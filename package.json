@@ -20,6 +20,7 @@
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-concat": "latest",
     "grunt-contrib-qunit": "latest",
-    "grunt-contrib-jasmine": "latest"
+    "grunt-contrib-jasmine": "latest",
+    "phaser-ce": "latest"
   }
 }
