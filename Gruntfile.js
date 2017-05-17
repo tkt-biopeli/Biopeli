@@ -23,19 +23,22 @@ module.exports = function(grunt) {
     },
     qunit: {
       files: ['test/qunit/**/*.html']
-    }
-    
+    },
     jasmine : {
-      src : 'src/**/*.js',
-      specs : 'test/jasmine/specs/**/*spec.js',
-      helpers : 'test/jasmine/specs/helpers/*.js'
+      pivotal: {
+        src: 'src/**/*.js',
+        options: {
+           specs: 'test/jasmine/*Spec.js',
+           helpers: 'test/jasmine/helpers/*Helper.js'
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-jasmine-runner');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
 
   grunt.registerTask('test', ['qunit', 'jasmine']);
 
