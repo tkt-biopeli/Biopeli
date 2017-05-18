@@ -4,6 +4,6 @@ Linkki dokumentaatioon (dod, backlogit ja tuntikirjanpito): https://docs.google.
 
 ### Pelin idea
 
-Kyseessä on biotalouteen perustuva construction & management -tyyppinen peli. Pelaaja pyrkii täyttämään lähialueen kaupungin tarpeet, joihin kuuluu esimerkiksi
+Kyseessä on biotalouteen perustuva construction & management simulation -tyyppinen peli. Pelaaja pyrkii täyttämään lähialueen kaupungin tarpeet.
 
-Pelimaailma on jaettu ruutuihin nönnönöö
+Pelimaailma on jaettu ruutuihin, joihin pelaaja voi rakentaa erilaisia tuotantolaitoksia. Pelaaja saa pisteitä tekemistään valinnoista perustuen sekä niiden ekologisuuteen että taloudellisuuteen. Pelin kulkuun vaikuttavat myös satunnaiset tapahtumat, joilla voi olla positiivisia tai negatiivisia vaikutuksia. Pelaajan hallittavana on ainakin aluksi kaksi resurssia - porkkanat ja raha. Kaupunki tuottaa rahaa ja kuluttaa porkkanoita suhteessa kokoonsa.
