@@ -1,6 +1,9 @@
 /* globals __DEV__ */
 import Phaser from 'phaser'
 import Mushroom from '../sprites/Mushroom'
+import ModelTile from '../models/ModelTile'
+import TileType from '../models/TileType'
+import ViewTile from '../sprites/ViewTile'
 
 export default class extends Phaser.State {
   init () {}
@@ -22,6 +25,9 @@ export default class extends Phaser.State {
       y: this.world.centerY,
       asset: 'mushroom'
     })
+
+      this.tileTypes = TileType.call()
+      this.modelTile = new ModelTile{(this.game, 100, 200, tileTypes.fores
 
     this.game.add.existing(this.mushroom)
   }
