@@ -26,8 +26,19 @@ export default class extends Phaser.State {
       asset: 'mushroom'
     })
 
-      this.tileTypes = TileType.call()
-      this.modelTile = new ModelTile{(this.game, 100, 200, tileTypes.fores
+      var tileTypes = TileType.call()
+      var mT = new ModelTile({
+        x: 100,
+        y: 200,
+        type: tileTypes.forest
+      })
+      
+      this.viewTile = new ViewTile( {
+        game: this,
+        x: 100,
+        y: 100,
+        modelTile: mT
+      })
 
     this.game.add.existing(this.mushroom)
   }

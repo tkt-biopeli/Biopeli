@@ -1,14 +1,9 @@
 import Phaser from 'phaser'
 
 export default class {
-    constructor ({ game, x, y, type }) {
-        this.game = game
+    constructor ({ x, y, type }) {
         this.x = x
         this.y = y
         this.tileType = type
-    }
-
-    update () {
-
     }
 }
