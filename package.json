@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "webpack",
     "deploy": "webpack --config webpack.production.config.js",
-    "test": "eslint ./src/**/**.js"
+    "test": "eslint ./src/**/**.js; mocha test"
   },
   "license": "MIT",
   "devDependencies": {
@@ -26,6 +26,8 @@
     "eslint-plugin-standard": "^3.0.1",
     "expose-loader": "^0.7.3",
     "jasmine": "^2.6.0",
+    "mocha": "^3.4.1",
+    "mocha-loader": "^1.1.1",
     "qunit": "^1.0.0",
     "webpack": "^2.5.1"
   },
