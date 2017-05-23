@@ -27,31 +27,13 @@ export default class extends Phaser.State {
     })
 
     var tileTypes = TileType.call()
-    var forestTile = new ModelTile({
-      x: 100,
-      y: 200,
-      type: tileTypes.forest
-    })
+    var forestTile = new ModelTile(100, 200, tileTypes.forest)
 
-    var waterTile = new ModelTile({
-      x: 300,
-      y: 300,
-      type: tileTypes.water
-    })
+    var waterTile = new ModelTile(300, 300, tileTypes.water)
 
-    this.viewForestTile = new ViewTile({
-      game: this,
-      x: 100,
-      y: 200,
-      modelTile: forestTile
-    })
+    this.viewForestTile = new ViewTile(this, 100, 200, forestTile)
 
-    this.viewWaterTile = new ViewTile({
-      game: this,
-      x: 300,
-      y: 300,
-      modelTile: waterTile
-    })
+    this.viewWaterTile = new ViewTile(this, 300, 300, waterTile)
 
     this.game.add.existing(this.mushroom)
   }
