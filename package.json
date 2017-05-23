@@ -1,13 +1,13 @@
 {
-  "name": "PhaserES6Webpack",
+  "name": "Biopeli",
   "version": "1.0.0",
   "description": "",
-  "author": "leandro cabrera <leandcabrera@gmail.com>",
+  "author": "tkt biopeli team",
   "main": "index.js",
   "scripts": {
     "dev": "webpack",
     "deploy": "webpack --config webpack.production.config.js",
-    "test": "eslint ./src/**/**.js"
+    "test": "eslint ./src/**/**.js; mocha --require babel-register test/**/*.js"
   },
   "license": "MIT",
   "devDependencies": {
@@ -26,7 +26,10 @@
     "eslint-plugin-standard": "^3.0.1",
     "expose-loader": "^0.7.3",
     "jasmine": "^2.6.0",
+    "mocha": "^3.4.1",
+    "mocha-loader": "^1.1.1",
     "qunit": "^1.0.0",
+    "sinon": "^2.3.0",
     "webpack": "^2.5.1"
   },
   "dependencies": {

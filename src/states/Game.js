@@ -10,7 +10,7 @@ export default class extends Phaser.State {
   preload () {}
 
   create () {
-    const bannerText = 'Phaser + ES6 + Webpack'
+    const bannerText = 'Biopeli 2.0'
     let banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText)
     banner.font = 'Bangers'
     banner.padding.set(10, 16)
@@ -26,19 +26,14 @@ export default class extends Phaser.State {
       asset: 'mushroom'
     })
 
-      var tileTypes = TileType.call()
-      var mT = new ModelTile({
-        x: 100,
-        y: 200,
-        type: tileTypes.forest
-      })
-      
-      this.viewTile = new ViewTile( {
-        game: this,
-        x: 100,
-        y: 100,
-        modelTile: mT
-      })
+    var tileTypes = TileType.call()
+    var forestTile = new ModelTile(100, 200, tileTypes.forest)
+
+    var waterTile = new ModelTile(300, 300, tileTypes.water)
+
+    this.viewForestTile = new ViewTile(this, 100, 200, forestTile)
+
+    this.viewWaterTile = new ViewTile(this, 300, 300, waterTile)
 
     this.game.add.existing(this.mushroom)
   }
