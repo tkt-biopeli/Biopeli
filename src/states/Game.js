@@ -4,6 +4,7 @@ import Mushroom from '../sprites/Mushroom'
 import ModelTile from '../models/ModelTile'
 import TileType from '../models/TileType'
 import ViewTile from '../sprites/ViewTile'
+import Map from '../models/Map'
 
 export default class extends Phaser.State {
   init () {}
@@ -36,6 +37,16 @@ export default class extends Phaser.State {
     this.viewWaterTile = new ViewTile(this, 300, 300, waterTile)
 
     this.game.add.existing(this.mushroom)
+
+    var map = new Map({
+      game: this,
+      gridSizeX = Math.floor(1024 / 32),
+      gridSizeY = Math.floor(768 / 32),
+      tileWidth = 32,
+      tileHeight = 32
+    })
+
+
   }
 
   render () {
