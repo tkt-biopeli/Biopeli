@@ -2,7 +2,6 @@ import ModelTile from './ModelTile'
 import TileType from './TileType'
 import ViewTile from '../sprites/ViewTile'
 import ViewTileSprite from '../sprites/ViewTileSprite'
-// import Phaser from 'phaser'
 
 export default class Map {
   constructor({ game, gridSizeX, gridSizeY, tileWidth, tileHeight }) {
@@ -13,7 +12,7 @@ export default class Map {
     this.game = game
     this.mapGroup = game.add.group()
     this.grid = []
-    
+
     // World map size: top left corner x & y, width, height
     game.world.setBounds(0, 0, gridSizeX * tileWidth, gridSizeY * tileHeight)
   }
@@ -21,16 +20,31 @@ export default class Map {
   addTileWithGridCoordinates (x, y, tileType) {
     var tile = new ModelTile(x, y, tileType)
     var viewTile = new ViewTileSprite(this.game, this.gridToPixelsX(x), this.gridToPixelsY(y), tile)
-    this.grid[x * this.gridSizeX + y] = viewTile
-    this.game.add.sprite(viewTile.x, viewTile.y, viewTile.modelTile.tileType.asset)
+    this.grid[y * this.gridSizeX + x] = viewTile
+    // this.game.add.sprite(viewTile.x, viewTile.y, viewTile.modelTile.tileType.asset)
   }
 
   addTileWithPixelCoordinates (x, y, tileType) {
     var gridX = this.pixelsToGridX(x)
     var gridY = this.pixelsToGridY(y)
-    var tile = new ModelTile(this.pixelsToGridX(x), this.pixelsToGridY(y), tileType)
-    tile = new ViewTile(this.game, x, y, tile)
-    this.game.add.sprite(x, y, modelTile.tileType.asset)
+    var tile = new ModelTile(gridX, gridY, tileType)
+    var viewTile = new ViewTile(this.game, x, y, tile)
+    this.grid[y * this.gridSizeX + x] = viewTile
+  }
+
+  getTileWithGridCoordinates (x, y) {
+    return this.grid[y * this.gridSizeX + x]
+  }
+
+  draw () {
+    for (var y = 0; y < this.gridSizeY; y++) {
+      for (var x = 0; x < this.gridSizeX; x++) {
+        var tile = this.getTileWithGridCoordinates(x, y)
+        if (typeof tile !== 'undefined') {
+          this.game.add.existing(tile)
+        }
+      }
+    }
   }
 
   // TEST DATA
@@ -44,12 +58,14 @@ export default class Map {
           this.addTileWithGridCoordinates(j, i, tileTypes.forest)
         }
       } else {
+
         for (var k = 0; k < this.gridSizeX; k++) {
           this.addTileWithGridCoordinates(k, i, tileTypes.water)
 
-          // end check
+          // last tile check
           if (i === (this.gridSizeY - 1) && k === (this.gridSizeX - 1)) {
-            this.addTileWithGridCoordinates(k, i, tileTypes.forest)
+            var test = this.getTileWithGridCoordinates(k, i)
+            test.exists = false
           }
         }
       }

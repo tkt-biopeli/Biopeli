@@ -41,13 +41,14 @@ export default class extends Phaser.State {
 
     var map = new Map({
       game: this,
-      gridSizeX: Math.floor(1024 / 32),
-      gridSizeY: Math.floor(768 / 32),
+      gridSizeX: Math.floor(this.game.width / 32),
+      gridSizeY: Math.floor(this.game.height / 32),
       tileWidth: 32,
       tileHeight: 32
     })
 
     map.createMapHalfForestHalfWater()
+    map.draw()
 
 
   }
