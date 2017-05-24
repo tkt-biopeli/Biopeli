@@ -1,60 +1,69 @@
-// import Phaser from 'phaser'
-import ModelTile from '../models/ModelTile'
-import TileType from '../models/TileType'
+import ModelTile from './ModelTile'
+import TileType from './TileType'
+import ViewTile from '../sprites/ViewTile'
 
-export default class {
+export default class Map {
+  constructor({ game, gridSizeX, gridSizeY, tileWidth, tileHeight }) {
+    this.gridSizeX = gridSizeX
+    this.gridSizeY = gridSizeY
+    this.tileWidth = tileWidth
+    this.tileHeight = tileHeight
+    this.game = game
+    this.mapGroup = game.add.group()
+    
+    // World map size: top left corner x & y, width, height
+    game.world.setBounds(0, 0, gridSizeX * tileWidth, gridSizeY * tileHeight)
+  }
 
-    constructor({ game, gridSizeX, gridSizeY, tileWidth, tileHeight }) {
-        this.gridSizeX = gridSizeX
-        this.gridSizeY = gridSizeY
-        this.tileWidth = tileWidth
-        this.tileHeight = tileHeight
+  addTileWithGridCoordinates(x, y, tileType) {
+    var modelTile = new ModelTile(x, y, tileType)
+    var viewTile = new ViewTile(this.game, this.gridToPixelsX(x), this.gridToPixelsY(y), modelTile)
+  }
 
-        // this.tileMap = game.add.tilemap()
-        this.mapGroup = game.add.group()
-        // this.layer1 = tileMap.create('layer1', gridSizeX, gridSizeY, tileWidth, tileHeight)
+  addTileWithPixelCoordinates(x, y, tileType) {
+    var modelTile = new ModelTile(this.pixelsToGridX(x), this.pixelsToGridY(y), tileType)
+    var viewTile = new ViewTile(this.game, x, y, modelTile)
+  }
 
-        this.getTileX = function (x) {
-            return Math.floor(x / this.tileWidth)
+  // TEST DATA
+  createMapHalfForestHalfWater() {
+    var tileTypes = TileType.call()
+
+    for (var i = 0; i < this.gridSizeY; i++) {
+
+      if (i % 2 == 0) {
+        for (var j = 0; j < this.gridSizeX; j++) {
+          this.addTileWithGridCoordinates(j, i, tileTypes.forest)
         }
+      } else {
+        for (var j = 0; j < this.gridSizeX; j++) {
+          this.addTileWithGridCoordinates(j, i, tileTypes.water)
 
-        this.getTileY = function (y) {
-            return Math.floor(y / this.tileHeight)
+          // end check
+          if (i == (this.gridSizeY - 1) && j == (this.gridSizeX - 1)) {
+            this.addTileWithGridCoordinates(j, i, tileTypes.forest)
+          }
         }
-
-        this.getScreenTileX = function (x) {
-            return x * this.tileWidth
-        }
-
-        this.getScreenTileY = function (y) {
-            return y * this.tileHeight
-        }
-
-
-        this.addTile = function addTile(x, y, tileType) {
-            var newTile = new ModelTile(getTileX(x), getTileY(y), tileType)
-
-            this.tileGroup.add(newTile)
-            game.add.sprite(x, y, newTile.tileType.asset)
-        }
-
-        this.createMapHalfForestHalfWater = function () {
-            var tileTypes = TileType.call()
-
-            for (var i = 0; i < this.gridSizeY; i++) {
-                if (i % 2 == 0) {
-                    for (var j = 0; j < this.gridSizeX; j++) {
-                        addTile((this.tileWidth * j) / 2, (this.tileHeight * i) / 2, tileTypes.forest)
-                    }
-                } else {
-                    for (var j = 0; j < this.gridSizeX; j++) {
-                        addTile(j, i, tileTypes.water)
-
-                    }
-
-
-                }
-            }
-
-        }
+      }
     }
+
+  }
+
+  // Pixel-Grid-Pixel conversion helpers
+
+  pixelsToGridX(x) {
+    return Math.floor(x / this.tileWidth)
+  }
+
+  pixelsToGridY(y) {
+    return Math.floor(y / this.tileHeight)
+  }
+
+  gridToPixelsX(x) {
+    return x * this.tileWidth
+  }
+
+  gridToPixelsY(y) {
+    return y * this.tileHeight
+  }
+}
