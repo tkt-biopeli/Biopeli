@@ -1,16 +1,16 @@
 /* globals __DEV__ */
 import Phaser from 'phaser'
 import Mushroom from '../sprites/Mushroom'
-import ModelTile from '../models/ModelTile'
-import TileType from '../models/TileType'
-import ViewTile from '../sprites/ViewTile'
+// import ModelTile from '../models/ModelTile'
+// import TileType from '../models/TileType'
+// import ViewTile from '../sprites/ViewTile'
 import Map from '../models/Map'
 
 export default class extends Phaser.State {
-  init() { }
-  preload() { }
+  init () { }
+  preload () { }
 
-  create() {
+  create () {
     const bannerText = 'Biopeli 2.0'
     let banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText)
     banner.font = 'Bangers'
@@ -27,15 +27,15 @@ export default class extends Phaser.State {
       asset: 'mushroom'
     })
 
-    var tileTypes = TileType.call()
-    /*
+    /*    var tileTypes = TileType.call()
         var forestTile = new ModelTile(100, 200, tileTypes.forest)
     
         var waterTile = new ModelTile(300, 300, tileTypes.water)
     
         this.viewForestTile = new ViewTile(this, 100, 200, forestTile)
     
-        this.viewWaterTile = new ViewTile(this, 300, 300, waterTile)*/
+        this.viewWaterTile = new ViewTile(this, 300, 300, waterTile)
+    */
 
     this.game.add.existing(this.mushroom)
 
@@ -49,10 +49,10 @@ export default class extends Phaser.State {
 
     map.createMapHalfForestHalfWater()
 
-    
+
   }
 
-  render() {
+  render () {
     if (__DEV__) {
       this.game.debug.spriteInfo(this.mushroom, 32, 32)
     }
