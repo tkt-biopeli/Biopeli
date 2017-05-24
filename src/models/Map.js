@@ -11,7 +11,7 @@ export default class {
         this.tileHeight = tileHeight
 
         // this.tileMap = game.add.tilemap()
-        this.tileGroup = game.add.group()
+        this.mapGroup = game.add.group()
         // this.layer1 = tileMap.create('layer1', gridSizeX, gridSizeY, tileWidth, tileHeight)
 
         this.getTileX = function (x) {
@@ -22,13 +22,20 @@ export default class {
             return Math.floor(y / this.tileHeight)
         }
 
+        this.getScreenTileX = function (x) {
+            return x * this.tileWidth
+        }
+
+        this.getScreenTileY = function (y) {
+            return y * this.tileHeight
+        }
 
 
         this.addTile = function addTile(x, y, tileType) {
             var newTile = new ModelTile(getTileX(x), getTileY(y), tileType)
 
             this.tileGroup.add(newTile)
-            game.add.sprite()
+            game.add.sprite(x, y, newTile.tileType.asset)
         }
 
         this.createMapHalfForestHalfWater = function () {
@@ -37,7 +44,7 @@ export default class {
             for (var i = 0; i < this.gridSizeY; i++) {
                 if (i % 2 == 0) {
                     for (var j = 0; j < this.gridSizeX; j++) {
-                        addTile(j, i, tileTypes.forest)
+                        addTile((this.tileWidth * j) / 2, (this.tileHeight * i) / 2, tileTypes.forest)
                     }
                 } else {
                     for (var j = 0; j < this.gridSizeX; j++) {
