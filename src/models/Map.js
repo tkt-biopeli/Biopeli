@@ -36,6 +36,12 @@ export default class Map {
     return this.grid[y * this.gridSizeX + x]
   }
 
+  getTileWithPixelCoordinates(x, y) {
+    var gx = this.pixelsToGridX(x)
+    var gy = this.pixelsToGridY(y)
+    return this.getTileWithGridCoordinates(gx, gy)
+  }
+
   draw () {
     for (var y = 0; y < this.gridSizeY; y++) {
       for (var x = 0; x < this.gridSizeX; x++) {
@@ -44,6 +50,15 @@ export default class Map {
           this.game.add.existing(tile)
         }
       }
+    }
+  }
+
+  update () {
+    if ( this.game.input.mousePointer.isDown) {
+      var x = this.game.input.activePointer.worldX
+      var y = this.game.input.activePointer.worldY
+      var test = this.getTileWithPixelCoordinates(x, y)
+      test.exists = false
     }
   }
 

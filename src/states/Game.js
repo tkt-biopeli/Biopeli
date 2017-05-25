@@ -6,9 +6,13 @@ import Mushroom from '../sprites/Mushroom'
 // import ViewTile from '../sprites/ViewTile'
 import Map from '../models/Map'
 
+
+
 export default class extends Phaser.State {
   init () { }
   preload () { }
+
+  
 
   create () {
     const bannerText = 'Biopeli 2.0'
@@ -39,7 +43,7 @@ export default class extends Phaser.State {
 
     this.game.add.existing(this.mushroom)
 
-    var map = new Map({
+    this.map = new Map({
       game: this,
       gridSizeX: Math.floor(this.game.width / 32),
       gridSizeY: Math.floor(this.game.height / 32),
@@ -47,8 +51,8 @@ export default class extends Phaser.State {
       tileHeight: 32
     })
 
-    map.createMapHalfForestHalfWater()
-    map.draw()
+    this.map.createMapHalfForestHalfWater()
+    this.map.draw()
 
 
   }
@@ -57,5 +61,9 @@ export default class extends Phaser.State {
     if (__DEV__) {
       this.game.debug.spriteInfo(this.mushroom, 32, 32)
     }
+  }
+
+  update () {
+    this.map.update()
   }
 }
