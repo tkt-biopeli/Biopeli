@@ -1,10 +1,8 @@
-export default class {
-  constructor (game, x, y, modelTile) {
-    this.game = game
-    this.x = x
-    this.y = y
-    this.modelTile = modelTile
+import Phaser from 'phaser'
 
-    this.nature = game.add.sprite(x, y, modelTile.tileType.asset)
+export default class extends Phaser.Sprite {
+  constructor (game, x, y, modelTile) {
+    super(game, x, y, modelTile.tileType.asset)
+    this.modelTile = modelTile
   }
 }

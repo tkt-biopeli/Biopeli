@@ -1,7 +1,7 @@
 import ModelTile from './ModelTile'
 import TileType from './TileType'
 import ViewTile from '../sprites/ViewTile'
-import ViewTileSprite from '../sprites/ViewTileSprite'
+
 
 export default class Map {
   constructor({ game, gridSizeX, gridSizeY, tileWidth, tileHeight }) {
@@ -19,7 +19,7 @@ export default class Map {
 
   addTileWithGridCoordinates (x, y, tileType) {
     var tile = new ModelTile(x, y, tileType)
-    var viewTile = new ViewTileSprite(this.game, this.gridToPixelsX(x), this.gridToPixelsY(y), tile)
+    var viewTile = new ViewTile(this.game, this.gridToPixelsX(x), this.gridToPixelsY(y), tile)
     this.grid[y * this.gridSizeX + x] = viewTile
     // this.game.add.sprite(viewTile.x, viewTile.y, viewTile.modelTile.tileType.asset)
   }
