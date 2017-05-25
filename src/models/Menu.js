@@ -5,7 +5,7 @@ export default class Menu {
     this.menuActions = []
 
     createBackground(
-      this.menuViewGroup, game.world.width - menuViewWidth, 0, menuViewWidth, game.world.height, 0x993333)
+      game, this.menuViewGroup, game.world.width - menuViewWidth, 0, menuViewWidth, game.world.height, 0x993333)
     this.menuViewGroup.fixedToCamera = true
   }
 
@@ -14,7 +14,7 @@ export default class Menu {
   }
 }
 
-function createBackground (viewGroup, leftX, leftY, width, height, color) {
+function createBackground (game, viewGroup, leftX, leftY, width, height, color) {
   var background = game.make.graphics()
 
   background.beginFill(color, 1)
