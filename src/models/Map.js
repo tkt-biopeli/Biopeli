@@ -22,6 +22,7 @@ export default class Map {
     var viewTile = new ViewTile(this.game, this.gridToPixelsX(x), this.gridToPixelsY(y), tile)
     this.grid[y * this.gridSizeX + x] = viewTile
     // this.game.add.sprite(viewTile.x, viewTile.y, viewTile.modelTile.tileType.asset)
+    this.mapGroup.add(viewTile)
   }
 
   addTileWithPixelCoordinates (x, y, tileType) {
@@ -30,6 +31,7 @@ export default class Map {
     var tile = new ModelTile(gridX, gridY, tileType)
     var viewTile = new ViewTile(this.game, x, y, tile)
     this.grid[y * this.gridSizeX + x] = viewTile
+    this.mapGroup.add(viewTile)
   }
 
   getTileWithGridCoordinates (x, y) {
@@ -47,7 +49,7 @@ export default class Map {
       for (var x = 0; x < this.gridSizeX; x++) {
         var tile = this.getTileWithGridCoordinates(x, y)
         if (typeof tile !== 'undefined') {
-          this.game.add.existing(tile)
+        //  this.game.add.existing(tile)
         }
       }
     }
