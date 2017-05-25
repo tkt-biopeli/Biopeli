@@ -51,11 +51,21 @@ export default class extends Phaser.State {
     map.draw()
 
 
+
+
   }
 
   render () {
     if (__DEV__) {
       this.game.debug.spriteInfo(this.mushroom, 32, 32)
+
+        if (game.input.mousePointer.isDown)
+        {
+          if (game.input.mousePointer.getCurrentPosition == this.mushroom.getCurrentPosition)
+            this.mushroom.x = this.world.randomX
+            this.mushroom.y = this.world.randomY
+
+        }
     }
   }
 }
