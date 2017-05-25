@@ -1,15 +1,14 @@
 // The class Player keeps track of players points
-
 class Player {
-
-    //initially player has 0 points
+    // initially player has 0 points
     constructor () {
-        this.points = 0;
+        this.points = 0
     }
-
     // adds points given as a parameter to players existing points
-    addPoints(points) {
-        this.points += points;
-    }
-    
+    addPoints (points) {
+        this.points += points
+    } 
+    getPoints (points) {
+        return this.points
+    } 
 }
