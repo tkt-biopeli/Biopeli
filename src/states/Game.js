@@ -5,6 +5,7 @@ import Mushroom from '../sprites/Mushroom'
 // import TileType from '../models/TileType'
 // import ViewTile from '../sprites/ViewTile'
 import Map from '../models/Map'
+import Menu from '../models/Menu'
 
 
 
@@ -51,8 +52,11 @@ export default class extends Phaser.State {
       tileHeight: 32
     })
 
+      this.menu = new Menu(game, 320)
     this.map.createMapHalfForestHalfWater()
     this.map.draw()
+
+
 
 
 
