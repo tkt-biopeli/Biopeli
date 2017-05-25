@@ -1,4 +1,4 @@
-const assert = require('assert')
+/*const assert = require('assert')
 const sinon = require('sinon')
 import ViewTile from '../../src/sprites/ViewTile'
 
@@ -22,3 +22,4 @@ describe('View tile tests', () =>{
     mock.verify()
   })
 })
+*/
