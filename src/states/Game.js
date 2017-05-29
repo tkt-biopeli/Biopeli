@@ -52,14 +52,13 @@ export default class extends Phaser.State {
       tileHeight: 32
     })
 
-      this.menu = new Menu(game, 320)
+    this.menu = new Menu({
+      game: this,
+      menuViewWidth: 320
+    })
+
     this.map.createMapHalfForestHalfWater()
     this.map.draw()
-
-
-
-
-
 
   }
 
@@ -79,5 +78,6 @@ export default class extends Phaser.State {
 
   update () {
     this.map.update()
+    this.menu.update()
   }
 }
