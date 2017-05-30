@@ -1,7 +1,5 @@
 import ModelTile from './ModelTile'
 import TileType from './TileType'
-import ViewTile from '../sprites/ViewTile'
-
 
 export default class Map {
   constructor({ game, gridSizeX, gridSizeY, tileWidth, tileHeight }) {
