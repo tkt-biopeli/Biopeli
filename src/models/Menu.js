@@ -1,8 +1,10 @@
 export default class Menu {
-  constructor ({ game, menuViewWidth }) {
+  constructor({ game, menuViewWidth }) {
     this.menuViewGroup = game.add.group()
     this.title = 'Choose a tile first'
     this.menuActions = []
+    this.game = game
+    this.menuViewWidth = menuViewWidth
 
     createBackground(
       game, this.menuViewGroup, game.world.width - menuViewWidth, 0, menuViewWidth, game.world.height, 0x993333)
@@ -11,6 +13,10 @@ export default class Menu {
 
   update () {
     //
+/*    this.menuViewGroup.removeAll(true, true)
+    createBackground(
+      this.game, this.menuViewGroup, this.game.world.width - this.menuViewWidth, 0, this.menuViewWidth, this.game.world.height, 0x993333)*/
+
   }
 }
 
