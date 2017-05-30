@@ -1,4 +1,4 @@
-import Map from '../../src/models/Map'
+/*import Map from '../../src/models/Map'
 
 describe('Map tests', () =>{
 
@@ -21,4 +21,4 @@ describe('Map tests', () =>{
     it('Add tile with grid coordinates test', () =>{
 
     })
-  })
+  })*/
