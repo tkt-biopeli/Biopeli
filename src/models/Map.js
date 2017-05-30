@@ -87,12 +87,16 @@ export default class Map {
 
             this.addTileWithGridCoordinates(k, i, tileTypes.grass)
           } else {
-            this.addTileWithGridCoordinates(k, i, tileTypes.forest2)
+            if (r > 0.08) {
+              this.addTileWithGridCoordinates(k, i, tileTypes.forest2)
+            } else {
+              this.addTileWithGridCoordinates(k, i, tileTypes.water2)
+            }
           }
 
           // last tile check
-          if (i === (this.gridSizeY - 1) && k === (this.gridSizeX - 1)) {                        
-              this.removeTileWithGridCoordinates(k, i)            
+          if (i === (this.gridSizeY - 1) && k === (this.gridSizeX - 1)) {
+            this.removeTileWithGridCoordinates(k, i)
           }
         }
       }

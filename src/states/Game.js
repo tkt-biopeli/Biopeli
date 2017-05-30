@@ -34,10 +34,6 @@ export default class extends Phaser.State {
         
     this.game.add.existing(this.mushroom)
 
-    var testo = this.game.add.sprite(128, 128, 'farm')
-    var crop = new Phaser.Rectangle(0, 0, 12, 128)
-    testo.crop(crop)
-
 
     // game menu
     this.menu = new Menu({
@@ -48,7 +44,7 @@ export default class extends Phaser.State {
     // map grid
     this.map = new Map({
       game: this,
-      gridSizeX: Math.ceil((this.game.width * 4 - 256) / 128),
+      gridSizeX: Math.ceil(this.game.width * 4 / 128),
       gridSizeY: Math.ceil(this.game.height * 4 / 128),
       tileWidth: 128,
       tileHeight: 128

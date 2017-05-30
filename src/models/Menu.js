@@ -13,10 +13,6 @@ export default class Menu {
 
   update () {
     //
-/*    this.menuViewGroup.removeAll(true, true)
-    createBackground(
-      this.game, this.menuViewGroup, this.game.world.width - this.menuViewWidth, 0, this.menuViewWidth, this.game.world.height, 0x993333)*/
-
   }
 }
 
