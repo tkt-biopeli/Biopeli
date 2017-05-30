@@ -10,79 +10,89 @@ export default class Map {
     this.tileWidth = tileWidth
     this.tileHeight = tileHeight
     this.game = game
-    this.mapGroup = game.add.group()
     this.grid = []
 
     // World map size: top left corner x & y, width, height
     game.world.setBounds(0, 0, gridSizeX * tileWidth, gridSizeY * tileHeight)
   }
 
-  addTileWithGridCoordinates (x, y, tileType) {
-    var tile = new ModelTile(x, y, tileType)
-    var viewTile = new ViewTile(this.game, this.gridToPixelsX(x), this.gridToPixelsY(y), tile)
-    this.grid[y * this.gridSizeX + x] = viewTile
-    // this.game.add.sprite(viewTile.x, viewTile.y, viewTile.modelTile.tileType.asset)
-    this.mapGroup.add(viewTile)
+  addTileWithGridCoordinates (gx, gy, tileType) {
+    var tile = new ModelTile(gx, gy, tileType)
+    this.grid[gy * this.gridSizeX + gx] = tile
   }
 
-  addTileWithPixelCoordinates (x, y, tileType) {
-    var gridX = this.pixelsToGridX(x)
-    var gridY = this.pixelsToGridY(y)
-    var tile = new ModelTile(gridX, gridY, tileType)
-    var viewTile = new ViewTile(this.game, x, y, tile)
-    this.grid[y * this.gridSizeX + x] = viewTile
-    this.mapGroup.add(viewTile)
+
+  addTileWithPixelCoordinates (px, py, tileType) {
+    var gx = this.pixelsToGridX(px)
+    var gy = this.pixelsToGridY(py)
+    this.addTileWithGridCoordinates(gx, gy, tileType)
   }
 
-  getTileWithGridCoordinates (x, y) {
-    return this.grid[y * this.gridSizeX + x]
+  getTileWithGridCoordinates (gx, gy) {
+    return this.grid[gy * this.gridSizeX + gx]
   }
 
-  getTileWithPixelCoordinates(x, y) {
-    var gx = this.pixelsToGridX(x)
-    var gy = this.pixelsToGridY(y)
+  getTileWithPixelCoordinates (px, py) {
+    var gx = this.pixelsToGridX(px)
+    var gy = this.pixelsToGridY(py)
     return this.getTileWithGridCoordinates(gx, gy)
   }
 
-  draw () {
-    for (var y = 0; y < this.gridSizeY; y++) {
-      for (var x = 0; x < this.gridSizeX; x++) {
-        var tile = this.getTileWithGridCoordinates(x, y)
-        if (typeof tile !== 'undefined') {
-        //  this.game.add.existing(tile)
-        }
-      }
-    }
+  removeTileWithGridCoordinates (gx, gy) {
+    this.grid[gy * this.gridSizeX + gx] = undefined
+  }
+
+  removeTileWithPixelCoordinates (px, py) {
+    this.grid[this.pixelsToGridX(py) * this.gridSizeX + this.pixelsToGridX(px)] = undefined
   }
 
   update () {
-    if ( this.game.input.mousePointer.isDown) {
-      var x = this.game.input.activePointer.worldX
-      var y = this.game.input.activePointer.worldY
+    // map mouse demo, deletes tile from grid
+    if (this.game.input.activePointer.isDown) {
+      var x = this.game.input.activePointer.position.x + this.game.game.camera.x
+      var y = this.game.input.activePointer.position.y + this.game.game.camera.y
+
       var test = this.getTileWithPixelCoordinates(x, y)
-      test.exists = false
+
+      if (typeof test !== 'undefined') {
+        this.removeTileWithPixelCoordinates(x, y)
+      }
     }
   }
 
   // TEST DATA
   createMapHalfForestHalfWater () {
+    var limit = 0.2
     var tileTypes = TileType.call()
 
     for (var i = 0; i < this.gridSizeY; i++) {
 
       if (i % 2 === 0) {
         for (var j = 0; j < this.gridSizeX; j++) {
-          this.addTileWithGridCoordinates(j, i, tileTypes.forest)
+          var r = Math.random()
+          if (r > limit) {
+
+            this.addTileWithGridCoordinates(j, i, tileTypes.grass)
+          } else {
+            this.addTileWithGridCoordinates(j, i, tileTypes.farm)
+
+          }
         }
       } else {
 
         for (var k = 0; k < this.gridSizeX; k++) {
-          this.addTileWithGridCoordinates(k, i, tileTypes.water)
+          var r = Math.random()
+
+          if (r > limit) {
+
+            this.addTileWithGridCoordinates(k, i, tileTypes.grass)
+          } else {
+            this.addTileWithGridCoordinates(k, i, tileTypes.forest2)
+          }
 
           // last tile check
-          if (i === (this.gridSizeY - 1) && k === (this.gridSizeX - 1)) {
-            var test = this.getTileWithGridCoordinates(k, i)
-            test.exists = false
+          if (i === (this.gridSizeY - 1) && k === (this.gridSizeX - 1)) {                        
+              this.removeTileWithGridCoordinates(k, i)            
           }
         }
       }

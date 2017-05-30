@@ -1,11 +1,9 @@
 /* globals __DEV__ */
 import Phaser from 'phaser'
 import Mushroom from '../sprites/Mushroom'
-// import ModelTile from '../models/ModelTile'
-// import TileType from '../models/TileType'
-// import ViewTile from '../sprites/ViewTile'
 import Map from '../models/Map'
 import Menu from '../models/Menu'
+import MapView from '../sprites/MapView'
 
 
 
@@ -13,7 +11,7 @@ export default class extends Phaser.State {
   init () { }
   preload () { }
 
-  
+
 
   create () {
     const bannerText = 'Biopeli 2.0'
@@ -25,6 +23,8 @@ export default class extends Phaser.State {
     banner.smoothed = false
     banner.anchor.setTo(0.5)
 
+
+    // ever rolling mushroom
     this.mushroom = new Mushroom({
       game: this,
       x: this.world.centerX,
@@ -32,52 +32,77 @@ export default class extends Phaser.State {
       asset: 'mushroom'
     })
 
-    /*    var tileTypes = TileType.call()
-        var forestTile = new ModelTile(100, 200, tileTypes.forest)
-    
-        var waterTile = new ModelTile(300, 300, tileTypes.water)
-    
-        this.viewForestTile = new ViewTile(this, 100, 200, forestTile)
-    
-        this.viewWaterTile = new ViewTile(this, 300, 300, waterTile)
-    */
-
     this.game.add.existing(this.mushroom)
 
-    this.map = new Map({
-      game: this,
-      gridSizeX: Math.floor(this.game.width / 32),
-      gridSizeY: Math.floor(this.game.height / 32),
-      tileWidth: 32,
-      tileHeight: 32
-    })
 
+    // game menu
     this.menu = new Menu({
       game: this,
-      menuViewWidth: 320
+      menuViewWidth: 256
     })
 
+    // map grid
+    this.map = new Map({
+      game: this,
+      gridSizeX: Math.ceil(this.game.width * 4 / 128),
+      gridSizeY: Math.ceil(this.game.height * 4 / 128),
+      tileWidth: 128,
+      tileHeight: 128
+    })
+
+    // fill map grid with sample data
     this.map.createMapHalfForestHalfWater()
-    this.map.draw()
+
+    // map view
+    this.mapView = new MapView({
+      game: this,
+      map: this.map,
+      viewWidthPx: this.game.width - 256,
+      viewHeightPx: this.game.height
+    })
+
+
+    // cursors for map movement demo
+    this.cursors = game.input.keyboard.createCursorKeys();
+
+
 
   }
 
   render () {
     if (__DEV__) {
       this.game.debug.spriteInfo(this.mushroom, 32, 32)
+      this.game.debug.cameraInfo(this.game.camera, 500, 32)
 
-        if (game.input.mousePointer.isDown)
-        {
-          if (game.input.mousePointer.getCurrentPosition == this.mushroom.getCurrentPosition)
-            this.mushroom.x = this.world.randomX
-            this.mushroom.y = this.world.randomY
-
-        }
+      /*      if (game.input.mousePointer.isDown) {
+              if (game.input.mousePointer.getCurrentPosition == this.mushroom.getCurrentPosition)
+                this.mushroom.x = this.world.randomX
+              this.mushroom.y = this.world.randomY
+            }*/
     }
   }
 
   update () {
     this.map.update()
+
+    // camera speed
+    var s = 16
+    if (this.cursors.up.isDown) {
+      game.camera.y -= s;
+    }
+    else if (this.cursors.down.isDown) {
+      game.camera.y += s;
+    }
+
+    if (this.cursors.left.isDown) {
+      game.camera.x -= s;
+    }
+    else if (this.cursors.right.isDown) {
+      game.camera.x += s;
+    }
+
+    this.mapView.drawWithOffset(game.camera.x, game.camera.y)
+
     this.menu.update()
   }
 }
