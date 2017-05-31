@@ -9,7 +9,7 @@
 // broadcastMessage
 
 import MenuView from '../sprites/MenuView'
-import MenuOptionManager from './MenuOptionManager'
+import * as menuOptionManager from './MenuOptionManager'
 
 export default class Menu {
   constructor({ game, menuViewWidth }) {
@@ -23,7 +23,7 @@ export default class Menu {
       menu: this,
       menuViewWidth: menuViewWidth
     })
-    
+    this.menuView.redraw()
   }
 
   update () {
@@ -31,8 +31,8 @@ export default class Menu {
     if (this.game.input.activePointer.isDown) {
       // do menuOption action and sendMessage to Map
       // update menuOptions
-    }
-    this.menuView.redraw()
+      this.menuView.redraw()
+    }  
   }
   
   setLabel(label) {
