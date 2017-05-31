@@ -46,7 +46,7 @@ export default class Map {
 
   update () {
     // map mouse demo, deletes tile from grid
-    if (this.game.input.activePointer.isDown) {
+    if (this.game.input.activePointer.isDown && this.game.input.activePointer.position.x <= (this.game.camera.width - 256)) {
       var x = this.game.input.activePointer.position.x + this.game.game.camera.x
       var y = this.game.input.activePointer.position.y + this.game.game.camera.y
 
