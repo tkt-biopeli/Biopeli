@@ -1,27 +1,46 @@
+// +label
+// +menuOptions[]
+// +targetTile
+// update
+// getComponent
+// getAllComponents
+// addComponent
+// sendMessage
+// broadcastMessage
+
+import MenuView from '../sprites/MenuView'
+import MenuOptionManager from './MenuOptionManager'
+
 export default class Menu {
   constructor({ game, menuViewWidth }) {
-    this.menuViewGroup = game.add.group()
-    this.title = 'Choose a tile first'
-    this.menuActions = []
     this.game = game
-    this.menuViewWidth = menuViewWidth
+    this.label = 'Klikkaa kartan ruutua'
+    this.targetTile = undefined
+    this.menuOptions = []
 
-    createBackground(
-      game, this.menuViewGroup, game.world.width - menuViewWidth, 0, menuViewWidth, game.world.height, 0x993333)
-    this.menuViewGroup.fixedToCamera = true
+    this.menuView = new MenuView({
+      game: this.game,
+      menu: this,
+      menuViewWidth: menuViewWidth
+    })
+    
   }
 
   update () {
-    //
+    // if activePointer.isDown and the cursor is over a menuOption
+    if (this.game.input.activePointer.isDown) {
+      // do menuOption action and sendMessage to Map
+      // update menuOptions
+    }
+    this.menuView.redraw()
   }
-}
-
-function createBackground (game, viewGroup, leftX, leftY, width, height, color) {
-  var background = game.make.graphics()
-
-  background.beginFill(color, 1)
-  background.drawRect(leftX, leftY, width, height)
-  background.endFill()
-
-  viewGroup.add(background)
+  
+  setLabel(label) {
+    this.label = label
+  }
+  
+  setTargetTile (target) {
+    this.targetTile = target
+  }
+  
 }
