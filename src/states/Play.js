@@ -5,13 +5,9 @@ import Map from '../models/Map'
 import Menu from '../models/Menu'
 import MapView from '../sprites/MapView'
 
-
-
 export default class extends Phaser.State {
   init () { }
   preload () { }
-
-
 
   create () {
     const bannerText = 'Biopeli 2.0'
@@ -33,7 +29,6 @@ export default class extends Phaser.State {
     })
         
     this.game.add.existing(this.mushroom)
-
 
     // game menu
     this.menu = new Menu({
@@ -73,12 +68,6 @@ export default class extends Phaser.State {
     if (__DEV__) {
       this.game.debug.spriteInfo(this.mushroom, 32, 32)
       this.game.debug.cameraInfo(this.game.camera, 500, 32)
-
-      /*      if (game.input.mousePointer.isDown) {
-              if (game.input.mousePointer.getCurrentPosition == this.mushroom.getCurrentPosition)
-                this.mushroom.x = this.world.randomX
-              this.mushroom.y = this.world.randomY
-            }*/
     }
   }
 
