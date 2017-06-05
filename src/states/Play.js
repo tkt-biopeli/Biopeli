@@ -27,7 +27,7 @@ export default class extends Phaser.State {
       y: this.world.centerY,
       asset: 'mushroom'
     })
-        
+
     this.game.add.existing(this.mushroom)
 
     // game menu
@@ -59,8 +59,6 @@ export default class extends Phaser.State {
 
     // cursors for map movement demo
     this.cursors = game.input.keyboard.createCursorKeys();
-
-
 
   }
 

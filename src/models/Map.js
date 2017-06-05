@@ -15,7 +15,7 @@ export default class Map {
   }
 
   addTileWithGridCoordinates (gx, gy, tileType) {
-    var tile = new ModelTile(gx, gy, tileType)
+    var tile = new ModelTile({x: gx, y: gy, type: tileType})
     this.grid[gy * this.gridSizeX + gx] = tile
   }
 
@@ -70,9 +70,9 @@ export default class Map {
           var r = Math.random()
           if (r > limit) {
 
-            this.addTileWithGridCoordinates(j, i, tileTypes.grass)
+            this.addTileWithGridCoordinates({x: j, y: i, tileType: tileTypes.grass})
           } else {
-            this.addTileWithGridCoordinates(j, i, tileTypes.farm)
+            this.addTileWithGridCoordinates({x: j, y: i, tileType: tileTypes.farm})
 
           }
         }
@@ -83,12 +83,12 @@ export default class Map {
 
           if (r > limit) {
 
-            this.addTileWithGridCoordinates(k, i, tileTypes.grass)
+            this.addTileWithGridCoordinates({x: k, y: i, tileType: tileTypes.grass})
           } else {
             if (r > 0.08) {
-              this.addTileWithGridCoordinates(k, i, tileTypes.forest2)
+              this.addTileWithGridCoordinates({x: k, y: i, tileType: tileTypes.forest2})
             } else {
-              this.addTileWithGridCoordinates(k, i, tileTypes.water2)
+              this.addTileWithGridCoordinates({x: k, y: i, tileType: tileTypes.water2})
             }
           }
 
