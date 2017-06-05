@@ -38,10 +38,13 @@ export default class GameState {
   update () {
     this.map.update()
 
+    // Camera-movement must happen before view is updated!
+    this.cameraMover.update()
+
     this.mapView.drawWithOffset(this.state.game.camera.x, this.state.game.camera.y)
 
     this.menu.update()
 
-    this.cameraMover.update()
+    
   }
 }
