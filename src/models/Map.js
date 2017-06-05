@@ -61,11 +61,11 @@ export default class Map {
   createMapHalfForestHalfWater () {
     var limit = 0.2
     var tileTypes = TileType.call()
+    var r = Math.random()
 
     for (var i = 0; i < this.gridSizeY; i++) {
       if (i % 2 === 0) {
         for (var j = 0; j < this.gridSizeX; j++) {
-          var r = Math.random()
           if (r > limit) {
             this.addTileWithGridCoordinates({x: j, y: i, tileType: tileTypes.grass})
           } else {
@@ -74,7 +74,6 @@ export default class Map {
         }
       } else {
         for (var k = 0; k < this.gridSizeX; k++) {
-          r = Math.random()
           if (r > limit) {
             this.addTileWithGridCoordinates({x: k, y: i, tileType: tileTypes.grass})
           } else {
