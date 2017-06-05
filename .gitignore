@@ -5,3 +5,4 @@ dist/
 .idea/*
 tsDefs/
 nbproject/
+.nyc_output/
