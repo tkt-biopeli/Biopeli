@@ -5,4 +5,10 @@ export default class extends Phaser.Sprite {
     super(game, x, y, modelTile.tileType.asset)
     this.modelTile = modelTile
   }
+
+  update {
+
+  }
 }
+
+
