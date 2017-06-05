@@ -19,7 +19,6 @@ export default class extends Phaser.State {
     banner.smoothed = false
     banner.anchor.setTo(0.5)
 
-
     // ever rolling mushroom
     this.mushroom = new Mushroom({
       game: this,
@@ -56,10 +55,8 @@ export default class extends Phaser.State {
       viewHeightPx: this.game.height
     })
 
-
     // cursors for map movement demo
-    this.cursors = game.input.keyboard.createCursorKeys();
-
+    this.cursors = this.game.input.keyboard.createCursorKeys()
   }
 
   render () {
@@ -75,20 +72,18 @@ export default class extends Phaser.State {
     // camera speed
     var s = 16
     if (this.cursors.up.isDown) {
-      game.camera.y -= s;
-    }
-    else if (this.cursors.down.isDown) {
-      game.camera.y += s;
+      this.game.camera.y -= s
+    } else if (this.cursors.down.isDown) {
+      this.game.camera.y += s
     }
 
     if (this.cursors.left.isDown) {
-      game.camera.x -= s;
-    }
-    else if (this.cursors.right.isDown) {
-      game.camera.x += s;
+      this.game.camera.x -= s
+    } else if (this.cursors.right.isDown) {
+      this.game.camera.x += s
     }
 
-    this.mapView.drawWithOffset(game.camera.x, game.camera.y)
+    this.mapView.drawWithOffset(this.game.camera.x, this.game.camera.y)
 
     this.menu.update()
   }

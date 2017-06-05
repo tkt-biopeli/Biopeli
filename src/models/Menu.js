@@ -9,10 +9,9 @@
 // broadcastMessage
 
 import MenuView from '../sprites/MenuView'
-import * as menuOptionManager from './MenuOptionManager'
 
 export default class Menu {
-  constructor({ game, menuViewWidth }) {
+  constructor ({ game, menuViewWidth }) {
     this.game = game
     this.label = 'Klikkaa kartan ruutua'
     this.targetTile = undefined
@@ -32,15 +31,14 @@ export default class Menu {
       // do menuOption action and sendMessage to Map
       // update menuOptions
       this.menuView.redraw()
-    }  
+    }
   }
-  
-  setLabel(label) {
+
+  setLabel (label) {
     this.label = label
   }
-  
+
   setTargetTile (target) {
     this.targetTile = target
   }
-  
 }
