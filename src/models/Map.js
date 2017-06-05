@@ -52,7 +52,12 @@ export default class Map {
       var test = this.getTileWithPixelCoordinates(x, y)
 
       if (typeof test !== 'undefined') {
-        this.removeTileWithPixelCoordinates(x, y)
+        test.structure = new Structure ({
+          game: this.game,
+          x: test.x,
+          y: test.y,
+          asset: 'farm'
+        })
       }
     }
   }
@@ -69,7 +74,7 @@ export default class Map {
           if (r > limit) {
             this.addTileWithGridCoordinates(j, i, tileTypes.grass)
           } else {
-            this.addTileWithGridCoordinates(j, i, tileTypes.farm)
+            this.addTileWithGridCoordinates(j, i, tileTypes.grass)
           }
         }
       } else {
