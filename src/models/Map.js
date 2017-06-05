@@ -1,6 +1,6 @@
 import ModelTile from './ModelTile'
 import TileType from './TileType'
-import Structure from '../sprites/Structure'
+import Structure from '../models/Structure'
 
 export default class Map {
   constructor ({ game, gridSizeX, gridSizeY, tileWidth, tileHeight }) {
