@@ -1,7 +1,5 @@
-/* globals __DEV__ */
 import Phaser from 'phaser'
 import Mushroom from '../view/Mushroom'
-import CameraMover from '../view/CameraMover'
 import GameState from '../models/GameState'
 
 export default class extends Phaser.State {
@@ -26,12 +24,13 @@ export default class extends Phaser.State {
       asset: 'mushroom'
     })
 
+
     this.game.add.existing(this.mushroom)
 
     this.gameState = new GameState({state: this})
-    this.cameraMover = new CameraMover({game: this, xSpeed: 16, ySpeed: 16})
 
     this.cursors = this.game.input.keyboard.createCursorKeys()
+
   }
 
   render () {
@@ -43,6 +42,5 @@ export default class extends Phaser.State {
 
   update () {
     this.gameState.update()
-    this.cameraMover.update()
   }
 }
