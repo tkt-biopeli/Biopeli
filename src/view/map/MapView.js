@@ -1,21 +1,22 @@
+<<<<<<< HEAD:src/view/map/MapView.js
 import Map from '../../models/map/Map'
 import ModelTile from '../../models/map/ModelTile'
 import TileType from '../../models/map/TileType'
+=======
+>>>>>>> e028b9042f6bec8012a5d1d290ad74104d285ef5:src/sprites/MapView.js
 export default class MapView {
-
-  constructor({ game, map, viewWidthPx, viewHeightPx }) {
+  constructor ({ game, map, viewWidthPx, viewHeightPx }) {
     this.game = game
     this.map = map
     this.viewWidthPx = viewWidthPx
     this.viewHeightPx = viewHeightPx
     this.tileWidth = map.tileWidth
     this.tileHeight = map.tileHeight
-    this.renderTexture1 = this.game.add.renderTexture(viewWidthPx, viewHeightPx,'texture1')
+    this.renderTexture1 = this.game.add.renderTexture(viewWidthPx, viewHeightPx, 'texture1')
     this.renderS = this.game.add.sprite(0, 0, this.renderTexture1)
   }
 
   drawWithOffset (cameraX, cameraY) {
-
     // clear the view
     this.renderTexture1.clear()
 
@@ -31,13 +32,13 @@ export default class MapView {
 
     // get tiles from Map and fill view with Sprites
     for (var c = startCol; c <= endCol; c++) {
-
       for (var r = startRow; r <= endRow; r++) {
         var x = (c - startCol) * this.tileWidth + offX
         var y = (r - startRow) * this.tileHeight + offY
         var tile = this.map.getTileWithGridCoordinates(c, r)
 
         if (typeof tile !== 'undefined') {
+<<<<<<< HEAD:src/view/map/MapView.js
 
           // var spr = this.view.add(this.game.make.sprite(Math.round(x), Math.round(y), tile.tileType.asset))
           var spr = this.game.make.sprite(0, 0, tile.tileType.asset)
@@ -48,6 +49,10 @@ export default class MapView {
 /*            var crop = new Phaser.Rectangle(0, 0, 1, 128)
             spr.crop(crop)*/
           }
+=======
+          var spr = this.game.make.sprite(0, 0, tile.tileType.asset)
+          this.renderTexture1.renderXY(spr, Math.round(x), Math.round(y))
+>>>>>>> e028b9042f6bec8012a5d1d290ad74104d285ef5:src/sprites/MapView.js
         }
       }
     }

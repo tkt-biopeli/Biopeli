@@ -12,7 +12,7 @@ import MenuView from '../../view/menu/MenuView'
 import * as menuOptionManager from './MenuOptionManager'
 
 export default class Menu {
-  constructor({ game, menuViewWidth }) {
+  constructor ({ game, menuViewWidth }) {
     this.game = game
     this.label = 'Klikkaa kartan ruutua'
     this.targetTile = undefined
@@ -35,12 +35,11 @@ export default class Menu {
     }
   }
 
-  setLabel(label) {
+  setLabel (label) {
     this.label = label
   }
 
   setTargetTile (target) {
     this.targetTile = target
   }
-
 }

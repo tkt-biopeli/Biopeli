@@ -2,7 +2,7 @@ import ModelTile from './ModelTile'
 import TileType from './TileType'
 
 export default class Map {
-  constructor({ game, gridSizeX, gridSizeY, tileWidth, tileHeight }) {
+  constructor ({ game, gridSizeX, gridSizeY, tileWidth, tileHeight }) {
     this.gridSizeX = gridSizeX
     this.gridSizeY = gridSizeY
     this.tileWidth = tileWidth
@@ -15,11 +15,9 @@ export default class Map {
   }
 
   addTileWithGridCoordinates (gx, gy, tileType) {
-
     var tile = new ModelTile({x: gx, y: gy, type: tileType})
     this.grid[gy * this.gridSizeX + gx] = tile
   }
-
 
   addTileWithPixelCoordinates (px, py, tileType) {
     console.log(px+" "+py+" "+tileType)
@@ -65,27 +63,21 @@ export default class Map {
   createMapHalfForestHalfWater () {
     var limit = 0.2
     var tileTypes = TileType.call()
+    var r = Math.random()
 
     for (var i = 0; i < this.gridSizeY; i++) {
-
       if (i % 2 === 0) {
         for (var j = 0; j < this.gridSizeX; j++) {
-          var r = Math.random()
           if (r > limit) {
-
             this.addTileWithGridCoordinates(j, i, tileTypes.grass)
           } else {
             this.addTileWithGridCoordinates(j, i, tileTypes.farm)
-
           }
         }
       } else {
-
         for (var k = 0; k < this.gridSizeX; k++) {
-          var r = Math.random()
-
+          r = Math.random()
           if (r > limit) {
-
             this.addTileWithGridCoordinates(k, i, tileTypes.grass)
           } else {
             if (r > 0.08) {
@@ -94,7 +86,6 @@ export default class Map {
               this.addTileWithGridCoordinates(k, i, tileTypes.water2)
             }
           }
-
           // last tile check
           if (i === (this.gridSizeY - 1) && k === (this.gridSizeX - 1)) {
             this.removeTileWithGridCoordinates(k, i)
@@ -102,7 +93,6 @@ export default class Map {
         }
       }
     }
-
   }
 
   // Pixel-Grid-Pixel conversion helpers
