@@ -15,12 +15,15 @@ export default class Map {
   }
 
   addTileWithGridCoordinates (gx, gy, tileType) {
+
     var tile = new ModelTile({x: gx, y: gy, type: tileType})
     this.grid[gy * this.gridSizeX + gx] = tile
   }
 
 
   addTileWithPixelCoordinates (px, py, tileType) {
+    console.log(px+" "+py+" "+tileType)
+
     var gx = this.pixelsToGridX(px)
     var gy = this.pixelsToGridY(py)
     this.addTileWithGridCoordinates(gx, gy, tileType)
@@ -70,9 +73,9 @@ export default class Map {
           var r = Math.random()
           if (r > limit) {
 
-            this.addTileWithGridCoordinates({x: j, y: i, tileType: tileTypes.grass})
+            this.addTileWithGridCoordinates(j, i, tileTypes.grass)
           } else {
-            this.addTileWithGridCoordinates({x: j, y: i, tileType: tileTypes.farm})
+            this.addTileWithGridCoordinates(j, i, tileTypes.farm)
 
           }
         }
@@ -83,12 +86,12 @@ export default class Map {
 
           if (r > limit) {
 
-            this.addTileWithGridCoordinates({x: k, y: i, tileType: tileTypes.grass})
+            this.addTileWithGridCoordinates(k, i, tileTypes.grass)
           } else {
             if (r > 0.08) {
-              this.addTileWithGridCoordinates({x: k, y: i, tileType: tileTypes.forest2})
+              this.addTileWithGridCoordinates(k, i, tileTypes.forest2)
             } else {
-              this.addTileWithGridCoordinates({x: k, y: i, tileType: tileTypes.water2})
+              this.addTileWithGridCoordinates(k, i, tileTypes.water2)
             }
           }
 

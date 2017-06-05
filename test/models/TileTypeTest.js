@@ -1,5 +1,5 @@
 const assert = require('assert')
-import tileTypeCreator from '../../src/models/TileType'
+import tileTypeCreator from '../../src/models/map/TileType'
 
 describe('TileType test', () =>{
   it('Forest tile type is created correctly', () =>{

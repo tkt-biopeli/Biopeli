@@ -1,13 +1,11 @@
-import Map from '../models/Map'
-import ModelTile from '../models/ModelTile'
-import TileType from '../models/TileType'
+import Map from '../../models/map/Map'
+import ModelTile from '../../models/map/ModelTile'
+import TileType from '../../models/map/TileType'
 export default class MapView {
 
   constructor({ game, map, viewWidthPx, viewHeightPx }) {
     this.game = game
     this.map = map
-    this.view = this.game.add.group()
-    this.view.fixedToCamera = true
     this.viewWidthPx = viewWidthPx
     this.viewHeightPx = viewHeightPx
     this.tileWidth = map.tileWidth
@@ -19,7 +17,6 @@ export default class MapView {
   drawWithOffset (cameraX, cameraY) {
 
     // clear the view
-    this.view.removeAll(true, true)
     this.renderTexture1.clear()
 
     // calculate grid coordinates for new view
@@ -32,9 +29,6 @@ export default class MapView {
     var offX = -cameraX + startCol * this.tileWidth
     var offY = -cameraY + startRow * this.tileHeight
 
-
-
-
     // get tiles from Map and fill view with Sprites
     for (var c = startCol; c <= endCol; c++) {
 
@@ -43,13 +37,12 @@ export default class MapView {
         var y = (r - startRow) * this.tileHeight + offY
         var tile = this.map.getTileWithGridCoordinates(c, r)
 
-
         if (typeof tile !== 'undefined') {
+
           // var spr = this.view.add(this.game.make.sprite(Math.round(x), Math.round(y), tile.tileType.asset))
-          var spr = this.game.make.sprite(Math.round(x), Math.round(y), tile.tileType.asset)
-          spr.cameraOffset = new Phaser.Point(offX, offY)
+          var spr = this.game.make.sprite(0, 0, tile.tileType.asset)
           this.renderTexture1.renderXY(spr, Math.round(x), Math.round(y))
-          
+
           if (c > (endCol - 2)) {
             // spr.cameraOffset = new Phaser.Point(64, 0)
 /*            var crop = new Phaser.Rectangle(0, 0, 1, 128)
@@ -59,8 +52,5 @@ export default class MapView {
       }
     }
     this.renderS.reset(cameraX, cameraY)
-
-
-
   }
 }

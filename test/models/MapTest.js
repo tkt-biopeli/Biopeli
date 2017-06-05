@@ -1,7 +1,7 @@
 const assert = require("assert")
 const sinon = require('sinon')
-import Map from '../../src/models/Map'
-import TileType from '../../src/models/TileType'
+import Map from '../../src/models/map/Map'
+import TileType from '../../src/models/map/TileType'
 
 
 describe('Map tests', () => {

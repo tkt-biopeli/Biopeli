@@ -1,6 +1,6 @@
 const assert = require("assert")
-import ModelTile from '../../src/models/ModelTile'
-import tileTypeCreator from '../../src/models/TileType'
+import ModelTile from '../../src/models/map/ModelTile'
+import tileTypeCreator from '../../src/models/map/TileType'
 
 describe('Model tile tests', () =>{
   it('Constructor test', () =>{

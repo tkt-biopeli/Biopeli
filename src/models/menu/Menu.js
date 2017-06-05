@@ -8,7 +8,7 @@
 // sendMessage
 // broadcastMessage
 
-import MenuView from '../sprites/MenuView'
+import MenuView from '../../view/menu/MenuView'
 import * as menuOptionManager from './MenuOptionManager'
 
 export default class Menu {
@@ -32,15 +32,15 @@ export default class Menu {
       // do menuOption action and sendMessage to Map
       // update menuOptions
       this.menuView.redraw()
-    }  
+    }
   }
-  
+
   setLabel(label) {
     this.label = label
   }
-  
+
   setTargetTile (target) {
     this.targetTile = target
   }
-  
+
 }
