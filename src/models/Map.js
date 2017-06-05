@@ -2,7 +2,7 @@ import ModelTile from './ModelTile'
 import TileType from './TileType'
 
 export default class Map {
-  constructor({ game, gridSizeX, gridSizeY, tileWidth, tileHeight }) {
+  constructor ({ game, gridSizeX, gridSizeY, tileWidth, tileHeight }) {
     this.gridSizeX = gridSizeX
     this.gridSizeY = gridSizeY
     this.tileWidth = tileWidth
@@ -64,23 +64,18 @@ export default class Map {
     var r = Math.random()
 
     for (var i = 0; i < this.gridSizeY; i++) {
-
       if (i % 2 === 0) {
         for (var j = 0; j < this.gridSizeX; j++) {
           if (r > limit) {
-
             this.addTileWithGridCoordinates(j, i, tileTypes.grass)
           } else {
             this.addTileWithGridCoordinates(j, i, tileTypes.farm)
-
           }
         }
       } else {
-
         for (var k = 0; k < this.gridSizeX; k++) {
           r = Math.random()
           if (r > limit) {
-
             this.addTileWithGridCoordinates(k, i, tileTypes.grass)
           } else {
             if (r > 0.08) {
@@ -89,7 +84,6 @@ export default class Map {
               this.addTileWithGridCoordinates(k, i, tileTypes.water2)
             }
           }
-
           // last tile check
           if (i === (this.gridSizeY - 1) && k === (this.gridSizeX - 1)) {
             this.removeTileWithGridCoordinates(k, i)
@@ -97,7 +91,6 @@ export default class Map {
         }
       }
     }
-
   }
 
   // Pixel-Grid-Pixel conversion helpers

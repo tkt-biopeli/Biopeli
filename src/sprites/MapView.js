@@ -1,5 +1,3 @@
-import Phaser from 'phaser'
-
 export default class MapView {
   constructor ({ game, map, viewWidthPx, viewHeightPx }) {
     this.game = game
