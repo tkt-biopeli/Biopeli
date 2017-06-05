@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "webpack",
     "deploy": "webpack --config webpack.production.config.js",
-    "test": "eslint ./src/**/**.js; nyc mocha --timeout=3000 --require babel-register \"test/**/*.js\""
+    "test": "eslint ./src/**/**.js; nyc mocha --timeout=3000 --require babel-register \"test/**/*.js\"",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "license": "MIT",
