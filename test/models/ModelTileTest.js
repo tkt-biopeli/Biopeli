@@ -7,8 +7,8 @@ describe('Model tile tests', () =>{
     var tileType = tileTypeCreator().forest
     var tile = new ModelTile(1, 2, tileType)
 
-    assert.equal(1, tile.x)
-    assert.equal(2, tile.y)
+    assert.equal(1, tile.gridX)
+    assert.equal(2, tile.gridY)
     assert.equal('forest', tile.tileType.name)
   })
 })
