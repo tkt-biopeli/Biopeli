@@ -1,7 +1,7 @@
 export default class {
-  constructor (gridX, gridY, type) {
-    this.gridX = gridX
-    this.gridY = gridY
+  constructor ({x, y, type}) {
+    this.x = x
+    this.y = y
     this.tileType = type
   }
 }

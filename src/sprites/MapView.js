@@ -1,21 +1,18 @@
-import Map from '../models/Map'
-import ModelTile from '../models/ModelTile'
-import TileType from '../models/TileType'
-export default class MapView {
+import Phaser from 'phaser'
 
-  constructor({ game, map, viewWidthPx, viewHeightPx }) {
+export default class MapView {
+  constructor ({ game, map, viewWidthPx, viewHeightPx }) {
     this.game = game
     this.map = map
     this.viewWidthPx = viewWidthPx
     this.viewHeightPx = viewHeightPx
     this.tileWidth = map.tileWidth
     this.tileHeight = map.tileHeight
-    this.renderTexture1 = this.game.add.renderTexture(viewWidthPx, viewHeightPx,'texture1')
+    this.renderTexture1 = this.game.add.renderTexture(viewWidthPx, viewHeightPx, 'texture1')
     this.renderS = this.game.add.sprite(0, 0, this.renderTexture1)
   }
 
   drawWithOffset (cameraX, cameraY) {
-
     // clear the view
     this.renderTexture1.clear()
 
@@ -31,7 +28,6 @@ export default class MapView {
 
     // get tiles from Map and fill view with Sprites
     for (var c = startCol; c <= endCol; c++) {
-
       for (var r = startRow; r <= endRow; r++) {
         var x = (c - startCol) * this.tileWidth + offX
         var y = (r - startRow) * this.tileHeight + offY

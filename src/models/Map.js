@@ -15,10 +15,9 @@ export default class Map {
   }
 
   addTileWithGridCoordinates (gx, gy, tileType) {
-    var tile = new ModelTile(gx, gy, tileType)
+    var tile = new ModelTile({ x: gx, y: gy, type: tileType })
     this.grid[gy * this.gridSizeX + gx] = tile
   }
-
 
   addTileWithPixelCoordinates (px, py, tileType) {
     var gx = this.pixelsToGridX(px)
@@ -79,7 +78,7 @@ export default class Map {
       } else {
 
         for (var k = 0; k < this.gridSizeX; k++) {
-          var r = Math.random()
+          r = Math.random()
 
           if (r > limit) {
 
