@@ -46,7 +46,5 @@ export default class GameState {
     this.mapView.drawWithOffset(this.state.game.camera.x, this.state.game.camera.y)
 
     this.menu.update()
-
-    
   }
 }
