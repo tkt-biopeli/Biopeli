@@ -1,13 +1,10 @@
-/* globals __DEV__ */
 import Phaser from 'phaser'
-import Mushroom from '../sprites/Mushroom'
-import ModelTile from '../models/ModelTile'
-import TileType from '../models/TileType'
-import ViewTile from '../sprites/ViewTile'
+import Mushroom from '../view/Mushroom'
+import GameState from '../models/GameState'
 
 export default class extends Phaser.State {
-  init () {}
-  preload () {}
+  init () { }
+  preload () { }
 
   create () {
     const bannerText = 'Biopeli 2.0'
@@ -19,6 +16,7 @@ export default class extends Phaser.State {
     banner.smoothed = false
     banner.anchor.setTo(0.5)
 
+    // ever rolling mushroom
     this.mushroom = new Mushroom({
       game: this,
       x: this.world.centerX,
@@ -26,21 +24,23 @@ export default class extends Phaser.State {
       asset: 'mushroom'
     })
 
-    var tileTypes = TileType.call()
-    var forestTile = new ModelTile(100, 200, tileTypes.forest)
-
-    var waterTile = new ModelTile(300, 300, tileTypes.water)
-
-    this.viewForestTile = new ViewTile(this, 100, 200, forestTile)
-
-    this.viewWaterTile = new ViewTile(this, 300, 300, waterTile)
 
     this.game.add.existing(this.mushroom)
+
+    this.gameState = new GameState({state: this})
+
+    this.cursors = this.game.input.keyboard.createCursorKeys()
+
   }
 
   render () {
     if (__DEV__) {
       this.game.debug.spriteInfo(this.mushroom, 32, 32)
+      this.game.debug.cameraInfo(this.game.camera, 500, 32)
     }
+  }
+
+  update () {
+    this.gameState.update()
   }
 }
