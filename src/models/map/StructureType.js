@@ -4,7 +4,7 @@ export default function () {
         this.asset = asset
     }
 
-    var farm = new TileType({name: 'farm', asset: 'farm'})
+    var farm = new StructureType({name: 'farm', asset: 'farm'})
 
     return {
         farm: farm

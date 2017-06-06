@@ -16,7 +16,7 @@ export default class Map {
   }
 
   addTileWithGridCoordinates (gx, gy, tileType) {
-    var tile = new ModelTile({x: gx, y: gy, type: tileType})
+    var tile = new ModelTile({x: gx, y: gy, type: tileType, structure: null})
     this.grid[gy * this.gridSizeX + gx] = tile
   }
 
