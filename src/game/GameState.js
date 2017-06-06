@@ -1,10 +1,11 @@
-import Menu from './menu/Menu'
-import Map from './map/Map'
+import Menu from '../models/menu/Menu'
+import Map from '../models/map/Map'
 import MapView from '../view/map/MapView'
 import CameraMover from '../view/CameraMover'
 import InputHandler from '../InputHandler'
-export default class GameState {
+import Player from './Player'
 
+export default class GameState {
   constructor ({state}) {
     this.state = state
 
@@ -36,6 +37,8 @@ export default class GameState {
     this.cameraMover = new CameraMover({game: state, xSpeed: 16, ySpeed: 16})
 
     this.inputHandler = new InputHandler(state)
+    
+    this.player = new Player()
   }
 
   update () {
@@ -43,10 +46,15 @@ export default class GameState {
 
     this.map.update(events)
 
+    // Camera-movement must happen before view is updated!
+    this.cameraMover.update()
+
     this.mapView.drawWithOffset(this.state.game.camera.x, this.state.game.camera.y)
 
     this.menu.update(events)
 
     this.cameraMover.update(events)
+
+    this.menu.update()
   }
 }

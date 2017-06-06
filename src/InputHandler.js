@@ -1,5 +1,5 @@
 export default class InputHandler{
-	constructor(game){
+  constructor(game){
     this.game = game
   }
 

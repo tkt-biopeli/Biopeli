@@ -19,9 +19,7 @@ export default class Map {
     this.grid[gy * this.gridSizeX + gx] = tile
   }
 
-  addTileWithPixelCoordinates (px, py, tileType) {
-    console.log(px+" "+py+" "+tileType)
-
+  addTileWithPixelCoordinates (px, py, tileType) {    
     var gx = this.pixelsToGridX(px)
     var gy = this.pixelsToGridY(py)
     this.addTileWithGridCoordinates(gx, gy, tileType)
