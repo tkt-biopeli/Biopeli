@@ -3,7 +3,7 @@ export default class ViewTile{
     this.game = game
     this.modelTile = modelTile
 
-    this.tileSprite = game.add.sprite(x, y, modelTile.tileType.asset)
+    this.tileSprite = game.make.sprite(x, y, modelTile.tileType.asset)
 
     if(modelTile.structure != null){
       makeStructureSprite()
