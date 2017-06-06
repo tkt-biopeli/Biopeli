@@ -3,5 +3,6 @@ export default class {
     this.x = x
     this.y = y
     this.tileType = type
+    this.structure = null
   }
 }

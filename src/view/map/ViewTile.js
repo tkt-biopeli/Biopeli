@@ -24,4 +24,10 @@ export default class ViewTile{
   makeStructureSprite(){
     this.structureSprte = this.tileSprite.addChild(game.make.sprite(0, 0, modelTile.structure.asset))
   }
+
+  update {
+
+  }
 }
+
+

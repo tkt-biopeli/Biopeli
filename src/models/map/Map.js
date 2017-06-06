@@ -1,5 +1,6 @@
 import ModelTile from './ModelTile'
 import TileType from './TileType'
+import Structure from '../models/Structure'
 
 export default class Map {
   constructor ({ game, gridSizeX, gridSizeY, tileWidth, tileHeight }) {
@@ -44,15 +45,24 @@ export default class Map {
   }
 
   update () {
-    // map mouse demo, deletes tile from grid
+    // map mouse demo, add building just demo!!!
     if (this.game.input.activePointer.isDown && this.game.input.activePointer.position.x <= (this.game.camera.width - 256)) {
       var x = this.game.input.activePointer.position.x + this.game.game.camera.x
       var y = this.game.input.activePointer.position.y + this.game.game.camera.y
 
       var test = this.getTileWithPixelCoordinates(x, y)
 
+      var tileTypes = TileType.call()
+
       if (typeof test !== 'undefined') {
-        this.removeTileWithPixelCoordinates(x, y)
+        test.structure = new Structure ({
+          game: this.game,
+          x: test.x,
+          y: test.y,
+          asset: 'farm'
+        })
+        this.removeTileWithGridCoordinates(x, y)
+        this.addTileWithPixelCoordinates(x, y, tileTypes.farm)
       }
     }
   }
@@ -69,7 +79,7 @@ export default class Map {
           if (r > limit) {
             this.addTileWithGridCoordinates(j, i, tileTypes.grass)
           } else {
-            this.addTileWithGridCoordinates(j, i, tileTypes.farm)
+            this.addTileWithGridCoordinates(j, i, tileTypes.grass)
           }
         }
       } else {
