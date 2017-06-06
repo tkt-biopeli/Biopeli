@@ -2965,8 +2965,6 @@ var Map = function () {
   }, {
     key: 'addTileWithPixelCoordinates',
     value: function addTileWithPixelCoordinates(px, py, tileType) {
-      console.log(px + " " + py + " " + tileType);
-
       var gx = this.pixelsToGridX(px);
       var gy = this.pixelsToGridY(py);
       this.addTileWithGridCoordinates(gx, gy, tileType);
@@ -4243,13 +4241,14 @@ var GameState = function () {
   _createClass(GameState, [{
     key: 'update',
     value: function update() {
-      this.map.update();
+      this.map.update
+
+      // Camera-movement must happen before view is updated!
+      ();this.cameraMover.update();
 
       this.mapView.drawWithOffset(this.state.game.camera.x, this.state.game.camera.y);
 
       this.menu.update();
-
-      this.cameraMover.update();
     }
   }]);
 
@@ -4886,16 +4885,6 @@ var MapView = function () {
           var tile = this.map.getTileWithGridCoordinates(c, r);
 
           if (typeof tile !== 'undefined') {
-
-            // var spr = this.view.add(this.game.make.sprite(Math.round(x), Math.round(y), tile.tileType.asset))
-            var spr = this.game.make.sprite(0, 0, tile.tileType.asset);
-            this.renderTexture1.renderXY(spr, Math.round(x), Math.round(y));
-
-            if (c > endCol - 2) {
-              // spr.cameraOffset = new Phaser.Point(64, 0)
-              /*            var crop = new Phaser.Rectangle(0, 0, 1, 128)
-                          spr.crop(crop)*/
-            }
             var spr = this.game.make.sprite(0, 0, tile.tileType.asset);
             this.renderTexture1.renderXY(spr, Math.round(x), Math.round(y));
           }
