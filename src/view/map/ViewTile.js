@@ -1,5 +1,3 @@
-import Phaser from 'phaser'
-
 export default class ViewTile{
   constructor ({game, x, y, modelTile}) {
     this.game = game
@@ -15,13 +13,13 @@ export default class ViewTile{
   update(){
     if(this.modelTile.structure != null && this.structureSprite == null){
       makeStructureSprite()
-    }else if(this.modelTile.structure == null && this.structureSprte != null){
+    }else if(this.modelTile.structure == null && this.structureSprite != null){
       this.structureSprite.destroy()
       this.structureSprite = null
     }
   }
 
   makeStructureSprite(){
-    this.structureSprte = this.tileSprite.addChild(game.make.sprite(0, 0, modelTile.structure.asset))
+    this.structureSprte = this.tileSprite.addChild(game.make.sprite(0, 0, modelTile.structure.asset()))
   }
 }
