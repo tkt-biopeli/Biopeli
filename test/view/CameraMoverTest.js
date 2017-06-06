@@ -4,12 +4,13 @@ import CameraMover from '../../src/view/CameraMover'
 
 describe('Camera mover tests', () =>{
   var game
+  var events
 
   function setCursors(up, down, left, right){
-    game.cursors.up.isDown = up
-    game.cursors.down.isDown = down
-    game.cursors.left.isDown = left
-    game.cursors.right.isDown = right
+    events.cursor.up = up
+    events.cursor.down = down
+    events.cursor.left = left
+    events.cursor.right = right
   }
 
   function checkCameraCoordinates(x, y){
@@ -19,15 +20,18 @@ describe('Camera mover tests', () =>{
 
   beforeEach(() =>{
     game = {
-      cursors: {
-        up: {isDown: false},
-        down: {isDown: false},
-        left: {isDown: false},
-        right: {isDown: false}
-      },
       camera: {
         x: 0,
         y: 0
+      }
+    }
+
+    events = {
+      cursor: {
+        up: false,
+        down: false,
+        left: false,
+        right: false
       }
     }
   })
@@ -43,7 +47,7 @@ describe('Camera mover tests', () =>{
   it('If there is no input, camera doesn\'t move', () =>{
     var mover = new CameraMover({game: game, xSpeed: 1, ySpeed: 1})
 
-    mover.update()
+    mover.update(events)
 
     checkCameraCoordinates(0, 0)
   })
@@ -51,30 +55,30 @@ describe('Camera mover tests', () =>{
   it('If there is one input, camera moves', () => {
     setCursors(true, false, false, false)
     var mover = new CameraMover({game: game, xSpeed: 1, ySpeed: 1})
-    mover.update()
+    mover.update(events)
     checkCameraCoordinates(0, -1)
 
     setCursors(false, true, false, false)
-    mover.update()
+    mover.update(events)
     checkCameraCoordinates(0, 0)
 
     setCursors(false, false, true, false)
-    mover.update()
+    mover.update(events)
     checkCameraCoordinates(-1, 0)
 
     setCursors(false, false, false, true)
-    mover.update()
+    mover.update(events)
     checkCameraCoordinates(0, 0)
   })
 
   it('Camera checks both axis every loop', () => {
     setCursors(true, false, true, false)
     var mover = new CameraMover({game: game, xSpeed: 1, ySpeed: 1})
-    mover.update()
+    mover.update(events)
     checkCameraCoordinates(-1, -1)
 
     setCursors(false, true, false, true)
-    mover.update()
+    mover.update(events)
     checkCameraCoordinates(0, 0)
   })
 })

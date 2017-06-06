@@ -50,5 +50,4 @@ describe('Map tests', () => {
     assert.equal(map.getTileWithGridCoordinates(1, 1), undefined)
   })
 
-
 })

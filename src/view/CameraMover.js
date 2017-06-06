@@ -6,7 +6,6 @@ export default class CameraMover {
   }
 
   /**
-   * 
    * @param  events - see InputHandler
    */
   update (events) {

@@ -1,9 +1,9 @@
-export default class InputHandler{
-  constructor(game){
+export default class InputHandler {
+  constructor ({game}) {
     this.game = game
   }
 
-  getEvents(){
+  getEvents () {
     var cursorEvent, pointerEvent
 
     // cursor
@@ -17,7 +17,7 @@ export default class InputHandler{
 
     // pointer
     var ptr = this.game.input.activePointer
-    if(ptr.isDown){
+    if (ptr.isDown) {
       pointerEvent = {
         x: ptr.position.x,
         y: ptr.position.y
@@ -25,7 +25,7 @@ export default class InputHandler{
     }
 
     return {
-      cursor: cursorEvent, 
+      cursor: cursorEvent,
       pointer: pointerEvent // undefined if pointer is not down, otherwise {x,y} obj
     }
   }

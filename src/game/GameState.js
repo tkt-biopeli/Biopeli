@@ -2,7 +2,7 @@ import Menu from '../models/menu/Menu'
 import Map from '../models/map/Map'
 import MapView from '../view/map/MapView'
 import CameraMover from '../view/CameraMover'
-import InputHandler from '../InputHandler'
+import InputHandler from '../view/InputHandler'
 import Player from './Player'
 
 export default class GameState {
@@ -36,8 +36,8 @@ export default class GameState {
 
     this.cameraMover = new CameraMover({game: state, xSpeed: 16, ySpeed: 16})
 
-    this.inputHandler = new InputHandler(state)
-    
+    this.inputHandler = new InputHandler({game: state})
+
     this.player = new Player()
   }
 
