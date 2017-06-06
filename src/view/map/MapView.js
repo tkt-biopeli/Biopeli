@@ -1,5 +1,6 @@
 import Map from '../../models/map/Map'
 import ModelTile from '../../models/map/ModelTile'
+import ViewTile from './ViewTile'
 import TileType from '../../models/map/TileType'
 export default class MapView {
   constructor ({ game, map, viewWidthPx, viewHeightPx }) {
@@ -34,9 +35,9 @@ export default class MapView {
         var y = (r - startRow) * this.tileHeight + offY
         var tile = this.map.getTileWithGridCoordinates(c, r)
 
-        if (typeof tile !== 'undefined') {          
-          var spr = this.game.make.sprite(0, 0, tile.tileType.asset)
-          this.renderTexture1.renderXY(spr, Math.round(x), Math.round(y))
+        if (typeof tile !== 'undefined') {
+          var viewTile = new ViewTile({game: this.game, x: 0, y: 0, modelTile: tile})
+          this.renderTexture1.renderXY(viewTile.tileSprite, Math.round(x), Math.round(y))
         }
       }
     }

@@ -1,6 +1,6 @@
 import ModelTile from './ModelTile'
 import TileType from './TileType'
-import Structure from '../models/Structure'
+import Structure from './Structure'
 
 export default class Map {
   constructor ({ game, gridSizeX, gridSizeY, tileWidth, tileHeight }) {
@@ -20,7 +20,7 @@ export default class Map {
     this.grid[gy * this.gridSizeX + gx] = tile
   }
 
-  addTileWithPixelCoordinates (px, py, tileType) {    
+  addTileWithPixelCoordinates (px, py, tileType) {
     var gx = this.pixelsToGridX(px)
     var gy = this.pixelsToGridY(py)
     this.addTileWithGridCoordinates(gx, gy, tileType)

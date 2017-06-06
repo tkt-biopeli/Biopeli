@@ -1,5 +1,3 @@
-import Phaser from 'phaser'
-
 export default class Structure{
   constructor ({tile, structureType}) {
     this.tile = tile
