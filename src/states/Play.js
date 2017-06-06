@@ -1,9 +1,6 @@
-/* globals __DEV__ */
 import Phaser from 'phaser'
-import Mushroom from '../sprites/Mushroom'
-import Map from '../models/Map'
-import Menu from '../models/Menu'
-import MapView from '../sprites/MapView'
+import Mushroom from '../view/Mushroom'
+import GameState from '../game/GameState'
 
 export default class extends Phaser.State {
   init () { }
@@ -29,33 +26,8 @@ export default class extends Phaser.State {
 
     this.game.add.existing(this.mushroom)
 
-    // game menu
-    this.menu = new Menu({
-      game: this,
-      menuViewWidth: 256
-    })
+    this.gameState = new GameState({state: this})
 
-    // map grid
-    this.map = new Map({
-      game: this,
-      gridSizeX: Math.ceil(this.game.width * 4 / 128),
-      gridSizeY: Math.ceil(this.game.height * 4 / 128),
-      tileWidth: 128,
-      tileHeight: 128
-    })
-
-    // fill map grid with sample data
-    this.map.createMapHalfForestHalfWater()
-
-    // map view
-    this.mapView = new MapView({
-      game: this,
-      map: this.map,
-      viewWidthPx: this.game.width - 256,
-      viewHeightPx: this.game.height
-    })
-
-    // cursors for map movement demo
     this.cursors = this.game.input.keyboard.createCursorKeys()
   }
 
@@ -67,24 +39,6 @@ export default class extends Phaser.State {
   }
 
   update () {
-    this.map.update()
-
-    // camera speed
-    var s = 16
-    if (this.cursors.up.isDown) {
-      this.game.camera.y -= s
-    } else if (this.cursors.down.isDown) {
-      this.game.camera.y += s
-    }
-
-    if (this.cursors.left.isDown) {
-      this.game.camera.x -= s
-    } else if (this.cursors.right.isDown) {
-      this.game.camera.x += s
-    }
-
-    this.mapView.drawWithOffset(this.game.camera.x, this.game.camera.y)
-
-    this.menu.update()
+    this.gameState.update()
   }
 }

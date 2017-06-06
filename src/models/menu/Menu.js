@@ -8,7 +8,8 @@
 // sendMessage
 // broadcastMessage
 
-import MenuView from '../sprites/MenuView'
+import MenuView from '../../view/menu/MenuView'
+import * as menuOptionManager from './MenuOptionManager'
 
 export default class Menu {
   constructor ({ game, menuViewWidth }) {

@@ -16,11 +16,11 @@ export default class Map {
   }
 
   addTileWithGridCoordinates (gx, gy, tileType) {
-    var tile = new ModelTile({ x: gx, y: gy, type: tileType })
+    var tile = new ModelTile({x: gx, y: gy, type: tileType})
     this.grid[gy * this.gridSizeX + gx] = tile
   }
 
-  addTileWithPixelCoordinates (px, py, tileType) {
+  addTileWithPixelCoordinates (px, py, tileType) {    
     var gx = this.pixelsToGridX(px)
     var gy = this.pixelsToGridY(py)
     this.addTileWithGridCoordinates(gx, gy, tileType)
