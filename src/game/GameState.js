@@ -1,9 +1,9 @@
-import Menu from './menu/Menu'
-import Map from './map/Map'
+import Menu from '../models/menu/Menu'
+import Map from '../models/map/Map'
 import MapView from '../view/map/MapView'
 import CameraMover from '../view/CameraMover'
+import Player from './Player'
 export default class GameState {
-
   constructor ({state}) {
     this.state = state
 
@@ -33,6 +33,8 @@ export default class GameState {
     })
 
     this.cameraMover = new CameraMover({game: state, xSpeed: 16, ySpeed: 16})
+
+    this.player = new Player()
   }
 
   update () {

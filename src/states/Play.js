@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import Mushroom from '../view/Mushroom'
-import GameState from '../models/GameState'
+import GameState from '../game/GameState'
 
 export default class extends Phaser.State {
   init () { }
@@ -24,13 +24,11 @@ export default class extends Phaser.State {
       asset: 'mushroom'
     })
 
-
     this.game.add.existing(this.mushroom)
 
     this.gameState = new GameState({state: this})
 
     this.cursors = this.game.input.keyboard.createCursorKeys()
-
   }
 
   render () {
