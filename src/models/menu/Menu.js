@@ -26,11 +26,13 @@ export default class Menu {
     this.menuView.redraw()
   }
 
-  update () {
-    // if activePointer.isDown and the cursor is over a menuOption
-    if (this.game.input.activePointer.isDown) {
-      // do menuOption action and sendMessage to Map
-      // update menuOptions
+  /**
+   * 
+   * @param  events - see InputHandler
+   */
+  update (events) {
+    var event = events.pointer
+    if(event != undefined){
       this.menuView.redraw()
     }
   }

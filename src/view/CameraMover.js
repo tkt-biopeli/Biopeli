@@ -5,16 +5,21 @@ export default class CameraMover {
     this.y = ySpeed
   }
 
-  update () {
-    if (this.game.cursors.up.isDown) {
+  /**
+   * 
+   * @param  events - see InputHandler
+   */
+  update (events) {
+    var event = events.cursor
+    if (event.up) {
       this.game.camera.y -= this.y
-    } else if (this.game.cursors.down.isDown) {
+    } else if (event.down) {
       this.game.camera.y += this.y
     }
 
-    if (this.game.cursors.left.isDown) {
+    if (event.left) {
       this.game.camera.x -= this.x
-    } else if (this.game.cursors.right.isDown) {
+    } else if (event.right) {
       this.game.camera.x += this.x
     }
   }

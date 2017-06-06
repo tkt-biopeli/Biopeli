@@ -45,12 +45,15 @@ export default class Map {
     this.grid[this.pixelsToGridX(py) * this.gridSizeX + this.pixelsToGridX(px)] = undefined
   }
 
-  update () {
-    // map mouse demo, deletes tile from grid
-    if (this.game.input.activePointer.isDown && this.game.input.activePointer.position.x <= (this.game.camera.width - 256)) {
-      var x = this.game.input.activePointer.position.x + this.game.game.camera.x
-      var y = this.game.input.activePointer.position.y + this.game.game.camera.y
-
+  /**
+   * 
+   * @param  events - see InputHandler
+   */
+  update (events) {
+    var event = events.pointer
+    if(event != undefined && event.x <= (this.game.camera.width - 256)){
+      var x = event.x + this.game.game.camera.x
+      var y = event.y + this.game.game.camera.y
       var test = this.getTileWithPixelCoordinates(x, y)
 
       if (typeof test !== 'undefined') {

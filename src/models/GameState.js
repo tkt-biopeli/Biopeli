@@ -2,6 +2,7 @@ import Menu from './menu/Menu'
 import Map from './map/Map'
 import MapView from '../view/map/MapView'
 import CameraMover from '../view/CameraMover'
+import InputHandler from '../InputHandler'
 export default class GameState {
 
   constructor ({state}) {
@@ -33,15 +34,19 @@ export default class GameState {
     })
 
     this.cameraMover = new CameraMover({game: state, xSpeed: 16, ySpeed: 16})
+
+    this.inputHandler = new InputHandler(state)
   }
 
   update () {
-    this.map.update()
+    var events = this.inputHandler.getEvents()
+
+    this.map.update(events)
 
     this.mapView.drawWithOffset(this.state.game.camera.x, this.state.game.camera.y)
 
-    this.menu.update()
+    this.menu.update(events)
 
-    this.cameraMover.update()
+    this.cameraMover.update(events)
   }
 }
