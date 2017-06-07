@@ -16,12 +16,12 @@ export default class extends Phaser.State {
     this.load.image('menuBg', 'assets/images/low-poly-bg.png')
     this.load.spritesheet('button', 'assets/images/button_sprite_sheet.png', 193, 71)
     this.load.image('mushroom', 'assets/images/mushroom2.png')
-    this.load.image('forest', 'assets/images/forest.png')
-    this.load.image('water', 'assets/images/water.png')
-    this.load.image('forest2', 'assets/images/forest2.png')
-    this.load.image('water2', 'assets/images/water2.png')
-    this.load.image('grass', 'assets/images/grass.png')
-    this.load.image('farm', 'assets/images/farm.png')
+
+    this.load.image('forest', 'assets/images/tiles/forest.png')
+    this.load.image('water', 'assets/images/tiles/water.png')
+    this.load.image('grass', 'assets/images/tiles/grass.png')
+    this.load.image('farm', 'assets/images/structures/farm.png')
+    this.load.image('granary', 'assets/images/structures/granary.png')
   }
 
   create () {

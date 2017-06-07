@@ -5,8 +5,10 @@ export default function () {
     }
 
     var farm = new StructureType({name: 'farm', asset: 'farm'})
+    var granary = new StructureType({name: 'granary', asset: 'granary'})
 
     return {
-        farm: farm
+        farm: farm,
+        granary: granary
     }
 }
