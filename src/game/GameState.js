@@ -42,8 +42,12 @@ export default class GameState {
     })
 
     this.cameraMover = new CameraMover({game: state, xSpeed: 16, ySpeed: 16})
-    this.mapListener = new MapListener({game: state, map: this.map,
-      tileTypes: this.tileTypes, structureTypes: this.structureTypes})
+    this.mapListener = new MapListener({
+      game: state,
+      map: this.map,
+      tileTypes: this.tileTypes,
+      structureTypes: this.structureTypes
+    })
 
     this.inputHandler = new InputHandler({game: state})
 

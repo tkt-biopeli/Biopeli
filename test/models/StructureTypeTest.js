@@ -5,6 +5,6 @@ describe('StructureType tests', () =>{
   it('All structures are created', () =>{
     var structures = StructureType()
 
-    assert.equal(1, Object.keys(structures).length)
+    assert.equal(2, Object.keys(structures).length)
   })
 })
