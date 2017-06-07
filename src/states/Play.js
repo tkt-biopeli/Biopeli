@@ -26,7 +26,13 @@ export default class extends Phaser.State {
 
     this.game.add.existing(this.mushroom)
 
-    this.gameState = new GameState({state: this})
+    this.gameState = new GameState({
+      state: this,
+      mapWidth: Math.ceil(this.game.width * 4 / 128),
+      mapHeight: Math.ceil(this.game.height * 4 / 128),
+      tileWidth: 128,
+      tileHeight: 128
+    })
 
     this.cursors = this.game.input.keyboard.createCursorKeys()
   }

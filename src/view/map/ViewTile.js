@@ -6,13 +6,13 @@ export default class ViewTile{
     this.tileSprite = game.make.sprite(x, y, modelTile.tileType.asset)
 
     if(modelTile.structure != null){
-      makeStructureSprite()
+      this.makeStructureSprite()
     }
   }
 
   update(){
     if(this.modelTile.structure != null && this.structureSprite == null){
-      makeStructureSprite()
+      this.makeStructureSprite()
     }else if(this.modelTile.structure == null && this.structureSprite != null){
       this.structureSprite.destroy()
       this.structureSprite = null
@@ -20,6 +20,6 @@ export default class ViewTile{
   }
 
   makeStructureSprite(){
-    this.structureSprte = this.tileSprite.addChild(game.make.sprite(0, 0, modelTile.structure.asset()))
+    this.structureSprite = this.tileSprite.addChild(this.game.make.sprite(0, 0, this.modelTile.structure.asset()))
   }
 }

@@ -3,16 +3,12 @@ import TileType from './TileType'
 import Structure from './Structure'
 
 export default class Map {
-  constructor ({ game, gridSizeX, gridSizeY, tileWidth, tileHeight }) {
+  constructor ({ gridSizeX, gridSizeY, tileWidth, tileHeight }) {
     this.gridSizeX = gridSizeX
     this.gridSizeY = gridSizeY
     this.tileWidth = tileWidth
     this.tileHeight = tileHeight
-    this.game = game
     this.grid = []
-
-    // World map size: top left corner x & y, width, height
-    game.world.setBounds(0, 0, gridSizeX * tileWidth, gridSizeY * tileHeight)
   }
 
   addTileWithGridCoordinates (gx, gy, tileType) {
@@ -42,32 +38,6 @@ export default class Map {
 
   removeTileWithPixelCoordinates (px, py) {
     this.grid[this.pixelsToGridX(py) * this.gridSizeX + this.pixelsToGridX(px)] = undefined
-  }
-
-  /**
-   * @param  events - see InputHandler
-   */
-  update (events) {
-    var event = events.pointer
-    if(event != undefined && event.x <= (this.game.camera.width - 256)){
-      var x = event.x + this.game.game.camera.x
-      var y = event.y + this.game.game.camera.y
-
-      var test = this.getTileWithPixelCoordinates(x, y)
-
-      var tileTypes = TileType.call()
-
-      if (typeof test !== 'undefined') {
-        test.structure = new Structure ({
-          game: this.game,
-          x: test.x,
-          y: test.y,
-          asset: 'farm'
-        })
-        this.removeTileWithGridCoordinates(x, y)
-        this.addTileWithPixelCoordinates(x, y, tileTypes.farm)
-      }
-    }
   }
 
   // TEST DATA
