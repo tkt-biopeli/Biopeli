@@ -1,6 +1,6 @@
-import StructureBuilder from '../../map/StructureBuilder'
+import StructureBuilder from '../../map/StructureFactory'
 export default function ForestActions (tile) {
-  var sbuilder = new StructureBuilder({tile: tile})
+  var sbuilder = new StructureFactory({tile: tile})
 
   var createGranary = new ButtonAction({
     name: 'Build a granary',

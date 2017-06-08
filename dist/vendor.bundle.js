@@ -105516,10 +105516,10 @@ process.umask = function() { return 0; };
   \******************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! pixi */88);
-__webpack_require__(/*! p2 */89);
+__webpack_require__(/*! pixi */89);
+__webpack_require__(/*! p2 */90);
 __webpack_require__(/*! phaser */45);
-module.exports = __webpack_require__(/*! webfontloader */90);
+module.exports = __webpack_require__(/*! webfontloader */91);
 
 
 /***/ }),
@@ -105570,7 +105570,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 88:
+/***/ 89:
 /* unknown exports provided */
 /* all exports used */
 /*!******************************************!*\
@@ -105583,7 +105583,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 89:
+/***/ 90:
 /* unknown exports provided */
 /* all exports used */
 /*!****************************************!*\
@@ -105596,7 +105596,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 90:
+/***/ 91:
 /* unknown exports provided */
 /* all exports used */
 /*!******************************************!*\

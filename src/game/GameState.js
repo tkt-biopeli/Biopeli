@@ -20,7 +20,9 @@ export default class GameState {
     this.structureTypes = StructureTypes()
 
     this.menuOptionCreator = new MenuOptionCreator()
-    this.menu = new Menu()
+    this.menu = new Menu({
+      menuOptionCreator: this.menuOptionCreator
+    })
     this.menuView = new MenuView({
       game: state,
       menuViewWidth: 256,

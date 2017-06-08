@@ -1,15 +1,4 @@
-// +label
-// +menuOptions[]
-// +targetTile
-// update
-// getComponent
-// getAllComponents
-// addComponent
-// sendMessage
-// broadcastMessage
-
-import * as menuOptionManager from './MenuOptionManager'
-
+import MenuOptionCreator from './MenuOptionCreator'
 export default class Menu {
   constructor ({menuOptionCreator}) {
     this.menuOptionCreator = menuOptionCreator
