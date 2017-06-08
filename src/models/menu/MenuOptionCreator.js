@@ -1,11 +1,12 @@
+import ForestActions from './ActionCreators/ForestActions'
+import GrassActions from './ActionCreators/GrassActions'
+import WaterActions from './ActionCreators/WaterActions'
 export default class MenuOptionCreator {
-
-  constructor(){
+  constructor () {
     this.tileOptions = new Map()
-    this.tileOptions.set("forest", [
-      new ButtonAction("Rakenna")
-    ])
-
+    this.tileOptions.set("forest", ForestActions)
+    this.tileOptions.set("grass", GrassActions)
+    this.tileOptions.set("water", WaterActions)
 
   }
 
@@ -21,7 +22,7 @@ export default class MenuOptionCreator {
   }
 
   tileOptions (tileType) {
-    return tileTypeOptions.get(tileType.name)
+    return tileTypeOptions.get(tileType.name)()
   }
 
   structureOptions (structure) {
