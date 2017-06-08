@@ -18,6 +18,7 @@ export default class GameState {
     this.tileTypes = TileTypes()
     this.structureTypes = StructureTypes()
 
+
     this.menu = new Menu()
     this.menuView = new MenuView({
       game: state,
