@@ -1,10 +1,11 @@
 import Structure from '../models/map/Structure'
 
-export default class StructureFactory {
-  constructor (tile) {
+export default class StructureBuilder {
+  constructor ({tile, structureTypes}) {
     this.tile = tile
+    this.structureTypes = structureTypes
   }
-}
+
 
 buildGranary() {
   this.tile.structure = new Structure({
@@ -18,4 +19,5 @@ buildFarm() {
     tile: tile,
     structureType: this.structureTypes.farm
   }
+}
 }

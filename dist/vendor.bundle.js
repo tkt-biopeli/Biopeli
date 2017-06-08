@@ -64,21 +64,20 @@
 /******/ 	// This file contains only the entry chunk.
 /******/ 	// The chunk loading function for additional chunks
 /******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
-/******/ 		var installedChunkData = installedChunks[chunkId];
-/******/ 		if(installedChunkData === 0) {
-/******/ 			return new Promise(function(resolve) { resolve(); });
+/******/ 		if(installedChunks[chunkId] === 0) {
+/******/ 			return Promise.resolve();
 /******/ 		}
 /******/
 /******/ 		// a Promise means "currently loading".
-/******/ 		if(installedChunkData) {
-/******/ 			return installedChunkData[2];
+/******/ 		if(installedChunks[chunkId]) {
+/******/ 			return installedChunks[chunkId][2];
 /******/ 		}
 /******/
 /******/ 		// setup Promise in chunk cache
 /******/ 		var promise = new Promise(function(resolve, reject) {
-/******/ 			installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 			installedChunks[chunkId] = [resolve, reject];
 /******/ 		});
-/******/ 		installedChunkData[2] = promise;
+/******/ 		installedChunks[chunkId][2] = promise;
 /******/
 /******/ 		// start chunk loading
 /******/ 		var head = document.getElementsByTagName('head')[0];
@@ -156,7 +155,7 @@
 /******/ ({
 
 /***/ 325:
-/* no static exports found */
+/* unknown exports provided */
 /* all exports used */
 /*!****************************************!*\
   !*** ./~/phaser-ce/build/custom/p2.js ***!
@@ -186,7 +185,7 @@ var require;var require;/**
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-!function(e){if(true)module.exports=e();else if("function"==typeof define&&false)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.p2=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return require(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+!function(e){if(true)module.exports=e();else if("function"==typeof define&&false)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.p2=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return require(o,!0);if(i)return require(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 var Scalar = _dereq_('./Scalar');
 
 module.exports = Line;
@@ -13805,7 +13804,7 @@ World.prototype.raycast = function(result, ray){
 /***/ }),
 
 /***/ 326:
-/* no static exports found */
+/* unknown exports provided */
 /* all exports used */
 /*!**************************************************!*\
   !*** ./~/phaser-ce/build/custom/phaser-split.js ***!
@@ -13821,7 +13820,7 @@ World.prototype.raycast = function(result, ray){
 *
 * Phaser - http://phaser.io
 *
-* v2.8.0 "2017-05-30" - Built: Tue May 30 2017 21:46:23
+* v2.7.9 "2017-05-09" - Built: Tue May 09 2017 12:04:53
 *
 * By Richard Davey http://www.photonstorm.com @photonstorm
 *
@@ -13867,7 +13866,7 @@ var Phaser = Phaser || {    // jshint ignore:line
     * @constant Phaser.VERSION
     * @type {string}
     */
-    VERSION: '2.8.0',
+    VERSION: '2.7.9',
 
     /**
     * An array of Phaser game instances.
@@ -14618,36 +14617,35 @@ Phaser.Utils = {
     },
 
     /**
-     * Gets an object's property by string.
+     * Gets an objects property by string.
      *
      * @method Phaser.Utils.getProperty
      * @param {object} obj - The object to traverse.
      * @param {string} prop - The property whose value will be returned.
-     * @return {any} - The value of the property or `undefined` if the property isn't found.
+     * @return {*} the value of the property or null if property isn't found .
      */
     getProperty: function(obj, prop) {
 
         var parts = prop.split('.'),
-            len = parts.length,
-            i = 0,
-            val = obj;
+            last = parts.pop(),
+            l = parts.length,
+            i = 1,
+            current = parts[0];
 
-        while (i < len)
+        while (i < l && (obj = obj[current]))
         {
-            var key = parts[i];
-
-            if (val != null)
-            {
-                val = val[key];
-                i++;
-            }
-            else
-            {
-                return undefined;
-            }
+            current = parts[i];
+            i++;
         }
 
-        return val;
+        if (obj)
+        {
+            return obj[last];
+        }
+        else
+        {
+            return null;
+        }
 
     },
 
@@ -14761,13 +14759,13 @@ Phaser.Utils = {
     * This would return: `bob---` as it has padded it out to 6 characters, using the `-` on the right.
     *
     * You can also use it to pad numbers (they are always returned as strings):
-    *
+    * 
     * `pad(512, 6, '0', 1)`
     *
     * Would return: `000512` with the string padded to the left.
     *
     * If you don't specify a direction it'll pad to both sides:
-    *
+    * 
     * `pad('c64', 7, '*')`
     *
     * Would return: `**c64**`
@@ -14851,7 +14849,7 @@ Phaser.Utils = {
 
     /**
     * This is a slightly modified version of http://api.jquery.com/jQuery.extend/
-    *
+    * 
     * @method Phaser.Utils.extend
     * @param {boolean} deep - Perform a deep copy?
     * @param {object} target - The target object to copy to.
@@ -14942,7 +14940,7 @@ Phaser.Utils = {
     * @param {boolean} [replace=false] - If the target object already has a matching function should it be overwritten or not?
     */
     mixinPrototype: function (target, mixin, replace) {
-
+    
         if (replace === undefined) { replace = false; }
 
         var mixinKeys = Object.keys(mixin);
@@ -17076,7 +17074,7 @@ PIXI.identityMatrix = Phaser.identityMatrix;
 * The following code creates a point at (0,0):
 * `var myPoint = new Phaser.Point();`
 * You can also use them as 2D Vectors and you'll find different vector related methods in this class.
-*
+* 
 * @class Phaser.Point
 * @constructor
 * @param {number} [x=0] - The horizontal position of this Point.
@@ -17473,7 +17471,7 @@ Phaser.Point.prototype = {
 
     /**
     * The dot product of this and another Point object.
-    *
+    * 
     * @method Phaser.Point#dot
     * @param {Phaser.Point} a - The Point object to get the dot product combined with this Point.
     * @return {number} The result.
@@ -17486,7 +17484,7 @@ Phaser.Point.prototype = {
 
     /**
     * The cross product of this and another Point object.
-    *
+    * 
     * @method Phaser.Point#cross
     * @param {Phaser.Point} a - The Point object to get the cross product combined with this Point.
     * @return {number} The result.
@@ -17499,7 +17497,7 @@ Phaser.Point.prototype = {
 
     /**
     * Make this Point perpendicular (90 degrees rotation)
-    *
+    * 
     * @method Phaser.Point#perp
     * @return {Phaser.Point} This Point object.
     */
@@ -17511,7 +17509,7 @@ Phaser.Point.prototype = {
 
     /**
     * Make this Point perpendicular (-90 degrees rotation)
-    *
+    * 
     * @method Phaser.Point#rperp
     * @return {Phaser.Point} This Point object.
     */
@@ -17700,7 +17698,7 @@ Phaser.Point.negative = function (a, out) {
 
 /**
 * Adds two 2D Points together and multiplies the result by the given scalar.
-*
+* 
 * @method Phaser.Point.multiplyAdd
 * @param {Phaser.Point} a - The first Point object.
 * @param {Phaser.Point} b - The second Point object.
@@ -17718,7 +17716,7 @@ Phaser.Point.multiplyAdd = function (a, b, s, out) {
 
 /**
 * Interpolates the two given Points, based on the `f` value (between 0 and 1) and returns a new Point.
-*
+* 
 * @method Phaser.Point.interpolate
 * @param {Phaser.Point} a - The first Point object.
 * @param {Phaser.Point} b - The second Point object.
@@ -17784,7 +17782,7 @@ Phaser.Point.distance = function (a, b, round) {
 
 /**
 * Project two Points onto another Point.
-*
+* 
 * @method Phaser.Point.project
 * @param {Phaser.Point} a - The first Point object.
 * @param {Phaser.Point} b - The second Point object.
@@ -17808,7 +17806,7 @@ Phaser.Point.project = function (a, b, out) {
 
 /**
 * Project two Points onto a Point of unit length.
-*
+* 
 * @method Phaser.Point.projectUnit
 * @param {Phaser.Point} a - The first Point object.
 * @param {Phaser.Point} b - The second Point object.
@@ -17874,7 +17872,7 @@ Phaser.Point.normalize = function (a, out) {
 * the angle specified. If the angle between the point and coordinates was 45 deg and the angle argument
 * is 45 deg then the resulting angle will be 90 deg, as the angle argument is added to the current angle.
 *
-* The distance allows you to specify a distance constraint for the rotation between the point and the
+* The distance allows you to specify a distance constraint for the rotation between the point and the 
 * coordinates. If none is given the distance between the two is calculated and used.
 *
 * @method Phaser.Point.rotate
@@ -17984,19 +17982,6 @@ Phaser.Point.parse = function(obj, xProp, yProp) {
     }
 
     return point;
-
-};
-
-/**
- * Tests a Point or Point-like object.
- *
- * @method Phaser.Point.isPoint
- * @static
- * @return {boolean} - True if the object has numeric x and y properties.
- */
-Phaser.Point.isPoint = function(obj) {
-
-    return (obj != null) && (typeof obj.x === 'number') && (typeof obj.y === 'number');
 
 };
 
@@ -24548,23 +24533,22 @@ Phaser.Group.prototype.setProperty = function (child, key, value, operation, for
 *
 * @method Phaser.Group#checkProperty
 * @param {any} child - The child to check the property value on.
-* @param {string} key - The property, as a string, to be checked. For example: 'body.velocity.x'
+* @param {array} key - An array of strings that make up the property that will be set.
 * @param {any} value - The value that will be checked.
-* @param {boolean} [force=false] - Also return false if the property is missing or undefined (regardless of the `value` argument).
-* @return {boolean} True if `child` is a child of this Group and the property was equal to value, false if not.
+* @param {boolean} [force=false] - If `force` is true then the property will be checked on the child regardless if it already exists or not. If true and the property doesn't exist, false will be returned.
+* @return {boolean} True if the property was was equal to value, false if not.
 */
 Phaser.Group.prototype.checkProperty = function (child, key, value, force) {
 
     if (force === undefined) { force = false; }
 
-    if (this !== child.parent)
+    //  We can't force a property in and the child doesn't have it, so abort.
+    if (!Phaser.Utils.getProperty(child, key) && force)
     {
         return false;
     }
 
-    var result = Phaser.Utils.getProperty(child, key);
-
-    if (((result === undefined) && force) || (result !== value))
+    if (Phaser.Utils.getProperty(child, key) !== value)
     {
         return false;
     }
@@ -24681,16 +24665,16 @@ Phaser.Group.prototype.setAllChildren = function (key, value, checkAlive, checkV
 };
 
 /**
-* Test that the same property across all children of this group is equal to the given value.
+* Quickly check that the same property across all children of this group is equal to the given value.
 *
 * This call doesn't descend down children, so if you have a Group inside of this group, the property will be checked on the group but not its children.
 *
 * @method Phaser.Group#checkAll
-* @param {string} key - The property, as a string, to be checked. For example: 'body.velocity.x'
+* @param {string} key - The property, as a string, to be set. For example: 'body.velocity.x'
 * @param {any} value - The value that will be checked.
 * @param {boolean} [checkAlive=false] - If set then only children with alive=true will be checked. This includes any Groups that are children.
 * @param {boolean} [checkVisible=false] - If set then only children with visible=true will be checked. This includes any Groups that are children.
-* @param {boolean} [force=false] - Also return false if the property is missing or undefined (regardless of the `value` argument).
+* @param {boolean} [force=false] - If `force` is true then the property will be checked on the child regardless if it already exists or not. If true and the property doesn't exist, false will be returned.
 */
 Phaser.Group.prototype.checkAll = function (key, value, checkAlive, checkVisible, force) {
 
@@ -24700,11 +24684,9 @@ Phaser.Group.prototype.checkAll = function (key, value, checkAlive, checkVisible
 
     for (var i = 0; i < this.children.length; i++)
     {
-        var child = this.children[i];
-
-        if ((!checkAlive || (checkAlive && child.alive)) && (!checkVisible || (checkVisible && child.visible)))
+        if ((!checkAlive || (checkAlive && this.children[i].alive)) && (!checkVisible || (checkVisible && this.children[i].visible)))
         {
-            if (!this.checkProperty(child, key, value, force))
+            if (!this.checkProperty(this.children[i], key, value, force))
             {
                 return false;
             }
@@ -24712,39 +24694,6 @@ Phaser.Group.prototype.checkAll = function (key, value, checkAlive, checkVisible
     }
 
     return true;
-
-};
-
-/**
-* Test that at least one child of this group has the given property value.
-*
-* This call doesn't descend down children, so if you have a Group inside of this group, the property will be checked on the group but not its children.
-*
-* @method Phaser.Group#checkAny
-* @param {string} key - The property, as a string, to be checked. For example: 'body.velocity.x'
-* @param {any} value - The value that will be checked.
-* @param {boolean} [checkAlive=false] - If set then only children with alive=true will be checked. This includes any Groups that are children.
-* @param {boolean} [checkVisible=false] - If set then only children with visible=true will be checked. This includes any Groups that are children.
-*/
-Phaser.Group.prototype.checkAny = function (key, value, checkAlive, checkVisible) {
-
-    if (checkAlive === undefined) { checkAlive = false; }
-    if (checkVisible === undefined) { checkVisible = false; }
-
-    for (var i = 0; i < this.children.length; i++)
-    {
-        var child = this.children[i];
-
-        if ((!checkAlive || (checkAlive && child.alive)) && (!checkVisible || (checkVisible && child.visible)))
-        {
-            if (this.checkProperty(child, key, value))
-            {
-                return true;
-            }
-        }
-    }
-
-    return false;
 
 };
 
@@ -24813,44 +24762,6 @@ Phaser.Group.prototype.multiplyAll = function (property, amount, checkAlive, che
 Phaser.Group.prototype.divideAll = function (property, amount, checkAlive, checkVisible) {
 
     this.setAll(property, amount, checkAlive, checkVisible, 4);
-
-};
-
-/**
- * Kills all children having exists=true.
- *
- * @method Phaser.Group#killAll
- */
-Phaser.Group.prototype.killAll = function () {
-
-    this.callAllExists('kill', true);
-
-};
-
-/**
- * Revives all children having exists=false.
- *
- * @method Phaser.Group#reviveAll
- */
-Phaser.Group.prototype.reviveAll = function () {
-
-    this.callAllExists('revive', false);
-
-};
-
-/**
-* Calls {@link #resetChild} on each child (or each existing child).
-*
-* @method Phaser.Group#resetAll
-* @param {number} [x] - The x coordinate to reset each child to. The value is in relation to the group.x point.
-* @param {number} [y] - The y coordinate to reset each child to. The value is in relation to the group.y point.
-* @param {string|Phaser.RenderTexture|Phaser.BitmapData|Phaser.Video|PIXI.Texture} [key] - The image or texture used by the Sprite during rendering.
-* @param {string|number} [frame] - The frame of a sprite sheet or texture atlas.
-* @param {boolean} [checkExists=false] - Reset only existing children.
-*/
-Phaser.Group.prototype.resetAll = function (x, y, key, frame, checkExists) {
-
-    this.forEach(this.resetChild, this, checkExists, x, y, key, frame);
 
 };
 
@@ -25818,18 +25729,18 @@ Phaser.Group.prototype.getRandomExists = function (startIndex, endIndex) {
 *
 * You can optionally specify a matching criteria using the `property` and `value` arguments.
 *
-* For example: `getAll('exists', true)` would return only children that have an `exists` property equal to `true`.
+* For example: `getAll('exists', true)` would return only children that have their exists property set.
 *
 * Optionally you can specify a start and end index. For example if this Group had 100 children,
-* and you set `startIndex` to 0 and `endIndex` to 50, it would return the first 50 children in the Group.
-* If `property` and `value` are also specified, only children within the given index range are searched.
+* and you set `startIndex` to 0 and `endIndex` to 50, it would return a random child from only
+* the first 50 children in the Group.
 *
 * @method Phaser.Group#getAll
 * @param {string} [property] - An optional property to test against the value argument.
 * @param {any} [value] - If property is set then Child.property must strictly equal this value to be included in the results.
 * @param {integer} [startIndex=0] - The first child index to start the search from.
 * @param {integer} [endIndex] - The last child index to search up until.
-* @return {array} - An array containing all, some, or none of the Children of this Group.
+* @return {any} A random existing child of this Group.
 */
 Phaser.Group.prototype.getAll = function (property, value, startIndex, endIndex) {
 
@@ -25842,14 +25753,7 @@ Phaser.Group.prototype.getAll = function (property, value, startIndex, endIndex)
     {
         var child = this.children[i];
 
-        if (property)
-        {
-            if (child[property] === value)
-            {
-                output.push(child);
-            }
-        }
-        else
+        if (property && child[property] === value)
         {
             output.push(child);
         }
@@ -26036,25 +25940,6 @@ Phaser.Group.prototype.removeBetween = function (startIndex, endIndex, destroy, 
     }
 
     this.updateZ();
-
-};
-
-/**
- * Places each child at a random position within the given Rectangle (or the {@link Phaser.World#bounds World bounds}).
- *
- * @method Phaser.Group.prototype#scatter
- * @param {Phaser.Rectangle} [rect=this.game.world.bounds] - A Rectangle. If omitted {@link Phaser.World#bounds} is used.
- * @param {boolean} [checkExists=false] - Place only children with exists=true.
- */
-Phaser.Group.prototype.scatter = function (rect, checkExists) {
-
-    if (rect == null) { rect = this.game.world.bounds; }
-
-    this.forEach(function (child) {
-
-        child.position.set(rect.randomX, rect.randomY);
-
-    }, null, checkExists);
 
 };
 
@@ -29061,21 +28946,6 @@ Phaser.Input.prototype = {
         if (displayObject.hitArea && displayObject.hitArea.contains)
         {
             return (displayObject.hitArea.contains(this._localPoint.x, this._localPoint.y));
-        }
-        else if (Phaser.Creature && displayObject instanceof Phaser.Creature) {
-          var width = displayObject.width;
-          var height = displayObject.height;
-          var x1 = displayObject.x - (width * displayObject.anchorX);
-
-          if (this.game.camera.x + pointer.x >= x1 && this.game.camera.x + pointer.x < x1 + width)
-          {
-            var y1 = displayObject.y - (height * displayObject.anchorY);
-
-            if (this.game.camera.y + pointer.y >= y1 && this.game.camera.y + pointer.y < y1 + height)
-            {
-              return true;
-            }
-          }
         }
         else if (displayObject instanceof Phaser.TileSprite)
         {
@@ -48600,7 +48470,7 @@ Phaser.Text.prototype.setStyle = function (style, update) {
     newStyle.boundsAlignH = (style.boundsAlignH || 'left').toLowerCase();
     newStyle.boundsAlignV = (style.boundsAlignV || 'top').toLowerCase();
     newStyle.stroke = style.stroke || 'black'; //provide a default, see: https://github.com/GoodBoyDigital/pixi.js/issues/136
-    newStyle.strokeThickness = Number(style.strokeThickness) || 0;
+    newStyle.strokeThickness = style.strokeThickness || 0;
     newStyle.wordWrap = style.wordWrap || false;
     newStyle.wordWrapWidth = style.wordWrapWidth || 100;
     newStyle.maxLines = style.maxLines || 0;
@@ -50348,7 +50218,7 @@ Object.defineProperty(Phaser.Text.prototype, 'strokeThickness', {
 
         if (value !== this.style.strokeThickness)
         {
-            this.style.strokeThickness = Number(value);
+            this.style.strokeThickness = value;
             this.dirty = true;
         }
 
@@ -61527,7 +61397,6 @@ Phaser.Timer.prototype = {
 
         this.onComplete.removeAll();
         this.running = false;
-        this.expired = true;
         this.events = [];
         this._len = 0;
         this._i = 0;
@@ -70236,12 +70105,6 @@ Phaser.Sound = function (game, key, volume, loop, connect) {
     */
     this._sound = null;
 
-	/**
-    * @property {object} _globalVolume - Internal var for keeping track of global volume when using AudioTag
-    * @private
-    */
-	this._globalVolume = 1;
-
     /**
     * @property {boolean} _markedToDelete - When audio stops, disconnect Web Audio nodes.
     * @private
@@ -71141,8 +71004,7 @@ Phaser.Sound.prototype = {
 
         if (this.usingAudioTag && this._sound)
         {
-            this._globalVolume = globalVolume;
-            this._sound.volume = this._globalVolume * this._volume;
+            this._sound.volume = globalVolume * this._volume;
         }
 
     },
@@ -71301,7 +71163,7 @@ Object.defineProperty(Phaser.Sound.prototype, "volume", {
         }
         else if (this.usingAudioTag && this._sound)
         {
-            this._sound.volume = this._globalVolume * value;
+            this._sound.volume = value;
         }
     }
 
@@ -74624,7 +74486,7 @@ Phaser.Utils.Debug = function (game) {
     this.game = game;
 
     /**
-    * @property {Phaser.Image} sprite - If debugging in WebGL mode, this is the Image displaying the debug {@link #bmd BitmapData}.
+    * @property {Phaser.Image} sprite - If debugging in WebGL mode we need this.
     */
     this.sprite = null;
 
@@ -74645,31 +74507,22 @@ Phaser.Utils.Debug = function (game) {
 
     /**
     * @property {string} font - The font that the debug information is rendered in.
-    * @default
+    * @default '14px Courier'
     */
     this.font = '14px Courier';
 
     /**
     * @property {number} columnWidth - The spacing between columns.
-    * @default
     */
     this.columnWidth = 100;
 
     /**
     * @property {number} lineHeight - The line height between the debug text.
-    * @default
     */
     this.lineHeight = 16;
 
     /**
-    * @property {number} lineWidth - The width of the stroke on lines and shapes. A positive number.
-    * @default
-    */
-    this.lineWidth = 1;
-
-    /**
     * @property {boolean} renderShadow - Should the text be rendered with a slight shadow? Makes it easier to read on different types of background.
-    * @default
     */
     this.renderShadow = true;
 
@@ -74693,7 +74546,6 @@ Phaser.Utils.Debug = function (game) {
 
     /**
     * @property {boolean} dirty - Does the canvas need re-rendering?
-    * @default
     */
     this.dirty = false;
 
@@ -75212,7 +75064,6 @@ Phaser.Utils.Debug.prototype = {
             }
             else
             {
-                this.context.lineWidth = this.lineWidth;
                 this.context.strokeRect(object.x - this.game.camera.x, object.y - this.game.camera.y, object.width, object.height);
             }
         }
@@ -75237,7 +75088,7 @@ Phaser.Utils.Debug.prototype = {
         }
         else if (object instanceof Phaser.Line || forceType === 4)
         {
-            this.context.lineWidth = this.lineWidth;
+            this.context.lineWidth = 1;
             this.context.beginPath();
             this.context.moveTo((object.start.x + 0.5) - this.game.camera.x, (object.start.y + 0.5) - this.game.camera.y);
             this.context.lineTo((object.end.x + 0.5) - this.game.camera.x, (object.end.y + 0.5) - this.game.camera.y);
@@ -76754,8 +76605,8 @@ Phaser.LinkedList.prototype.constructor = Phaser.LinkedList;
 * quickly and easily, without the need for any external files. You can create textures for sprites and in
 * coming releases we'll add dynamic sound effect generation support as well (like sfxr).
 *
-* Access this via `Game.create` (`this.game.create` from within a State object).
-*
+* Access this via `Game.create` (`this.game.create` from within a State object)
+* 
 * @class Phaser.Create
 * @constructor
 * @param {Phaser.Game} game - Game reference to the currently running game.
@@ -76861,17 +76712,13 @@ Phaser.Create.prototype = {
      * @param {integer} [pixelWidth=8] - The width of each pixel.
      * @param {integer} [pixelHeight=8] - The height of each pixel.
      * @param {integer} [palette=0] - The palette to use when rendering the texture. One of the Phaser.Create.PALETTE consts.
-     * @param {boolean} [generateTexture=true] - When false, a new BitmapData object is returned instead.
-     * @param {function} [callback] - A function to execute once the texture is generated. It will be passed the newly generated texture.
-     * @param {any} [callbackContext] - The context in which to invoke the callback.
-     * @return {?PIXI.Texture|Phaser.BitmapData} The newly generated texture, or a new BitmapData object if `generateTexture` is false, or `null` if a callback was passed and the texture isn't available yet.
+     * @return {PIXI.Texture} The newly generated texture.
      */
-    texture: function (key, data, pixelWidth, pixelHeight, palette, generateTexture, callback, callbackContext) {
+    texture: function (key, data, pixelWidth, pixelHeight, palette) {
 
         if (pixelWidth === undefined) { pixelWidth = 8; }
         if (pixelHeight === undefined) { pixelHeight = pixelWidth; }
         if (palette === undefined) { palette = 0; }
-        if (generateTexture === undefined) { generateTexture = true; }
 
         var w = data[0].length * pixelWidth;
         var h = data.length * pixelHeight;
@@ -76904,9 +76751,7 @@ Phaser.Create.prototype = {
             }
         }
 
-        return generateTexture ?
-            this.bmd.generateTexture(key, callback, callbackContext) :
-            this.copy();
+        return this.bmd.generateTexture(key);
 
     },
 
@@ -76920,14 +76765,9 @@ Phaser.Create.prototype = {
      * @param {integer} cellWidth - The width of the grid cells in pixels.
      * @param {integer} cellHeight - The height of the grid cells in pixels.
      * @param {string} color - The color to draw the grid lines in. Should be a Canvas supported color string like `#ff5500` or `rgba(200,50,3,0.5)`.
-     * @param {boolean} [generateTexture=true] - When false, a new BitmapData object is returned instead.
-     * @param {function} [callback] - A function to execute once the texture is generated. It will be passed the newly generated texture.
-     * @param {any} [callbackContext] - The context in which to invoke the callback.
-     * @return {?PIXI.Texture|Phaser.BitmapData} The newly generated texture, or a new BitmapData object if `generateTexture` is false, or `null` if a callback was passed and the texture isn't available yet.
+     * @return {PIXI.Texture} The newly generated texture.
      */
-    grid: function (key, width, height, cellWidth, cellHeight, color, generateTexture, callback, callbackContext) {
-
-        if (generateTexture === undefined) { generateTexture = true; }
+    grid: function (key, width, height, cellWidth, cellHeight, color) {
 
         //  No bmd? Let's make one
         if (this.bmd === null)
@@ -76951,31 +76791,7 @@ Phaser.Create.prototype = {
             this.ctx.fillRect(x, 0, 1, height);
         }
 
-        return generateTexture ?
-            this.bmd.generateTexture(key, callback, callbackContext) :
-            this.copy();
-
-    },
-
-    /**
-     * Copies the contents of {@link bmd Create's canvas} to the given BitmapData object, or a new BitmapData object.
-     *
-     * @param {Phaser.BitmapData} [dest] - The BitmapData receiving the copied image.
-     * @param {number} [x=0] - The x coordinate to translate to before drawing.
-     * @param {number} [y=0] - The y coordinate to translate to before drawing.
-     * @param {number} [width] - The new width of the Sprite being copied.
-     * @param {number} [height] - The new height of the Sprite being copied.
-     * @param {string} [blendMode=null] - The composite blend mode that will be used when drawing. The default is no blend mode at all. This is a Canvas globalCompositeOperation value such as 'lighter' or 'xor'.
-     * @param {boolean} [roundPx=false] - Should the x and y values be rounded to integers before drawing? This prevents anti-aliasing in some instances.
-     * @return {Phaser.BitmapData} - The `dest` argument (if passed), or a new BitmapData object
-     */
-    copy: function (dest, x, y, width, height, blendMode, roundPx) {
-
-        if (dest == null) { dest = this.game.make.bitmapData(); }
-
-        dest.resize(this.bmd.width, this.bmd.height);
-
-        return dest.draw(this.bmd, x, y, width, height, blendMode, roundPx);
+        return this.bmd.generateTexture(key);
 
     }
 
@@ -79538,7 +79354,7 @@ Phaser.Physics.Arcade.prototype = {
         {
             velocity += acceleration * this.game.time.physicsElapsed;
         }
-        else if (drag && body.allowDrag)
+        else if (drag)
         {
             drag *= this.game.time.physicsElapsed;
 
@@ -79643,9 +79459,8 @@ Phaser.Physics.Arcade.prototype = {
     * You can perform Sprite vs. Sprite, Sprite vs. Group, Group vs. Group, Sprite vs. Tilemap Layer or Group vs. Tilemap Layer collisions.
     * Both the `object1` and `object2` can be arrays of objects, of differing types.
     *
-    * If two Groups or arrays are passed, each member of one will be tested against each member of the other.
-    *
-    * If one Group **only** is passed (as `object1`), each member of the Group will be collided against the other members.
+    * If two Groups or arrays are passed, the contents of one will be tested against all contents of the other.
+    * If one Group or array **only** is passed (as `object1`), contents of the Group or array will be collided against each other.
     *
     * If either object is `null` the collision test will fail.
     *
@@ -79656,19 +79471,6 @@ Phaser.Physics.Arcade.prototype = {
     * The collideCallback is an optional function that is only called if two sprites collide. If a processCallback has been set then it needs to return true for collideCallback to be called.
     *
     * **This function is not recursive**, and will not test against children of objects passed (i.e. Groups or Tilemaps within other Groups).
-    *
-    * ##### Examples
-    *
-    *     collide(group);
-    *     collide(group, undefined); // equivalent
-    *
-    *     collide(sprite1, sprite2);
-    *
-    *     collide(sprite, group);
-    *
-    *     collide(group1, group2);
-    *
-    *     collide([sprite1, sprite2], [sprite3, sprite4]); // 1v3, 1v4, 2v3, 2v4
     *
     * ##### Tilemaps
     *
@@ -80279,7 +80081,10 @@ Phaser.Physics.Arcade.prototype = {
                 bottom: bodyRect.bottom
             };
 
-            var circle = bodyCircle.center;
+            var circle = {
+                x: bodyCircle.x + bodyCircle.radius,
+                y: bodyCircle.y + bodyCircle.radius
+            };
 
             if (circle.y < rect.y || circle.y > rect.bottom)
             {
@@ -80369,7 +80174,7 @@ Phaser.Physics.Arcade.prototype = {
             if (body2.isCircle)
             {
                 //  Circle vs. Circle
-                return Phaser.Math.distance(body1.center.x, body1.center.y, body2.center.x, body2.center.y) <= (body1.halfWidth + body2.halfWidth);
+                return Phaser.Math.distance(body1.center.x, body1.center.y, body2.center.x, body2.center.y) <= (body1.radius + body2.radius);
             }
             else
             {
@@ -80429,7 +80234,7 @@ Phaser.Physics.Arcade.prototype = {
         var dx = (circle.center.x - x) * (circle.center.x - x);
         var dy = (circle.center.y - y) * (circle.center.y - y);
 
-        return (dx + dy) <= (circle.halfWidth * circle.halfWidth);
+        return (dx + dy) <= (circle.radius * circle.radius);
 
     },
 
@@ -80466,9 +80271,9 @@ Phaser.Physics.Arcade.prototype = {
             };
 
             var circle = {
-                x: (body1.isCircle) ? body1.center.x : body2.center.x,
-                y: (body1.isCircle) ? body1.center.y : body2.center.y,
-                radius: (body1.isCircle) ? body1.halfWidth : body2.halfWidth
+                x: (body1.isCircle) ? (body1.position.x + body1.radius) : (body2.position.x + body2.radius),
+                y: (body1.isCircle) ? (body1.position.y + body1.radius) : (body2.position.y + body2.radius),
+                radius: (body1.isCircle) ? body1.radius : body2.radius
             };
 
             if (circle.y < rect.y)
@@ -80498,7 +80303,7 @@ Phaser.Physics.Arcade.prototype = {
         }
         else
         {
-            overlap = (body1.halfWidth + body2.halfWidth) - Phaser.Math.distance(body1.center.x, body1.center.y, body2.center.x, body2.center.y);
+            overlap = (body1.radius + body2.radius) - Phaser.Math.distance(body1.center.x, body1.center.y, body2.center.x, body2.center.y);
         }
 
         //  Can't separate two immovable bodies, or a body with its own custom separation logic
@@ -81451,10 +81256,9 @@ Phaser.Physics.Arcade.Body = function (sprite) {
     this.isCircle = false;
 
     /**
-    * The radius of the circular collision shape this Body is using if Body.setCircle has been enabled, relative to the Sprite's _texture_.
+    * The radius of the circular collision shape this Body is using if Body.setCircle has been enabled.
     * If you wish to change the radius then call `setCircle` again with the new value.
     * If you wish to stop the Body using a circle then call `setCircle` with a radius of zero (or undefined).
-    * The actual radius of the Body (at any Sprite scale) is equal to {@link halfWidth}.
     * @property {number} radius
     * @default
     * @readOnly
@@ -81462,7 +81266,7 @@ Phaser.Physics.Arcade.Body = function (sprite) {
     this.radius = 0;
 
     /**
-    * @property {Phaser.Point} offset - The offset of the Physics Body from the Sprite's texture.
+    * @property {Phaser.Point} offset - The offset of the Physics Body from the Sprite x/y position.
     */
     this.offset = new Phaser.Point();
 
@@ -81567,13 +81371,7 @@ Phaser.Physics.Arcade.Body = function (sprite) {
     this.acceleration = new Phaser.Point();
 
     /**
-     * @property {boolean} allowDrag - Apply this Body's {@link drag}.
-     * @default
-     */
-     this.allowDrag = true;
-
-    /**
-    * @property {Phaser.Point} drag - The drag applied to the motion of the Body (when {@link allowDrag} is enabled). Measured in pixels per second squared.
+    * @property {Phaser.Point} drag - The drag applied to the motion of the Body. Measured in pixels per second squared.
     */
     this.drag = new Phaser.Point();
 
@@ -82241,30 +82039,68 @@ Phaser.Physics.Arcade.Body.prototype = {
         var bx = (this.worldBounce) ? -this.worldBounce.x : -this.bounce.x;
         var by = (this.worldBounce) ? -this.worldBounce.y : -this.bounce.y;
 
-        if (pos.x < bounds.x && check.left)
+        if (this.isCircle)
         {
-            pos.x = bounds.x;
-            this.velocity.x *= bx;
-            this.blocked.left = true;
-        }
-        else if (this.right > bounds.right && check.right)
-        {
-            pos.x = bounds.right - this.width;
-            this.velocity.x *= bx;
-            this.blocked.right = true;
-        }
+            var bodyBounds = {
+                x: this.center.x - this.radius,
+                y: this.center.y - this.radius,
+                right: this.center.x + this.radius,
+                bottom: this.center.y + this.radius
+            };
 
-        if (pos.y < bounds.y && check.up)
-        {
-            pos.y = bounds.y;
-            this.velocity.y *= by;
-            this.blocked.up = true;
+            if (bodyBounds.x < bounds.x && check.left)
+            {
+                pos.x = bounds.x - this.halfWidth + this.radius;
+                this.velocity.x *= bx;
+                this.blocked.left = true;
+            }
+            else if (bodyBounds.right > bounds.right && check.right)
+            {
+                pos.x = bounds.right - this.halfWidth - this.radius;
+                this.velocity.x *= bx;
+                this.blocked.right = true;
+            }
+
+            if (bodyBounds.y < bounds.y && check.up)
+            {
+                pos.y = bounds.y - this.halfHeight + this.radius;
+                this.velocity.y *= by;
+                this.blocked.up = true;
+            }
+            else if (bodyBounds.bottom > bounds.bottom && check.down)
+            {
+                pos.y = bounds.bottom  - this.halfHeight - this.radius;
+                this.velocity.y *= by;
+                this.blocked.down = true;
+            }
         }
-        else if (this.bottom > bounds.bottom && check.down)
+        else
         {
-            pos.y = bounds.bottom - this.height;
-            this.velocity.y *= by;
-            this.blocked.down = true;
+            if (pos.x < bounds.x && check.left)
+            {
+                pos.x = bounds.x;
+                this.velocity.x *= bx;
+                this.blocked.left = true;
+            }
+            else if (this.right > bounds.right && check.right)
+            {
+                pos.x = bounds.right - this.width;
+                this.velocity.x *= bx;
+                this.blocked.right = true;
+            }
+
+            if (pos.y < bounds.y && check.up)
+            {
+                pos.y = bounds.y;
+                this.velocity.y *= by;
+                this.blocked.up = true;
+            }
+            else if (this.bottom > bounds.bottom && check.down)
+            {
+                pos.y = bounds.bottom - this.height;
+                this.velocity.y *= by;
+                this.blocked.down = true;
+            }
         }
 
         return (this.blocked.up || this.blocked.down || this.blocked.left || this.blocked.right);
@@ -82459,8 +82295,8 @@ Phaser.Physics.Arcade.Body.prototype = {
     * @method Phaser.Physics.Arcade.Body#setSize
     * @param {number} width - The width of the Body.
     * @param {number} height - The height of the Body.
-    * @param {number} [offsetX] - The X offset of the Body from the left of the Sprite's texture.
-    * @param {number} [offsetY] - The Y offset of the Body from the top of the Sprite's texture.
+    * @param {number} [offsetX] - The X offset of the Body from the top-left of the Sprite's texture.
+    * @param {number} [offsetY] - The Y offset of the Body from the top-left of the Sprite's texture.
     */
     setSize: function (width, height, offsetX, offsetY) {
 
@@ -82484,9 +82320,9 @@ Phaser.Physics.Arcade.Body.prototype = {
 
     /**
     * Sets this Body as using a circle, of the given radius, for all collision detection instead of a rectangle.
-    * The radius is given in pixels (relative to the Sprite's _texture_) and is the distance from the center of the circle to the edge.
+    * The radius is given in pixels and is the distance from the center of the circle to the edge.
     *
-    * You can also control the x and y offset, which is the position of the Body relative to the top-left of the Sprite's texture.
+    * You can also control the x and y offset, which is the position of the Body relative to the top-left of the Sprite.
     *
     * To change a Body back to being rectangular again call `Body.setSize`.
     *
@@ -82495,8 +82331,8 @@ Phaser.Physics.Arcade.Body.prototype = {
     *
     * @method Phaser.Physics.Arcade.Body#setCircle
     * @param {number} [radius] - The radius of the Body in pixels. Pass a value of zero / undefined, to stop the Body using a circle for collision.
-    * @param {number} [offsetX] - The X offset of the Body from the left of the Sprite's texture.
-    * @param {number} [offsetY] - The Y offset of the Body from the top of the Sprite's texture.
+    * @param {number} [offsetX] - The X offset of the Body from the Sprite position.
+    * @param {number} [offsetY] - The Y offset of the Body from the Sprite position.
     */
     setCircle: function (radius, offsetX, offsetY) {
 
@@ -82573,10 +82409,20 @@ Phaser.Physics.Arcade.Body.prototype = {
     */
     getBounds: function (obj) {
 
-        obj.x = this.x;
-        obj.y = this.y;
-        obj.right = this.right;
-        obj.bottom = this.bottom;
+        if (this.isCircle)
+        {
+            obj.x = this.center.x - this.radius;
+            obj.y = this.center.y - this.radius;
+            obj.right = this.center.x + this.radius;
+            obj.bottom = this.center.y + this.radius;
+        }
+        else
+        {
+            obj.x = this.x;
+            obj.y = this.y;
+            obj.right = this.right;
+            obj.bottom = this.bottom;
+        }
 
         return obj;
 
@@ -82832,7 +82678,7 @@ Phaser.Physics.Arcade.Body.render = function (context, body, color, filled) {
     if (body.isCircle)
     {
         context.beginPath();
-        context.arc(body.center.x - body.game.camera.x, body.center.y - body.game.camera.y, body.halfWidth, 0, 2 * Math.PI);
+        context.arc(body.center.x - body.game.camera.x, body.center.y - body.game.camera.y, body.radius, 0, 2 * Math.PI);
 
         if (filled)
         {
@@ -89869,7 +89715,7 @@ Phaser.Tilemap.prototype = {
 
         if (index === null || index > this.layers.length)
         {
-            console.warn('Tilemap.createLayer: Invalid layer ID given: "' + layer + '"');
+            console.warn('Tilemap.createLayer: Invalid layer ID given: ' + index);
             return;
         }
 
@@ -93906,30 +93752,6 @@ Phaser.Particles.Arcade.Emitter = function (game, x, y, maxParticles) {
     this.area = new Phaser.Rectangle(x, y, 1, 1);
 
     /**
-     * @property {?number} minAngle - The minimum angle of initial particle velocities, in degrees. When set to a non-null value (with {@link maxAngle}), {@link minSpeed} and {@link maxSpeed} are used and {@link minParticleSpeed} and {@link maxParticleSpeed} are ignored.
-     * @default
-     */
-    this.minAngle = null;
-
-    /**
-     * @property {?number} maxAngle - The maximum angle of initial particle velocities, in degrees. When set to a non-null value (with {@link minAngle}), {@link minSpeed} and {@link maxSpeed} are used and {@link minParticleSpeed} and {@link maxParticleSpeed} are ignored.
-     * @default
-     */
-    this.maxAngle = null;
-
-    /**
-     * @property {number} minSpeed - The minimum initial speed of particles released within {@link minAngle} and {@link maxAngle}.
-     * @default
-     */
-    this.minSpeed = 0;
-
-    /**
-     * @property {number} maxSpeed - The maximum initial speed of particles released within {@link minAngle} and {@link maxAngle}.
-     * @default
-     */
-    this.maxSpeed = 100;
-
-    /**
     * @property {Phaser.Point} minParticleSpeed - The minimum possible velocity of a particle.
     * @default
     */
@@ -94524,10 +94346,6 @@ Phaser.Particles.Arcade.Emitter.prototype.emitParticle = function (x, y, key, fr
     {
         particle.scale.set(rnd.realInRange(this._minParticleScale.x, this._maxParticleScale.x), rnd.realInRange(this._minParticleScale.y, this._maxParticleScale.y));
     }
-    else
-    {
-        particle.scale.set(this._minParticleScale.x, this._minParticleScale.y);
-    }
 
     if (frame === undefined)
     {
@@ -94559,21 +94377,10 @@ Phaser.Particles.Arcade.Emitter.prototype.emitParticle = function (x, y, key, fr
     body.bounce.copyFrom(this.bounce);
     body.drag.copyFrom(this.particleDrag);
 
-    if (this.minAngle != null && this.maxAngle != null)
-    {
-        this.game.physics.arcade.velocityFromAngle(
-            (this.minAngle === this.maxAngle) ? this.minAngle : rnd.between(this.minAngle, this.maxAngle),
-            (this.minSpeed === this.maxSpeed) ? this.minSpeed : rnd.between(this.minSpeed, this.maxSpeed),
-            body.velocity
-            );
-    }
-    else
-    {
-        body.velocity.x = rnd.between(this.minParticleSpeed.x, this.maxParticleSpeed.x);
-        body.velocity.y = rnd.between(this.minParticleSpeed.y, this.maxParticleSpeed.y);
-    }
-
+    body.velocity.x = rnd.between(this.minParticleSpeed.x, this.maxParticleSpeed.x);
+    body.velocity.y = rnd.between(this.minParticleSpeed.y, this.maxParticleSpeed.y);
     body.angularVelocity = rnd.between(this.minRotation, this.maxRotation);
+
     body.gravity.copyFrom(this.gravity);
     body.angularDrag = this.angularDrag;
 
@@ -94765,32 +94572,6 @@ Phaser.Particles.Arcade.Emitter.prototype.setScale = function (minX, maxX, minY,
 };
 
 /**
- * Sets a radial pattern for emitting particles.
- *
- * This is a shorthand for setting {@link minAngle}, {@link maxAngle}, {@link minSpeed}, and {@link maxSpeed}.
- *
- * To remove the radial pattern, use `setAngle(null, null)`.
- *
- * @method Phaser.Particle.Emitter.prototype.setAngle
- * @param {?number} minAngle - The minimum angle of initial particle velocities, in degrees.
- * @param {?number} maxAngle - The maximum angle of initial particle velocities, in degrees.
- * @param {number} [minSpeed] - The minimum initial particle speed.
- * @param {number} [maxSpeed] - The maximum initial particle speed.
- * @return {Phaser.Particles.Arcade.Emitter} This Emitter instance.
- */
-Phaser.Particles.Arcade.Emitter.prototype.setAngle = function (minAngle, maxAngle, minSpeed, maxSpeed) {
-
-    this.minAngle = minAngle;
-    this.maxAngle = maxAngle;
-
-    if (minSpeed != null) { this.minSpeed = minSpeed; }
-    if (maxSpeed != null) { this.maxSpeed = maxSpeed; }
-
-    return this;
-
-};
-
-/**
 * Change the emitters center to match the center of any object with a `center` property, such as a Sprite.
 * If the object doesn't have a center property it will be set to object.x + object.width / 2
 *
@@ -94961,45 +94742,6 @@ Object.defineProperty(Phaser.Particles.Arcade.Emitter.prototype, "bottom", {
 
     get: function () {
         return Math.floor(this.y + (this.area.height / 2));
-    }
-
-});
-
-/**
- * @name Phaser.Particles.Arcade.Emitter#output
- * @property {number} output - The number of particles released per second, after calling {@link flow}.
- * @readonly
- */
-Object.defineProperty(Phaser.Particles.Arcade.Emitter.prototype, "output", {
-
-    get: function () {
-        return 1000 * this._flowQuantity / this.frequency;
-    }
-
-});
-
-/**
- * @name Phaser.Particles.Arcade.Emitter#lifespanOutput
- * @property {number} lifespanOutput - The number of particles released during one particle's {@link lifespan}, after calling {@link flow}.
- * @readonly
- */
-Object.defineProperty(Phaser.Particles.Arcade.Emitter.prototype, "lifespanOutput", {
-
-    get: function () {
-        return (this.lifespan === 0 ? Infinity : this.lifespan) * this._flowQuantity / this.frequency;
-    }
-
-});
-
-/**
- * @name Phaser.Particles.Arcade.Emitter#remainder
- * @property {number} remainder - The expected number of unreleased particles after a flow interval of {@link lifespan}, after calling {@link flow}.
- * @readonly
- */
-Object.defineProperty(Phaser.Particles.Arcade.Emitter.prototype, "remainder", {
-
-    get: function () {
-        return this.maxParticles - this.lifespanOutput;
     }
 
 });
@@ -98025,7 +97767,7 @@ PIXI.TextureSilentFail = true;
 /***/ }),
 
 /***/ 327:
-/* no static exports found */
+/* unknown exports provided */
 /* all exports used */
 /*!******************************************!*\
   !*** ./~/phaser-ce/build/custom/pixi.js ***!
@@ -98041,7 +97783,7 @@ PIXI.TextureSilentFail = true;
 *
 * Phaser - http://phaser.io
 *
-* v2.8.0 "2017-05-30" - Built: Tue May 30 2017 21:46:30
+* v2.7.9 "2017-05-09" - Built: Tue May 09 2017 12:04:52
 *
 * By Richard Davey http://www.photonstorm.com @photonstorm
 *
@@ -102489,14 +102231,14 @@ PIXI.WebGLShaderManager.prototype.constructor = PIXI.WebGLShaderManager;
 
 /**
 * Initialises the context and the properties.
-*
-* @method setContext
+* 
+* @method setContext 
 * @param gl {WebGLContext} the current WebGL drawing context
 */
 PIXI.WebGLShaderManager.prototype.setContext = function(gl)
 {
     this.gl = gl;
-
+    
     // the next one is used for rendering primitives
     this.primitiveShader = new PIXI.PrimitiveShader(gl);
 
@@ -102512,17 +102254,14 @@ PIXI.WebGLShaderManager.prototype.setContext = function(gl)
     // the next one is used for rendering triangle strips
     this.stripShader = new PIXI.StripShader(gl);
 
-    // the next one is used for rendering creature meshes
-    this.creatureShader = PIXI.CreatureShader ? new PIXI.CreatureShader(gl) : null;
-
     this.setShader(this.defaultShader);
 };
 
 /**
 * Takes the attributes given in parameters.
-*
+* 
 * @method setAttribs
-* @param attribs {Array} attribs
+* @param attribs {Array} attribs 
 */
 PIXI.WebGLShaderManager.prototype.setAttribs = function(attribs)
 {
@@ -102563,14 +102302,14 @@ PIXI.WebGLShaderManager.prototype.setAttribs = function(attribs)
 
 /**
 * Sets the current shader.
-*
+* 
 * @method setShader
 * @param shader {Any}
 */
 PIXI.WebGLShaderManager.prototype.setShader = function(shader)
 {
     if(this._currentId === shader._UID)return false;
-
+    
     this._currentId = shader._UID;
 
     this.currentShader = shader;
@@ -102583,7 +102322,7 @@ PIXI.WebGLShaderManager.prototype.setShader = function(shader)
 
 /**
 * Destroys this object.
-*
+* 
 * @method destroy
 */
 PIXI.WebGLShaderManager.prototype.destroy = function()
@@ -102601,10 +102340,6 @@ PIXI.WebGLShaderManager.prototype.destroy = function()
     this.fastShader.destroy();
 
     this.stripShader.destroy();
-
-    if (this.creatureShader) {
-      this.creatureShader.destroy();
-    }
 
     this.gl = null;
 };
@@ -105578,7 +105313,7 @@ PIXI.TextureUvs = function()
 /***/ }),
 
 /***/ 328:
-/* no static exports found */
+/* unknown exports provided */
 /* all exports used */
 /*!******************************!*\
   !*** ./~/process/browser.js ***!
@@ -105774,7 +105509,7 @@ process.umask = function() { return 0; };
 /***/ }),
 
 /***/ 331:
-/* no static exports found */
+/* unknown exports provided */
 /* all exports used */
 /*!******************************************!*\
   !*** multi pixi p2 phaser webfontloader ***!
@@ -105790,7 +105525,7 @@ module.exports = __webpack_require__(/*! webfontloader */90);
 /***/ }),
 
 /***/ 45:
-/* no static exports found */
+/* unknown exports provided */
 /* all exports used */
 /*!**************************************************!*\
   !*** ./~/phaser-ce/build/custom/phaser-split.js ***!
@@ -105803,7 +105538,7 @@ module.exports = __webpack_require__(/*! webfontloader */90);
 /***/ }),
 
 /***/ 49:
-/* no static exports found */
+/* unknown exports provided */
 /* all exports used */
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -105836,7 +105571,7 @@ module.exports = g;
 /***/ }),
 
 /***/ 88:
-/* no static exports found */
+/* unknown exports provided */
 /* all exports used */
 /*!******************************************!*\
   !*** ./~/phaser-ce/build/custom/pixi.js ***!
@@ -105849,7 +105584,7 @@ module.exports = g;
 /***/ }),
 
 /***/ 89:
-/* no static exports found */
+/* unknown exports provided */
 /* all exports used */
 /*!****************************************!*\
   !*** ./~/phaser-ce/build/custom/p2.js ***!
@@ -105862,30 +105597,31 @@ module.exports = g;
 /***/ }),
 
 /***/ 90:
-/* no static exports found */
+/* unknown exports provided */
 /* all exports used */
 /*!******************************************!*\
   !*** ./~/webfontloader/webfontloader.js ***!
   \******************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_RESULT__;/* Web Font Loader v1.6.28 - (c) Adobe Systems, Google. License: Apache 2.0 */(function(){function aa(a,b,c){return a.call.apply(a.bind,arguments)}function ba(a,b,c){if(!a)throw Error();if(2<arguments.length){var d=Array.prototype.slice.call(arguments,2);return function(){var c=Array.prototype.slice.call(arguments);Array.prototype.unshift.apply(c,d);return a.apply(b,c)}}return function(){return a.apply(b,arguments)}}function p(a,b,c){p=Function.prototype.bind&&-1!=Function.prototype.bind.toString().indexOf("native code")?aa:ba;return p.apply(null,arguments)}var q=Date.now||function(){return+new Date};function ca(a,b){this.a=a;this.o=b||a;this.c=this.o.document}var da=!!window.FontFace;function t(a,b,c,d){b=a.c.createElement(b);if(c)for(var e in c)c.hasOwnProperty(e)&&("style"==e?b.style.cssText=c[e]:b.setAttribute(e,c[e]));d&&b.appendChild(a.c.createTextNode(d));return b}function u(a,b,c){a=a.c.getElementsByTagName(b)[0];a||(a=document.documentElement);a.insertBefore(c,a.lastChild)}function v(a){a.parentNode&&a.parentNode.removeChild(a)}
+var __WEBPACK_AMD_DEFINE_RESULT__;/* Web Font Loader v1.6.27 - (c) Adobe Systems, Google. License: Apache 2.0 */(function(){function aa(a,b,c){return a.call.apply(a.bind,arguments)}function ba(a,b,c){if(!a)throw Error();if(2<arguments.length){var d=Array.prototype.slice.call(arguments,2);return function(){var c=Array.prototype.slice.call(arguments);Array.prototype.unshift.apply(c,d);return a.apply(b,c)}}return function(){return a.apply(b,arguments)}}function p(a,b,c){p=Function.prototype.bind&&-1!=Function.prototype.bind.toString().indexOf("native code")?aa:ba;return p.apply(null,arguments)}var q=Date.now||function(){return+new Date};function ca(a,b){this.a=a;this.m=b||a;this.c=this.m.document}var da=!!window.FontFace;function t(a,b,c,d){b=a.c.createElement(b);if(c)for(var e in c)c.hasOwnProperty(e)&&("style"==e?b.style.cssText=c[e]:b.setAttribute(e,c[e]));d&&b.appendChild(a.c.createTextNode(d));return b}function u(a,b,c){a=a.c.getElementsByTagName(b)[0];a||(a=document.documentElement);a.insertBefore(c,a.lastChild)}function v(a){a.parentNode&&a.parentNode.removeChild(a)}
 function w(a,b,c){b=b||[];c=c||[];for(var d=a.className.split(/\s+/),e=0;e<b.length;e+=1){for(var f=!1,g=0;g<d.length;g+=1)if(b[e]===d[g]){f=!0;break}f||d.push(b[e])}b=[];for(e=0;e<d.length;e+=1){f=!1;for(g=0;g<c.length;g+=1)if(d[e]===c[g]){f=!0;break}f||b.push(d[e])}a.className=b.join(" ").replace(/\s+/g," ").replace(/^\s+|\s+$/,"")}function y(a,b){for(var c=a.className.split(/\s+/),d=0,e=c.length;d<e;d++)if(c[d]==b)return!0;return!1}
-function ea(a){return a.o.location.hostname||a.a.location.hostname}function z(a,b,c){function d(){m&&e&&f&&(m(g),m=null)}b=t(a,"link",{rel:"stylesheet",href:b,media:"all"});var e=!1,f=!0,g=null,m=c||null;da?(b.onload=function(){e=!0;d()},b.onerror=function(){e=!0;g=Error("Stylesheet failed to load");d()}):setTimeout(function(){e=!0;d()},0);u(a,"head",b)}
-function A(a,b,c,d){var e=a.c.getElementsByTagName("head")[0];if(e){var f=t(a,"script",{src:b}),g=!1;f.onload=f.onreadystatechange=function(){g||this.readyState&&"loaded"!=this.readyState&&"complete"!=this.readyState||(g=!0,c&&c(null),f.onload=f.onreadystatechange=null,"HEAD"==f.parentNode.tagName&&e.removeChild(f))};e.appendChild(f);setTimeout(function(){g||(g=!0,c&&c(Error("Script load timeout")))},d||5E3);return f}return null};function B(){this.a=0;this.c=null}function C(a){a.a++;return function(){a.a--;D(a)}}function E(a,b){a.c=b;D(a)}function D(a){0==a.a&&a.c&&(a.c(),a.c=null)};function F(a){this.a=a||"-"}F.prototype.c=function(a){for(var b=[],c=0;c<arguments.length;c++)b.push(arguments[c].replace(/[\W_]+/g,"").toLowerCase());return b.join(this.a)};function G(a,b){this.c=a;this.f=4;this.a="n";var c=(b||"n4").match(/^([nio])([1-9])$/i);c&&(this.a=c[1],this.f=parseInt(c[2],10))}function fa(a){return H(a)+" "+(a.f+"00")+" 300px "+I(a.c)}function I(a){var b=[];a=a.split(/,\s*/);for(var c=0;c<a.length;c++){var d=a[c].replace(/['"]/g,"");-1!=d.indexOf(" ")||/^\d/.test(d)?b.push("'"+d+"'"):b.push(d)}return b.join(",")}function J(a){return a.a+a.f}function H(a){var b="normal";"o"===a.a?b="oblique":"i"===a.a&&(b="italic");return b}
-function ga(a){var b=4,c="n",d=null;a&&((d=a.match(/(normal|oblique|italic)/i))&&d[1]&&(c=d[1].substr(0,1).toLowerCase()),(d=a.match(/([1-9]00|normal|bold)/i))&&d[1]&&(/bold/i.test(d[1])?b=7:/[1-9]00/.test(d[1])&&(b=parseInt(d[1].substr(0,1),10))));return c+b};function ha(a,b){this.c=a;this.f=a.o.document.documentElement;this.h=b;this.a=new F("-");this.j=!1!==b.events;this.g=!1!==b.classes}function ia(a){a.g&&w(a.f,[a.a.c("wf","loading")]);K(a,"loading")}function L(a){if(a.g){var b=y(a.f,a.a.c("wf","active")),c=[],d=[a.a.c("wf","loading")];b||c.push(a.a.c("wf","inactive"));w(a.f,c,d)}K(a,"inactive")}function K(a,b,c){if(a.j&&a.h[b])if(c)a.h[b](c.c,J(c));else a.h[b]()};function ja(){this.c={}}function ka(a,b,c){var d=[],e;for(e in b)if(b.hasOwnProperty(e)){var f=a.c[e];f&&d.push(f(b[e],c))}return d};function M(a,b){this.c=a;this.f=b;this.a=t(this.c,"span",{"aria-hidden":"true"},this.f)}function N(a){u(a.c,"body",a.a)}function O(a){return"display:block;position:absolute;top:-9999px;left:-9999px;font-size:300px;width:auto;height:auto;line-height:normal;margin:0;padding:0;font-variant:normal;white-space:nowrap;font-family:"+I(a.c)+";"+("font-style:"+H(a)+";font-weight:"+(a.f+"00")+";")};function P(a,b,c,d,e,f){this.g=a;this.j=b;this.a=d;this.c=c;this.f=e||3E3;this.h=f||void 0}P.prototype.start=function(){var a=this.c.o.document,b=this,c=q(),d=new Promise(function(d,e){function f(){q()-c>=b.f?e():a.fonts.load(fa(b.a),b.h).then(function(a){1<=a.length?d():setTimeout(f,25)},function(){e()})}f()}),e=null,f=new Promise(function(a,d){e=setTimeout(d,b.f)});Promise.race([f,d]).then(function(){e&&(clearTimeout(e),e=null);b.g(b.a)},function(){b.j(b.a)})};function Q(a,b,c,d,e,f,g){this.v=a;this.B=b;this.c=c;this.a=d;this.s=g||"BESbswy";this.f={};this.w=e||3E3;this.u=f||null;this.m=this.j=this.h=this.g=null;this.g=new M(this.c,this.s);this.h=new M(this.c,this.s);this.j=new M(this.c,this.s);this.m=new M(this.c,this.s);a=new G(this.a.c+",serif",J(this.a));a=O(a);this.g.a.style.cssText=a;a=new G(this.a.c+",sans-serif",J(this.a));a=O(a);this.h.a.style.cssText=a;a=new G("serif",J(this.a));a=O(a);this.j.a.style.cssText=a;a=new G("sans-serif",J(this.a));a=
-O(a);this.m.a.style.cssText=a;N(this.g);N(this.h);N(this.j);N(this.m)}var R={D:"serif",C:"sans-serif"},S=null;function T(){if(null===S){var a=/AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(window.navigator.userAgent);S=!!a&&(536>parseInt(a[1],10)||536===parseInt(a[1],10)&&11>=parseInt(a[2],10))}return S}Q.prototype.start=function(){this.f.serif=this.j.a.offsetWidth;this.f["sans-serif"]=this.m.a.offsetWidth;this.A=q();U(this)};
-function la(a,b,c){for(var d in R)if(R.hasOwnProperty(d)&&b===a.f[R[d]]&&c===a.f[R[d]])return!0;return!1}function U(a){var b=a.g.a.offsetWidth,c=a.h.a.offsetWidth,d;(d=b===a.f.serif&&c===a.f["sans-serif"])||(d=T()&&la(a,b,c));d?q()-a.A>=a.w?T()&&la(a,b,c)&&(null===a.u||a.u.hasOwnProperty(a.a.c))?V(a,a.v):V(a,a.B):ma(a):V(a,a.v)}function ma(a){setTimeout(p(function(){U(this)},a),50)}function V(a,b){setTimeout(p(function(){v(this.g.a);v(this.h.a);v(this.j.a);v(this.m.a);b(this.a)},a),0)};function W(a,b,c){this.c=a;this.a=b;this.f=0;this.m=this.j=!1;this.s=c}var X=null;W.prototype.g=function(a){var b=this.a;b.g&&w(b.f,[b.a.c("wf",a.c,J(a).toString(),"active")],[b.a.c("wf",a.c,J(a).toString(),"loading"),b.a.c("wf",a.c,J(a).toString(),"inactive")]);K(b,"fontactive",a);this.m=!0;na(this)};
-W.prototype.h=function(a){var b=this.a;if(b.g){var c=y(b.f,b.a.c("wf",a.c,J(a).toString(),"active")),d=[],e=[b.a.c("wf",a.c,J(a).toString(),"loading")];c||d.push(b.a.c("wf",a.c,J(a).toString(),"inactive"));w(b.f,d,e)}K(b,"fontinactive",a);na(this)};function na(a){0==--a.f&&a.j&&(a.m?(a=a.a,a.g&&w(a.f,[a.a.c("wf","active")],[a.a.c("wf","loading"),a.a.c("wf","inactive")]),K(a,"active")):L(a.a))};function oa(a){this.j=a;this.a=new ja;this.h=0;this.f=this.g=!0}oa.prototype.load=function(a){this.c=new ca(this.j,a.context||this.j);this.g=!1!==a.events;this.f=!1!==a.classes;pa(this,new ha(this.c,a),a)};
-function qa(a,b,c,d,e){var f=0==--a.h;(a.f||a.g)&&setTimeout(function(){var a=e||null,m=d||null||{};if(0===c.length&&f)L(b.a);else{b.f+=c.length;f&&(b.j=f);var h,l=[];for(h=0;h<c.length;h++){var k=c[h],n=m[k.c],r=b.a,x=k;r.g&&w(r.f,[r.a.c("wf",x.c,J(x).toString(),"loading")]);K(r,"fontloading",x);r=null;if(null===X)if(window.FontFace){var x=/Gecko.*Firefox\/(\d+)/.exec(window.navigator.userAgent),xa=/OS X.*Version\/10\..*Safari/.exec(window.navigator.userAgent)&&/Apple/.exec(window.navigator.vendor);
-X=x?42<parseInt(x[1],10):xa?!1:!0}else X=!1;X?r=new P(p(b.g,b),p(b.h,b),b.c,k,b.s,n):r=new Q(p(b.g,b),p(b.h,b),b.c,k,b.s,a,n);l.push(r)}for(h=0;h<l.length;h++)l[h].start()}},0)}function pa(a,b,c){var d=[],e=c.timeout;ia(b);var d=ka(a.a,c,a.c),f=new W(a.c,b,e);a.h=d.length;b=0;for(c=d.length;b<c;b++)d[b].load(function(b,d,c){qa(a,f,b,d,c)})};function ra(a,b){this.c=a;this.a=b}
-ra.prototype.load=function(a){function b(){if(f["__mti_fntLst"+d]){var c=f["__mti_fntLst"+d](),e=[],h;if(c)for(var l=0;l<c.length;l++){var k=c[l].fontfamily;void 0!=c[l].fontStyle&&void 0!=c[l].fontWeight?(h=c[l].fontStyle+c[l].fontWeight,e.push(new G(k,h))):e.push(new G(k))}a(e)}else setTimeout(function(){b()},50)}var c=this,d=c.a.projectId,e=c.a.version;if(d){var f=c.c.o;A(this.c,(c.a.api||"https://fast.fonts.net/jsapi")+"/"+d+".js"+(e?"?v="+e:""),function(e){e?a([]):(f["__MonotypeConfiguration__"+
-d]=function(){return c.a},b())}).id="__MonotypeAPIScript__"+d}else a([])};function sa(a,b){this.c=a;this.a=b}sa.prototype.load=function(a){var b,c,d=this.a.urls||[],e=this.a.families||[],f=this.a.testStrings||{},g=new B;b=0;for(c=d.length;b<c;b++)z(this.c,d[b],C(g));var m=[];b=0;for(c=e.length;b<c;b++)if(d=e[b].split(":"),d[1])for(var h=d[1].split(","),l=0;l<h.length;l+=1)m.push(new G(d[0],h[l]));else m.push(new G(d[0]));E(g,function(){a(m,f)})};function ta(a,b){a?this.c=a:this.c=ua;this.a=[];this.f=[];this.g=b||""}var ua="https://fonts.googleapis.com/css";function va(a,b){for(var c=b.length,d=0;d<c;d++){var e=b[d].split(":");3==e.length&&a.f.push(e.pop());var f="";2==e.length&&""!=e[1]&&(f=":");a.a.push(e.join(f))}}
-function wa(a){if(0==a.a.length)throw Error("No fonts to load!");if(-1!=a.c.indexOf("kit="))return a.c;for(var b=a.a.length,c=[],d=0;d<b;d++)c.push(a.a[d].replace(/ /g,"+"));b=a.c+"?family="+c.join("%7C");0<a.f.length&&(b+="&subset="+a.f.join(","));0<a.g.length&&(b+="&text="+encodeURIComponent(a.g));return b};function ya(a){this.f=a;this.a=[];this.c={}}
-var za={latin:"BESbswy","latin-ext":"\u00e7\u00f6\u00fc\u011f\u015f",cyrillic:"\u0439\u044f\u0416",greek:"\u03b1\u03b2\u03a3",khmer:"\u1780\u1781\u1782",Hanuman:"\u1780\u1781\u1782"},Aa={thin:"1",extralight:"2","extra-light":"2",ultralight:"2","ultra-light":"2",light:"3",regular:"4",book:"4",medium:"5","semi-bold":"6",semibold:"6","demi-bold":"6",demibold:"6",bold:"7","extra-bold":"8",extrabold:"8","ultra-bold":"8",ultrabold:"8",black:"9",heavy:"9",l:"3",r:"4",b:"7"},Ba={i:"i",italic:"i",n:"n",normal:"n"},
-Ca=/^(thin|(?:(?:extra|ultra)-?)?light|regular|book|medium|(?:(?:semi|demi|extra|ultra)-?)?bold|black|heavy|l|r|b|[1-9]00)?(n|i|normal|italic)?$/;
-function Da(a){for(var b=a.f.length,c=0;c<b;c++){var d=a.f[c].split(":"),e=d[0].replace(/\+/g," "),f=["n4"];if(2<=d.length){var g;var m=d[1];g=[];if(m)for(var m=m.split(","),h=m.length,l=0;l<h;l++){var k;k=m[l];if(k.match(/^[\w-]+$/)){var n=Ca.exec(k.toLowerCase());if(null==n)k="";else{k=n[2];k=null==k||""==k?"n":Ba[k];n=n[1];if(null==n||""==n)n="4";else var r=Aa[n],n=r?r:isNaN(n)?"4":n.substr(0,1);k=[k,n].join("")}}else k="";k&&g.push(k)}0<g.length&&(f=g);3==d.length&&(d=d[2],g=[],d=d?d.split(","):
-g,0<d.length&&(d=za[d[0]])&&(a.c[e]=d))}a.c[e]||(d=za[e])&&(a.c[e]=d);for(d=0;d<f.length;d+=1)a.a.push(new G(e,f[d]))}};function Ea(a,b){this.c=a;this.a=b}var Fa={Arimo:!0,Cousine:!0,Tinos:!0};Ea.prototype.load=function(a){var b=new B,c=this.c,d=new ta(this.a.api,this.a.text),e=this.a.families;va(d,e);var f=new ya(e);Da(f);z(c,wa(d),C(b));E(b,function(){a(f.a,f.c,Fa)})};function Ga(a,b){this.c=a;this.a=b}Ga.prototype.load=function(a){var b=this.a.id,c=this.c.o;b?A(this.c,(this.a.api||"https://use.typekit.net")+"/"+b+".js",function(b){if(b)a([]);else if(c.Typekit&&c.Typekit.config&&c.Typekit.config.fn){b=c.Typekit.config.fn;for(var e=[],f=0;f<b.length;f+=2)for(var g=b[f],m=b[f+1],h=0;h<m.length;h++)e.push(new G(g,m[h]));try{c.Typekit.load({events:!1,classes:!1,async:!0})}catch(l){}a(e)}},2E3):a([])};function Ha(a,b){this.c=a;this.f=b;this.a=[]}Ha.prototype.load=function(a){var b=this.f.id,c=this.c.o,d=this;b?(c.__webfontfontdeckmodule__||(c.__webfontfontdeckmodule__={}),c.__webfontfontdeckmodule__[b]=function(b,c){for(var g=0,m=c.fonts.length;g<m;++g){var h=c.fonts[g];d.a.push(new G(h.name,ga("font-weight:"+h.weight+";font-style:"+h.style)))}a(d.a)},A(this.c,(this.f.api||"https://f.fontdeck.com/s/css/js/")+ea(this.c)+"/"+b+".js",function(b){b&&a([])})):a([])};var Y=new oa(window);Y.a.c.custom=function(a,b){return new sa(b,a)};Y.a.c.fontdeck=function(a,b){return new Ha(b,a)};Y.a.c.monotype=function(a,b){return new ra(b,a)};Y.a.c.typekit=function(a,b){return new Ga(b,a)};Y.a.c.google=function(a,b){return new Ea(b,a)};var Z={load:p(Y.load,Y)}; true?!(__WEBPACK_AMD_DEFINE_RESULT__ = function(){return Z}.call(exports, __webpack_require__, exports, module),
+function z(a){if("string"===typeof a.f)return a.f;var b=a.m.location.protocol;"about:"==b&&(b=a.a.location.protocol);return"https:"==b?"https:":"http:"}function ea(a){return a.m.location.hostname||a.a.location.hostname}
+function A(a,b,c){function d(){k&&e&&f&&(k(g),k=null)}b=t(a,"link",{rel:"stylesheet",href:b,media:"all"});var e=!1,f=!0,g=null,k=c||null;da?(b.onload=function(){e=!0;d()},b.onerror=function(){e=!0;g=Error("Stylesheet failed to load");d()}):setTimeout(function(){e=!0;d()},0);u(a,"head",b)}
+function B(a,b,c,d){var e=a.c.getElementsByTagName("head")[0];if(e){var f=t(a,"script",{src:b}),g=!1;f.onload=f.onreadystatechange=function(){g||this.readyState&&"loaded"!=this.readyState&&"complete"!=this.readyState||(g=!0,c&&c(null),f.onload=f.onreadystatechange=null,"HEAD"==f.parentNode.tagName&&e.removeChild(f))};e.appendChild(f);setTimeout(function(){g||(g=!0,c&&c(Error("Script load timeout")))},d||5E3);return f}return null};function C(){this.a=0;this.c=null}function D(a){a.a++;return function(){a.a--;E(a)}}function F(a,b){a.c=b;E(a)}function E(a){0==a.a&&a.c&&(a.c(),a.c=null)};function G(a){this.a=a||"-"}G.prototype.c=function(a){for(var b=[],c=0;c<arguments.length;c++)b.push(arguments[c].replace(/[\W_]+/g,"").toLowerCase());return b.join(this.a)};function H(a,b){this.c=a;this.f=4;this.a="n";var c=(b||"n4").match(/^([nio])([1-9])$/i);c&&(this.a=c[1],this.f=parseInt(c[2],10))}function fa(a){return I(a)+" "+(a.f+"00")+" 300px "+J(a.c)}function J(a){var b=[];a=a.split(/,\s*/);for(var c=0;c<a.length;c++){var d=a[c].replace(/['"]/g,"");-1!=d.indexOf(" ")||/^\d/.test(d)?b.push("'"+d+"'"):b.push(d)}return b.join(",")}function K(a){return a.a+a.f}function I(a){var b="normal";"o"===a.a?b="oblique":"i"===a.a&&(b="italic");return b}
+function ga(a){var b=4,c="n",d=null;a&&((d=a.match(/(normal|oblique|italic)/i))&&d[1]&&(c=d[1].substr(0,1).toLowerCase()),(d=a.match(/([1-9]00|normal|bold)/i))&&d[1]&&(/bold/i.test(d[1])?b=7:/[1-9]00/.test(d[1])&&(b=parseInt(d[1].substr(0,1),10))));return c+b};function ha(a,b){this.c=a;this.f=a.m.document.documentElement;this.h=b;this.a=new G("-");this.j=!1!==b.events;this.g=!1!==b.classes}function ia(a){a.g&&w(a.f,[a.a.c("wf","loading")]);L(a,"loading")}function M(a){if(a.g){var b=y(a.f,a.a.c("wf","active")),c=[],d=[a.a.c("wf","loading")];b||c.push(a.a.c("wf","inactive"));w(a.f,c,d)}L(a,"inactive")}function L(a,b,c){if(a.j&&a.h[b])if(c)a.h[b](c.c,K(c));else a.h[b]()};function ja(){this.c={}}function ka(a,b,c){var d=[],e;for(e in b)if(b.hasOwnProperty(e)){var f=a.c[e];f&&d.push(f(b[e],c))}return d};function N(a,b){this.c=a;this.f=b;this.a=t(this.c,"span",{"aria-hidden":"true"},this.f)}function O(a){u(a.c,"body",a.a)}function P(a){return"display:block;position:absolute;top:-9999px;left:-9999px;font-size:300px;width:auto;height:auto;line-height:normal;margin:0;padding:0;font-variant:normal;white-space:nowrap;font-family:"+J(a.c)+";"+("font-style:"+I(a)+";font-weight:"+(a.f+"00")+";")};function Q(a,b,c,d,e,f){this.g=a;this.j=b;this.a=d;this.c=c;this.f=e||3E3;this.h=f||void 0}Q.prototype.start=function(){var a=this.c.m.document,b=this,c=q(),d=new Promise(function(d,e){function k(){q()-c>=b.f?e():a.fonts.load(fa(b.a),b.h).then(function(a){1<=a.length?d():setTimeout(k,25)},function(){e()})}k()}),e=new Promise(function(a,d){setTimeout(d,b.f)});Promise.race([e,d]).then(function(){b.g(b.a)},function(){b.j(b.a)})};function R(a,b,c,d,e,f,g){this.v=a;this.B=b;this.c=c;this.a=d;this.s=g||"BESbswy";this.f={};this.w=e||3E3;this.u=f||null;this.o=this.j=this.h=this.g=null;this.g=new N(this.c,this.s);this.h=new N(this.c,this.s);this.j=new N(this.c,this.s);this.o=new N(this.c,this.s);a=new H(this.a.c+",serif",K(this.a));a=P(a);this.g.a.style.cssText=a;a=new H(this.a.c+",sans-serif",K(this.a));a=P(a);this.h.a.style.cssText=a;a=new H("serif",K(this.a));a=P(a);this.j.a.style.cssText=a;a=new H("sans-serif",K(this.a));a=
+P(a);this.o.a.style.cssText=a;O(this.g);O(this.h);O(this.j);O(this.o)}var S={D:"serif",C:"sans-serif"},T=null;function U(){if(null===T){var a=/AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(window.navigator.userAgent);T=!!a&&(536>parseInt(a[1],10)||536===parseInt(a[1],10)&&11>=parseInt(a[2],10))}return T}R.prototype.start=function(){this.f.serif=this.j.a.offsetWidth;this.f["sans-serif"]=this.o.a.offsetWidth;this.A=q();la(this)};
+function ma(a,b,c){for(var d in S)if(S.hasOwnProperty(d)&&b===a.f[S[d]]&&c===a.f[S[d]])return!0;return!1}function la(a){var b=a.g.a.offsetWidth,c=a.h.a.offsetWidth,d;(d=b===a.f.serif&&c===a.f["sans-serif"])||(d=U()&&ma(a,b,c));d?q()-a.A>=a.w?U()&&ma(a,b,c)&&(null===a.u||a.u.hasOwnProperty(a.a.c))?V(a,a.v):V(a,a.B):na(a):V(a,a.v)}function na(a){setTimeout(p(function(){la(this)},a),50)}function V(a,b){setTimeout(p(function(){v(this.g.a);v(this.h.a);v(this.j.a);v(this.o.a);b(this.a)},a),0)};function W(a,b,c){this.c=a;this.a=b;this.f=0;this.o=this.j=!1;this.s=c}var X=null;W.prototype.g=function(a){var b=this.a;b.g&&w(b.f,[b.a.c("wf",a.c,K(a).toString(),"active")],[b.a.c("wf",a.c,K(a).toString(),"loading"),b.a.c("wf",a.c,K(a).toString(),"inactive")]);L(b,"fontactive",a);this.o=!0;oa(this)};
+W.prototype.h=function(a){var b=this.a;if(b.g){var c=y(b.f,b.a.c("wf",a.c,K(a).toString(),"active")),d=[],e=[b.a.c("wf",a.c,K(a).toString(),"loading")];c||d.push(b.a.c("wf",a.c,K(a).toString(),"inactive"));w(b.f,d,e)}L(b,"fontinactive",a);oa(this)};function oa(a){0==--a.f&&a.j&&(a.o?(a=a.a,a.g&&w(a.f,[a.a.c("wf","active")],[a.a.c("wf","loading"),a.a.c("wf","inactive")]),L(a,"active")):M(a.a))};function pa(a){this.j=a;this.a=new ja;this.h=0;this.f=this.g=!0}pa.prototype.load=function(a){this.c=new ca(this.j,a.context||this.j);this.g=!1!==a.events;this.f=!1!==a.classes;qa(this,new ha(this.c,a),a)};
+function ra(a,b,c,d,e){var f=0==--a.h;(a.f||a.g)&&setTimeout(function(){var a=e||null,k=d||null||{};if(0===c.length&&f)M(b.a);else{b.f+=c.length;f&&(b.j=f);var h,m=[];for(h=0;h<c.length;h++){var l=c[h],n=k[l.c],r=b.a,x=l;r.g&&w(r.f,[r.a.c("wf",x.c,K(x).toString(),"loading")]);L(r,"fontloading",x);r=null;if(null===X)if(window.FontFace){var x=/Gecko.*Firefox\/(\d+)/.exec(window.navigator.userAgent),ya=/OS X.*Version\/10\..*Safari/.exec(window.navigator.userAgent)&&/Apple/.exec(window.navigator.vendor);
+X=x?42<parseInt(x[1],10):ya?!1:!0}else X=!1;X?r=new Q(p(b.g,b),p(b.h,b),b.c,l,b.s,n):r=new R(p(b.g,b),p(b.h,b),b.c,l,b.s,a,n);m.push(r)}for(h=0;h<m.length;h++)m[h].start()}},0)}function qa(a,b,c){var d=[],e=c.timeout;ia(b);var d=ka(a.a,c,a.c),f=new W(a.c,b,e);a.h=d.length;b=0;for(c=d.length;b<c;b++)d[b].load(function(b,d,c){ra(a,f,b,d,c)})};function sa(a,b){this.c=a;this.a=b}function ta(a,b,c){var d=z(a.c);a=(a.a.api||"fast.fonts.net/jsapi").replace(/^.*http(s?):(\/\/)?/,"");return d+"//"+a+"/"+b+".js"+(c?"?v="+c:"")}
+sa.prototype.load=function(a){function b(){if(f["__mti_fntLst"+d]){var c=f["__mti_fntLst"+d](),e=[],h;if(c)for(var m=0;m<c.length;m++){var l=c[m].fontfamily;void 0!=c[m].fontStyle&&void 0!=c[m].fontWeight?(h=c[m].fontStyle+c[m].fontWeight,e.push(new H(l,h))):e.push(new H(l))}a(e)}else setTimeout(function(){b()},50)}var c=this,d=c.a.projectId,e=c.a.version;if(d){var f=c.c.m;B(this.c,ta(c,d,e),function(e){e?a([]):(f["__MonotypeConfiguration__"+d]=function(){return c.a},b())}).id="__MonotypeAPIScript__"+
+d}else a([])};function ua(a,b){this.c=a;this.a=b}ua.prototype.load=function(a){var b,c,d=this.a.urls||[],e=this.a.families||[],f=this.a.testStrings||{},g=new C;b=0;for(c=d.length;b<c;b++)A(this.c,d[b],D(g));var k=[];b=0;for(c=e.length;b<c;b++)if(d=e[b].split(":"),d[1])for(var h=d[1].split(","),m=0;m<h.length;m+=1)k.push(new H(d[0],h[m]));else k.push(new H(d[0]));F(g,function(){a(k,f)})};function va(a,b,c){a?this.c=a:this.c=b+wa;this.a=[];this.f=[];this.g=c||""}var wa="//fonts.googleapis.com/css";function xa(a,b){for(var c=b.length,d=0;d<c;d++){var e=b[d].split(":");3==e.length&&a.f.push(e.pop());var f="";2==e.length&&""!=e[1]&&(f=":");a.a.push(e.join(f))}}
+function za(a){if(0==a.a.length)throw Error("No fonts to load!");if(-1!=a.c.indexOf("kit="))return a.c;for(var b=a.a.length,c=[],d=0;d<b;d++)c.push(a.a[d].replace(/ /g,"+"));b=a.c+"?family="+c.join("%7C");0<a.f.length&&(b+="&subset="+a.f.join(","));0<a.g.length&&(b+="&text="+encodeURIComponent(a.g));return b};function Aa(a){this.f=a;this.a=[];this.c={}}
+var Ba={latin:"BESbswy","latin-ext":"\u00e7\u00f6\u00fc\u011f\u015f",cyrillic:"\u0439\u044f\u0416",greek:"\u03b1\u03b2\u03a3",khmer:"\u1780\u1781\u1782",Hanuman:"\u1780\u1781\u1782"},Ca={thin:"1",extralight:"2","extra-light":"2",ultralight:"2","ultra-light":"2",light:"3",regular:"4",book:"4",medium:"5","semi-bold":"6",semibold:"6","demi-bold":"6",demibold:"6",bold:"7","extra-bold":"8",extrabold:"8","ultra-bold":"8",ultrabold:"8",black:"9",heavy:"9",l:"3",r:"4",b:"7"},Da={i:"i",italic:"i",n:"n",normal:"n"},
+Ea=/^(thin|(?:(?:extra|ultra)-?)?light|regular|book|medium|(?:(?:semi|demi|extra|ultra)-?)?bold|black|heavy|l|r|b|[1-9]00)?(n|i|normal|italic)?$/;
+function Fa(a){for(var b=a.f.length,c=0;c<b;c++){var d=a.f[c].split(":"),e=d[0].replace(/\+/g," "),f=["n4"];if(2<=d.length){var g;var k=d[1];g=[];if(k)for(var k=k.split(","),h=k.length,m=0;m<h;m++){var l;l=k[m];if(l.match(/^[\w-]+$/)){var n=Ea.exec(l.toLowerCase());if(null==n)l="";else{l=n[2];l=null==l||""==l?"n":Da[l];n=n[1];if(null==n||""==n)n="4";else var r=Ca[n],n=r?r:isNaN(n)?"4":n.substr(0,1);l=[l,n].join("")}}else l="";l&&g.push(l)}0<g.length&&(f=g);3==d.length&&(d=d[2],g=[],d=d?d.split(","):
+g,0<d.length&&(d=Ba[d[0]])&&(a.c[e]=d))}a.c[e]||(d=Ba[e])&&(a.c[e]=d);for(d=0;d<f.length;d+=1)a.a.push(new H(e,f[d]))}};function Ga(a,b){this.c=a;this.a=b}var Ha={Arimo:!0,Cousine:!0,Tinos:!0};Ga.prototype.load=function(a){var b=new C,c=this.c,d=new va(this.a.api,z(c),this.a.text),e=this.a.families;xa(d,e);var f=new Aa(e);Fa(f);A(c,za(d),D(b));F(b,function(){a(f.a,f.c,Ha)})};function Ia(a,b){this.c=a;this.a=b}Ia.prototype.load=function(a){var b=this.a.id,c=this.c.m;b?B(this.c,(this.a.api||"https://use.typekit.net")+"/"+b+".js",function(b){if(b)a([]);else if(c.Typekit&&c.Typekit.config&&c.Typekit.config.fn){b=c.Typekit.config.fn;for(var e=[],f=0;f<b.length;f+=2)for(var g=b[f],k=b[f+1],h=0;h<k.length;h++)e.push(new H(g,k[h]));try{c.Typekit.load({events:!1,classes:!1,async:!0})}catch(m){}a(e)}},2E3):a([])};function Ja(a,b){this.c=a;this.f=b;this.a=[]}Ja.prototype.load=function(a){var b=this.f.id,c=this.c.m,d=this;b?(c.__webfontfontdeckmodule__||(c.__webfontfontdeckmodule__={}),c.__webfontfontdeckmodule__[b]=function(b,c){for(var g=0,k=c.fonts.length;g<k;++g){var h=c.fonts[g];d.a.push(new H(h.name,ga("font-weight:"+h.weight+";font-style:"+h.style)))}a(d.a)},B(this.c,z(this.c)+(this.f.api||"//f.fontdeck.com/s/css/js/")+ea(this.c)+"/"+b+".js",function(b){b&&a([])})):a([])};var Y=new pa(window);Y.a.c.custom=function(a,b){return new ua(b,a)};Y.a.c.fontdeck=function(a,b){return new Ja(b,a)};Y.a.c.monotype=function(a,b){return new sa(b,a)};Y.a.c.typekit=function(a,b){return new Ia(b,a)};Y.a.c.google=function(a,b){return new Ga(b,a)};var Z={load:p(Y.load,Y)}; true?!(__WEBPACK_AMD_DEFINE_RESULT__ = function(){return Z}.call(exports, __webpack_require__, exports, module),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):"undefined"!==typeof module&&module.exports?module.exports=Z:(window.WebFont=Z,window.WebFontConfig&&Y.load(window.WebFontConfig));}());
 
 

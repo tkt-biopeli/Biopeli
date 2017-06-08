@@ -1,3 +1,4 @@
+import StructureBuilder from '../models/map/StructureBuilder'
 export default function GrassActions (tile) {
   var sbuilder = new StructureBuilder({tile: tile})
 
