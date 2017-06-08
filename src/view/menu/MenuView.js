@@ -1,4 +1,4 @@
-import * as labeledButton from './LabeledButton'
+import LabeledButton from './LabeledButton'
 
 export default class MenuView {
   constructor ({ game, menuViewWidth, buttonHeight }) {
@@ -15,21 +15,24 @@ export default class MenuView {
     this.menuViewGroup.removeAll(true, true)
     this.menuViewGroup.create(this.leftBorder, 0, 'menuBg')
     // make a grid system
-      /*
     for (var i = 0, len = this.buttonActions.length; i < len; i++) {
-      labeledButton.addLabeledButton({
+      new LabeledButton({
+        game: this.game,
         viewGroup: this.menuViewGroup,
         label: this.buttonActions[i].name,
         x: this.leftBorder + 35,
         y: this.buttonHeight * (i + 1),
         callback: this.buttonActions[i].function()
       })
-      */
-//      var button = this.game.make.button(
-//              this.leftBorder + 35, this.buttonHeight * (i + 1), 'button',
-//              this.buttonActions[i].function(), this, 2, 1, 0)
-//      this.menuViewGroup.add(button)
-//    }
+    }
+//    new LabeledButton({
+//        game: this.game,
+//        viewGroup: this.menuViewGroup,
+//        label: "plapla",
+//        x: this.leftBorder + 35,
+//        y: this.buttonHeight * (i + 1),
+//        callback: null
+//      })
   }
 
   setButtonActions(buttonActions) {

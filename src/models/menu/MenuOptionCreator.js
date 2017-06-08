@@ -12,7 +12,7 @@ export default class MenuOptionCreator {
 
   getActions (tile) {
     if(tile.structure == null){
-      return this.tileOptions(tile.tileType)
+      return this.tileTypeOptions(tile.tileType)
     }
 
     /*var options = this.structureOptions(tile.structure)
@@ -24,8 +24,9 @@ export default class MenuOptionCreator {
   }
 
   //ERROR
-  tileOptions (tileType) {
-    return tileTypeOptions.get(tileType.name)()
+  tileTypeOptions (tileType) {
+    return []
+//    return tileTypeOptions.get(tileType.name)()
   }
 
   structureOptions (structure) {

@@ -1,17 +1,17 @@
-export default function () {
-  function addLabeledButton( { viewGroup, label, x, y, callback }) {
-    var button = this.game.make.button(
-            x, y, 'button', callback, this, 2, 1, 0)
+export default class LabeledButton {
+  constructor( { game, viewGroup, label, x, y, callback }) {
+    var button = game.make.button(x, y, 'button', callback, this, 2, 1, 0)
+    var buttonWidth = 193
+    var buttonHeight = 71
     viewGroup.add(button)
+    var style = {
+      font: "16px Arial",
+      fill: "#ffff00",
+      align: "center"}
+    var text = game.add.text(
+            Math.floor(x + buttonWidth / 2),
+            Math.floor(y + buttonHeight / 2), label, style, viewGroup)
+    text.anchor.set(0.5, 0.5)
   }
 }
-
-//
-//export default class LabeledButton {
-//  constructor( { viewGroup, label, x, y, callback }) {
-//    var button = this.game.make.button(
-//            x, y, 'button', callback, this, 2, 1, 0)
-//    viewGroup.add(button)
-//  }
-//}
 
