@@ -1,9 +1,7 @@
 export default class ButtonAction {
-  constructor ({name}) {
+  constructor ({name, functionToCall, valuesToCallWith}) {
     this.name = name
-  }
-
-  setOnClick(functionToCall){
     this.function = functionToCall
+    this.values = valuesToCallWith
   }
 }
