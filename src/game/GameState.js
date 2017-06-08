@@ -53,7 +53,8 @@ export default class GameState {
     this.mapListener = new MapListener({
       game: state,
       map: this.map,
-      menuOptionCreator: this.menuOptionCreator
+      menuOptionCreator: this.menuOptionCreator,
+      menuView: this.menuView
     })
 
     this.inputHandler = new InputHandler({game: state})

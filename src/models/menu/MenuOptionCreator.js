@@ -23,6 +23,7 @@ export default class MenuOptionCreator {
     return []
   }
 
+  //ERROR
   tileOptions (tileType) {
     return tileTypeOptions.get(tileType.name)()
   }
