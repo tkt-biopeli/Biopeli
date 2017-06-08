@@ -15,10 +15,12 @@ export default class MenuOptionCreator {
       return this.tileOptions(tile.tileType)
     }
 
-    var options = this.structureOptions(tile.structure)
+    /*var options = this.structureOptions(tile.structure)
     options.concat(this.extraOptions(tile))
 
-    return options
+    return options*/
+
+    return []
   }
 
   tileOptions (tileType) {
