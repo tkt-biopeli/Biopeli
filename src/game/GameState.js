@@ -1,6 +1,7 @@
 import Menu from '../models/menu/Menu'
 import Map from '../models/map/Map'
 import MapView from '../view/map/MapView'
+import MenuView from '../view/menu/MenuView'
 import CameraMover from '../view/CameraMover'
 import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
@@ -17,9 +18,11 @@ export default class GameState {
     this.tileTypes = TileTypes()
     this.structureTypes = StructureTypes()
 
-    this.menu = new Menu({
+    this.menu = new Menu()
+    this.menuView = new MenuView({
       game: state,
-      menuViewWidth: 256
+      menuViewWidth: 256,
+      menu: this.menu
     })
 
     // map grid
@@ -63,6 +66,6 @@ export default class GameState {
 
     this.mapView.drawWithOffset(this.state.game.camera.x, this.state.game.camera.y)
 
-    this.menu.update(events)
+    this.menuView.update(events)
   }
 }

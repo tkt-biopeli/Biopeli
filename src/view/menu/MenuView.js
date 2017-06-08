@@ -1,10 +1,22 @@
+import Menu from '../../models/menu/Menu'
+
 export default class MenuView {
-  constructor ({ game, menu, menuViewWidth }) {
+  constructor ({ game, menuViewWidth, menu }) {
     this.game = game
+
     this.menu = menu
     this.leftBorder = game.camera.width - menuViewWidth
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
+
+    this.redraw()
+  }
+
+  update (events) {
+    var event = events.pointer
+    if(event != undefined){
+      this.redraw()
+    }
   }
 
   redraw () {
