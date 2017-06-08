@@ -3374,6 +3374,7 @@ var MenuView = function () {
           callback: this.buttonActions[i].function()
         });
       }
+      //    for (var i = 0, len = 2; i < len; i++) {
       //    new LabeledButton({
       //        game: this.game,
       //        viewGroup: this.menuViewGroup,
@@ -3382,6 +3383,7 @@ var MenuView = function () {
       //        y: this.buttonHeight * (i + 1),
       //        callback: null
       //      })
+      //    }
     }
   }, {
     key: 'setButtonActions',

@@ -25,6 +25,7 @@ export default class MenuView {
         callback: this.buttonActions[i].function()
       })
     }
+//    for (var i = 0, len = 2; i < len; i++) {
 //    new LabeledButton({
 //        game: this.game,
 //        viewGroup: this.menuViewGroup,
@@ -33,6 +34,7 @@ export default class MenuView {
 //        y: this.buttonHeight * (i + 1),
 //        callback: null
 //      })
+//    }
   }
 
   setButtonActions(buttonActions) {
