@@ -9,7 +9,7 @@ import StructureTypes from '../models/map/StructureType'
 import Player from './Player'
 
 export default class GameState {
-  constructor ({state, mapWidth, mapHeight, tileWidth, tileHeight}) {
+  constructor ({state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth}) {
     this.state = state
 
     state.world.setBounds(0, 0, mapWidth * tileWidth, mapHeight * tileHeight)
@@ -19,7 +19,7 @@ export default class GameState {
 
     this.menu = new Menu({
       game: state,
-      menuViewWidth: 256
+      menuViewWidth: menuWidth
     })
 
     // map grid
@@ -37,7 +37,7 @@ export default class GameState {
     this.mapView = new MapView({
       game: state,
       map: this.map,
-      viewWidthPx: state.game.width - 256,
+      viewWidthPx: state.game.width - menuWidth,
       viewHeightPx: state.game.height
     })
 
@@ -46,7 +46,8 @@ export default class GameState {
       game: state,
       map: this.map,
       tileTypes: this.tileTypes,
-      structureTypes: this.structureTypes
+      structureTypes: this.structureTypes,
+      menuWidth: menuWidth
     })
 
     this.inputHandler = new InputHandler({game: state})
