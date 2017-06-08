@@ -7,17 +7,17 @@ export default class StructureBuilder {
   }
 
 
-buildGranary() {
-  this.tile.structure = new Structure({
-    tile: tile,
-    structureType: this.structureTypes.granary
+  buildGranary() {
+    this.tile.structure = new Structure({
+      tile: tile,
+      structureType: this.structureTypes.granary
+    }
   }
-}
 
-buildFarm() {
-  this.tile.structure = new Structure({
-    tile: tile,
-    structureType: this.structureTypes.farm
+  buildFarm() {
+    this.tile.structure = new Structure({
+      tile: tile,
+      structureType: this.structureTypes.farm
+    }
   }
-}
 }
