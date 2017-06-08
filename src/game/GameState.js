@@ -8,6 +8,7 @@ import InputHandler from '../view/InputHandler'
 import TileTypes from '../models/map/TileType'
 import StructureTypes from '../models/map/StructureType'
 import Player from './Player'
+import MenuOptionCreator from '../models/menu/MenuOptionCreator'
 
 export default class GameState {
   constructor ({state, mapWidth, mapHeight, tileWidth, tileHeight}) {
@@ -18,6 +19,7 @@ export default class GameState {
     this.tileTypes = TileTypes()
     this.structureTypes = StructureTypes()
 
+    this.menuOptionCreator = new MenuOptionCreator()
     this.menu = new Menu()
     this.menuView = new MenuView({
       game: state,
@@ -48,8 +50,7 @@ export default class GameState {
     this.mapListener = new MapListener({
       game: state,
       map: this.map,
-      tileTypes: this.tileTypes,
-      structureTypes: this.structureTypes
+      menuOptionCreator: this.menuOptionCreator
     })
 
     this.inputHandler = new InputHandler({game: state})

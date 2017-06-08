@@ -1,10 +1,9 @@
 import Structure from '../models/map/Structure'
 export default class MapListener {
-  constructor ({game, map, tileTypes, structureTypes}) {
+  constructor ({game, map, menuOptionCreator}) {
     this.map = map
     this.game = game
-    this.tileTypes = tileTypes
-    this.structureTypes = structureTypes
+    this.menuOptionCreator = menuOptionCreator
   }
 
   update (events) {
@@ -16,10 +15,7 @@ export default class MapListener {
       var tile = this.map.getTileWithPixelCoordinates(x, y)
 
       if (typeof tile !== 'undefined') {
-        tile.structure = new Structure({
-          tile: tile,
-          structureType: this.structureTypes.farm
-        })
+        this.menuView.setButtonActions( menuOptionCreator.getActions(tile) )
       }
     }
   }

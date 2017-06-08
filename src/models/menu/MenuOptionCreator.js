@@ -10,7 +10,7 @@ export default class MenuOptionCreator {
 
   }
 
-  getOptions (tile) {
+  getActions (tile) {
     if(tile.structure == null){
       return this.tileOptions(tile.tileType)
     }
