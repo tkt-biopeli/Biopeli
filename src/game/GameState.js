@@ -46,7 +46,8 @@ export default class GameState {
       game: state,
       map: this.map,
       tileTypes: this.tileTypes,
-      structureTypes: this.structureTypes
+      structureTypes: this.structureTypes,
+      menuWidth: menuWidth
     })
 
     this.inputHandler = new InputHandler({game: state})
