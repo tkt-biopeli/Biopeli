@@ -23,10 +23,11 @@ export default class GameState {
     this.menu = new Menu({
       menuOptionCreator: this.menuOptionCreator
     })
+    
     this.menuView = new MenuView({
       game: state,
       menuViewWidth: 256,
-      menu: this.menu
+      buttonHeight: 75
     })
 
     // map grid
@@ -69,6 +70,6 @@ export default class GameState {
 
     this.mapView.drawWithOffset(this.state.game.camera.x, this.state.game.camera.y)
 
-    this.menuView.update(events)
+//    this.menuView.update(events)
   }
 }
