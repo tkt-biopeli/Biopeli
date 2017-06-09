@@ -17,6 +17,7 @@ describe('StructureBuilder tests', () =>{
       structureTypes: {}
     })
 
+    sbuilder.menuView = {reset: function(){}}
     sbuilder.buildBuilding({name: 'test'})
     assert.equal('test', sbuilder.tile.structure.structureType.name)
   })
@@ -26,6 +27,7 @@ describe('StructureBuilder tests', () =>{
       tile : {},
       structureTypes : {farm: {name: 'farm'}}
     })
+    sbuilder.menuView = {reset: function(){}}
     sbuilder.buildFarm()
     assert.equal('farm', sbuilder.tile.structure.structureType.name)
   })
@@ -35,6 +37,7 @@ describe('StructureBuilder tests', () =>{
         tile : {},
         structureTypes : {granary: {name: 'granary'}}
     })
+    sbuilder.menuView = {reset: function(){}}
     sbuilder.buildGranary()
     assert.equal('granary', sbuilder.tile.structure.structureType.name)
   })
