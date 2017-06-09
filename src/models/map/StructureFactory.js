@@ -6,10 +6,6 @@ export default class StructureFactory {
     this.structureTypes = structureTypes
   }
 
-  setMenuView(menuView){
-    this.menuView = menuView
-  }
-
   buildGranary () {
     this.buildBuilding(this.structureTypes.granary)
   }
@@ -23,7 +19,5 @@ export default class StructureFactory {
       tile: this.tile,
       structureType: structureType
     })
-
-    this.menuView.reset()
   }
 }
