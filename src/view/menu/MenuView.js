@@ -22,7 +22,8 @@ export default class MenuView {
         label: this.buttonActions[i].name,
         x: this.leftBorder + 35,
         y: this.buttonHeight * (i + 1),
-        callback: this.buttonActions[i].function()
+        callback: this.buttonActions[i].function,
+        context: this.buttonActions[i].context
       })
     }
 //    for (var i = 0, len = 2; i < len; i++) {

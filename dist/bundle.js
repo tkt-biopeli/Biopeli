@@ -3254,12 +3254,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var ButtonAction = function ButtonAction(_ref) {
   var name = _ref.name,
-      functionToCall = _ref.functionToCall;
+      functionToCall = _ref.functionToCall,
+      context = _ref.context;
 
   _classCallCheck(this, ButtonAction);
 
   this.name = name;
   this.function = functionToCall;
+  this.context = context;
 };
 
 exports.default = ButtonAction;
@@ -3299,20 +3301,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var MenuOptionCreator = function () {
-  function MenuOptionCreator() {
+  function MenuOptionCreator(_ref) {
+    var structureTypes = _ref.structureTypes;
+
     _classCallCheck(this, MenuOptionCreator);
 
     this.tileOptions = new Map();
     this.tileOptions.set("forest", _ForestActions2.default);
     this.tileOptions.set("grass", _GrassActions2.default);
     this.tileOptions.set("water", _WaterActions2.default);
+
+    this.structureTypes = structureTypes;
   }
 
   _createClass(MenuOptionCreator, [{
     key: 'getActions',
     value: function getActions(tile) {
       if (tile.structure == null) {
-        return this.tileTypeOptions(tile.tileType);
+        return this.tileTypeOptions(tile);
       }
 
       /*var options = this.structureOptions(tile.structure)
@@ -3321,13 +3327,10 @@ var MenuOptionCreator = function () {
 
       return [];
     }
-
-    //ERROR
-
   }, {
     key: 'tileTypeOptions',
-    value: function tileTypeOptions(tileType) {
-      return this.tileOptions.get(tileType.name)();
+    value: function tileTypeOptions(tile) {
+      return this.tileOptions.get(tile.tileType.name)(tile, this.structureTypes);
     }
   }, {
     key: 'structureOptions',
@@ -4438,7 +4441,7 @@ var GameState = function () {
     this.tileTypes = (0, _TileType2.default)();
     this.structureTypes = (0, _StructureType2.default)();
 
-    this.menuOptionCreator = new _MenuOptionCreator2.default();
+    this.menuOptionCreator = new _MenuOptionCreator2.default({ structureTypes: this.structureTypes });
     this.menu = new _Menu2.default({
       menuOptionCreator: this.menuOptionCreator
     });
@@ -4613,12 +4616,13 @@ var _ButtonAction2 = _interopRequireDefault(_ButtonAction);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function ForestActions(tile) {
-  var sbuilder = new _StructureFactory2.default({ tile: tile });
+function ForestActions(tile, structureTypes) {
+  var sbuilder = new _StructureFactory2.default({ tile: tile, structureTypes: structureTypes });
 
   var createGranary = new _ButtonAction2.default({
     name: 'Build a granary',
-    function: sbuilder.buildGranary
+    functionToCall: sbuilder.buildGranary,
+    context: sbuilder
   });
 
   return [createGranary];
@@ -4656,12 +4660,14 @@ function GrassActions(tile, structureTypes) {
 
   var createGranary = new _ButtonAction2.default({
     name: "Build a granary",
-    function: sBuilder.buildGranary
+    functionToCall: sBuilder.buildGranary,
+    context: sBuilder
   });
 
   var createFarm = new _ButtonAction2.default({
     name: "Build a farm",
-    function: sBuilder.buildFarm
+    functionToCall: sBuilder.buildFarm,
+    context: sBuilder
   });
 
   return [createGranary, createFarm];
@@ -5367,11 +5373,12 @@ var LabeledButton = function LabeledButton(_ref) {
       label = _ref.label,
       x = _ref.x,
       y = _ref.y,
-      callback = _ref.callback;
+      callback = _ref.callback,
+      context = _ref.context;
 
   _classCallCheck(this, LabeledButton);
 
-  var button = game.make.button(x, y, 'button', callback, this, 2, 1, 0);
+  var button = game.make.button(x, y, 'button', callback, context, 2, 1, 0);
   var buttonWidth = 193;
   var buttonHeight = 71;
   viewGroup.add(button);
@@ -5441,7 +5448,8 @@ var MenuView = function () {
           label: this.buttonActions[i].name,
           x: this.leftBorder + 35,
           y: this.buttonHeight * (i + 1),
-          callback: this.buttonActions[i].function()
+          callback: this.buttonActions[i].function,
+          context: this.buttonActions[i].context
         });
       }
       //    for (var i = 0, len = 2; i < len; i++) {

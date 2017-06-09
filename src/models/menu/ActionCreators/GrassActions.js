@@ -5,12 +5,14 @@ export default function GrassActions (tile, structureTypes) {
 
   var createGranary = new ButtonAction({
     name : "Build a granary",
-    function: sBuilder.buildGranary
+    functionToCall: sBuilder.buildGranary,
+    context: sBuilder
   })
 
   var createFarm = new ButtonAction({
     name : "Build a farm",
-    function: sBuilder.buildFarm
+    functionToCall: sBuilder.buildFarm,
+    context: sBuilder
   })
 
   return [createGranary, createFarm]

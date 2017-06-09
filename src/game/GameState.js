@@ -19,7 +19,7 @@ export default class GameState {
     this.tileTypes = TileTypes()
     this.structureTypes = StructureTypes()
 
-    this.menuOptionCreator = new MenuOptionCreator()
+    this.menuOptionCreator = new MenuOptionCreator({structureTypes: this.structureTypes})
     this.menu = new Menu({
       menuOptionCreator: this.menuOptionCreator
     })

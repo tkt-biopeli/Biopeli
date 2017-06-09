@@ -2,16 +2,18 @@ import ForestActions from './ActionCreators/ForestActions'
 import GrassActions from './ActionCreators/GrassActions'
 import WaterActions from './ActionCreators/WaterActions'
 export default class MenuOptionCreator {
-  constructor () {
+  constructor ({structureTypes}) {
     this.tileOptions = new Map()
     this.tileOptions.set("forest", ForestActions)
     this.tileOptions.set("grass", GrassActions)
     this.tileOptions.set("water", WaterActions)
+
+    this.structureTypes = structureTypes
   }
 
   getActions (tile) {
     if(tile.structure == null){
-      return this.tileTypeOptions(tile.tileType)
+      return this.tileTypeOptions(tile)
     }
 
     /*var options = this.structureOptions(tile.structure)
@@ -22,9 +24,8 @@ export default class MenuOptionCreator {
     return []
   }
 
-  //ERROR
-  tileTypeOptions (tileType) {
-    return this.tileOptions.get(tileType.name)()
+  tileTypeOptions (tile) {
+    return this.tileOptions.get(tile.tileType.name)(tile, this.structureTypes)
   }
 
   structureOptions (structure) {
