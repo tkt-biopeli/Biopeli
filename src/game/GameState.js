@@ -1,12 +1,14 @@
 import Menu from '../models/menu/Menu'
 import Map from '../models/map/Map'
 import MapView from '../view/map/MapView'
+import MenuView from '../view/menu/MenuView'
 import CameraMover from '../view/CameraMover'
 import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
 import TileTypes from '../models/map/TileType'
 import StructureTypes from '../models/map/StructureType'
 import Player from './Player'
+import MenuOptionCreator from '../models/menu/MenuOptionCreator'
 
 export default class GameState {
   constructor ({state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth}) {
@@ -17,9 +19,15 @@ export default class GameState {
     this.tileTypes = TileTypes()
     this.structureTypes = StructureTypes()
 
+    this.menuOptionCreator = new MenuOptionCreator({structureTypes: this.structureTypes})
     this.menu = new Menu({
+      menuOptionCreator: this.menuOptionCreator
+    })
+
+    this.menuView = new MenuView({
       game: state,
-      menuViewWidth: menuWidth
+      menuViewWidth: 256,
+      buttonHeight: 75
     })
 
     // map grid
@@ -45,9 +53,8 @@ export default class GameState {
     this.mapListener = new MapListener({
       game: state,
       map: this.map,
-      tileTypes: this.tileTypes,
-      structureTypes: this.structureTypes,
-      menuWidth: menuWidth
+      menuOptionCreator: this.menuOptionCreator,
+      menuView: this.menuView
     })
 
     this.inputHandler = new InputHandler({game: state})
@@ -64,6 +71,6 @@ export default class GameState {
 
     this.mapView.drawWithOffset(this.state.game.camera.x, this.state.game.camera.y)
 
-    this.menu.update(events)
+//    this.menuView.update(events)
   }
 }
