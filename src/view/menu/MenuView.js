@@ -25,6 +25,8 @@ export default class MenuView {
         callback: this.buttonActions[i].function,
         context: this.buttonActions[i].context
       })
+
+      this.buttonActions[i].context.setMenuView(this)
     }
 //    for (var i = 0, len = 2; i < len; i++) {
 //    new LabeledButton({
@@ -41,5 +43,9 @@ export default class MenuView {
   setButtonActions(buttonActions) {
     this.buttonActions = buttonActions
     this.redraw()
+  }
+
+  reset(){
+    this.setButtonActions([])
   }
 }

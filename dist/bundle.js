@@ -3210,6 +3210,11 @@ var StructureFactory = function () {
   }
 
   _createClass(StructureFactory, [{
+    key: 'setMenuView',
+    value: function setMenuView(menuView) {
+      this.menuView = menuView;
+    }
+  }, {
     key: 'buildGranary',
     value: function buildGranary() {
       this.buildBuilding(this.structureTypes.granary);
@@ -3226,6 +3231,8 @@ var StructureFactory = function () {
         tile: this.tile,
         structureType: structureType
       });
+
+      this.menuView.reset();
     }
   }]);
 
@@ -4972,6 +4979,7 @@ var _class = function (_Phaser$State) {
       //
       );this.load.image('menuBg', 'assets/images/low-poly-bg.png');
       this.load.spritesheet('button', 'assets/images/button_sprite_sheet.png', 193, 71);
+      this.load.image('emptyButton', 'assets/images/empty_button.png');
 
       this.load.image('forest', 'assets/images/tiles/forest.png');
       this.load.image('water', 'assets/images/tiles/water.png');
@@ -5378,7 +5386,7 @@ var LabeledButton = function LabeledButton(_ref) {
 
   _classCallCheck(this, LabeledButton);
 
-  var button = game.make.button(x, y, 'button', callback, context, 2, 1, 0);
+  var button = game.make.button(x, y, 'emptyButton', callback, context, 2, 1, 0);
   var buttonWidth = 193;
   var buttonHeight = 71;
   viewGroup.add(button);
@@ -5451,6 +5459,8 @@ var MenuView = function () {
           callback: this.buttonActions[i].function,
           context: this.buttonActions[i].context
         });
+
+        this.buttonActions[i].context.setMenuView(this);
       }
       //    for (var i = 0, len = 2; i < len; i++) {
       //    new LabeledButton({
@@ -5468,6 +5478,11 @@ var MenuView = function () {
     value: function setButtonActions(buttonActions) {
       this.buttonActions = buttonActions;
       this.redraw();
+    }
+  }, {
+    key: 'reset',
+    value: function reset() {
+      this.setButtonActions([]);
     }
   }]);
 

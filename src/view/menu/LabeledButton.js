@@ -1,6 +1,6 @@
 export default class LabeledButton {
   constructor( { game, viewGroup, label, x, y, callback, context }) {
-    var button = game.make.button(x, y, 'button', callback, context, 2, 1, 0)
+    var button = game.make.button(x, y, 'emptyButton', callback, context, 2, 1, 0)
     var buttonWidth = 193
     var buttonHeight = 71
     viewGroup.add(button)
