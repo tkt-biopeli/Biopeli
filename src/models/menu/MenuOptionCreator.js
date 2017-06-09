@@ -27,12 +27,12 @@ export default class MenuOptionCreator {
   tileTypeOptions (tile) {
     return this.tileOptions.get(tile.tileType.name)(tile, this.structureTypes)
   }
-
+/*
   structureOptions (structure) {
     return []
   }
 
   extraOptions (tile) {
     return []
-  }
+  }*/
 }

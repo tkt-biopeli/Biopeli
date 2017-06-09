@@ -24,4 +24,27 @@ describe('Menu option creator tests', ()=>{
     }
   })
 
+  it('Option creator gives tile options when structure not presented', () =>{
+    var creator = new MenuOptionCreator({structureTypes: null})
+    var spy = sinon.spy()
+    creator.tileTypeOptions = spy
+    var tile = {structure: null}
+
+    creator.getActions(tile)
+
+    assert.equal(1, spy.callCount)
+    assert(spy.calledWith(tile))
+  })
+
+  it('Option creator doesn\t give tile options when tile has structure', () =>{
+    var creator = new MenuOptionCreator({structureTypes: null})
+    var spy = sinon.spy()
+    creator.tileTypeOptions = spy
+    var tile = {structure: 2}
+
+    creator.getActions(tile)
+
+    assert(spy.notCalled)
+  })
+
 })
