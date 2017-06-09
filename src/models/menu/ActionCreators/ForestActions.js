@@ -1,4 +1,5 @@
-import StructureBuilder from '../../map/StructureFactory'
+import StructureFactory from '../../map/StructureFactory'
+import ButtonAction from '../ButtonAction'
 export default function ForestActions (tile) {
   var sbuilder = new StructureFactory({tile: tile})
 

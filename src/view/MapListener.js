@@ -1,5 +1,3 @@
-import Structure from '../models/map/Structure'
-import MenuView from './menu/MenuView'
 export default class MapListener {
   constructor ({game, map, menuOptionCreator, menuView}) {
     this.map = map
@@ -17,7 +15,7 @@ export default class MapListener {
       var tile = this.map.getTileWithPixelCoordinates(x, y)
 
       if (typeof tile !== 'undefined') {
-        this.menuView.setButtonActions( this.menuOptionCreator.getActions(tile) )
+        this.menuView.setButtonActions(this.menuOptionCreator.getActions(tile))
       }
     }
   }

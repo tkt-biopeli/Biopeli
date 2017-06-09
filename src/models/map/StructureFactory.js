@@ -6,17 +6,18 @@ export default class StructureFactory {
     this.structureTypes = structureTypes
   }
 
-  buildGranary() {
-    this.tile.structure = new Structure({
-      tile: tile,
-      structureType: this.structureTypes.granary
-    })
+  buildGranary () {
+    this.buildBuilding(this.structureTypes.granary)
   }
 
-  buildFarm() {
+  buildFarm () {
+    this.buildBuilding(this.structureTypes.farm)
+  }
+
+  buildBuilding (structureType) {
     this.tile.structure = new Structure({
-      tile: tile,
-      structureType: this.structureTypes.farm
+      tile: this.tile,
+      structureType: structureType
     })
   }
 }

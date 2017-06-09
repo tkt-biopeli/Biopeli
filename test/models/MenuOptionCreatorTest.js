@@ -14,10 +14,13 @@ describe('Menu option creator tests', ()=>{
   it('TileOptions gives right tile', ()=>{
     var creator = new MenuOptionCreator()
     var grass = TileType().grass
-    var excpectedValues = creator.tileOptions.get(grass.name)
-    var got = creator.tileOptions(grass)
+    var expectedValues = creator.tileOptions.get(grass.name)()
+    var got = creator.tileTypeOptions(grass)
 
-    assert.equal(excpectedValues, got)
+    for(var i = 0 ; i < expectedValues.length ; i++){
+      assert.equal(expectedValues[i].name, got[i].name)
+      assert.equal(expectedValues[i].functionToCall, got[i].functionToCall)
+    }
   })
 
 })

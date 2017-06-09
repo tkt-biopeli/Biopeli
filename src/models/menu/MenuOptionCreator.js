@@ -7,7 +7,6 @@ export default class MenuOptionCreator {
     this.tileOptions.set("forest", ForestActions)
     this.tileOptions.set("grass", GrassActions)
     this.tileOptions.set("water", WaterActions)
-
   }
 
   getActions (tile) {
@@ -25,8 +24,7 @@ export default class MenuOptionCreator {
 
   //ERROR
   tileTypeOptions (tileType) {
-    return []
-//    return tileTypeOptions.get(tileType.name)()
+    return this.tileOptions.get(tileType.name)()
   }
 
   structureOptions (structure) {
