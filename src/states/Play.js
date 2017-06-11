@@ -18,9 +18,9 @@ export default class extends Phaser.State {
   }
 
   render () {
-    if (__DEV__) {
-      this.game.debug.cameraInfo(this.game.camera, 500, 32)
-    }
+//    if (__DEV__) {
+//      this.game.debug.cameraInfo(this.game.camera, 500, 32)
+//    }
   }
 
   update () {
