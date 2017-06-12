@@ -2,7 +2,8 @@ export default class InputHandler {
   constructor({ game, mapListener, cameraMover }) {
     this.game = game
     this.mapListener = mapListener
-    this.cameraMover = cameraMover
+    this.cameraMover = cameraMover    
+
     this.initialize()
   }
 
