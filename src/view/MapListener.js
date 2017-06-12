@@ -26,7 +26,7 @@ export default class MapListener {
   selectInMap (tile) {
     if (tile === this.map.selectedTile) {
       this.map.selectedTile = undefined
-    } else {
+    } else if (tile !== undefined) {
       this.map.selectedTile = tile
     }
 

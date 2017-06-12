@@ -1,3 +1,4 @@
+
 export default class CameraMover {
   constructor ({ game, xSpeed, ySpeed }) {
     this.game = game
@@ -29,7 +30,7 @@ export default class CameraMover {
   }
 
   tweenCameraTo (tx, ty) {
-    this.game.add.tween(this.game.camera).to({ y: ty, x: tx }, 500, Phaser.Easing.Default, true)
+    this.game.add.tween(this.game.camera).to({ y: ty, x: tx }, 500, 'Linear', true)
   }
 
 
