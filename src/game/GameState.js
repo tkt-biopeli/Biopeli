@@ -30,6 +30,7 @@ export default class GameState {
       buttonWidth: 189,
       buttonHeight: 66
     })
+    this.menuView.redraw()
 
     this.menu = new Menu({
       menuView: this.menuView

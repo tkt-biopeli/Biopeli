@@ -5,7 +5,7 @@ import ResetDecorator from './ResetDecorator'
 export default class MenuView {
   constructor ({ game, leftBorderCoordinate, leftPadding, sectionPadding, linePadding, buttonWidth, buttonHeight }) {
     this.game = game
-    // move to a config file?
+
     this.leftBorderCoordinate = leftBorderCoordinate
     this.leftPadding = leftPadding
     this.buttonWidth = buttonWidth
@@ -16,9 +16,6 @@ export default class MenuView {
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
     this.buttonActions = []
-    this.selectedTile = null
-
-    this.redraw()
   }
 
   setMenu (menu) {
@@ -31,7 +28,7 @@ export default class MenuView {
     this.drawHeight = this.sectionPadding
     this.createBackground()
 
-    if(this.menu == undefined ||this.menu.selectedTile == null){
+    if(this.menu == null || this.menu.selectedTile == null){
       return
     }
 
@@ -67,6 +64,8 @@ export default class MenuView {
     }
 
     this.createText('Structure: '+structure.structureType.name, 16)
+
+    return true
   }
 
   createButtons () {
@@ -97,7 +96,7 @@ export default class MenuView {
   }
 
   createText (text, fontSize) {
-    var text = new Text({
+    var tex = new Text({
       game: this.game,
       viewGroup: this.menuViewGroup,
       text: text,
@@ -107,7 +106,7 @@ export default class MenuView {
     })
     this.addPadding(fontSize)
 
-    return text
+    return tex
   }
 
   setButtonActions (buttonActions) {
