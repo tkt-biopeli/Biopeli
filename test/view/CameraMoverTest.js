@@ -38,20 +38,20 @@ describe('Camera mover tests', () =>{
 
   it('Camera mover\'s costructor works', () =>{
     var mover = new CameraMover(4, 5, 6)
-
     assert(4, mover.game)
     assert(5, mover.x)
     assert(6, mover.y)
   })
 
-/*  it('If there is no input, camera doesn\'t move', () =>{
-    var mover = new CameraMover({game: game, xSpeed: 1, ySpeed: 1})
+
+ it('If there is no input, camera doesn\'t move', () =>{
+    var mover = new CameraMover({game: game, xSpeed: 0, ySpeed: 0, tweenCameraTo: function(tx, ty){}})
 
     mover.update(events)
 
     checkCameraCoordinates(0, 0)
   })
-
+/*
   it('If there is one input, camera moves', () => {
     setCursors(true, false, false, false)
     var mover = new CameraMover({game: game, xSpeed: 1, ySpeed: 1})
