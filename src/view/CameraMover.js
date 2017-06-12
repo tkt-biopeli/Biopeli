@@ -30,6 +30,7 @@ export default class CameraMover {
   }
 
   tweenCameraTo (tx, ty) {
+    // .to parameters(properties object = new coordinates, duration, type of Easing, autoStart)
     this.game.add.tween(this.game.camera).to({ y: ty, x: tx }, 500, 'Linear', true)
   }
 

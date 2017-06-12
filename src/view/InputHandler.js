@@ -7,6 +7,7 @@ export default class InputHandler {
     this.initialize()
   }
 
+  // add callbacks to controls -> Phaser takes care of update in game loop
   initialize () {
     this.game.input.onDown.add(this.onPointerDown, this)
     var cursors = this.game.cursors
