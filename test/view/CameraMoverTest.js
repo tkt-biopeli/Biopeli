@@ -45,16 +45,20 @@ describe('Camera mover tests', () =>{
 
 
  it('If there is no input, camera doesn\'t move', () =>{
-    var mover = new CameraMover({game: game, xSpeed: 0, ySpeed: 0, tweenCameraTo: function(tx, ty){}})
-
+    var mover = new CameraMover({game: game, xSpeed: 1, ySpeed: 1})
+    var spy = sinon.spy()
+    mover.tweenCameraTo = spy
     mover.update(events)
 
     checkCameraCoordinates(0, 0)
   })
-/*
+
   it('If there is one input, camera moves', () => {
-    setCursors(true, false, false, false)
     var mover = new CameraMover({game: game, xSpeed: 1, ySpeed: 1})
+    var spy = sinon.spy()
+    mover.tweenCameraTo = spy
+
+    setCursors(true, false, false, false)
     mover.update(events)
     checkCameraCoordinates(0, -1)
 
@@ -74,11 +78,13 @@ describe('Camera mover tests', () =>{
   it('Camera checks both axis every loop', () => {
     setCursors(true, false, true, false)
     var mover = new CameraMover({game: game, xSpeed: 1, ySpeed: 1})
+    var spy = sinon.spy()
+    mover.tweenCameraTo = spy
     mover.update(events)
     checkCameraCoordinates(-1, -1)
 
     setCursors(false, true, false, true)
     mover.update(events)
     checkCameraCoordinates(0, 0)
-  })*/
+  })
 })
