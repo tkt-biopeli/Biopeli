@@ -15,6 +15,9 @@ export default {
   menuButtonWidth: 189,
   menuButtonHeight: 66,
   menuTextStartingPoint: 0.5,
+  font: '16px Arial',
+  textColor: '#ffff00',
+  textAlignment: 'center',
   //configurations for camera
   cameraSpeed: 400,
   tweenCameraDuration: 500

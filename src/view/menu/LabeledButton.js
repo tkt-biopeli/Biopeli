@@ -2,8 +2,7 @@ import config from '../../config'
 
 export default class LabeledButton {
   constructor( { game, viewGroup, label, x, y, callback, context, buttonWidth, buttonHeight }) {
-    // move to a config file?
-    var style = {font: "16px Arial", fill: "#ffff00", align: "center"}
+    var style = {font: config.font, fill: config.textColor, align: config.textAlignment}
     
     var button = game.make.button(x, y, 'emptyButton', callback, context)
     viewGroup.add(button)
