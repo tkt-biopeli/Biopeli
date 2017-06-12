@@ -25,6 +25,8 @@ export default class GameState {
       game: state,
       leftBorderCoordinate: state.game.camera.width - 256,
       leftPadding: 35,
+      sectionPadding: 12,
+      linePadding: 8,
       buttonWidth: 189,
       buttonHeight: 66
     })
