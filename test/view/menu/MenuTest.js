@@ -3,34 +3,33 @@ const sinon = require('sinon')
 import Menu from '../../../src/view/menu/Menu'
 
 describe('Menu tests', () =>{
+  var spy
+  var menuView
+  var menu
+  var buttonActions
+  var tile
 
-    var spy
-    var menuView
-    var menu
-    var buttonActions
-    var tile
-
-    beforeEach(() => {
+  beforeEach(() => {
     spy = sinon.spy()
     menuView = {setMenu: spy, setButtonActions: function(){}}
     menu = new Menu({menuView: menuView})
     buttonActions = []
     tile = 1
-})
+  })
 
-it('Constructor test', () =>{
+  it('Constructor test', () =>{
     assert.equal(menuView, menu.menuView)
-assert.equal(null, menu.selectedTile)
-})
+    assert.equal(null, menu.selectedTile)
+  })
 
-it('Choose tile test', () =>{
+  it('Choose tile test', () => {
     menu.chooseTile(tile, buttonActions)
-assert.equal(1, menu.selectedTile)
-})
-it('Reset test', () => {
-    menu.selectedTile = 0
-menu.reset()
-assert.equal(null, menu.selectedTile)
-})
+    assert.equal(1, menu.selectedTile)
+  })
 
+  it('Reset test', () => {
+    menu.selectedTile = 0
+    menu.reset()
+    assert.equal(null, menu.selectedTile)
+  })
 })
