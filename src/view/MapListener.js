@@ -7,26 +7,29 @@ export default class MapListener {
   }
 
   update (pointerEvent) {
-    var tile = this.getTileFromMap(pointerEvent)
+    if (this.pointerInMapArea(pointerEvent)) {
 
-    tile = this.selectInMap(tile)
+      var tile = this.getTileFromMap(pointerEvent)
+      tile = this.selectInMap(tile)
+      this.updateMenuOptions(tile)
+    }
+  }
 
-    this.updateMenuOptions(tile)
+  pointerInMapArea (pointerEvent) {
+    return (pointerEvent !== undefined && pointerEvent.x <= this.menuView.leftBorder)
   }
 
   getTileFromMap (pointerEvent) {
-    if (pointerEvent !== undefined && pointerEvent.x <= (this.menuView.leftBorder)) {
-      var x = pointerEvent.x + this.game.camera.x
-      var y = pointerEvent.y + this.game.camera.y
+    var x = pointerEvent.x + this.game.camera.x
+    var y = pointerEvent.y + this.game.camera.y
 
-      return this.map.getTileWithPixelCoordinates(x, y)
-    }
+    return this.map.getTileWithPixelCoordinates(x, y)
   }
 
   selectInMap (tile) {
     if (tile === this.map.selectedTile) {
       this.map.selectedTile = undefined
-    } else if (tile !== undefined) {
+    } else {
       this.map.selectedTile = tile
     }
 
