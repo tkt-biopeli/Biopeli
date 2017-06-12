@@ -11,7 +11,7 @@ import Player from './Player'
 import MenuOptionCreator from '../models/menu/MenuOptionCreator'
 
 export default class GameState {
-  constructor ({state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth}) {
+  constructor({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
     this.state = state
 
     state.world.setBounds(0, 0, mapWidth * tileWidth, mapHeight * tileHeight)
@@ -19,14 +19,14 @@ export default class GameState {
     this.tileTypes = TileTypes()
     this.structureTypes = StructureTypes()
 
-    this.menuOptionCreator = new MenuOptionCreator({structureTypes: this.structureTypes})
+    this.menuOptionCreator = new MenuOptionCreator({ structureTypes: this.structureTypes })
     this.menu = new Menu({
       menuOptionCreator: this.menuOptionCreator
     })
 
     this.menuView = new MenuView({
       game: state,
-      menuViewWidth: 256,
+      menuViewWidth: menuWidth,
       buttonHeight: 75
     })
 
@@ -49,7 +49,8 @@ export default class GameState {
       viewHeightPx: state.game.height
     })
 
-    this.cameraMover = new CameraMover({game: state, xSpeed: 16, ySpeed: 16})
+    this.cameraMover = new CameraMover({ game: state, xSpeed: 400, ySpeed: 400 })
+    
     this.mapListener = new MapListener({
       game: state,
       map: this.map,
@@ -57,20 +58,14 @@ export default class GameState {
       menuView: this.menuView
     })
 
-    this.inputHandler = new InputHandler({game: state})
+    this.inputHandler = new InputHandler({ game: state, mapListener: this.mapListener, cameraMover: this.cameraMover })
 
     this.player = new Player()
   }
 
   update () {
-    var events = this.inputHandler.getEvents()
-
-    // Camera-movement must happen before view is updated!
-    this.cameraMover.update(events)
-    this.mapListener.update(events)
 
     this.mapView.drawWithOffset(this.state.game.camera.x, this.state.game.camera.y)
 
-//    this.menuView.update(events)
   }
 }

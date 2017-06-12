@@ -3,7 +3,7 @@ import ModelTile from '../../models/map/ModelTile'
 import ViewTile from './ViewTile'
 import TileType from '../../models/map/TileType'
 export default class MapView {
-  constructor ({ game, map, viewWidthPx, viewHeightPx }) {
+  constructor({ game, map, viewWidthPx, viewHeightPx }) {
     this.game = game
     this.map = map
     this.viewWidthPx = viewWidthPx
@@ -12,6 +12,7 @@ export default class MapView {
     this.tileHeight = map.tileHeight
     this.renderTexture1 = this.game.add.renderTexture(viewWidthPx, viewHeightPx, 'texture1')
     this.renderS = this.game.add.sprite(0, 0, this.renderTexture1)
+    this.renderS.fixedToCamera = true
   }
 
   drawWithOffset (cameraX, cameraY) {
@@ -20,9 +21,9 @@ export default class MapView {
 
     // calculate grid coordinates for new view
     var startCol = Math.floor(cameraX / this.tileWidth)
-    var endCol = startCol + (this.viewWidthPx / this.tileWidth)
+    var endCol = startCol + (this.viewWidthPx / this.tileWidth) + 1
     var startRow = Math.floor(cameraY / this.tileHeight)
-    var endRow = startRow + (this.viewHeightPx / this.tileHeight)
+    var endRow = startRow + (this.viewHeightPx / this.tileHeight) + 1
 
     // calculate offset
     var offX = -cameraX + startCol * this.tileWidth
@@ -36,8 +37,17 @@ export default class MapView {
         var tile = this.map.getTileWithGridCoordinates(c, r)
 
         if (typeof tile !== 'undefined') {
-          var viewTile = new ViewTile({game: this.game, x: 0, y: 0, modelTile: tile})
+          var viewTile = new ViewTile({ game: this.game, x: 0, y: 0, modelTile: tile })
           this.renderTexture1.renderXY(viewTile.tileSprite, Math.round(x), Math.round(y))
+
+          // Selection highlight
+          if (tile === this.map.selectedTile) {
+            var highlight = this.game.make.graphics()
+            highlight.beginFill(0x000000, 0.2)
+            highlight.drawRoundedRect(0, 0, this.tileWidth, this.tileHeight, 9)
+            highlight.endFill()
+            this.renderTexture1.renderXY(highlight, Math.round(x), Math.round(y))
+          }
         }
       }
     }

@@ -9,6 +9,7 @@ export default class Map {
     this.tileWidth = tileWidth
     this.tileHeight = tileHeight
     this.grid = []
+    this.selectedTile = undefined
   }
 
   addTileWithGridCoordinates (gx, gy, tileType) {
