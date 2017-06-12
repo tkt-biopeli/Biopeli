@@ -1,3 +1,5 @@
+import config from '../../config'
+
 export default class LabeledButton {
   constructor( { game, viewGroup, label, x, y, callback, context, buttonWidth, buttonHeight }) {
     // move to a config file?
@@ -9,6 +11,6 @@ export default class LabeledButton {
     var text = game.add.text(
             Math.floor(x + buttonWidth / 2),
             Math.floor(y + buttonHeight / 2), label, style, viewGroup)
-    text.anchor.set(0.5, 0.5)
+    text.anchor.set(config.menuTextStartingPoint, config.menuTextStartingPoint)
   }
 }
