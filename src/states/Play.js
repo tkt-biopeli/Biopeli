@@ -7,6 +7,9 @@ export default class extends Phaser.State {
   preload () { }
 
   create () {
+    // create before game state
+    this.cursors = this.game.input.keyboard.createCursorKeys()
+
     this.gameState = new GameState({
       state: this,
       mapWidth: Math.ceil(this.game.width * config.madWidthMultiplier / config.tileWidth),
@@ -16,7 +19,6 @@ export default class extends Phaser.State {
       menuWidth: config.menuWidth
     })
 
-    this.cursors = this.game.input.keyboard.createCursorKeys()
   }
 
   render () {

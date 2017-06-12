@@ -1,22 +1,41 @@
 export default class MapListener {
-  constructor ({game, map, menuOptionCreator, menuView}) {
+  constructor({ game, map, menuOptionCreator, menuView }) {
     this.map = map
     this.game = game
     this.menuOptionCreator = menuOptionCreator
     this.menuView = menuView
   }
 
-  update (events) {
-    var event = events.pointer
-    if (event !== undefined && event.x <= (this.menuView.leftBorder)) {
-      var x = event.x + this.game.camera.x
-      var y = event.y + this.game.camera.y
+  update (pointerEvent) {
+    var tile = this.getTileFromMap(pointerEvent)
 
-      var tile = this.map.getTileWithPixelCoordinates(x, y)
+    tile = this.selectInMap(tile)
 
-      if (typeof tile !== 'undefined') {
-        this.menuView.setButtonActions(this.menuOptionCreator.getActions(tile))
-      }
+    this.updateMenuOptions(tile)
+  }
+
+  getTileFromMap (pointerEvent) {
+    if (pointerEvent !== undefined && pointerEvent.x <= (this.menuView.leftBorder)) {
+      var x = pointerEvent.x + this.game.camera.x
+      var y = pointerEvent.y + this.game.camera.y
+
+      return this.map.getTileWithPixelCoordinates(x, y)
+    }
+  }
+
+  selectInMap (tile) {
+    if (tile === this.map.selectedTile) {
+      this.map.selectedTile = undefined
+    } else {
+      this.map.selectedTile = tile
+    }
+
+    return this.map.selectedTile
+  }
+
+  updateMenuOptions (tile) {
+    if (typeof tile !== 'undefined') {
+      this.menuView.setButtonActions(this.menuOptionCreator.getActions(tile))
     }
   }
 }

@@ -26,7 +26,7 @@ export default class GameState {
 
     this.menuView = new MenuView({
       game: state,
-      menuViewWidth: 256,
+      menuViewWidth: menuWidth,
       buttonHeight: 75
     })
 
@@ -57,17 +57,16 @@ export default class GameState {
       menuView: this.menuView
     })
 
-    this.inputHandler = new InputHandler({game: state})
+    this.inputHandler = new InputHandler({game: state, mapListener: this.mapListener, cameraMover: this.cameraMover})
 
     this.player = new Player()
   }
 
-  update () {
-    var events = this.inputHandler.getEvents()
+  update () {    
 
     // Camera-movement must happen before view is updated!
-    this.cameraMover.update(events)
-    this.mapListener.update(events)
+    // this.cameraMover.update(events)
+    // this.mapListener.update(events)
 
     this.mapView.drawWithOffset(this.state.game.camera.x, this.state.game.camera.y)
 
