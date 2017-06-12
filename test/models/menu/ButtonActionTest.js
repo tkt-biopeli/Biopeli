@@ -11,7 +11,6 @@ describe('ButtonAction tests', () =>{
         context: 'con'
     })
     assert.equal('name', testBA.name)
-    assert.equal('func', testBA.functionToCall)
     assert.equal('con', testBA.context)
   })
 })
