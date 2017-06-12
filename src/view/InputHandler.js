@@ -1,8 +1,8 @@
 export default class InputHandler {
-  constructor({ game, mapListener, cameraMover }) {
+  constructor ({ game, mapListener, cameraMover }) {
     this.game = game
     this.mapListener = mapListener
-    this.cameraMover = cameraMover    
+    this.cameraMover = cameraMover
 
     this.initialize()
   }
@@ -36,7 +36,6 @@ export default class InputHandler {
       right: cursors.right.isDown
     }
 
-    this.cameraMover.update({cursor:cursorEvent})
+    this.cameraMover.update({cursor: cursorEvent})
   }
-
 }

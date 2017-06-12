@@ -9,7 +9,13 @@ export default class MenuView {
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
     this.buttonActions = []
+    this.selectedTile = null
+
     this.redraw()
+  }
+
+  setMenu(menu){
+    this.menu = menu
   }
 
   redraw() {
@@ -22,7 +28,7 @@ export default class MenuView {
   }
 
   createButton(i, buttonAction){
-    var resetDecorator = new ResetDecorator({action: buttonAction, menuView: this})
+    var resetDecorator = new ResetDecorator({action: buttonAction, menu: this.menu})
 
     return new LabeledButton({
       game: this.game,
@@ -35,12 +41,8 @@ export default class MenuView {
     })
   }
 
-  setButtonActions(buttonActions) {
+  setButtonActions (buttonActions) {
     this.buttonActions = buttonActions
     this.redraw()
-  }
-
-  reset(){
-    this.setButtonActions([])
   }
 }

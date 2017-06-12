@@ -3,9 +3,10 @@ import ModelTile from '../../models/map/ModelTile'
 import ViewTile from './ViewTile'
 import TileType from '../../models/map/TileType'
 export default class MapView {
-  constructor({ game, map, viewWidthPx, viewHeightPx }) {
+  constructor({ game, map, menu, viewWidthPx, viewHeightPx }) {
     this.game = game
     this.map = map
+    this.menu = menu
     this.viewWidthPx = viewWidthPx
     this.viewHeightPx = viewHeightPx
     this.tileWidth = map.tileWidth
@@ -41,7 +42,7 @@ export default class MapView {
           this.renderTexture1.renderXY(viewTile.tileSprite, Math.round(x), Math.round(y))
 
           // Selection highlight
-          if (tile === this.map.selectedTile) {
+          if (tile === this.menu.selectedTile) {
             var highlight = this.game.make.graphics()
             highlight.beginFill(0x000000, 0.2)
             highlight.drawRoundedRect(0, 0, this.tileWidth, this.tileHeight, 9)

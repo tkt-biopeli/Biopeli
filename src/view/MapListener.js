@@ -1,22 +1,21 @@
 export default class MapListener {
-  constructor({ game, map, menuOptionCreator, menuView }) {
-    this.map = map
+  constructor ({ game, map, menuOptionCreator, menu }) {
     this.game = game
+    this.map = map
     this.menuOptionCreator = menuOptionCreator
-    this.menuView = menuView
+    this.menu = menu
   }
 
   update (pointerEvent) {
     if (this.pointerInMapArea(pointerEvent)) {
-
       var tile = this.getTileFromMap(pointerEvent)
-      tile = this.selectInMap(tile)
+      if (!this.validTile(tile)) return
       this.updateMenuOptions(tile)
     }
   }
 
   pointerInMapArea (pointerEvent) {
-    return (pointerEvent !== undefined && pointerEvent.x <= this.menuView.leftBorder)
+    return (pointerEvent !== undefined && pointerEvent.x <= this.menu.menuView.leftBorder)
   }
 
   getTileFromMap (pointerEvent) {
@@ -26,19 +25,19 @@ export default class MapListener {
     return this.map.getTileWithPixelCoordinates(x, y)
   }
 
-  selectInMap (tile) {
-    if (tile === this.map.selectedTile) {
-      this.map.selectedTile = undefined
-    } else {
-      this.map.selectedTile = tile
+  validTile (tile) {
+    if (typeof tile === 'undefined') {
+      return false
+    } else if (tile === this.menu.selectedTile) {
+      this.menu.reset()
+
+      return false
     }
 
-    return this.map.selectedTile
+    return true
   }
 
   updateMenuOptions (tile) {
-    if (typeof tile !== 'undefined') {
-      this.menuView.setButtonActions(this.menuOptionCreator.getActions(tile))
-    }
+    this.menu.chooseTile(tile, this.menuOptionCreator.getActions(tile))
   }
 }

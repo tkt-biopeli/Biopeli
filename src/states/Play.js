@@ -18,7 +18,6 @@ export default class extends Phaser.State {
       tileHeight: config.tileHeight,
       menuWidth: config.menuWidth
     })
-
   }
 
   render () {
