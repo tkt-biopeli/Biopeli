@@ -1,4 +1,3 @@
-
 export default class CameraMover {
   constructor ({ game, xSpeed, ySpeed }) {
     this.game = game

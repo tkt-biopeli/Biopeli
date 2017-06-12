@@ -44,8 +44,9 @@ describe('Camera mover tests', () =>{
     assert(6, mover.y)
   })
 
-/*  it('If there is no input, camera doesn\'t move', () =>{
-    var mover = new CameraMover({game: game, xSpeed: 1, ySpeed: 1})
+/*
+ it('If there is no input, camera doesn\'t move', () =>{
+    var mover = new CameraMover({game: game, xSpeed: 0, ySpeed: 0})
 
     mover.update(events)
 
