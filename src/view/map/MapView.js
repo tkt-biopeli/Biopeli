@@ -21,9 +21,9 @@ export default class MapView {
 
     // calculate grid coordinates for new view
     var startCol = Math.floor(cameraX / this.tileWidth)
-    var endCol = startCol + (this.viewWidthPx / this.tileWidth)
+    var endCol = startCol + (this.viewWidthPx / this.tileWidth) + 1
     var startRow = Math.floor(cameraY / this.tileHeight)
-    var endRow = startRow + (this.viewHeightPx / this.tileHeight)
+    var endRow = startRow + (this.viewHeightPx / this.tileHeight) + 1
 
     // calculate offset
     var offX = -cameraX + startCol * this.tileWidth
