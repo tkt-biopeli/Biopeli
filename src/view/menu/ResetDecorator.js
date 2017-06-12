@@ -2,13 +2,13 @@
 *Handles resetting the menu for the true action
 */
 export default class ResetDecorator {
-  constructor ({action, menuView}) {
+  constructor ({action, menu}) {
     this.action = action
-    this.menuView = menuView
+    this.menu = menu
   }
 
   act(){
     this.action.function.call(this.action.context)
-    this.menuView.reset()
+    this.menu.reset()
   }
 }

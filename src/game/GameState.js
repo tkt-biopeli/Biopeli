@@ -1,4 +1,4 @@
-import Menu from '../models/menu/Menu'
+import Menu from '../view/menu/Menu'
 import Map from '../models/map/Map'
 import MapView from '../view/map/MapView'
 import MenuView from '../view/menu/MenuView'
@@ -11,7 +11,7 @@ import Player from './Player'
 import MenuOptionCreator from '../models/menu/MenuOptionCreator'
 
 export default class GameState {
-  constructor ({state, mapWidth, mapHeight, tileWidth, tileHeight}) {
+  constructor ({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
     this.state = state
 
     state.world.setBounds(0, 0, mapWidth * tileWidth, mapHeight * tileHeight)
@@ -19,10 +19,7 @@ export default class GameState {
     this.tileTypes = TileTypes()
     this.structureTypes = StructureTypes()
 
-    this.menuOptionCreator = new MenuOptionCreator({structureTypes: this.structureTypes})
-    this.menu = new Menu({
-      menuOptionCreator: this.menuOptionCreator
-    })
+    this.menuOptionCreator = new MenuOptionCreator({ structureTypes: this.structureTypes })
 
     this.menuView = new MenuView({
       game: state,
@@ -30,6 +27,10 @@ export default class GameState {
       leftPadding: 35,
       buttonWidth: 189,
       buttonHeight: 66
+    })
+
+    this.menu = new Menu({
+      menuView: this.menuView
     })
 
     // map grid
@@ -47,32 +48,26 @@ export default class GameState {
     this.mapView = new MapView({
       game: state,
       map: this.map,
-      viewWidthPx: state.game.width - 256,
+      menu: this.menu,
+      viewWidthPx: state.game.width - menuWidth,
       viewHeightPx: state.game.height
     })
 
-    this.cameraMover = new CameraMover({game: state, xSpeed: 16, ySpeed: 16})
+    this.cameraMover = new CameraMover({ game: state, xSpeed: 400, ySpeed: 400 })
+
     this.mapListener = new MapListener({
       game: state,
       map: this.map,
       menuOptionCreator: this.menuOptionCreator,
-      menuView: this.menuView
+      menu: this.menu
     })
 
-    this.inputHandler = new InputHandler({game: state})
+    this.inputHandler = new InputHandler({ game: state, mapListener: this.mapListener, cameraMover: this.cameraMover })
 
     this.player = new Player()
   }
 
   update () {
-    var events = this.inputHandler.getEvents()
-
-    // Camera-movement must happen before view is updated!
-    this.cameraMover.update(events)
-    this.mapListener.update(events)
-
     this.mapView.drawWithOffset(this.state.game.camera.x, this.state.game.camera.y)
-
-//    this.menuView.update(events)
   }
 }

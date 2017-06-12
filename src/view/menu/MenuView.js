@@ -3,17 +3,23 @@ import ResetDecorator from './ResetDecorator'
 
 export default class MenuView {
   constructor ({ game, leftBorderCoordinate, leftPadding, buttonWidth, buttonHeight }) {
-    this.game = game  
+    this.game = game
     // move to a config file?
     this.leftBorderCoordinate = leftBorderCoordinate
     this.leftPadding = leftPadding
     this.buttonWidth = buttonWidth
     this.buttonHeight = buttonHeight
-    
+
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
     this.buttonActions = []
+    this.selectedTile = null
+
     this.redraw()
+  }
+
+  setMenu(menu){
+    this.menu = menu
   }
 
   redraw() {
@@ -27,7 +33,8 @@ export default class MenuView {
   }
 
   createButton(i, buttonAction){
-    var resetDecorator = new ResetDecorator({action: buttonAction, menuView: this})
+    var resetDecorator = new ResetDecorator({action: buttonAction, menu: this.menu})
+
     return new LabeledButton({
       game: this.game,
       viewGroup: this.menuViewGroup,
@@ -41,12 +48,8 @@ export default class MenuView {
     })
   }
 
-  setButtonActions(buttonActions) {
+  setButtonActions (buttonActions) {
     this.buttonActions = buttonActions
     this.redraw()
-  }
-
-  reset(){
-    this.setButtonActions([])
   }
 }
