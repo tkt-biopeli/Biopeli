@@ -3,7 +3,7 @@ import ModelTile from '../../models/map/ModelTile'
 import ViewTile from './ViewTile'
 import TileType from '../../models/map/TileType'
 export default class MapView {
-  constructor ({ game, map, viewWidthPx, viewHeightPx }) {
+  constructor({ game, map, viewWidthPx, viewHeightPx }) {
     this.game = game
     this.map = map
     this.viewWidthPx = viewWidthPx
@@ -37,8 +37,17 @@ export default class MapView {
         var tile = this.map.getTileWithGridCoordinates(c, r)
 
         if (typeof tile !== 'undefined') {
-          var viewTile = new ViewTile({game: this.game, x: 0, y: 0, modelTile: tile})
+          var viewTile = new ViewTile({ game: this.game, x: 0, y: 0, modelTile: tile })
           this.renderTexture1.renderXY(viewTile.tileSprite, Math.round(x), Math.round(y))
+
+          // Selection highlight
+          if (tile === this.map.selectedTile) {
+            var highlight = this.game.make.graphics()
+            highlight.beginFill(0x000000, 0.2)
+            highlight.drawRoundedRect(0, 0, this.tileWidth, this.tileHeight, 9)
+            highlight.endFill()
+            this.renderTexture1.renderXY(highlight, Math.round(x), Math.round(y))
+          }
         }
       }
     }
