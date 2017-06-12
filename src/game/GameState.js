@@ -27,8 +27,11 @@ export default class GameState {
       leftBorderCoordinate: state.game.camera.width - config.menuWidth,
       leftPadding: config.menuLeftPadding,
       buttonWidth: config.menuButtonWidth,
-      buttonHeight: config.menuButtonHeight
+      buttonHeight: config.menuButtonHeight,
+      sectionPadding: 12,
+      linePadding: 8
     })
+    this.menuView.redraw()
 
     this.menu = new Menu({
       menuView: this.menuView
