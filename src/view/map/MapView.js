@@ -12,6 +12,7 @@ export default class MapView {
     this.tileHeight = map.tileHeight
     this.renderTexture1 = this.game.add.renderTexture(viewWidthPx, viewHeightPx, 'texture1')
     this.renderS = this.game.add.sprite(0, 0, this.renderTexture1)
+    this.renderS.fixedToCamera = true
   }
 
   drawWithOffset (cameraX, cameraY) {

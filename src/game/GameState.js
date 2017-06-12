@@ -49,7 +49,7 @@ export default class GameState {
       viewHeightPx: state.game.height
     })
 
-    this.cameraMover = new CameraMover({game: state, xSpeed: 16, ySpeed: 16})
+    this.cameraMover = new CameraMover({game: state, xSpeed: 400, ySpeed: 400})
     this.mapListener = new MapListener({
       game: state,
       map: this.map,

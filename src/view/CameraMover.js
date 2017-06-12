@@ -1,5 +1,5 @@
 export default class CameraMover {
-  constructor ({game, xSpeed, ySpeed}) {
+  constructor ({ game, xSpeed, ySpeed }) {
     this.game = game
     this.x = xSpeed
     this.y = ySpeed
@@ -10,16 +10,27 @@ export default class CameraMover {
    */
   update (events) {
     var event = events.cursor
+    var tx = this.game.camera.x
+    var ty = this.game.camera.y
+
     if (event.up) {
-      this.game.camera.y -= this.y
+      ty -= this.y
     } else if (event.down) {
-      this.game.camera.y += this.y
+      ty += this.y
     }
 
     if (event.left) {
-      this.game.camera.x -= this.x
+      tx -= this.x
     } else if (event.right) {
-      this.game.camera.x += this.x
+      tx += this.x
     }
+
+    this.tweenCameraTo(tx, ty)
   }
+
+  tweenCameraTo (tx, ty) {
+    this.game.add.tween(this.game.camera).to({ y: ty, x: tx }, 500, Phaser.Easing.Default, true)
+  }
+
+
 }
