@@ -1,11 +1,12 @@
 const assert = require('assert')
+const sinon = require('sinon')
 import InputHandler from '../../src/view/InputHandler'
 
 describe('Inputhandler tests', () => {
-  var game
-  var mapListener
-  var cameraMover
+  var game, mapListener, cameraMover
   var handler
+  var mapListenerSpy = sinon.spy()
+  var cameraMoverSpy = sinon.spy()
 
   beforeEach(() => {
     game = {
@@ -30,14 +31,14 @@ describe('Inputhandler tests', () => {
     }
 
     mapListener = {
-      update: function() {}
+      update: mapListenerSpy
     }
 
     cameraMover = {
-      update: function() {}
+      update: cameraMoverSpy
     }
 
-    handler = new InputHandler({ game: game })
+    handler = new InputHandler({ game: game, mapListener: mapListener, cameraMover: cameraMover })
   })
 
   function setInput (up, down, left, right, isDown, x, y) {
@@ -58,23 +59,6 @@ describe('Inputhandler tests', () => {
     game.input.activePointer.position.y = y
   }
 
-  function checkOutput (events, up, down, left, right, exist, x, y) {
-    assert.equal(up, events.cursor.up)
-    assert.equal(down, events.cursor.down)
-    assert.equal(left, events.cursor.left)
-    assert.equal(right, events.cursor.right)
-
-    checkPointer(events, exist, x, y)
-  }
-
-  function checkPointer (events, exist, x, y) {
-    assert(exist == (events.pointer != null))
-    if (exist) {
-      assert.equal(x, events.pointer.x)
-      assert.equal(y, events.pointer.y)
-    }
-  }
-
   it('Constructor works', () => {
     var h = new InputHandler({ game: game, mapListener: mapListener, cameraMover: cameraMover })
 
@@ -82,30 +66,20 @@ describe('Inputhandler tests', () => {
     assert.equal(mapListener, h.mapListener)
     assert.equal(cameraMover, h.cameraMover)    
   })
-
-/*  it('Cursor event is always created', () => {
-    var events = handler.getEvents()
-    checkOutput(events, false, false, false, false, false)
-
-    setCursors(true, true, true, true)
-    events = handler.getEvents()
-    checkOutput(events, true, true, true, true, false)
-  })
-
-  it('Mouse event is only created when mouse is down', () => {
-    var events = handler.getEvents()
-    checkPointer(events, false)
-
-    setPointer(true, 0, 0)
-    events = handler.getEvents()
-    checkPointer(events, true, 0, 0)
-  })
-
-  it('Mouse coordinates are right', () => {
+  
+  it('On mouse pointer down, mapListener is called with correct parameters', () => {
     setPointer(true, 4, -3)
-    var events = handler.getEvents()
-    checkPointer(events, true, 4, -3)
-  })*/
+    handler.onPointerDown()
+    assert.equal(mapListenerSpy.callCount, 1)
+    assert(mapListenerSpy.calledWith({x: 4, y: -3}))
+  })
+  
+  it('On key cursor down, cameraMover is called with correct parameters', () => {
+    setCursors(true, false, true, false)
+    handler.onCursorDown()
+    assert.equal(cameraMoverSpy.callCount, 1)
+    assert(cameraMoverSpy.calledWith({cursor: {up: true, down: false, left: true, right: false}}))
+  })
 
-
+  
 })
