@@ -10,6 +10,7 @@ import StructureTypes from '../models/map/StructureType'
 import Player from './Player'
 import MenuOptionCreator from '../models/menu/MenuOptionCreator'
 import config from '../config'
+import Mocker from '../Mocker'
 
 export default class GameState {
   constructor ({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {

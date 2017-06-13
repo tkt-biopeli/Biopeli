@@ -1,6 +1,5 @@
 export default class MapListener {
-  constructor ({ game, map, menuOptionCreator, menu }) {
-    this.game = game
+  constructor ({ map, menuOptionCreator, menu }) {
     this.map = map
     this.menuOptionCreator = menuOptionCreator
     this.menu = menu
