@@ -15,7 +15,7 @@ describe('MapListener tests', () => {
 
     menu = {
       menuView: {
-        leftBorder: 0
+        leftBorderCoordinate: 0
       },
       selectedTile: undefined,
       reset: function () { },
@@ -120,7 +120,7 @@ describe('MapListener tests', () => {
 
   it('Update with pointer outside map area doesnt call any functions', () => {
     var pointerEvent = { x: 70, y: 50 }
-    menu.menuView.leftBorder = 60
+    menu.menuView.leftBorderCoordinate = 60
     var mockMenu = sinon.mock(menu)
     mockMenu.expects("chooseTile").never()
 
@@ -134,7 +134,7 @@ describe('MapListener tests', () => {
 
   it('Unvalid selection in map are doesnt call any functions', () => {
     var pointerEvent = { x: 70, y: 50 }
-    menu.menuView.leftBorder = 80
+    menu.menuView.leftBorderCoordinate = 80
 
     var stub = sinon.stub(ml, "getTileFromMap")
     stub.returns(undefined)
@@ -152,4 +152,3 @@ describe('MapListener tests', () => {
   })
 
 })
-
