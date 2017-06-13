@@ -9,6 +9,7 @@ import TileTypes from '../models/map/TileType'
 import StructureTypes from '../models/map/StructureType'
 import Player from './Player'
 import MenuOptionCreator from '../models/menu/MenuOptionCreator'
+import config from '../config'
 
 export default class GameState {
   constructor ({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
@@ -23,9 +24,14 @@ export default class GameState {
 
     this.menuView = new MenuView({
       game: state,
-      menuViewWidth: menuWidth,
-      buttonHeight: 75
+      leftBorderCoordinate: state.game.camera.width - config.menuWidth,
+      leftPadding: config.menuLeftPadding,
+      buttonWidth: config.menuButtonWidth,
+      buttonHeight: config.menuButtonHeight,
+      sectionPadding: 12,
+      linePadding: 8
     })
+    this.menuView.redraw()
 
     this.menu = new Menu({
       menuView: this.menuView
@@ -51,7 +57,7 @@ export default class GameState {
       viewHeightPx: state.game.height
     })
 
-    this.cameraMover = new CameraMover({ game: state, xSpeed: 400, ySpeed: 400 })
+    this.cameraMover = new CameraMover({ game: state, xSpeed: config.cameraSpeed, ySpeed: config.cameraSpeed })
 
     this.mapListener = new MapListener({
       game: state,

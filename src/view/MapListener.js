@@ -15,7 +15,7 @@ export default class MapListener {
   }
 
   pointerInMapArea (pointerEvent) {
-    return (pointerEvent !== undefined && pointerEvent.x <= this.menu.menuView.leftBorder)
+    return (pointerEvent !== undefined && pointerEvent.x <= this.menu.menuView.leftBorderCoordinate)
   }
 
   getTileFromMap (pointerEvent) {
