@@ -2,9 +2,11 @@ export default function SingleMocker(gives, gets){
   var give = gives
   var get = gets
 
-  return new function(){
+  var realMocker = function(){
     get.push(arguments)
 
     return give
   }
+
+  return realMocker
 }

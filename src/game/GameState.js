@@ -10,7 +10,6 @@ import StructureTypes from '../models/map/StructureType'
 import Player from './Player'
 import MenuOptionCreator from '../models/menu/MenuOptionCreator'
 import config from '../config'
-import Mocker from '../Mocker'
 
 export default class GameState {
   constructor ({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
@@ -25,7 +24,7 @@ export default class GameState {
 
     this.menuView = new MenuView({
       game: state,
-      leftBorderCoordinate: state.game.camera.width - config.menuWidth,
+      leftBorderCoordinate: state.camera.width - config.menuWidth,
       leftPadding: config.menuLeftPadding,
       buttonWidth: config.menuButtonWidth,
       buttonHeight: config.menuButtonHeight,
