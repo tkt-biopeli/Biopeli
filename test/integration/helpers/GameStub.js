@@ -1,19 +1,24 @@
 import MockerHandler from './MockerHandler'
 
 export default class GameStub{
-  constructor(){
+  constructor({width, height}){
     this.mockers = new MockerHandler()
 
     this.add = {
       tween: function(){return {to: function({x, y}){
         setCamera(x, y)
       }}},
-      text: this.mockers.createOneValueMocker('add.text', {anchor: {set: function(){}}})
+      text: this.mockers.createOneValueMocker('add.text', {anchor: {set: function(){}}}),
+      renderTexture: function(){
+        return {
+          renderXY: this.mockers.createOneValueMocker('render', true)
+        }
+      }
     }
 
     this.make = {
-      button: this.mockers.createOneValueMocker('make.button', true)
-
+      button: this.mockers.createOneValueMocker('make.button', true),
+      graphics: this.mockers.createOneValueMocker('make.graphics')
     }
 
     this.world = {
@@ -37,6 +42,11 @@ export default class GameStub{
     this.camera = {
       x: 0,
       y: 0
+    }
+
+    this.game = {
+      width: width,
+      height: height
     }
   }
 
