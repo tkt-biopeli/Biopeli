@@ -1,5 +1,5 @@
 const assert = require("assert")
-import ModelTile from '../../src/models/map/ModelTile'
+import ModelTile from '../../../src/models/map/ModelTile'
 
 describe('Model tile tests', () =>{
 

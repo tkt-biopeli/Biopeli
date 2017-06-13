@@ -1,4 +1,4 @@
-import MenuView from '../../src/view/menu/MenuView'
+import MenuView from '../../../src/view/menu/MenuView'
 const assert = require('assert')
 const sinon = require('sinon')
 

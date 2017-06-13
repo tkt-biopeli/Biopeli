@@ -1,5 +1,5 @@
 const assert = require("assert")
-import StructureFactory from '../../src/models/map/StructureFactory'
+import StructureFactory from '../../../src/models/map/StructureFactory'
 
 describe('StructureBuilder tests', () =>{
   it('Constructor works', () =>{

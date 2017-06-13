@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import ViewTile from '../../src/view/map/ViewTile'
+import ViewTile from '../../../src/view/map/ViewTile'
 
 describe('View tile tests', () =>{
 
