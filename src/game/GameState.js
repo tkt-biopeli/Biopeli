@@ -15,7 +15,7 @@ export default class GameState {
   constructor ({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
     this.state = state
 
-    state.world.setBounds(0, 0, mapWidth * tileWidth, mapHeight * tileHeight)
+    state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
 
     this.tileTypes = TileTypes()
     this.structureTypes = StructureTypes()
@@ -72,6 +72,6 @@ export default class GameState {
   }
 
   update () {
-    this.mapView.drawWithOffset(this.state.game.camera.x, this.state.game.camera.y)
+    this.mapView.draw(this.state.game.camera.x, this.state.game.camera.y)
   }
 }

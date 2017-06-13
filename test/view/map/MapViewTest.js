@@ -49,13 +49,13 @@ describe('MapView tests', () =>{
     assert.equal(mapView.viewHeightPx, 653)
     assert.equal(mapView.tileWidth, 74)
     assert.equal(mapView.tileHeight, 34)
-    assert.equal(mapView.renderTexture1, mockRenderTexture)
+    assert.equal(mapView.viewTexture, mockRenderTexture)
     assert.equal(mapView.renderS, mockRenderSprite)
     assert.equal(mapView.renderS.fixedToCamera, true)
   })
   
-  it('drawWithOffset clears the view', () =>{
-    mapView.drawWithOffset(5, 87)
+  it('draw clears the view', () =>{
+    mapView.draw(5, 87)
     assert.equal(textureClearSpy.callCount, 1)
   })
   
