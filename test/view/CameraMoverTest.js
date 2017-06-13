@@ -13,11 +13,6 @@ describe('Camera mover tests', () =>{
     events.cursor.right = right
   }
 
-  function checkCameraCoordinates(x, y){
-    assert.equal(x, game.camera.x)
-    assert.equal(y, game.camera.y)
-  }
-
   beforeEach(() =>{
     game = {
       camera: {
@@ -50,29 +45,29 @@ describe('Camera mover tests', () =>{
     mover.tweenCameraTo = spy
     mover.update(events)
 
-    checkCameraCoordinates(0, 0)
+    assert(spy.calledWith(0, 0))
   })
 
   it('If there is one input, camera moves', () => {
     var mover = new CameraMover({game: game, xSpeed: 1, ySpeed: 1})
     var spy = sinon.spy()
     mover.tweenCameraTo = spy
-
+    
     setCursors(true, false, false, false)
     mover.update(events)
-    checkCameraCoordinates(0, -1)
+    assert(spy.calledWith(0, -1))
 
     setCursors(false, true, false, false)
     mover.update(events)
-    checkCameraCoordinates(0, 0)
+    assert(spy.calledWith(0, 1))
 
     setCursors(false, false, true, false)
     mover.update(events)
-    checkCameraCoordinates(-1, 0)
+    assert(spy.calledWith(-1, 0))
 
     setCursors(false, false, false, true)
     mover.update(events)
-    checkCameraCoordinates(0, 0)
+    assert(spy.calledWith(1, 0))
   })
 
   it('Camera checks both axis every loop', () => {
@@ -81,10 +76,10 @@ describe('Camera mover tests', () =>{
     var spy = sinon.spy()
     mover.tweenCameraTo = spy
     mover.update(events)
-    checkCameraCoordinates(-1, -1)
+    assert(spy.calledWith(-1, -1))
 
     setCursors(false, true, false, true)
     mover.update(events)
-    checkCameraCoordinates(0, 0)
+    assert(spy.calledWith(1, 1))
   })
 })
