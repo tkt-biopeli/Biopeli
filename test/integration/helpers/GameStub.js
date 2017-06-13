@@ -1,47 +1,91 @@
 import MockerHandler from './MockerHandler'
+const assert = require('assert')
 
 export default class GameStub{
   constructor({width, height}){
     this.mockers = new MockerHandler()
 
+    var remoteMockingFunction = function(mockers, tag, value){
+      var realFunction = function(){
+        return mockers.createOneValueMocker(tag, value)
+      }
+
+      return realFunction
+    }
+
+    var renderFunction = remoteMockingFunction(this.mockers, 'render', true)
+
     this.add = {
+      helperFunction: remoteMockingFunction,
+
       tween: function(){return {to: function({x, y}){
         setCamera(x, y)
       }}},
+
       text: this.mockers.createOneValueMocker('add.text', {anchor: {set: function(){}}}),
-      renderTexture: function(){
-        return {
-          renderXY: this.mockers.createOneValueMocker('render', true)
-        }
-      }
+
+      renderTexture: renderFunction,
+
+      group: this.mockers.createOneValueMocker('add.group', {
+        add: function(){},
+        removeAll: function(){},
+        create: function(){}
+      }),
+
+      sprite: this.mockers.createOneValueMocker('add.sprite', {
+
+      })
     }
 
     this.make = {
       button: this.mockers.createOneValueMocker('make.button', true),
-      graphics: this.mockers.createOneValueMocker('make.graphics')
+
+      graphics: this.mockers.createOneValueMocker('make.graphics', {
+        beginFill: function(){},
+        drawRoundedRect: function(){},
+        endFill: function(){}
+      }),
+
+      sprite: this.mockers.createOneValueMocker('make.sprite', {addChild: function(){}})
+
     }
 
     this.world = {
-
+      setBounds: function(){}
     }
 
     this.input = {
       activePointer: {position: {
         x: 0,
         y: 0
-      }}
+      }},
+
+      onDown: {add: function(){}}
     }
 
     this.cursors = {
-      up: {isDown: false},
-      down: {isDown: false},
-      left: {isDown: false},
-      right: {isDown: false}
+      up: {
+        isDown: false,
+        onDown: {add: function(){}}
+      },
+      down: {
+        isDown: false,
+        onDown: {add: function(){}}
+      },
+      left: {
+        isDown: false,
+        onDown: {add: function(){}}
+      },
+      right: {
+        isDown: false,
+        onDown: {add: function(){}}
+      }
     }
 
     this.camera = {
       x: 0,
-      y: 0
+      y: 0,
+      width: width
     }
 
     this.game = {

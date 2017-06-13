@@ -3,10 +3,12 @@ export default function Mocker(gives, gets) {
   var get = gets
   var i = 0
 
-  return function(){
+  var realMocker = function(){
     get.push(arguments)
 
     if(i < give.length) return give[i]
     return null
   }
+
+  return realMocker
 }

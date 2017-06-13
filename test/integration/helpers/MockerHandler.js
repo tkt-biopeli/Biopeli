@@ -1,25 +1,30 @@
 import Mocker from './Mocker'
 import SingleMocker from './SingleMocker'
+const assert = require("assert")
 
 export default class MockerHandler{
-  consturctor(){
+  constructor(){
     this.mockers = new Map()
   }
 
   createOneValueMocker(tag, value){
-    return createMocker(tag, value, SingleMocker)
+    var gets = []
+    var mocker = SingleMocker(value, gets)
+
+    return this.createMocker(tag, mocker, gets)
   }
 
   createSeveralValueMocker(tag, values){
-    return createMocker(tag, values, Mocker)
+    var gets = []
+    var mocker = Mocker(values, gets)
+
+    return this.createMocker(tag, mocker, gets)
   }
 
-  createMocker(tag, values, createFunction){
-    var gets = []
-    var mocker = createFunction(values, gets)
-
+  createMocker(tag, mocker, gets){
     var save = {mocker: mocker, gets: gets}
     this.mockers.set(tag, save)
+
 
     return mocker
   }
