@@ -141,4 +141,17 @@ export default class GameStub{
     this.cursors.left.isDown = left
     this.cursors.right.isDown = right
   }
+
+  getNthActiveButton(n){
+    var buttonCalls = this.mockers.getUnmarkedCalls('make.button')
+
+    var call = buttonCalls[n]
+
+    return {
+      x: call[3],
+      y: call[4],
+      width: call[7],
+      height: call[8]
+    }
+  }
 }
