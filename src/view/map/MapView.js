@@ -40,9 +40,9 @@ export default class MapView {
 
     return {
       startCol: startCol,
-      endCol: startCol + (this.viewWidthPx / this.tileWidth) + 1,
+      endCol: startCol + Math.floor(this.viewWidthPx / this.tileWidth) + 1,
       startRow: startRow,
-      endRow: startRow + (this.viewHeightPx / this.tileHeight) + 1
+      endRow: startRow + Math.floor(this.viewHeightPx / this.tileHeight) + 1
     }
   }
 
@@ -53,10 +53,10 @@ export default class MapView {
     }
   }
 
-  ColAndRowToPx (c, r, startCol, startRow, offset) {
+  ColAndRowToPx (col, row, startCol, startRow, offset) {
     return {
-      x: (c - startCol) * this.tileWidth + offset.x,
-      y: (r - startRow) * this.tileHeight + offset.y
+      x: (col - startCol) * this.tileWidth + offset.x,
+      y: (row - startRow) * this.tileHeight + offset.y
     }
 
   }

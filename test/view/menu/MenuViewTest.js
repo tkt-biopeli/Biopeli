@@ -2,7 +2,7 @@ import MenuView from '../../../src/view/menu/MenuView'
 const assert = require('assert')
 const sinon = require('sinon')
 
-describe('Menu view tests', () =>{
+describe('MenuView tests', () =>{
   var leftBorderCoordinate = 0
   var leftPadding = 2
   var sectionPadding = 5
