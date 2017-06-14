@@ -21,6 +21,16 @@ export default class GameAdvancer{
     })
 
     this.gamestateChecker = new GamestateChecker({gameStub: this.game, gameState: this.gameState})
+
+    var cm = this.gameState.cameraMover
+    this.cameraXSpeed = cm.x
+    this.cameraYSpeed = cm.y
+
+    this.estimatedX = this.game.camera.x
+    this.estimatedY = this.game.camera.y
+
+    this.mapRealWidth = this.mapWidth * config.tileWidth
+    this.mapRealHeight = this.mapHeight * config.tileHeight
   }
 
   update(){
@@ -28,16 +38,34 @@ export default class GameAdvancer{
   }
 
   click(x, y){
-    this.gameStub.setPointer(x, y)
+    this.game.setPointer(x, y)
     this.gameState.inputHandler.onPointerDown()
   }
 
   pressCursors(up, down, left, right){
-    this.gameStub.setCursors(up, down, left, right)
+    this.game.setCursors(up, down, left, right)
     this.gameState.inputHandler.onCursorDown()
+
+    if(up) (this.estimatedY - this.cameraYSpeed < 0) ? this.estimatedY = 0 : this.estimatedY -= this.cameraYSpeed
+    if(left) (this.estimatedX - this.cameraXSpeed < 0) ? this.estimatedX = 0 : this.estimatedX -= this.cameraXSpeed
+    if(down) (this.estimatedY + this.cameraYSpeed > this.mapRealHeight) ? this.estimatedY = this.mapRealHeight : this.estimatedY += this.cameraYSpeed
+    if(right) (this.estimatedX + this.cameraXSpeed > this.mapRealWidth) ? this.estimatedX = this.mapRealWidth : this.estimatedX += this.cameraXSpeed
   }
 
   setCamera(x, y){
-    this.gameStub.setCamera(x, y)
+    this.game.setCamera(x, y)
+    this.estimatedX = x
+    this.estimatedY = y
+  }
+
+  estimatedCameraLocation(){
+    return {
+      x: this.estimatedX,
+      y: this.estimatedY
+    }
+  }
+
+  resetCamera(){
+    this.setCamera(0,0)
   }
 }

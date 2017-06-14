@@ -1,9 +1,6 @@
-import GameState from '../../src/game/GameState'
-import GameStub from './helpers/GameStub'
 import GameAdvancer from './helpers/GameAdvancer'
-import GamestateChecker from './helpers/GamestateChecker'
 
-describe('Pressing cursor buttons move the camera', () =>{
+describe('Integration test: Pressing cursor buttons move the camera', () =>{
 
   var game
   var gameState
@@ -11,7 +8,51 @@ describe('Pressing cursor buttons move the camera', () =>{
   var gameStateChecker
 
   before(() =>{
-
+    gameAdvancer = new GameAdvancer()
+    game = gameAdvancer.game
+    gameState = gameAdvancer.gameState
+    gameStateChecker = gameAdvancer.gamestateChecker
   })
 
+  it('Moving camera changes camera coordinates correctly', ()=>{
+    gameAdvancer.pressCursors(false, false, false, true)
+
+    gameStateChecker.checkCameraLocation(gameAdvancer.estimatedCameraLocation())
+
+    gameAdvancer.pressCursors(false, false, true, false)
+
+    gameStateChecker.checkCameraLocation(gameAdvancer.estimatedCameraLocation())
+
+    gameAdvancer.pressCursors(false, true, false, true)
+
+    gameStateChecker.checkCameraLocation(gameAdvancer.estimatedCameraLocation())
+
+    gameAdvancer.pressCursors(false, true, false, true)
+
+    gameStateChecker.checkCameraLocation(gameAdvancer.estimatedCameraLocation())
+
+    gameAdvancer.pressCursors(true, false, false, true)
+
+    gameStateChecker.checkCameraLocation(gameAdvancer.estimatedCameraLocation())
+  })
+
+  it('There is always right tile under camera', ()=>{
+    gameAdvancer.resetCamera()
+
+    gameAdvancer.pressCursors(false, false, false, true)
+
+    gameStateChecker.checkTileUnderCamera(gameAdvancer.estimatedCameraLocation())
+
+    gameAdvancer.pressCursors(false, false, false, true)
+
+    gameStateChecker.checkTileUnderCamera(gameAdvancer.estimatedCameraLocation())
+
+    gameAdvancer.pressCursors(false, true, false, true)
+
+    gameStateChecker.checkTileUnderCamera(gameAdvancer.estimatedCameraLocation())
+
+    gameAdvancer.pressCursors(true, false, true, false)
+
+    gameStateChecker.checkTileUnderCamera(gameAdvancer.estimatedCameraLocation())
+  })
 })

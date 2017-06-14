@@ -16,14 +16,21 @@ export default class GameStub{
       return realFunction
     }
 
+    var remoteCamerafunction = function(cameraOwner){
+      var returnFunction = function({x, y}){
+        cameraOwner.setCamera(x, y)
+      }
+
+      return returnFunction
+    }
+
     var renderCreatorFunction = remoteMockingFunction(this.mockers)
+    var cameraFunction = remoteCamerafunction(this)
 
     this.add = {
       helperFunction: remoteMockingFunction,
 
-      tween: function(){return {to: function({x, y}){
-        setCamera(x, y)
-      }}},
+      tween: function(){return {to: cameraFunction}},
 
       text: this.mockers.createOneValueMocker('add.text', {anchor: {set: function(){}}}),
 
@@ -98,8 +105,20 @@ export default class GameStub{
   }
 
   setCamera(x, y){
-    this.camera.x = x,
+    this.camera.x = x
     this.camera.y = y
+  }
+
+  moveCamera(x, y){
+    this.camera.x += x
+    this.camera.y += y
+  }
+
+  getCamera(){
+    return {
+      x: this.camera.x,
+      y: this.camera.y
+    }
   }
 
   setPointer(x, y){
@@ -111,6 +130,6 @@ export default class GameStub{
     this.cursors.up.isDown = up
     this.cursors.down.isDown = down
     this.cursors.left.isDown = left
-    this.cursors.rght.isDown = right
+    this.cursors.right.isDown = right
   }
 }

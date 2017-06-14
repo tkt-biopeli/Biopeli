@@ -1,4 +1,5 @@
 const assert = require('assert')
+import config from '../../../src/config'
 
 export default class GamestateChecker{
   constructor({gameStub, gameState}){
@@ -42,5 +43,21 @@ export default class GamestateChecker{
       assert.equal(x, selected.x)
       assert.equal(y, selected.y)
     }
+  }
+
+  checkCameraLocation(estimated){
+    var real = this.gameStub.getCamera()
+
+    assert.equal(estimated.x, real.x)
+    assert.equal(estimated.y, real.y)
+  }
+
+  checkTileUnderCamera(estimated){
+    var ex = Math.floor(estimated.x / config.tileWidth)
+    var ey = Math.floor(estimated.y / config.tileHeight)
+
+    var camera = this.gameStub.getCamera()
+
+    this.checkTilesModelCoordinates(camera.x, camera.y, ex, ey)
   }
 }
