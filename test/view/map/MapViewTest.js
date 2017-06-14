@@ -33,7 +33,7 @@ describe('MapView tests', () =>{
     }
     
     menu = {
-      selectedTile: sinon.spy()
+      selectedTile: 7
     }
     
     mockRenderTexture = {
@@ -108,6 +108,17 @@ describe('MapView tests', () =>{
     assert(highlight.beginFill.calledWith(0x000000, 0.2))
     assert(highlight.drawRoundedRect.calledWith(0, 0, 74, 34, 9))
     assert.equal(highlight.endFill.callCount, 1)
+  })
+  
+  it('Selection highlight visible if tile is selected', () =>{
+    var pxCoords = {x: 0, y: 0}
+    mapView.addToViewTexture = sinon.spy()
+    
+    mapView.highlightSelectedTile (8, pxCoords)
+    assert.equal(mapView.addToViewTexture.callCount, 0)
+
+    mapView.highlightSelectedTile (7, pxCoords)
+    assert.equal(mapView.addToViewTexture.callCount, 1)
   })
   
 })

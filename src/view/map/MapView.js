@@ -67,15 +67,21 @@ export default class MapView {
         var tile = this.map.getTileWithGridCoordinates(c, r)
         var pxCoords = this.ColAndRowToPx(c, r, viewArea.startCol, viewArea.startRow, offset)
 
-        if (typeof tile !== 'undefined') {
-          var viewTile = new ViewTile({ game: this.game, x: 0, y: 0, modelTile: tile })
-          this.addToViewTexture(viewTile.tileSprite, pxCoords.x, pxCoords.y)
-
-          if (tile === this.menu.selectedTile) {
-            this.addToViewTexture(this.highlight(), pxCoords.x, pxCoords.y)
-          }
-        }
+        if (typeof tile !== 'undefined') this.createViewTileForFill(tile, pxCoords, viewArea, offset)
       }
+    }
+  }
+
+  createViewTileForFill (tile, pxCoords, viewArea, offset) {
+    var viewTile = new ViewTile({ game: this.game, x: 0, y: 0, modelTile: tile })
+    this.addToViewTexture(viewTile.tileSprite, pxCoords.x, pxCoords.y)
+
+    this.highlightSelectedTile(tile, pxCoords)
+  }
+  
+  highlightSelectedTile (tile, pxCoords) {
+    if (tile === this.menu.selectedTile) {
+      this.addToViewTexture(this.highlight(), pxCoords.x, pxCoords.y)
     }
   }
 
