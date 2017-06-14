@@ -1,24 +1,31 @@
 import GameStub from './helpers/GameStub'
+import GamestateChecker from './helpers/GamestateChecker'
 import GameState from '../../src/game/GameState'
 import config from '../../src/config'
 const assert = require('assert')
 
-describe('The game is initialized properly when started', ()=>{
+describe('Integration test: The game is initialized properly when started', ()=>{
 
   var game
   var gameState
+  var checker
+
+  var mapHeight = 10
+  var mapWidth = 20
 
   before(() =>{
     game = new GameStub({width: config.gameWidth, height: config.gameHeight})
 
     gameState = new GameState({
       state: game,
-      mapWidth: config.mapWidth,
-      mapHeight: config.mapHeight,
+      mapWidth: mapWidth,
+      mapHeight: mapHeight,
       tileWidth: config.tileWidth,
       tileHeight: config.tileHeight,
       menuWidth: config.menuWidth
     })
+
+    checker = new GamestateChecker({gameStub: game, gameState: gameState})
   })
 
   it('All components of the game are created', ()=>{
@@ -59,13 +66,23 @@ describe('The game is initialized properly when started', ()=>{
     var clearAmount = mockerHandler.callCount('render.clear')
 
     assert.equal(0, clearAmount)
+    assert.equal(0, drawAmount)
+
+    gameState.update()
+
+    clearAmount = mockerHandler.callCount('render.clear')
+    drawAmount = mockerHandler.callCount('make.sprite')
+
+    assert.equal(1, clearAmount)
 
     gameState.update()
 
     var newDrawAmount = mockerHandler.callCount('make.sprite')
-    clearAmount = mockerHandler.callCount('render.clear')
 
-    assert.equal(1, clearAmount)
     assert.equal(2*drawAmount, newDrawAmount)
+  })
+
+  it('Game starts in left upper corner', () =>{
+    checker.checkTilesModelCoordinates(1, 1, 0, 0)
   })
 })

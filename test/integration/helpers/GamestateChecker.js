@@ -9,17 +9,17 @@ export default class GamestateChecker{
   }
 
   getTile(x, y){
-    return this.map.getTileWithGridCoordinates(x, y)
+    return this.map.getTileWithPixelCoordinates(x, y)
   }
 
   checkTilesModelCoordinates(x, y, gridX, gridY){
-    var tile = getTile(x, y)
+    var tile = this.getTile(x, y)
     assert.equal(gridX, tile.x)
     assert.equal(gridY, tile.y)
   }
 
   checkTilesInformation(x, y, tileType, structureType){
-    var tile = getTile(x, y)
+    var tile = this.getTile(x, y)
     assert.equal(tileType, tile.tileType.name)
     if(structureType != null){
       assert.equal(structureType, tile.structure.structureType.name)
@@ -29,8 +29,8 @@ export default class GamestateChecker{
   }
 
   checkTile(x, y, gridX, gridY, tileType, structureType){
-    checkTilesModelCoordinates(x, y, gridX, gridY)
-    checkTilesInformation(x, y, tileType, structureType)
+    this.checkTilesModelCoordinates(x, y, gridX, gridY)
+    this.checkTilesInformation(x, y, tileType, structureType)
   }
 
   checkSelectedTile(x, y){
