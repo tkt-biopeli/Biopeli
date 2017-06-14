@@ -22,9 +22,8 @@ export default class MockerHandler{
   }
 
   createMocker(tag, mocker, gets){
-    var save = {mocker: mocker, gets: gets}
+    var save = {mocker: mocker, gets: gets, mark: 0}
     this.mockers.set(tag, save)
-
 
     return mocker
   }
@@ -41,6 +40,18 @@ export default class MockerHandler{
     var mocker = this.getMocker(tag)
 
     return mocker.gets[index]
+  }
+
+  getCalls(tag){
+    var mocker = this.getMocker(tag)
+
+    return mocker.gets
+  }
+
+  getUnmarkedCalls(tag){
+    var mocker = this.getMocker(tag)
+
+    return mocker.gets.slice(mocker.mark)
   }
 
   callCount(tag){
@@ -65,6 +76,12 @@ export default class MockerHandler{
     }
 
     return -1
+  }
+
+  markCalls(tag){
+    var mocker = this.getMocker(tag)
+
+    mocker.mark = mocker.gets.length
   }
 
 }

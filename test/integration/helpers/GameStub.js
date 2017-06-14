@@ -24,8 +24,17 @@ export default class GameStub{
       return returnFunction
     }
 
+    var remoteButtonMarker = function(mockers){
+      var returnFunction = function(){
+        mockers.markCalls('make.button')
+      }
+
+      return returnFunction
+    }
+
     var renderCreatorFunction = remoteMockingFunction(this.mockers)
     var cameraFunction = remoteCamerafunction(this)
+    var buttonMarkerFunction = remoteButtonMarker(this.mockers)
 
     this.add = {
       helperFunction: remoteMockingFunction,
@@ -38,7 +47,7 @@ export default class GameStub{
 
       group: this.mockers.createOneValueMocker('add.group', {
         add: function(){},
-        removeAll: function(){},
+        removeAll: buttonMarkerFunction,
         create: function(){}
       }),
 
