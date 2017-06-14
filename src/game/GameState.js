@@ -72,6 +72,6 @@ export default class GameState {
   }
 
   update () {
-    this.mapView.draw(this.state.game.camera.x, this.state.game.camera.y)
+    this.mapView.draw(this.state.camera.x, this.state.camera.y)
   }
 }

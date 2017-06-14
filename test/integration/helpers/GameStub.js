@@ -5,15 +5,18 @@ export default class GameStub{
   constructor({width, height}){
     this.mockers = new MockerHandler()
 
-    var remoteMockingFunction = function(mockers, tag, value){
+    var remoteMockingFunction = function(mockers){
       var realFunction = function(){
-        return mockers.createOneValueMocker(tag, value)
+        return {
+          renderXY: mockers.createOneValueMocker('renderXY', true),
+          clear: mockers.createOneValueMocker('render.clear', true)
+        }
       }
 
       return realFunction
     }
 
-    var renderFunction = remoteMockingFunction(this.mockers, 'render', true)
+    var renderCreatorFunction = remoteMockingFunction(this.mockers)
 
     this.add = {
       helperFunction: remoteMockingFunction,
@@ -24,7 +27,7 @@ export default class GameStub{
 
       text: this.mockers.createOneValueMocker('add.text', {anchor: {set: function(){}}}),
 
-      renderTexture: renderFunction,
+      renderTexture: renderCreatorFunction,
 
       group: this.mockers.createOneValueMocker('add.group', {
         add: function(){},
@@ -33,7 +36,7 @@ export default class GameStub{
       }),
 
       sprite: this.mockers.createOneValueMocker('add.sprite', {
-
+        reset: function(){}
       })
     }
 
