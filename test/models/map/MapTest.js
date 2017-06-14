@@ -65,7 +65,6 @@ describe('Map tests', () => {
 
   it('Hard coded map fill works', () => {
     map.createMapHalfForestHalfWater()
-    assert.equal(map.getTileWithGridCoordinates(map.gridSizeX - 1, map.gridSizeY - 1), undefined)
     assert.notEqual(map.getTileWithGridCoordinates(map.gridSizeX - 2, map.gridSizeY - 2), undefined)
   })
 

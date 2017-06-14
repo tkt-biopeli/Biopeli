@@ -67,10 +67,6 @@ export default class Map {
               this.addTileWithGridCoordinates(k, i, tileTypes.water)
             }
           }
-          // last tile check
-          if (i === (this.gridSizeY - 1) && k === (this.gridSizeX - 1)) {
-            this.removeTileWithGridCoordinates(k, i)
-          }
         }
       }
     }

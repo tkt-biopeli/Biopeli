@@ -1,7 +1,5 @@
-import GameStub from './helpers/GameStub'
-import GamestateChecker from './helpers/GamestateChecker'
-import GameState from '../../src/game/GameState'
-import config from '../../src/config'
+import GameAdvancer from './helpers/GameAdvancer'
+const chai = require('chai')
 const assert = require('assert')
 
 describe('Integration test: The game is initialized properly when started', ()=>{
@@ -9,23 +7,19 @@ describe('Integration test: The game is initialized properly when started', ()=>
   var game
   var gameState
   var checker
+  var gameAdvancer
 
-  var mapHeight = 10
-  var mapWidth = 20
+  var mapWidth
+  var mapHeight
 
   before(() =>{
-    game = new GameStub({width: config.gameWidth, height: config.gameHeight})
+    gameAdvancer = new GameAdvancer({mapWidth, mapHeight})
+    game = gameAdvancer.game
+    gameState = gameAdvancer.gameState
+    checker = gameAdvancer.gamestateChecker
 
-    gameState = new GameState({
-      state: game,
-      mapWidth: mapWidth,
-      mapHeight: mapHeight,
-      tileWidth: config.tileWidth,
-      tileHeight: config.tileHeight,
-      menuWidth: config.menuWidth
-    })
-
-    checker = new GamestateChecker({gameStub: game, gameState: gameState})
+    mapWidth = gameAdvancer.mapWidth
+    mapHeight = gameAdvancer.mapHeight
   })
 
   it('All components of the game are created', ()=>{
@@ -47,11 +41,12 @@ describe('Integration test: The game is initialized properly when started', ()=>
   })
 
   it('Map is initialized with right size', ()=>{
-    for(var i = 0 ; i < config.mapWidth ; i++){
-      for(var j = 0 ; j < config.mapHeight ; j++){
+    for(var i = 0 ; i < mapWidth ; i++){
+      for(var j = 0 ; j < mapHeight ; j++){
         var tile = gameState.map.getTileWithGridCoordinates(i,j)
-        assert(tile != null)
-        assert(tile.tileType != null)
+
+        assert(tile)
+        assert(tile.tileType)
       }
     }
   })
