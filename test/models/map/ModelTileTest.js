@@ -1,9 +1,9 @@
 const assert = require("assert")
-import ModelTile from '../../src/models/map/ModelTile'
+import ModelTile from '../../../src/models/map/ModelTile'
 
 describe('Model tile tests', () =>{
 
-  it('Cosntructor works', () =>{
+  it('Constructor works', () =>{
     var tile = new ModelTile({x: 1, y: 2, type: 0, structure: -1})
 
     assert.equal(1, tile.x)
