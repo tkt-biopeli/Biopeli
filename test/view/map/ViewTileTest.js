@@ -42,8 +42,17 @@ describe('View tile tests', () =>{
     makeTileSpriteStub.withArgs(0, 0).returns("huuhaa")
     viewTile.makeTileSprite = makeTileSpriteStub
     
+    var structure = {
+      asset: function() {return "building"}
+    }
+    modelTile.structure = structure
+
+    let makeSpriteStub = sinon.stub()
+    makeSpriteStub.withArgs(0, 0, "building").returns("buildingSprite")
+    game.make.sprite = makeSpriteStub
+
     viewTile.makeStructureSprite()
-    assert(addChildSpy.calledWith("huuhaa"))
+    assert(addChildSpy.calledWith("buildingSprite"))
   })
   
   it('update functions properly', () =>{
