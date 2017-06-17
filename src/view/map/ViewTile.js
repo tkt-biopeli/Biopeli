@@ -1,4 +1,13 @@
+
+/**
+ * Description goes here
+ */
 export default class ViewTile{
+
+  /**
+   * Description goes here
+   * @param {*} param0 
+   */
   constructor ({game, x, y, modelTile}) {
     this.game = game
     this.modelTile = modelTile
@@ -10,6 +19,9 @@ export default class ViewTile{
     }
   }
 
+  /**
+   * Description goes here
+   */
   update(){
     if(this.modelTile.structure != null && this.structureSprite == null){
       this.makeStructureSprite()
@@ -19,6 +31,9 @@ export default class ViewTile{
     }
   }
 
+  /**
+   * Description goes here
+   */
   makeStructureSprite(){
     this.structureSprite = this.tileSprite.addChild(this.game.make.sprite(0, 0, this.modelTile.structure.asset()))
   }

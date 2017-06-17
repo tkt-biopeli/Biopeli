@@ -1,4 +1,10 @@
+
+/**
+ * Description goes here
+ * @returns {water:TileType,forest:TileType,grass:TileType}
+ */
 export default function () {
+  
   function TileType ({name, asset}) {
     this.name = name
     this.asset = asset

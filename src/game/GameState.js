@@ -11,7 +11,20 @@ import Player from './Player'
 import MenuOptionCreator from '../models/menu/MenuOptionCreator'
 import config from '../config'
 
+/**
+ * Description goes here
+ */
 export default class GameState {
+
+  /**
+   * Description goes here
+   * @param {Phaser.Game} state - description 
+   * @param {Number} mapWidth - description 
+   * @param {Number} mapHeight - description 
+   * @param {Number} tileWidth - description 
+   * @param {Number} tileHeight - description 
+   * @param {Number} menuWidth - description 
+   */
   constructor ({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
     this.state = state
 
@@ -71,6 +84,9 @@ export default class GameState {
     this.player = new Player()
   }
 
+  /**
+   * Description goes here
+   */
   update () {
     this.mapView.drawWithOffset(this.state.game.camera.x, this.state.game.camera.y)
   }

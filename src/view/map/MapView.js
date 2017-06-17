@@ -2,7 +2,16 @@ import Map from '../../models/map/Map'
 import ModelTile from '../../models/map/ModelTile'
 import ViewTile from './ViewTile'
 import TileType from '../../models/map/TileType'
+
+/**
+ * Description goes here
+ */
 export default class MapView {
+
+  /**
+   * Description goes here
+   * @param {*} param0 
+   */
   constructor({ game, map, menu, viewWidthPx, viewHeightPx }) {
     this.game = game
     this.map = map
@@ -16,6 +25,11 @@ export default class MapView {
     this.renderS.fixedToCamera = true
   }
 
+  /**
+   * Description goes here
+   * @param {Number} cameraX 
+   * @param {Number} cameraY 
+   */
   drawWithOffset (cameraX, cameraY) {
     // clear the view
     this.renderTexture1.clear()

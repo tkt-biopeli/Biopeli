@@ -8,7 +8,14 @@ import GameState from './states/Play'
 
 import config from './config'
 
+/**
+ * Description goes here
+ */
 class Game extends Phaser.Game {
+
+  /**
+   * Description goes here
+   */
   constructor () {
     const docElement = document.documentElement
     const width = docElement.clientWidth > config.gameWidth ? config.gameWidth : docElement.clientWidth

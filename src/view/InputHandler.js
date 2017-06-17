@@ -1,4 +1,13 @@
+
+/**
+ * Description goes here
+ */
 export default class InputHandler {
+
+  /**
+   * Description goes here
+   * @param {*} param0 
+   */
   constructor ({ game, mapListener, cameraMover }) {
     this.game = game
     this.mapListener = mapListener
@@ -7,7 +16,9 @@ export default class InputHandler {
     this.initialize()
   }
 
-  // add callbacks to controls -> Phaser takes care of update in game loop
+  /** 
+   * add callbacks to controls -> Phaser takes care of update in game loop
+   */
   initialize () {
     this.game.input.onDown.add(this.onPointerDown, this)
     var cursors = this.game.cursors
@@ -17,6 +28,9 @@ export default class InputHandler {
     cursors.right.onDown.add(this.onCursorDown, this)
   }
 
+  /**
+   * Description goes here
+   */
   onPointerDown () {
     var ptr = this.game.input.activePointer
     var pointerEvent = {
@@ -27,6 +41,9 @@ export default class InputHandler {
     this.mapListener.update(pointerEvent)
   }
 
+  /**
+   * Description goes here
+   */
   onCursorDown () {
     var cursors = this.game.cursors
     var cursorEvent = {
