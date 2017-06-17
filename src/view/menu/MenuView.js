@@ -9,7 +9,16 @@ export default class MenuView {
 
   /**
    * Description goes here
-   * @param {*} param0 
+   * 
+   * @param {object} param
+   * 
+   * @param {Phaser.Game} param.game
+   * @param {number} param.leftBorderCoordinate
+   * @param {number} param.leftPadding
+   * @param {number} param.sectionPadding
+   * @param {number} param.linePadding
+   * @param {number} param.buttonWidth
+   * @param {number} param.buttonHeight
    */
   constructor ({ game, leftBorderCoordinate, leftPadding, sectionPadding, linePadding, buttonWidth, buttonHeight }) {
     this.game = game
@@ -28,7 +37,8 @@ export default class MenuView {
 
   /**
    * Description goes here
-   * @param {*} menu 
+   * 
+   * @param {Menu} menu 
    */
   setMenu (menu) {
     this.menu = menu
@@ -49,6 +59,9 @@ export default class MenuView {
     this.iterateMenuFunctions()
   }
 
+  /**
+   * Description goes here
+   */
   iterateMenuFunctions () {
     var menuFunctions = [
       this.createTileInformation,
@@ -69,6 +82,8 @@ export default class MenuView {
 
   /**
    * Description goes here
+   * 
+   * @return {boolean}
    */
   createTileInformation () {
     var tile = this.menu.selectedTile
@@ -82,6 +97,8 @@ export default class MenuView {
 
   /**
    * Description goes here
+   * 
+   * @return {boolean}
    */
   createStructureInformation () {
     var structure = this.menu.selectedTile.structure
@@ -97,6 +114,8 @@ export default class MenuView {
 
   /**
    * Description goes here
+   * 
+   * @return {boolean}
    */
   createButtons () {
     for (var i = 0, len = this.buttonActions.length; i < len; i++) {
@@ -109,7 +128,8 @@ export default class MenuView {
 
   /**
    * Description goes here
-   * @param {*} buttonAction 
+   * 
+   * @param {ButtonAction} buttonAction 
    */
   createButton (buttonAction) {
     var resetDecorator = new ResetDecorator({action: buttonAction, menu: this.menu})
@@ -131,8 +151,11 @@ export default class MenuView {
 
   /**
    * Description goes here
+   * 
    * @param {*} text 
    * @param {*} fontSize 
+   * 
+   * @return { ??? }
    */
   createText (text, fontSize) {
     var tex = new Text({
@@ -150,7 +173,8 @@ export default class MenuView {
 
   /**
    * Description goes here
-   * @param {*} buttonActions 
+   * 
+   * @param { ??? } buttonActions 
    */
   setButtonActions (buttonActions) {
     this.buttonActions = buttonActions
@@ -159,6 +183,7 @@ export default class MenuView {
 
   /**
    * Description goes here
+   * 
    * @param {Number} amount 
    */
   addPadding (amount) {

@@ -6,7 +6,11 @@ export default class Structure{
 
   /**
    * Description goes here
-   * @param {*} param0 
+   * 
+   * @param {object} param
+   * 
+   * @param {ModelTile} param.tile
+   * @param {StructureType} param.structureType 
    */
   constructor ({tile, structureType}) {
     this.tile = tile

@@ -6,7 +6,13 @@ export default class ViewTile{
 
   /**
    * Description goes here
-   * @param {*} param0 
+   * 
+   * @param {object} param
+   * 
+   * @param {Phaser.Game} param.game
+   * @param {number} param.x
+   * @param {number} param.y
+   * @param {ModelTile} param.modelTile
    */
   constructor ({game, x, y, modelTile}) {
     this.game = game
@@ -31,8 +37,9 @@ export default class ViewTile{
 
   /**
    * Description goes here
-   * @param {*} x 
-   * @param {*} y 
+   * 
+   * @param {number} x 
+   * @param {number} y 
    */
   makeTileSprite (x, y) {
     return this.game.make.sprite(x, y, this.modelTile.tileType.asset)

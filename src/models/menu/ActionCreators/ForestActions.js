@@ -3,8 +3,11 @@ import ButtonAction from '../ButtonAction'
 
 /**
  * Description goes here
+ * 
  * @param {ModelTile} tile 
- * @param {*} structureTypes 
+ * @param {StructureType} structureTypes 
+ * 
+ * @return {ButtonAction[]}
  */
 export default function ForestActions (tile, structureTypes) {
   var sbuilder = new StructureFactory({tile: tile, structureTypes: structureTypes})

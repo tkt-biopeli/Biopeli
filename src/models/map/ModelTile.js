@@ -6,7 +6,13 @@ export default class {
 
   /**
    * Description goes here
-   * @param {*} param0 
+   * 
+   * @param {object} param
+   * 
+   * @param {number} param.x
+   * @param {number} param.y
+   * @param {TileType} param.type
+   * @param {Structure} param.structure
    */
   constructor({x, y, type, structure}){
     this.x = x

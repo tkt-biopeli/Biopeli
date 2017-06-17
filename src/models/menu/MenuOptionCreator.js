@@ -9,7 +9,9 @@ export default class MenuOptionCreator {
 
   /**
    * Description goes here
-   * @param {*} param0 
+   * 
+   * @param {object} param
+   * @param {StructureType} structureTypes
    */
   constructor ({structureTypes}) {
     this.tileOptions = new Map()
@@ -22,7 +24,10 @@ export default class MenuOptionCreator {
 
   /**
    * Description goes here
-   * @param {*} tile 
+   * 
+   * @param {ModelTile} tile 
+   * 
+   * @return { ???[] }
    */
   getActions (tile) {
     if(tile.structure == null){
@@ -39,7 +44,10 @@ export default class MenuOptionCreator {
 
   /**
    * Description goes here
-   * @param {*} tile 
+   * 
+   * @param {ModelTile} tile 
+   * 
+   * @return { ??? }
    */
   tileTypeOptions (tile) {
     return this.tileOptions.get(tile.tileType.name)(tile, this.structureTypes)

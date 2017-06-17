@@ -5,7 +5,11 @@ export default class ResetDecorator {
 
   /**
    * Description goes here
-   * @param {*} param0 
+   * 
+   * @param {object} param
+   * 
+   * @param { ??? } param.action
+   * @param {Menu} param.menu
    */
   constructor ({action, menu}) {
     this.action = action

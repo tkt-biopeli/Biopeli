@@ -6,7 +6,9 @@ export default class Menu {
 
   /**
    * Description goes here
-   * @param {*} param0 
+   * 
+   * @param {object} param - Parameter object
+   * @param {MenuView} param.menuView
    */
   constructor ({menuView}) {
     this.menuView = menuView
@@ -17,8 +19,9 @@ export default class Menu {
 
   /**
    * Description goes here
-   * @param {*} tile 
-   * @param {*} buttonActions 
+   * 
+   * @param {ModelTile} tile 
+   * @param { ??? } buttonActions 
    */
   chooseTile (tile, buttonActions) {
     this.selectedTile = tile

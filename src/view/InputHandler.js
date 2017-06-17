@@ -6,7 +6,12 @@ export default class InputHandler {
 
   /**
    * Description goes here
-   * @param {*} param0 
+   * 
+   * @param {object} param
+   * 
+   * @param {Phaser.Game} param.game - Current game
+   * @param {MapListener} param.mapListener - Current map listener
+   * @param {CameraMover} param.cameraMover - Current camera mover
    */
   constructor ({ game, mapListener, cameraMover }) {
     this.game = game

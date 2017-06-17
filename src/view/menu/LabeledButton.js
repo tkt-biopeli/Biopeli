@@ -7,7 +7,18 @@ export default class LabeledButton {
 
   /**
    * Description goes here
-   * @param {*} param0 
+   * 
+   * @param {object} param
+   * 
+   * @param {Phaser.Game} param.game
+   * @param { ??? } param.viewGroup
+   * @param { ??? } param.label
+   * @param {number} param.
+   * @param {number} param.
+   * @param { ??? } param.callback
+   * @param { ??? } param.context
+   * @param {number} param.buttonWidth
+   * @param {number} param.buttonHeight
    */
   constructor( { game, viewGroup, label, x, y, callback, context, buttonWidth, buttonHeight }) {
     var style = {font: config.font, fill: config.textColor, align: config.textAlignment}

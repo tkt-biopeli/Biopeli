@@ -7,7 +7,11 @@ export default class StructureFactory {
 
   /**
    * Description goes here
-   * @param {*} param0 
+   * 
+   * @param {object} param
+   * 
+   * @param {ModelTile} param.tile
+   * @param {StructureType} param.structureTypes
    */
   constructor ({tile, structureTypes}) {
     this.tile = tile
@@ -30,6 +34,7 @@ export default class StructureFactory {
 
   /**
    * Description goes here
+   * 
    * @param {StructureType} structureType 
    */
   buildBuilding (structureType) {

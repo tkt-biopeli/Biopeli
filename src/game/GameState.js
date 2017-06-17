@@ -18,12 +18,15 @@ export default class GameState {
 
   /**
    * Description goes here
-   * @param {Phaser.Game} state - description 
-   * @param {Number} mapWidth - description 
-   * @param {Number} mapHeight - description 
-   * @param {Number} tileWidth - description 
-   * @param {Number} tileHeight - description 
-   * @param {Number} menuWidth - description 
+   * 
+   * @param {object} param - Parameter object
+   * 
+   * @param {Phaser.Game} param.state - Current game
+   * @param {Number} param.mapWidth - Map width in # of tiles 
+   * @param {Number} param.mapHeight - Map height in # of tiles 
+   * @param {Number} param.tileWidth - Tile width in pixels 
+   * @param {Number} param.tileHeight - Tile height in pixels
+   * @param {Number} param.menuWidth - Menu width in pixels
    */
   constructor ({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
     this.state = state

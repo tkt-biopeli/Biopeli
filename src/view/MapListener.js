@@ -6,7 +6,13 @@ export default class MapListener {
 
   /**
    * Description goes here
-   * @param {*} param0 
+   * 
+   * @param {Object} param - Parameter object
+   * 
+   * @param {Phaser.Game} param.game 
+   * @param {Map} param.map 
+   * @param {MenuOptionCreator} param.menuOptionCreator
+   * @param {Menu} param.menu 
    */
   constructor ({ game, map, menuOptionCreator, menu }) {
     this.game = game
@@ -17,7 +23,8 @@ export default class MapListener {
 
   /**
    * Description goes here
-   * @param {*} pointerEvent 
+   * 
+   * @param {{x: number, y: number}} pointerEvent 
    */
   update (pointerEvent) {
     if (this.pointerInMapArea(pointerEvent)) {
@@ -29,7 +36,10 @@ export default class MapListener {
 
   /**
    * Description goes here
-   * @param {*} pointerEvent 
+   * 
+   * @param {{x: number, y: number}} pointerEvent 
+   * 
+   * @return {boolean}
    */
   pointerInMapArea (pointerEvent) {
     return (pointerEvent !== undefined && pointerEvent.x <= this.menu.menuView.leftBorderCoordinate)
@@ -37,19 +47,22 @@ export default class MapListener {
 
   /**
    * Description goes here
-   * @param {*} pointerEvent 
+   * 
+   * @param {{x: number, y: number}} pointerEvent 
+   * 
    * @return {ModelTile}
    */
   getTileFromMap (pointerEvent) {
     var x = pointerEvent.x + this.game.camera.x
     var y = pointerEvent.y + this.game.camera.y
-
     return this.map.getTileWithPixelCoordinates(x, y)
   }
 
   /**
    * Description goes here
+   * 
    * @param {ModelTile} tile 
+   * 
    * @return {Boolean}
    */
   validTile (tile) {
@@ -66,6 +79,7 @@ export default class MapListener {
 
   /**
    * Description goes here
+   * 
    * @param {ModelTile} tile 
    */
   updateMenuOptions (tile) {

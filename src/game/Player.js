@@ -12,7 +12,8 @@ export default class {
 
   /**
    * Adds points given as a parameter to players existing points
-   * @return {Number} - Current points
+   * 
+   * @return {number} - Current points
    */ 
   addPoints (points) {
     this.points += points
@@ -20,7 +21,8 @@ export default class {
 
   /**
    * Returns the player's current points
-   * @param {Number} points - haloo?
+   * 
+   * @param {Number} points - why is this a thing
    * @return {Number} - Current points
    */ 
   getPoints (points) {

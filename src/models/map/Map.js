@@ -9,7 +9,13 @@ export default class Map {
 
   /**
    * Description goes here
-   * @param {*} param0 
+   * 
+   * @param {object} param - Parameter object
+   * 
+   * @param {number} param.gridSizeX
+   * @param {number} param.gridSizeY
+   * @param {number} param.tileWidth
+   * @param {number} param.tileHeight
    */
   constructor ({ gridSizeX, gridSizeY, tileWidth, tileHeight }) {
     this.gridSizeX = gridSizeX
@@ -21,9 +27,10 @@ export default class Map {
 
   /**
    * Description goes here
+   * 
    * @param {Number} gx 
    * @param {Number} gy 
-   * @param {*} tileType 
+   * @param {TileType} tileType 
    */
   addTileWithGridCoordinates (gx, gy, tileType) {
     var tile = new ModelTile({x: gx, y: gy, type: tileType, structure: null})
@@ -32,9 +39,10 @@ export default class Map {
 
   /**
    * Description goes here
+   * 
    * @param {Number} px 
    * @param {Number} py 
-   * @param {*} tileType 
+   * @param {TileType} tileType 
    */
   addTileWithPixelCoordinates (px, py, tileType) {
     var gx = this.pixelsToGridX(px)
@@ -44,9 +52,11 @@ export default class Map {
 
   /**
    * Description goes here
+   * 
    * @param {Number} gx 
    * @param {Number} gy 
-   * @return {Tile}
+   * 
+   * @return {ModelTile}
    */
   getTileWithGridCoordinates (gx, gy) {
     return this.grid[gy * this.gridSizeX + gx]
@@ -54,8 +64,11 @@ export default class Map {
 
   /**
    * Description goes here
+   * 
    * @param {Number} px 
    * @param {Number} py 
+   * 
+   * @return {ModelTile}
    */
   getTileWithPixelCoordinates (px, py) {
     var gx = this.pixelsToGridX(px)
@@ -65,6 +78,7 @@ export default class Map {
 
   /**
    * Description goes here
+   * 
    * @param {Number} gx 
    * @param {Number} gy 
    */
@@ -74,6 +88,7 @@ export default class Map {
 
   /**
    * Description goes here
+   * 
    * @param {Number} px 
    * @param {Number} py 
    */
@@ -119,7 +134,9 @@ export default class Map {
 
   /**
    * Description goes here
+   * 
    * @param {Number} x 
+   * 
    * @return {Number}
    */
   pixelsToGridX (x) {
@@ -128,7 +145,9 @@ export default class Map {
 
   /**
    * Description goes here
+   * 
    * @param {Number} y 
+   * 
    * @return {Number}
    */
   pixelsToGridY (y) {
@@ -137,7 +156,9 @@ export default class Map {
 
   /**
    * Description goes here
+   * 
    * @param {Number} x 
+   * 
    * @return {Number}
    */
   gridToPixelsX (x) {
@@ -146,7 +167,9 @@ export default class Map {
 
   /**
    * Description goes here
+   * 
    * @param {Number} y 
+   * 
    * @return {Number}
    */
   gridToPixelsY (y) {
