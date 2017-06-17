@@ -21,22 +21,21 @@ export default class CameraMover {
    */
   update (events) {
     var event = events.cursor
-    var tx = this.game.camera.x
-    var ty = this.game.camera.y
-
-    if (event.up) {
-      ty -= this.y
-    } else if (event.down) {
-      ty += this.y
-    }
-
-    if (event.left) {
-      tx -= this.x
-    } else if (event.right) {
-      tx += this.x
-    }
+    var tx = this.game.camera.x + this.updateCoordinate(event.left, event.right, this.x)
+    var ty = this.game.camera.y + this.updateCoordinate(event.up, event.down, this.y)
 
     this.tweenCameraTo(tx, ty)
+  }
+
+  updateCoordinate (eventForNegDirection, eventForPosDirection, increment) {
+    var delta = 0
+
+    if (eventForNegDirection) {
+      delta -= increment
+    } else if (eventForPosDirection) {
+      delta += increment
+    }
+    return delta
   }
 
   /**

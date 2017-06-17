@@ -11,12 +11,10 @@ export default class ViewTile{
   constructor ({game, x, y, modelTile}) {
     this.game = game
     this.modelTile = modelTile
-
-    this.tileSprite = game.make.sprite(x, y, modelTile.tileType.asset)
-
-    if(modelTile.structure != null){
-      this.makeStructureSprite()
-    }
+    this.tileSprite = this.makeTileSprite(x, y)
+    this.structureSprite = null
+    
+    this.update()
   }
 
   /**
@@ -24,8 +22,8 @@ export default class ViewTile{
    */
   update(){
     if(this.modelTile.structure != null && this.structureSprite == null){
-      this.makeStructureSprite()
-    }else if(this.modelTile.structure == null && this.structureSprite != null){
+      this.structureSprite = this.makeStructureSprite()
+    } else if(this.modelTile.structure == null && this.structureSprite != null){
       this.structureSprite.destroy()
       this.structureSprite = null
     }
@@ -33,8 +31,18 @@ export default class ViewTile{
 
   /**
    * Description goes here
+   * @param {*} x 
+   * @param {*} y 
    */
-  makeStructureSprite(){
-    this.structureSprite = this.tileSprite.addChild(this.game.make.sprite(0, 0, this.modelTile.structure.asset()))
+  makeTileSprite (x, y) {
+    return this.game.make.sprite(x, y, this.modelTile.tileType.asset)
+  }
+  
+  /**
+   * Description goes here
+   */
+  makeStructureSprite () {
+    let sprite = this.game.make.sprite(0, 0, this.modelTile.structure.asset())
+    return this.tileSprite.addChild(sprite)
   }
 }

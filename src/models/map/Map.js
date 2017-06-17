@@ -17,7 +17,6 @@ export default class Map {
     this.tileWidth = tileWidth
     this.tileHeight = tileHeight
     this.grid = []
-    this.selectedTile = undefined
   }
 
   /**
@@ -110,10 +109,6 @@ export default class Map {
             } else {
               this.addTileWithGridCoordinates(k, i, tileTypes.water)
             }
-          }
-          // last tile check
-          if (i === (this.gridSizeY - 1) && k === (this.gridSizeX - 1)) {
-            this.removeTileWithGridCoordinates(k, i)
           }
         }
       }
