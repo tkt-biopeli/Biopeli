@@ -2,11 +2,26 @@ import Mocker from './Mocker'
 import SingleMocker from './SingleMocker'
 const assert = require("assert")
 
+/**
+ * Description goes here
+ */
 export default class MockerHandler{
+
+  /**
+   * Description goes here
+   */
   constructor(){
     this.mockers = new Map()
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param { ???} tag 
+   * @param { ??? } value 
+   * 
+   * @return { ??? }
+   */
   createOneValueMocker(tag, value){
     var gets = []
     var mocker = SingleMocker(value, gets)
@@ -14,6 +29,14 @@ export default class MockerHandler{
     return this.createMocker(tag, mocker, gets)
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param { ??? } tag 
+   * @param { ??? } values 
+   * 
+   * @return { ??? }
+   */
   createSeveralValueMocker(tag, values){
     var gets = []
     var mocker = Mocker(values, gets)
@@ -21,6 +44,15 @@ export default class MockerHandler{
     return this.createMocker(tag, mocker, gets)
   }
 
+  /**
+   * description goes here
+   * 
+   * @param { ??? } tag 
+   * @param { ??? } mocker 
+   * @param { ??? } gets 
+   * 
+   * @return { ??? }
+   */
   createMocker(tag, mocker, gets){
     var save = {mocker: mocker, gets: gets, mark: 0}
     this.mockers.set(tag, save)
@@ -28,6 +60,13 @@ export default class MockerHandler{
     return mocker
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param { ??? } tag 
+   * 
+   * @return { ??? }
+   */
   getMocker(tag){
     var mocker = this.mockers.get(tag)
 
@@ -36,36 +75,79 @@ export default class MockerHandler{
     return mocker
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param { ??? } tag 
+   * @param {number} index
+   * 
+   * @return {*} 
+   */
   getCall(tag, index){
     var mocker = this.getMocker(tag)
 
     return mocker.gets[index]
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param { ??? } tag 
+   * 
+   * @return { ??? }
+   */
   getCalls(tag){
     var mocker = this.getMocker(tag)
 
     return mocker.gets
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param { ??? } tag 
+   * 
+   * @return { ??? }
+   */
   getUnmarkedCalls(tag){
     var mocker = this.getMocker(tag)
 
     return mocker.gets.slice(mocker.mark)
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param { ??? } tag 
+   * 
+   * @return { ??? }
+   */
   callCount(tag){
     var mocker = this.getMocker(tag)
 
     return mocker.gets.length
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param { ??? } tag 
+   * 
+   * @return {Boolean}
+   */
   hasBeenCalledWith(tag){
     var time = this.firstCallTime(arguments)
 
     return time != -1
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param { ??? } tag 
+   * 
+   * @return {Number}
+   */
   firstCallTime(tag){
     var mocker = this.getMocker(tag)
 
@@ -78,6 +160,11 @@ export default class MockerHandler{
     return -1
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param { ??? } tag 
+   */
   markCalls(tag){
     var mocker = this.getMocker(tag)
 
