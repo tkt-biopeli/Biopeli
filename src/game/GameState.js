@@ -68,7 +68,7 @@ export default class GameState {
 
     this.inputHandler = new InputHandler({ game: state, mapListener: this.mapListener, cameraMover: this.cameraMover })
 
-    this.gameTimerListener = new GameTimerListener()
+    this.gameTimerListener = new GameTimerListener({player: this.player})
 
     this.gameTimer = new Timer({interval: config.gameTimerInterval})
     this.gameTimer.addListener(this.gameTimerListener)
