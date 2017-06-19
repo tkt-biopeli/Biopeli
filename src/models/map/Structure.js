@@ -17,6 +17,7 @@ export default class Structure{
     this.name = name
     this.size = size
     this.structureType = structureType
+    this.updateFn = structureType.createUpdateFn()
   }
 
   /**
@@ -24,5 +25,13 @@ export default class Structure{
    */
   asset(){
     return this.structureType.asset
+  }
+
+  /**
+   * Calls the update function of the structure type
+   * @see StructureType.updateFn
+   */
+  update(){
+    this.updateFn()
   }
 }

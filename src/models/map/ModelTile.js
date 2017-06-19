@@ -20,4 +20,12 @@ export default class {
     this.tileType = type
     this.structure = structure
   }
+
+  /**
+   * Calls the update function associated with the structure if one exists
+   */
+  update(){
+    if(this.structure != undefined)
+      this.structure.update()
+  }
 }
