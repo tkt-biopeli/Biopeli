@@ -9,6 +9,8 @@ describe('StructureBuilder tests', () =>{
     })
     assert.equal(0, sbuilder.tile)
     assert.equal(1, sbuilder.structureTypes)
+    assert.notEqual(null, sbuilder.structureName)
+    assert.notEqual(null, sbuilder.structureSize)
   })
 
   it('Build building works', () =>{
