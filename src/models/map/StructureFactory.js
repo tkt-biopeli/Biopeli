@@ -15,6 +15,8 @@ export default class StructureFactory {
    */
   constructor ({tile, structureTypes}) {
     this.tile = tile
+    this.structureName = "joku nimi"
+    this.structureSize = "joku koko"
     this.structureTypes = structureTypes
   }
 
@@ -40,6 +42,8 @@ export default class StructureFactory {
   buildBuilding (structureType) {
     this.tile.structure = new Structure({
       tile: this.tile,
+      name: this.structureName,
+      size: this.structureSize,
       structureType: structureType
     })
   }
