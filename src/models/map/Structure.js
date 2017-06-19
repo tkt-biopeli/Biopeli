@@ -12,8 +12,10 @@ export default class Structure{
    * @param {ModelTile} param.tile
    * @param {StructureType} param.structureType 
    */
-  constructor ({tile, structureType}) {
+  constructor ({tile, name, size, structureType}) {
     this.tile = tile
+    this.name = name
+    this.size = size
     this.structureType = structureType
     this.updateFn = structureType.createUpdateFn()
   }
