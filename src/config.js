@@ -29,5 +29,6 @@ export default {
   
   //configurations for camera
   cameraSpeed: 400,
-  tweenCameraDuration: 500
+  tweenCameraDuration: 500,
+  gameTimerInterval: 1000
 }

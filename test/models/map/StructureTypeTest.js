@@ -7,4 +7,11 @@ describe('StructureType tests', () =>{
 
     assert.equal(2, Object.keys(structures).length)
   })
+
+  it('', () => {
+
+  })  
+  it('', () => {
+    
+  })
 })

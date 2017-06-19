@@ -25,6 +25,12 @@ export default class Structure{
     this.size = size
     this.structureType = structureType
     this.productionInput = 0
+
+    if(structureType.createUpdateFn == undefined){
+      this.updateFn = function(){}
+    }else{
+      this.updateFn = structureType.createUpdateFn()
+    }
   }
 
   /**
@@ -33,7 +39,7 @@ export default class Structure{
   asset(){
     return this.structureType.asset
   }
-  
+
   /**
    * Calculates and returns the value of the structure's production efficiency
    * ie. number of production units per period
@@ -44,5 +50,13 @@ export default class Structure{
     // magic happens
     // production inputs are also factored into calculation
     return value
+  }
+
+  /**
+   * Calls the update function of the structure type
+   * @see StructureType.updateFn
+   */
+  update(){
+    this.updateFn()
   }
 }

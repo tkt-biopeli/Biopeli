@@ -24,9 +24,6 @@ export default class extends Phaser.State {
     // create before game state
     this.cursors = this.game.input.keyboard.createCursorKeys()
 
-    console.log(Math.ceil(this.game.width * config.madWidthMultiplier / config.tileWidth))
-    console.log(Math.ceil(this.game.height * config.mapHeightMultiplier / config.tileHeight))
-
     this.gameState = new GameState({
       state: this,
       mapWidth: Math.ceil(this.game.width * config.madWidthMultiplier / config.tileWidth),
