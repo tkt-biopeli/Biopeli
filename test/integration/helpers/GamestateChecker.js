@@ -2,12 +2,12 @@ const assert = require('assert')
 import config from '../../../src/config'
 
 /**
- * Description goes here
+ * Provides functions to check if the state of the game is wanted
  */
 export default class GamestateChecker{
 
   /**
-   * Description goes here
+   * Constructor
    * 
    * @param {object} param
    * 
@@ -22,7 +22,7 @@ export default class GamestateChecker{
   }
 
   /**
-   * Description goes here
+   * Helper method for getting tile from map
    * 
    * @param {number} x 
    * @param {number} y 
@@ -34,7 +34,7 @@ export default class GamestateChecker{
   }
 
   /**
-   * Description goes here
+   * Checks if tile in the part of the screen has wanted grid coordinates
    * 
    * @param {number} x 
    * @param {number} y 
@@ -48,7 +48,7 @@ export default class GamestateChecker{
   }
 
   /**
-   * Description goes here
+   * Checks if the tile in screen coordinates has wanted tileType and structureType
    * 
    * @param {number} x 
    * @param {number} y 
@@ -66,7 +66,7 @@ export default class GamestateChecker{
   }
 
   /**
-   * Description goes here
+   * Checks all information of tile in given screen coordinates
    * 
    * @param {number} x 
    * @param {number} y 
@@ -81,7 +81,7 @@ export default class GamestateChecker{
   }
 
   /**
-   * Description goes here
+   * Checks if the chosen tiel of menu is wanted one
    * 
    * @param {number} x 
    * @param {number} y 
@@ -98,7 +98,7 @@ export default class GamestateChecker{
   }
 
   /**
-   * Description goes here
+   * Checks if camera is where it is estimated to be
    * 
    * @param {{x: number, y: number}} estimated 
    */
@@ -110,7 +110,7 @@ export default class GamestateChecker{
   }
 
   /**{
-   * Description goes here
+   * Checks if tile under camera is the one we think it is
    * 
    * @param {{x: number, y: number}} estimated 
    */
