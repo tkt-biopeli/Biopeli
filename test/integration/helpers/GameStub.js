@@ -1,7 +1,19 @@
 import MockerHandler from './MockerHandler'
 const assert = require('assert')
 
+/**
+ * Mocks phaser
+ */
 export default class GameStub{
+
+  /**
+   * Mocks phaser
+   * 
+   * @param {object} param
+   * 
+   * @param {number} width
+   * @param {number} height
+   */
   constructor({width, height}){
     this.mockers = new MockerHandler()
 
@@ -113,16 +125,33 @@ export default class GameStub{
     }
   }
 
+  /**
+   * Set camera location
+   * 
+   * @param {number} x 
+   * @param {number} y 
+   */
   setCamera(x, y){
     this.camera.x = x
     this.camera.y = y
   }
 
+  /**
+   * Move camera with given amounts
+   * 
+   * @param {number} x 
+   * @param {number} y 
+   */
   moveCamera(x, y){
     this.camera.x += x
     this.camera.y += y
   }
 
+  /**
+   * Get location of camera
+   * 
+   * @return {x: number, y: number} - Camera coordinates
+   */
   getCamera(){
     return {
       x: this.camera.x,
@@ -130,11 +159,25 @@ export default class GameStub{
     }
   }
 
+  /**
+   * Set pointer to wanted point on screen
+   * 
+   * @param {number} x 
+   * @param {number} y 
+   */
   setPointer(x, y){
     this.input.activePointer.position.x = x
     this.input.activePointer.position.y = y
   }
 
+  /**
+   * Set cursor input
+   * 
+   * @param {boolean} up 
+   * @param {boolean} down 
+   * @param {boolean} left 
+   * @param {boolean} right 
+   */
   setCursors(up, down, left, right){
     this.cursors.up.isDown = up
     this.cursors.down.isDown = down
@@ -142,6 +185,13 @@ export default class GameStub{
     this.cursors.right.isDown = right
   }
 
+  /**
+   * Gives the size and coordinates of the n:th button in creation order of what exist
+   * 
+   * @param {number} n 
+   * 
+   * @return {{x: ???, y: ???, width: ???, height: ???}}
+   */
   getNthActiveButton(n){
     var buttonCalls = this.mockers.getUnmarkedCalls('make.button')
 

@@ -1,15 +1,40 @@
-// The class Player keeps track of players points
+/**
+ * Keeps track of the player's points
+ */
 export default class {
-  // initially player has 0 points
+
+  /**
+   * Initially the player has 0 points
+   */
   constructor () {
     this.points = 0
+    this.structures = new Set()
   }
-  // adds points given as a parameter to players existing points
+
+  /**
+   * Adds points given as a parameter to players existing points
+   *
+   * @return {number} - Current points
+   */
   addPoints (points) {
     this.points += points
   }
-  // returns players current points
+
+  /**
+   * Returns the player's current points
+   *
+   * @param {Number} points - why is this a thing
+   * @return {Number} - Current points
+   */
   getPoints (points) {
     return this.points
+  }
+
+  addStructure (structure) {
+    this.structures.add(structure)
+  }
+
+  removeStructure (structure) {
+    this.structures.delete(structure)
   }
 }

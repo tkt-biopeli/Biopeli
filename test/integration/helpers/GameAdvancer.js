@@ -3,8 +3,14 @@ import GamestateChecker from './GamestateChecker'
 import GameState from '../../../src/game/GameState'
 import config from '../../../src/config'
 
+/**
+ * Provides functions for simulating inputs of user and passing of time
+ */
 export default class GameAdvancer{
 
+  /**
+   * Initializes integration testing game
+   */
   constructor(){
     this.mapWidth = 20
     this.mapHeight = 10
@@ -31,12 +37,35 @@ export default class GameAdvancer{
 
     this.mapRealWidth = this.mapWidth * config.tileWidth
     this.mapRealHeight = this.mapHeight * config.tileHeight
+
+    this.timeObject = {time: 0}
+    this.gameState.currentTime = function(timeObject){
+      var returnFunction = function() {
+        return timeObject.time
+      }
+
+      return returnFunction
+    }(this.timeObject)
+    this.gameState.gameTimer.lastTime = 0
   }
 
-  update(){
+  /**
+   * Sets the time to wanted number and updates the game
+   */
+  update(time){
+    if(time != null){
+      this.timeObject.time = time
+    }
+
     this.gameState.update()
   }
 
+  /**
+   * Simulates click of a pointer to certain point in camera
+   * 
+   * @param {number} x 
+   * @param {number} y 
+   */
   click(x, y){
     this.game.setPointer(x, y)
     this.gameState.inputHandler.onPointerDown()
@@ -44,6 +73,12 @@ export default class GameAdvancer{
     this.clickButton(x, y)
   }
 
+  /**
+   * Simulates click of a pointe to certain point in camera but only checks buttons
+   * 
+   * @param {number} x 
+   * @param {number} y 
+   */
   clickButton(x, y){
     var xloc = 3
     var yloc = 4
@@ -67,6 +102,14 @@ export default class GameAdvancer{
 
   }
 
+  /**
+   * Simulates cursor input
+   * 
+   * @param {boolean} up 
+   * @param {boolean} down 
+   * @param {boolean} left 
+   * @param {boolean} right 
+   */
   pressCursors(up, down, left, right){
     this.game.setCursors(up, down, left, right)
     this.gameState.inputHandler.onCursorDown()
@@ -77,12 +120,23 @@ export default class GameAdvancer{
     if(right) (this.estimatedX + this.cameraXSpeed > this.mapRealWidth) ? this.estimatedX = this.mapRealWidth : this.estimatedX += this.cameraXSpeed
   }
 
+  /**
+   * Set the camera to wanted location (helper function)
+   * 
+   * @param {number} x 
+   * @param {number} y 
+   */
   setCamera(x, y){
     this.game.setCamera(x, y)
     this.estimatedX = x
     this.estimatedY = y
   }
 
+  /**
+   * Presumed location of camera
+   * 
+   * @return {{x: Number, y: Number}}
+   */
   estimatedCameraLocation(){
     return {
       x: this.estimatedX,
@@ -90,6 +144,9 @@ export default class GameAdvancer{
     }
   }
 
+  /**
+   * Set camera to starting position
+   */
   resetCamera(){
     this.setCamera(0,0)
   }

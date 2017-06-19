@@ -1,14 +1,22 @@
+
+/**
+ * Description goes here
+ */
 export default {
+
   //configurations for game
   gameWidth: 1024,
   gameHeight: 768,
   localStorageName: 'biopeli',
+
   //configurations for tiles
   tileWidth: 128,
   tileHeight: 128,
+
   //configurations for map
   madWidthMultiplier: 4,
   mapHeightMultiplier: 4,
+
   //configurations for menu
   menuWidth: 256,
   menuLeftPadding: 35,
@@ -18,7 +26,9 @@ export default {
   font: '16px Arial',
   textColor: '#ffff00',
   textAlignment: 'center',
+  
   //configurations for camera
   cameraSpeed: 400,
-  tweenCameraDuration: 500
+  tweenCameraDuration: 500,
+  gameTimerInterval: 1000
 }

@@ -1,22 +1,53 @@
 import Structure from './Structure'
 
+/**
+ * Description goes here
+ */
 export default class StructureFactory {
+
+  /**
+   * Description goes here
+   * 
+   * @param {object} param
+   * 
+   * @param {ModelTile} param.tile
+   * @param {StructureType} param.structureTypes
+   */
   constructor ({tile, structureTypes}) {
     this.tile = tile
+    this.structureName = "joku nimi"
+    this.structureSize = "joku koko"
     this.structureTypes = structureTypes
   }
 
-  buildGranary () {
-    this.buildBuilding(this.structureTypes.granary)
+  /**
+   * Description goes here
+   */
+  buildDairyFarm () {
+    this.buildBuilding(this.structureTypes.dairyFarm)
   }
 
+  buildBerryFarm () {
+    this.buildBuilding(this.structureTypes.berryFarm)
+  }
+
+  /**
+   * Description goes here
+   */
   buildFarm () {
     this.buildBuilding(this.structureTypes.farm)
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param {StructureType} structureType 
+   */
   buildBuilding (structureType) {
     this.tile.structure = new Structure({
       tile: this.tile,
+      name: this.structureName,
+      size: this.structureSize,
       structureType: structureType
     })
   }

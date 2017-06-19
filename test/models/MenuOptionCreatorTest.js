@@ -9,7 +9,9 @@ describe('Menu option creator tests', ()=>{
     var creator = new MenuOptionCreator({structureTypes: 0})
     var tiletypes = TileType()
 
-    assert.equal(Object.values(tiletypes).length, creator.tileOptions.size)
+    var len = Object.keys(tiletypes).length
+
+    assert.equal(len, creator.tileOptions.size)
   })
 
   it('TileOptions gives right tile', ()=>{
