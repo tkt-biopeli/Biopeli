@@ -10,6 +10,8 @@ import StructureTypes from '../models/map/StructureType'
 import Player from './Player'
 import MenuOptionCreator from '../models/menu/MenuOptionCreator'
 import config from '../config'
+import GameTimerListener from '../models/GameTimerListener'
+import Timer from '../view/Timer'
 
 /**
  * Description goes here
@@ -17,14 +19,10 @@ import config from '../config'
 export default class GameState {
 
   /**
-   * Description goes here
-   * 
-   * @param {object} param - Parameter object
-   * 
    * @param {Phaser.Game} param.state - Current game
-   * @param {Number} param.mapWidth - Map width in # of tiles 
-   * @param {Number} param.mapHeight - Map height in # of tiles 
-   * @param {Number} param.tileWidth - Tile width in pixels 
+   * @param {Number} param.mapWidth - Map width in # of tiles
+   * @param {Number} param.mapHeight - Map height in # of tiles
+   * @param {Number} param.tileWidth - Tile width in pixels
    * @param {Number} param.tileHeight - Tile height in pixels
    * @param {Number} param.menuWidth - Menu width in pixels
    */
@@ -33,10 +31,7 @@ export default class GameState {
 
     state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
 
-    this.tileTypes = TileTypes()
-    this.structureTypes = StructureTypes(this)
-
-    this.menuOptionCreator = new MenuOptionCreator({ structureTypes: this.structureTypes })
+    this.initializeModel(mapWidth, mapHeight, tileWidth, tileHeight)
 
     this.menuView = new MenuView({
       game: state,
@@ -52,17 +47,6 @@ export default class GameState {
     this.menu = new Menu({
       menuView: this.menuView
     })
-
-    // map grid
-    this.map = new Map({
-      gridSizeX: mapWidth,
-      gridSizeY: mapHeight,
-      tileWidth: tileWidth,
-      tileHeight: tileHeight
-    })
-
-    // fill map grid with sample data
-    this.map.createMapHalfForestHalfWater()
 
     // map view
     this.mapView = new MapView({
@@ -84,7 +68,29 @@ export default class GameState {
 
     this.inputHandler = new InputHandler({ game: state, mapListener: this.mapListener, cameraMover: this.cameraMover })
 
+    this.gameTimerListener = new GameTimerListener({player: this.player})
+
+    this.gameTimer = new Timer({interval: config.gameTimerInterval})
+    this.gameTimer.addListener(this.gameTimerListener)
+  }
+
+  initializeModel(mapWidth, mapHeight, tileWidth, tileHeight){
+    this.tileTypes = TileTypes()
+    this.structureTypes = StructureTypes()// map grid
+
+    this.map = new Map({
+      gridSizeX: mapWidth,
+      gridSizeY: mapHeight,
+      tileWidth: tileWidth,
+      tileHeight: tileHeight
+    })
+
+    // fill map grid with sample data
+    this.map.createMapHalfForestHalfWater()
+
     this.player = new Player()
+
+    this.menuOptionCreator = new MenuOptionCreator({ structureTypes: this.structureTypes })
   }
 
   /**
@@ -92,5 +98,10 @@ export default class GameState {
    */
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
+    this.gameTimer.update(this.currentTime())
+  }
+
+  currentTime () {
+    return Date.now()
   }
 }
