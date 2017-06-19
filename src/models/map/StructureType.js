@@ -21,8 +21,10 @@ export default function (gameState) {
   function StructureType ({name, asset, createUpdateFn}) {
     this.name = name
     this.asset = asset
-    this.createUpdateFn = createUpdateFn ? 
-        createUpdateFn : function(){}
+    if(createUpdateFn != undefined)
+      this.createUpdateFn = createUpdateFn
+    else
+      this.createUpdateFn = function(){return function(){}}
   }
 
   var farm = new StructureType({

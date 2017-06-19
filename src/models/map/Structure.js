@@ -17,7 +17,11 @@ export default class Structure{
     this.name = name
     this.size = size
     this.structureType = structureType
-    this.updateFn = structureType.createUpdateFn()
+    if(structureType.createUpdateFn == undefined){
+      this.updateFn = function(){}
+    }else{
+      this.updateFn = structureType.createUpdateFn()
+    }
   }
 
   /**
