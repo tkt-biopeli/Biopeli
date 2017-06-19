@@ -1,5 +1,14 @@
 import StructureFactory from '../../map/StructureFactory'
 import ButtonAction from '../ButtonAction'
+
+/**
+ * Description goes here
+ * 
+ * @param {ModelTile} tile 
+ * @param {StructureType} structureTypes 
+ * 
+ * @return {ButtonAction[]}
+ */
 export default function GrassActions (tile, structureTypes) {
   var sBuilder = new StructureFactory({tile: tile, structureTypes: structureTypes})
 

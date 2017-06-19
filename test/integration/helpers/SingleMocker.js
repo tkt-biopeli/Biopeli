@@ -1,3 +1,12 @@
+
+/**
+ * Description goes here
+ * 
+ * @param { ??? } gives 
+ * @param { ??? } gets 
+ * 
+ * @return { ??? }
+ */
 export default function SingleMocker(gives, gets){
   var give = gives
   var get = gets

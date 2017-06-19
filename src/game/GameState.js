@@ -13,7 +13,23 @@ import config from '../config'
 import GameTimerListener from '../models/GameTimerListener'
 import Timer from '../view/Timer'
 
+/**
+ * Description goes here
+ */
 export default class GameState {
+
+  /**
+   * Description goes here
+   * 
+   * @param {object} param - Parameter object
+   * 
+   * @param {Phaser.Game} param.state - Current game
+   * @param {Number} param.mapWidth - Map width in # of tiles 
+   * @param {Number} param.mapHeight - Map height in # of tiles 
+   * @param {Number} param.tileWidth - Tile width in pixels 
+   * @param {Number} param.tileHeight - Tile height in pixels
+   * @param {Number} param.menuWidth - Menu width in pixels
+   */
   constructor ({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
     this.state = state
 
@@ -81,6 +97,9 @@ export default class GameState {
     this.menuOptionCreator = new MenuOptionCreator({ structureTypes: this.structureTypes })
   }
 
+  /**
+   * Description goes here
+   */
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
     this.gameTimer.update(this.currentTime())

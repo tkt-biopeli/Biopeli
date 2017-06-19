@@ -1,4 +1,18 @@
+
+/**
+ * Description goes here
+ * 
+ * @returns {{water:TileType, forest:TileType, grass: TileType}} Tile types
+ */
 export default function () {
+  
+  /**
+   * @class 
+   * 
+   * @param {object} param 
+   * @param {string} param.name
+   * @param {string} param.asset
+   */
   function TileType ({name, asset}) {
     this.name = name
     this.asset = asset

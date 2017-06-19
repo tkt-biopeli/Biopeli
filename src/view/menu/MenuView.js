@@ -2,7 +2,24 @@ import LabeledButton from './LabeledButton'
 import Text from './Text'
 import ResetDecorator from './ResetDecorator'
 
+/**
+ * Description goes here
+ */
 export default class MenuView {
+
+  /**
+   * Description goes here
+   * 
+   * @param {object} param
+   * 
+   * @param {Phaser.Game} param.game
+   * @param {number} param.leftBorderCoordinate
+   * @param {number} param.leftPadding
+   * @param {number} param.sectionPadding
+   * @param {number} param.linePadding
+   * @param {number} param.buttonWidth
+   * @param {number} param.buttonHeight
+   */
   constructor ({ game, leftBorderCoordinate, leftPadding, sectionPadding, linePadding, buttonWidth, buttonHeight }) {
     this.game = game
 
@@ -18,10 +35,18 @@ export default class MenuView {
     this.buttonActions = []
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param {Menu} menu 
+   */
   setMenu (menu) {
     this.menu = menu
   }
 
+  /**
+   * Description goes here
+   */
   redraw () {
     this.menuViewGroup.removeAll(true, true)
 
@@ -34,6 +59,9 @@ export default class MenuView {
     this.iterateMenuFunctions()
   }
 
+  /**
+   * Description goes here
+   */
   iterateMenuFunctions () {
     var menuFunctions = [
       this.createTileInformation,
@@ -45,10 +73,18 @@ export default class MenuView {
     }
   }
 
+  /**
+   * Description goes here
+   */
   createBackground () {
     this.menuViewGroup.create(this.leftBorderCoordinate, 0, 'menuBg')
   }
 
+  /**
+   * Description goes here
+   * 
+   * @return {boolean}
+   */
   createTileInformation () {
     var tile = this.menu.selectedTile
 
@@ -59,6 +95,11 @@ export default class MenuView {
     return true
   }
 
+  /**
+   * Description goes here
+   * 
+   * @return {boolean}
+   */
   createStructureInformation () {
     var structure = this.menu.selectedTile.structure
 
@@ -71,6 +112,11 @@ export default class MenuView {
     return true
   }
 
+  /**
+   * Description goes here
+   * 
+   * @return {boolean}
+   */
   createButtons () {
     for (var i = 0, len = this.buttonActions.length; i < len; i++) {
       this.createButton(this.buttonActions[i])
@@ -80,6 +126,11 @@ export default class MenuView {
     return true
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param {ButtonAction} buttonAction 
+   */
   createButton (buttonAction) {
     var resetDecorator = new ResetDecorator({action: buttonAction, menu: this.menu})
 
@@ -98,6 +149,14 @@ export default class MenuView {
     this.addPadding(this.buttonHeight)
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param {*} text 
+   * @param {*} fontSize 
+   * 
+   * @return { ??? }
+   */
   createText (text, fontSize) {
     var tex = new Text({
       game: this.game,
@@ -112,19 +171,35 @@ export default class MenuView {
     return tex
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param { ??? } buttonActions 
+   */
   setButtonActions (buttonActions) {
     this.buttonActions = buttonActions
     this.redraw()
   }
 
+  /**
+   * Description goes here
+   * 
+   * @param {Number} amount 
+   */
   addPadding (amount) {
     this.drawHeight += amount
   }
 
+  /**
+   * Description goes here
+   */
   addLinePadding () {
     this.addPadding(this.linePadding)
   }
 
+  /**
+   * Description goes here
+   */
   addSectionPadding () {
     this.addPadding(this.sectionPadding)
   }
