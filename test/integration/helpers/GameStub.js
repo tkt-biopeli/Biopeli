@@ -2,12 +2,12 @@ import MockerHandler from './MockerHandler'
 const assert = require('assert')
 
 /**
- * Description goes here
+ * Mocks phaser
  */
 export default class GameStub{
 
   /**
-   * Description goes here
+   * Mocks phaser
    * 
    * @param {object} param
    * 
@@ -126,7 +126,7 @@ export default class GameStub{
   }
 
   /**
-   * Description goes here
+   * Set camera location
    * 
    * @param {number} x 
    * @param {number} y 
@@ -137,7 +137,7 @@ export default class GameStub{
   }
 
   /**
-   * Description goes here
+   * Move camera with given amounts
    * 
    * @param {number} x 
    * @param {number} y 
@@ -148,7 +148,7 @@ export default class GameStub{
   }
 
   /**
-   * Description goes here
+   * Get location of camera
    * 
    * @return {x: number, y: number} - Camera coordinates
    */
@@ -160,7 +160,7 @@ export default class GameStub{
   }
 
   /**
-   * Description goes here
+   * Set pointer to wanted point on screen
    * 
    * @param {number} x 
    * @param {number} y 
@@ -171,7 +171,7 @@ export default class GameStub{
   }
 
   /**
-   * Description goes here
+   * Set cursor input
    * 
    * @param {boolean} up 
    * @param {boolean} down 
@@ -186,7 +186,7 @@ export default class GameStub{
   }
 
   /**
-   * Description goes here
+   * Gives the size and coordinates of the n:th button in creation order of what exist
    * 
    * @param {number} n 
    * 

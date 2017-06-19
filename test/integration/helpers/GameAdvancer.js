@@ -4,12 +4,12 @@ import GameState from '../../../src/game/GameState'
 import config from '../../../src/config'
 
 /**
- * Description goes here
+ * Provides functions for simulating inputs of user and passing of time
  */
 export default class GameAdvancer{
 
   /**
-   * Description goes here
+   * Initializes integration testing game
    */
   constructor(){
     this.mapWidth = 20
@@ -37,17 +37,31 @@ export default class GameAdvancer{
 
     this.mapRealWidth = this.mapWidth * config.tileWidth
     this.mapRealHeight = this.mapHeight * config.tileHeight
+
+    this.timeObject = {time: 0}
+    this.gameState.currentTime = function(timeObject){
+      var returnFunction = function() {
+        return timeObject.time
+      }
+
+      return returnFunction
+    }(this.timeObject)
+    this.gameState.gameTimer.lastTime = 0
   }
 
   /**
-   * Description goes here
+   * Sets the time to wanted number and updates the game
    */
-  update(){
+  update(time){
+    if(time != null){
+      this.timeObject.time = time
+    }
+
     this.gameState.update()
   }
 
   /**
-   * Description goes here
+   * Simulates click of a pointer to certain point in camera
    * 
    * @param {number} x 
    * @param {number} y 
@@ -60,7 +74,7 @@ export default class GameAdvancer{
   }
 
   /**
-   * Description goes here
+   * Simulates click of a pointe to certain point in camera but only checks buttons
    * 
    * @param {number} x 
    * @param {number} y 
@@ -89,7 +103,7 @@ export default class GameAdvancer{
   }
 
   /**
-   * Description goes here
+   * Simulates cursor input
    * 
    * @param {boolean} up 
    * @param {boolean} down 
@@ -107,7 +121,7 @@ export default class GameAdvancer{
   }
 
   /**
-   * Description goes here
+   * Set the camera to wanted location (helper function)
    * 
    * @param {number} x 
    * @param {number} y 
@@ -119,7 +133,7 @@ export default class GameAdvancer{
   }
 
   /**
-   * Description goes here
+   * Presumed location of camera
    * 
    * @return {{x: Number, y: Number}}
    */
@@ -131,7 +145,7 @@ export default class GameAdvancer{
   }
 
   /**
-   * Description goes here
+   * Set camera to starting position
    */
   resetCamera(){
     this.setCamera(0,0)

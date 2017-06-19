@@ -70,7 +70,7 @@ export default class GameState {
 
     this.gameTimerListener = new GameTimerListener({player: this.player})
 
-    this.gameTimer = new Timer({interval: config.gameTimerInterval})
+    this.gameTimer = new Timer({interval: config.gameTimerInterval, currentTime: this.currentTime()})
     this.gameTimer.addListener(this.gameTimerListener)
   }
 
