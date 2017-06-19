@@ -15,6 +15,7 @@ export default class Structure{
   constructor ({tile, structureType}) {
     this.tile = tile
     this.structureType = structureType
+    this.updateFn = structureType.createUpdateFn()
   }
 
   /**
@@ -22,5 +23,14 @@ export default class Structure{
    */
   asset(){
     return this.structureType.asset
+  }
+
+  /**
+   * Calls the update function of the structure type
+   * @see StructureType.updateFn
+   */
+  update(){
+    if(this.updateFn != undefined)
+      this.updateFn()
   }
 }

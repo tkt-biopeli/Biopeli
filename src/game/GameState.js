@@ -34,7 +34,7 @@ export default class GameState {
     state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
 
     this.tileTypes = TileTypes()
-    this.structureTypes = StructureTypes()
+    this.structureTypes = StructureTypes(this)
 
     this.menuOptionCreator = new MenuOptionCreator({ structureTypes: this.structureTypes })
 
