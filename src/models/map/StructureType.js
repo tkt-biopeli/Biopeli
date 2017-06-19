@@ -37,9 +37,9 @@ export default function (gameState) {
     }
   })
 
-  var granary = new StructureType({
-    name: 'granary', 
-    asset: 'granary',
+  var berryFarm = new StructureType({
+    name: 'berry farm', 
+    asset: 'berry_farm',
     createUpdateFn: function(){
       return function(){
         gameState.player.addPoints(1) // placeholder
@@ -47,8 +47,20 @@ export default function (gameState) {
     }
   })
 
+  var dairyFarm = new StructureType({
+    name: 'dairy farm', 
+    asset: 'dairy_farm',
+    createUpdateFn: function(){
+      return function(){
+        gameState.player.addPoints(1) // placeholder
+      }
+    }
+  })
+
+
   return {
       farm: farm,
-      granary: granary
+      berryFarm: berryFarm,
+      dairyFarm: dairyFarm
   }
 }

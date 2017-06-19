@@ -1,7 +1,9 @@
 const assert = require("assert")
+const sinon = require("sinon")
 import StructureFactory from '../../../src/models/map/StructureFactory'
+import StructureTypes from '../../../src/models/map/StructureType'
 
-describe('StructureBuilder tests', () =>{
+describe('StructureFactory tests', () =>{
 
   /**
    * @see StructureType.createUpdateFn
@@ -29,21 +31,37 @@ describe('StructureBuilder tests', () =>{
     assert.equal('test', sbuilder.tile.structure.structureType.name)
   })
 
+  var spy
+  var builder
+  var types
+  var setSpy = function(){
+    types = StructureTypes()
+    spy = sinon.spy()
+    builder = new StructureFactory({structureTypes: types})
+    builder.buildBuilding = spy
+  }
+
   it('Build Farm works', () =>{
-    var sbuilder = new StructureFactory ({
-      tile : {},
-      structureTypes : {farm: {name: 'farm', createUpdateFn:createUpdateFn}}
-    })
-    sbuilder.buildFarm()
-    assert.equal('farm', sbuilder.tile.structure.structureType.name)
+    setSpy()
+
+    builder.buildFarm()
+
+    assert(spy.calledWith(types.farm))
   })
 
-  it('Build Granary works', () =>{
-    var sbuilder = new StructureFactory ({
-        tile : {},
-        structureTypes : {granary: {name: 'granary', createUpdateFn:createUpdateFn}}
-    })
-    sbuilder.buildGranary()
-    assert.equal('granary', sbuilder.tile.structure.structureType.name)
+  it('Build dairy farm works', () =>{
+    setSpy()
+
+    builder.buildDairyFarm()
+
+    assert(spy.calledWith(types.dairyFarm))
+  })
+
+  it('Build berry farm works', () =>{
+    setSpy()
+
+    builder.buildBerryFarm()
+
+    assert(spy.calledWith(types.berryFarm))
   })
 })

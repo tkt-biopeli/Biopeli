@@ -12,11 +12,11 @@ import ButtonAction from '../ButtonAction'
 export default function ForestActions (tile, structureTypes) {
   var sbuilder = new StructureFactory({tile: tile, structureTypes: structureTypes})
 
-  var createGranary = new ButtonAction({
-    name: 'Build a granary',
-    functionToCall: sbuilder.buildGranary,
+  var createDairyFarm = new ButtonAction({
+    name: 'Build a dairy farm',
+    functionToCall: sbuilder.buildDairyFarm,
     context: sbuilder
   })
 
-  return [createGranary]
+  return [createDairyFarm]
 }

@@ -23,8 +23,12 @@ export default class StructureFactory {
   /**
    * Description goes here
    */
-  buildGranary () {
-    this.buildBuilding(this.structureTypes.granary)
+  buildDairyFarm () {
+    this.buildBuilding(this.structureTypes.dairyFarm)
+  }
+
+  buildBerryFarm () {
+    this.buildBuilding(this.structureTypes.berryFarm)
   }
 
   /**
