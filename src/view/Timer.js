@@ -1,4 +1,10 @@
 export default class Timer {
+  /**
+   * 
+   * @param {string} name 
+   * @param {int} interval in millis
+   * @param {int} currentTime in millis
+   */
   constructor ({name, interval, currentTime}) {
     if(name == null){
       this.name = ''
@@ -13,14 +19,29 @@ export default class Timer {
     this.listeners = new Set()
   }
 
+  /**
+   * Adds new listener to be called when timer updates
+   * 
+   * @param {*} listener 
+   */
   addListener (listener) {
     this.listeners.add(listener)
   }
 
+  /**
+   * Removes listener from listeners
+   * 
+   * @param {*} listener 
+  */
   removeListener (listener) {
     this.listeners.delete(listener)
   }
 
+  /**
+   * Checks if enough time has passed for timer update, and if it has, updates
+   * 
+   * @param {*} currentTime 
+   */
   update (currentTime) {
     if(currentTime - this.lastTime >= this.interval) {
       this.callListeners()
@@ -30,6 +51,9 @@ export default class Timer {
     }
   }
 
+  /**
+   * Helper method for calling all of the listeners
+   */
   callListeners () {
     var timeEvent = this.createTimeEvent()
 
@@ -39,6 +63,9 @@ export default class Timer {
     }
   }
 
+  /**
+   * Function that creates the time event to be given to listeners
+   */
   createTimeEvent () {
     return {time: this.callTime}
   }
