@@ -46,6 +46,7 @@ export default class GameAdvancer{
 
       return returnFunction
     }(this.timeObject)
+    this.gameState.gameTimer.lastTime = 0
   }
 
   /**
