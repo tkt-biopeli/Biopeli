@@ -32,7 +32,6 @@ export default class Structure{
    * @see StructureType.updateFn
    */
   update(){
-    if(this.updateFn != undefined)
-      this.updateFn()
+    this.updateFn()
   }
 }
