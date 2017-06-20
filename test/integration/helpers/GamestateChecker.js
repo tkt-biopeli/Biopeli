@@ -131,4 +131,21 @@ export default class GamestateChecker{
 
     assert.equal(expectedAmount, buttons.length)
   }
+
+  checkIfTextsExist(...texts){
+    var textImages = gameStub.getCurrentTexts()
+
+    for(let text of texts){
+      var found = false
+
+      for(let image of textImages){
+        if(image.indexOf(text) !== -1){
+          found = true
+          break
+        }
+      }
+
+      assert(found)
+    }
+  }
 }
