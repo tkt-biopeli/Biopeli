@@ -51,7 +51,7 @@ export default class StructureFactory {
       name: this.structureName,
       size: this.structureSize,
       structureType: structureType,
-      foundingYear: gameTimer.currentTime.year()
+      foundingYear: this.gameTimer.currentTime.year()
     })
   }
 }

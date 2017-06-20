@@ -31,7 +31,7 @@ describe('StructureFactory tests', () =>{
       gameTimer: {}
     })
 
-    sbuilder.buildBuilding({name: 'test', createUpdateFn:createUpdateFn})
+    sbuilder.buildBuilding({name: 'test', createUpdateFn:createUpdateFn, })
     assert.equal('test', sbuilder.tile.structure.structureType.name)
   })
 
