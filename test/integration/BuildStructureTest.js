@@ -7,7 +7,7 @@ describe('Integration test: Building structures', () =>{
   var gameAdvancer
   var gameStateChecker
 
-  before(() =>{
+  beforeEach(() =>{
     gameAdvancer = new GameAdvancer()
     game = gameAdvancer.game
     gameState = gameAdvancer.gameState

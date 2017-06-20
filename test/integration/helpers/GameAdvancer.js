@@ -86,9 +86,9 @@ export default class GameAdvancer{
    */
   click(x, y){
     this.game.setPointer(x, y)
+    this.clickButton(x, y)
     this.gameState.inputHandler.onPointerDown()
 
-    this.clickButton(x, y)
   }
 
   /**
@@ -98,20 +98,20 @@ export default class GameAdvancer{
    * @param {number} y 
    */
   clickButton(x, y){
-    var xloc = 3
-    var yloc = 4
-    var widthloc = 7
-    var heightloc = 8
-    var funcloc = 5
-    var contextloc = 6
+    var xloc = 0
+    var yloc = 1
+    var funcloc = 3
+    var contextloc = 4
 
     var buttons = this.game.mockers.getUnmarkedCalls('make.button')
 
     for(var i = 0 ; i < buttons.length ; i++){
       var button = buttons[i]
 
-      if (x >= button[xloc] && x <= button[xloc] + button[widthloc]
-        && y >= button[yloc] && y <= button[yloc] + button[heightloc]){
+      if(i == 2){
+        assert.equal(0, button[xloc]+" "+button[yloc]+" "+x+" "+y)
+      }
+      if (x == button[xloc] && y == button[yloc]){
         button[funcloc].call(button[contextloc])
 
         return
