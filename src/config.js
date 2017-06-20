@@ -26,7 +26,14 @@ export default {
   font: '16px Arial',
   textColor: '#ffff00',
   textAlignment: 'center',
-  
+
+  //configuration for top bar
+  topBarItems: [
+    { name: "time", type: "text" },
+    { name: "score", type: "text" },
+    { name: "turnip", type: "bar" }],
+  topBarHeight: 64,
+
   //configurations for camera
   cameraSpeed: 400,
   tweenCameraDuration: 500,
