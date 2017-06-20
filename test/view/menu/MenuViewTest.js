@@ -33,7 +33,7 @@ describe('MenuView tests', () =>{
     })
 
     menuView.drawHeight = 0
-    tile = {tileType: {name: 'test'}, x: 0, y: 0, structure: {structureType: {name: 'test2'}}}
+    tile = {tileType: {name: 'test'}, x: 0, y: 0, structure: {structureType: {name: 'test2'}, calculateProductionEfficiency: () => 2}}
     menuView.menu = {selectedTile: tile}
   })
 
@@ -171,7 +171,7 @@ describe('MenuView tests', () =>{
     assert(menuView.createStructureInformation())
 
     assert.equal(0, paddingSpy.callCount)
-    assert(textSpy.calledWith('Structure: test2', 16))
+    assert(textSpy.calledWith('Structure: test2'))
   })
 
   it('Background creation works', () =>{
