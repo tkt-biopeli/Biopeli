@@ -188,10 +188,8 @@ export default class GameStub{
     var call = buttonCalls[n]
 
     return {
-      x: call[3],
-      y: call[4],
-      width: call[7],
-      height: call[8]
+      x: call[0],
+      y: call[1]
     }
   }
 
@@ -207,5 +205,18 @@ export default class GameStub{
     }
 
     return textInformation
+  }
+
+  getCurrentButtons(){
+    var buttons = this.mockers.getUnmarkedCalls('make.button')
+    var buttonInformation = []
+    for(let button of buttons){
+      buttonInformation.push({
+        x: button[0],
+        y: button[1]
+      })
+    }
+
+    return buttonInformation
   }
 }

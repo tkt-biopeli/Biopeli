@@ -9,8 +9,6 @@ export default class GamestateChecker{
   /**
    * Constructor
    * 
-   * @param {object} param
-   * 
    * @param {GameStub} param.gameStub
    * @param {GameState} param.gameState
    */
@@ -121,5 +119,16 @@ export default class GamestateChecker{
     var camera = this.gameStub.getCamera()
 
     this.checkTilesModelCoordinates(camera.x, camera.y, ex, ey)
+  }
+
+  /**
+   * Checks if there is n buttons in menu
+   * 
+   * @param {int} expectedAmount 
+   */
+  checkButtonAmountInMenu(expectedAmount){
+    var buttons = this.gameStub.getCurrentButtons()
+
+    assert.equal(expectedAmount, buttons.length)
   }
 }

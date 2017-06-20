@@ -61,6 +61,16 @@ export default class GameAdvancer{
   }
 
   /**
+   * Click nth button that currently exist in menu
+   * @param {*} n 
+   */
+  clickNthButton(n){
+    var button = game.getNthActiveButton(n)
+
+    clickButton(button.x+1, button.y+1)
+  }
+
+  /**
    * Simulates click of a pointer to certain point in camera
    * 
    * @param {number} x 
@@ -74,7 +84,7 @@ export default class GameAdvancer{
   }
 
   /**
-   * Simulates click of a pointe to certain point in camera but only checks buttons
+   * Simulates click of a pointer to certain point in camera but only checks buttons
    * 
    * @param {number} x 
    * @param {number} y 
@@ -149,5 +159,15 @@ export default class GameAdvancer{
    */
   resetCamera(){
     this.setCamera(0,0)
+  }
+
+  /**
+   * Helper method hat gives tile from map
+   * 
+   * @param {*} gridX 
+   * @param {*} gridY 
+   */
+  getTile(gridX, gridY){
+    return this.gameState.map.getTileWithGridCoordinates(gridX, gridY)
   }
 }
