@@ -2,6 +2,8 @@ import GameStub from './GameStub'
 import GamestateChecker from './GamestateChecker'
 import GameState from '../../../src/game/GameState'
 import config from '../../../src/config'
+import ModelTile from '../../../src/model/map/ModelTile'
+import TileType from '../../../src/model/map/TileType'
 
 /**
  * Provides functions for simulating inputs of user and passing of time
@@ -47,6 +49,8 @@ export default class GameAdvancer{
       return returnFunction
     }(this.timeObject)
     this.gameState.gameTimer.lastTime = 0
+
+    this.tileTypes = TileType()
   }
 
   /**
@@ -169,5 +173,18 @@ export default class GameAdvancer{
    */
   getTile(gridX, gridY){
     return this.gameState.map.getTileWithGridCoordinates(gridX, gridY)
+  }
+
+  /**
+   * Sets the tile in map as preferred
+   * 
+   * @param {*} gridX 
+   * @param {*} gridY 
+   * @param {*} tileTypeName 
+   */
+  setTile(gridX, gridY, tileTypeName){
+    var tile = new ModelTile(gridX, gridY, this.tileTypes[tileTypeName], null)
+    this.gameState.map.addTileWithGridCoordinates(gridX, gridY, tile)
+    return tile
   }
 }
