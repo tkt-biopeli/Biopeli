@@ -26,9 +26,15 @@ export default {
   font: '16px Arial',
   textColor: '#ffff00',
   textAlignment: 'center',
+  linePadding: 8,
+  sectionPadding: 12,
+  menuFontSize: 16,
   
   //configurations for camera
   cameraSpeed: 400,
   tweenCameraDuration: 500,
+
+  //amount of time between time events
   gameTimerInterval: 1000
+
 }

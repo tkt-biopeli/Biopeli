@@ -39,8 +39,9 @@ export default class GameState {
       leftPadding: config.menuLeftPadding,
       buttonWidth: config.menuButtonWidth,
       buttonHeight: config.menuButtonHeight,
-      sectionPadding: 12,
-      linePadding: 8
+      sectionPadding: config.sectionPadding,
+      linePadding: config.linePadding,
+      fontSize: config.menuFontSize
     })
     this.menuView.redraw()
 
@@ -68,10 +69,11 @@ export default class GameState {
 
     this.inputHandler = new InputHandler({ game: state, mapListener: this.mapListener, cameraMover: this.cameraMover })
 
-    this.gameTimerListener = new GameTimerListener({player: this.player})
+    this.gameTimerListener = new GameTimerListener({player: this.player, menuView: this.menuView})
 
     this.gameTimer = new Timer({interval: config.gameTimerInterval, currentTime: this.currentTime()})
     this.gameTimer.addListener(this.gameTimerListener)
+    this.menuOptionCreator.gameTimer = this.gameTimer
   }
 
   initializeModel(mapWidth, mapHeight, tileWidth, tileHeight){

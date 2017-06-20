@@ -17,6 +17,7 @@ export default class Timer {
     this.callTime = 0
 
     this.listeners = new Set()
+    this.currentTime = this.createTimeEvent()
   }
 
   /**
@@ -55,11 +56,11 @@ export default class Timer {
    * Helper method for calling all of the listeners
    */
   callListeners () {
-    var timeEvent = this.createTimeEvent()
+    this.currentTime = this.createTimeEvent()
 
     for (let listener of this.listeners) {
       var method = listener['on'+this.name+'Timer']
-      method.call(listener, timeEvent)
+      method.call(listener, this.currentTime)
     }
   }
 
@@ -67,6 +68,6 @@ export default class Timer {
    * Function that creates the time event to be given to listeners
    */
   createTimeEvent () {
-    return {time: this.callTime}
+    return {time: this.callTime, year: ()=>{return Math.random()*2017}}
   }
 }

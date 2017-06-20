@@ -43,7 +43,7 @@ export default class Structure{
    */
   calculateProductionEfficiency() {
     // init value
-    var value = 785
+    var value = 785 + Math.random()*10 //For testing purposes!
     // magic happens
     // production inputs are also factored into calculation
     return value
