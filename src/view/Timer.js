@@ -45,9 +45,9 @@ export default class Timer {
    */
   update (currentTime) {
     if(currentTime - this.lastTime >= this.interval) {
+      this.callTime ++
       this.callListeners()
       this.lastTime = currentTime
-      this.callTime ++
       return
     }
   }
