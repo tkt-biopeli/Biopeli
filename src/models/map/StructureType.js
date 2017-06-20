@@ -31,9 +31,7 @@ export default function (gameState) {
     name: 'farm', 
     asset: 'farm',
     createUpdateFn: function(){
-      return function(){
-        gameState.player.addPoints(1) // placeholder
-      }       
+      return function(){}       
     }
   })
 
@@ -41,9 +39,7 @@ export default function (gameState) {
     name: 'berry farm', 
     asset: 'berry_farm',
     createUpdateFn: function(){
-      return function(){
-        gameState.player.addPoints(1) // placeholder
-      }
+      return function(){}
     }
   })
 
@@ -51,9 +47,7 @@ export default function (gameState) {
     name: 'dairy farm', 
     asset: 'dairy_farm',
     createUpdateFn: function(){
-      return function(){
-        gameState.player.addPoints(1) // placeholder
-      }
+      return function(){}
     }
   })
 

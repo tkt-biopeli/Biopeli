@@ -2,7 +2,6 @@
  * Keeps track of the player's points
  */
 export default class {
-
   /**
    * Initially the player has 0 points
    */

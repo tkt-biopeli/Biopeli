@@ -26,6 +26,9 @@ export default {
   font: '16px Arial',
   textColor: '#ffff00',
   textAlignment: 'center',
+  linePadding: 8,
+  sectionPadding: 12,
+  menuFontSize: 16,
 
   //configuration for top bar
   topBarItems: [
@@ -34,8 +37,13 @@ export default {
     { name: "turnip", type: "bar" }],
   topBarHeight: 64,
 
+
+  
   //configurations for camera
   cameraSpeed: 400,
   tweenCameraDuration: 500,
+
+  //amount of time between time events
   gameTimerInterval: 1000
+
 }

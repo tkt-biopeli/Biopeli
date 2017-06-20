@@ -20,6 +20,7 @@ describe('Timer tests', () =>{
       assert.equal(0, ltimer.callTime)
       assert.equal(4, ltimer.lastTime)
       assert.equal(0, ltimer.listeners.size)
+      assert.equal(0, ltimer.currentTime.time)
     })
 
     it('If name is not given, it is empty', ()=>{

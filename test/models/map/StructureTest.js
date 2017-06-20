@@ -14,7 +14,8 @@ describe('Structure tests', () =>{
       tile: 0, 
       name: "Riston rustholli", 
       size: 64, 
-      structureType: stype
+      structureType: stype,
+      foundingYear: 1999
     })
   })
   
@@ -24,6 +25,7 @@ describe('Structure tests', () =>{
     assert.equal("Riston rustholli", structure.name)
     assert.equal(64, structure.size)
     assert.equal(0, structure.productionInput)
+    assert.equal(1999, structure.foundingYear)
   })
 
   it('asset-shortcut works', () =>{
@@ -31,15 +33,13 @@ describe('Structure tests', () =>{
       tile: 0, 
       name: "Riston rustholli", 
       size: 64, 
-      structureType: stype
+      structureType: stype,
+      foundingYear: 1999
     })
     assert.equal("sd", structure.asset())
   })
   
   it('calculateProductionEfficiency returns correct value', () =>{
-    // calculate manually (use mock random if random factors are used)
-    var expected = 785
-    
-    assert.equal(expected, structure.calculateProductionEfficiency())
+    assert(structure.calculateProductionEfficiency() >= 785 && structure.calculateProductionEfficiency() <= 795)
   })
 })

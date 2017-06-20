@@ -9,8 +9,6 @@ export default class GamestateChecker{
   /**
    * Constructor
    * 
-   * @param {object} param
-   * 
    * @param {GameStub} param.gameStub
    * @param {GameState} param.gameState
    */
@@ -121,5 +119,34 @@ export default class GamestateChecker{
     var camera = this.gameStub.getCamera()
 
     this.checkTilesModelCoordinates(camera.x, camera.y, ex, ey)
+  }
+
+  /**
+   * Checks if there is n buttons in menu
+   * 
+   * @param {int} expectedAmount 
+   */
+  checkButtonAmountInMenu(expectedAmount){
+    var buttons = this.gameStub.getCurrentButtons()
+
+    assert.equal(expectedAmount, buttons.length)
+  }
+
+  checkIfTextsExist(...texts){
+    var textImages = this.gameStub.getCurrentTexts()
+
+    for(let text of texts){
+      var found = false
+
+      for(let image of textImages){
+        var itext = image.text
+        if(itext.indexOf(text) !== -1){
+          found = true
+          break
+        }
+      }
+
+      assert(found, "Text \'"+text+"\' not found")
+    }
   }
 }

@@ -19,12 +19,13 @@ export default class Structure{
    * @param {StructureType} param.structureType
    * @param {integer} productionInput
    */
-  constructor ({tile, name, size, structureType}) {
+  constructor ({tile, name, size, structureType, foundingYear}) {
     this.tile = tile
     this.name = name
     this.size = size
     this.structureType = structureType
     this.productionInput = 0
+    this.foundingYear = foundingYear
 
     this.updateFn = structureType.createUpdateFn()
   }
@@ -42,7 +43,7 @@ export default class Structure{
    */
   calculateProductionEfficiency() {
     // init value
-    var value = 785
+    var value = 785 + Math.random()*10 //For testing purposes!
     // magic happens
     // production inputs are also factored into calculation
     return value
