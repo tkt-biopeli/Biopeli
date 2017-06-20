@@ -184,8 +184,7 @@ export default class GameStub{
    */
   getNthActiveButton(n){
     var buttonCalls = this.mockers.getUnmarkedCalls('make.button')
-
-    var call = buttonCalls[n]
+    var call = buttonCalls[n-1]
 
     return {
       x: call[0],
