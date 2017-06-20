@@ -91,7 +91,7 @@ export default class GameState {
 
     this.player = new Player()
 
-    this.menuOptionCreator = new MenuOptionCreator({ structureTypes: this.structureTypes })
+    this.menuOptionCreator = new MenuOptionCreator({ structureTypes: this.structureTypes, player: this.player })
   }
 
   /**

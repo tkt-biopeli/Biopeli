@@ -25,14 +25,17 @@ describe('StructureFactory tests', () =>{
   })
 
   it('Build building works', () =>{
+    var spy = sinon.spy()
     var sbuilder = new StructureFactory ({
       tile: {},
       structureTypes: {},
-      gameTimer: {currentTime: {year:()=>{}}}
+      gameTimer: {currentTime: {year:()=>{}}},
+      player: {addStructure: spy}
     })
 
     sbuilder.buildBuilding({name: 'test', createUpdateFn:createUpdateFn})
     assert.equal('test', sbuilder.tile.structure.structureType.name)
+    assert.equal(1, spy.callCount)
   })
 
   var spy
@@ -41,7 +44,7 @@ describe('StructureFactory tests', () =>{
   var setSpy = function(){
     types = StructureTypes()
     spy = sinon.spy()
-    builder = new StructureFactory({structureTypes: types})
+    builder = new StructureFactory({structureTypes: types, player: {addStructure: ()=>{}}})
     builder.buildBuilding = spy
   }
 

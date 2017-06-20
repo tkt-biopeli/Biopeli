@@ -13,7 +13,7 @@ export default class MenuOptionCreator {
    * @param {object} param
    * @param {StructureType} structureTypes
    */
-  constructor ({structureTypes, gameTimer}) {
+  constructor ({structureTypes, player}) {
     this.tileOptions = new Map()
     this.tileOptions.set('forest', ForestActions)
     this.tileOptions.set('grass', GrassActions)
@@ -21,6 +21,7 @@ export default class MenuOptionCreator {
 
     this.gameTimer = gameTimer
     this.structureTypes = structureTypes
+    this.player = player
   }
 
   /**
@@ -51,7 +52,7 @@ export default class MenuOptionCreator {
    * @return { ??? }
    */
   tileTypeOptions (tile) {
-    return this.tileOptions.get(tile.tileType.name)(tile, this.structureTypes, this.gameTimer)
+    return this.tileOptions.get(tile.tileType.name)(tile, this.structureTypes, this.gameTimer, this.player)
   }
 /*
   structureOptions (structure) {
