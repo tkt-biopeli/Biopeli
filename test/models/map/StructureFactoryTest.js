@@ -13,18 +13,22 @@ describe('StructureFactory tests', () =>{
   it('Constructor works', () =>{
     var sbuilder = new StructureFactory ({
       tile : 0,
-      structureTypes : 1
+      structureTypes : 1,
+      gameTimer : 2
     })
     assert.equal(0, sbuilder.tile)
     assert.equal(1, sbuilder.structureTypes)
+    assert.equal(2, sbuilder.gameTimer)
     assert.notEqual(null, sbuilder.structureName)
     assert.notEqual(null, sbuilder.structureSize)
+    assert.notEqual(null, sbuilder.gameTimer)
   })
 
   it('Build building works', () =>{
     var sbuilder = new StructureFactory ({
       tile: {},
-      structureTypes: {}
+      structureTypes: {},
+      gameTimer: {}
     })
 
     sbuilder.buildBuilding({name: 'test', createUpdateFn:createUpdateFn})
