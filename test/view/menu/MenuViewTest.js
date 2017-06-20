@@ -170,8 +170,9 @@ describe('MenuView tests', () =>{
 
     assert(menuView.createStructureInformation())
 
-    assert.equal(0, paddingSpy.callCount)
+    assert.equal(4, paddingSpy.callCount)
     assert(textSpy.calledWith('Structure: test2'))
+    assert.equal(5, textSpy.callCount)
   })
 
   it('Background creation works', () =>{

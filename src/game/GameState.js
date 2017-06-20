@@ -17,7 +17,6 @@ import Timer from '../view/Timer'
  * Description goes here
  */
 export default class GameState {
-
   /**
    * @param {Phaser.Game} param.state - Current game
    * @param {Number} param.mapWidth - Map width in # of tiles
@@ -76,7 +75,7 @@ export default class GameState {
     this.menuOptionCreator.gameTimer = this.gameTimer
   }
 
-  initializeModel(mapWidth, mapHeight, tileWidth, tileHeight){
+  initializeModel (mapWidth, mapHeight, tileWidth, tileHeight) {
     this.tileTypes = TileTypes()
     this.structureTypes = StructureTypes()// map grid
 

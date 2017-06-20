@@ -6,7 +6,6 @@ import config from '../config'
  * Description goes here
  */
 export default class extends Phaser.State {
-
   /**
    * Description goes here
    */

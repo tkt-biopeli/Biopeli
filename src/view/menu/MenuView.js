@@ -107,9 +107,13 @@ export default class MenuView {
     }
 
     this.createText('Structure: '+structure.structureType.name)
+    this.addLinePadding()
     this.createText('Founding year: '+structure.foundingYear)
+    this.addLinePadding()
     this.createText('Size: '+structure.size)
+    this.addLinePadding()
     this.createText('Production input: '+structure.productionInput)
+    this.addLinePadding()
     this.createText('Production per time: '+structure.calculateProductionEfficiency())
 
     return true

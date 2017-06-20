@@ -5,7 +5,6 @@ import { centerGameObjects } from '../utils'
  * Description goes here
  */
 export default class extends Phaser.State {
-
   /**
    * Description goes here
    */
