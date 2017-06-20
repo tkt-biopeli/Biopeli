@@ -75,7 +75,7 @@ export default class GameAdvancer{
   clickNthButton(n){
     var button = this.game.getNthActiveButton(n)
 
-    this.clickButton(button.x+1, button.y+1)
+    this.clickButton(button.x, button.y)
   }
 
   /**
@@ -109,7 +109,7 @@ export default class GameAdvancer{
       var button = buttons[i]
 
       if(i == 2){
-        assert.equal(0, button[xloc]+" "+button[yloc]+" "+x+" "+y)
+        //assert.equal(0, button[xloc]+" "+button[yloc]+" "+x+" "+y)
       }
       if (x == button[xloc] && y == button[yloc]){
         button[funcloc].call(button[contextloc])
