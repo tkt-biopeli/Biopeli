@@ -1,0 +1,33 @@
+import GameAdvancer from './helpers/GameAdvancer'
+
+describe('Integration test: Tile selection shows correctly in Menu', () =>{
+
+  var game
+  var gameState
+  var gameAdvancer
+  var gameStateChecker
+
+  before(() =>{
+    gameAdvancer = new GameAdvancer()
+    game = gameAdvancer.game
+    gameState = gameAdvancer.gameState
+    gameStateChecker = gameAdvancer.gamestateChecker
+  })
+
+  it('Selecting tile with no structure shows correctly in Menu', ()=>{
+    gameAdvancer.setTile(0, 0, 'grass')
+    gameAdvancer.click(0, 0)
+    gameStateChecker.checkSelectedTile(0, 0)
+    gameStateChecker.checkButtonAmountInMenu(3)  
+    gameStateChecker.checkIfTextsExist('Ground type: grass', 'X: 0, Y: 0') 
+  })
+
+  it('Selecting tile with built structure shows correct options in Menu', ()=>{
+    gameAdvancer.setTileWithStructure(0, 0, 'grass', 'farm', 'piippolan vaari', 100, 1999)
+    gameStateChecker.checkSelectedTile(0, 0)
+    gameStateChecker.checkButtonAmountInMenu(0)  
+    gameStateChecker.checkIfTextsExist('Ground type: grass', 'X: 0, Y: 0', 'Structure: farm', 
+      'Founding year: 1999', 'Size: joku koko', 'Production input: 0', 'Production per time: ' ) 
+  })
+
+})

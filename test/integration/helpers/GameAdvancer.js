@@ -198,8 +198,8 @@ export default class GameAdvancer{
     tile.structure = structure
   }
 
-  setTileWithStructure(gridX, gridY, tileType, structureType, sname, ssize, sfoundingYear){
-    setTile(gridX, gridY, tileType)
-    setStructure(gridX, gridY, sname, structureType, ssize, sfoundingYear)
+  setTileWithStructure(gridX, gridY, tileTypeName, structureType, sname, ssize, sfoundingYear){
+    this.setTile(gridX, gridY, tileTypeName)
+    this.setStructure(gridX, gridY, sname, structureType, ssize, sfoundingYear)
   }
 }

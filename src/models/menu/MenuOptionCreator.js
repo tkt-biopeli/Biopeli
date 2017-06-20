@@ -18,7 +18,7 @@ export default class MenuOptionCreator {
     this.tileOptions.set("forest", ForestActions)
     this.tileOptions.set("grass", GrassActions)
     this.tileOptions.set("water", WaterActions)
-
+    this.gameTimer = gameTimer
     this.structureTypes = structureTypes
   }
 
