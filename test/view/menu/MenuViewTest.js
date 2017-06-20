@@ -144,8 +144,8 @@ describe('MenuView tests', () =>{
     assert(menuView.createTileInformation())
 
     assert.equal(1, paddingSpy.callCount)
-    assert(textSpy.calledWith('Ground type: test', 16))
-    assert(textSpy.calledWith('X: 0, Y: 0', 16))
+    assert(textSpy.calledWith('Ground type: test'))
+    assert(textSpy.calledWith('X: 0, Y: 0'))
   })
 
   it('Structure information isn\'t created when structure isn\'t found', () =>{
