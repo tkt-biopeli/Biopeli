@@ -2,8 +2,7 @@ import AnimatedBar from './AnimatedBar'
 import config from '../../config'
 
 export default class TopBarView {
-
-  constructor({ game, topBar, topBarHeight, topBarWidth }) {
+  constructor ({ game, topBar, topBarHeight, topBarWidth }) {
     this.game = game
     this.topBar = topBar
     this.topBarHeight = topBarHeight
@@ -66,7 +65,6 @@ export default class TopBarView {
     }
   }
 
-
   createIconGraphic (item) {
     let icon = this.game.add.sprite(item.icon.x, item.icon.y, item.icon.asset)
     icon.fixedToCamera = true
@@ -102,12 +100,11 @@ export default class TopBarView {
   update () {
     for (let [key, item] of this.items) {
       if (item.type === 'text') {
-        item.graphic.setText(item.value.source())        
+        item.graphic.setText(item.value.source())
       }
       if (item.type === 'bar') {
         item.graphic.setPercentage(item.value.source())
       }
     }
   }
-
 }
