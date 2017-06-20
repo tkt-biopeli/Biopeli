@@ -133,13 +133,14 @@ export default class GamestateChecker{
   }
 
   checkIfTextsExist(...texts){
-    var textImages = gameStub.getCurrentTexts()
+    var textImages = this.gameStub.getCurrentTexts()
 
     for(let text of texts){
       var found = false
 
       for(let image of textImages){
-        if(image.indexOf(text) !== -1){
+        var itext = image.text
+        if(itext.indexOf(text) !== -1){
           found = true
           break
         }
