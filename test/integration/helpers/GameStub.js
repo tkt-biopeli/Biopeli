@@ -1,4 +1,5 @@
 import MockerHandler from './MockerHandler'
+import config from '../../../src/config'
 const assert = require('assert')
 
 /**
@@ -27,6 +28,7 @@ export default class GameStub{
     var remoteButtonMarker = function(mockers){
       var returnFunction = function(){
         mockers.markCalls('make.button')
+        mockers.markCalls('add.text')
       }
 
       return returnFunction
@@ -191,5 +193,19 @@ export default class GameStub{
       width: call[7],
       height: call[8]
     }
+  }
+
+  getCurrentTexts(){
+    var texts = this.mockers.getUnmarkedCalls('add.text')
+    var textInformation = []
+    for(let text of texts){
+      textInformation.push({
+        text: text[2],
+        x: text[4],
+        y: text[5]
+      })
+    }
+
+    return textInformation
   }
 }
