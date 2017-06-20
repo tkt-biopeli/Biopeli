@@ -196,7 +196,7 @@ export default class GameAdvancer{
       tile: tile, 
       name: name, 
       size: size, 
-      strutureType: this.structureTypes[structureTypeName], 
+      structureType: this.structureTypes[structureTypeName], 
       foundingYear: foundingYear
     })
 

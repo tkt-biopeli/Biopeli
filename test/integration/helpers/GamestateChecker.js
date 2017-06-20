@@ -146,7 +146,7 @@ export default class GamestateChecker{
         }
       }
 
-      assert(found)
+      assert(found, "Text \'"+text+"\' not found")
     }
   }
 }
