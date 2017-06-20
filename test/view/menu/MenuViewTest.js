@@ -9,7 +9,7 @@ describe('MenuView tests', () =>{
   var linePadding = 3
   var buttonWidth = 1
   var buttonHeight = 4
-
+  var fontSize = 10
   var groupStub
   var gameStub
   var menuView
@@ -28,7 +28,8 @@ describe('MenuView tests', () =>{
       sectionPadding: sectionPadding,
       linePadding: linePadding,
       buttonWidth: buttonWidth,
-      buttonHeight: buttonHeight
+      buttonHeight: buttonHeight,
+      fontSize: fontSize
     })
 
     menuView.drawHeight = 0
@@ -91,7 +92,7 @@ describe('MenuView tests', () =>{
 
     menuView.createText("asd", 10)
 
-    var style = {font: 10+"px Arial", fill: "#ffff00", align: "center"}
+    var style = {font: fontSize+"px Arial", fill: "#ffff00", align: "center"}
     assert.equal(1, textSpy.callCount)
     assert(textSpy.calledWith(leftBorderCoordinate+leftPadding, 0, "asd", style, groupStub))
     assert(paddingSpy.calledWith(10))
