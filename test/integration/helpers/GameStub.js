@@ -17,24 +17,12 @@ export default class GameStub{
   constructor({width, height}){
     this.mockers = new MockerHandler()
 
-    var remoteMockingFunction = function(mockers){
-      var realFunction = function(){
-        return {
-          renderXY: mockers.createOneValueMocker('renderXY', true),
-          clear: mockers.createOneValueMocker('render.clear', true)
-        }
-      }
+    var remoteMockingFunction = mockers => () => ({
+      renderXY: mockers.createOneValueMocker('renderXY', true),
+      clear: mockers.createOneValueMocker('render.clear', true)
+    })
 
-      return realFunction
-    }
-
-    var remoteCamerafunction = function(cameraOwner){
-      var returnFunction = function({x, y}){
-        cameraOwner.setCamera(x, y)
-      }
-
-      return returnFunction
-    }
+    var remoteCamerafunction = cameraOwner => ({x,y}) => cameraOwner.setCamera(x, y)
 
     var remoteButtonMarker = function(mockers){
       var returnFunction = function(){
