@@ -28,10 +28,10 @@ describe('StructureFactory tests', () =>{
     var sbuilder = new StructureFactory ({
       tile: {},
       structureTypes: {},
-      gameTimer: {}
+      gameTimer: {currentTime: {year:()=>{}}}
     })
 
-    sbuilder.buildBuilding({name: 'test', createUpdateFn:createUpdateFn, })
+    sbuilder.buildBuilding({name: 'test', createUpdateFn:createUpdateFn})
     assert.equal('test', sbuilder.tile.structure.structureType.name)
   })
 
