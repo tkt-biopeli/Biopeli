@@ -2,8 +2,10 @@ import GameStub from './GameStub'
 import GamestateChecker from './GamestateChecker'
 import GameState from '../../../src/game/GameState'
 import config from '../../../src/config'
-import ModelTile from '../../../src/model/map/ModelTile'
-import TileType from '../../../src/model/map/TileType'
+import ModelTile from '../../../src/models/map/ModelTile'
+import TileType from '../../../src/models/map/TileType'
+import StructureType from '../../../src/models/map/StructureType'
+import Structure from '../../../src/models/map/Structure'
 
 /**
  * Provides functions for simulating inputs of user and passing of time
@@ -51,6 +53,7 @@ export default class GameAdvancer{
     this.gameState.gameTimer.lastTime = 0
 
     this.tileTypes = TileType()
+    this.structureTypes = StructureType()
   }
 
   /**
@@ -186,5 +189,17 @@ export default class GameAdvancer{
     var tile = new ModelTile(gridX, gridY, this.tileTypes[tileTypeName], null)
     this.gameState.map.addTileWithGridCoordinates(gridX, gridY, tile)
     return tile
+  }
+
+  setStructure(gridX, gridY, name, structureTypeName, size, foundingYear){
+    var tile = this.getTile(gridX, gridY)
+    var structure = new Structure(tile, name, size, this.structureTypes[structureTypeName], foundingYear)
+
+    tile.structure = structure
+  }
+
+  setTileWithStructure(gridX, gridY, tileType, structureType, sname, ssize, sfoundingYear){
+    setTile(gridX, gridY, tileType)
+    setStructure(gridX, gridY, sname, structureType, ssize, sfoundingYear)
   }
 }
