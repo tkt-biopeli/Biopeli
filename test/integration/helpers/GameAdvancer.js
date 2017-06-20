@@ -6,6 +6,7 @@ import ModelTile from '../../../src/models/map/ModelTile'
 import TileType from '../../../src/models/map/TileType'
 import StructureType from '../../../src/models/map/StructureType'
 import Structure from '../../../src/models/map/Structure'
+const assert = require("assert")
 
 /**
  * Provides functions for simulating inputs of user and passing of time
@@ -186,14 +187,18 @@ export default class GameAdvancer{
    * @param {*} tileTypeName 
    */
   setTile(gridX, gridY, tileTypeName){
-    var tile = new ModelTile(gridX, gridY, this.tileTypes[tileTypeName], null)
-    this.gameState.map.addTileWithGridCoordinates(gridX, gridY, tile)
-    return tile
+    return this.gameState.map.addTileWithGridCoordinates(gridX, gridY, this.tileTypes[tileTypeName])
   }
 
   setStructure(gridX, gridY, name, structureTypeName, size, foundingYear){
     var tile = this.getTile(gridX, gridY)
-    var structure = new Structure(tile, name, size, this.structureTypes[structureTypeName], foundingYear)
+    var structure = new Structure({
+      tile: tile, 
+      name: name, 
+      size: size, 
+      strutureType: this.structureTypes[structureTypeName], 
+      foundingYear: foundingYear
+    })
 
     tile.structure = structure
   }

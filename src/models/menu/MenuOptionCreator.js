@@ -15,9 +15,10 @@ export default class MenuOptionCreator {
    */
   constructor ({structureTypes, gameTimer}) {
     this.tileOptions = new Map()
-    this.tileOptions.set("forest", ForestActions)
-    this.tileOptions.set("grass", GrassActions)
-    this.tileOptions.set("water", WaterActions)
+    this.tileOptions.set('forest', ForestActions)
+    this.tileOptions.set('grass', GrassActions)
+    this.tileOptions.set('water', WaterActions)
+
     this.gameTimer = gameTimer
     this.structureTypes = structureTypes
   }
