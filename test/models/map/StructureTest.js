@@ -40,9 +40,6 @@ describe('Structure tests', () =>{
   })
   
   it('calculateProductionEfficiency returns correct value', () =>{
-    // calculate manually (use mock random if random factors are used)
-    var expected = 785
-    
-    assert.equal(structure.calculateProductionEfficiency() >= 785 && structure.calculateProductionEfficiency <= 795)
+    assert(structure.calculateProductionEfficiency() >= 785 && structure.calculateProductionEfficiency() <= 795)
   })
 })
