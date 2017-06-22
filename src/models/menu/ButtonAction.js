@@ -3,7 +3,6 @@
  * Description goes here
  */
 export default class ButtonAction {
-
   /**
    * Description goes here
    *

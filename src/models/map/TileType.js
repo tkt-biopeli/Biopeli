@@ -5,7 +5,6 @@
  * @returns {{water:TileType, forest:TileType, grass: TileType}} Tile types
  */
 export default function () {
-
   /**
    * @class
    *

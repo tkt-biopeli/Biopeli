@@ -4,7 +4,6 @@ import Structure from './Structure'
  * Description goes here
  */
 export default class StructureFactory {
-
   /**
    * Description goes here
    *
@@ -16,8 +15,8 @@ export default class StructureFactory {
    */
   constructor ({tile, structureTypes, gameTimer, player}) {
     this.tile = tile
-    this.structureName = "joku nimi"
-    this.structureSize = "joku koko"
+    this.structureName = 'joku nimi'
+    this.structureSize = 10
     this.structureTypes = structureTypes
     this.gameTimer = gameTimer
     this.player = player

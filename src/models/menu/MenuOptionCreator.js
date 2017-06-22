@@ -6,7 +6,6 @@ import WaterActions from './ActionCreators/WaterActions'
  * Description goes here
  */
 export default class MenuOptionCreator {
-
   /**
    * Description goes here
    *
@@ -31,14 +30,14 @@ export default class MenuOptionCreator {
    * @return { ???[] }
    */
   getActions (tile) {
-    if(tile.structure == null){
+    if (tile.structure == null) {
       return this.tileTypeOptions(tile)
     }
 
-    /*var options = this.structureOptions(tile.structure)
+    /* var options = this.structureOptions(tile.structure)
     options.concat(this.extraOptions(tile))
 
-    return options*/
+    return options */
 
     return []
   }
@@ -60,5 +59,5 @@ export default class MenuOptionCreator {
 
   extraOptions (tile) {
     return []
-  }*/
+  } */
 }

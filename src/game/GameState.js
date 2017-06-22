@@ -14,7 +14,7 @@ import GameTimerListener from '../models/GameTimerListener'
 import Timer from '../view/Timer'
 import TopBar from '../models/topbar/TopBar'
 import TopBarView from '../view/topbar/TopBarView'
-import topBarControllerDemo from '../models/topbar/TopBarControllerDemo'
+import TopBarControllerDemo from '../models/topbar/TopBarControllerDemo'
 
 /**
  * Description goes here
@@ -28,7 +28,7 @@ export default class GameState {
    * @param {Number} param.tileHeight - Tile height in pixels
    * @param {Number} param.menuWidth - Menu width in pixels
    */
-  constructor({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
+  constructor ({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
     this.state = state
 
     state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
@@ -68,10 +68,10 @@ export default class GameState {
       topBarWidth: state.game.width - menuWidth
     })
 
-    this.topBarControllerDemo = new topBarControllerDemo({
-      player : this.player,
-      topBar : this.topBar,
-      topBarView : this.topBarView
+    this.topBarControllerDemo = new TopBarControllerDemo({
+      player: this.player,
+      topBar: this.topBar,
+      topBarView: this.topBarView
     })
 
     this.cameraMover = new CameraMover({ game: state, xSpeed: config.cameraSpeed, ySpeed: config.cameraSpeed })

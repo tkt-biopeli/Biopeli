@@ -7,7 +7,6 @@
  * @return {{farm: StructureType, granary: StructureType}} Structure types
  */
 export default function (gameState) {
-
   /**
    * @class
    *
@@ -21,40 +20,42 @@ export default function (gameState) {
   function StructureType ({name, asset, createUpdateFn}) {
     this.name = name
     this.asset = asset
-    if(createUpdateFn != undefined)
+    if (createUpdateFn !== undefined) {
       this.createUpdateFn = createUpdateFn
-    else
-      this.createUpdateFn = function(){return function(){}}
+    } else {
+      this.createUpdateFn = function () {
+        return function () {}
+      }
+    }
   }
 
   var farm = new StructureType({
     name: 'farm',
     asset: 'farm',
-    createUpdateFn: function(){
-      return function(){}
+    createUpdateFn: function () {
+      return function () {}
     }
   })
 
   var berryFarm = new StructureType({
     name: 'berry farm',
     asset: 'berry_farm',
-    createUpdateFn: function(){
-      return function(){}
+    createUpdateFn: function () {
+      return function () {}
     }
   })
 
   var dairyFarm = new StructureType({
     name: 'dairy farm',
     asset: 'dairy_farm',
-    createUpdateFn: function(){
-      return function(){}
+    createUpdateFn: function () {
+      return function () {}
     }
   })
 
-
   return {
-      farm: farm,
-      berryFarm: berryFarm,
-      dairyFarm: dairyFarm
+    farm: farm,
+    berryFarm: berryFarm,
+    dairyFarm: dairyFarm
   }
 }

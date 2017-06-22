@@ -30,7 +30,7 @@ export default class {
     return this.points
   }
 
-  getCash() {
+  getCash () {
     return this.cash
   }
 

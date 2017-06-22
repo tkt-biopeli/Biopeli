@@ -15,7 +15,7 @@ export default class MapView {
    * @param {number} param.viewWidthPx
    * @param {number} param.viewHeightPx
    */
-  constructor({ game, map, menu, viewWidthPx, viewHeightPx }) {
+  constructor ({ game, map, menu, viewWidthPx, viewHeightPx }) {
     this.game = game
     this.map = map
     this.menu = menu
@@ -109,7 +109,6 @@ export default class MapView {
       x: (col - startCol) * this.tileWidth + offset.x,
       y: (row - startRow) * this.tileHeight + offset.y
     }
-
   }
 
   /**

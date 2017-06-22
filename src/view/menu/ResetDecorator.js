@@ -2,7 +2,6 @@
  * Handles resetting the menu for the true action
  */
 export default class ResetDecorator {
-
   /**
    * Description goes here
    *
@@ -19,7 +18,7 @@ export default class ResetDecorator {
   /**
    * Description goes here
    */
-  act(){
+  act () {
     this.action.function.call(this.action.context)
     this.menu.reset()
   }
