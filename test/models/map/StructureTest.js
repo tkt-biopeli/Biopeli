@@ -1,18 +1,20 @@
-const assert = require("assert")
+const assert = require('assert')
 import Structure from '../../../src/models/map/Structure'
 
 describe('Structure tests', () =>{
   
-  var structure
+  var structure, tile
   var stype = {
     asset: 'sd',
     createUpdateFn: function(){}
   }
   
   before(function () {
+    tile = {potential: 10}
+    
     structure = new Structure({
-      tile: 0, 
-      name: "Riston rustholli", 
+      tile: tile, 
+      name: 'Riston rustholli', 
       size: 10, 
       structureType: stype,
       foundingYear: 1999
@@ -20,21 +22,19 @@ describe('Structure tests', () =>{
   })
   
   it('Constructor works', () =>{
-    assert.equal(0, structure.tile)
+    assert.equal(tile, structure.tile)
     assert.equal(stype, structure.structureType)
-    assert.equal("Riston rustholli", structure.name)
+    assert.equal('Riston rustholli', structure.name)
     assert.equal(10, structure.size)
     assert.equal(1, structure.productionInput)
     assert.equal(1999, structure.foundingYear)
   })
 
   it('asset-shortcut works', () =>{
-    assert.equal("sd", structure.asset())
+    assert.equal('sd', structure.asset())
   })
 
- /* tämä pitää siirtää integraatio testiksi 
   it('calculateProductionEfficiency returns correct value', () =>{
-    assert(structure.calculateProductionEfficiency() >= 0 && structure.calculateProductionEfficiency() <= 795)
+    assert.equal(100, structure.calculateProductionEfficiency())
   })
-  */
 })
