@@ -10,9 +10,9 @@ export default class Structure{
   /**
    * tile, name, size, and structureType are given to the constructor as parameters.
    * the initial value of productionInput is 0.
-   * 
+   *
    * @param {object} param
-   * 
+   *
    * @param {ModelTile} param.tile
    * @param {string} name
    * @param {integer} size

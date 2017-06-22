@@ -64,7 +64,7 @@ export default class GameState {
 
     this.topBarView = new TopBarView({
       game: state,
-      topBar: this.topBar,      
+      topBar: this.topBar,
       topBarWidth: state.game.width - menuWidth
     })
 

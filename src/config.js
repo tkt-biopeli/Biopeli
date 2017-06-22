@@ -32,7 +32,7 @@ export default {
 
   //configuration for top bar
   topBarItems: [
-    { name: "time", asset: "time", type: "text", widthPct: 1 / 3 },    
+    { name: "time", asset: "time", type: "text", widthPct: 1 / 3 },
     { name: "score", asset: "score", type: "text", widthPct: 1 / 3 },
     { name: "turnip", asset: "turnip", type: "bar", widthPct: 1 / 3 }],
   topBarSettings: {

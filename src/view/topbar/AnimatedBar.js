@@ -33,7 +33,7 @@ export default class AnimatedBar {
 
   /**
    * Animate bar fill to new value
-   * 
+   *
    * @param {number} value - Percentage value between [0, 100]
    * @memberof AnimatedBar
    */

@@ -6,9 +6,9 @@ export default class ButtonAction {
 
   /**
    * Description goes here
-   * 
+   *
    * @param {object} param
-   * 
+   *
    * @param {string} param.name
    * @param {function} param.functionToCall
    * @param {???} param.context

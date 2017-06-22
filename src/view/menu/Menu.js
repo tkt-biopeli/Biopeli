@@ -3,10 +3,9 @@
  * Description goes here
  */
 export default class Menu {
-
   /**
    * Description goes here
-   * 
+   *
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
@@ -19,9 +18,9 @@ export default class Menu {
 
   /**
    * Description goes here
-   * 
-   * @param {ModelTile} tile 
-   * @param { ??? } buttonActions 
+   *
+   * @param {ModelTile} tile
+   * @param { ??? } buttonActions
    */
   chooseTile (tile, buttonActions) {
     this.selectedTile = tile

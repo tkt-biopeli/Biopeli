@@ -9,7 +9,7 @@ export default class MenuOptionCreator {
 
   /**
    * Description goes here
-   * 
+   *
    * @param {object} param
    * @param {StructureType} structureTypes
    */
@@ -25,9 +25,9 @@ export default class MenuOptionCreator {
 
   /**
    * Description goes here
-   * 
-   * @param {ModelTile} tile 
-   * 
+   *
+   * @param {ModelTile} tile
+   *
    * @return { ???[] }
    */
   getActions (tile) {
@@ -45,9 +45,9 @@ export default class MenuOptionCreator {
 
   /**
    * Description goes here
-   * 
-   * @param {ModelTile} tile 
-   * 
+   *
+   * @param {ModelTile} tile
+   *
    * @return { ??? }
    */
   tileTypeOptions (tile) {

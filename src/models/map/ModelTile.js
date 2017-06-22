@@ -6,9 +6,9 @@ export default class {
 
   /**
    * Description goes here
-   * 
+   *
    * @param {object} param
-   * 
+   *
    * @param {number} param.x
    * @param {number} param.y
    * @param {TileType} param.type

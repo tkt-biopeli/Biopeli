@@ -6,10 +6,9 @@ import ResetDecorator from './ResetDecorator'
  * Controls drawing of game's menu
  */
 export default class MenuView {
-
   /**
    * Description goes here
-   * 
+   *
    * @param {Phaser.Game} param.game
    * @param {number} param.leftBorderCoordinate the x-coordinate of menu's left border
    * @param {number} param.leftPadding amount of space before line starts
@@ -36,8 +35,8 @@ export default class MenuView {
 
   /**
    * Description goes here
-   * 
-   * @param {Menu} menu 
+   *
+   * @param {Menu} menu
    */
   setMenu (menu) {
     this.menu = menu
@@ -81,7 +80,7 @@ export default class MenuView {
 
   /**
    * Creates the information of tile to the menu
-   * 
+   *
    * @return {boolean} WasAdded
    */
   createTileInformation () {
@@ -96,7 +95,7 @@ export default class MenuView {
 
   /**
    * Creates the information of the structure in tile, if the tile has one
-   * 
+   *
    * @return {boolean}
    */
   createStructureInformation () {
@@ -121,7 +120,7 @@ export default class MenuView {
 
   /**
    * Creates the buttons for actions of the tile
-   * 
+   *
    * @return {boolean}
    */
   createButtons () {
@@ -135,8 +134,8 @@ export default class MenuView {
 
   /**
    * Creates a button with given button action
-   * 
-   * @param {ButtonAction} buttonAction 
+   *
+   * @param {ButtonAction} buttonAction
    */
   createButton (buttonAction) {
     var resetDecorator = new ResetDecorator({action: buttonAction, menu: this.menu})
@@ -158,10 +157,10 @@ export default class MenuView {
 
   /**
    * Creates a visible text with given text and font size
-   * 
-   * @param {*} text 
-   * @param {*} fontSize 
-   * 
+   *
+   * @param {*} text
+   * @param {*} fontSize
+   *
    * @return { ??? }
    */
   createText (text) {
@@ -180,8 +179,8 @@ export default class MenuView {
 
   /**
    * Sets the button actions to given and refreshes the menuView
-   * 
-   * @param { [ButtonAction] } buttonActions 
+   *
+   * @param { [ButtonAction] } buttonActions
    */
   setButtonActions (buttonActions) {
     this.buttonActions = buttonActions
@@ -190,8 +189,8 @@ export default class MenuView {
 
   /**
    * Adds given amount of padding
-   * 
-   * @param {Number} amount 
+   *
+   * @param {Number} amount
    */
   addPadding (amount) {
     this.drawHeight += amount

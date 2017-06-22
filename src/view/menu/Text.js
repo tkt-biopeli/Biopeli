@@ -6,9 +6,9 @@ export default class Text {
 
   /**
    * Description goes here
-   * 
+   *
    * @param {object} param
-   * 
+   *
    * @param {Phaser.Game} param.game
    * @param { ??? } param.viewGroup
    * @param { ???} param.text

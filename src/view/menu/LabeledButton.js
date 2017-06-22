@@ -7,9 +7,9 @@ export default class LabeledButton {
 
   /**
    * Description goes here
-   * 
+   *
    * @param {object} param
-   * 
+   *
    * @param {Phaser.Game} param.game
    * @param { ??? } param.viewGroup
    * @param { ??? } param.label
@@ -22,7 +22,7 @@ export default class LabeledButton {
    */
   constructor( { game, viewGroup, label, x, y, callback, context, buttonWidth, buttonHeight }) {
     var style = {font: config.font, fill: config.textColor, align: config.textAlignment}
-    
+
     var button = game.make.button(x, y, 'emptyButton', callback, context)
     viewGroup.add(button)
     // this method call creates a 'text' object and adds it to viewGroup

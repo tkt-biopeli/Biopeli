@@ -3,16 +3,16 @@ import ButtonAction from '../ButtonAction'
 
 /**
  * Description goes here
- * 
- * @param {ModelTile} tile 
- * @param {StructureType} structureTypes 
- * 
+ *
+ * @param {ModelTile} tile
+ * @param {StructureType} structureTypes
+ *
  * @return {ButtonAction[]}
  */
 export default function GrassActions (tile, structureTypes, gameTimer, player) {
   var sBuilder = new StructureFactory({
-    tile: tile, 
-    structureTypes: structureTypes, 
+    tile: tile,
+    structureTypes: structureTypes,
     gameTimer: gameTimer,
     player: player
   })

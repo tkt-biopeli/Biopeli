@@ -4,17 +4,17 @@ import config from '../../config'
 
 /**
  * TopBarView draws an info bar on top of the game screen
- * 
+ *
  * @export
  * @class TopBarView
  */
 export default class TopBarView {
   /**
    * Creates an instance of TopBarView.
-   * @param {object} param 
+   * @param {object} param
    * @param {Phaser.Game} param.game
    * @param {TopBar} param.topBar - model class
-   * @param {number} param.topBarWidth - width on screen 
+   * @param {number} param.topBarWidth - width on screen
    * @memberof TopBarView
    */
   constructor({ game, topBar, topBarWidth }) {
@@ -43,7 +43,7 @@ export default class TopBarView {
       })
 
       this.items.set(itemCfg.name, item)
-      usedWidth += item.width + settings.paddingWidth      
+      usedWidth += item.width + settings.paddingWidth
     }
   }
 
@@ -70,7 +70,7 @@ export default class TopBarView {
   }
 
   createTextGraphic (item) {
-    let text = this.game.add.text(item.value.x, item.value.y, item.value.source())    
+    let text = this.game.add.text(item.value.x, item.value.y, item.value.source())
     text.fixedToCamera = true
     item.graphic = text
   }
@@ -97,7 +97,7 @@ export default class TopBarView {
 
   /**
    * Sets item values on screen based on values in TopBar class
-   * 
+   *
    * @memberof TopBarView
    */
   update () {

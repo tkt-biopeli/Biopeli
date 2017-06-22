@@ -7,9 +7,9 @@ export default class StructureFactory {
 
   /**
    * Description goes here
-   * 
+   *
    * @param {object} param
-   * 
+   *
    * @param {ModelTile} param.tile
    * @param {StructureType} param.structureTypes
    * @param {GameTimer} param.gameTimer
@@ -43,8 +43,8 @@ export default class StructureFactory {
 
   /**
    * Description goes here
-   * 
-   * @param {StructureType} structureType 
+   *
+   * @param {StructureType} structureType
    */
   buildBuilding (structureType) {
     this.tile.structure = new Structure({
