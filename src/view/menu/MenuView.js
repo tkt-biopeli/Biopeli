@@ -51,7 +51,7 @@ export default class MenuView {
     this.drawHeight = this.sectionPadding
     this.createBackground()
 
-    if(this.menu == null || this.menu.selectedTile == null){
+    if (this.menu == null || this.menu.selectedTile == null) {
       return
     }
     this.iterateMenuFunctions()
@@ -66,8 +66,8 @@ export default class MenuView {
       this.createStructureInformation,
       this.createButtons]
 
-    for(var i = 0 ; i < menuFunctions.length ; i++){
-      if(menuFunctions[i].call(this)) this.addSectionPadding()
+    for (var i = 0; i < menuFunctions.length; i++) {
+      if (menuFunctions[i].call(this)) this.addSectionPadding()
     }
   }
 
@@ -86,9 +86,9 @@ export default class MenuView {
   createTileInformation () {
     var tile = this.menu.selectedTile
 
-    this.createText('Ground type: '+tile.tileType.name)
+    this.createText('Ground type: ' + tile.tileType.name)
     this.addLinePadding()
-    this.createText('X: '+tile.x+", Y: "+tile.y)
+    this.createText('X: ' + tile.x + ', Y: ' + tile.y)
 
     return true
   }
@@ -105,15 +105,15 @@ export default class MenuView {
       return false
     }
 
-    this.createText('Structure: '+structure.structureType.name)
+    this.createText('Structure: ' + structure.structureType.name)
     this.addLinePadding()
-    this.createText('Founding year: '+structure.foundingYear)
+    this.createText('Founding year: ' + structure.foundingYear)
     this.addLinePadding()
-    this.createText('Size: '+structure.size)
+    this.createText('Size: ' + structure.size)
     this.addLinePadding()
-    this.createText('Production input: '+structure.productionInput)
+    this.createText('Production input: ' + structure.productionInput)
     this.addLinePadding()
-    this.createText('Production per time: '+structure.calculateProductionEfficiency())
+    this.createText('Production per time: ' + structure.calculateProductionEfficiency())
 
     return true
   }
