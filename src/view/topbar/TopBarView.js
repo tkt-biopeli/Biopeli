@@ -17,7 +17,7 @@ export default class TopBarView {
    * @param {number} param.topBarWidth - width on screen
    * @memberof TopBarView
    */
-  constructor({ game, topBar, topBarWidth }) {
+  constructor ({ game, topBar, topBarWidth }) {
     this.game = game
     this.topBar = topBar
     this.topBarWidth = topBarWidth
@@ -32,13 +32,15 @@ export default class TopBarView {
     let settings = config.topBarSettings
     let totalPadding = (itemsConfig.length + 1) * settings.paddingWidth
     let totalAvailableWidth = this.topBarWidth - totalPadding
-    let usedWidth = settings.paddingWidth //start with one padding
+    let usedWidth = settings.paddingWidth // start with one padding
 
     for (var i = 0; i < itemsConfig.length; i++) {
       let itemCfg = itemsConfig[i]
       let item = new TopBarItem({
-        itemCfg: itemCfg, settings: settings,
-        leftPadding: usedWidth, totalWidth: totalAvailableWidth,
+        itemCfg: itemCfg,
+        settings: settings,
+        leftPadding: usedWidth,
+        totalWidth: totalAvailableWidth,
         callback: () => { return this.topBar['getValueOf'](itemCfg.name) }
       })
 
@@ -49,7 +51,7 @@ export default class TopBarView {
 
   draw () {
     this.createBackground()
-    for (let [key, item] of this.items) {
+    for (let item of this.items.values()) {
       this.createIconGraphic(item)
       this.createItemValueGraphics(item)
     }
@@ -101,7 +103,7 @@ export default class TopBarView {
    * @memberof TopBarView
    */
   update () {
-    for (let [key, item] of this.items) {
+    for (let item of this.items.values()) {
       if (item.type === 'text') {
         item.graphic.setText(item.value.source())
       }
@@ -110,6 +112,4 @@ export default class TopBarView {
       }
     }
   }
-
-
 }
