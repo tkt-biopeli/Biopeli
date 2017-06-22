@@ -149,4 +149,22 @@ export default class GamestateChecker{
       assert(found, "Text \'"+text+"\' not found")
     }
   }
+
+  /**
+   * Checks if the game time is correct
+   * 
+   * @param {int} time
+   */
+  checkTime(time) {
+    var textImages = this.gameStub.getCurrentTexts()
+    var found = false
+      for(let image of textImages){
+        var itext = image.text
+        if(itext == time){
+          found = true
+          break
+        }
+      }
+    assert(found)
+  }
 }
