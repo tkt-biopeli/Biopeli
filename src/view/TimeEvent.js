@@ -1,12 +1,11 @@
 import Timer from './Timer.js'
 
 export default class {
-  constructor (timer) {
-    this.timer = timer
-    this.serialNumber = timer.callTime
+  constructor ({callTime}) {
+    this.serialNumber = callTime
     this.week = this.serialNumber % 4 + 1
-    this.month = this.serialNumber / 4 % 12 + 1
-    this.year = this.getSerialNumber / 48
+    this.month = Math.floor(this.serialNumber / 4) % 12 + 1
+    this.year = Math.floor(this.serialNumber / 48) + 1980
   }
 
   getWeek () {
@@ -26,6 +25,6 @@ export default class {
   }
 
   toString () {
-    return 'Vuosi ' + this.getYear() + ', kuukausi ' + this.getMonth() + ', viikko ' + this.getWeek(this.date)
+    return this.year+'/'+this.month+'/'+this.week
   }
 }
