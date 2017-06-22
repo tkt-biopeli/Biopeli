@@ -17,7 +17,7 @@ export default class StructureFactory {
   constructor ({tile, structureTypes, gameTimer, player}) {
     this.tile = tile
     this.structureName = "joku nimi"
-    this.structureSize = "joku koko"
+    this.structureSize = 10
     this.structureTypes = structureTypes
     this.gameTimer = gameTimer
     this.player = player

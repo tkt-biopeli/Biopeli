@@ -32,9 +32,7 @@ describe('Structure tests', () =>{
     assert.equal("sd", structure.asset())
   })
 
- /* tämä pitää siirtää integraatio testiksi 
   it('calculateProductionEfficiency returns correct value', () =>{
-    assert(structure.calculateProductionEfficiency() >= 0 && structure.calculateProductionEfficiency() <= 795)
+    assert.equal(100, structure.calculateProductionEfficiency())
   })
-  */
 })
