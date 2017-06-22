@@ -31,6 +31,12 @@ export default class AnimatedBar {
     this.bar.fixedToCamera = true
   }
 
+  /**
+   * Animate bar fill to new value
+   * 
+   * @param {number} value - Percentage value between [0, 100]
+   * @memberof AnimatedBar
+   */
   setPercentage (value) {
     let inPixels = value * this.width / 100
     this.game.add.tween(this.bar).to({ width: inPixels }, this.duration, 'Linear', true)

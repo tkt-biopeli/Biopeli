@@ -1,7 +1,12 @@
 import config from '../../config'
 
+/**
+ * Model class for the info bar on top of the game screen
+ * 
+ * @export
+ * @class TopBar
+ */
 export default class TopBar {
-
   constructor({}) {            
     this.initializeValues()
   }
@@ -13,11 +18,11 @@ export default class TopBar {
     }
   }
 
-  getValueOf(item) {
-    return this[item]
+  getValueOf(itemName) {
+    return this[itemName]
   }
 
-  setValueOf(item, value) {
-    this[item] = value
+  setValueOf(itemName, value) {
+    this[itemName] = value
   }
 }

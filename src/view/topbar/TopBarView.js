@@ -1,50 +1,49 @@
 import AnimatedBar from './AnimatedBar'
+import TopBarItem from './TopBarItem'
 import config from '../../config'
 
+/**
+ * TopBarView draws an info bar on top of the game screen
+ * 
+ * @export
+ * @class TopBarView
+ */
 export default class TopBarView {
-  constructor ({ game, topBar, topBarHeight, topBarWidth }) {
+  /**
+   * Creates an instance of TopBarView.
+   * @param {object} param 
+   * @param {Phaser.Game} param.game
+   * @param {TopBar} param.topBar - model class
+   * @param {number} param.topBarWidth - width on screen 
+   * @memberof TopBarView
+   */
+  constructor({ game, topBar, topBarWidth }) {
     this.game = game
     this.topBar = topBar
-    this.topBarHeight = topBarHeight
     this.topBarWidth = topBarWidth
+    this.topBarHeight = config.topBarSettings.height
     this.items = new Map()
     this.initializeItems()
-    this.calculateItemLocations()
     this.draw()
   }
 
   initializeItems () {
     let itemsConfig = config.topBarItems
-    let model = this.topBar
+    let settings = config.topBarSettings
+    let totalPadding = (itemsConfig.length + 1) * settings.paddingWidth
+    let totalAvailableWidth = this.topBarWidth - totalPadding
+    let usedWidth = settings.paddingWidth //start with one padding
 
     for (var i = 0; i < itemsConfig.length; i++) {
-      let name = itemsConfig[i].name
-      let item = {
-        icon: { asset: name, x: 0, y: 0 },
-        value: { source: function () { return model['getValueOf'](name) }, x: 0, y: 0 },
-        type: itemsConfig[i].type,
-        graphic: undefined
-      }
+      let itemCfg = itemsConfig[i]
+      let item = new TopBarItem({
+        itemCfg: itemCfg, settings: settings,
+        leftPadding: usedWidth, totalWidth: totalAvailableWidth,
+        callback: () => { return this.topBar['getValueOf'](itemCfg.name) }
+      })
 
-      this.items.set(name, item)
-    }
-  }
-
-  // WORK IN PROGRESS
-  calculateItemLocations () {
-    let count = 0
-    let columnWidth = Math.floor(this.topBarWidth / this.items.size)
-    let columnPaddingHori = Math.floor(columnWidth * 0.05)
-    let iconWidth = 64
-    let valuePaddingVert = 16
-    let valuePaddingHori = 8
-
-    for (let [key, item] of this.items) {
-      item.icon.x = (count + 1) * columnPaddingHori + count * columnWidth
-      item.icon.y = 0
-      item.value.x = item.icon.x + iconWidth + valuePaddingHori
-      item.value.y = valuePaddingVert
-      count++
+      this.items.set(itemCfg.name, item)
+      usedWidth += item.width + settings.paddingWidth      
     }
   }
 
@@ -71,19 +70,18 @@ export default class TopBarView {
   }
 
   createTextGraphic (item) {
-    let text = this.game.add.text(item.value.x, item.value.y, item.value.source())
+    let text = this.game.add.text(item.value.x, item.value.y, item.value.source())    
     text.fixedToCamera = true
     item.graphic = text
   }
 
-  // WORK IN PROGRESS
   createBarGraphic (item) {
     let bar = new AnimatedBar({
       game: this.game,
       x: item.value.x,
       y: item.value.y,
-      width: 128,
-      height: 32
+      width: item.value.width,
+      height: this.topBarHeight - config.topBarSettings.verticalPadding * 2
     })
     item.graphic = bar
   }
@@ -97,6 +95,11 @@ export default class TopBarView {
     this.game.add.existing(bg)
   }
 
+  /**
+   * Sets item values on screen based on values in TopBar class
+   * 
+   * @memberof TopBarView
+   */
   update () {
     for (let [key, item] of this.items) {
       if (item.type === 'text') {
@@ -107,4 +110,6 @@ export default class TopBarView {
       }
     }
   }
+
+
 }

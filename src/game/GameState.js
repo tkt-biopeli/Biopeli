@@ -64,10 +64,8 @@ export default class GameState {
 
     this.topBarView = new TopBarView({
       game: state,
-      topBar: this.topBar,
-      topBarHeight: config.topBarHeight,
+      topBar: this.topBar,      
       topBarWidth: state.game.width - menuWidth
-
     })
 
     this.topBarControllerDemo = new topBarControllerDemo({
@@ -97,7 +95,7 @@ export default class GameState {
 
   initializeModel (mapWidth, mapHeight, tileWidth, tileHeight) {
     this.tileTypes = TileTypes()
-    this.structureTypes = StructureTypes()// map grid
+    this.structureTypes = StructureTypes()
 
     this.map = new Map({
       gridSizeX: mapWidth,
