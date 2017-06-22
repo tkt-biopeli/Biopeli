@@ -16,7 +16,7 @@ export default class Timer {
     this.lastTime = currentTime
     this.callTime = 0
 
-    this.listeners = new Set()
+    this.listeners = new Set() 
   }
 
   /**
