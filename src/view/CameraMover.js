@@ -4,12 +4,9 @@ import config from '../config'
  * Description goes here
  */
 export default class CameraMover {
-
   /**
    * Description goes here
-   * 
-   * @param {object} param
-   * 
+   *
    * @param {Phaser.Game} param.game
    * @param {number} param.xSpeed
    * @param {number} param.ySpeed
@@ -34,11 +31,11 @@ export default class CameraMover {
 
   /**
    * Description goes here
-   * 
-   * @param { ??? } eventForNegDirection 
-   * @param { ??? } eventForPosDirection 
-   * @param {number} increment 
-   * 
+   *
+   * @param { ??? } eventForNegDirection
+   * @param { ??? } eventForPosDirection
+   * @param {number} increment
+   *
    * @return {number} - delta
    */
   updateCoordinate (eventForNegDirection, eventForPosDirection, increment) {
@@ -54,9 +51,9 @@ export default class CameraMover {
 
   /**
    * Description goes here
-   * 
-   * @param {number} tx 
-   * @param {number} ty 
+   *
+   * @param {number} tx
+   * @param {number} ty
    */
   tweenCameraTo (tx, ty) {
     // .to parameters(properties object = new coordinates, duration, type of Easing, autoStart)

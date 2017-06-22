@@ -12,7 +12,6 @@ import config from './config'
  * Description goes here
  */
 class Game extends Phaser.Game {
-
   /**
    * Description goes here
    */

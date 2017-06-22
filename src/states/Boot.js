@@ -5,7 +5,6 @@ import WebFont from 'webfontloader'
  * Description goes here
  */
 export default class extends Phaser.State {
-
   /**
    * Description goes here
    */

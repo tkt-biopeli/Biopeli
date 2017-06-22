@@ -12,12 +12,14 @@ import MenuOptionCreator from '../models/menu/MenuOptionCreator'
 import config from '../config'
 import GameTimerListener from '../models/GameTimerListener'
 import Timer from '../view/Timer'
+import TopBar from '../models/topbar/TopBar'
+import TopBarView from '../view/topbar/TopBarView'
+import TopBarControllerDemo from '../models/topbar/TopBarControllerDemo'
 
 /**
  * Description goes here
  */
 export default class GameState {
-
   /**
    * @param {Phaser.Game} param.state - Current game
    * @param {Number} param.mapWidth - Map width in # of tiles
@@ -39,8 +41,9 @@ export default class GameState {
       leftPadding: config.menuLeftPadding,
       buttonWidth: config.menuButtonWidth,
       buttonHeight: config.menuButtonHeight,
-      sectionPadding: 12,
-      linePadding: 8
+      sectionPadding: config.sectionPadding,
+      linePadding: config.linePadding,
+      fontSize: config.menuFontSize
     })
     this.menuView.redraw()
 
@@ -57,6 +60,20 @@ export default class GameState {
       viewHeightPx: state.game.height
     })
 
+    this.topBar = new TopBar({})
+
+    this.topBarView = new TopBarView({
+      game: state,
+      topBar: this.topBar,
+      topBarWidth: state.game.width - menuWidth
+    })
+
+    this.topBarControllerDemo = new TopBarControllerDemo({
+      player: this.player,
+      topBar: this.topBar,
+      topBarView: this.topBarView
+    })
+
     this.cameraMover = new CameraMover({ game: state, xSpeed: config.cameraSpeed, ySpeed: config.cameraSpeed })
 
     this.mapListener = new MapListener({
@@ -68,15 +85,17 @@ export default class GameState {
 
     this.inputHandler = new InputHandler({ game: state, mapListener: this.mapListener, cameraMover: this.cameraMover })
 
-    this.gameTimerListener = new GameTimerListener({player: this.player})
+    this.gameTimerListener = new GameTimerListener({player: this.player, menuView: this.menuView})
 
-    this.gameTimer = new Timer({interval: config.gameTimerInterval, currentTime: this.currentTime()})
+    this.gameTimer = new Timer({ interval: config.gameTimerInterval, currentTime: this.currentTime() })
     this.gameTimer.addListener(this.gameTimerListener)
+    this.gameTimer.addListener(this.topBarControllerDemo)
+    this.menuOptionCreator.gameTimer = this.gameTimer
   }
 
-  initializeModel(mapWidth, mapHeight, tileWidth, tileHeight){
+  initializeModel (mapWidth, mapHeight, tileWidth, tileHeight) {
     this.tileTypes = TileTypes()
-    this.structureTypes = StructureTypes()// map grid
+    this.structureTypes = StructureTypes()
 
     this.map = new Map({
       gridSizeX: mapWidth,
@@ -90,7 +109,7 @@ export default class GameState {
 
     this.player = new Player()
 
-    this.menuOptionCreator = new MenuOptionCreator({ structureTypes: this.structureTypes })
+    this.menuOptionCreator = new MenuOptionCreator({ structureTypes: this.structureTypes, player: this.player })
   }
 
   /**

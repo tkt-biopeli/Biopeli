@@ -1,4 +1,5 @@
 import MockerHandler from './MockerHandler'
+import config from '../../../src/config'
 const assert = require('assert')
 
 /**
@@ -17,28 +18,17 @@ export default class GameStub{
   constructor({width, height}){
     this.mockers = new MockerHandler()
 
-    var remoteMockingFunction = function(mockers){
-      var realFunction = function(){
-        return {
-          renderXY: mockers.createOneValueMocker('renderXY', true),
-          clear: mockers.createOneValueMocker('render.clear', true)
-        }
-      }
+    var remoteMockingFunction = mockers => () => ({
+      renderXY: mockers.createOneValueMocker('renderXY', true),
+      clear: mockers.createOneValueMocker('render.clear', true)
+    })
 
-      return realFunction
-    }
-
-    var remoteCamerafunction = function(cameraOwner){
-      var returnFunction = function({x, y}){
-        cameraOwner.setCamera(x, y)
-      }
-
-      return returnFunction
-    }
+    var remoteCamerafunction = cameraOwner => ({x,y}) => cameraOwner.setCamera(x, y)
 
     var remoteButtonMarker = function(mockers){
       var returnFunction = function(){
         mockers.markCalls('make.button')
+        mockers.markCalls('add.text')
       }
 
       return returnFunction
@@ -65,6 +55,18 @@ export default class GameStub{
 
       sprite: this.mockers.createOneValueMocker('add.sprite', {
         reset: function(){}
+      }),
+
+      existing: this.mockers.createOneValueMocker('add.existing', {
+      }),
+
+      bitmapData: this.mockers.createOneValueMocker('add.bitmapData', {        
+        ctx : {
+        fillStyle: "",
+        beginPath: function(){},
+        rect: function(){},
+        fill : function(){}
+        }
       })
     }
 
@@ -194,14 +196,38 @@ export default class GameStub{
    */
   getNthActiveButton(n){
     var buttonCalls = this.mockers.getUnmarkedCalls('make.button')
-
-    var call = buttonCalls[n]
+    var call = buttonCalls[n-1]
 
     return {
-      x: call[3],
-      y: call[4],
-      width: call[7],
-      height: call[8]
+      x: call[0],
+      y: call[1]
     }
+  }
+
+  getCurrentTexts(){
+    var texts = this.mockers.getUnmarkedCalls('add.text')
+    var textInformation = []
+    for(let text of texts){
+      textInformation.push({
+        text: text[2],
+        x: text[4],
+        y: text[5]
+      })
+    }
+
+    return textInformation
+  }
+
+  getCurrentButtons(){
+    var buttons = this.mockers.getUnmarkedCalls('make.button')
+    var buttonInformation = []
+    for(let button of buttons){
+      buttonInformation.push({
+        x: button[0],
+        y: button[1]
+      })
+    }
+
+    return buttonInformation
   }
 }

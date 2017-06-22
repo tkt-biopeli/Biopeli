@@ -3,29 +3,34 @@ import ButtonAction from '../ButtonAction'
 
 /**
  * Description goes here
- * 
- * @param {ModelTile} tile 
- * @param {StructureType} structureTypes 
- * 
+ *
+ * @param {ModelTile} tile
+ * @param {StructureType} structureTypes
+ *
  * @return {ButtonAction[]}
  */
-export default function GrassActions (tile, structureTypes) {
-  var sBuilder = new StructureFactory({tile: tile, structureTypes: structureTypes})
+export default function GrassActions (tile, structureTypes, gameTimer, player) {
+  var sBuilder = new StructureFactory({
+    tile: tile,
+    structureTypes: structureTypes,
+    gameTimer: gameTimer,
+    player: player
+  })
 
   var createDairyFarm = new ButtonAction({
-    name : "Build a dairy farm",
+    name: 'Build a dairy farm',
     functionToCall: sBuilder.buildDairyFarm,
     context: sBuilder
   })
 
   var createBerryFarm = new ButtonAction({
-    name : "Build a berry farm",
+    name: 'Build a berry farm',
     functionToCall: sBuilder.buildBerryFarm,
     context: sBuilder
   })
 
   var createFarm = new ButtonAction({
-    name : "Build a farm",
+    name: 'Build a farm',
     functionToCall: sBuilder.buildFarm,
     context: sBuilder
   })

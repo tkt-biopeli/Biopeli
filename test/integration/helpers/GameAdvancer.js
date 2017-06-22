@@ -2,6 +2,11 @@ import GameStub from './GameStub'
 import GamestateChecker from './GamestateChecker'
 import GameState from '../../../src/game/GameState'
 import config from '../../../src/config'
+import ModelTile from '../../../src/models/map/ModelTile'
+import TileType from '../../../src/models/map/TileType'
+import StructureType from '../../../src/models/map/StructureType'
+import Structure from '../../../src/models/map/Structure'
+const assert = require("assert")
 
 /**
  * Provides functions for simulating inputs of user and passing of time
@@ -47,6 +52,9 @@ export default class GameAdvancer{
       return returnFunction
     }(this.timeObject)
     this.gameState.gameTimer.lastTime = 0
+
+    this.tileTypes = TileType()
+    this.structureTypes = StructureType()
   }
 
   /**
@@ -61,6 +69,16 @@ export default class GameAdvancer{
   }
 
   /**
+   * Click nth button that currently exist in menu
+   * @param {*} n 
+   */
+  clickNthButton(n){
+    var button = this.game.getNthActiveButton(n)
+
+    this.clickButton(button.x, button.y)
+  }
+
+  /**
    * Simulates click of a pointer to certain point in camera
    * 
    * @param {number} x 
@@ -68,32 +86,32 @@ export default class GameAdvancer{
    */
   click(x, y){
     this.game.setPointer(x, y)
+    this.clickButton(x, y)
     this.gameState.inputHandler.onPointerDown()
 
-    this.clickButton(x, y)
   }
 
   /**
-   * Simulates click of a pointe to certain point in camera but only checks buttons
+   * Simulates click of a pointer to certain point in camera but only checks buttons
    * 
    * @param {number} x 
    * @param {number} y 
    */
   clickButton(x, y){
-    var xloc = 3
-    var yloc = 4
-    var widthloc = 7
-    var heightloc = 8
-    var funcloc = 5
-    var contextloc = 6
+    var xloc = 0
+    var yloc = 1
+    var funcloc = 3
+    var contextloc = 4
 
     var buttons = this.game.mockers.getUnmarkedCalls('make.button')
 
     for(var i = 0 ; i < buttons.length ; i++){
       var button = buttons[i]
 
-      if (x >= button[xloc] && x <= button[xloc] + button[widthloc]
-        && y >= button[yloc] && y <= button[yloc] + button[heightloc]){
+      if(i == 2){
+        //assert.equal(0, button[xloc]+" "+button[yloc]+" "+x+" "+y)
+      }
+      if (x == button[xloc] && y == button[yloc]){
         button[funcloc].call(button[contextloc])
 
         return
@@ -149,5 +167,44 @@ export default class GameAdvancer{
    */
   resetCamera(){
     this.setCamera(0,0)
+  }
+
+  /**
+   * Helper method hat gives tile from map
+   * 
+   * @param {*} gridX 
+   * @param {*} gridY 
+   */
+  getTile(gridX, gridY){
+    return this.gameState.map.getTileWithGridCoordinates(gridX, gridY)
+  }
+
+  /**
+   * Sets the tile in map as preferred
+   * 
+   * @param {*} gridX 
+   * @param {*} gridY 
+   * @param {*} tileTypeName 
+   */
+  setTile(gridX, gridY, tileTypeName){
+    return this.gameState.map.addTileWithGridCoordinates(gridX, gridY, this.tileTypes[tileTypeName])
+  }
+
+  setStructure(gridX, gridY, name, structureTypeName, size, foundingYear){
+    var tile = this.getTile(gridX, gridY)
+    var structure = new Structure({
+      tile: tile, 
+      name: name, 
+      size: size, 
+      structureType: this.structureTypes[structureTypeName], 
+      foundingYear: foundingYear
+    })
+
+    tile.structure = structure
+  }
+
+  setTileWithStructure(gridX, gridY, tileTypeName, structureType, sname, ssize, sfoundingYear){
+    this.setTile(gridX, gridY, tileTypeName)
+    this.setStructure(gridX, gridY, sname, structureType, ssize, sfoundingYear)
   }
 }

@@ -1,8 +1,8 @@
 
 /**
  * Description goes here
- * 
- * @param { ??? } objects 
+ *
+ * @param { ??? } objects
  */
 export const centerGameObjects = (objects) => {
   objects.forEach(function (object) {

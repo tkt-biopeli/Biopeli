@@ -3,12 +3,9 @@
  * Description goes here
  */
 export default class InputHandler {
-
   /**
    * Description goes here
-   * 
-   * @param {object} param
-   * 
+   *
    * @param {Phaser.Game} param.game - Current game
    * @param {MapListener} param.mapListener - Current map listener
    * @param {CameraMover} param.cameraMover - Current camera mover
@@ -21,7 +18,7 @@ export default class InputHandler {
     this.initialize()
   }
 
-  /** 
+  /**
    * add callbacks to controls -> Phaser takes care of update in game loop
    */
   initialize () {
