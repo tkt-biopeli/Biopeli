@@ -55,6 +55,18 @@ export default class GameStub{
 
       sprite: this.mockers.createOneValueMocker('add.sprite', {
         reset: function(){}
+      }),
+
+      existing: this.mockers.createOneValueMocker('add.existing', {
+      }),
+
+      bitmapData: this.mockers.createOneValueMocker('add.bitmapData', {        
+        ctx : {
+        fillStyle: "",
+        beginPath: function(){},
+        rect: function(){},
+        fill : function(){}
+        }
       })
     }
 

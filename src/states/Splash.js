@@ -32,6 +32,11 @@ export default class extends Phaser.State {
     this.load.image('farm', 'assets/images/structures/farm.png')
     this.load.image('berry_farm', 'assets/images/structures/berry_farm.png')
     this.load.image('dairy_farm', 'assets/images/structures/dairy_farm.png')
+
+    this.load.image('turnip', 'assets/images/turnip.png')
+    this.load.image('score', 'assets/images/score.png')
+    this.load.image('time', 'assets/images/time.png')
+
   }
 
   /**

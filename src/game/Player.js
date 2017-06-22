@@ -7,6 +7,7 @@ export default class {
    */
   constructor () {
     this.points = 0
+    this.cash = 0
     this.structures = new Set()
   }
 
@@ -27,6 +28,10 @@ export default class {
    */
   getPoints (points) {
     return this.points
+  }
+
+  getCash() {
+    return this.cash
   }
 
   addStructure (structure) {

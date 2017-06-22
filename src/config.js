@@ -29,7 +29,20 @@ export default {
   linePadding: 8,
   sectionPadding: 12,
   menuFontSize: 16,
-  
+
+  //configuration for top bar
+  topBarItems: [
+    { name: "time", asset: "time", type: "text", widthPct: 1 / 3 },    
+    { name: "score", asset: "score", type: "text", widthPct: 1 / 3 },
+    { name: "turnip", asset: "turnip", type: "bar", widthPct: 1 / 3 }],
+  topBarSettings: {
+    height: 64,
+    paddingWidth: 32,
+    iconWidth: 64,
+    iconPadding: 16,
+    verticalPadding: 16,
+  },
+
   //configurations for camera
   cameraSpeed: 400,
   tweenCameraDuration: 500,

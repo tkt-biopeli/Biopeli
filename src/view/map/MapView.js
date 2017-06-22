@@ -1,13 +1,9 @@
-import Map from '../../models/map/Map'
-import ModelTile from '../../models/map/ModelTile'
 import ViewTile from './ViewTile'
-import TileType from '../../models/map/TileType'
 
 /**
  * Description goes here
  */
 export default class MapView {
-
   /**
    * Description goes here
    * 
