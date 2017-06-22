@@ -42,10 +42,8 @@ export default class Structure{
    * ie. number of production units per period
    */
   calculateProductionEfficiency() {
-    // init value
-    var value = 785 + Math.random()*10 //For testing purposes!
-    // magic happens
-    // production inputs are also factored into calculation
+    // production efficiency is based on the potential of the tile, and size and input of structure
+    var value = this.productionInput * this.structureSize * this.tile.potential
     return value
   }
 

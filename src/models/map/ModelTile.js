@@ -19,6 +19,7 @@ export default class {
     this.y = y
     this.tileType = type
     this.structure = structure
+    this.potential = 10
   }
 
   /**
