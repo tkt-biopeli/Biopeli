@@ -73,7 +73,7 @@ export default class GameAdvancer{
    * @param {*} n 
    */
   clickNthButton(n){
-    var button = this.game.getNthActiveButton(n)
+    var button = this.gameState.menuView.activeButtons[n-1]
 
     this.clickButton(button.x, button.y)
   }

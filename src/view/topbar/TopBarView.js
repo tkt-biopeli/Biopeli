@@ -103,7 +103,7 @@ export default class TopBarView {
   update () {
     for (let [key, item] of this.items) {
       if (item.type === 'text') {
-        item.graphic.setText(item.value.source())
+        item.graphic.text = item.value.source()
       }
       if (item.type === 'bar') {
         item.graphic.setPercentage(item.value.source())

@@ -43,7 +43,11 @@ export default class GameStub{
 
       tween: function(){return {to: cameraFunction}},
 
-      text: this.mockers.createOneValueMocker('add.text', {anchor: {set: function(){}}}),
+      text: this.mockers.createOneValueMocker('add.text', {
+        anchor: {set: function(){}},
+        x: 0,
+        y: 0
+      }),
 
       renderTexture: renderCreatorFunction,
 
