@@ -24,7 +24,7 @@ export default class Structure{
     this.name = name
     this.size = size
     this.structureType = structureType
-    this.productionInput = 0
+    this.productionInput = 1
     this.foundingYear = foundingYear
 
     this.updateFn = structureType.createUpdateFn()

@@ -13,7 +13,7 @@ describe('Structure tests', () =>{
     structure = new Structure({
       tile: 0, 
       name: "Riston rustholli", 
-      size: 64, 
+      size: 10, 
       structureType: stype,
       foundingYear: 1999
     })
@@ -23,23 +23,18 @@ describe('Structure tests', () =>{
     assert.equal(0, structure.tile)
     assert.equal(stype, structure.structureType)
     assert.equal("Riston rustholli", structure.name)
-    assert.equal(64, structure.size)
-    assert.equal(0, structure.productionInput)
+    assert.equal(10, structure.size)
+    assert.equal(1, structure.productionInput)
     assert.equal(1999, structure.foundingYear)
   })
 
   it('asset-shortcut works', () =>{
-    structure = new Structure({
-      tile: 0, 
-      name: "Riston rustholli", 
-      size: 64, 
-      structureType: stype,
-      foundingYear: 1999
-    })
     assert.equal("sd", structure.asset())
   })
-  
+
+ /* tämä pitää siirtää integraatio testiksi 
   it('calculateProductionEfficiency returns correct value', () =>{
-    assert(structure.calculateProductionEfficiency() >= 785 && structure.calculateProductionEfficiency() <= 795)
+    assert(structure.calculateProductionEfficiency() >= 0 && structure.calculateProductionEfficiency() <= 795)
   })
+  */
 })
