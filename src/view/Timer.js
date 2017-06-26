@@ -1,8 +1,8 @@
 export default class Timer {
   /**
    * @param {string} name
-   * @param {int} interval in millis
-   * @param {int} currentTime in millis
+   * @param {number} interval in millis
+   * @param {number} currentTime in millis
    */
   constructor ({name, interval, currentTime}) {
     if (name == null) {
@@ -40,7 +40,7 @@ export default class Timer {
   /**
    * Checks if enough time has passed for timer update, and if it has, updates
    *
-   * @param {*} currentTime
+   * @param {number} currentTime
    */
   update (currentTime) {
     if (currentTime - this.lastTime >= this.interval) {
@@ -64,6 +64,8 @@ export default class Timer {
 
   /**
    * Function that creates the time event to be given to listeners
+   * 
+   * @return {{time: number, year: number}}
    */
   createTimeEvent () {
     return {time: this.callTime, year: () => { return Math.random() * 2017 }}

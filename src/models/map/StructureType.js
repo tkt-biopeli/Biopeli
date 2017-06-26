@@ -14,17 +14,20 @@ export default function (gameState) {
    *
    * @param {string} param.name - Name of the type
    * @param {string} param.asset - Name of the sprite used
-   * @param {function} param.createUpdateFn
-   *  - Function that is called when the ingame time proceeds, not mandatory
+   * @param {function} param.constProduction
+   * @param {function} param.seasonProduction
    */
-  function StructureType ({name, asset, createUpdateFn}) {
+  function StructureType ({name, asset, constProduction, seasonProduction}) {
     this.name = name
     this.asset = asset
-    if (createUpdateFn !== undefined) {
-      this.createUpdateFn = createUpdateFn
-    } else {
-      this.createUpdateFn = function () {
-        return function () {}
+
+    this.constProduction = constProduction ? constProduction : function () {}
+    this.seasonProduction = seasonProduction ? seasonProduction : function () {}
+
+    this.createUpdateFn = function () {
+      return function () {
+        constProduction()
+        seasonProduction()
       }
     }
   }
@@ -32,24 +35,39 @@ export default function (gameState) {
   var farm = new StructureType({
     name: 'farm',
     asset: 'farm',
-    createUpdateFn: function () {
-      return function () {}
+
+    constantProductionUpdate: function () {
+      gameState.player.addCash(1)
+    },
+
+    seasonalProductionUpdate: function () {
+      gameState.player.addCash(10)
     }
   })
 
   var berryFarm = new StructureType({
     name: 'berry farm',
     asset: 'berry_farm',
-    createUpdateFn: function () {
-      return function () {}
+
+    constantProductionUpdate: function () {
+      gameState.player.addCash(1)
+    },
+
+    seasonalProductionUpdate: function () {
+      gameState.player.addCash(10)
     }
   })
 
   var dairyFarm = new StructureType({
     name: 'dairy farm',
     asset: 'dairy_farm',
-    createUpdateFn: function () {
-      return function () {}
+
+    constantProductionUpdate: function () {
+      gameState.player.addCash(1)
+    },
+
+    seasonalProductionUpdate: function () {
+      gameState.player.addCash(10)
     }
   })
 

@@ -13,10 +13,10 @@ export default class Structure {
    * @param {object} param
    *
    * @param {ModelTile} param.tile
-   * @param {string} name
-   * @param {integer} size
+   * @param {string} param.name
+   * @param {integer} param.size
    * @param {StructureType} param.structureType
-   * @param {integer} productionInput
+   * @param {integer} productionInput - ????
    */
   constructor ({tile, name, size, structureType, foundingYear}) {
     this.tile = tile

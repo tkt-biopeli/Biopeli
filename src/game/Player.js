@@ -14,10 +14,19 @@ export default class {
   /**
    * Adds points given as a parameter to players existing points
    *
-   * @return {number} - Current points
+   * @param {number} - The amount of points to be added
    */
   addPoints (points) {
     this.points += points
+  }
+
+  /**
+   * Add cash to the player's cash pool
+   * 
+   * @param {number} cash - The amount of cash to be added
+   */
+  addCash (cash) {
+    this.cash += cash
   }
 
   /**
