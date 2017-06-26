@@ -1,4 +1,4 @@
-/*import GameAdvancer from './helpers/GameAdvancer'
+import GameAdvancer from './helpers/GameAdvancer'
 
 describe('Integration test: Time advances, shows in top bar', () =>{
 
@@ -25,12 +25,12 @@ describe('Integration test: Time advances, shows in top bar', () =>{
 
 
   it('Time advances correctly for a month', ()=>{
-    gameAdvancer.update(4000)
+    gameAdvancer.updateSeveralTimes(4, 1000)
     gameStateChecker.checkTime('1980/2/1')
   })
 
   it('Time advances correctly for a year', ()=>{
-    gameAdvancer.update(52000)
+    gameAdvancer.updateSeveralTimes(48, 1000)
     gameStateChecker.checkTime('1981/1/1')
   })
 
@@ -39,4 +39,4 @@ describe('Integration test: Time advances, shows in top bar', () =>{
     gameStateChecker.checkTime('1980/1/1')
   })
 
-})*/
+})

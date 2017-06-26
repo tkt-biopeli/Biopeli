@@ -70,6 +70,17 @@ export default class GameAdvancer{
     this.gameState.update()
   }
 
+ /**
+ * Makes several update calls with wanted time interval
+ * @param {*} times 
+ * @param {*} interval 
+ */
+  updateSeveralTimes(times, interval){
+    for(let i = 0 ; i < times ; i++){
+      this.update(interval * (i + 1))
+    }
+  }
+
   /**
    * Click nth button that currently exist in menu
    * @param {*} n 

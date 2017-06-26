@@ -12,11 +12,12 @@ export default class GamestateChecker{
    * @param {GameStub} param.gameStub
    * @param {GameState} param.gameState
    */
-  constructor({gameStub, gameState}){
+  constructor({gameStub, gameState, gameAdvancer}){
     this.gameStub = gameStub
     this.gameState = gameState
     this.map = gameState.map
     this.menu = gameState.menu
+    this.gameAdvancer = gameAdvancer
   }
 
   /**
@@ -156,15 +157,8 @@ export default class GamestateChecker{
    * @param {int} time
    */
   checkTime(time) {
-    var textImages = this.gameStub.getCurrentTexts()
-    var found = false
-      for(let image of textImages){
-        var itext = image.text
-        if(itext == time){
-          found = true
-          break
-        }
-      }
-    assert(found)
+    var text = this.gameState.topBarView.items.get('time').graphic.text
+    
+    assert.equal(time, text)
   }
 }
