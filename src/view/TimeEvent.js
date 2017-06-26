@@ -1,5 +1,3 @@
-import Timer from './Timer.js'
-
 export default class {
   constructor ({callTime}) {
     this.serialNumber = callTime
@@ -25,6 +23,6 @@ export default class {
   }
 
   toString () {
-    return this.year+'/'+this.month+'/'+this.week
+    return this.year + '/' + this.month + '/' + this.week
   }
 }

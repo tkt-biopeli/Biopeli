@@ -1,5 +1,5 @@
 export default class TopBarControllerDemo {
-  constructor({ player, topBar, topBarView }) {
+  constructor ({ player, topBar, topBarView }) {
     this.player = player
     this.topBar = topBar
     this.topBarView = topBarView
@@ -13,5 +13,4 @@ export default class TopBarControllerDemo {
     this.topBar.setValueOf('turnip', r)
     this.topBarView.update()
   }
-
 }
