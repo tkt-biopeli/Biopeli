@@ -23,12 +23,14 @@ export default class GameStub{
       clear: mockers.createOneValueMocker('render.clear', true)
     })
 
-    var remoteCamerafunction = cameraOwner => ({x,y}) => cameraOwner.setCamera(x, y)
+    var remoteCamerafunction = cameraOwner => ({x,y,width}) => {
+      if(width == null){
+        cameraOwner.setCamera(x, y)
+      }
+    }
 
     var remoteButtonMarker = function(mockers){
       var returnFunction = function(){
-        mockers.markCalls('make.button')
-        mockers.markCalls('add.text')
       }
 
       return returnFunction
@@ -43,9 +45,12 @@ export default class GameStub{
 
       tween: function(){return {to: cameraFunction}},
 
-      text: this.mockers.createOneValueMocker('add.text', {
-        anchor: {set: function(){}},
-        setText: function(){}
+
+      text: (x, y, text)=>({
+        anchor: {set: ()=>{}},
+        x: x,
+        y: y,
+        text: text
       }),
 
       renderTexture: renderCreatorFunction,
@@ -74,7 +79,7 @@ export default class GameStub{
     }
 
     this.make = {
-      button: this.mockers.createOneValueMocker('make.button', true),
+      button: this.mockers.createGetValueMocker('make.button', 'x', 'y', 'asset', 'function', 'context'),
 
       graphics: this.mockers.createOneValueMocker('make.graphics', {
         beginFill: function(){},
@@ -188,49 +193,5 @@ export default class GameStub{
     this.cursors.down.isDown = down
     this.cursors.left.isDown = left
     this.cursors.right.isDown = right
-  }
-
-  /**
-   * Gives the size and coordinates of the n:th button in creation order of what exist
-   * 
-   * @param {number} n 
-   * 
-   * @return {{x: ???, y: ???, width: ???, height: ???}}
-   */
-  getNthActiveButton(n){
-    var buttonCalls = this.mockers.getUnmarkedCalls('make.button')
-    var call = buttonCalls[n-1]
-
-    return {
-      x: call[0],
-      y: call[1]
-    }
-  }
-
-  getCurrentTexts(){
-    var texts = this.mockers.getUnmarkedCalls('add.text')
-    var textInformation = []
-    for(let text of texts){
-      textInformation.push({
-        text: text[2],
-        x: text[4],
-        y: text[5]
-      })
-    }
-
-    return textInformation
-  }
-
-  getCurrentButtons(){
-    var buttons = this.mockers.getUnmarkedCalls('make.button')
-    var buttonInformation = []
-    for(let button of buttons){
-      buttonInformation.push({
-        x: button[0],
-        y: button[1]
-      })
-    }
-
-    return buttonInformation
   }
 }

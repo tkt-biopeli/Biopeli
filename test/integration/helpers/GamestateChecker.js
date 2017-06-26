@@ -127,19 +127,19 @@ export default class GamestateChecker{
    * @param {int} expectedAmount 
    */
   checkButtonAmountInMenu(expectedAmount){
-    var buttons = this.gameStub.getCurrentButtons()
+    var buttons = this.gameState.menuView.activeButtons
 
     assert.equal(expectedAmount, buttons.length)
   }
 
   checkIfTextsExist(...texts){
-    var textImages = this.gameStub.getCurrentTexts()
+    var textImages = this.gameState.menuView.activeTexts
 
     for(let text of texts){
       var found = false
 
       for(let image of textImages){
-        var itext = image.text
+        var itext = image.text.text
         if(itext.indexOf(text) !== -1){
           found = true
           break

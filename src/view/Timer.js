@@ -1,3 +1,4 @@
+import TimeEvent from './TimeEvent'
 export default class Timer {
   /**
    * @param {string} name
@@ -16,7 +17,6 @@ export default class Timer {
     this.callTime = 0
 
     this.listeners = new Set()
-    this.currentTime = this.createTimeEvent()
   }
 
   /**
@@ -66,6 +66,6 @@ export default class Timer {
    * Function that creates the time event to be given to listeners
    */
   createTimeEvent () {
-    return {time: this.callTime, year: () => { return Math.random() * 2017 }}
+    return new TimeEvent({callTime: this.callTime})
   }
 }

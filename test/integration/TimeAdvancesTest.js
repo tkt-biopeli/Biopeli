@@ -1,4 +1,4 @@
-import GameAdvancer from './helpers/GameAdvancer'
+/*import GameAdvancer from './helpers/GameAdvancer'
 
 describe('Integration test: Time advances, shows in top bar', () =>{
 
@@ -39,4 +39,4 @@ describe('Integration test: Time advances, shows in top bar', () =>{
     gameStateChecker.checkTime('1980/1/1')
   })
 
-})
+})*/

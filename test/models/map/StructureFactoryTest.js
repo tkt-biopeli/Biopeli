@@ -29,7 +29,7 @@ describe('StructureFactory tests', () =>{
     var sbuilder = new StructureFactory ({
       tile: {},
       structureTypes: {},
-      gameTimer: {currentTime: {year:()=>{}}},
+      gameTimer: {currentTime: {getYear:()=>{}}},
       player: {addStructure: spy}
     })
 
