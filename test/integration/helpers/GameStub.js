@@ -23,7 +23,7 @@ export default class GameStub{
       clear: mockers.createOneValueMocker('render.clear', true)
     })
 
-    var remoteCamerafunction = cameraOwner => ({x,y}) => {
+    var remoteCamerafunction = cameraOwner => ({x,y,width}) => {
       if(width == null){
         cameraOwner.setCamera(x, y)
       }
