@@ -22,11 +22,9 @@ export default class {
 
   /**
    * Returns the player's current points
-   *
-   * @param {Number} points - why is this a thing
    * @return {Number} - Current points
    */
-  getPoints (points) {
+  getPoints () {
     return this.points
   }
 

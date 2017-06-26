@@ -48,6 +48,9 @@ export default {
   tweenCameraDuration: 500,
 
   // amount of time between time events
-  gameTimerInterval: 1000
+  gameTimerInterval: 1000,
 
+  // configurations for city
+  cityInitialDemand: 100,
+  cityInitialTurnips: 0
 }
