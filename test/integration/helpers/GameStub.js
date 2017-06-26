@@ -45,7 +45,12 @@ export default class GameStub{
 
       tween: function(){return {to: cameraFunction}},
 
-      text: ()=>({anchor: {set: ()=>{}}}),
+      text: (x, y, text)=>({
+        anchor: {set: ()=>{}},
+        x: x,
+        y: y,
+        text: text
+      }),
 
       renderTexture: renderCreatorFunction,
 
