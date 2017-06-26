@@ -7,16 +7,15 @@
  * 
  * @return { ??? }
  */
-export default function GetValueMocker(gets) {
+export default function GetValueMocker(gets, values) {
   var get = gets
-  var args = arguments.slice(1)
 
   var realMocker = function(){
     get.push(arguments)
 
     var o = {}
-    for(let i = 0 ; i < args.length ; i++){
-      o[args[i]] = arguments[i]
+    for(let i = 0 ; i < values.length ; i++){
+      o[values[i]] = arguments[i]
     }
     return o
   }

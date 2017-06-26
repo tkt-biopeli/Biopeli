@@ -23,7 +23,11 @@ export default class GameStub{
       clear: mockers.createOneValueMocker('render.clear', true)
     })
 
-    var remoteCamerafunction = cameraOwner => ({x,y}) => cameraOwner.setCamera(x, y)
+    var remoteCamerafunction = cameraOwner => ({x,y}) => {
+      if(width == null){
+        cameraOwner.setCamera(x, y)
+      }
+    }
 
     var remoteButtonMarker = function(mockers){
       var returnFunction = function(){
@@ -43,11 +47,7 @@ export default class GameStub{
 
       tween: function(){return {to: cameraFunction}},
 
-      text: this.mockers.createOneValueMocker('add.text', {
-        anchor: {set: function(){}},
-        x: 0,
-        y: 0
-      }),
+      text: this.mockers.createGetValueMocker('add.text', 'x', 'y', 'text'),
 
       renderTexture: renderCreatorFunction,
 
@@ -75,7 +75,7 @@ export default class GameStub{
     }
 
     this.make = {
-      button: this.mockers.createOneValueMocker('make.button', true),
+      button: this.mockers.createGetValueMocker('make.button', 'x', 'y', 'asset', 'function', 'context'),
 
       graphics: this.mockers.createOneValueMocker('make.graphics', {
         beginFill: function(){},

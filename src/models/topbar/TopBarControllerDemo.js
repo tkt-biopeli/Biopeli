@@ -11,7 +11,7 @@ export default class TopBarControllerDemo {
     let r = Math.floor(Math.random() * 100)
     this.topBar.setValueOf('time', timerEvent.toString())
     this.topBar.setValueOf('turnip', r)
-    this.topBarView.update()    
+    this.topBarView.update()  
   }
 
 }

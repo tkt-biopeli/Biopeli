@@ -59,7 +59,10 @@ export default class MenuView {
     if(this.menu == null || this.menu.selectedTile == null){
       return
     }
+    
     this.iterateMenuFunctions()
+
+    
   }
 
   /**
