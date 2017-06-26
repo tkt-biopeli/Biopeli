@@ -31,8 +31,6 @@ export default class GameStub{
 
     var remoteButtonMarker = function(mockers){
       var returnFunction = function(){
-        mockers.markCalls('make.button')
-        mockers.markCalls('add.text')
       }
 
       return returnFunction
@@ -47,7 +45,7 @@ export default class GameStub{
 
       tween: function(){return {to: cameraFunction}},
 
-      text: this.mockers.createGetValueMocker('add.text', 'x', 'y', 'text'),
+      text: ()=>({anchor: {set: ()=>{}}}),
 
       renderTexture: renderCreatorFunction,
 
@@ -189,49 +187,5 @@ export default class GameStub{
     this.cursors.down.isDown = down
     this.cursors.left.isDown = left
     this.cursors.right.isDown = right
-  }
-
-  /**
-   * Gives the size and coordinates of the n:th button in creation order of what exist
-   * 
-   * @param {number} n 
-   * 
-   * @return {{x: ???, y: ???, width: ???, height: ???}}
-   */
-  getNthActiveButton(n){
-    var buttonCalls = this.mockers.getUnmarkedCalls('make.button')
-    var call = buttonCalls[n-1]
-
-    return {
-      x: call[0],
-      y: call[1]
-    }
-  }
-
-  getCurrentTexts(){
-    var texts = this.mockers.getUnmarkedCalls('add.text')
-    var textInformation = []
-    for(let text of texts){
-      textInformation.push({
-        text: text[2],
-        x: text[4],
-        y: text[5]
-      })
-    }
-
-    return textInformation
-  }
-
-  getCurrentButtons(){
-    var buttons = this.mockers.getUnmarkedCalls('make.button')
-    var buttonInformation = []
-    for(let button of buttons){
-      buttonInformation.push({
-        x: button[0],
-        y: button[1]
-      })
-    }
-
-    return buttonInformation
   }
 }

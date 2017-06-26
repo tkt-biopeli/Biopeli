@@ -30,5 +30,10 @@ export default class LabeledButton {
             Math.floor(x + buttonWidth / 2),
             Math.floor(y + buttonHeight / 2), label, style, viewGroup)
     text.anchor.set(config.menuTextStartingPoint, config.menuTextStartingPoint)
+    
+    this.x = x
+    this.y = y
+    this.callback = callback
+    this.context = context
   }
 }

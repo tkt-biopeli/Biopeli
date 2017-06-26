@@ -106,7 +106,7 @@ export default class GameAdvancer{
       var button = buttons[i]
 
       if (x == button.x && y == button.y){
-        button.function.call(button.context)
+        button.callback.call(button.context)
 
         return
       }
