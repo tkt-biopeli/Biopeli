@@ -53,9 +53,9 @@ describe('MapListener tests', () => {
 
   it('Pointer event in map area is recognized', () => {
     var pointerEvent = { x: 70, y: 50 }
-    menu.menuView.leftBorderCoordinate = 60
+    menu.menuView.menuBorderCoordinate = 60
     assert.equal(ml.pointerInMapArea(pointerEvent), false)
-    menu.menuView.leftBorderCoordinate = 70
+    menu.menuView.menuBorderCoordinate = 70
     assert.equal(ml.pointerInMapArea(pointerEvent), true)
   })
 
@@ -99,7 +99,7 @@ describe('MapListener tests', () => {
   it('Update with pointer in map area calls correct functions', () => {
     var pointerEvent = { x: 70, y: 50 }
     menu.selectedTile = "tile"
-    menu.menuView.leftBorderCoordinate = 80
+    menu.menuView.menuBorderCoordinate = 80
     game.camera.x = 0
     game.camera.y = 0
 

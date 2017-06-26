@@ -3,13 +3,14 @@ const assert = require('assert')
 const sinon = require('sinon')
 
 describe('MenuView tests', () =>{
-  var leftBorderCoordinate = 0
+  var menuBorderCoordinate = 0
   var leftPadding = 2
   var sectionPadding = 5
   var linePadding = 3
   var buttonWidth = 1
   var buttonHeight = 4
   var fontSize = 10
+  var backgroundAsset = 'menuBg'
   var groupStub
   var gameStub
   var menuView
@@ -23,23 +24,25 @@ describe('MenuView tests', () =>{
 
     menuView = new MenuView({
       game: gameStub,
-      leftBorderCoordinate: leftBorderCoordinate,
+      vertical: true,
+      menuBorderCoordinate: menuBorderCoordinate,
       leftPadding: leftPadding,
       sectionPadding: sectionPadding,
       linePadding: linePadding,
       buttonWidth: buttonWidth,
       buttonHeight: buttonHeight,
-      fontSize: fontSize
+      fontSize: fontSize,
+      backgroundAsset: backgroundAsset
     })
 
-    menuView.drawHeight = 0
+    menuView.drawPosition = 0
     tile = {tileType: {name: 'test'}, x: 0, y: 0, structure: {structureType: {name: 'test2'}, calculateProductionEfficiency: () => 2}}
     menuView.menu = {selectedTile: tile}
   })
 
   it('Constructor works', () =>{
     assert.equal(gameStub, menuView.game)
-    assert.equal(leftBorderCoordinate, menuView.leftBorderCoordinate)
+    assert.equal(menuBorderCoordinate, menuView.menuBorderCoordinate)
     assert.equal(leftPadding, menuView.leftPadding)
     assert.equal(sectionPadding, menuView.sectionPadding)
     assert.equal(linePadding, menuView.linePadding)
@@ -56,17 +59,17 @@ describe('MenuView tests', () =>{
   })
 
   it('Padding adders work', () =>{
-    menuView.drawHeight = 0
+    menuView.drawPosition = 0
     menuView.addPadding(10)
-    assert.equal(10, menuView.drawHeight)
+    assert.equal(10, menuView.drawPosition)
 
-    menuView.drawHeight = 0
+    menuView.drawPosition = 0
     menuView.addLinePadding()
-    assert.equal(linePadding, menuView.drawHeight)
+    assert.equal(linePadding, menuView.drawPosition)
 
-    menuView.drawHeight = 0
+    menuView.drawPosition = 0
     menuView.addSectionPadding()
-    assert.equal(sectionPadding, menuView.drawHeight)
+    assert.equal(sectionPadding, menuView.drawPosition)
   })
 
   it('Setting button actions works', () =>{
@@ -94,7 +97,7 @@ describe('MenuView tests', () =>{
 
     var style = {font: fontSize+"px Arial", fill: "#ffff00", align: "center"}
     assert.equal(1, textSpy.callCount)
-    assert(textSpy.calledWith(leftBorderCoordinate+leftPadding, 0, "asd", style, groupStub))
+    assert(textSpy.calledWith(menuBorderCoordinate+leftPadding, 0, "asd", style, groupStub))
     assert(paddingSpy.calledWith(10))
   })
 
@@ -171,8 +174,8 @@ describe('MenuView tests', () =>{
     assert(menuView.createStructureInformation())
 
     assert.equal(4, paddingSpy.callCount)
-    assert(textSpy.calledWith('Structure: test2'))
     assert.equal(5, textSpy.callCount)
+    assert(textSpy.calledWith('Structure: test2'))
   })
 
   it('Background creation works', () =>{
@@ -181,7 +184,7 @@ describe('MenuView tests', () =>{
 
     menuView.createBackground()
 
-    assert(spy.calledWith(leftBorderCoordinate, 0, "menuBg"))
+    assert(spy.calledWith(menuBorderCoordinate, 0, "menuBg"))
   })
 
   it('Background is always created in redraw', () =>{
@@ -195,7 +198,7 @@ describe('MenuView tests', () =>{
 
     assert.equal(1, backgroundSpy.callCount)
     assert(removeSpy.calledWith(true, true))
-    assert.equal(sectionPadding, menuView.drawHeight)
+    assert.equal(sectionPadding, menuView.drawPosition)
   })
 
   it('No information is outputted if no tile is chosen', () =>{

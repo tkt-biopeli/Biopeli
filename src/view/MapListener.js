@@ -42,7 +42,7 @@ export default class MapListener {
    * @return {boolean}
    */
   pointerInMapArea (pointerEvent) {
-    return (pointerEvent !== undefined && pointerEvent.x <= this.menu.menuView.leftBorderCoordinate)
+    return (pointerEvent !== undefined && pointerEvent.x <= this.menu.menuView.menuBorderCoordinate)
   }
 
   /**

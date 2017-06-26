@@ -1,6 +1,7 @@
 import LabeledButton from './LabeledButton'
 import Text from './Text'
 import ResetDecorator from './ResetDecorator'
+import TextComponent from './TextComponent'
 
 /**
  * Controls drawing of game's menu
@@ -17,16 +18,18 @@ export default class MenuView {
    * @param {number} param.buttonWidth width of buttons
    * @param {number} param.buttonHeight height of buttons
    */
-  constructor ({ game, leftBorderCoordinate, leftPadding, sectionPadding, linePadding, buttonWidth, buttonHeight, fontSize }) {
+  constructor ({ game, menuBorderCoordinate, vertical, leftPadding, sectionPadding, linePadding, buttonWidth, buttonHeight, fontSize, backgroundAsset }) {
     this.game = game
 
-    this.leftBorderCoordinate = leftBorderCoordinate
+    this.vertical = vertical
+    this.menuBorderCoordinate = menuBorderCoordinate
     this.leftPadding = leftPadding
     this.buttonWidth = buttonWidth
     this.buttonHeight = buttonHeight
     this.sectionPadding = sectionPadding
     this.linePadding = linePadding
     this.fontSize = fontSize
+    this.backgroundAsset = backgroundAsset
 
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
@@ -52,24 +55,25 @@ export default class MenuView {
     this.activeButtons = []
     this.activeTexts = []
 
-    this.drawHeight = this.sectionPadding
+    this.drawPosition = this.sectionPadding
     this.createBackground()
 
     if (this.menu == null || this.menu.selectedTile == null) {
       return
     }
 
-    this.iterateMenuFunctions()
+    var menuFunctions = [
+      this.createTileInformation,
+      this.createStructureInformation,
+      this.createButtons]
+
+    this.iterateMenuFunctions(menuFunctions)
   }
 
   /**
    * Creates all menu's sections and adds section padding between them
    */
-  iterateMenuFunctions () {
-    var menuFunctions = [
-      this.createTileInformation,
-      this.createStructureInformation,
-      this.createButtons]
+  iterateMenuFunctions (menuFunctions) {
 
     for (var i = 0; i < menuFunctions.length; i++) {
       if (menuFunctions[i].call(this)) this.addSectionPadding()
@@ -80,7 +84,14 @@ export default class MenuView {
    * Creates background image of menu
    */
   createBackground () {
-    this.menuViewGroup.create(this.leftBorderCoordinate, 0, 'menuBg')
+    var x = this.menuBorderCoordinate
+    var y = 0
+    if(!this.vertical){
+      y = this.menuBorderCoordinate
+      x = 0
+    }
+
+    this.menuViewGroup.create(x, y, this.backgroundAsset)
   }
 
   /**
@@ -91,9 +102,12 @@ export default class MenuView {
   createTileInformation () {
     var tile = this.menu.selectedTile
 
-    this.createText('Ground type: ' + tile.tileType.name)
-    this.addLinePadding()
-    this.createText('X: ' + tile.x + ', Y: ' + tile.y)
+    var components = [
+      new TextComponent('Ground type: ' + tile.tileType.name),
+      new TextComponent('X: ' + tile.x + ', Y: ' + tile.y)
+    ]
+
+    this.createSection(components)
 
     return true
   }
@@ -110,17 +124,30 @@ export default class MenuView {
       return false
     }
 
-    this.createText('Structure: ' + structure.structureType.name)
-    this.addLinePadding()
-    this.createText('Founding year: ' + structure.foundingYear)
-    this.addLinePadding()
-    this.createText('Size: ' + structure.size)
-    this.addLinePadding()
-    this.createText('Production input: ' + structure.productionInput)
-    this.addLinePadding()
-    this.createText('Production per time: ' + structure.calculateProductionEfficiency())
+    var components = [
+      new TextComponent('Structure: ' + structure.structureType.name),
+      new TextComponent('Founding year: ' + structure.foundingYear),
+      new TextComponent('Size: ' + structure.size),
+      new TextComponent('Production input: ' + structure.productionInput),
+      new TextComponent('Production per time: ' + structure.calculateProductionEfficiency())
+    ]
+
+    this.createSection(components)
 
     return true
+  }
+
+  createSection (components) {
+    for (let i = 0 ; i < components.length ; i++) {
+      var component = components[i]
+      if (component.type = 'text') {
+        this.createText(component.text)
+      }
+
+      if (i != components.length - 1) {
+        this.addLinePadding()
+      }
+    }
   }
 
   /**
@@ -143,14 +170,16 @@ export default class MenuView {
    * @param {ButtonAction} buttonAction
    */
   createButton (buttonAction) {
+    var coords = this.getNextElementCoordinates()
+
     var resetDecorator = new ResetDecorator({action: buttonAction, menu: this.menu})
 
     var button = new LabeledButton({
       game: this.game,
       viewGroup: this.menuViewGroup,
       label: buttonAction.name,
-      x: this.leftBorderCoordinate + this.leftPadding,
-      y: this.drawHeight,
+      x: coords.x,
+      y: coords.y,
       callback: resetDecorator.act,
       context: resetDecorator,
       buttonWidth: this.buttonWidth,
@@ -171,19 +200,35 @@ export default class MenuView {
    * @return { ??? }
    */
   createText (text) {
+    var coords = this.getNextElementCoordinates()
+
     var tex = new Text({
       game: this.game,
       viewGroup: this.menuViewGroup,
       text: text,
       fontSize: this.fontSize,
-      x: this.leftBorderCoordinate + this.leftPadding,
-      y: this.drawHeight
+      x: coords.x,
+      y: coords.y
     })
     this.addPadding(this.fontSize)
 
     this.activeTexts.push(tex)
 
     return tex
+  }
+
+  getNextElementCoordinates(){
+    if(this.vertical){
+      return {
+        x: this.menuBorderCoordinate + this.leftPadding,
+        y: this.drawPosition
+      }
+    }else{
+      return {
+        x: this.drawPosition,
+        y: this.menuBorderCoordinate - this.leftPadding
+      }
+    }
   }
 
   /**
@@ -202,7 +247,7 @@ export default class MenuView {
    * @param {Number} amount
    */
   addPadding (amount) {
-    this.drawHeight += amount
+    this.drawPosition += amount
   }
 
   /**

@@ -37,13 +37,15 @@ export default class GameState {
 
     this.menuView = new MenuView({
       game: state,
-      leftBorderCoordinate: state.camera.width - config.menuWidth,
+      vertical: true,
+      menuBorderCoordinate: state.camera.width - config.menuWidth,
       leftPadding: config.menuLeftPadding,
       buttonWidth: config.menuButtonWidth,
       buttonHeight: config.menuButtonHeight,
       sectionPadding: config.sectionPadding,
       linePadding: config.linePadding,
-      fontSize: config.menuFontSize
+      fontSize: config.menuFontSize,
+      backgroundAsset: 'menuBg'
     })
     this.menuView.redraw()
 
