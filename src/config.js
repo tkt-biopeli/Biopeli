@@ -4,20 +4,20 @@
  */
 export default {
 
-  //configurations for game
+  // configurations for game
   gameWidth: 1024,
   gameHeight: 768,
   localStorageName: 'biopeli',
 
-  //configurations for tiles
+  // configurations for tiles
   tileWidth: 128,
   tileHeight: 128,
 
-  //configurations for map
+  // configurations for map
   madWidthMultiplier: 4,
   mapHeightMultiplier: 4,
 
-  //configurations for menu
+  // configurations for menu
   menuWidth: 256,
   menuLeftPadding: 35,
   menuButtonWidth: 189,
@@ -30,24 +30,24 @@ export default {
   sectionPadding: 12,
   menuFontSize: 16,
 
-  //configuration for top bar
+  // configuration for top bar
   topBarItems: [
-    { name: "time", asset: "time", type: "text", widthPct: 1 / 3 },    
-    { name: "score", asset: "score", type: "text", widthPct: 1 / 3 },
-    { name: "turnip", asset: "turnip", type: "bar", widthPct: 1 / 3 }],
+    { name: 'time', asset: 'time', type: 'text', widthPct: 1 / 3 },
+    { name: 'score', asset: 'score', type: 'text', widthPct: 1 / 3 },
+    { name: 'turnip', asset: 'turnip', type: 'bar', widthPct: 1 / 3 }],
   topBarSettings: {
     height: 64,
     paddingWidth: 32,
     iconWidth: 64,
     iconPadding: 16,
-    verticalPadding: 16,
+    verticalPadding: 16
   },
 
-  //configurations for camera
+  // configurations for camera
   cameraSpeed: 400,
   tweenCameraDuration: 500,
 
-  //amount of time between time events
+  // amount of time between time events
   gameTimerInterval: 1000
 
 }

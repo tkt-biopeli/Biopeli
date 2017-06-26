@@ -11,4 +11,6 @@ Kyseessä on biotalouteen perustuva construction & management simulation -tyyppi
 
 Pelimaailma on jaettu ruutuihin, joihin pelaaja voi rakentaa erilaisia tuotantolaitoksia. Pelaaja saa pisteitä tekemistään valinnoista perustuen sekä niiden ekologisuuteen että taloudellisuuteen. Pelin kulkuun vaikuttavat myös satunnaiset tapahtumat, joilla voi olla positiivisia tai negatiivisia vaikutuksia. Pelaajan hallittavana on ainakin aluksi kaksi resurssia - nauriit ja raha. Kaupunki tuottaa rahaa ja kuluttaa nauriita suhteessa kokoonsa.
 
+### Demo
+
 https://tkt-biopeli.github.io/Biopeli/

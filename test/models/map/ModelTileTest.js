@@ -10,5 +10,6 @@ describe('Model tile tests', () =>{
     assert.equal(2, tile.y)
     assert.equal(0, tile.tileType)
     assert.equal(-1, tile.structure)
+    assert.equal(10, tile.potential)
   })
 })

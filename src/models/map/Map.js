@@ -1,17 +1,15 @@
 import ModelTile from './ModelTile'
 import TileType from './TileType'
-import Structure from './Structure'
 
 /**
  * Description goes here
  */
 export default class Map {
-
   /**
    * Description goes here
-   * 
+   *
    * @param {object} param - Parameter object
-   * 
+   *
    * @param {number} param.gridSizeX
    * @param {number} param.gridSizeY
    * @param {number} param.tileWidth
@@ -27,10 +25,10 @@ export default class Map {
 
   /**
    * Description goes here
-   * 
-   * @param {Number} gx 
-   * @param {Number} gy 
-   * @param {TileType} tileType 
+   *
+   * @param {Number} gx
+   * @param {Number} gy
+   * @param {TileType} tileType
    */
   addTileWithGridCoordinates (gx, gy, tileType) {
     var tile = new ModelTile({x: gx, y: gy, type: tileType, structure: null})
@@ -40,10 +38,10 @@ export default class Map {
 
   /**
    * Description goes here
-   * 
-   * @param {Number} px 
-   * @param {Number} py 
-   * @param {TileType} tileType 
+   *
+   * @param {Number} px
+   * @param {Number} py
+   * @param {TileType} tileType
    */
   addTileWithPixelCoordinates (px, py, tileType) {
     var gx = this.pixelsToGridX(px)
@@ -53,10 +51,10 @@ export default class Map {
 
   /**
    * Description goes here
-   * 
-   * @param {Number} gx 
-   * @param {Number} gy 
-   * 
+   *
+   * @param {Number} gx
+   * @param {Number} gy
+   *
    * @return {ModelTile}
    */
   getTileWithGridCoordinates (gx, gy) {
@@ -65,10 +63,10 @@ export default class Map {
 
   /**
    * Description goes here
-   * 
-   * @param {Number} px 
-   * @param {Number} py 
-   * 
+   *
+   * @param {Number} px
+   * @param {Number} py
+   *
    * @return {ModelTile}
    */
   getTileWithPixelCoordinates (px, py) {
@@ -79,9 +77,9 @@ export default class Map {
 
   /**
    * Description goes here
-   * 
-   * @param {Number} gx 
-   * @param {Number} gy 
+   *
+   * @param {Number} gx
+   * @param {Number} gy
    */
   removeTileWithGridCoordinates (gx, gy) {
     this.grid[gy * this.gridSizeX + gx] = undefined
@@ -89,9 +87,9 @@ export default class Map {
 
   /**
    * Description goes here
-   * 
-   * @param {Number} px 
-   * @param {Number} py 
+   *
+   * @param {Number} px
+   * @param {Number} py
    */
   removeTileWithPixelCoordinates (px, py) {
     this.grid[this.pixelsToGridX(py) * this.gridSizeX + this.pixelsToGridX(px)] = undefined
@@ -135,9 +133,9 @@ export default class Map {
 
   /**
    * Description goes here
-   * 
-   * @param {Number} x 
-   * 
+   *
+   * @param {Number} x
+   *
    * @return {Number}
    */
   pixelsToGridX (x) {
@@ -146,9 +144,9 @@ export default class Map {
 
   /**
    * Description goes here
-   * 
-   * @param {Number} y 
-   * 
+   *
+   * @param {Number} y
+   *
    * @return {Number}
    */
   pixelsToGridY (y) {
@@ -157,9 +155,9 @@ export default class Map {
 
   /**
    * Description goes here
-   * 
-   * @param {Number} x 
-   * 
+   *
+   * @param {Number} x
+   *
    * @return {Number}
    */
   gridToPixelsX (x) {
@@ -168,9 +166,9 @@ export default class Map {
 
   /**
    * Description goes here
-   * 
-   * @param {Number} y 
-   * 
+   *
+   * @param {Number} y
+   *
    * @return {Number}
    */
   gridToPixelsY (y) {

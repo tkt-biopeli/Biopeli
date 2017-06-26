@@ -2,12 +2,11 @@
  * Handles resetting the menu for the true action
  */
 export default class ResetDecorator {
-
   /**
    * Description goes here
-   * 
+   *
    * @param {object} param
-   * 
+   *
    * @param { ??? } param.action
    * @param {Menu} param.menu
    */
@@ -19,7 +18,7 @@ export default class ResetDecorator {
   /**
    * Description goes here
    */
-  act(){
+  act () {
     this.action.function.call(this.action.context)
     this.menu.reset()
   }

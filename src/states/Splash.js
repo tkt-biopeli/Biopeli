@@ -36,7 +36,6 @@ export default class extends Phaser.State {
     this.load.image('turnip', 'assets/images/turnip.png')
     this.load.image('score', 'assets/images/score.png')
     this.load.image('time', 'assets/images/time.png')
-
   }
 
   /**
