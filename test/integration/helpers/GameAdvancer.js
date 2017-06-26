@@ -40,6 +40,7 @@ export default class GameAdvancer{
     this.estimatedX = this.game.camera.x
     this.estimatedY = this.game.camera.y
 
+
     this.mapRealWidth = this.mapWidth * config.tileWidth
     this.mapRealHeight = this.mapHeight * config.tileHeight
 
@@ -55,6 +56,7 @@ export default class GameAdvancer{
 
     this.tileTypes = TileType()
     this.structureTypes = StructureType()
+    
   }
 
   /**
@@ -73,7 +75,7 @@ export default class GameAdvancer{
    * @param {*} n 
    */
   clickNthButton(n){
-    var button = this.game.getNthActiveButton(n)
+    var button = this.gameState.menuView.activeButtons[n-1]
 
     this.clickButton(button.x, button.y)
   }
@@ -98,21 +100,13 @@ export default class GameAdvancer{
    * @param {number} y 
    */
   clickButton(x, y){
-    var xloc = 0
-    var yloc = 1
-    var funcloc = 3
-    var contextloc = 4
-
-    var buttons = this.game.mockers.getUnmarkedCalls('make.button')
+    var buttons = this.gameState.menuView.activeButtons
 
     for(var i = 0 ; i < buttons.length ; i++){
       var button = buttons[i]
 
-      if(i == 2){
-        //assert.equal(0, button[xloc]+" "+button[yloc]+" "+x+" "+y)
-      }
-      if (x == button[xloc] && y == button[yloc]){
-        button[funcloc].call(button[contextloc])
+      if (x == button.x && y == button.y){
+        button.callback.call(button.context)
 
         return
       }

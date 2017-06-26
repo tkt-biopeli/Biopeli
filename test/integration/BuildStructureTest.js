@@ -1,4 +1,5 @@
 import GameAdvancer from './helpers/GameAdvancer'
+const assert = require('assert')
 
 describe('Integration test: Building structures', () =>{
 
@@ -11,7 +12,7 @@ describe('Integration test: Building structures', () =>{
     gameAdvancer = new GameAdvancer()
     game = gameAdvancer.game
     gameState = gameAdvancer.gameState
-    gameStateChecker = gameAdvancer.gamestateChecker
+    gameStateChecker = gameAdvancer.gamestateChecker    
   })
 
   it('Can build a farm on grass', () =>{

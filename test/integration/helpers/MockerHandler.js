@@ -1,5 +1,6 @@
 import Mocker from './Mocker'
 import SingleMocker from './SingleMocker'
+import GetValueMocker from './GetValueMocker'
 const assert = require("assert")
 
 /**
@@ -40,6 +41,13 @@ export default class MockerHandler{
   createSeveralValueMocker(tag, values){
     var gets = []
     var mocker = Mocker(values, gets)
+
+    return this.createMocker(tag, mocker, gets)
+  }
+
+  createGetValueMocker(tag){
+    var gets = []
+    var mocker = GetValueMocker(gets, Array.prototype.slice.call(arguments, 1))
 
     return this.createMocker(tag, mocker, gets)
   }

@@ -1,6 +1,5 @@
 import ModelTile from './ModelTile'
 import TileType from './TileType'
-import Structure from './Structure'
 
 /**
  * Description goes here

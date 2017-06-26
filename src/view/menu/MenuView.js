@@ -31,6 +31,8 @@ export default class MenuView {
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
     this.buttonActions = []
+    this.activeButtons = []
+    this.activeTexts = []
   }
 
   /**
@@ -47,6 +49,8 @@ export default class MenuView {
    */
   redraw () {
     this.menuViewGroup.removeAll(true, true)
+    this.activeButtons = []
+    this.activeTexts = []
 
     this.drawHeight = this.sectionPadding
     this.createBackground()
@@ -54,6 +58,7 @@ export default class MenuView {
     if (this.menu == null || this.menu.selectedTile == null) {
       return
     }
+
     this.iterateMenuFunctions()
   }
 
@@ -152,6 +157,8 @@ export default class MenuView {
       buttonHeight: this.buttonHeight
     })
 
+    this.activeButtons.push(button)
+
     this.addPadding(this.buttonHeight)
   }
 
@@ -173,6 +180,8 @@ export default class MenuView {
       y: this.drawHeight
     })
     this.addPadding(this.fontSize)
+
+    this.activeTexts.push(tex)
 
     return tex
   }
