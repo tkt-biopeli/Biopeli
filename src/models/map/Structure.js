@@ -26,8 +26,7 @@ export default class Structure {
     this.productionInput = 1
     this.foundingYear = foundingYear
 
-    this.produceFn = structureType.createConstantProductionFn()
-    this.produceSeasonFn = structureType.createSeasonalProductionFn()
+    this.produceFn = structureType.createProductionFn()
   }
 
   /**
@@ -48,16 +47,13 @@ export default class Structure {
   }
 
   /**
-   * Generates the constant produce 
+   * Returns the amount of turnips produced by this structure
+   * 
+   * @param {TimeEvent} timeEvent - Current ingame date
+   * 
+   * @return {number} - Turnips produced
    */
-  produce () {
-    return this.produceFn()
-  }  
-
-  /**
-   * Generates the seasonal produce 
-   */
-  produceSeason () {
-    return this.produceSeasonFn()
+  produce (timeEvent) {
+    return this.produceFn(timeEvent)
   }
 }

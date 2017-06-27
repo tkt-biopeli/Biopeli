@@ -9,17 +9,10 @@ describe('StructureType tests', () => {
     assert.equal(3, Object.keys(structures).length)
   })
 
-  it('Create constant production function is never undefined', () => {
+  it('Create production function is never undefined', () => {
     var types = StructureType()
     for(var type in types){
-      assert.equal('function', typeof types[type].createConstantProductionFn)
+      assert.equal('function', typeof types[type].createProductionFn)
     }
   })  
-  
-  it('Create seasonal production function is never undefined', () => {
-    var types = StructureType()
-    for(var type in types){
-      assert.equal('function', typeof types[type].createSeasonalProductionFn)
-    }
-  })
 })

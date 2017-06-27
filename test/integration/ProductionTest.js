@@ -1,32 +1,39 @@
-import GameTimeListener from '../../src/models/GameTimeListener'
+import GameTimerListener from '../../src/models/GameTimerListener'
 import Player from '../../src/game/Player'
 import TimeEvent from '../../src/view/TimeEvent'
 import StructureType from '../../src/models/map/StructureType'
+import TileType from '../../src/models/map/TileType'
+import ModelTile from '../../src/models/map/ModelTile'
+import StructureFactory from '../../src/models/map/StructureFactory'
+
+const sinon = require('sinon')
+const assert = require('assert')
 
 describe('Production tests', () => {
 
   var listener, tile, factory, structureTypes, player
 
   before(function () {
-    player = new Player
-    listener = new GameTimeListener({
+    player = new Player()
+
+    listener = new GameTimerListener({
       player: player,
       menuView: {redraw: function(){}}
     })
 
     structureTypes = StructureType()
 
-    tile = new Tile({ 
+    tile = new ModelTile({ 
       x: 1, 
       y: 1, 
-      type: structureTypes.farm, 
+      type: TileType().grass, 
       structure: undefined
     })
 
     factory = new StructureFactory({ 
       tile: tile, 
       structureTypes: structureTypes, 
-      gameTimer: undefined, 
+      gameTimer: {currentTime: {getYear: () => {return 1}}}, 
       player: player
     })
   })
@@ -48,11 +55,13 @@ describe('Production tests', () => {
     }
   }
 
-  it('constant production works', () => {
-    factory.build.farm()
-  })
+  it('Production works', () => {
+    factory.buildFarm()
 
-  it('Seasonal production works', () => {
-    factory.build.farm()
+    sinon.spy(tile.structure, 'produceFn')
+
+    listener.onTimer(createNonSeasonEvent())
+
+    assert(tile.structure.produceFn.calledOnce)
   })
 })

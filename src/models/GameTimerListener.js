@@ -10,17 +10,9 @@ export default class GameTimerListener {
   * @param {TimeEvent} timerEvent
   */
   onTimer (timerEvent) {
-    var month = timerEvent.getMonth(), 
-        week = timerEvent.getWeek()
-    var updateSeasonal = (month % 3 == 0) && (week == 1)
-
     var produced = 0
     for (let structure of this.player.structures) {
-      produced += structure.produce()
-
-      if(updateSeasonal){
-        produced += structure.produceSeason()
-      }
+      produced += structure.produce(timerEvent)
     }
     this.player.addPoints(produced) // Replace with desired functionality
 

@@ -5,12 +5,6 @@ import StructureTypes from '../../../src/models/map/StructureType'
 
 describe('StructureFactory tests', () => {
 
-  /**
-   * @see StructureType.createUpdateFn
-   */
-  function createConstantProductionFn(){}
-  function createSeasonalProductionFn(){}
-
   it('Constructor works', () => {
     var sbuilder = new StructureFactory({
       tile: 0,
@@ -36,8 +30,7 @@ describe('StructureFactory tests', () => {
 
     sbuilder.buildBuilding({
       name: 'test', 
-      createConstantProductionFn:createConstantProductionFn,
-      createSeasonalProductionFn:createSeasonalProductionFn
+      createProductionFn: ()=>{}
     })
     assert.equal('test', sbuilder.tile.structure.structureType.name)
     assert.equal(1, spy.callCount)

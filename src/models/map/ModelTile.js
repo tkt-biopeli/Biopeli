@@ -20,24 +20,4 @@ export default class {
     this.structure = structure
     this.potential = 10
   }
-
-  /**
-   * Generates the constant produce 
-   * @see Structure
-   * 
-   * @return {number} - The number of turnips produced
-   */
-  produce () {
-    return this.structure.produce()
-  }  
-
-  /**
-   * Generates the seasonal produce 
-   * @see Structure
-   * 
-   * @return {number} - The number of turnips produced
-   */
-  produceSeason () {
-    return this.structure.produceSeason()
-  }
 }

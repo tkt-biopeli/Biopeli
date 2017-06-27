@@ -21,29 +21,37 @@ export default function (gameState) {
     this.name = name
     this.asset = asset
 
-    var constProdFn = createConstFn ? 
-        createConstFn : function () {return function () {}}
-    var seasonProdFn = createSeasonFn ? 
-        createSeasonFn : function () {return function () {}}
+    this.createSeasonFn = createSeasonFn ? 
+        createSeasonFn : (event) => {return ()=>{}}
+    this.createConstFn = createConstFn ? 
+        createConstFn : () => {return ()=>{}}
 
-    this.createConstantProductionFn = function () { return constProdFn() }
-    this.createSeasonalProductionFn = function () { return seasonProdFn() }
+    this.createProductionFn = () => {
+      var seasonFn = createSeasonFn()
+      var constFn = createConstFn()
+      return (timeEvent) => {
+        var produced = 0
+        produced += seasonFn(timeEvent)
+        produced += constFn()
+        return produced
+      }
+    }
   }
 
   var farm = new StructureType({
     name: 'farm',
     asset: 'farm',
 
-    createSeasonFn: function () {
-      return function () {
-        return 100
-      } 
+    createSeasonFn: () => {
+      return (timeEvent) => {
+        return timeEvent.month == 8 ? 100 : 0
+      }
     },
 
-    createConstFn: function (stat) {
-      return function () {
-        return 1
-      } 
+    createConstFn: () => {
+      return () => {
+        return 2
+      }
     }
   })
 
@@ -51,12 +59,16 @@ export default function (gameState) {
     name: 'berry farm',
     asset: 'berry_farm',
 
-    createSeasonFn: function () {
-      return function () {gameState.player.addCash(1)} 
+    createSeasonFn: () => {
+      return (timeEvent) => {
+        return timeEvent.month == 8 ? 100 : 0
+      }
     },
 
-    createConstFn: function () {
-      return function () {gameState.player.addCash(10)} 
+    createConstFn: () => {
+      return () => {
+        return 2
+      }
     }
   })
 
@@ -64,12 +76,16 @@ export default function (gameState) {
     name: 'dairy farm',
     asset: 'dairy_farm',
 
-    createSeasonFn: function () {
-      return function () {gameState.player.addCash(1)} 
+    createSeasonFn: () => {
+      return (timeEvent) => {
+        return timeEvent.month == 8 ? 100 : 0
+      }
     },
 
-    createConstFn: function () {
-      return function () {gameState.player.addCash(10)} 
+    createConstFn: () => {
+      return () => {
+        return 2
+      }
     }
   })
 
