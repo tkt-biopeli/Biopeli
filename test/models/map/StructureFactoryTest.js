@@ -49,7 +49,7 @@ describe('StructureFactory tests', () => {
   it('Build Farm works', () => {
     setSpy()
 
-    builder.buildFarm()
+    builder.build.farm()
 
     assert(spy.calledWith(types.farm))
   })
@@ -57,7 +57,7 @@ describe('StructureFactory tests', () => {
   it('Build dairy farm works', () => {
     setSpy()
 
-    builder.buildDairyFarm()
+    builder.build.dairyFarm()
 
     assert(spy.calledWith(types.dairyFarm))
   })
@@ -65,7 +65,7 @@ describe('StructureFactory tests', () => {
   it('Build berry farm works', () => {
     setSpy()
 
-    builder.buildBerryFarm()
+    builder.build.berryFarm()
 
     assert(spy.calledWith(types.berryFarm))
   })

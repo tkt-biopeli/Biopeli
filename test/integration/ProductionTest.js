@@ -56,7 +56,7 @@ describe('Production tests', () => {
   }
 
   it('Production works', () => {
-    factory.buildFarm()
+    factory.build.farm()
 
     sinon.spy(tile.structure, 'produceFn')
 

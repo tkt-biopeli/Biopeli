@@ -20,38 +20,20 @@ export default class StructureFactory {
     this.structureTypes = structureTypes
     this.gameTimer = gameTimer
     this.player = player
-  }
 
-  /*build = {
-    dairyFarm: () => {
-      this.buildBuilding(structureTypes.dairyFarm)
-    },
-    berryFarm: () => {
-      this.buildBuilding(structureTypes.berryFarm)
-    },
-    farm: () => {
-      this.buildBuilding(structureTypes.farm)
+    this.build = {
+      dairyFarm: () => {
+        this.buildBuilding(structureTypes.dairyFarm)
+      },
+      berryFarm: () => {
+        this.buildBuilding(structureTypes.berryFarm)
+      },
+      farm: () => {
+        this.buildBuilding(structureTypes.farm)
+      }
     }
-  }*/
-
-  /**
-   * Description goes here
-   */
-  buildDairyFarm() {
-    this.buildBuilding(this.structureTypes.dairyFarm)
   }
-
-  buildBerryFarm() {
-    this.buildBuilding(this.structureTypes.berryFarm)
-  }
-
-  /**
-   * Description goes here
-   */
-  buildFarm() {
-    this.buildBuilding(this.structureTypes.farm)
-  }
-
+  
   /**
    * Description goes here
    *
