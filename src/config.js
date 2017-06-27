@@ -52,5 +52,6 @@ export default {
 
   // configurations for city
   cityInitialDemand: 100,
-  cityInitialTurnips: 0
+  cityInitialTurnips: 0,
+  cityInitialPopulation: 100000
 }

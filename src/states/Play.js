@@ -9,17 +9,17 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  init () { }
+  init() { }
 
   /**
    * Description goes here
    */
-  preload () { }
+  preload() { }
 
   /**
    * Description goes here
    */
-  create () {
+  create() {
     // create before game state
     this.cursors = this.game.input.keyboard.createCursorKeys()
 
@@ -36,7 +36,7 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  render () {
+  render() {
     if (__DEV__) {
       // this.game.debug.cameraInfo(this.game.camera, 500, 32)
     }
@@ -45,7 +45,7 @@ export default class extends Phaser.State {
   /**
    * Updates the  gameState associated with this object
    */
-  update () {
+  update() {
     this.gameState.update()
   }
 }

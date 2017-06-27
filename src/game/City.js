@@ -1,34 +1,30 @@
 import config from '../config'
 
 export default class City {
-  constructor (name) {
-    this.name = name || 'City'
+  constructor({ name }) {
+    this.name = name
+    this.population = config.cityInitialPopulation
     this.demand = config.cityInitialDemand
     this.turnips = config.cityInitialTurnips
   }
 
-  /* Moi Miia, nämä vähän turhia javascriptis, ku city.name on oikeastaan parempi
-     kun city.getName koska se on getteri ja setteri samalla.
-  getName () {
-    return this.name
+  increasePopulation(amount) {
+    this.population = this.population + amount
   }
-  getDemand () {
-    return this.demand
-  }
-  getTurnips () {
-    return this.turnips
-  }
-  */
-  increaseDemand (amount) {
+
+  increaseDemand(amount) {
     this.demand = this.demand + amount
   }
-  resetTurnips () {
+
+  resetTurnips() {
     this.turnips = config.cityInitialTurnips
   }
-  receiveTurnips (amount) {
+
+  receiveTurnips(amount) {
     this.turnips = this.turnips + amount
   }
-  payPlayerAccordingToDemandSatisfied () {
+
+  payPlayerAccordingToDemandSatisfied() {
     // if turnips equals demand player gets ? points
   }
 }

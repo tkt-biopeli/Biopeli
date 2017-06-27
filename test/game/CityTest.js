@@ -3,31 +3,41 @@ import config from '../../src/config'
 const assert = require('assert')
 
 describe('City tests', () => {
-  it('Constructor works when name is defined', () => {
-    var city = new City('test')
-    assert.equal(city.getName(), 'test')
+
+  var city
+
+  before(() => {
+    city = new City({ name: 'test' })
   })
-  it('Constructor works when name is undefined', () => {
-    var city = new City()
-    assert.equal(city.getName(), 'City')
+
+  it('Constructor works', () => {
+    assert.equal(city.name, 'test')
   })
-  it('Initial demand and turnips are set correctly', () => {
-    var city = new City('test')
-    assert.equal(city.getDemand(), config.cityInitialDemand)
-    assert.equal(city.getTurnips(), config.cityInitialTurnips)
+
+  it('Initial demand, population and turnips are set correctly', () => {
+    assert.equal(city.demand, config.cityInitialDemand)
+    assert.equal(city.turnips, config.cityInitialTurnips)
+    assert.equal(city.population = config.cityInitialPopulation)
   })
+
   it('Demand is increased correctly', () => {
-    var city = new City('test')
     city.increaseDemand(100)
-    assert.equal(city.getDemand(), 200)
+    assert.equal(city.demand, 200)
   })
+
+  it('Population is increased correctly', () => {
+    city.increasePopulation(1)
+    assert.equal(city.population, 100001)
+  })
+
+
   it('Receiving and reseting turnips works', () => {
-    var city = new City('test')
     city.receiveTurnips(20)
-    assert.equal(city.getTurnips(), 20)
+    assert.equal(city.turnips, 20)
     city.resetTurnips()
-    assert.equal(city.getTurnips(), 0)
+    assert.equal(city.turnips, 0)
   })
+
   it('City pays money to player according to satisfaction level', () => {
     // test here
   })
