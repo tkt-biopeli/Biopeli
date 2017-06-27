@@ -105,6 +105,8 @@ export default class GameState {
     this.gameTimer.addListener(this.gameTimerListener)
     this.gameTimer.addListener(this.topBarControllerDemo)
     this.menuOptionCreator.gameTimer = this.gameTimer
+
+    this.gameTimer.callListeners()
   }
 
   initializeModel(mapWidth, mapHeight, tileWidth, tileHeight) {

@@ -17,7 +17,7 @@ export default class TopBarView {
    * @param {number} param.topBarWidth - width on screen
    * @memberof TopBarView
    */
-  constructor ({ game, topBar, topBarWidth }) {
+  constructor({ game, topBar, topBarWidth }) {
     this.game = game
     this.topBar = topBar
     this.topBarWidth = topBarWidth
@@ -27,7 +27,7 @@ export default class TopBarView {
     this.draw()
   }
 
-  initializeItems () {
+  initializeItems() {
     let itemsConfig = config.topBarItems
     let settings = config.topBarSettings
     let totalPadding = (itemsConfig.length + 1) * settings.paddingWidth
@@ -49,7 +49,7 @@ export default class TopBarView {
     }
   }
 
-  draw () {
+  draw() {
     this.createBackground()
     for (let item of this.items.values()) {
       this.createIconGraphic(item)
@@ -57,7 +57,7 @@ export default class TopBarView {
     }
   }
 
-  createItemValueGraphics (item) {
+  createItemValueGraphics(item) {
     if (item.type === 'text') {
       this.createTextGraphic(item)
     }
@@ -66,18 +66,18 @@ export default class TopBarView {
     }
   }
 
-  createIconGraphic (item) {
+  createIconGraphic(item) {
     let icon = this.game.add.sprite(item.icon.x, item.icon.y, item.icon.asset)
     icon.fixedToCamera = true
   }
 
-  createTextGraphic (item) {
+  createTextGraphic(item) {
     let text = this.game.add.text(item.value.x, item.value.y, item.value.source())
     text.fixedToCamera = true
     item.graphic = text
   }
 
-  createBarGraphic (item) {
+  createBarGraphic(item) {
     let bar = new AnimatedBar({
       game: this.game,
       x: item.value.x,
@@ -88,7 +88,7 @@ export default class TopBarView {
     item.graphic = bar
   }
 
-  createBackground () {
+  createBackground() {
     let bg = this.game.make.graphics()
     bg.beginFill(0x000000, 0.25)
     bg.drawRoundedRect(0, 0, this.topBarWidth, this.topBarHeight, 1)
@@ -102,10 +102,10 @@ export default class TopBarView {
    *
    * @memberof TopBarView
    */
-  update () {
+  update() {
     for (let item of this.items.values()) {
       if (item.type === 'text') {
-        item.graphic.setText(item.value.source())
+        item.graphic.text = item.value.source()
       }
       if (item.type === 'bar') {
         item.graphic.setPercentage(item.value.source())

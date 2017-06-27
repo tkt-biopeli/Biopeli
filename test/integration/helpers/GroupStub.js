@@ -1,8 +1,8 @@
 export default class GroupStub {
-	constructor(){}
+  constructor() { }
 
-  add(){}
-  addChild(){}
-  removeAll(){}
-  create(){}
+  add() { }
+  addChild() { }
+  removeAll() { }
+  create() { }
 }

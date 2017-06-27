@@ -243,4 +243,5 @@ describe('MenuView tests', () => {
       assert.equal(2, paddingSpy.callCount)
     })
     */
+
 })

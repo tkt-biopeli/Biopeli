@@ -17,14 +17,14 @@ export default function (gameState) {
    * @param {function} param.createUpdateFn
    *  - Function that is called when the ingame time proceeds, not mandatory
    */
-  function StructureType ({name, asset, createUpdateFn}) {
+  function StructureType({ name, asset, createUpdateFn }) {
     this.name = name
     this.asset = asset
     if (createUpdateFn !== undefined) {
       this.createUpdateFn = createUpdateFn
     } else {
       this.createUpdateFn = function () {
-        return function () {}
+        return function () { }
       }
     }
   }
@@ -33,7 +33,7 @@ export default function (gameState) {
     name: 'farm',
     asset: 'farm',
     createUpdateFn: function () {
-      return function () {}
+      return function () { }
     }
   })
 
@@ -41,7 +41,7 @@ export default function (gameState) {
     name: 'berry farm',
     asset: 'berry_farm',
     createUpdateFn: function () {
-      return function () {}
+      return function () { }
     }
   })
 
@@ -49,7 +49,7 @@ export default function (gameState) {
     name: 'dairy farm',
     asset: 'dairy_farm',
     createUpdateFn: function () {
-      return function () {}
+      return function () { }
     }
   })
 

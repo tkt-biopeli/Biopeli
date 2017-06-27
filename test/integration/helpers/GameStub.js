@@ -5,7 +5,7 @@ const assert = require('assert')
 /**
  * Mocks phaser
  */
-export default class GameStub{
+export default class GameStub {
 
   /**
    * Mocks phaser
@@ -15,7 +15,7 @@ export default class GameStub{
    * @param {number} width
    * @param {number} height
    */
-  constructor({width, height}){
+  constructor({ width, height }) {
     this.mockers = new MockerHandler()
 
     var remoteMockingFunction = mockers => () => ({
@@ -23,12 +23,14 @@ export default class GameStub{
       clear: mockers.createOneValueMocker('render.clear', true)
     })
 
-    var remoteCamerafunction = cameraOwner => ({x,y}) => cameraOwner.setCamera(x, y)
+    var remoteCamerafunction = cameraOwner => ({ x, y, width }) => {
+      if (width == null) {
+        cameraOwner.setCamera(x, y)
+      }
+    }
 
-    var remoteButtonMarker = function(mockers){
-      var returnFunction = function(){
-        mockers.markCalls('make.button')
-        mockers.markCalls('add.text')
+    var remoteButtonMarker = function (mockers) {
+      var returnFunction = function () {
       }
 
       return returnFunction
@@ -41,77 +43,85 @@ export default class GameStub{
     this.add = {
       helperFunction: remoteMockingFunction,
 
-      tween: function(){return {to: cameraFunction}},
+      tween: function () { return { to: cameraFunction } },
 
-      text: this.mockers.createOneValueMocker('add.text', {anchor: {set: function(){}}}),
+
+      text: (x, y, text) => ({
+        anchor: { set: () => { } },
+        x: x,
+        y: y,
+        text: text
+      }),
 
       renderTexture: renderCreatorFunction,
 
       group: this.mockers.createOneValueMocker('add.group', {
-        add: function(){},
+        add: function () { },
         removeAll: buttonMarkerFunction,
-        create: function(){}
+        create: function () { }
       }),
 
       sprite: this.mockers.createOneValueMocker('add.sprite', {
-        reset: function(){}
+        reset: function () { }
       }),
 
       existing: this.mockers.createOneValueMocker('add.existing', {
       }),
 
-      bitmapData: this.mockers.createOneValueMocker('add.bitmapData', {        
-        ctx : {
-        fillStyle: "",
-        beginPath: function(){},
-        rect: function(){},
-        fill : function(){}
+      bitmapData: this.mockers.createOneValueMocker('add.bitmapData', {
+        ctx: {
+          fillStyle: "",
+          beginPath: function () { },
+          rect: function () { },
+          fill: function () { }
         }
       })
     }
 
     this.make = {
-      button: this.mockers.createOneValueMocker('make.button', true),
+      button: this.mockers.createGetValueMocker('make.button', 'x', 'y', 'asset', 'function', 'context'),
 
       graphics: this.mockers.createOneValueMocker('make.graphics', {
-        beginFill: function(){},
-        drawRoundedRect: function(){},
-        endFill: function(){}
+        beginFill: function () { },
+        drawRoundedRect: function () { },
+        endFill: function () { }
       }),
 
-      sprite: this.mockers.createOneValueMocker('make.sprite', {addChild: function(){}})
+      sprite: this.mockers.createOneValueMocker('make.sprite', { addChild: function () { } })
 
     }
 
     this.world = {
-      setBounds: function(){}
+      setBounds: function () { }
     }
 
     this.input = {
-      activePointer: {position: {
-        x: 0,
-        y: 0
-      }},
+      activePointer: {
+        position: {
+          x: 0,
+          y: 0
+        }
+      },
 
-      onDown: {add: function(){}}
+      onDown: { add: function () { } }
     }
 
     this.cursors = {
       up: {
         isDown: false,
-        onDown: {add: function(){}}
+        onDown: { add: function () { } }
       },
       down: {
         isDown: false,
-        onDown: {add: function(){}}
+        onDown: { add: function () { } }
       },
       left: {
         isDown: false,
-        onDown: {add: function(){}}
+        onDown: { add: function () { } }
       },
       right: {
         isDown: false,
-        onDown: {add: function(){}}
+        onDown: { add: function () { } }
       }
     }
 
@@ -133,7 +143,7 @@ export default class GameStub{
    * @param {number} x 
    * @param {number} y 
    */
-  setCamera(x, y){
+  setCamera(x, y) {
     this.camera.x = x
     this.camera.y = y
   }
@@ -144,7 +154,7 @@ export default class GameStub{
    * @param {number} x 
    * @param {number} y 
    */
-  moveCamera(x, y){
+  moveCamera(x, y) {
     this.camera.x += x
     this.camera.y += y
   }
@@ -154,7 +164,7 @@ export default class GameStub{
    * 
    * @return {x: number, y: number} - Camera coordinates
    */
-  getCamera(){
+  getCamera() {
     return {
       x: this.camera.x,
       y: this.camera.y
@@ -167,7 +177,7 @@ export default class GameStub{
    * @param {number} x 
    * @param {number} y 
    */
-  setPointer(x, y){
+  setPointer(x, y) {
     this.input.activePointer.position.x = x
     this.input.activePointer.position.y = y
   }
@@ -180,54 +190,10 @@ export default class GameStub{
    * @param {boolean} left 
    * @param {boolean} right 
    */
-  setCursors(up, down, left, right){
+  setCursors(up, down, left, right) {
     this.cursors.up.isDown = up
     this.cursors.down.isDown = down
     this.cursors.left.isDown = left
     this.cursors.right.isDown = right
-  }
-
-  /**
-   * Gives the size and coordinates of the n:th button in creation order of what exist
-   * 
-   * @param {number} n 
-   * 
-   * @return {{x: ???, y: ???, width: ???, height: ???}}
-   */
-  getNthActiveButton(n){
-    var buttonCalls = this.mockers.getUnmarkedCalls('make.button')
-    var call = buttonCalls[n-1]
-
-    return {
-      x: call[0],
-      y: call[1]
-    }
-  }
-
-  getCurrentTexts(){
-    var texts = this.mockers.getUnmarkedCalls('add.text')
-    var textInformation = []
-    for(let text of texts){
-      textInformation.push({
-        text: text[2],
-        x: text[4],
-        y: text[5]
-      })
-    }
-
-    return textInformation
-  }
-
-  getCurrentButtons(){
-    var buttons = this.mockers.getUnmarkedCalls('make.button')
-    var buttonInformation = []
-    for(let button of buttons){
-      buttonInformation.push({
-        x: button[0],
-        y: button[1]
-      })
-    }
-
-    return buttonInformation
   }
 }

@@ -41,19 +41,19 @@ describe('Inputhandler tests', () => {
     handler = new InputHandler({ game: game, mapListener: mapListener, cameraMover: cameraMover })
   })
 
-  function setInput (up, down, left, right, isDown, x, y) {
+  function setInput(up, down, left, right, isDown, x, y) {
     setCursors(up, down, left, right)
     setPointer(isDown, x, y)
   }
 
-  function setCursors (up, down, left, right) {
+  function setCursors(up, down, left, right) {
     game.cursors.up.isDown = up
     game.cursors.down.isDown = down
     game.cursors.left.isDown = left
     game.cursors.right.isDown = right
   }
 
-  function setPointer (isDown, x, y) {
+  function setPointer(isDown, x, y) {
     game.input.activePointer.isDown = isDown
     game.input.activePointer.position.x = x
     game.input.activePointer.position.y = y
@@ -64,22 +64,22 @@ describe('Inputhandler tests', () => {
 
     assert.equal(game, h.game)
     assert.equal(mapListener, h.mapListener)
-    assert.equal(cameraMover, h.cameraMover)    
+    assert.equal(cameraMover, h.cameraMover)
   })
-  
+
   it('On mouse pointer down, mapListener is called with correct parameters', () => {
     setPointer(true, 4, -3)
     handler.onPointerDown()
     assert.equal(mapListenerSpy.callCount, 1)
-    assert(mapListenerSpy.calledWith({x: 4, y: -3}))
+    assert(mapListenerSpy.calledWith({ x: 4, y: -3 }))
   })
-  
+
   it('On key cursor down, cameraMover is called with correct parameters', () => {
     setCursors(true, false, true, false)
     handler.onCursorDown()
     assert.equal(cameraMoverSpy.callCount, 1)
-    assert(cameraMoverSpy.calledWith({cursor: {up: true, down: false, left: true, right: false}}))
+    assert(cameraMoverSpy.calledWith({ cursor: { up: true, down: false, left: true, right: false } }))
   })
 
-  
+
 })

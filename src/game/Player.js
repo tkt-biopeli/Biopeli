@@ -20,18 +20,6 @@ export default class {
     this.points += points
   }
 
-  /**
-   * Returns the player's current points
-   * @return {Number} - Current points
-   */
-  getPoints() {
-    return this.points
-  }
-
-  getCash() {
-    return this.cash
-  }
-
   addStructure(structure) {
     this.structures.add(structure)
   }

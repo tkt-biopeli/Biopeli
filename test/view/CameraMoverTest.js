@@ -2,18 +2,18 @@ const assert = require('assert')
 const sinon = require('sinon')
 import CameraMover from '../../src/view/CameraMover'
 
-describe('Camera mover tests', () =>{
+describe('Camera mover tests', () => {
   var game
   var events
 
-  function setCursors(up, down, left, right){
+  function setCursors(up, down, left, right) {
     events.cursor.up = up
     events.cursor.down = down
     events.cursor.left = left
     events.cursor.right = right
   }
 
-  beforeEach(() =>{
+  beforeEach(() => {
     game = {
       camera: {
         x: 0,
@@ -31,7 +31,7 @@ describe('Camera mover tests', () =>{
     }
   })
 
-  it('Camera mover\'s costructor works', () =>{
+  it('Camera mover\'s costructor works', () => {
     var mover = new CameraMover(4, 5, 6)
     assert(4, mover.game)
     assert(5, mover.x)
@@ -39,8 +39,8 @@ describe('Camera mover tests', () =>{
   })
 
 
- it('If there is no input, camera doesn\'t move', () =>{
-    var mover = new CameraMover({game: game, xSpeed: 1, ySpeed: 1})
+  it('If there is no input, camera doesn\'t move', () => {
+    var mover = new CameraMover({ game: game, xSpeed: 1, ySpeed: 1 })
     var spy = sinon.spy()
     mover.tweenCameraTo = spy
     mover.update(events)
@@ -49,10 +49,10 @@ describe('Camera mover tests', () =>{
   })
 
   it('If there is one input, camera moves', () => {
-    var mover = new CameraMover({game: game, xSpeed: 1, ySpeed: 1})
+    var mover = new CameraMover({ game: game, xSpeed: 1, ySpeed: 1 })
     var spy = sinon.spy()
     mover.tweenCameraTo = spy
-    
+
     setCursors(true, false, false, false)
     mover.update(events)
     assert(spy.calledWith(0, -1))
@@ -72,7 +72,7 @@ describe('Camera mover tests', () =>{
 
   it('Camera checks both axis every loop', () => {
     setCursors(true, false, true, false)
-    var mover = new CameraMover({game: game, xSpeed: 1, ySpeed: 1})
+    var mover = new CameraMover({ game: game, xSpeed: 1, ySpeed: 1 })
     var spy = sinon.spy()
     mover.tweenCameraTo = spy
     mover.update(events)

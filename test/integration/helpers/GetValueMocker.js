@@ -7,16 +7,17 @@
  * 
  * @return { ??? }
  */
-export default function Mocker(gives, gets) {
-  var give = gives
+export default function GetValueMocker(gets, values) {
   var get = gets
-  var i = 0
 
   var realMocker = function () {
     get.push(arguments)
 
-    if (i < give.length) return give[i]
-    return null
+    var o = {}
+    for (let i = 0; i < values.length; i++) {
+      o[values[i]] = arguments[i]
+    }
+    return o
   }
 
   return realMocker

@@ -1,5 +1,3 @@
-import Timer from './Timer.js'
-
 export default class {
   constructor({ callTime }) {
     this.serialNumber = callTime

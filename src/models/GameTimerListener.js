@@ -1,5 +1,5 @@
 export default class GameTimerListener {
-  constructor ({player, menuView}) {
+  constructor({ player, menuView }) {
     this.player = player
     this.menuView = menuView
   }
@@ -9,7 +9,7 @@ export default class GameTimerListener {
   *
   * @param {TimerEvent} timerEvent
   */
-  onTimer (timerEvent) {
+  onTimer(timerEvent) {
     for (let structure of this.player.structures) {
       structure.update()
     }
