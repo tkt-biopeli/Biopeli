@@ -1,4 +1,4 @@
-export default class TimeEvent{
+export default class TimeEvent {
   constructor ({ callTime }) {
     this.serialNumber = callTime
     this.week = this.serialNumber % 4 + 1

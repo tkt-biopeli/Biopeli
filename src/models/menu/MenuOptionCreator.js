@@ -17,7 +17,6 @@ export default class MenuOptionCreator {
     this.tileOptions.set('forest', ForestActions)
     this.tileOptions.set('grass', GrassActions)
     this.tileOptions.set('water', WaterActions)
-
     this.structureTypes = structureTypes
     this.player = player
   }
@@ -56,8 +55,9 @@ export default class MenuOptionCreator {
     structureOptions (structure) {
       return []
     }
-  
+
     extraOptions (tile) {
       return []
-    } */
+    }
+  */
 }
