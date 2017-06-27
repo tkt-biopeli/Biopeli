@@ -1,5 +1,5 @@
 export default class GameTimerListener {
-  constructor ({player, menuView}) {
+  constructor({ player, menuView }) {
     this.player = player
     this.menuView = menuView
   }

@@ -3,19 +3,23 @@ const sinon = require("sinon")
 import StructureFactory from '../../../src/models/map/StructureFactory'
 import StructureTypes from '../../../src/models/map/StructureType'
 
-describe('StructureFactory tests', () =>{
+describe('StructureFactory tests', () => {
 
   /**
    * @see StructureType.createUpdateFn
    */
+<<<<<<< HEAD
   function createConstantProductionFn(){}
   function createSeasonalProductionFn(){}
+=======
+  function createUpdateFn() { }
+>>>>>>> 38742310955351e6620db8ea1f3e604afe94535b
 
-  it('Constructor works', () =>{
-    var sbuilder = new StructureFactory ({
-      tile : 0,
-      structureTypes : 1,
-      gameTimer : 2
+  it('Constructor works', () => {
+    var sbuilder = new StructureFactory({
+      tile: 0,
+      structureTypes: 1,
+      gameTimer: 2
     })
     assert.equal(0, sbuilder.tile)
     assert.equal(1, sbuilder.structureTypes)
@@ -25,20 +29,24 @@ describe('StructureFactory tests', () =>{
     assert.notEqual(null, sbuilder.gameTimer)
   })
 
-  it('Build building works', () =>{
+  it('Build building works', () => {
     var spy = sinon.spy()
-    var sbuilder = new StructureFactory ({
+    var sbuilder = new StructureFactory({
       tile: {},
       structureTypes: {},
-      gameTimer: {currentTime: {getYear:()=>{}}},
-      player: {addStructure: spy}
+      gameTimer: { currentTime: { getYear: () => { } } },
+      player: { addStructure: spy }
     })
 
+<<<<<<< HEAD
     sbuilder.buildBuilding({
       name: 'test', 
       createConstantProductionFn:createConstantProductionFn,
       createSeasonalProductionFn:createSeasonalProductionFn
     })
+=======
+    sbuilder.buildBuilding({ name: 'test', createUpdateFn: createUpdateFn })
+>>>>>>> 38742310955351e6620db8ea1f3e604afe94535b
     assert.equal('test', sbuilder.tile.structure.structureType.name)
     assert.equal(1, spy.callCount)
   })
@@ -46,14 +54,14 @@ describe('StructureFactory tests', () =>{
   var spy
   var builder
   var types
-  var setSpy = function(){
+  var setSpy = function () {
     types = StructureTypes()
     spy = sinon.spy()
-    builder = new StructureFactory({structureTypes: types, player: {addStructure: ()=>{}}})
+    builder = new StructureFactory({ structureTypes: types, player: { addStructure: () => { } } })
     builder.buildBuilding = spy
   }
 
-  it('Build Farm works', () =>{
+  it('Build Farm works', () => {
     setSpy()
 
     builder.buildFarm()
@@ -61,7 +69,7 @@ describe('StructureFactory tests', () =>{
     assert(spy.calledWith(types.farm))
   })
 
-  it('Build dairy farm works', () =>{
+  it('Build dairy farm works', () => {
     setSpy()
 
     builder.buildDairyFarm()
@@ -69,7 +77,7 @@ describe('StructureFactory tests', () =>{
     assert(spy.calledWith(types.dairyFarm))
   })
 
-  it('Build berry farm works', () =>{
+  it('Build berry farm works', () => {
     setSpy()
 
     builder.buildBerryFarm()

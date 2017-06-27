@@ -7,11 +7,11 @@
  * 
  * @return { ??? }
  */
-export default function SingleMocker(gives, gets){
+export default function SingleMocker(gives, gets) {
   var give = gives
   var get = gets
 
-  var realMocker = function(){
+  var realMocker = function () {
     get.push(arguments)
 
     return give

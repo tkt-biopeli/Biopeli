@@ -22,8 +22,8 @@ describe('Map tests', () => {
 
   it('Constructor test', () => {
 
-/*    var mock = sinon.mock(game.world)
-    mock.expects("setBounds").once().withArgs(0, 0, 100 * 128, 100 * 128)*/
+    /*    var mock = sinon.mock(game.world)
+        mock.expects("setBounds").once().withArgs(0, 0, 100 * 128, 100 * 128)*/
 
     assert.equal(map.gridSizeX, 100)
     assert.equal(map.gridSizeY, 100)

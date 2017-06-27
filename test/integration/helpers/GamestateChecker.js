@@ -4,7 +4,7 @@ import config from '../../../src/config'
 /**
  * Provides functions to check if the state of the game is wanted
  */
-export default class GamestateChecker{
+export default class GamestateChecker {
 
   /**
    * Constructor
@@ -12,11 +12,12 @@ export default class GamestateChecker{
    * @param {GameStub} param.gameStub
    * @param {GameState} param.gameState
    */
-  constructor({gameStub, gameState}){
+  constructor({ gameStub, gameState, gameAdvancer }) {
     this.gameStub = gameStub
     this.gameState = gameState
     this.map = gameState.map
     this.menu = gameState.menu
+    this.gameAdvancer = gameAdvancer
   }
 
   /**
@@ -27,7 +28,7 @@ export default class GamestateChecker{
    * 
    * @return {ModelTile} - Tile at (x,y)
    */
-  getTile(x, y){
+  getTile(x, y) {
     return this.map.getTileWithPixelCoordinates(x, y)
   }
 
@@ -39,7 +40,7 @@ export default class GamestateChecker{
    * @param {number} gridX 
    * @param {number} gridY 
    */
-  checkTilesModelCoordinates(x, y, gridX, gridY){
+  checkTilesModelCoordinates(x, y, gridX, gridY) {
     var tile = this.getTile(x, y)
     assert.equal(gridX, tile.x)
     assert.equal(gridY, tile.y)
@@ -53,12 +54,12 @@ export default class GamestateChecker{
    * @param {TileType} tileType 
    * @param {StructureType} structureType 
    */
-  checkTilesInformation(x, y, tileType, structureType){
+  checkTilesInformation(x, y, tileType, structureType) {
     var tile = this.getTile(x, y)
     assert.equal(tileType, tile.tileType.name)
-    if(structureType != null){
+    if (structureType != null) {
       assert.equal(structureType, tile.structure.structureType.name)
-    }else{
+    } else {
       assert(tile.structure == null)
     }
   }
@@ -73,7 +74,7 @@ export default class GamestateChecker{
    * @param {TileType} tileType 
    * @param {StructureType} structureType 
    */
-  checkTile(x, y, gridX, gridY, tileType, structureType){
+  checkTile(x, y, gridX, gridY, tileType, structureType) {
     this.checkTilesModelCoordinates(x, y, gridX, gridY)
     this.checkTilesInformation(x, y, tileType, structureType)
   }
@@ -84,12 +85,12 @@ export default class GamestateChecker{
    * @param {number} x 
    * @param {number} y 
    */
-  checkSelectedTile(x, y){
+  checkSelectedTile(x, y) {
     var selected = this.menu.selectedTile
 
-    if(x == null){
+    if (x == null) {
       assert(selected == null)
-    }else{
+    } else {
       assert.equal(x, selected.x)
       assert.equal(y, selected.y)
     }
@@ -100,9 +101,8 @@ export default class GamestateChecker{
    * 
    * @param {{x: number, y: number}} estimated 
    */
-  checkCameraLocation(estimated){
+  checkCameraLocation(estimated) {
     var real = this.gameStub.getCamera()
-
     assert.equal(estimated.x, real.x)
     assert.equal(estimated.y, real.y)
   }
@@ -112,12 +112,10 @@ export default class GamestateChecker{
    * 
    * @param {{x: number, y: number}} estimated 
    */
-  checkTileUnderCamera(estimated){
+  checkTileUnderCamera(estimated) {
     var ex = Math.floor(estimated.x / config.tileWidth)
     var ey = Math.floor(estimated.y / config.tileHeight)
-
     var camera = this.gameStub.getCamera()
-
     this.checkTilesModelCoordinates(camera.x, camera.y, ex, ey)
   }
 
@@ -126,27 +124,36 @@ export default class GamestateChecker{
    * 
    * @param {int} expectedAmount 
    */
-  checkButtonAmountInMenu(expectedAmount){
+  checkButtonAmountInMenu(expectedAmount) {
     var buttons = this.gameState.menuView.activeButtons
-
     assert.equal(expectedAmount, buttons.length)
   }
 
-  checkIfTextsExist(...texts){
+  checkIfTextsExist(...texts) {
     var textImages = this.gameState.menuView.activeTexts
 
-    for(let text of texts){
+    for (let text of texts) {
       var found = false
 
-      for(let image of textImages){
+      for (let image of textImages) {
         var itext = image.text.text
-        if(itext.indexOf(text) !== -1){
+        if (itext.indexOf(text) !== -1) {
           found = true
           break
         }
       }
 
-      assert(found, "Text \'"+text+"\' not found")
+      assert(found, "Text \'" + text + "\' not found")
     }
+  }
+
+  /**
+   * Checks if the game time is correct
+   * 
+   * @param {int} time
+   */
+  checkTime(time) {
+    var text = this.gameState.topBarView.items.get('time').graphic.text
+    assert.equal(time, text)
   }
 }

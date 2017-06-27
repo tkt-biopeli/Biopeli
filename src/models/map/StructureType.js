@@ -21,8 +21,10 @@ export default function (gameState) {
     this.name = name
     this.asset = asset
 
-    var constProdFn = createConstFn ? createConstFn : function () {}
-    var seasonProdFn = createSeasonFn ? createSeasonFn : function () {}
+    var constProdFn = createConstFn ? 
+        createConstFn : function () {return function () {}}
+    var seasonProdFn = createSeasonFn ? 
+        createSeasonFn : function () {return function () {}}
 
     this.createConstantProductionFn = function () { return constProdFn() }
     this.createSeasonalProductionFn = function () { return seasonProdFn() }

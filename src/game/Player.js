@@ -5,7 +5,7 @@ export default class {
   /**
    * Initially the player has 0 points
    */
-  constructor () {
+  constructor() {
     this.points = 0
     this.cash = 0
     this.structures = new Set()
@@ -16,7 +16,7 @@ export default class {
    *
    * @param {number} - The amount of points to be added
    */
-  addPoints (points) {
+  addPoints(points) {
     this.points += points
   }
 
@@ -35,19 +35,19 @@ export default class {
    * @param {Number} points - why is this a thing
    * @return {Number} - Current points
    */
-  getPoints (points) {
+  getPoints(points) {
     return this.points
   }
 
-  getCash () {
+  getCash() {
     return this.cash
   }
 
-  addStructure (structure) {
+  addStructure(structure) {
     this.structures.add(structure)
   }
 
-  removeStructure (structure) {
+  removeStructure(structure) {
     this.structures.delete(structure)
   }
 }

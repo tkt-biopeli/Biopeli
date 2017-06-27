@@ -13,7 +13,7 @@ export default class {
    * @param {TileType} param.type
    * @param {Structure} param.structure
    */
-  constructor ({x, y, type, structure}) {
+  constructor({ x, y, type, structure }) {
     this.x = x
     this.y = y
     this.tileType = type
