@@ -17,31 +17,31 @@ export default function (gameState) {
    * @param {function} param.constProduction
    * @param {function} param.seasonProduction
    */
-  function StructureType ({name, asset, constProduction, seasonProduction}) {
+  function StructureType ({name, asset, createSeasonFn, createConstFn}) {
     this.name = name
     this.asset = asset
 
-    this.constProduction = constProduction ? constProduction : function () {}
-    this.seasonProduction = seasonProduction ? seasonProduction : function () {}
+    var constProdFn = createConstFn ? createConstFn : function () {}
+    var seasonProdFn = createSeasonFn ? createSeasonFn : function () {}
 
-    this.createUpdateFn = function () {
-      return function () {
-        constProduction()
-        seasonProduction()
-      }
-    }
+    this.createConstantProductionFn = function () { return constProdFn() }
+    this.createSeasonalProductionFn = function () { return seasonProdFn() }
   }
 
   var farm = new StructureType({
     name: 'farm',
     asset: 'farm',
 
-    constantProductionUpdate: function () {
-      gameState.player.addCash(1)
+    createSeasonFn: function () {
+      return function () {
+        return 100
+      } 
     },
 
-    seasonalProductionUpdate: function () {
-      gameState.player.addCash(10)
+    createConstFn: function (stat) {
+      return function () {
+        return 1
+      } 
     }
   })
 
@@ -49,12 +49,12 @@ export default function (gameState) {
     name: 'berry farm',
     asset: 'berry_farm',
 
-    constantProductionUpdate: function () {
-      gameState.player.addCash(1)
+    createSeasonFn: function () {
+      return function () {gameState.player.addCash(1)} 
     },
 
-    seasonalProductionUpdate: function () {
-      gameState.player.addCash(10)
+    createConstFn: function () {
+      return function () {gameState.player.addCash(10)} 
     }
   })
 
@@ -62,12 +62,12 @@ export default function (gameState) {
     name: 'dairy farm',
     asset: 'dairy_farm',
 
-    constantProductionUpdate: function () {
-      gameState.player.addCash(1)
+    createSeasonFn: function () {
+      return function () {gameState.player.addCash(1)} 
     },
 
-    seasonalProductionUpdate: function () {
-      gameState.player.addCash(10)
+    createConstFn: function () {
+      return function () {gameState.player.addCash(10)} 
     }
   })
 

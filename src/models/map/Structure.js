@@ -26,7 +26,8 @@ export default class Structure {
     this.productionInput = 1
     this.foundingYear = foundingYear
 
-    this.updateFn = structureType.createUpdateFn()
+    this.produceFn = structureType.createConstantProductionFn()
+    this.produceSeasonFn = structureType.createSeasonalProductionFn()
   }
 
   /**
@@ -47,10 +48,16 @@ export default class Structure {
   }
 
   /**
-   * Calls the update function of the structure type
-   * @see StructureType.updateFn
+   * Generates the constant produce 
    */
-  update () {
-    this.updateFn()
+  produce () {
+    return this.produceFn()
+  }  
+
+  /**
+   * Generates the seasonal produce 
+   */
+  produceSeason () {
+    return this.produceSeasonFn()
   }
 }

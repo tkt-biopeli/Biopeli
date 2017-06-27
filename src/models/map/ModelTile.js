@@ -22,11 +22,22 @@ export default class {
   }
 
   /**
-   * Calls the update function associated with the structure if one exists
+   * Generates the constant produce 
+   * @see Structure
+   * 
+   * @return {number} - The number of turnips produced
    */
-  update () {
-    if (this.structure !== undefined) {
-      this.structure.update()
-    }
+  produce () {
+    return this.structure.produce()
+  }  
+
+  /**
+   * Generates the seasonal produce 
+   * @see Structure
+   * 
+   * @return {number} - The number of turnips produced
+   */
+  produceSeason () {
+    return this.structure.produceSeason()
   }
 }

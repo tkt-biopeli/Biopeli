@@ -8,7 +8,8 @@ describe('StructureFactory tests', () =>{
   /**
    * @see StructureType.createUpdateFn
    */
-  function createUpdateFn(){}
+  function createConstantProductionFn(){}
+  function createSeasonalProductionFn(){}
 
   it('Constructor works', () =>{
     var sbuilder = new StructureFactory ({
@@ -33,7 +34,11 @@ describe('StructureFactory tests', () =>{
       player: {addStructure: spy}
     })
 
-    sbuilder.buildBuilding({name: 'test', createUpdateFn:createUpdateFn})
+    sbuilder.buildBuilding({
+      name: 'test', 
+      createConstantProductionFn:createConstantProductionFn,
+      createSeasonalProductionFn:createSeasonalProductionFn
+    })
     assert.equal('test', sbuilder.tile.structure.structureType.name)
     assert.equal(1, spy.callCount)
   })
