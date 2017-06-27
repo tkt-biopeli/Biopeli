@@ -4,7 +4,7 @@ const sinon = require('sinon')
 
 describe('MenuView tests', () =>{
   var menuBorderCoordinate = 0
-  var leftPadding = 2
+  var borderPadding = 2
   var sectionPadding = 5
   var linePadding = 3
   var buttonWidth = 1
@@ -20,13 +20,13 @@ describe('MenuView tests', () =>{
     var stub = sinon.stub()
     groupStub = {add: function(){}, create: function(){}, removeAll: function(){}}
     stub.withArgs().returns(groupStub)
-    gameStub = {add: {group: stub}, make: {}}
+    gameStub = {add: {group: stub}, make: {}, camera: {width: 0, height: 0}}
 
     menuView = new MenuView({
       game: gameStub,
       vertical: true,
       menuBorderCoordinate: menuBorderCoordinate,
-      leftPadding: leftPadding,
+      borderPadding: borderPadding,
       sectionPadding: sectionPadding,
       linePadding: linePadding,
       buttonWidth: buttonWidth,
@@ -43,7 +43,7 @@ describe('MenuView tests', () =>{
   it('Constructor works', () =>{
     assert.equal(gameStub, menuView.game)
     assert.equal(menuBorderCoordinate, menuView.menuBorderCoordinate)
-    assert.equal(leftPadding, menuView.leftPadding)
+    assert.equal(borderPadding, menuView.borderPadding)
     assert.equal(sectionPadding, menuView.sectionPadding)
     assert.equal(linePadding, menuView.linePadding)
     assert.equal(buttonWidth, menuView.buttonWidth)
@@ -76,7 +76,7 @@ describe('MenuView tests', () =>{
 
     var style = {font: fontSize+"px Arial", fill: "#ffff00", align: "center"}
     assert.equal(1, textSpy.callCount)
-    assert(textSpy.calledWith(menuBorderCoordinate+leftPadding, 0, "asd", style, groupStub))
+    assert(textSpy.calledWith(menuBorderCoordinate+borderPadding, 0, "asd", style, groupStub))
     assert(paddingSpy.calledWith(10))
   })
 

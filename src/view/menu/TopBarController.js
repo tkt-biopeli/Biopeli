@@ -1,3 +1,7 @@
+import IconComponent from './components/IconComponent'
+import TextComponent from './components/TextComponent'
+import AnimatedBarComponent from './components/AnimatedBarComponent'
+
 export default class TopBarController{
   constructor({menuView, player}){
     this.menuView = menuView

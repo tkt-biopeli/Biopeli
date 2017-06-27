@@ -15,6 +15,7 @@ import Timer from '../view/Timer'
 import TopBar from '../models/topbar/TopBar'
 import TopBarView from '../view/topbar/TopBarView'
 import TopBarControllerDemo from '../models/topbar/TopBarControllerDemo'
+import TopBarControllerT from '../view/menu/TopBarController'
 
 /**
  * Description goes here
@@ -39,7 +40,7 @@ export default class GameState {
       game: state,
       vertical: true,
       menuBorderCoordinate: state.camera.width - config.menuWidth,
-      leftPadding: config.menuLeftPadding,
+      borderPadding: config.menuLeftPadding,
       buttonWidth: config.menuButtonWidth,
       buttonHeight: config.menuButtonHeight,
       sectionPadding: config.sectionPadding,
@@ -48,11 +49,27 @@ export default class GameState {
       background: {asset: 'menuBg'}
     })
 
+    this.topBarViewt = new MenuView({
+      game: state,
+      vertical: false,
+      menuBorderCoordinate: config.topBarSettings.height,
+      borderPadding: config.topBarSettings.verticalPadding,
+      buttonWidth: 0,
+      buttonHeight: 0,
+      sectionPadding: config.topBarSettings.paddingWidth,
+      linePadding: 1,
+      fontSize: 30,
+      background: {}
+    })
+
+    this.topBarControllert = new TopBarControllerT({
+      menuView: this.topBarViewt,
+      player: this.player
+    })
+
     this.menu = new Menu({
       menuView: this.menuView
     })
-
-    this.menu.redraw()
 
     // map view
     this.mapView = new MapView({
@@ -62,7 +79,7 @@ export default class GameState {
       viewWidthPx: state.game.width - menuWidth,
       viewHeightPx: state.game.height
     })
-
+    /*
     this.topBar = new TopBar({})
 
     this.topBarView = new TopBarView({
@@ -76,7 +93,7 @@ export default class GameState {
       topBar: this.topBar,
       topBarView: this.topBarView
     })
-
+    */
     this.cameraMover = new CameraMover({ game: state, xSpeed: config.cameraSpeed, ySpeed: config.cameraSpeed })
 
     this.mapListener = new MapListener({
@@ -88,11 +105,11 @@ export default class GameState {
 
     this.inputHandler = new InputHandler({ game: state, mapListener: this.mapListener, cameraMover: this.cameraMover })
 
-    this.gameTimerListener = new GameTimerListener({player: this.player, menu: this.menu})
+    this.gameTimerListener = new GameTimerListener({player: this.player, menu: this.menu, topBarController: this.topBarControllert})
 
     this.gameTimer = new Timer({ interval: config.gameTimerInterval, currentTime: this.currentTime() })
     this.gameTimer.addListener(this.gameTimerListener)
-    this.gameTimer.addListener(this.topBarControllerDemo)
+    //this.gameTimer.addListener(this.topBarControllerDemo)
     this.menuOptionCreator.gameTimer = this.gameTimer
 
     this.gameTimer.callListeners()

@@ -18,12 +18,12 @@ export default class MenuView {
    * @param {number} param.buttonWidth width of buttons
    * @param {number} param.buttonHeight height of buttons
    */
-  constructor ({ game, menuBorderCoordinate, vertical, leftPadding, sectionPadding, linePadding, buttonWidth, buttonHeight, fontSize, background }) {
+  constructor ({ game, menuBorderCoordinate, vertical, borderPadding, sectionPadding, linePadding, buttonWidth, buttonHeight, fontSize, background }) {
     this.game = game
 
     this.vertical = vertical
     this.menuBorderCoordinate = menuBorderCoordinate
-    this.leftPadding = leftPadding
+    this.borderPadding = borderPadding
     this.buttonWidth = buttonWidth
     this.buttonHeight = buttonHeight
     this.sectionPadding = sectionPadding
@@ -59,13 +59,24 @@ export default class MenuView {
   createBackground () {
     var x = this.menuBorderCoordinate
     var y = 0
+    var height = this.game.camera.height
+    var width = this.game.camera.width - this.menuBorderCoordinate
     if(!this.vertical){
-      y = this.menuBorderCoordinate
+      y = 0
       x = 0
+      height = this.menuBorderCoordinate
+      width = this.game.camera.width
     }
 
     if(this.background.asset != null){
       this.menuViewGroup.create(x, y, this.background.asset)
+    }else{
+      let bg = this.game.make.graphics()
+      bg.beginFill(0x000000, 0.25)
+      bg.drawRoundedRect(x, y, width, height, 1)
+      bg.endFill()
+      bg.fixedToCamera = true
+      this.menuViewGroup.add(bg)
     }
 
   }
@@ -201,13 +212,13 @@ export default class MenuView {
   getNextElementCoordinates () {
     if(this.vertical){
       return {
-        x: this.menuBorderCoordinate + this.leftPadding,
+        x: this.menuBorderCoordinate + this.borderPadding,
         y: this.drawPosition
       }
     }else{
       return {
         x: this.drawPosition,
-        y: this.menuBorderCoordinate - this.leftPadding
+        y: this.menuBorderCoordinate - this.borderPadding
       }
     }
   }
