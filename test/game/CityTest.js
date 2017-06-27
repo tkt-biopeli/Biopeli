@@ -17,7 +17,7 @@ describe('City tests', () => {
   it('Initial demand, population and turnips are set correctly', () => {
     assert.equal(city.demand, config.cityInitialDemand)
     assert.equal(city.turnips, config.cityInitialTurnips)
-    assert.equal(city.population = config.cityInitialPopulation)
+    assert.equal(city.population, config.cityInitialPopulation)
   })
 
   it('Demand is increased correctly', () => {

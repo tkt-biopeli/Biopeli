@@ -15,7 +15,7 @@ export default class Map {
    * @param {number} param.tileWidth
    * @param {number} param.tileHeight
    */
-  constructor ({ gridSizeX, gridSizeY, tileWidth, tileHeight }) {
+  constructor({ gridSizeX, gridSizeY, tileWidth, tileHeight }) {
     this.gridSizeX = gridSizeX
     this.gridSizeY = gridSizeY
     this.tileWidth = tileWidth
@@ -30,8 +30,8 @@ export default class Map {
    * @param {Number} gy
    * @param {TileType} tileType
    */
-  addTileWithGridCoordinates (gx, gy, tileType) {
-    var tile = new ModelTile({x: gx, y: gy, type: tileType, structure: null})
+  addTileWithGridCoordinates(gx, gy, tileType) {
+    var tile = new ModelTile({ x: gx, y: gy, type: tileType, structure: null })
     this.grid[gy * this.gridSizeX + gx] = tile
     return tile
   }
@@ -43,7 +43,7 @@ export default class Map {
    * @param {Number} py
    * @param {TileType} tileType
    */
-  addTileWithPixelCoordinates (px, py, tileType) {
+  addTileWithPixelCoordinates(px, py, tileType) {
     var gx = this.pixelsToGridX(px)
     var gy = this.pixelsToGridY(py)
     return this.addTileWithGridCoordinates(gx, gy, tileType)
@@ -57,7 +57,7 @@ export default class Map {
    *
    * @return {ModelTile}
    */
-  getTileWithGridCoordinates (gx, gy) {
+  getTileWithGridCoordinates(gx, gy) {
     return this.grid[gy * this.gridSizeX + gx]
   }
 
@@ -69,7 +69,7 @@ export default class Map {
    *
    * @return {ModelTile}
    */
-  getTileWithPixelCoordinates (px, py) {
+  getTileWithPixelCoordinates(px, py) {
     var gx = this.pixelsToGridX(px)
     var gy = this.pixelsToGridY(py)
     return this.getTileWithGridCoordinates(gx, gy)
@@ -81,7 +81,7 @@ export default class Map {
    * @param {Number} gx
    * @param {Number} gy
    */
-  removeTileWithGridCoordinates (gx, gy) {
+  removeTileWithGridCoordinates(gx, gy) {
     this.grid[gy * this.gridSizeX + gx] = undefined
   }
 
@@ -91,14 +91,14 @@ export default class Map {
    * @param {Number} px
    * @param {Number} py
    */
-  removeTileWithPixelCoordinates (px, py) {
+  removeTileWithPixelCoordinates(px, py) {
     this.grid[this.pixelsToGridX(py) * this.gridSizeX + this.pixelsToGridX(px)] = undefined
   }
 
   /**
    * TEST DATA
    */
-  createMapHalfForestHalfWater () {
+  createMapHalfForestHalfWater() {
     var limit = 0.2
     var tileTypes = TileType.call()
     var r = Math.random()
@@ -138,7 +138,7 @@ export default class Map {
    *
    * @return {Number}
    */
-  pixelsToGridX (x) {
+  pixelsToGridX(x) {
     return Math.floor(x / this.tileWidth)
   }
 
@@ -149,7 +149,7 @@ export default class Map {
    *
    * @return {Number}
    */
-  pixelsToGridY (y) {
+  pixelsToGridY(y) {
     return Math.floor(y / this.tileHeight)
   }
 
@@ -160,7 +160,7 @@ export default class Map {
    *
    * @return {Number}
    */
-  gridToPixelsX (x) {
+  gridToPixelsX(x) {
     return x * this.tileWidth
   }
 
@@ -171,7 +171,7 @@ export default class Map {
    *
    * @return {Number}
    */
-  gridToPixelsY (y) {
+  gridToPixelsY(y) {
     return y * this.tileHeight
   }
 }
