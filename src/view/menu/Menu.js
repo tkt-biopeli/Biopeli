@@ -1,4 +1,6 @@
-
+import TextComponent from './TextComponent'
+import ButtonComponent from './ButtonComponent'
+import ResetDecorator from './ResetDecorator'
 /**
  * Description goes here
  */
@@ -11,9 +13,42 @@ export default class Menu {
    */
   constructor ({menuView}) {
     this.menuView = menuView
-    menuView.setMenu(this)
 
     this.selectedTile = null
+    this.buttonComponents = []
+  }
+
+  redraw(){
+    this.menuView.draw(this.createSections())
+  }
+
+  createSections () {
+    if(this.selectedTile == null){
+      return []
+    }
+
+    var tile = this.selectedTile
+
+    var sections = []
+    sections.push([
+      new TextComponent('Ground type: ' + tile.tileType.name),
+      new TextComponent('X: ' + tile.x + ', Y: ' + tile.y)
+    ])
+
+    if(tile.structure != null){
+      var structure = tile.structure
+      sections.push([
+        new TextComponent('Structure: ' + structure.structureType.name),
+        new TextComponent('Founding year: ' + structure.foundingYear),
+        new TextComponent('Size: ' + structure.size),
+        new TextComponent('Production input: ' + structure.productionInput),
+        new TextComponent('Production per time: ' + structure.calculateProductionEfficiency())
+      ])
+    }
+
+    sections.push(this.buttonComponents)
+
+    return sections
   }
 
   /**
@@ -22,16 +57,29 @@ export default class Menu {
    * @param {ModelTile} tile
    * @param { ??? } buttonActions
    */
-  chooseTile (tile, buttonActions) {
+  chooseTile (tile, buttonComponents) {
     this.selectedTile = tile
-    this.menuView.setButtonActions(buttonActions)
+    this.buttonComponents = buttonComponents
+    this.decorateButtonComponents()
+    this.redraw()
+  }
+
+  decorateButtonComponents(){
+    for(let i = 0 ; i < this.buttonComponents.length ; i++){
+      var buttonComponent = this.buttonComponents[i]
+      var resetDecorator = new ResetDecorator({action: buttonComponent, menu: this})
+      this.buttonComponents[i] = new ButtonComponent({
+        name: buttonComponent.name,
+        functionToCall: resetDecorator.act,
+        context: resetDecorator
+      })
+    }
   }
 
   /**
    * Description goes here
    */
   reset () {
-    this.selectedTile = null
-    this.menuView.setButtonActions([])
+    this.chooseTile(null, [])
   }
 }

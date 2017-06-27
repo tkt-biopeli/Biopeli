@@ -38,50 +38,13 @@ export default class MenuView {
     this.activeTexts = []
   }
 
-  /**
-   * Description goes here
-   *
-   * @param {Menu} menu
-   */
-  setMenu (menu) {
-    this.menu = menu
-  }
-
-  /**
-   * Description goes here
-   */
-  redraw () {
+  draw (sections) {
     this.menuViewGroup.removeAll(true, true)
     this.activeButtons = []
     this.activeTexts = []
 
     this.drawPosition = this.sectionPadding
     this.createBackground()
-
-    if (this.menu == null || this.menu.selectedTile == null) {
-      return
-    }
-
-    var tile = this.menu.selectedTile
-
-    var sections = []
-    sections.push([
-      new TextComponent('Ground type: ' + tile.tileType.name),
-      new TextComponent('X: ' + tile.x + ', Y: ' + tile.y)
-    ])
-
-    if(tile.structure != null){
-      var structure = tile.structure
-      sections.push([
-        new TextComponent('Structure: ' + structure.structureType.name),
-        new TextComponent('Founding year: ' + structure.foundingYear),
-        new TextComponent('Size: ' + structure.size),
-        new TextComponent('Production input: ' + structure.productionInput),
-        new TextComponent('Production per time: ' + structure.calculateProductionEfficiency())
-      ])
-    }
-
-    sections.push(this.buttonActions)
 
     this.createMenuComponents(sections)
   }
@@ -111,7 +74,6 @@ export default class MenuView {
   }
 
   createSection (components) {
-    
     for (let i = 0 ; i < components.length ; i++) {
       var component = components[i]
       switch (component.type) {
@@ -136,19 +98,17 @@ export default class MenuView {
    *
    * @param {ButtonAction} buttonAction
    */
-  createButton (buttonAction) {
+  createButton (buttonComponent) {
     var coords = this.getNextElementCoordinates()
-
-    var resetDecorator = new ResetDecorator({action: buttonAction, menu: this.menu})
 
     var button = new LabeledButton({
       game: this.game,
       viewGroup: this.menuViewGroup,
-      label: buttonAction.name,
+      label: buttonComponent.name,
       x: coords.x,
       y: coords.y,
-      callback: resetDecorator.act,
-      context: resetDecorator,
+      callback: buttonComponent.function,
+      context: buttonComponent.context,
       buttonWidth: this.buttonWidth,
       buttonHeight: this.buttonHeight
     })
@@ -196,16 +156,6 @@ export default class MenuView {
         y: this.menuBorderCoordinate - this.leftPadding
       }
     }
-  }
-
-  /**
-   * Sets the button actions to given and refreshes the menuView
-   *
-   * @param { [ButtonAction] } buttonActions
-   */
-  setButtonActions (buttonActions) {
-    this.buttonActions = buttonActions
-    this.redraw()
   }
 
   /**

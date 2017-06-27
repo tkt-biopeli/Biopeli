@@ -47,11 +47,12 @@ export default class GameState {
       fontSize: config.menuFontSize,
       backgroundAsset: 'menuBg'
     })
-    this.menuView.redraw()
 
     this.menu = new Menu({
       menuView: this.menuView
     })
+
+    this.menu.redraw()
 
     // map view
     this.mapView = new MapView({
@@ -87,7 +88,7 @@ export default class GameState {
 
     this.inputHandler = new InputHandler({ game: state, mapListener: this.mapListener, cameraMover: this.cameraMover })
 
-    this.gameTimerListener = new GameTimerListener({player: this.player, menuView: this.menuView})
+    this.gameTimerListener = new GameTimerListener({player: this.player, menu: this.menu})
 
     this.gameTimer = new Timer({ interval: config.gameTimerInterval, currentTime: this.currentTime() })
     this.gameTimer.addListener(this.gameTimerListener)

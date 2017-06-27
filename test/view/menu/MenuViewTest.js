@@ -53,11 +53,6 @@ describe('MenuView tests', () =>{
     assert.equal(0, menuView.buttonActions.length)
   })
 
-  it('Set menu works', () =>{
-    menuView.setMenu(12)
-    assert.equal(12, menuView.menu)
-  })
-
   it('Padding adders work', () =>{
     menuView.drawPosition = 0
     menuView.addPadding(10)
@@ -70,21 +65,6 @@ describe('MenuView tests', () =>{
     menuView.drawPosition = 0
     menuView.addSectionPadding()
     assert.equal(sectionPadding, menuView.drawPosition)
-  })
-
-  it('Setting button actions works', () =>{
-    var spy = sinon.spy()
-    menuView.redraw = spy
-
-    menuView.setButtonActions([2,3])
-
-    assert.equal(2, menuView.buttonActions[0])
-    assert.equal(3, menuView.buttonActions[1])
-    assert.equal(1, spy.callCount)
-
-    menuView.setButtonActions([])
-    assert.equal(0, menuView.buttonActions.length)
-    assert.equal(2, spy.callCount)
   })
 
   it('Texts are created correctly', () =>{
@@ -126,29 +106,5 @@ describe('MenuView tests', () =>{
     menuView.createBackground()
 
     assert(spy.calledWith(menuBorderCoordinate, 0, "menuBg"))
-  })
-
-  it('Background is always created in redraw', () =>{
-    var backgroundSpy = sinon.spy()
-    menuView.createBackground = backgroundSpy
-    var removeSpy = sinon.spy()
-    groupStub.removeAll = removeSpy
-
-    menuView.menu = null
-    menuView.redraw()
-
-    assert.equal(1, backgroundSpy.callCount)
-    assert(removeSpy.calledWith(true, true))
-    assert.equal(sectionPadding, menuView.drawPosition)
-  })
-
-  it('No information is outputted if no tile is chosen', () =>{
-    var spy = sinon.spy()
-    menuView.createTileInformation = spy
-
-    menuView.menu.selectedTile = null
-    menuView.redraw()
-
-    assert.equal(0, spy.callCount)
   })
 })
