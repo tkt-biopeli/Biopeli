@@ -17,9 +17,9 @@ export default class MenuView {
    * @param {number} param.buttonWidth width of buttons
    * @param {number} param.buttonHeight height of buttons
    */
-  constructor({ game, leftBorderCoordinate, leftPadding, sectionPadding, linePadding, buttonWidth, buttonHeight, fontSize }) {
+  constructor({ game, city, leftBorderCoordinate, leftPadding, sectionPadding, linePadding, buttonWidth, buttonHeight, fontSize }) {
     this.game = game
-
+    this.city = city
     this.leftBorderCoordinate = leftBorderCoordinate
     this.leftPadding = leftPadding
     this.buttonWidth = buttonWidth
@@ -27,7 +27,6 @@ export default class MenuView {
     this.sectionPadding = sectionPadding
     this.linePadding = linePadding
     this.fontSize = fontSize
-
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
     this.buttonActions = []
@@ -54,6 +53,7 @@ export default class MenuView {
 
     this.drawHeight = this.sectionPadding
     this.createBackground()
+    this.createCityInformation()
 
     if (this.menu == null || this.menu.selectedTile == null) {
       return
@@ -81,6 +81,21 @@ export default class MenuView {
    */
   createBackground() {
     this.menuViewGroup.create(this.leftBorderCoordinate, 0, 'menuBg')
+  }
+
+  /**
+   * Creates city information to the menu
+   */
+  createCityInformation() {
+    this.createText('City: ' + this.city.name)
+    this.addLinePadding()
+    this.createText('Population: ' + this.city.population)
+    this.addLinePadding()
+    this.createText('Demand: ' + this.city.demand)
+    this.addLinePadding()
+    this.addLinePadding()
+
+    return true
   }
 
   /**

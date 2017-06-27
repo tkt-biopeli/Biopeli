@@ -51,9 +51,8 @@ export default class StructureFactory {
       name: this.structureName,
       size: this.structureSize,
       structureType: structureType,
-      foundingYear: this.gameTimer.currentTime.getYear()
+      foundingYear: this.gameTimer.currentTime.year
     })
-
     this.player.addStructure(this.tile.structure)
   }
 }

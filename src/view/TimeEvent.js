@@ -6,22 +6,6 @@ export default class {
     this.year = Math.floor(this.serialNumber / 48) + 1980
   }
 
-  getWeek() {
-    return this.week
-  }
-
-  getMonth() {
-    return this.month
-  }
-
-  getYear() {
-    return this.year
-  }
-
-  getSerialNumber() {
-    return this.serialNumber
-  }
-
   toString() {
     return this.year + '/' + this.month + '/' + this.week
   }
