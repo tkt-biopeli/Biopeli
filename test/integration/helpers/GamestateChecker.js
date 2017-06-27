@@ -103,7 +103,6 @@ export default class GamestateChecker {
    */
   checkCameraLocation(estimated) {
     var real = this.gameStub.getCamera()
-
     assert.equal(estimated.x, real.x)
     assert.equal(estimated.y, real.y)
   }
@@ -116,9 +115,7 @@ export default class GamestateChecker {
   checkTileUnderCamera(estimated) {
     var ex = Math.floor(estimated.x / config.tileWidth)
     var ey = Math.floor(estimated.y / config.tileHeight)
-
     var camera = this.gameStub.getCamera()
-
     this.checkTilesModelCoordinates(camera.x, camera.y, ex, ey)
   }
 
@@ -129,7 +126,6 @@ export default class GamestateChecker {
    */
   checkButtonAmountInMenu(expectedAmount) {
     var buttons = this.gameState.menuView.activeButtons
-
     assert.equal(expectedAmount, buttons.length)
   }
 
@@ -158,7 +154,6 @@ export default class GamestateChecker {
    */
   checkTime(time) {
     var text = this.gameState.topBarView.items.get('time').graphic.text
-
     assert.equal(time, text)
   }
 }
