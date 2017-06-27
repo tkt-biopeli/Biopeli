@@ -6,6 +6,9 @@ export default class City {
     this.demand = config.cityInitialDemand
     this.turnips = config.cityInitialTurnips
   }
+
+  /* Moi Miia, nämä vähän turhia javascriptis, ku city.name on oikeastaan parempi
+     kun city.getName koska se on getteri ja setteri samalla.
   getName () {
     return this.name
   }
@@ -15,6 +18,7 @@ export default class City {
   getTurnips () {
     return this.turnips
   }
+  */
   increaseDemand (amount) {
     this.demand = this.demand + amount
   }
