@@ -1,4 +1,4 @@
-import AnimatedBar from './AnimatedBar'
+import AnimatedBarComponent from '../menu/AnimatedBar'
 import TopBarItem from './TopBarItem'
 import config from '../../config'
 
@@ -78,8 +78,9 @@ export default class TopBarView {
   }
 
   createBarGraphic (item) {
-    let bar = new AnimatedBar({
+    let bar = new AnimatedBarComponent({
       game: this.game,
+      horizontal: true,
       x: item.value.x,
       y: item.value.y,
       width: item.value.width,

@@ -1,7 +1,6 @@
 import LabeledButton from './LabeledButton'
 import Text from './Text'
-import ResetDecorator from './ResetDecorator'
-import TextComponent from './TextComponent'
+import AnimatedBarComponent from './AnimatedBar'
 
 /**
  * Controls drawing of game's menu
@@ -36,6 +35,7 @@ export default class MenuView {
     this.buttonActions = []
     this.activeButtons = []
     this.activeTexts = []
+    this.activeBars = []
   }
 
   draw (sections) {
@@ -115,7 +115,11 @@ export default class MenuView {
 
     this.activeButtons.push(button)
 
-    this.addPadding(this.buttonHeight)
+    if(this.vertical){
+      this.addPadding(this.buttonHeight)
+    }else{
+      this.addPadding(this.buttonWidth)
+    }
   }
 
   /**
@@ -137,14 +141,38 @@ export default class MenuView {
       x: coords.x,
       y: coords.y
     })
-    this.addPadding(this.fontSize)
 
     this.activeTexts.push(tex)
 
-    return tex
+    if(this.vertical){
+      this.addPadding(this.fontSize)
+    }else{
+      this.addPadding(this.fontSize * text.length)
+    }
   }
 
-  getNextElementCoordinates(){
+  createAnimatedBar (animatedBarComponent) {
+    var coords = this.getNextElementCoordinates()
+
+    var animatedBar = new AnimatedBar({
+      game: this.game,
+      horizontal: animatedBarComponent.vertical,
+      width: animatedBarComponent.width,
+      height: animatedBarComponent.height,
+      x: coords.x,
+      y: coords.y
+    })
+
+    this.activeBars.push(animatedBar)
+
+    if(this.vertical){
+      this.addPadding(animatedBarComponent.height)
+    }else{
+      this.addPadding(animatedBarComponent.width)
+    }
+  }
+
+  getNextElementCoordinates () {
     if(this.vertical){
       return {
         x: this.menuBorderCoordinate + this.leftPadding,

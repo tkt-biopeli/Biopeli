@@ -1,6 +1,7 @@
 export default class AnimatedBar {
-  constructor ({ game, width, height, x, y }) {
+  constructor ({ game, horizontal, width, height, x, y }) {
     this.game = game
+    this.horizontal = horizontal
     this.width = width
     this.height = height
     this.x = x
@@ -38,7 +39,12 @@ export default class AnimatedBar {
    * @memberof AnimatedBar
    */
   setPercentage (value) {
-    let inPixels = value * this.width / 100
-    this.game.add.tween(this.bar).to({ width: inPixels }, this.duration, 'Linear', true)
+    if(this.horizontal){
+      let inPixels = value * this.width / 100
+      this.game.add.tween(this.bar).to({ width: inPixels }, this.duration, 'Linear', true)
+    }else{
+      let inPixels = value * this.height / 100
+      this.game.add.tween(this.bar).to({ height: inPixels }, this.duration, 'Linear', true)
+    }
   }
 }
