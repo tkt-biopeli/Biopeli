@@ -12,7 +12,7 @@ export default class ButtonAction {
    * @param {function} param.functionToCall
    * @param {???} param.context
    */
-  constructor({ name, functionToCall, context }) {
+  constructor ({ name, functionToCall, context }) {
     this.name = name
     this.function = functionToCall
     this.context = context

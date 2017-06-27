@@ -29,7 +29,7 @@ export default class GameState {
    * @param {Number} param.tileHeight - Tile height in pixels
    * @param {Number} param.menuWidth - Menu width in pixels
    */
-  constructor({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
+  constructor ({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
     this.state = state
 
     state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
@@ -109,7 +109,7 @@ export default class GameState {
     this.gameTimer.callListeners()
   }
 
-  initializeModel(mapWidth, mapHeight, tileWidth, tileHeight) {
+  initializeModel (mapWidth, mapHeight, tileWidth, tileHeight) {
     this.tileTypes = TileTypes()
     this.structureTypes = StructureTypes()
 
@@ -131,12 +131,12 @@ export default class GameState {
   /**
    * Description goes here
    */
-  update() {
+  update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
     this.gameTimer.update(this.currentTime())
   }
 
-  currentTime() {
+  currentTime () {
     return Date.now()
   }
 }

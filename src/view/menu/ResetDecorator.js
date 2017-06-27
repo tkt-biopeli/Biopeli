@@ -10,7 +10,7 @@ export default class ResetDecorator {
    * @param { ??? } param.action
    * @param {Menu} param.menu
    */
-  constructor({ action, menu }) {
+  constructor ({ action, menu }) {
     this.action = action
     this.menu = menu
   }
@@ -18,7 +18,7 @@ export default class ResetDecorator {
   /**
    * Description goes here
    */
-  act() {
+  act () {
     this.action.function.call(this.action.context)
     this.menu.reset()
   }

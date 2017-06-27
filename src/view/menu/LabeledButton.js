@@ -19,7 +19,7 @@ export default class LabeledButton {
    * @param {number} param.buttonWidth
    * @param {number} param.buttonHeight
    */
-  constructor({ game, viewGroup, label, x, y, callback, context, buttonWidth, buttonHeight }) {
+  constructor ({ game, viewGroup, label, x, y, callback, context, buttonWidth, buttonHeight }) {
     var style = { font: config.font, fill: config.textColor, align: config.textAlignment }
 
     var button = game.make.button(x, y, 'emptyButton', callback, context)

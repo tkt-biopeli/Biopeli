@@ -8,12 +8,12 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  init() { }
+  init () { }
 
   /**
    * Description goes here
    */
-  preload() {
+  preload () {
     this.loaderBg = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBg')
     this.loaderBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBar')
     centerGameObjects([this.loaderBg, this.loaderBar])
@@ -41,7 +41,7 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  create() {
+  create () {
     this.state.start('Game')
   }
 }

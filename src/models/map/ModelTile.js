@@ -13,7 +13,7 @@ export default class {
    * @param {TileType} param.type
    * @param {Structure} param.structure
    */
-  constructor({ x, y, type, structure }) {
+  constructor ({ x, y, type, structure }) {
     this.x = x
     this.y = y
     this.tileType = type
@@ -24,7 +24,7 @@ export default class {
   /**
    * Calls the update function associated with the structure if one exists
    */
-  update() {
+  update () {
     if (this.structure !== undefined) {
       this.structure.update()
     }

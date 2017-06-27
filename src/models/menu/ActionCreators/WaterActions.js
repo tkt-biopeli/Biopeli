@@ -5,6 +5,6 @@
  *
  * @return {ButtonAction[]}
  */
-export default function WaterActions(tile) {
+export default function WaterActions (tile) {
   return []
 }

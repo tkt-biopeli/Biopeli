@@ -6,10 +6,10 @@ import ButtonAction from '../ButtonAction'
  *
  * @param {ModelTile} tile
  * @param {StructureType} structureTypes
- * @param {GameTimer] gameTimer
+ * @param {GameTimer} gameTimer
  * @return {ButtonAction[]}
  */
-export default function ForestActions(tile, structureTypes, gameTimer, player) {
+export default function ForestActions (tile, structureTypes, gameTimer, player) {
   var sbuilder = new StructureFactory({
     tile: tile,
     structureTypes: structureTypes,

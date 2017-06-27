@@ -17,7 +17,7 @@ export default function (gameState) {
    * @param {function} param.createUpdateFn
    *  - Function that is called when the ingame time proceeds, not mandatory
    */
-  function StructureType({ name, asset, createUpdateFn }) {
+  function StructureType ({ name, asset, createUpdateFn }) {
     this.name = name
     this.asset = asset
     if (createUpdateFn !== undefined) {
