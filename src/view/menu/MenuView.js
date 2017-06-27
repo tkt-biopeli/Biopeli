@@ -62,22 +62,28 @@ export default class MenuView {
       return
     }
 
-    var menuFunctions = [
-      this.createTileInformation,
-      this.createStructureInformation,
-      this.createButtons]
+    var tile = this.menu.selectedTile
 
-    this.iterateMenuFunctions(menuFunctions)
-  }
+    var sections = []
+    sections.push([
+      new TextComponent('Ground type: ' + tile.tileType.name),
+      new TextComponent('X: ' + tile.x + ', Y: ' + tile.y)
+    ])
 
-  /**
-   * Creates all menu's sections and adds section padding between them
-   */
-  iterateMenuFunctions (menuFunctions) {
-
-    for (var i = 0; i < menuFunctions.length; i++) {
-      if (menuFunctions[i].call(this)) this.addSectionPadding()
+    if(tile.structure != null){
+      var structure = tile.structure
+      sections.push([
+        new TextComponent('Structure: ' + structure.structureType.name),
+        new TextComponent('Founding year: ' + structure.foundingYear),
+        new TextComponent('Size: ' + structure.size),
+        new TextComponent('Production input: ' + structure.productionInput),
+        new TextComponent('Production per time: ' + structure.calculateProductionEfficiency())
+      ])
     }
+
+    sections.push(this.buttonActions)
+
+    this.createMenuComponents(sections)
   }
 
   /**
@@ -94,74 +100,35 @@ export default class MenuView {
     this.menuViewGroup.create(x, y, this.backgroundAsset)
   }
 
-  /**
-   * Creates the information of tile to the menu
-   *
-   * @return {boolean} WasAdded
-   */
-  createTileInformation () {
-    var tile = this.menu.selectedTile
+  createMenuComponents (sections) {
+    for(let i = 0 ; i < sections.length ; i++){
+      this.createSection(sections[i])
 
-    var components = [
-      new TextComponent('Ground type: ' + tile.tileType.name),
-      new TextComponent('X: ' + tile.x + ', Y: ' + tile.y)
-    ]
-
-    this.createSection(components)
-
-    return true
-  }
-
-  /**
-   * Creates the information of the structure in tile, if the tile has one
-   *
-   * @return {boolean}
-   */
-  createStructureInformation () {
-    var structure = this.menu.selectedTile.structure
-
-    if (structure == null) {
-      return false
+      if(i != sections.length -1){
+        this.addSectionPadding()
+      }
     }
-
-    var components = [
-      new TextComponent('Structure: ' + structure.structureType.name),
-      new TextComponent('Founding year: ' + structure.foundingYear),
-      new TextComponent('Size: ' + structure.size),
-      new TextComponent('Production input: ' + structure.productionInput),
-      new TextComponent('Production per time: ' + structure.calculateProductionEfficiency())
-    ]
-
-    this.createSection(components)
-
-    return true
   }
 
   createSection (components) {
+    
     for (let i = 0 ; i < components.length ; i++) {
       var component = components[i]
-      if (component.type = 'text') {
-        this.createText(component.text)
+      switch (component.type) {
+        case 'text': {
+          this.createText(component.text)
+          break
+        }
+        case 'button': {
+          this.createButton(component)
+          break
+        }
       }
 
       if (i != components.length - 1) {
         this.addLinePadding()
       }
     }
-  }
-
-  /**
-   * Creates the buttons for actions of the tile
-   *
-   * @return {boolean}
-   */
-  createButtons () {
-    for (var i = 0, len = this.buttonActions.length; i < len; i++) {
-      this.createButton(this.buttonActions[i])
-      this.addLinePadding()
-    }
-
-    return true
   }
 
   /**

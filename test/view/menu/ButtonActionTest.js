@@ -1,11 +1,10 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import ButtonAction from '../../../src/models/menu/ButtonAction'
+import ButtonComponent from '../../../src/view/menu/ButtonComponent'
 
 describe('ButtonAction tests', () =>{
-
   it('Constructor test', () =>{
-    var testBA = new ButtonAction({
+    var testBA = new ButtonComponent({
         name: 'name',
         functionToCall: 'func',
         context: 'con'

@@ -1,5 +1,5 @@
 import StructureFactory from '../../map/StructureFactory'
-import ButtonAction from '../ButtonAction'
+import ButtonComponent from '../../../view/menu/ButtonComponent'
 
 /**
  * Description goes here
@@ -7,7 +7,7 @@ import ButtonAction from '../ButtonAction'
  * @param {ModelTile} tile
  * @param {StructureType} structureTypes
  * @param {GameTimer] gameTimer
- * @return {ButtonAction[]}
+ * @return {ButtonComponent[]}
  */
 export default function ForestActions (tile, structureTypes, gameTimer, player) {
   var sbuilder = new StructureFactory({
@@ -17,7 +17,7 @@ export default function ForestActions (tile, structureTypes, gameTimer, player) 
     player: player
   })
 
-  var createDairyFarm = new ButtonAction({
+  var createDairyFarm = new ButtonComponent({
     name: 'Build a dairy farm',
     functionToCall: sbuilder.buildDairyFarm,
     context: sbuilder

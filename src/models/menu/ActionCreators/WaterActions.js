@@ -3,7 +3,7 @@
  * Description goes here
  * @param {ModelTile} tile
  *
- * @return {ButtonAction[]}
+ * @return {ButtonComponent[]}
  */
 export default function WaterActions (tile) {
   return []

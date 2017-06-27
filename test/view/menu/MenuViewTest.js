@@ -119,65 +119,6 @@ describe('MenuView tests', () =>{
     assert.equal(1, anchorSpy.callCount)
   })
 
-  it('Buttons are created correctly', () =>{
-    var paddingSpy = sinon.spy()
-    menuView.addLinePadding = paddingSpy
-    var buttonSpy = sinon.spy()
-    menuView.createButton = buttonSpy
-
-    assert(menuView.createButtons())
-    assert.equal(0, paddingSpy.callCount)
-    assert.equal(0, buttonSpy.callCount)
-
-    menuView.buttonActions = [1,2,3,4]
-
-    assert(menuView.createButtons())
-    assert.equal(4, paddingSpy.callCount)
-    for(var i = 0 ; i < menuView.buttonActions.length ; i++){
-      assert(buttonSpy.calledWith(menuView.buttonActions[i]))
-    }
-  })
-
-  it('Tile information is created correctly', () =>{
-    var paddingSpy = sinon.spy()
-    menuView.addLinePadding = paddingSpy
-    var textSpy = sinon.spy()
-    menuView.createText = textSpy
-
-    assert(menuView.createTileInformation())
-
-    assert.equal(1, paddingSpy.callCount)
-    assert(textSpy.calledWith('Ground type: test'))
-    assert(textSpy.calledWith('X: 0, Y: 0'))
-  })
-
-  it('Structure information isn\'t created when structure isn\'t found', () =>{
-    var paddingSpy = sinon.spy()
-    menuView.addLinePadding = paddingSpy
-    var textSpy = sinon.spy()
-    menuView.createText = textSpy
-
-    tile.structure = null
-
-    assert(!menuView.createStructureInformation())
-
-    assert.equal(0, paddingSpy.callCount)
-    assert.equal(0, textSpy.callCount)
-  })
-
-  it('Structure infromation is created when structure is found', () =>{
-    var paddingSpy = sinon.spy()
-    menuView.addLinePadding = paddingSpy
-    var textSpy = sinon.spy()
-    menuView.createText = textSpy
-
-    assert(menuView.createStructureInformation())
-
-    assert.equal(4, paddingSpy.callCount)
-    assert.equal(5, textSpy.callCount)
-    assert(textSpy.calledWith('Structure: test2'))
-  })
-
   it('Background creation works', () =>{
     var spy = sinon.spy()
     groupStub.create = spy
@@ -209,38 +150,5 @@ describe('MenuView tests', () =>{
     menuView.redraw()
 
     assert.equal(0, spy.callCount)
-  })
-
-  it('All creation functions are called when tile exist', () =>{
-    var tspy = sinon.spy()
-    menuView.createTileInformation = tspy
-    var sspy = sinon.spy()
-    menuView.createStructureInformation = sspy
-    var bspy = sinon.spy()
-    menuView.createButtons = bspy
-
-    menuView.redraw()
-
-    assert.equal(1, tspy.callCount)
-    assert.equal(1, sspy.callCount)
-    assert.equal(1, bspy.callCount)
-  })
-
-  it('Padding is only added in redraw when section is drawn', () =>{
-    var paddingSpy = sinon.spy()
-    menuView.addSectionPadding = paddingSpy
-    var tspy = sinon.stub()
-    tspy.returns(true)
-    menuView.createTileInformation = tspy
-    var sspy = sinon.stub()
-    sspy.returns(true)
-    menuView.createStructureInformation = sspy
-    var bspy = sinon.stub()
-    bspy.returns(false)
-    menuView.createButtons = bspy
-
-    menuView.redraw()
-
-    assert.equal(2, paddingSpy.callCount)
   })
 })
