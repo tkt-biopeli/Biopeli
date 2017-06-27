@@ -23,7 +23,6 @@ describe('Integration test: Time advances, shows in top bar', () => {
     gameStateChecker.checkTime('1980/1/2')
   })
 
-
   it('Time advances correctly for a month', () => {
     gameAdvancer.updateSeveralTimes(4, 1000)
     gameStateChecker.checkTime('1980/2/1')
@@ -38,5 +37,4 @@ describe('Integration test: Time advances, shows in top bar', () => {
     gameAdvancer.update(999)
     gameStateChecker.checkTime('1980/1/1')
   })
-
 })

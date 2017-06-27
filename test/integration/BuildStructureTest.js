@@ -23,5 +23,4 @@ describe('Integration test: Building structures', () => {
     gameStateChecker.checkSelectedTile()
     gameStateChecker.checkTilesInformation(0, 0, 'grass', 'farm')
   })
-
 })

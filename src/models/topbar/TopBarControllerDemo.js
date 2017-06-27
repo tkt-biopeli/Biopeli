@@ -7,7 +7,7 @@ export default class TopBarControllerDemo {
 
   onTimer(timerEvent) {
     this.player.addPoints(10)
-    this.topBar.setValueOf('score', this.player.getPoints())
+    this.topBar.setValueOf('score', this.player.points)
     let r = Math.floor(Math.random() * 100)
     this.topBar.setValueOf('time', timerEvent.toString())
     this.topBar.setValueOf('turnip', r)
