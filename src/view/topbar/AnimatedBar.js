@@ -1,5 +1,5 @@
 export default class AnimatedBar {
-  constructor ({ game, width, height, x, y }) {
+  constructor({ game, width, height, x, y }) {
     this.game = game
     this.width = width
     this.height = height
@@ -11,7 +11,7 @@ export default class AnimatedBar {
     this.draw()
   }
 
-  draw () {
+  draw() {
     let bitmapBg = this.game.add.bitmapData(this.width, this.height)
     bitmapBg.ctx.fillStyle = this.colors.background
     bitmapBg.ctx.beginPath()
@@ -37,7 +37,7 @@ export default class AnimatedBar {
    * @param {number} value - Percentage value between [0, 100]
    * @memberof AnimatedBar
    */
-  setPercentage (value) {
+  setPercentage(value) {
     let inPixels = value * this.width / 100
     this.game.add.tween(this.bar).to({ width: inPixels }, this.duration, 'Linear', true)
   }

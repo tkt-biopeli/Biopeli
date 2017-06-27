@@ -2,7 +2,7 @@ import GameAdvancer from './helpers/GameAdvancer'
 const chai = require('chai')
 const assert = require('assert')
 
-describe('Integration test: The game is initialized properly when started', ()=>{
+describe('Integration test: The game is initialized properly when started', () => {
 
   var game
   var gameState
@@ -12,8 +12,8 @@ describe('Integration test: The game is initialized properly when started', ()=>
   var mapWidth
   var mapHeight
 
-  before(() =>{
-    gameAdvancer = new GameAdvancer({mapWidth, mapHeight})
+  before(() => {
+    gameAdvancer = new GameAdvancer({ mapWidth, mapHeight })
     game = gameAdvancer.game
     gameState = gameAdvancer.gameState
     checker = gameAdvancer.gamestateChecker
@@ -22,7 +22,7 @@ describe('Integration test: The game is initialized properly when started', ()=>
     mapHeight = gameAdvancer.mapHeight
   })
 
-  it('All components of the game are created', ()=>{
+  it('All components of the game are created', () => {
     var components = [
       gameState.map,
       gameState.mapView,
@@ -35,15 +35,15 @@ describe('Integration test: The game is initialized properly when started', ()=>
       gameState.player
     ]
 
-    for(var i = 0 ; i < components.length ; i++){
+    for (var i = 0; i < components.length; i++) {
       assert(components[i] != null)
     }
   })
 
-  it('Map is initialized with right size', ()=>{
-    for(var i = 0 ; i < mapWidth ; i++){
-      for(var j = 0 ; j < mapHeight ; j++){
-        var tile = gameState.map.getTileWithGridCoordinates(i,j)
+  it('Map is initialized with right size', () => {
+    for (var i = 0; i < mapWidth; i++) {
+      for (var j = 0; j < mapHeight; j++) {
+        var tile = gameState.map.getTileWithGridCoordinates(i, j)
 
         assert(tile)
         assert(tile.tileType)
@@ -51,11 +51,11 @@ describe('Integration test: The game is initialized properly when started', ()=>
     }
   })
 
-  it('Menu doesn\'t have tile selected', () =>{
+  it('Menu doesn\'t have tile selected', () => {
     assert(gameState.menu.selectedTile == null)
   })
 
-  it('Updating the game draws the tiles again', () =>{
+  it('Updating the game draws the tiles again', () => {
     var mockerHandler = game.mockers
     var drawAmount = mockerHandler.callCount('make.sprite')
     var clearAmount = mockerHandler.callCount('render.clear')
@@ -74,10 +74,10 @@ describe('Integration test: The game is initialized properly when started', ()=>
 
     var newDrawAmount = mockerHandler.callCount('make.sprite')
 
-    assert.equal(2*drawAmount, newDrawAmount)
+    assert.equal(2 * drawAmount, newDrawAmount)
   })
 
-  it('Game starts in left upper corner', () =>{
+  it('Game starts in left upper corner', () => {
     checker.checkTilesModelCoordinates(1, 1, 0, 0)
   })
 })

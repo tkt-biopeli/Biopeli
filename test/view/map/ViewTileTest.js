@@ -2,11 +2,11 @@ const assert = require('assert')
 const sinon = require('sinon')
 import ViewTile from '../../../src/view/map/ViewTile'
 
-describe('View tile tests', () =>{
+describe('View tile tests', () => {
 
   var game, modelTile, viewTile
   var makeSpriteSpy = sinon.spy()
-  
+
   beforeEach(() => {
     game = {
       make: {
@@ -16,34 +16,34 @@ describe('View tile tests', () =>{
     modelTile = {
       tileType: {
         asset: "test"
-      }, 
+      },
       structure: null
     }
-    
-    viewTile = new ViewTile({game: game, x: 6, y: 6, modelTile: modelTile})
+
+    viewTile = new ViewTile({ game: game, x: 6, y: 6, modelTile: modelTile })
   })
 
-  it('ViewTile costructor works', () =>{ 
+  it('ViewTile costructor works', () => {
     assert.equal(game, viewTile.game)
     assert.equal(modelTile, viewTile.modelTile)
     assert(viewTile.structureSprite == null)
   })
 
-  it('makeTileSprite calls game.make.sprite with correct parameters', () =>{
+  it('makeTileSprite calls game.make.sprite with correct parameters', () => {
     viewTile.makeTileSprite(11, 5)
     assert(makeSpriteSpy.calledWith(11, 5, "test"))
   })
- 
-  it('makeStructureSprite adds child to tileSprite correctly', () =>{
+
+  it('makeStructureSprite adds child to tileSprite correctly', () => {
     var addChildSpy = sinon.spy()
-    viewTile.tileSprite = {addChild: addChildSpy}
-    
+    viewTile.tileSprite = { addChild: addChildSpy }
+
     var makeTileSpriteStub = sinon.stub()
     makeTileSpriteStub.withArgs(0, 0).returns("huuhaa")
     viewTile.makeTileSprite = makeTileSpriteStub
-    
+
     var structure = {
-      asset: function() {return "building"}
+      asset: function () { return "building" }
     }
     modelTile.structure = structure
 
@@ -54,23 +54,23 @@ describe('View tile tests', () =>{
     viewTile.makeStructureSprite()
     assert(addChildSpy.calledWith("buildingSprite"))
   })
-  
-  it('update functions properly', () =>{
+
+  it('update functions properly', () => {
     // modelTile.structure = null, structureSprite = null
     var makeStructureSpriteSpy = sinon.spy()
     viewTile.makeStructureSprite = makeStructureSpriteSpy
-    
+
     viewTile.update()
     assert.equal(makeStructureSpriteSpy.callCount, 0)
     // modelTile.structure = not null, structureSprite = null
     viewTile.modelTile.structure = {}
     viewTile.update()
     assert.equal(makeStructureSpriteSpy.callCount, 1)
-    
+
     // modelTile.structure = null, structureSprite = not null
     viewTile.modelTile.structure = null
     var destroySpy = sinon.spy()
-    viewTile.structureSprite = {destroy: destroySpy}
+    viewTile.structureSprite = { destroy: destroySpy }
     viewTile.update()
     assert.equal(makeStructureSpriteSpy.callCount, 1)
     assert.equal(viewTile.structureSprite, null)

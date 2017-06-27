@@ -9,7 +9,7 @@ export default class Menu {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor ({menuView}) {
+  constructor({ menuView }) {
     this.menuView = menuView
     menuView.setMenu(this)
 
@@ -22,7 +22,7 @@ export default class Menu {
    * @param {ModelTile} tile
    * @param { ??? } buttonActions
    */
-  chooseTile (tile, buttonActions) {
+  chooseTile(tile, buttonActions) {
     this.selectedTile = tile
     this.menuView.setButtonActions(buttonActions)
   }
@@ -30,7 +30,7 @@ export default class Menu {
   /**
    * Description goes here
    */
-  reset () {
+  reset() {
     this.selectedTile = null
     this.menuView.setButtonActions([])
   }
