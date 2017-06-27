@@ -1,5 +1,5 @@
 import StructureFactory from '../../map/StructureFactory'
-import ButtonComponent from '../../../view/menu/ButtonComponent'
+import ButtonComponent from '../../../view/menu/components/ButtonComponent'
 
 /**
  * Description goes here

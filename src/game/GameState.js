@@ -45,7 +45,7 @@ export default class GameState {
       sectionPadding: config.sectionPadding,
       linePadding: config.linePadding,
       fontSize: config.menuFontSize,
-      backgroundAsset: 'menuBg'
+      background: {asset: 'menuBg'}
     })
 
     this.menu = new Menu({

@@ -1,6 +1,7 @@
 import LabeledButton from './LabeledButton'
 import Text from './Text'
-import AnimatedBarComponent from './AnimatedBar'
+import AnimatedBar from './AnimatedBar'
+import Icon from './Icon'
 
 /**
  * Controls drawing of game's menu
@@ -17,7 +18,7 @@ export default class MenuView {
    * @param {number} param.buttonWidth width of buttons
    * @param {number} param.buttonHeight height of buttons
    */
-  constructor ({ game, menuBorderCoordinate, vertical, leftPadding, sectionPadding, linePadding, buttonWidth, buttonHeight, fontSize, backgroundAsset }) {
+  constructor ({ game, menuBorderCoordinate, vertical, leftPadding, sectionPadding, linePadding, buttonWidth, buttonHeight, fontSize, background }) {
     this.game = game
 
     this.vertical = vertical
@@ -28,20 +29,23 @@ export default class MenuView {
     this.sectionPadding = sectionPadding
     this.linePadding = linePadding
     this.fontSize = fontSize
-    this.backgroundAsset = backgroundAsset
+    this.background = background
 
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
-    this.buttonActions = []
+    
     this.activeButtons = []
     this.activeTexts = []
     this.activeBars = []
+    this.activeIcons = []
   }
 
   draw (sections) {
     this.menuViewGroup.removeAll(true, true)
     this.activeButtons = []
     this.activeTexts = []
+    this.activeBars = []
+    this.activeIcons = []
 
     this.drawPosition = this.sectionPadding
     this.createBackground()
@@ -60,7 +64,10 @@ export default class MenuView {
       x = 0
     }
 
-    this.menuViewGroup.create(x, y, this.backgroundAsset)
+    if(this.background.asset != null){
+      this.menuViewGroup.create(x, y, this.background.asset)
+    }
+
   }
 
   createMenuComponents (sections) {
@@ -156,7 +163,7 @@ export default class MenuView {
 
     var animatedBar = new AnimatedBar({
       game: this.game,
-      horizontal: animatedBarComponent.vertical,
+      horizontal: animatedBarComponent.horizontal,
       width: animatedBarComponent.width,
       height: animatedBarComponent.height,
       x: coords.x,
@@ -169,6 +176,25 @@ export default class MenuView {
       this.addPadding(animatedBarComponent.height)
     }else{
       this.addPadding(animatedBarComponent.width)
+    }
+  }
+
+  createIcon (iconComponent) {
+    var coords = this.getNextElementCoordinates()
+
+    var icon = new Icon({
+      game: this.game,
+      x: coords.x,
+      y: coords.y,
+      asset: iconComponent.asset
+    })
+
+    this.activeIcons.add(icon)
+
+    if(this.vertical){
+      this.addPadding(iconComponent.height)
+    }else{
+      this.addPadding(iconComponent.width)
     }
   }
 

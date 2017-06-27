@@ -1,5 +1,5 @@
-import TextComponent from './TextComponent'
-import ButtonComponent from './ButtonComponent'
+import TextComponent from './components/TextComponent'
+import ButtonComponent from './components/ButtonComponent'
 import ResetDecorator from './ResetDecorator'
 /**
  * Description goes here

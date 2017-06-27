@@ -10,7 +10,7 @@ describe('MenuView tests', () =>{
   var buttonWidth = 1
   var buttonHeight = 4
   var fontSize = 10
-  var backgroundAsset = 'menuBg'
+  var background = {asset: 'menuBg'}
   var groupStub
   var gameStub
   var menuView
@@ -32,7 +32,7 @@ describe('MenuView tests', () =>{
       buttonWidth: buttonWidth,
       buttonHeight: buttonHeight,
       fontSize: fontSize,
-      backgroundAsset: backgroundAsset
+      background: background
     })
 
     menuView.drawPosition = 0
@@ -50,7 +50,6 @@ describe('MenuView tests', () =>{
     assert.equal(buttonHeight, menuView.buttonHeight)
     assert.equal(groupStub, menuView.menuViewGroup)
     assert.equal(groupStub.fixedToCamera, true)
-    assert.equal(0, menuView.buttonActions.length)
   })
 
   it('Padding adders work', () =>{
