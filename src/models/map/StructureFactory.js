@@ -22,6 +22,18 @@ export default class StructureFactory {
     this.player = player
   }
 
+  build = {
+    dairyFarm: function(){
+      this.buildBuilding(structureTypes.dairyFarm)
+    },
+    berryFarm: function () {
+      this.buildBuilding(structureTypes.berryFarm)
+    },
+    farm: function () {
+      this.buildBuilding(structureTypes.farm)
+    }
+  }
+
   /**
    * Description goes here
    */

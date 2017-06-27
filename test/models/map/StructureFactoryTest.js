@@ -8,12 +8,8 @@ describe('StructureFactory tests', () => {
   /**
    * @see StructureType.createUpdateFn
    */
-<<<<<<< HEAD
   function createConstantProductionFn(){}
   function createSeasonalProductionFn(){}
-=======
-  function createUpdateFn() { }
->>>>>>> 38742310955351e6620db8ea1f3e604afe94535b
 
   it('Constructor works', () => {
     var sbuilder = new StructureFactory({
@@ -38,15 +34,11 @@ describe('StructureFactory tests', () => {
       player: { addStructure: spy }
     })
 
-<<<<<<< HEAD
     sbuilder.buildBuilding({
       name: 'test', 
       createConstantProductionFn:createConstantProductionFn,
       createSeasonalProductionFn:createSeasonalProductionFn
     })
-=======
-    sbuilder.buildBuilding({ name: 'test', createUpdateFn: createUpdateFn })
->>>>>>> 38742310955351e6620db8ea1f3e604afe94535b
     assert.equal('test', sbuilder.tile.structure.structureType.name)
     assert.equal(1, spy.callCount)
   })
