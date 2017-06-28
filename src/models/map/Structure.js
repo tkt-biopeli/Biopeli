@@ -47,7 +47,7 @@ export default class Structure {
   }
 
   /**
-   * Returns the amount of turnips produced by this structure
+   * Returns the amount of turnips produced by this structure 
    * 
    * @param {TimeEvent} timeEvent - Current ingame date
    * 

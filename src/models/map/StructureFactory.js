@@ -35,7 +35,7 @@ export default class StructureFactory {
   }
   
   /**
-   * Description goes here
+   * Builds an structure on the tile defined in the constructor
    *
    * @param {StructureType} structureType
    */

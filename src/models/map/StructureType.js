@@ -4,7 +4,7 @@
  *
  * @param {GameState} gameState - Current game
  *
- * @return {{farm: StructureType, granary: StructureType}} Structure types
+ * @return {{farm: StructureType, berryFarm: StructureType, dairyFarm: StructureType}} - Structure types
  */
 export default function (gameState) {
   /**
@@ -14,8 +14,8 @@ export default function (gameState) {
    *
    * @param {string} param.name - Name of the type
    * @param {string} param.asset - Name of the sprite used
-   * @param {function} param.constProduction
-   * @param {function} param.seasonProduction
+   * @param {function} param.createSeasonFn
+   * @param {function} param.createConstFn
    */
   function StructureType ({name, asset, createSeasonFn, createConstFn}) {
     this.name = name
