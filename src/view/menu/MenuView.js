@@ -53,6 +53,12 @@ export default class MenuView {
     this.drawPosition = this.sectionPadding
 
     this.createMenuComponents(sections)
+    //
+    //
+    this.game.world.bringToTop(this.background)
+    this.game.world.bringToTop(this.menuViewGroup)
+    //
+    //
   }
 
   /**
@@ -77,7 +83,11 @@ export default class MenuView {
     }else{
       this.background = this.game.make.graphics()
       this.background.beginFill(0x000000, 0.25)
-      this.background.drawRoundedRect(0, 0, this.topBarWidth, this.topBarHeight, 1)
+      //
+      //
+      this.background.drawRoundedRect(0, 0, width, height, 1)            
+      //
+      //
       this.background.endFill()
       this.background.fixedToCamera = true
       this.game.add.existing(this.background)
@@ -208,6 +218,8 @@ export default class MenuView {
   createIcon (iconComponent) {
     var coords = this.getNextElementCoordinates()
 
+
+
     var icon = new Icon({
       game: this.game,
       group: this.menuViewGroup,
@@ -234,7 +246,10 @@ export default class MenuView {
     }else{
       return {
         x: this.drawPosition,
-        y: this.menuBorderCoordinate - this.borderPadding
+        // y: this.menuBorderCoordinate - this.borderPadding
+        //
+        y: 0
+        //
       }
     }
   }
