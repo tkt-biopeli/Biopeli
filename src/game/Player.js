@@ -14,7 +14,7 @@ export default class {
   /**
    * Adds points given as a parameter to players existing points
    *
-   * @return {number} - Current points
+   * @param {number} - The amount of points to be added
    */
   addPoints (points) {
     this.points += points

@@ -19,19 +19,19 @@ export default function GrassActions (tile, structureTypes, gameTimer, player) {
 
   var createDairyFarm = new ButtonAction({
     name: 'Build a dairy farm',
-    functionToCall: sBuilder.buildDairyFarm,
+    functionToCall: sBuilder.build.dairyFarm,
     context: sBuilder
   })
 
   var createBerryFarm = new ButtonAction({
     name: 'Build a berry farm',
-    functionToCall: sBuilder.buildBerryFarm,
+    functionToCall: sBuilder.build.berryFarm,
     context: sBuilder
   })
 
   var createFarm = new ButtonAction({
     name: 'Build a farm',
-    functionToCall: sBuilder.buildFarm,
+    functionToCall: sBuilder.build.farm,
     context: sBuilder
   })
 

@@ -5,11 +5,6 @@ import StructureTypes from '../../../src/models/map/StructureType'
 
 describe('StructureFactory tests', () => {
 
-  /**
-   * @see StructureType.createUpdateFn
-   */
-  function createUpdateFn() { }
-
   it('Constructor works', () => {
     var sbuilder = new StructureFactory({
       tile: 0,
@@ -33,7 +28,10 @@ describe('StructureFactory tests', () => {
       player: { addStructure: spy }
     })
 
-    sbuilder.buildBuilding({ name: 'test', createUpdateFn: createUpdateFn })
+    sbuilder.buildBuilding({
+      name: 'test', 
+      createProductionFn: ()=>{}
+    })
     assert.equal('test', sbuilder.tile.structure.structureType.name)
     assert.equal(1, spy.callCount)
   })
@@ -51,7 +49,7 @@ describe('StructureFactory tests', () => {
   it('Build Farm works', () => {
     setSpy()
 
-    builder.buildFarm()
+    builder.build.farm()
 
     assert(spy.calledWith(types.farm))
   })
@@ -59,7 +57,7 @@ describe('StructureFactory tests', () => {
   it('Build dairy farm works', () => {
     setSpy()
 
-    builder.buildDairyFarm()
+    builder.build.dairyFarm()
 
     assert(spy.calledWith(types.dairyFarm))
   })
@@ -67,7 +65,7 @@ describe('StructureFactory tests', () => {
   it('Build berry farm works', () => {
     setSpy()
 
-    builder.buildBerryFarm()
+    builder.build.berryFarm()
 
     assert(spy.calledWith(types.berryFarm))
   })

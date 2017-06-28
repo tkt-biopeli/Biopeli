@@ -20,13 +20,4 @@ export default class {
     this.structure = structure
     this.potential = 10
   }
-
-  /**
-   * Calls the update function associated with the structure if one exists
-   */
-  update () {
-    if (this.structure !== undefined) {
-      this.structure.update()
-    }
-  }
 }

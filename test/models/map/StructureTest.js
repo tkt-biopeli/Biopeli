@@ -6,7 +6,7 @@ describe('Structure tests', () => {
   var structure, tile
   var stype = {
     asset: 'sd',
-    createUpdateFn: function () { }
+    createProductionFn: function () {}
   }
 
   before(function () {

@@ -13,10 +13,10 @@ export default class Structure {
    * @param {object} param
    *
    * @param {ModelTile} param.tile
-   * @param {string} name
-   * @param {integer} size
+   * @param {string} param.name
+   * @param {integer} param.size
    * @param {StructureType} param.structureType
-   * @param {integer} productionInput
+   * @param {integer} productionInput - ????
    */
   constructor ({ tile, name, size, structureType, foundingYear }) {
     this.tile = tile
@@ -26,7 +26,7 @@ export default class Structure {
     this.productionInput = 1
     this.foundingYear = foundingYear
 
-    this.updateFn = structureType.createUpdateFn()
+    this.produceFn = structureType.createProductionFn()
   }
 
   /**
@@ -47,10 +47,13 @@ export default class Structure {
   }
 
   /**
-   * Calls the update function of the structure type
-   * @see StructureType.updateFn
+   * Returns the amount of turnips produced by this structure 
+   * 
+   * @param {TimeEvent} timeEvent - Current ingame date
+   * 
+   * @return {number} - Turnips produced
    */
-  update () {
-    this.updateFn()
+  produce (timeEvent) {
+    return this.produceFn(timeEvent)
   }
 }

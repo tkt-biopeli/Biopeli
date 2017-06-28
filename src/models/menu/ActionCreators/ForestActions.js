@@ -19,7 +19,7 @@ export default function ForestActions (tile, structureTypes, gameTimer, player) 
 
   var createDairyFarm = new ButtonAction({
     name: 'Build a dairy farm',
-    functionToCall: sbuilder.buildDairyFarm,
+    functionToCall: sbuilder.build.dairyFarm,
     context: sbuilder
   })
 

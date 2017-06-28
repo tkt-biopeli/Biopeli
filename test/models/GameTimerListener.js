@@ -1,6 +1,7 @@
 const assert = require('assert')
 const sinon = require('sinon')
 import GameTimerListener from '../../src/models/GameTimerListener'
+import TimeEvent from '../../src/view/TimeEvent'
 
 describe('Game timer listener tests', () => {
   it('Constructor works', () => {
@@ -12,17 +13,21 @@ describe('Game timer listener tests', () => {
 
   it('onTimer calls all necessary functions', () => {
     var player = {
-      structures: [{ update: sinon.spy() }, { update: sinon.spy() }],
+      addPoints: function (p) {},
+      structures: [
+        {produce: sinon.spy(), produceSeason: sinon.spy()}, 
+        {produce: sinon.spy(), produceSeason: sinon.spy()}
+      ],
     }
 
     var menuView = { redraw: sinon.spy() }
 
     var l = new GameTimerListener({ player: player, menuView: menuView })
 
-    l.onTimer(1)
+    l.onTimer(new TimeEvent(1))
 
-    assert.equal(1, player.structures[0].update.callCount)
-    assert.equal(1, player.structures[1].update.callCount)
+    assert.equal(1, player.structures[0].produce.callCount)
+    assert.equal(1, player.structures[1].produce.callCount)
     assert.equal(1, menuView.redraw.callCount)
   })
 })
