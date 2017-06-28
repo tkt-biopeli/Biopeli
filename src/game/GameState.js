@@ -5,8 +5,6 @@ import MenuView from '../view/menu/MenuView'
 import CameraMover from '../view/CameraMover'
 import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
-import TileTypes from '../models/map/TileType'
-import StructureTypes from '../models/map/StructureType'
 import Player from './Player'
 import MenuOptionCreator from '../models/menu/MenuOptionCreator'
 import config from '../config'
@@ -106,7 +104,7 @@ export default class GameState {
       gameTimer: this.gameTimer,
       player: this.player
     })
-
+    
     this.gameTimer.addListener(this.gameTimerListener)
     this.gameTimer.addListener(this.topBarControllerDemo)
     this.menuOptionCreator.gameTimer = this.gameTimer
@@ -115,7 +113,6 @@ export default class GameState {
   }
 
   initializeModel (mapWidth, mapHeight, tileWidth, tileHeight) {
-    this.tileTypes = TileTypes()
 
     this.map = new Map({
       gridSizeX: mapWidth,
@@ -129,7 +126,7 @@ export default class GameState {
 
     this.player = new Player()
 
-    this.menuOptionCreator = new MenuOptionCreator({player: this.player })
+    this.menuOptionCreator = new MenuOptionCreator({player: this.player, structureFactory: this.structureFactory })
   }
 
   /**

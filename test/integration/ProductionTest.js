@@ -2,7 +2,7 @@ import GameTimerListener from '../../src/models/GameTimerListener'
 import Player from '../../src/game/Player'
 import TimeEvent from '../../src/view/TimeEvent'
 import StructureType from '../../src/models/map/StructureType'
-import TileType from '../../src/models/map/TileType'
+import StaticTypes from '../../src/models/StaticTypes'
 import ModelTile from '../../src/models/map/ModelTile'
 import StructureFactory from '../../src/models/map/StructureFactory'
 
@@ -26,7 +26,7 @@ describe('Production tests', () => {
     tile = new ModelTile({ 
       x: 1, 
       y: 1, 
-      type: TileType().grass, 
+      type: StaticTypes.tileTypes.grass, 
       structure: undefined
     })
 

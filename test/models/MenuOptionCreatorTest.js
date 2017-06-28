@@ -1,13 +1,13 @@
 const assert = require('assert')
 const sinon = require('sinon')
 import MenuOptionCreator from '../../src/models/menu/MenuOptionCreator'
-import TileType from '../../src/models/map/TileType'
+import StaticTypes from '../../src/models/StaticTypes'
 import StructureType from '../../src/models/map/StructureType'
 
 describe('Menu option creator tests', () => {
   it('All tiletypes have action creator', () => {
     var creator = new MenuOptionCreator({ structureTypes: 0 })
-    var tiletypes = TileType()
+    var tiletypes = StaticTypes.tileTypes
 
     var len = Object.keys(tiletypes).length
 
@@ -16,7 +16,7 @@ describe('Menu option creator tests', () => {
 
   it('TileOptions gives right tile', () => {
     var creator = new MenuOptionCreator({ structureTypes: StructureType() })
-    var grass = TileType().grass
+    var grass = StaticTypes.tileTypes.grass
     var expectedValues = creator.tileOptions.get(grass.name)()
     var got = creator.tileTypeOptions({ tileType: grass })
 

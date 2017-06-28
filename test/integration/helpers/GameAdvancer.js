@@ -3,7 +3,7 @@ import GamestateChecker from './GamestateChecker'
 import GameState from '../../../src/game/GameState'
 import config from '../../../src/config'
 import ModelTile from '../../../src/models/map/ModelTile'
-import TileType from '../../../src/models/map/TileType'
+import StaticTypes from '../../../src/models/StaticTypes'
 import StructureType from '../../../src/models/map/StructureType'
 import Structure from '../../../src/models/map/Structure'
 const assert = require("assert")
@@ -54,7 +54,7 @@ export default class GameAdvancer {
     }(this.timeObject)
     this.gameState.gameTimer.lastTime = 0
 
-    this.tileTypes = TileType()
+    this.tileTypes = StaticTypes.tileTypes
     this.structureTypes = StructureType()
 
   }

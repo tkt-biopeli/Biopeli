@@ -1,5 +1,5 @@
 import ModelTile from './ModelTile'
-import TileType from './TileType'
+import StaticTypes from '../StaticTypes'
 
 /**
  * Description goes here
@@ -100,7 +100,7 @@ export default class Map {
    */
   createMapHalfForestHalfWater () {
     var limit = 0.2
-    var tileTypes = TileType.call()
+    var tileTypes = StaticTypes.tileTypes
     var r = Math.random()
 
     for (var i = 0; i < this.gridSizeY; i++) {
