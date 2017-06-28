@@ -31,16 +31,22 @@ export default class MenuView {
     this.fontSize = fontSize
     this.background = background
 
+    this.menuAllViewGroup = game.add.group()
     this.menuViewGroup = game.add.group()
-    this.menuViewGroup.fixedToCamera = true
+    this.menuAllViewGroup.fixedToCamera = true
     
     this.activeButtons = []
     this.activeTexts = []
     this.activeBars = []
     this.activeIcons = []
+
+    this.createBackground()
+    this.menuAllViewGroup.add(this.menuViewGroup)
   }
 
   draw (sections) {
+    
+
     this.menuViewGroup.removeAll(true, true)
     this.activeButtons = []
     this.activeTexts = []
@@ -48,9 +54,12 @@ export default class MenuView {
     this.activeIcons = []
 
     this.drawPosition = this.sectionPadding
-    this.createBackground()
 
     this.createMenuComponents(sections)
+
+    if(!this.vertical){
+      console.log(this.activeIcons[1])
+    }
   }
 
   /**
@@ -69,14 +78,14 @@ export default class MenuView {
     }
 
     if(this.background.asset != null){
-      this.menuViewGroup.create(x, y, this.background.asset)
+      this.menuAllViewGroup.create(x, y, this.background.asset)
     }else{
       let bg = this.game.make.graphics()
       bg.beginFill(0x000000, 0.25)
-      bg.drawRoundedRect(x, y, width, height, 1)
+      bg.drawRoundedRect(0, 0, this.topBarWidth, this.topBarHeight, 1)
       bg.endFill()
       bg.fixedToCamera = true
-      this.menuViewGroup.add(bg)
+      var x = this.game.add.existing(bg)
     }
 
   }
@@ -103,6 +112,15 @@ export default class MenuView {
           this.createButton(component)
           break
         }
+        case 'icon': {
+          this.createIcon(component)
+          break
+        }
+        case 'bar': {
+          this.createAnimatedBar(component)
+          break
+        }
+        default: throw new Error('Invalid menu component type')
       }
 
       if (i != components.length - 1) {
@@ -174,6 +192,7 @@ export default class MenuView {
 
     var animatedBar = new AnimatedBar({
       game: this.game,
+      group: this.menuViewGroup,
       horizontal: animatedBarComponent.horizontal,
       width: animatedBarComponent.width,
       height: animatedBarComponent.height,
@@ -195,12 +214,13 @@ export default class MenuView {
 
     var icon = new Icon({
       game: this.game,
+      group: this.menuViewGroup,
       x: coords.x,
       y: coords.y,
       asset: iconComponent.asset
     })
 
-    this.activeIcons.add(icon)
+    this.activeIcons.push(icon)
 
     if(this.vertical){
       this.addPadding(iconComponent.height)

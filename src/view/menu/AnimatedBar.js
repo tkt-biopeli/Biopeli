@@ -1,5 +1,5 @@
 export default class AnimatedBar {
-  constructor ({ game, horizontal, width, height, x, y }) {
+  constructor ({ game, group, horizontal, width, height, x, y }) {
     this.game = game
     this.horizontal = horizontal
     this.width = width
@@ -8,6 +8,7 @@ export default class AnimatedBar {
     this.y = y
     this.colors = { background: '#2e221f', bar: '#67244f' }
     this.duration = 250
+    this.group = group
 
     this.draw()
   }
@@ -19,7 +20,7 @@ export default class AnimatedBar {
     bitmapBg.ctx.rect(0, 0, this.width, this.height)
     bitmapBg.ctx.fill()
 
-    this.background = this.game.add.sprite(this.x, this.y, bitmapBg)
+    this.background = this.game.add.sprite(this.x, this.y, bitmapBg, null, this.group)
     this.background.fixedToCamera = true
 
     let bitmapBar = this.game.add.bitmapData(this.width, this.height)
@@ -28,7 +29,7 @@ export default class AnimatedBar {
     bitmapBar.ctx.rect(0, 0, this.width, this.height)
     bitmapBar.ctx.fill()
 
-    this.bar = this.game.add.sprite(this.x, this.y, bitmapBar)
+    this.bar = this.game.add.sprite(this.x, this.y, bitmapBar, null, this.group)
     this.bar.fixedToCamera = true
   }
 
