@@ -12,7 +12,7 @@ export default function () {
    * @param {string} param.name
    * @param {string} param.asset
    */
-  function TileType({ name, asset }) {
+  function TileType ({ name, asset }) {
     this.name = name
     this.asset = asset
   }

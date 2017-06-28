@@ -9,7 +9,7 @@ import ButtonAction from '../ButtonAction'
  *
  * @return {ButtonAction[]}
  */
-export default function GrassActions(tile, structureTypes, gameTimer, player) {
+export default function GrassActions (tile, structureTypes, gameTimer, player) {
   var sBuilder = new StructureFactory({
     tile: tile,
     structureTypes: structureTypes,

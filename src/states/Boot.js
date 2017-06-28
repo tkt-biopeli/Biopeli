@@ -8,7 +8,7 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  init() {
+  init () {
     this.stage.backgroundColor = '#EDEEC9'
     this.fontsReady = false
     this.fontsLoaded = this.fontsLoaded.bind(this)
@@ -17,7 +17,7 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  preload() {
+  preload () {
     WebFont.load({
       google: {
         families: ['Bangers']
@@ -35,7 +35,7 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  render() {
+  render () {
     if (this.fontsReady) {
       this.state.start('Splash')
     }
@@ -44,7 +44,7 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  fontsLoaded() {
+  fontsLoaded () {
     this.fontsReady = true
   }
 }

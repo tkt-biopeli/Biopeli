@@ -14,10 +14,7 @@ describe('Text test', () => {
                 }
             }, fontSize: 0, text: "sd"
         })
-
         text.setText("asd")
-
         assert.equal("asd", textMock.text)
-
     })
 })

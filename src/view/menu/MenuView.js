@@ -17,9 +17,9 @@ export default class MenuView {
    * @param {number} param.buttonWidth width of buttons
    * @param {number} param.buttonHeight height of buttons
    */
-  constructor({ game, leftBorderCoordinate, leftPadding, sectionPadding, linePadding, buttonWidth, buttonHeight, fontSize }) {
+  constructor ({ game, city, leftBorderCoordinate, leftPadding, sectionPadding, linePadding, buttonWidth, buttonHeight, fontSize }) {
     this.game = game
-
+    this.city = city
     this.leftBorderCoordinate = leftBorderCoordinate
     this.leftPadding = leftPadding
     this.buttonWidth = buttonWidth
@@ -27,7 +27,6 @@ export default class MenuView {
     this.sectionPadding = sectionPadding
     this.linePadding = linePadding
     this.fontSize = fontSize
-
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
     this.buttonActions = []
@@ -40,20 +39,21 @@ export default class MenuView {
    *
    * @param {Menu} menu
    */
-  setMenu(menu) {
+  setMenu (menu) {
     this.menu = menu
   }
 
   /**
    * Description goes here
    */
-  redraw() {
+  redraw () {
     this.menuViewGroup.removeAll(true, true)
     this.activeButtons = []
     this.activeTexts = []
 
     this.drawHeight = this.sectionPadding
     this.createBackground()
+    this.createCityInformation()
 
     if (this.menu == null || this.menu.selectedTile == null) {
       return
@@ -65,7 +65,7 @@ export default class MenuView {
   /**
    * Creates all menu's sections and adds section padding between them
    */
-  iterateMenuFunctions() {
+  iterateMenuFunctions () {
     var menuFunctions = [
       this.createTileInformation,
       this.createStructureInformation,
@@ -79,8 +79,23 @@ export default class MenuView {
   /**
    * Creates background image of menu
    */
-  createBackground() {
+  createBackground () {
     this.menuViewGroup.create(this.leftBorderCoordinate, 0, 'menuBg')
+  }
+
+  /**
+   * Creates city information to the menu
+   */
+  createCityInformation () {
+    this.createText('City: ' + this.city.name)
+    this.addLinePadding()
+    this.createText('Population: ' + this.city.population)
+    this.addLinePadding()
+    this.createText('Demand: ' + this.city.demand)
+    this.addLinePadding()
+    this.addLinePadding()
+
+    return true
   }
 
   /**
@@ -88,7 +103,7 @@ export default class MenuView {
    *
    * @return {boolean} WasAdded
    */
-  createTileInformation() {
+  createTileInformation () {
     var tile = this.menu.selectedTile
 
     this.createText('Ground type: ' + tile.tileType.name)
@@ -103,7 +118,7 @@ export default class MenuView {
    *
    * @return {boolean}
    */
-  createStructureInformation() {
+  createStructureInformation () {
     var structure = this.menu.selectedTile.structure
 
     if (structure == null) {
@@ -128,7 +143,7 @@ export default class MenuView {
    *
    * @return {boolean}
    */
-  createButtons() {
+  createButtons () {
     for (var i = 0, len = this.buttonActions.length; i < len; i++) {
       this.createButton(this.buttonActions[i])
       this.addLinePadding()
@@ -142,7 +157,7 @@ export default class MenuView {
    *
    * @param {ButtonAction} buttonAction
    */
-  createButton(buttonAction) {
+  createButton (buttonAction) {
     var resetDecorator = new ResetDecorator({ action: buttonAction, menu: this.menu })
 
     var button = new LabeledButton({
@@ -170,7 +185,7 @@ export default class MenuView {
    *
    * @return { ??? }
    */
-  createText(text) {
+  createText (text) {
     var tex = new Text({
       game: this.game,
       viewGroup: this.menuViewGroup,
@@ -191,7 +206,7 @@ export default class MenuView {
    *
    * @param { [ButtonAction] } buttonActions
    */
-  setButtonActions(buttonActions) {
+  setButtonActions (buttonActions) {
     this.buttonActions = buttonActions
     this.redraw()
   }
@@ -201,21 +216,21 @@ export default class MenuView {
    *
    * @param {Number} amount
    */
-  addPadding(amount) {
+  addPadding (amount) {
     this.drawHeight += amount
   }
 
   /**
    * Adds predefined padding after line
    */
-  addLinePadding() {
+  addLinePadding () {
     this.addPadding(this.linePadding)
   }
 
   /**
    * Adds predefined padding after section
    */
-  addSectionPadding() {
+  addSectionPadding () {
     this.addPadding(this.sectionPadding)
   }
 }

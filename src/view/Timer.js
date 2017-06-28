@@ -5,7 +5,7 @@ export default class Timer {
    * @param {number} interval in millis
    * @param {number} currentTime in millis
    */
-  constructor({ name, interval, currentTime }) {
+  constructor ({ name, interval, currentTime }) {
     if (name == null) {
       this.name = ''
     } else {
@@ -15,7 +15,7 @@ export default class Timer {
     this.interval = interval
     this.lastTime = currentTime
     this.callTime = 0
-
+    this.currentTime = currentTime
     this.listeners = new Set()
   }
 
@@ -24,7 +24,7 @@ export default class Timer {
    *
    * @param {*} listener
    */
-  addListener(listener) {
+  addListener (listener) {
     this.listeners.add(listener)
   }
 
@@ -33,7 +33,7 @@ export default class Timer {
    *
    * @param {*} listener
   */
-  removeListener(listener) {
+  removeListener (listener) {
     this.listeners.delete(listener)
   }
 
@@ -42,7 +42,7 @@ export default class Timer {
    *
    * @param {number} currentTime
    */
-  update(currentTime) {
+  update (currentTime) {
     if (currentTime - this.lastTime >= this.interval) {
       this.callTime++
       this.callListeners()
@@ -53,7 +53,7 @@ export default class Timer {
   /**
    * Helper method for calling all of the listeners
    */
-  callListeners() {
+  callListeners () {
     this.currentTime = this.createTimeEvent()
 
     for (let listener of this.listeners) {
@@ -67,7 +67,7 @@ export default class Timer {
    * 
    * @return {{time: number, year: number}}
    */
-  createTimeEvent() {
+  createTimeEvent () {
     return new TimeEvent({ callTime: this.callTime })
   }
 }

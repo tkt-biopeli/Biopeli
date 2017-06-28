@@ -15,7 +15,7 @@ export default class MapView {
    * @param {number} param.viewWidthPx
    * @param {number} param.viewHeightPx
    */
-  constructor({ game, map, menu, viewWidthPx, viewHeightPx }) {
+  constructor ({ game, map, menu, viewWidthPx, viewHeightPx }) {
     this.game = game
     this.map = map
     this.menu = menu
@@ -29,7 +29,7 @@ export default class MapView {
   /**
    * Description goes here
    */
-  initialize() {
+  initialize () {
     this.viewTexture = this.game.add.renderTexture(this.viewWidthPx, this.viewHeightPx, 'maptexture')
     this.renderS = this.game.add.sprite(0, 0, this.viewTexture)
     this.renderS.fixedToCamera = true
@@ -41,7 +41,7 @@ export default class MapView {
    * @param {number} cameraX
    * @param {number} cameraY
    */
-  draw(cameraX, cameraY) {
+  draw (cameraX, cameraY) {
     this.viewTexture.clear()
 
     var viewArea = this.viewAreaLimits(cameraX, cameraY)
@@ -58,7 +58,7 @@ export default class MapView {
    * @param {number} x
    * @param {number} y
    */
-  addToViewTexture(sprite, x, y) {
+  addToViewTexture (sprite, x, y) {
     this.viewTexture.renderXY(sprite, Math.round(x), Math.round(y))
   }
 
@@ -68,7 +68,7 @@ export default class MapView {
    * @param {number} cameraX
    * @param {number} cameraY
    */
-  viewAreaLimits(cameraX, cameraY) {
+  viewAreaLimits (cameraX, cameraY) {
     var startCol = Math.floor(cameraX / this.tileWidth)
     var startRow = Math.floor(cameraY / this.tileHeight)
 
@@ -88,7 +88,7 @@ export default class MapView {
    * @param {number} startCol
    * @param {number} startRow
    */
-  offset(cameraX, cameraY, startCol, startRow) {
+  offset (cameraX, cameraY, startCol, startRow) {
     return {
       x: -cameraX + startCol * this.tileWidth,
       y: -cameraY + startRow * this.tileHeight
@@ -104,7 +104,7 @@ export default class MapView {
    * @param {number} startRow
    * @param {{x: number, y: number}} offset
    */
-  ColAndRowToPx(col, row, startCol, startRow, offset) {
+  ColAndRowToPx (col, row, startCol, startRow, offset) {
     return {
       x: (col - startCol) * this.tileWidth + offset.x,
       y: (row - startRow) * this.tileHeight + offset.y
@@ -117,7 +117,7 @@ export default class MapView {
    * @param { ??? } viewArea
    * @param { ??? } offset
    */
-  fillView(viewArea, offset) {
+  fillView (viewArea, offset) {
     for (var c = viewArea.startCol; c <= viewArea.endCol; c++) {
       for (var r = viewArea.startRow; r <= viewArea.endRow; r++) {
         var tile = this.map.getTileWithGridCoordinates(c, r)
@@ -136,7 +136,7 @@ export default class MapView {
    * @param { ??? } viewArea
    * @param { ??? } offset - not actually used
    */
-  createViewTileForFill(tile, pxCoords, viewArea, offset) {
+  createViewTileForFill (tile, pxCoords, viewArea, offset) {
     var viewTile = new ViewTile({ game: this.game, x: 0, y: 0, modelTile: tile })
     this.addToViewTexture(viewTile.tileSprite, pxCoords.x, pxCoords.y)
 
@@ -148,7 +148,7 @@ export default class MapView {
    * @param {ModelTile} tile
    * @param {{x: number, y: number}} pxCoords
    */
-  highlightSelectedTile(tile, pxCoords) {
+  highlightSelectedTile (tile, pxCoords) {
     if (tile === this.menu.selectedTile) {
       this.addToViewTexture(this.highlight(), pxCoords.x, pxCoords.y)
     }
@@ -158,7 +158,7 @@ export default class MapView {
    * Description goes here
    * @return { ??? }
    */
-  highlight() {
+  highlight () {
     var highlight = this.game.make.graphics()
     highlight.beginFill(0x000000, 0.2)
     highlight.drawRoundedRect(0, 0, this.tileWidth, this.tileHeight, 9)

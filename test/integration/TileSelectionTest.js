@@ -30,5 +30,4 @@ describe('Integration test: Tile selection shows correctly in Menu', () => {
     gameStateChecker.checkIfTextsExist('Ground type: grass', 'X: 0, Y: 0', 'Structure: farm',
       'Founding year: 1999', 'Size: 100', 'Production input: 1', 'Production per time: ')
   })
-
 })

@@ -15,12 +15,12 @@ export default class Text {
    * @param {number} param.x
    * @param {number} param.y
    */
-  constructor({ game, viewGroup, text, fontSize, x, y }) {
+  constructor ({ game, viewGroup, text, fontSize, x, y }) {
     var style = { font: fontSize + 'px Arial', fill: '#ffff00', align: 'center' }
     this.text = game.add.text(x, y, text, style, viewGroup)
   }
 
-  setText(text) {
+  setText (text) {
     this.text.text = text
   }
 }

@@ -4,7 +4,7 @@ const assert = require("assert");
 describe('Player tests', function () {
   it('Player should have 0 points in the beginning', function () {
     var p = new Player();
-    assert.equal(0, p.getPoints());
+    assert.equal(0, p.points);
     assert.equal(0, p.structures.size)
   })
 
@@ -15,7 +15,7 @@ describe('Player tests', function () {
 
   it('Points are added correctly', function () {
     p.addPoints(5);
-    assert.equal(5, p.getPoints());
+    assert.equal(5, p.points);
   })
 
   it('Adding structure works', () => {

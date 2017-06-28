@@ -18,7 +18,7 @@ export default class Structure {
    * @param {StructureType} param.structureType
    * @param {integer} productionInput - ????
    */
-  constructor({ tile, name, size, structureType, foundingYear }) {
+  constructor ({ tile, name, size, structureType, foundingYear }) {
     this.tile = tile
     this.name = name
     this.size = size
@@ -32,7 +32,7 @@ export default class Structure {
   /**
    * Returns the asset of the structure type
    */
-  asset() {
+  asset () {
     return this.structureType.asset
   }
 
@@ -40,7 +40,7 @@ export default class Structure {
    * Calculates and returns the value of the structure's production efficiency
    * ie. number of production units per period
    */
-  calculateProductionEfficiency() {
+  calculateProductionEfficiency () {
     // production efficiency is based on the potential of the tile, and size and input of structure
     var value = this.productionInput * this.size * this.tile.potential
     return value

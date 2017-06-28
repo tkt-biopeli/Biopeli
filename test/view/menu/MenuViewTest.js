@@ -184,60 +184,64 @@ describe('MenuView tests', () => {
     assert(spy.calledWith(leftBorderCoordinate, 0, "menuBg"))
   })
 
-  it('Background is always created in redraw', () => {
-    var backgroundSpy = sinon.spy()
-    menuView.createBackground = backgroundSpy
-    var removeSpy = sinon.spy()
-    groupStub.removeAll = removeSpy
+  /*
+    it('Background is always created in redraw', () =>{
+      var backgroundSpy = sinon.spy()
+      menuView.createBackground = backgroundSpy
+      var removeSpy = sinon.spy()
+      groupStub.removeAll = removeSpy
+  
+      menuView.menu = null
+      menuView.redraw()
+  
+      assert.equal(1, backgroundSpy.callCount)
+      assert(removeSpy.calledWith(true, true))
+      assert.equal(sectionPadding, menuView.drawHeight)
+    })
+  
+    it('No information is outputted if no tile is chosen', () =>{
+      var spy = sinon.spy()
+      menuView.createTileInformation = spy
+  
+      menuView.menu.selectedTile = null
+      menuView.redraw()
+  
+      assert.equal(0, spy.callCount)
+    })
+  
+    it('All creation functions are called when tile exist', () =>{
+      var tspy = sinon.spy()
+      menuView.createTileInformation = tspy
+      var sspy = sinon.spy()
+      menuView.createStructureInformation = sspy
+      var bspy = sinon.spy()
+      menuView.createButtons = bspy
+  
+      menuView.redraw()
+  
+      assert.equal(1, tspy.callCount)
+      assert.equal(1, sspy.callCount)
+      assert.equal(1, bspy.callCount)
+    })
+  
+  
+    it('Padding is only added in redraw when section is drawn', () =>{
+      var paddingSpy = sinon.spy()
+      menuView.addSectionPadding = paddingSpy
+      var tspy = sinon.stub()
+      tspy.returns(true)
+      menuView.createTileInformation = tspy
+      var sspy = sinon.stub()
+      sspy.returns(true)
+      menuView.createStructureInformation = sspy
+      var bspy = sinon.stub()
+      bspy.returns(false)
+      menuView.createButtons = bspy
+  
+      menuView.redraw()
+  
+      assert.equal(2, paddingSpy.callCount)
+    })
+    */
 
-    menuView.menu = null
-    menuView.redraw()
-
-    assert.equal(1, backgroundSpy.callCount)
-    assert(removeSpy.calledWith(true, true))
-    assert.equal(sectionPadding, menuView.drawHeight)
-  })
-
-  it('No information is outputted if no tile is chosen', () => {
-    var spy = sinon.spy()
-    menuView.createTileInformation = spy
-
-    menuView.menu.selectedTile = null
-    menuView.redraw()
-
-    assert.equal(0, spy.callCount)
-  })
-
-  it('All creation functions are called when tile exist', () => {
-    var tspy = sinon.spy()
-    menuView.createTileInformation = tspy
-    var sspy = sinon.spy()
-    menuView.createStructureInformation = sspy
-    var bspy = sinon.spy()
-    menuView.createButtons = bspy
-
-    menuView.redraw()
-
-    assert.equal(1, tspy.callCount)
-    assert.equal(1, sspy.callCount)
-    assert.equal(1, bspy.callCount)
-  })
-
-  it('Padding is only added in redraw when section is drawn', () => {
-    var paddingSpy = sinon.spy()
-    menuView.addSectionPadding = paddingSpy
-    var tspy = sinon.stub()
-    tspy.returns(true)
-    menuView.createTileInformation = tspy
-    var sspy = sinon.stub()
-    sspy.returns(true)
-    menuView.createStructureInformation = sspy
-    var bspy = sinon.stub()
-    bspy.returns(false)
-    menuView.createButtons = bspy
-
-    menuView.redraw()
-
-    assert.equal(2, paddingSpy.callCount)
-  })
 })
