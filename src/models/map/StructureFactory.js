@@ -13,40 +13,28 @@ export default class StructureFactory {
    * @param {StructureType} param.structureTypes
    * @param {GameTimer} param.gameTimer
    */
-  constructor ({ tile, structureTypes, gameTimer, player }) {
-    this.tile = tile
+  constructor ({structureTypes, gameTimer, player }) {
     this.structureName = 'joku nimi'
     this.structureSize = 10
     this.structureTypes = structureTypes
     this.gameTimer = gameTimer
     this.player = player
-
-    this.build = {
-      dairyFarm: () => {
-        this.buildBuilding(structureTypes.dairyFarm)
-      },
-      berryFarm: () => {
-        this.buildBuilding(structureTypes.berryFarm)
-      },
-      farm: () => {
-        this.buildBuilding(structureTypes.farm)
-      }
-    }
   }
   
   /**
    * Builds an structure on the tile defined in the constructor
    *
+   * @param {ModelTile} tile
    * @param {StructureType} structureType
    */
-  buildBuilding (structureType) {
-    this.tile.structure = new Structure({
-      tile: this.tile,
+  buildBuilding (tile, structureType) {
+    tile.structure = new Structure({
+      tile: tile,
       name: this.structureName,
       size: this.structureSize,
       structureType: structureType,
       foundingYear: this.gameTimer.currentTime.year
     })
-    this.player.addStructure(this.tile.structure)
+    this.player.addStructure(tile.structure)
   }
 }

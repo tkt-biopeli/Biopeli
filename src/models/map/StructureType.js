@@ -1,25 +1,10 @@
 
-/**
- * Description goes here
- *
- * @param {GameState} gameState - Current game
- *
- * @return {{farm: StructureType, berryFarm: StructureType, dairyFarm: StructureType}} - Structure types
- */
-export default function (gameState) {
-  /**
-   * @class
-   *
-   * @param {object} param - Parameter object
-   *
-   * @param {string} param.name - Name of the type
-   * @param {string} param.asset - Name of the sprite used
-   * @param {function} param.createSeasonFn
-   * @param {function} param.createConstFn
-   */
-  function StructureType ({name, asset, createSeasonFn, createConstFn}) {
+class StructureType {
+  constructor ({name, asset, allowedTiles, createSeasonFn, createConstFn}) {
     this.name = name
     this.asset = asset
+
+    this.allowedTiles = allowedTiles
 
     this.createSeasonFn = createSeasonFn ? 
         createSeasonFn : (event) => {return ()=>{}}
@@ -27,8 +12,8 @@ export default function (gameState) {
         createConstFn : () => {return ()=>{}}
 
     this.createProductionFn = () => {
-      var seasonFn = createSeasonFn()
-      var constFn = createConstFn()
+      var seasonFn = this.createSeasonFn()
+      var constFn = this.createConstFn()
       return (timeEvent) => {
         var produced = 0
         produced += seasonFn(timeEvent)
@@ -37,61 +22,61 @@ export default function (gameState) {
       }
     }
   }
+}
 
-  var farm = new StructureType({
-    name: 'farm',
-    asset: 'farm',
-
-    createSeasonFn: () => {
-      return (timeEvent) => {
-        return timeEvent.month == 8 ? 100 : 0
-      }
-    },
-
-    createConstFn: () => {
-      return () => {
-        return 2
-      }
-    }
-  })
-
-  var berryFarm = new StructureType({
-    name: 'berry farm',
-    asset: 'berry_farm',
-
-    createSeasonFn: () => {
-      return (timeEvent) => {
-        return timeEvent.month == 8 ? 100 : 0
-      }
-    },
-
-    createConstFn: () => {
-      return () => {
-        return 2
-      }
-    }
-  })
-
-  var dairyFarm = new StructureType({
-    name: 'dairy farm',
-    asset: 'dairy_farm',
-
-    createSeasonFn: () => {
-      return (timeEvent) => {
-        return timeEvent.month == 8 ? 100 : 0
-      }
-    },
-
-    createConstFn: () => {
-      return () => {
-        return 2
-      }
-    }
-  })
-
-  return {
-    farm: farm,
-    berryFarm: berryFarm,
-    dairyFarm: dairyFarm
+export default StructureTypes = {
+  getAll: () => {
+    return Object.keys(this)
   }
 }
+
+StructureTypes.farm = new StructureType({
+  name: 'farm',
+  asset: 'farm',
+
+  createSeasonFn: () => {
+    return (timeEvent) => {
+      return timeEvent.month == 8 ? 100 : 0
+    }
+  },
+
+  createConstFn: () => {
+    return () => {
+      return 2
+    }
+  }
+})
+
+StructureTypes.berryFarm = new StructureType({
+  name: 'berry farm',
+  asset: 'berry_farm',
+
+  createSeasonFn: () => {
+    return (timeEvent) => {
+      return timeEvent.month == 8 ? 100 : 0
+    }
+  },
+
+ createConstFn: () => {
+    return () => {
+      return 2
+    }
+  }
+})
+
+StructureTypes.dairyFarm = new StructureType({
+  name: 'dairy farm',
+  asset: 'dairy_farm',
+
+  createSeasonFn: () => {
+    return (timeEvent) => {
+      return timeEvent.month == 8 ? 100 : 0
+    }
+  },
+
+  createConstFn: () => {
+    return () => {
+      return 2
+    }
+  }
+})
