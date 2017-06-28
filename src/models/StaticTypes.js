@@ -17,7 +17,7 @@ const StaticTypes = (structureTypes, tileTypes) => {
   tileTypes.forest.allowedStructures = [structureTypes.farm]
   tileTypes.grass.allowedStructures = [structureTypes.farm, structureTypes.dairy_farm, structureTypes.berry_farm]
   tileTypes.water.allowedStructures = []
-  return { structureTypes, tileTypes }
+  return ({ structureTypes: structureTypes, tileTypes: tileTypes })
 }
 
 export default StaticTypes
