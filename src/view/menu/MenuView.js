@@ -45,8 +45,6 @@ export default class MenuView {
   }
 
   draw (sections) {
-    
-
     this.menuViewGroup.removeAll(true, true)
     this.activeButtons = []
     this.activeTexts = []
@@ -56,10 +54,6 @@ export default class MenuView {
     this.drawPosition = this.sectionPadding
 
     this.createMenuComponents(sections)
-
-    if(!this.vertical){
-      console.log(this.activeIcons[1])
-    }
   }
 
   /**

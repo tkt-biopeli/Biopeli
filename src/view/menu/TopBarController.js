@@ -6,6 +6,7 @@ export default class TopBarController{
   constructor({menuView, player}){
     this.menuView = menuView
     this.player = player
+    console.log(this.player)
   }
 
   redraw (timeEvent) {
@@ -17,24 +18,24 @@ export default class TopBarController{
       [
         new IconComponent({
           asset: 'time',
-          width: 64,
-          height: 64
+          assetWidth: 64,
+          assetHeight: 64
         }),
         new TextComponent(timeEvent.toString())
       ],
       [
         new IconComponent({
           asset: 'score',
-          width: 64,
-          height: 64
+          assetWidth: 64,
+          assetHeight: 64
         }),
-        new TextComponent(this.player.getPoints())
+        new TextComponent(""+this.player.getPoints())
       ],
       [
         new IconComponent({
           asset: 'turnip',
-          width: 64,
-          height: 64
+          assetWidth: 64,
+          assetHeight: 64
         }),
         new AnimatedBarComponent({
           width: 200,
