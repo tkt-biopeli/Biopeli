@@ -10,9 +10,9 @@ export default class MenuOptionCreator {
    * Description goes here
    *
    * @param {object} param
-   * @param {StructureType} structureTypes
+   * @param {Player} player
    */
-  constructor ({ structureTypes, player }) {
+  constructor ({ player }) {
     this.tileOptions = new Map()
     this.tileOptions.set('forest', ForestActions)
     this.tileOptions.set('grass', GrassActions)

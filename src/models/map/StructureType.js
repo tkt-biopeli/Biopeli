@@ -26,7 +26,8 @@ class StructureType {
 
 export default StructureTypes = {
   getAll: () => {
-    return Object.keys(this)
+    // does not return this function
+    return Object.keys(this).filter((obj) => {typeof obj !== 'function'})
   }
 }
 

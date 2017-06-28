@@ -1,4 +1,5 @@
 import Structure from './Structure'
+import StructureTypes from './StructureType'
 
 /**
  * Description goes here
@@ -10,13 +11,11 @@ export default class StructureFactory {
    * @param {object} param
    *
    * @param {ModelTile} param.tile
-   * @param {StructureType} param.structureTypes
    * @param {GameTimer} param.gameTimer
    */
-  constructor ({structureTypes, gameTimer, player }) {
+  constructor ({gameTimer, player}) {
     this.structureName = 'joku nimi'
     this.structureSize = 10
-    this.structureTypes = structureTypes
     this.gameTimer = gameTimer
     this.player = player
   }

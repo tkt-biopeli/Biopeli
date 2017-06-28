@@ -102,6 +102,11 @@ export default class GameState {
       currentTime: this.currentTime()
     })
 
+    this.structureFactory = new StructureFactory({
+      gameTimer: this.gameTimer,
+      player: this.player
+    })
+
     this.gameTimer.addListener(this.gameTimerListener)
     this.gameTimer.addListener(this.topBarControllerDemo)
     this.menuOptionCreator.gameTimer = this.gameTimer
@@ -111,7 +116,6 @@ export default class GameState {
 
   initializeModel (mapWidth, mapHeight, tileWidth, tileHeight) {
     this.tileTypes = TileTypes()
-    this.structureTypes = StructureTypes()
 
     this.map = new Map({
       gridSizeX: mapWidth,
@@ -125,7 +129,7 @@ export default class GameState {
 
     this.player = new Player()
 
-    this.menuOptionCreator = new MenuOptionCreator({ structureTypes: this.structureTypes, player: this.player })
+    this.menuOptionCreator = new MenuOptionCreator({player: this.player })
   }
 
   /**
