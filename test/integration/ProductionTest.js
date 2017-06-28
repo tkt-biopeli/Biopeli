@@ -64,4 +64,13 @@ describe('Production tests', () => {
 
     assert(tile.structure.produceFn.calledOnce)
   })
+
+  it('Farm production return a number', () => {
+    factory.build.farm()
+    var production
+
+    production = tile.structure.produce(createNonSeasonEvent())
+    assert(typeof production == 'number')
+    assert(production != NaN)
+  })
 })
