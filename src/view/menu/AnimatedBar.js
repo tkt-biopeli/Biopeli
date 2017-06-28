@@ -20,8 +20,7 @@ export default class AnimatedBar {
     bitmapBg.ctx.rect(0, 0, this.width, this.height)
     bitmapBg.ctx.fill()
 
-    this.background = this.game.add.sprite(this.x, this.y, bitmapBg, null, this.group)
-    this.background.fixedToCamera = true
+    this.background = this.group.create(this.x, this.y, bitmapBg, null, this.group)
 
     let bitmapBar = this.game.add.bitmapData(this.width, this.height)
     bitmapBar.ctx.fillStyle = this.colors.bar
@@ -29,8 +28,7 @@ export default class AnimatedBar {
     bitmapBar.ctx.rect(0, 0, this.width, this.height)
     bitmapBar.ctx.fill()
 
-    this.bar = this.game.add.sprite(this.x, this.y, bitmapBar, null, this.group)
-    this.bar.fixedToCamera = true
+    this.bar = this.group.create(this.x, this.y, bitmapBar, null, this.group)
   }
 
   /**

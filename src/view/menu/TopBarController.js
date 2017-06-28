@@ -6,7 +6,6 @@ export default class TopBarController{
   constructor({menuView, player}){
     this.menuView = menuView
     this.player = player
-    console.log(this.player)
   }
 
   redraw (timeEvent) {

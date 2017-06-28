@@ -29,11 +29,11 @@ export default class MenuView {
     this.sectionPadding = sectionPadding
     this.linePadding = linePadding
     this.fontSize = fontSize
-    this.background = background
+    this.backgroundSettings = background
 
-    this.menuAllViewGroup = game.add.group()
     this.menuViewGroup = game.add.group()
-    this.menuAllViewGroup.fixedToCamera = true
+    this.menuViewGroup.fixedToCamera = true
+    this.game.world.bringToTop(this.menuViewGroup)
     
     this.activeButtons = []
     this.activeTexts = []
@@ -41,7 +41,6 @@ export default class MenuView {
     this.activeIcons = []
 
     this.createBackground()
-    this.menuAllViewGroup.add(this.menuViewGroup)
   }
 
   draw (sections) {
@@ -71,15 +70,18 @@ export default class MenuView {
       width = this.game.camera.width
     }
 
-    if(this.background.asset != null){
-      this.menuAllViewGroup.create(x, y, this.background.asset)
+    if(this.backgroundSettings.asset != null){
+      this.background = this.game.add.sprite(x, y, this.backgroundSettings.asset)
+      this.background.fixedToCamera = true
+      this.game.world.moveDown(this.background)
     }else{
-      let bg = this.game.make.graphics()
-      bg.beginFill(0x000000, 0.25)
-      bg.drawRoundedRect(0, 0, this.topBarWidth, this.topBarHeight, 1)
-      bg.endFill()
-      bg.fixedToCamera = true
-      var x = this.game.add.existing(bg)
+      this.background = this.game.make.graphics()
+      this.background.beginFill(0x000000, 0.25)
+      this.background.drawRoundedRect(0, 0, this.topBarWidth, this.topBarHeight, 1)
+      this.background.endFill()
+      this.background.fixedToCamera = true
+      this.game.add.existing(this.background)
+      this.game.world.bringToTop(this.background)
     }
 
   }

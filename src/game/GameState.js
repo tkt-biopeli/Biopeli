@@ -92,8 +92,8 @@ export default class GameState {
       player: this.player,
       topBar: this.topBar,
       topBarView: this.topBarView
-    })
-    */
+    })*/
+    
     this.cameraMover = new CameraMover({ game: state, xSpeed: config.cameraSpeed, ySpeed: config.cameraSpeed })
 
     this.mapListener = new MapListener({
