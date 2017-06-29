@@ -4,10 +4,10 @@ import GameTimerListener from '../../src/models/GameTimerListener'
 
 describe('Game timer listener tests', ()=>{
   it('Constructor works', ()=>{
-    var l = new GameTimerListener({player: 0, menu: 2})
+    var l = new GameTimerListener({player: 0, menuController: 2})
 
     assert.equal(0, l.player)
-    assert.equal(2, l.menu)
+    assert.equal(2, l.menuController)
   })
 
   it('onTimer calls all necessary functions', ()=>{
@@ -15,9 +15,9 @@ describe('Game timer listener tests', ()=>{
       structures: [{update: sinon.spy()}, {update: sinon.spy()}],
     }
 
-    var menu = {redraw: sinon.spy()}
+    var menuController = {redraw: sinon.spy()}
 
-    var l = new GameTimerListener({player: player, menu: menu})
+    var l = new GameTimerListener({player: player, menuController: menuController})
 
     l.onTimer(1)
 

@@ -1,8 +1,8 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import Menu from '../../../src/view/menu/Menu'
+import Menu from '../../../src/view/menu/MenuController'
 
-describe('Menu tests', () =>{
+describe('Menu controller tests', () =>{
   var spy
   var menuView
   var menu

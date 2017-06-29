@@ -4,7 +4,7 @@ import ResetDecorator from './ResetDecorator'
 /**
  * Description goes here
  */
-export default class Menu {
+export default class MenuController {
   /**
    * Description goes here
    *

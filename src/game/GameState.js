@@ -1,4 +1,4 @@
-import Menu from '../view/menu/Menu'
+import MenuController from '../view/menu/MenuController'
 import Map from '../models/map/Map'
 import MapView from '../view/map/MapView'
 import MenuView from '../view/menu/MenuView'
@@ -16,6 +16,7 @@ import TopBar from '../models/topbar/TopBar'
 import TopBarView from '../view/topbar/TopBarView'
 import TopBarControllerDemo from '../models/topbar/TopBarControllerDemo'
 import TopBarControllerT from '../view/menu/TopBarController'
+import StackingLayout from '../view/menu/StackingLayout'
 
 /**
  * Description goes here
@@ -38,19 +39,33 @@ export default class GameState {
 
     this.menuView = new MenuView({
       game: state,
-      vertical: true,
-      menuBorderCoordinate: state.camera.width - config.menuWidth,
-      borderPadding: config.menuLeftPadding,
+      layout: new StackingLayout({
+        menuRect: {
+          x: state.camera.width - config.menuWidth,
+          y: 0,
+          width: config.menuWidth,
+          height: state.camera.height
+        },
+        linePadding: config.menuLeftPadding,
+        sectionPadding: config.sectionPadding,
+        vertical: true
+      }),
       buttonWidth: config.menuButtonWidth,
       buttonHeight: config.menuButtonHeight,
-      sectionPadding: config.sectionPadding,
-      linePadding: config.linePadding,
       fontSize: config.menuFontSize,
-      background: {asset: 'menuBg'}
+      background: 'menuBg'
     })
 
     this.topBarViewt = new MenuView({
       game: state,
+      layout: new StackingLayout({
+        menuRect: {
+          x: 0,
+          y: 0,
+          width: state.camera.width - config.menuWidth,
+          height: config.topBarSettings.height
+        }
+      }),
       vertical: false,
       menuBorderCoordinate: config.topBarSettings.height,
       borderPadding: config.topBarSettings.verticalPadding,
@@ -67,7 +82,7 @@ export default class GameState {
       player: this.player
     })
 
-    this.menu = new Menu({
+    this.menuController = new MenuController({
       menuView: this.menuView
     })
 
@@ -75,7 +90,7 @@ export default class GameState {
     this.mapView = new MapView({
       game: state,
       map: this.map,
-      menu: this.menu,
+      menu: this.menuController,
       viewWidthPx: state.game.width - menuWidth,
       viewHeightPx: state.game.height
     })
@@ -100,12 +115,12 @@ export default class GameState {
       game: state,
       map: this.map,
       menuOptionCreator: this.menuOptionCreator,
-      menu: this.menu
+      menu: this.menuController
     })
 
     this.inputHandler = new InputHandler({ game: state, mapListener: this.mapListener, cameraMover: this.cameraMover })
 
-    this.gameTimerListener = new GameTimerListener({player: this.player, menu: this.menu, topBarController: this.topBarControllert})
+    this.gameTimerListener = new GameTimerListener({player: this.player, menuController: this.menuController, topBarController: this.topBarControllert})
 
     this.gameTimer = new Timer({ interval: config.gameTimerInterval, currentTime: this.currentTime() })
     this.gameTimer.addListener(this.gameTimerListener)

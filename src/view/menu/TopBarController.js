@@ -20,7 +20,7 @@ export default class TopBarController{
           assetWidth: 64,
           assetHeight: 64
         }),
-        new TextComponent(timeEvent.toString())
+        new TextComponent(timeEvent.toString(), 30)
       ],
       [
         new IconComponent({
@@ -28,7 +28,7 @@ export default class TopBarController{
           assetWidth: 64,
           assetHeight: 64
         }),
-        new TextComponent(""+this.player.getPoints())
+        new TextComponent(""+this.player.getPoints(), 30)
       ],
       [
         new IconComponent({

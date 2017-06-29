@@ -18,18 +18,11 @@ export default class MenuView {
    * @param {number} param.buttonWidth width of buttons
    * @param {number} param.buttonHeight height of buttons
    */
-  constructor ({ game, menuBorderCoordinate, vertical, borderPadding, sectionPadding, linePadding, buttonWidth, buttonHeight, fontSize, background }) {
+  constructor ({ game, layout, background }) {
     this.game = game
 
-    this.vertical = vertical
-    this.menuBorderCoordinate = menuBorderCoordinate
-    this.borderPadding = borderPadding
-    this.buttonWidth = buttonWidth
-    this.buttonHeight = buttonHeight
-    this.sectionPadding = sectionPadding
-    this.linePadding = linePadding
-    this.fontSize = fontSize
-    this.backgroundSettings = background
+    this.layout = layout
+    this.background = background
 
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
@@ -44,6 +37,7 @@ export default class MenuView {
   }
 
   draw (sections) {
+    console.log(1)
     this.menuViewGroup.removeAll(true, true)
     this.activeButtons = []
     this.activeTexts = []
@@ -52,6 +46,8 @@ export default class MenuView {
 
     this.drawPosition = this.sectionPadding
 
+    this.layout.init(sections)
+    console.log(2)
     this.createMenuComponents(sections)
     //
     //
@@ -65,19 +61,10 @@ export default class MenuView {
    * Creates background image of menu
    */
   createBackground () {
-    var x = this.menuBorderCoordinate
-    var y = 0
-    var height = this.game.camera.height
-    var width = this.game.camera.width - this.menuBorderCoordinate
-    if(!this.vertical){
-      y = 0
-      x = 0
-      height = this.menuBorderCoordinate
-      width = this.game.camera.width
-    }
+    var menuRect = this.layout.menuRect
 
-    if(this.backgroundSettings.asset != null){
-      this.background = this.game.add.sprite(x, y, this.backgroundSettings.asset)
+    if(this.background != null){
+      this.background = this.game.add.sprite(menuRect.x, menuRect.y, this.background)
       this.background.fixedToCamera = true
       this.game.world.moveDown(this.background)
     }else{
@@ -85,7 +72,7 @@ export default class MenuView {
       this.background.beginFill(0x000000, 0.25)
       //
       //
-      this.background.drawRoundedRect(0, 0, width, height, 1)            
+      this.background.drawRoundedRect(menuRect.x, menuRect.y, menuRect.width, menuRect.height, 1)            
       //
       //
       this.background.endFill()
@@ -97,21 +84,23 @@ export default class MenuView {
   }
 
   createMenuComponents (sections) {
+    console.log(3)
     for(let i = 0 ; i < sections.length ; i++){
       this.createSection(sections[i])
 
       if(i != sections.length -1){
-        this.addSectionPadding()
+        this.layout.afterSection()
       }
     }
   }
 
   createSection (components) {
+    console.log(4)
     for (let i = 0 ; i < components.length ; i++) {
       var component = components[i]
       switch (component.type) {
         case 'text': {
-          this.createText(component.text)
+          this.createText(component)
           break
         }
         case 'button': {
@@ -130,7 +119,7 @@ export default class MenuView {
       }
 
       if (i != components.length - 1) {
-        this.addLinePadding()
+        this.layout.afterLine()
       }
     }
   }
@@ -141,27 +130,22 @@ export default class MenuView {
    * @param {ButtonAction} buttonAction
    */
   createButton (buttonComponent) {
-    var coords = this.getNextElementCoordinates()
+    var coords = this.layout.nextComponentLocation(buttonComponent)
 
     var button = new LabeledButton({
       game: this.game,
       viewGroup: this.menuViewGroup,
       label: buttonComponent.name,
+      fontSize: buttonComponent.fontSize,
       x: coords.x,
       y: coords.y,
       callback: buttonComponent.function,
       context: buttonComponent.context,
-      buttonWidth: this.buttonWidth,
-      buttonHeight: this.buttonHeight
+      buttonWidth: buttonComponent.width,
+      buttonHeight: buttonComponent.height
     })
 
     this.activeButtons.push(button)
-
-    if(this.vertical){
-      this.addPadding(this.buttonHeight)
-    }else{
-      this.addPadding(this.buttonWidth)
-    }
   }
 
   /**
@@ -172,29 +156,23 @@ export default class MenuView {
    *
    * @return { ??? }
    */
-  createText (text) {
-    var coords = this.getNextElementCoordinates()
+  createText (textComponent) {
+    var coords = this.layout.nextComponentLocation(textComponent)
 
     var tex = new Text({
       game: this.game,
       viewGroup: this.menuViewGroup,
-      text: text,
-      fontSize: this.fontSize,
+      text: textComponent.text,
+      fontSize: textComponent.fontSize,
       x: coords.x,
       y: coords.y
     })
 
     this.activeTexts.push(tex)
-
-    if(this.vertical){
-      this.addPadding(this.fontSize)
-    }else{
-      this.addPadding(this.fontSize * text.length)
-    }
   }
 
   createAnimatedBar (animatedBarComponent) {
-    var coords = this.getNextElementCoordinates()
+    var coords = this.layout.nextComponentLocation(animatedBarComponent)
 
     var animatedBar = new AnimatedBar({
       game: this.game,
@@ -207,18 +185,10 @@ export default class MenuView {
     })
 
     this.activeBars.push(animatedBar)
-
-    if(this.vertical){
-      this.addPadding(animatedBarComponent.height)
-    }else{
-      this.addPadding(animatedBarComponent.width)
-    }
   }
 
   createIcon (iconComponent) {
-    var coords = this.getNextElementCoordinates()
-
-
+    var coords = this.layout.nextComponentLocation(iconComponent)
 
     var icon = new Icon({
       game: this.game,
@@ -229,51 +199,5 @@ export default class MenuView {
     })
 
     this.activeIcons.push(icon)
-
-    if(this.vertical){
-      this.addPadding(iconComponent.height)
-    }else{
-      this.addPadding(iconComponent.width)
-    }
-  }
-
-  getNextElementCoordinates () {
-    if(this.vertical){
-      return {
-        x: this.menuBorderCoordinate + this.borderPadding,
-        y: this.drawPosition
-      }
-    }else{
-      return {
-        x: this.drawPosition,
-        // y: this.menuBorderCoordinate - this.borderPadding
-        //
-        y: 0
-        //
-      }
-    }
-  }
-
-  /**
-   * Adds given amount of padding
-   *
-   * @param {Number} amount
-   */
-  addPadding (amount) {
-    this.drawPosition += amount
-  }
-
-  /**
-   * Adds predefined padding after line
-   */
-  addLinePadding () {
-    this.addPadding(this.linePadding)
-  }
-
-  /**
-   * Adds predefined padding after section
-   */
-  addSectionPadding () {
-    this.addPadding(this.sectionPadding)
   }
 }
