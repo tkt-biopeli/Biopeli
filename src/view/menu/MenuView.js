@@ -12,7 +12,6 @@ export default class MenuView {
     this.game = game
 
     this.layout = layout
-    this.background = background
 
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
@@ -23,7 +22,7 @@ export default class MenuView {
     this.activeBars = []
     this.activeIcons = []
 
-    this.createBackground()
+    this.createBackground(background)
   }
 
   draw (sections) {
@@ -46,11 +45,11 @@ export default class MenuView {
   /**
    * Creates background image of menu
    */
-  createBackground () {
+  createBackground (backgroundAsset) {
     var menuRect = this.layout.menuRect
 
-    if(this.background != null){
-      this.background = this.game.add.sprite(menuRect.x, menuRect.y, this.background)
+    if(backgroundAsset != null){
+      this.background = this.game.add.sprite(menuRect.x, menuRect.y, backgroundAsset)
       this.background.fixedToCamera = true
       this.game.world.moveDown(this.background)
     }else{
