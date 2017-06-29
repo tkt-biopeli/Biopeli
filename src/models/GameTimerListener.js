@@ -28,6 +28,5 @@ export default class GameTimerListener {
     })
 
     this.menuView.redraw()
-
   }
 }

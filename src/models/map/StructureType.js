@@ -21,9 +21,9 @@ export default function (gameState) {
     this.name = name
     this.asset = asset
 
-    this.createSeasonFn = createSeasonFn ? 
+    this.createSeasonFn = createSeasonFn ?
         createSeasonFn : (event) => {return ()=>{}}
-    this.createConstFn = createConstFn ? 
+    this.createConstFn = createConstFn ?
         createConstFn : () => {return ()=>{}}
 
     this.createProductionFn = () => {

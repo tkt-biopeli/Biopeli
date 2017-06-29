@@ -33,7 +33,7 @@ export default class StructureFactory {
       }
     }
   }
-  
+
   /**
    * Builds an structure on the tile defined in the constructor
    *

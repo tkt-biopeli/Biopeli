@@ -7,6 +7,10 @@ export default class TimeEvent {
   }
 
   toString () {
-    return this.year + '/' + this.month + '/' + this.week
+    if (this.month > 9) {
+      return this.year + ' / ' + this.month + ' / ' + this.week
+    } else {
+      return this.year + ' / 0' + this.month + ' / ' + this.week
+    }
   }
 }

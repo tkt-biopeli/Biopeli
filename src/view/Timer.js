@@ -64,7 +64,7 @@ export default class Timer {
 
   /**
    * Function that creates the time event to be given to listeners
-   * 
+   *
    * @return {{time: number, year: number}}
    */
   createTimeEvent () {
