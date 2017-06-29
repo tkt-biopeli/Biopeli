@@ -66,7 +66,6 @@ export default class GameAdvancer {
     if (time != null) {
       this.timeObject.time = time
     }
-
     this.gameState.update()
   }
 

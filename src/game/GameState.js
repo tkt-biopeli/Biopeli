@@ -16,6 +16,7 @@ import TopBar from '../models/topbar/TopBar'
 import TopBarView from '../view/topbar/TopBarView'
 import TopBarControllerDemo from '../models/topbar/TopBarControllerDemo'
 import City from './City'
+import GameOver from './GameOver'
 
 /**
  * Description goes here
@@ -107,6 +108,10 @@ export default class GameState {
     this.menuOptionCreator.gameTimer = this.gameTimer
 
     this.gameTimer.callListeners()
+
+    this.gameOver = new GameOver({
+      timer : this.gameTimer
+    })
   }
 
   initializeModel (mapWidth, mapHeight, tileWidth, tileHeight) {
@@ -133,7 +138,11 @@ export default class GameState {
    */
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
-    this.gameTimer.update(this.currentTime())
+    if (this.gameOver.isItOver()) {
+      // game over
+    } else {
+      this.gameTimer.update(this.currentTime())
+    }
   }
 
   currentTime () {
