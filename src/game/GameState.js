@@ -138,7 +138,7 @@ export default class GameState {
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
     if (this.gameOver.isItOver()) {
-      // game over
+      this.state.state.start('GameOver')
     } else {
       this.gameTimer.update(this.currentTime())
     }
