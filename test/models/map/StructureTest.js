@@ -1,27 +1,27 @@
 const assert = require('assert')
 import Structure from '../../../src/models/map/Structure'
 
-describe('Structure tests', () =>{
-  
+describe('Structure tests', () => {
+
   var structure, tile
   var stype = {
     asset: 'sd',
-    createUpdateFn: function(){}
+    createProductionFn: function () {}
   }
-  
+
   before(function () {
-    tile = {potential: 10}
-    
+    tile = { potential: 10 }
+
     structure = new Structure({
-      tile: tile, 
-      name: 'Riston rustholli', 
-      size: 10, 
+      tile: tile,
+      name: 'Riston rustholli',
+      size: 10,
       structureType: stype,
       foundingYear: 1999
     })
   })
-  
-  it('Constructor works', () =>{
+
+  it('Constructor works', () => {
     assert.equal(tile, structure.tile)
     assert.equal(stype, structure.structureType)
     assert.equal('Riston rustholli', structure.name)
@@ -30,11 +30,11 @@ describe('Structure tests', () =>{
     assert.equal(1999, structure.foundingYear)
   })
 
-  it('asset-shortcut works', () =>{
+  it('asset-shortcut works', () => {
     assert.equal('sd', structure.asset())
   })
 
-  it('calculateProductionEfficiency returns correct value', () =>{
+  it('calculateProductionEfficiency returns correct value', () => {
     assert.equal(100, structure.calculateProductionEfficiency())
   })
 })

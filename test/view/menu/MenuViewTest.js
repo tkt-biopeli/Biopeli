@@ -16,9 +16,9 @@ describe('MenuView tests', () =>{
   var menuView
   var tile
 
-  beforeEach(() =>{
+  beforeEach(() => {
     var stub = sinon.stub()
-    groupStub = {add: function(){}, create: function(){}, removeAll: function(){}}
+    groupStub = { add: function () { }, create: function () { }, removeAll: function () { } }
     stub.withArgs().returns(groupStub)
     gameStub = {add: {group: stub}, make: {}, camera: {width: 0, height: 0}}
 
@@ -40,7 +40,7 @@ describe('MenuView tests', () =>{
     menuView.menu = {selectedTile: tile}
   })
 
-  it('Constructor works', () =>{
+  it('Constructor works', () => {
     assert.equal(gameStub, menuView.game)
     assert.equal(menuBorderCoordinate, menuView.menuBorderCoordinate)
     assert.equal(borderPadding, menuView.borderPadding)
@@ -66,7 +66,7 @@ describe('MenuView tests', () =>{
     assert.equal(sectionPadding, menuView.drawPosition)
   })
 
-  it('Texts are created correctly', () =>{
+  it('Texts are created correctly', () => {
     var textSpy = sinon.spy()
     gameStub.add.text = textSpy
     var paddingSpy = sinon.spy()
@@ -74,23 +74,23 @@ describe('MenuView tests', () =>{
 
     menuView.createText("asd", 10)
 
-    var style = {font: fontSize+"px Arial", fill: "#ffff00", align: "center"}
+    var style = { font: fontSize + "px Arial", fill: "#ffff00", align: "center" }
     assert.equal(1, textSpy.callCount)
     assert(textSpy.calledWith(menuBorderCoordinate+borderPadding, 0, "asd", style, groupStub))
     assert(paddingSpy.calledWith(10))
   })
 
-  it('Button is created correctly', () =>{
+  it('Button is created correctly', () => {
     var anchorSpy = sinon.spy()
     var textSpy = sinon.stub()
     gameStub.add.text = textSpy
-    textSpy.returns({anchor: {set: anchorSpy}})
+    textSpy.returns({ anchor: { set: anchorSpy } })
     var buttonSpy = sinon.spy()
     gameStub.make.button = buttonSpy
     var paddingSpy = sinon.spy()
     menuView.addPadding = paddingSpy
 
-    menuView.createButton({name: "asd", function: function(){}, context: this})
+    menuView.createButton({ name: "asd", function: function () { }, context: this })
 
     assert.equal(1, textSpy.callCount)
     assert.equal(1, buttonSpy.callCount)

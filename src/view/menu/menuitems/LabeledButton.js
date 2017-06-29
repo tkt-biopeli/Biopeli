@@ -26,8 +26,8 @@ export default class LabeledButton {
     viewGroup.add(button)
     // this method call creates a 'text' object and adds it to viewGroup
     var text = game.add.text(
-            Math.floor(x + buttonWidth / 2),
-            Math.floor(y + buttonHeight / 2), label, style, viewGroup)
+      Math.floor(x + buttonWidth / 2),
+      Math.floor(y + buttonHeight / 2), label, style, viewGroup)
     text.anchor.set(config.menuTextStartingPoint, config.menuTextStartingPoint)
 
     this.x = x

@@ -7,17 +7,7 @@ import Icon from './menuitems/Icon'
  * Controls drawing of game's menu
  */
 export default class MenuView {
-  /**
-   * Description goes here
-   *
-   * @param {Phaser.Game} param.game
-   * @param {number} param.leftBorderCoordinate the x-coordinate of menu's left border
-   * @param {number} param.leftPadding amount of space before line starts
-   * @param {number} param.sectionPadding amount of empty space after section
-   * @param {number} param.linePadding amount of empty space after line
-   * @param {number} param.buttonWidth width of buttons
-   * @param {number} param.buttonHeight height of buttons
-   */
+  
   constructor ({ game, layout, background }) {
     this.game = game
 
@@ -42,8 +32,6 @@ export default class MenuView {
     this.activeTexts = []
     this.activeBars = []
     this.activeIcons = []
-
-    this.drawPosition = this.sectionPadding
 
     this.layout.init(sections)
     this.createMenuComponents(sections)
@@ -78,7 +66,6 @@ export default class MenuView {
       this.game.add.existing(this.background)
       this.game.world.bringToTop(this.background)
     }
-
   }
 
   createMenuComponents (sections) {

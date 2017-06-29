@@ -13,7 +13,6 @@ export default class TopBarController{
   }
 
   createSections (timeEvent) {
-    this.player.addPoints(10)
     return [
       [
         new IconComponent({
@@ -29,7 +28,7 @@ export default class TopBarController{
           assetWidth: 64,
           assetHeight: 64
         }),
-        new TextComponent(""+this.player.getPoints(), 30)
+        new TextComponent(""+this.player.points, 30)
       ],
       [
         new IconComponent({

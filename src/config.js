@@ -9,6 +9,9 @@ export default {
   gameHeight: 768,
   localStorageName: 'biopeli',
 
+  // configuration for game length
+  gameLength: 1990,
+
   // configurations for tiles
   tileWidth: 128,
   tileHeight: 128,
@@ -23,17 +26,15 @@ export default {
   menuButtonWidth: 189,
   menuButtonHeight: 66,
   menuTextStartingPoint: 0.5,
-  font: '16px Arial',
-  textColor: '#ffff00',
-  textAlignment: 'center',
   linePadding: 8,
-  sectionPadding: 12,
+  sectionPadding: 18,
   menuFontSize: 16,
 
   // configuration for top bar
   topBarItems: [
     { name: 'time', asset: 'time', type: 'text', widthPct: 1 / 3 },
-    { name: 'score', asset: 'score', type: 'text', widthPct: 1 / 3 },
+    { name: 'score', asset: 'score', type: 'text', widthPct: 1 / 6 },
+    { name: 'cash', asset: 'cash', type: 'text', widthPct: 1 / 6 },
     { name: 'turnip', asset: 'turnip', type: 'bar', widthPct: 1 / 3 }],
   topBarSettings: {
     height: 64,
@@ -48,6 +49,10 @@ export default {
   tweenCameraDuration: 500,
 
   // amount of time between time events
-  gameTimerInterval: 1000
+  gameTimerInterval: 1000,
 
+  // configurations for city
+  cityInitialDemand: 100,
+  cityInitialTurnips: 0,
+  cityInitialPopulation: 100
 }

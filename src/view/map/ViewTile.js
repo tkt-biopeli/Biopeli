@@ -13,7 +13,7 @@ export default class ViewTile {
    * @param {number} param.y
    * @param {ModelTile} param.modelTile
    */
-  constructor ({game, x, y, modelTile}) {
+  constructor ({ game, x, y, modelTile }) {
     this.game = game
     this.modelTile = modelTile
     this.tileSprite = this.makeTileSprite(x, y)

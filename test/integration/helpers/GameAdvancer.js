@@ -11,16 +11,16 @@ const assert = require("assert")
 /**
  * Provides functions for simulating inputs of user and passing of time
  */
-export default class GameAdvancer{
+export default class GameAdvancer {
 
   /**
    * Initializes integration testing game
    */
-  constructor(){
+  constructor() {
     this.mapWidth = 20
     this.mapHeight = 10
 
-    this.game = new GameStub({width: config.gameWidth, height: config.gameHeight})
+    this.game = new GameStub({ width: config.gameWidth, height: config.gameHeight })
 
     this.gameState = new GameState({
       state: this.game,
@@ -44,9 +44,9 @@ export default class GameAdvancer{
     this.mapRealWidth = this.mapWidth * config.tileWidth
     this.mapRealHeight = this.mapHeight * config.tileHeight
 
-    this.timeObject = {time: 0}
-    this.gameState.currentTime = function(timeObject){
-      var returnFunction = function() {
+    this.timeObject = { time: 0 }
+    this.gameState.currentTime = function (timeObject) {
+      var returnFunction = function () {
         return timeObject.time
       }
 
@@ -56,27 +56,26 @@ export default class GameAdvancer{
 
     this.tileTypes = TileType()
     this.structureTypes = StructureType()
-    
+
   }
 
   /**
    * Sets the time to wanted number and updates the game
    */
-  update(time){
-    if(time != null){
+  update(time) {
+    if (time != null) {
       this.timeObject.time = time
     }
-
     this.gameState.update()
   }
 
- /**
- * Makes several update calls with wanted time interval
- * @param {*} times 
- * @param {*} interval 
- */
-  updateSeveralTimes(times, interval){
-    for(let i = 0 ; i < times ; i++){
+  /**
+  * Makes several update calls with wanted time interval
+  * @param {*} times 
+  * @param {*} interval 
+  */
+  updateSeveralTimes(times, interval) {
+    for (let i = 0; i < times; i++) {
       this.update(interval * (i + 1))
     }
   }
@@ -85,8 +84,8 @@ export default class GameAdvancer{
    * Click nth button that currently exist in menu
    * @param {*} n 
    */
-  clickNthButton(n){
-    var button = this.gameState.menuView.activeButtons[n-1]
+  clickNthButton(n) {
+    var button = this.gameState.menuView.activeButtons[n - 1]
 
     this.clickButton(button.x, button.y)
   }
@@ -97,7 +96,7 @@ export default class GameAdvancer{
    * @param {number} x 
    * @param {number} y 
    */
-  click(x, y){
+  click(x, y) {
     this.game.setPointer(x, y)
     this.clickButton(x, y)
     this.gameState.inputHandler.onPointerDown()
@@ -110,13 +109,13 @@ export default class GameAdvancer{
    * @param {number} x 
    * @param {number} y 
    */
-  clickButton(x, y){
+  clickButton(x, y) {
     var buttons = this.gameState.menuView.activeButtons
 
-    for(var i = 0 ; i < buttons.length ; i++){
+    for (var i = 0; i < buttons.length; i++) {
       var button = buttons[i]
 
-      if (x == button.x && y == button.y){
+      if (x == button.x && y == button.y) {
         button.callback.call(button.context)
 
         return
@@ -133,14 +132,14 @@ export default class GameAdvancer{
    * @param {boolean} left 
    * @param {boolean} right 
    */
-  pressCursors(up, down, left, right){
+  pressCursors(up, down, left, right) {
     this.game.setCursors(up, down, left, right)
     this.gameState.inputHandler.onCursorDown()
 
-    if(up) (this.estimatedY - this.cameraYSpeed < 0) ? this.estimatedY = 0 : this.estimatedY -= this.cameraYSpeed
-    if(left) (this.estimatedX - this.cameraXSpeed < 0) ? this.estimatedX = 0 : this.estimatedX -= this.cameraXSpeed
-    if(down) (this.estimatedY + this.cameraYSpeed > this.mapRealHeight) ? this.estimatedY = this.mapRealHeight : this.estimatedY += this.cameraYSpeed
-    if(right) (this.estimatedX + this.cameraXSpeed > this.mapRealWidth) ? this.estimatedX = this.mapRealWidth : this.estimatedX += this.cameraXSpeed
+    if (up) (this.estimatedY - this.cameraYSpeed < 0) ? this.estimatedY = 0 : this.estimatedY -= this.cameraYSpeed
+    if (left) (this.estimatedX - this.cameraXSpeed < 0) ? this.estimatedX = 0 : this.estimatedX -= this.cameraXSpeed
+    if (down) (this.estimatedY + this.cameraYSpeed > this.mapRealHeight) ? this.estimatedY = this.mapRealHeight : this.estimatedY += this.cameraYSpeed
+    if (right) (this.estimatedX + this.cameraXSpeed > this.mapRealWidth) ? this.estimatedX = this.mapRealWidth : this.estimatedX += this.cameraXSpeed
   }
 
   /**
@@ -149,7 +148,7 @@ export default class GameAdvancer{
    * @param {number} x 
    * @param {number} y 
    */
-  setCamera(x, y){
+  setCamera(x, y) {
     this.game.setCamera(x, y)
     this.estimatedX = x
     this.estimatedY = y
@@ -160,7 +159,7 @@ export default class GameAdvancer{
    * 
    * @return {{x: Number, y: Number}}
    */
-  estimatedCameraLocation(){
+  estimatedCameraLocation() {
     return {
       x: this.estimatedX,
       y: this.estimatedY
@@ -170,8 +169,8 @@ export default class GameAdvancer{
   /**
    * Set camera to starting position
    */
-  resetCamera(){
-    this.setCamera(0,0)
+  resetCamera() {
+    this.setCamera(0, 0)
   }
 
   /**
@@ -180,7 +179,7 @@ export default class GameAdvancer{
    * @param {*} gridX 
    * @param {*} gridY 
    */
-  getTile(gridX, gridY){
+  getTile(gridX, gridY) {
     return this.gameState.map.getTileWithGridCoordinates(gridX, gridY)
   }
 
@@ -191,24 +190,24 @@ export default class GameAdvancer{
    * @param {*} gridY 
    * @param {*} tileTypeName 
    */
-  setTile(gridX, gridY, tileTypeName){
+  setTile(gridX, gridY, tileTypeName) {
     return this.gameState.map.addTileWithGridCoordinates(gridX, gridY, this.tileTypes[tileTypeName])
   }
 
-  setStructure(gridX, gridY, name, structureTypeName, size, foundingYear){
+  setStructure(gridX, gridY, name, structureTypeName, size, foundingYear) {
     var tile = this.getTile(gridX, gridY)
     var structure = new Structure({
-      tile: tile, 
-      name: name, 
-      size: size, 
-      structureType: this.structureTypes[structureTypeName], 
+      tile: tile,
+      name: name,
+      size: size,
+      structureType: this.structureTypes[structureTypeName],
       foundingYear: foundingYear
     })
 
     tile.structure = structure
   }
 
-  setTileWithStructure(gridX, gridY, tileTypeName, structureType, sname, ssize, sfoundingYear){
+  setTileWithStructure(gridX, gridY, tileTypeName, structureType, sname, ssize, sfoundingYear) {
     this.setTile(gridX, gridY, tileTypeName)
     this.setStructure(gridX, gridY, sname, structureType, ssize, sfoundingYear)
   }

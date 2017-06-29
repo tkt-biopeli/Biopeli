@@ -2,20 +2,27 @@ import TopBarController from '../../src/models/topbar/TopBarControllerDemo'
 const assert = require('assert')
 const sinon = require('sinon')
 
-describe('Time text test', ()=>{
-  it('TimerEvent updates time text', ()=>{
-    var topbarspy = sinon.spy()
-    var timerStub = {toString: ()=>'sd'}
+describe('Time text test', () => {
+  it('Model and View called correctly', () => {
+    var topbar = {
+      setValueOf: sinon.spy()
+    }
+    var topbarView = {
+      update: sinon.spy()
+    }
+
 
     var c = new TopBarController({
-      player: {addPoints: ()=>{}, getPoints: ()=>0},
-      topBar: {setValueOf: topbarspy},
-      topBarView: {update: ()=>{}}
+      topBar: topbar,
+      topBarView: topbarView
     })
 
-    c.onTimer(timerStub)
-
-    assert(topbarspy.calledWith('time', 'sd'))
+    c.update({ time: "time", score: "score", cash: "cash", fulfilledPct: "fulfilledPct" })
+    assert(topbar.setValueOf.calledWith('time', 'time'))
+    assert(topbar.setValueOf.calledWith('score', 'score'))
+    assert(topbar.setValueOf.calledWith('cash', 'cash'))
+    assert(topbar.setValueOf.calledWith('turnip', 'fulfilledPct'))
+    assert.equal(1, topbarView.update.callCount)
 
   })
 })

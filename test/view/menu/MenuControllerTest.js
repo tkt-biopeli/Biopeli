@@ -11,13 +11,13 @@ describe('Menu controller tests', () =>{
 
   beforeEach(() => {
     spy = sinon.spy()
-    menuView = {setMenu: spy, setButtonActions: function(){}}
-    menu = new Menu({menuView: menuView})
+    menuView = { setMenu: spy, setButtonActions: function () { } }
+    menu = new Menu({ menuView: menuView })
     buttonActions = []
     tile = 1
   })
 
-  it('Constructor test', () =>{
+  it('Constructor test', () => {
     assert.equal(menuView, menu.menuView)
     assert.equal(null, menu.selectedTile)
     assert.equal(0, menu.buttonComponents.length)

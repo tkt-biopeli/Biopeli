@@ -1,21 +1,26 @@
-import MenuController from '../controllers/MenuController'
+import config from '../config'
+
 import Map from '../models/map/Map'
+import TileTypes from '../models/map/TileType'
+import StructureTypes from '../models/map/StructureType'
+import Player from './Player'
+import City from '../models/city/City'
+
 import MapView from '../view/map/MapView'
 import MenuView from '../view/menu/MenuView'
 import CameraMover from '../view/CameraMover'
 import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
-import TileTypes from '../models/map/TileType'
-import StructureTypes from '../models/map/StructureType'
-import Player from './Player'
-import MenuOptionCreator from '../controllers/actioncreation/MenuOptionCreator'
-import config from '../config'
-import GameTimerListener from '../models/GameTimerListener'
 import Timer from '../view/Timer'
+import GameOver from './GameOver'
+
+import GameTimerListener from '../models/GameTimerListener'
+import MenuOptionCreator from '../controllers/actioncreation/MenuOptionCreator'
+
 import TopBarController from '../controllers/TopBarController'
+import MenuController from '../controllers/MenuController'
 import StackingLayout from '../view/menu/layouts/StackingLayout'
 import StaticLayout from '../view/menu/layouts/StaticLayout'
-
 /**
  * Description goes here
  */
@@ -72,7 +77,8 @@ export default class GameState {
     })
 
     this.menuController = new MenuController({
-      menuView: this.menuView
+      menuView: this.menuView,
+      city: this.city
     })
 
     // map view
@@ -84,7 +90,11 @@ export default class GameState {
       viewHeightPx: state.game.height
     })
     
-    this.cameraMover = new CameraMover({ game: state, xSpeed: config.cameraSpeed, ySpeed: config.cameraSpeed })
+    this.cameraMover = new CameraMover({ 
+      game: state, 
+      xSpeed: config.cameraSpeed, 
+      ySpeed: config.cameraSpeed 
+    })
 
     this.mapListener = new MapListener({
       game: state,
@@ -93,15 +103,32 @@ export default class GameState {
       menuController: this.menuController
     })
 
-    this.inputHandler = new InputHandler({ game: state, mapListener: this.mapListener, cameraMover: this.cameraMover })
+    this.inputHandler = new InputHandler({
+      game: state,
+      mapListener: this.mapListener,
+      cameraMover: this.cameraMover
+    })
 
-    this.gameTimerListener = new GameTimerListener({player: this.player, menuController: this.menuController, topBarController: this.topBarController})
+    this.gameTimerListener = new GameTimerListener({ 
+      city: this.city, 
+      player: this.player, 
+      menuController: this.menuController, 
+      topBarController: this.topBarController 
+    })
 
-    this.gameTimer = new Timer({ interval: config.gameTimerInterval, currentTime: this.currentTime() })
-    this.gameTimer.addListener(this.gameTimerListener)
+    this.gameTimer = new Timer({
+      interval: config.gameTimerInterval,
+      currentTime: this.currentTime()
+    })
+
+    this.gameTimer.addListener(this.gameTimerListener)    
     this.menuOptionCreator.gameTimer = this.gameTimer
 
     this.gameTimer.callListeners()
+
+    this.gameOver = new GameOver({
+      timer : this.gameTimer
+    })
   }
 
   initializeModel (mapWidth, mapHeight, tileWidth, tileHeight) {
@@ -119,6 +146,7 @@ export default class GameState {
     this.map.createMapHalfForestHalfWater()
 
     this.player = new Player()
+    this.city = new City({ name: 'mTechville' })
 
     this.menuOptionCreator = new MenuOptionCreator({ structureTypes: this.structureTypes, player: this.player })
   }
@@ -128,7 +156,11 @@ export default class GameState {
    */
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
-    this.gameTimer.update(this.currentTime())
+    if (this.gameOver.isItOver()) {
+      // game over
+    } else {
+      this.gameTimer.update(this.currentTime())
+    }
   }
 
   currentTime () {

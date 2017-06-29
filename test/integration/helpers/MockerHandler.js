@@ -6,12 +6,12 @@ const assert = require("assert")
 /**
  * Description goes here
  */
-export default class MockerHandler{
+export default class MockerHandler {
 
   /**
    * Description goes here
    */
-  constructor(){
+  constructor() {
     this.mockers = new Map()
   }
 
@@ -23,7 +23,7 @@ export default class MockerHandler{
    * 
    * @return { ??? }
    */
-  createOneValueMocker(tag, value){
+  createOneValueMocker(tag, value) {
     var gets = []
     var mocker = SingleMocker(value, gets)
 
@@ -38,14 +38,14 @@ export default class MockerHandler{
    * 
    * @return { ??? }
    */
-  createSeveralValueMocker(tag, values){
+  createSeveralValueMocker(tag, values) {
     var gets = []
     var mocker = Mocker(values, gets)
 
     return this.createMocker(tag, mocker, gets)
   }
 
-  createGetValueMocker(tag){
+  createGetValueMocker(tag) {
     var gets = []
     var mocker = GetValueMocker(gets, Array.prototype.slice.call(arguments, 1))
 
@@ -61,8 +61,8 @@ export default class MockerHandler{
    * 
    * @return { ??? }
    */
-  createMocker(tag, mocker, gets){
-    var save = {mocker: mocker, gets: gets, mark: 0}
+  createMocker(tag, mocker, gets) {
+    var save = { mocker: mocker, gets: gets, mark: 0 }
     this.mockers.set(tag, save)
 
     return mocker
@@ -75,10 +75,10 @@ export default class MockerHandler{
    * 
    * @return { ??? }
    */
-  getMocker(tag){
+  getMocker(tag) {
     var mocker = this.mockers.get(tag)
 
-    if(mocker == null) throw 'Mocker not found'
+    if (mocker == null) throw 'Mocker not found'
 
     return mocker
   }
@@ -91,7 +91,7 @@ export default class MockerHandler{
    * 
    * @return {*} 
    */
-  getCall(tag, index){
+  getCall(tag, index) {
     var mocker = this.getMocker(tag)
 
     return mocker.gets[index]
@@ -104,7 +104,7 @@ export default class MockerHandler{
    * 
    * @return { ??? }
    */
-  getCalls(tag){
+  getCalls(tag) {
     var mocker = this.getMocker(tag)
 
     return mocker.gets
@@ -117,7 +117,7 @@ export default class MockerHandler{
    * 
    * @return { ??? }
    */
-  getUnmarkedCalls(tag){
+  getUnmarkedCalls(tag) {
     var mocker = this.getMocker(tag)
 
     return mocker.gets.slice(mocker.mark)
@@ -130,7 +130,7 @@ export default class MockerHandler{
    * 
    * @return { ??? }
    */
-  callCount(tag){
+  callCount(tag) {
     var mocker = this.getMocker(tag)
 
     return mocker.gets.length
@@ -143,7 +143,7 @@ export default class MockerHandler{
    * 
    * @return {Boolean}
    */
-  hasBeenCalledWith(tag){
+  hasBeenCalledWith(tag) {
     var time = this.firstCallTime(arguments)
 
     return time != -1
@@ -156,13 +156,13 @@ export default class MockerHandler{
    * 
    * @return {Number}
    */
-  firstCallTime(tag){
+  firstCallTime(tag) {
     var mocker = this.getMocker(tag)
 
     var gets = mocker.gets
     var args = arguments.slice(1)
-    for(var i = 0 ; i < gets ; i++){
-      if(gets[i] == args) return i
+    for (var i = 0; i < gets; i++) {
+      if (gets[i] == args) return i
     }
 
     return -1
@@ -173,7 +173,7 @@ export default class MockerHandler{
    * 
    * @param { ??? } tag 
    */
-  markCalls(tag){
+  markCalls(tag) {
     var mocker = this.getMocker(tag)
 
     mocker.mark = mocker.gets.length

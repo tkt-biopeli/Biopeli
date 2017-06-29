@@ -12,14 +12,14 @@ export default function () {
    * @param {string} param.name
    * @param {string} param.asset
    */
-  function TileType ({name, asset}) {
+  function TileType ({ name, asset }) {
     this.name = name
     this.asset = asset
   }
 
-  var forest = new TileType({name: 'forest', asset: 'forest'})
-  var water = new TileType({name: 'water', asset: 'water'})
-  var grass = new TileType({name: 'grass', asset: 'grass'})
+  var forest = new TileType({ name: 'forest', asset: 'forest' })
+  var water = new TileType({ name: 'water', asset: 'water' })
+  var grass = new TileType({ name: 'grass', asset: 'grass' })
 
   return {
     water: water,

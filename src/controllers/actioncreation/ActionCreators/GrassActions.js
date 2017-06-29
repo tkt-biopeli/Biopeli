@@ -11,7 +11,7 @@ import config from '../../../config'
  * @return {ButtonComponent[]}
  */
 export default function GrassActions (tile, structureTypes, gameTimer, player) {
-  var sBuilder = new StructureFactory({
+  var sFactory = new StructureFactory({
     tile: tile,
     structureTypes: structureTypes,
     gameTimer: gameTimer,
@@ -20,8 +20,8 @@ export default function GrassActions (tile, structureTypes, gameTimer, player) {
 
   var createDairyFarm = new ButtonComponent({
     name: 'Build a dairy farm',
-    functionToCall: sBuilder.buildDairyFarm,
-    context: sBuilder,
+    functionToCall: sFactory.build.dairyFarm,
+    context: sFactory,
     width: config.menuButtonWidth,
     height: config.menuButtonHeight,
     fontSize: config.menuFontSize
@@ -29,8 +29,8 @@ export default function GrassActions (tile, structureTypes, gameTimer, player) {
 
   var createBerryFarm = new ButtonComponent({
     name: 'Build a berry farm',
-    functionToCall: sBuilder.buildBerryFarm,
-    context: sBuilder,
+    functionToCall: sFactory.build.berryFarm,
+    context: sFactory,
     width: config.menuButtonWidth,
     height: config.menuButtonHeight,
     fontSize: config.menuFontSize
@@ -38,8 +38,8 @@ export default function GrassActions (tile, structureTypes, gameTimer, player) {
 
   var createFarm = new ButtonComponent({
     name: 'Build a farm',
-    functionToCall: sBuilder.buildFarm,
-    context: sBuilder,
+    functionToCall: sFactory.build.farm,
+    context: sFactory,
     width: config.menuButtonWidth,
     height: config.menuButtonHeight,
     fontSize: config.menuFontSize

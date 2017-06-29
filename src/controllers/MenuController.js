@@ -12,9 +12,10 @@ export default class MenuController {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor ({menuView}) {
+  constructor ({menuView, city}) {
     this.menuView = menuView
 
+    this.city = city
     this.selectedTile = null
     this.buttonComponents = []
   }
@@ -24,13 +25,20 @@ export default class MenuController {
   }
 
   createSections () {
+    var sections = []
+
+    sections.push([
+      new TextComponent('City: ' + this.city.name, config.menuFontSize),
+      new TextComponent('Population: ' + this.city.population, config.menuFontSize),
+      new TextComponent('Demand: ' + this.city.demand, config.menuFontSize)
+    ])
+
     if(this.selectedTile == null){
-      return []
+      return sections
     }
 
     var tile = this.selectedTile
 
-    var sections = []
     sections.push([
       new TextComponent('Ground type: ' + tile.tileType.name, config.menuFontSize),
       new TextComponent('X: ' + tile.x + ', Y: ' + tile.y, config.menuFontSize)

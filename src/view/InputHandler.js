@@ -55,6 +55,6 @@ export default class InputHandler {
       right: cursors.right.isDown
     }
 
-    this.cameraMover.update({cursor: cursorEvent})
+    this.cameraMover.update({ cursor: cursorEvent })
   }
 }

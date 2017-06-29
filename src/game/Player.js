@@ -14,30 +14,24 @@ export default class {
   /**
    * Adds points given as a parameter to players existing points
    *
-   * @return {number} - Current points
+   * @param {number} - The amount of points to be added
    */
   addPoints (points) {
     this.points += points
   }
-
   /**
-   * Returns the player's current points
+   * Adds a structure for the player
    *
-   * @param {Number} points - why is this a thing
-   * @return {Number} - Current points
+   * @param {Structure} structure - The structure to be added
    */
-  getPoints (points) {
-    return this.points
-  }
-
-  getCash () {
-    return this.cash
-  }
-
   addStructure (structure) {
     this.structures.add(structure)
   }
-
+  /**
+   * Adds a structure for the player
+   *
+   * @param {Structure} structure - The structure to be removed
+   */
   removeStructure (structure) {
     this.structures.delete(structure)
   }
