@@ -1,6 +1,5 @@
 export default class DemandFunction {
-
-  constructor({ city, popularityPct, slope }) {
+  constructor ({ city, popularityPct, slope }) {
     this.city = city
     this.popularityPct = popularityPct
     this.slope = slope
@@ -24,5 +23,4 @@ export default class DemandFunction {
   customers () {
     return this.city.population * this.popularityPct / 100
   }
-
 }

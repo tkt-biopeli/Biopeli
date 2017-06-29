@@ -6,14 +6,14 @@ export default class City {
     this.name = name
     this.population = config.cityInitialPopulation
     // this.demand = config.cityInitialDemand
-    // this.turnips = config.cityInitialTurnips    
+    // this.turnips = config.cityInitialTurnips
     this.turnipDemand = new DemandFunction({
-      city:this, popularityPct: 80, slope: 2
-    })     
+      city: this, popularityPct: 80, slope: 2
+    })
   }
 
-  buyTurnips(supply) {
-    let fulfilledAndEarnings = this.turnipDemand.calculate(supply)    
+  buyTurnips (supply) {
+    let fulfilledAndEarnings = this.turnipDemand.calculate(supply)
     return fulfilledAndEarnings
   }
 
@@ -21,17 +21,17 @@ export default class City {
     this.population = this.population + amount
   }
 
-/*  increaseDemand (amount) {
-    this.demand = this.demand + amount
-  }
+  // increaseDemand (amount) {
+  //   this.demand = this.demand + amount
+  // }
 
-  resetTurnips () {
-    this.turnips = config.cityInitialTurnips
-  }
+  // resetTurnips () {
+  //   this.turnips = config.cityInitialTurnips
+  // }
 
-  receiveTurnips (amount) {
-    this.turnips = this.turnips + amount
-  }*/
+  // receiveTurnips (amount) {
+  //   this.turnips = this.turnips + amount
+  // }
 
   payPlayerAccordingToDemandSatisfied () {
     // if turnips equals demand player gets ? points
