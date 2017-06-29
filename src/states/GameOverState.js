@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import GameOverGameState from '../game/GameOverGameState'
 import config from '../config'
+import { centerGameObjects } from '../utils'
 
 /**
  * Description goes here
@@ -9,12 +10,17 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  init () { }
+  init () { 
+  }
 
   /**
    * Description goes here
    */
-  preload () { }
+  preload () { 
+
+    this.gameOverImg = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'gameover')
+    centerGameObjects([this.gameOverImg])
+  }
 
   /**
    * Description goes here
@@ -22,7 +28,7 @@ export default class extends Phaser.State {
   create () {
     // create before game state
     this.cursors = this.game.input.keyboard.createCursorKeys()
-
+    
     this.gameState = new GameOverGameState({
       state: this
     })
@@ -42,6 +48,5 @@ export default class extends Phaser.State {
    */
   update () {
     this.gameState.update()
-    console.log('game oer')
   }
 }
