@@ -15,8 +15,6 @@ export default class GameTimerListener {
       produced += structure.produce(timerEvent)
     }
     this.player.addPoints(produced) // Replace with desired functionality
-
     this.menuView.redraw()
-
   }
 }

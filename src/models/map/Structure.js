@@ -25,7 +25,6 @@ export default class Structure {
     this.structureType = structureType
     this.productionInput = 1
     this.foundingYear = foundingYear
-
     this.produceFn = structureType.createProductionFn()
   }
 
@@ -47,10 +46,9 @@ export default class Structure {
   }
 
   /**
-   * Returns the amount of turnips produced by this structure 
-   * 
+   * Returns the amount of turnips produced by this structure
+   *
    * @param {TimeEvent} timeEvent - Current ingame date
-   * 
    * @return {number} - Turnips produced
    */
   produce (timeEvent) {
