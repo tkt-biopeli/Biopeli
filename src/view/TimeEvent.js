@@ -10,7 +10,7 @@ export default class TimeEvent {
     if (this.month > 9) {
       return this.year + ' / ' + this.month + ' / ' + this.week
     } else {
-      return this.year + ' /  ' + this.month + ' / ' + this.week
+      return this.year + ' / 0' + this.month + ' / ' + this.week
     }
   }
 }
