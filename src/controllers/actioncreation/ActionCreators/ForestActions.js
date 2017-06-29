@@ -1,5 +1,6 @@
-import StructureFactory from '../../map/StructureFactory'
-import ButtonComponent from '../../../view/menu/components/ButtonComponent'
+import StructureFactory from '../../../models/map/StructureFactory'
+import ButtonComponent from '../../components/ButtonComponent'
+import config from '../../../config'
 
 /**
  * Description goes here
@@ -20,7 +21,10 @@ export default function ForestActions (tile, structureTypes, gameTimer, player) 
   var createDairyFarm = new ButtonComponent({
     name: 'Build a dairy farm',
     functionToCall: sbuilder.buildDairyFarm,
-    context: sbuilder
+    context: sbuilder,
+    width: config.menuButtonWidth,
+    height: config.menuButtonHeight,
+    fontSize: config.menuFontSize
   })
 
   return [createDairyFarm]

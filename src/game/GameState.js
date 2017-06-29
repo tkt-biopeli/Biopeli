@@ -1,4 +1,4 @@
-import MenuController from '../view/menu/MenuController'
+import MenuController from '../controllers/MenuController'
 import Map from '../models/map/Map'
 import MapView from '../view/map/MapView'
 import MenuView from '../view/menu/MenuView'
@@ -8,15 +8,15 @@ import InputHandler from '../view/InputHandler'
 import TileTypes from '../models/map/TileType'
 import StructureTypes from '../models/map/StructureType'
 import Player from './Player'
-import MenuOptionCreator from '../models/menu/MenuOptionCreator'
+import MenuOptionCreator from '../controllers/actioncreation/MenuOptionCreator'
 import config from '../config'
 import GameTimerListener from '../models/GameTimerListener'
 import Timer from '../view/Timer'
 import TopBar from '../models/topbar/TopBar'
 import TopBarView from '../view/topbar/TopBarView'
 import TopBarControllerDemo from '../models/topbar/TopBarControllerDemo'
-import TopBarControllerT from '../view/menu/TopBarController'
-import StackingLayout from '../view/menu/StackingLayout'
+import TopBarControllerT from '../controllers/TopBarController'
+import StackingLayout from '../view/menu/layouts/StackingLayout'
 
 /**
  * Description goes here
@@ -46,13 +46,10 @@ export default class GameState {
           width: config.menuWidth,
           height: state.camera.height
         },
-        linePadding: config.menuLeftPadding,
+        linePadding: config.linePadding,
         sectionPadding: config.sectionPadding,
         vertical: true
       }),
-      buttonWidth: config.menuButtonWidth,
-      buttonHeight: config.menuButtonHeight,
-      fontSize: config.menuFontSize,
       background: 'menuBg'
     })
 
@@ -64,17 +61,12 @@ export default class GameState {
           y: 0,
           width: state.camera.width - config.menuWidth,
           height: config.topBarSettings.height
-        }
+        },
+        linePadding: 5,
+        sectionPadding: 5,
+        vertical: false
       }),
-      vertical: false,
-      menuBorderCoordinate: config.topBarSettings.height,
-      borderPadding: config.topBarSettings.verticalPadding,
-      buttonWidth: 0,
-      buttonHeight: 0,
-      sectionPadding: config.topBarSettings.paddingWidth,
-      linePadding: 1,
-      fontSize: 30,
-      background: {}
+      background: null
     })
 
     this.topBarControllert = new TopBarControllerT({
@@ -94,20 +86,6 @@ export default class GameState {
       viewWidthPx: state.game.width - menuWidth,
       viewHeightPx: state.game.height
     })
-    /*
-    this.topBar = new TopBar({})
-
-    this.topBarView = new TopBarView({
-      game: state,
-      topBar: this.topBar,
-      topBarWidth: state.game.width - menuWidth
-    })
-
-    this.topBarControllerDemo = new TopBarControllerDemo({
-      player: this.player,
-      topBar: this.topBar,
-      topBarView: this.topBarView
-    })*/
     
     this.cameraMover = new CameraMover({ game: state, xSpeed: config.cameraSpeed, ySpeed: config.cameraSpeed })
 
@@ -115,7 +93,7 @@ export default class GameState {
       game: state,
       map: this.map,
       menuOptionCreator: this.menuOptionCreator,
-      menu: this.menuController
+      menuController: this.menuController
     })
 
     this.inputHandler = new InputHandler({ game: state, mapListener: this.mapListener, cameraMover: this.cameraMover })

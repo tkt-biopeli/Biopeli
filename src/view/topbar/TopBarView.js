@@ -1,4 +1,4 @@
-import AnimatedBar from '../menu/AnimatedBar'
+import AnimatedBar from '../menu/menuitems/AnimatedBar'
 import TopBarItem from './TopBarItem'
 import config from '../../config'
 

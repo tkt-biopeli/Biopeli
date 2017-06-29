@@ -48,7 +48,7 @@ describe('MapListener tests', () => {
     assert.equal(ml.game, game)
     assert.equal(ml.map, map)
     assert.equal(ml.menuOptionCreator, "jasd")
-    assert.equal(ml.menu, menu)
+    assert.equal(ml.menuController, menu)
   })
 
   it('Pointer event in map area is recognized', () => {

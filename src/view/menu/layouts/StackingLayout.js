@@ -16,12 +16,17 @@ export default class StackingLayout {
   }
 
   init(){
-    this.drawLocation = this.sectionPadding
+    if(this.vertical){
+      this.drawLocation = this.menuRect.y
+    }else{
+      this.drawLocation = this.menuRect.x
+    }
+    this.drawLocation += this.sectionPadding
   }
 
   nextComponentLocation(component){
     var location = this.coordinates(component)
-    this.addComponentPadding(location)
+    this.addComponentPadding(component)
     return location
   }
 
@@ -39,16 +44,27 @@ export default class StackingLayout {
   }
 
   coordinates(component){
+    var coords
     if(this.vertical){
-      return {
-        x: (this.menuLocation + this.menuPerpendicularSize - component.width) / 2,
+      coords = {
+        x: this.menuRect.x + (this.perpendicularSize - component.width) / 2,
         y: this.drawLocation
       }
     }else{
-      return {
+      coords = {
         x: this.drawLocation,
-        y: (this.menuLocation + this.menuPerpendicularSize - component.height) / 2
+        y: this.menuRect.y + (this.perpendicularSize - component.height) / 2
       }
     }
+
+    if(component.type == 'text'){
+      if(this.vertical){
+        coords.x = this.menuRect.x + this.perpendicularSize / 2
+      } else {
+        coords.y = this.menuRect.y + this.perpendicularSize / 2
+      }
+    }
+
+    return coords
   }
 }

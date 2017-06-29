@@ -1,7 +1,7 @@
-import LabeledButton from './LabeledButton'
-import Text from './Text'
-import AnimatedBar from './AnimatedBar'
-import Icon from './Icon'
+import LabeledButton from './menuitems/LabeledButton'
+import Text from './menuitems/Text'
+import AnimatedBar from './menuitems/AnimatedBar'
+import Icon from './menuitems/Icon'
 
 /**
  * Controls drawing of game's menu
@@ -37,7 +37,6 @@ export default class MenuView {
   }
 
   draw (sections) {
-    console.log(1)
     this.menuViewGroup.removeAll(true, true)
     this.activeButtons = []
     this.activeTexts = []
@@ -47,7 +46,6 @@ export default class MenuView {
     this.drawPosition = this.sectionPadding
 
     this.layout.init(sections)
-    console.log(2)
     this.createMenuComponents(sections)
     //
     //
@@ -84,7 +82,6 @@ export default class MenuView {
   }
 
   createMenuComponents (sections) {
-    console.log(3)
     for(let i = 0 ; i < sections.length ; i++){
       this.createSection(sections[i])
 
@@ -95,7 +92,6 @@ export default class MenuView {
   }
 
   createSection (components) {
-    console.log(4)
     for (let i = 0 ; i < components.length ; i++) {
       var component = components[i]
       switch (component.type) {
@@ -159,13 +155,27 @@ export default class MenuView {
   createText (textComponent) {
     var coords = this.layout.nextComponentLocation(textComponent)
 
+    var anchor
+    if(this.layout.vertical){
+      anchor = {
+        x: 0.5,
+        y: 0
+      }
+    }else{
+      anchor = {
+        x: 0,
+        y: 0.5
+      }
+    }
+
     var tex = new Text({
       game: this.game,
       viewGroup: this.menuViewGroup,
       text: textComponent.text,
       fontSize: textComponent.fontSize,
       x: coords.x,
-      y: coords.y
+      y: coords.y,
+      anchor: anchor
     })
 
     this.activeTexts.push(tex)

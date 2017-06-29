@@ -1,5 +1,6 @@
-import StructureFactory from '../../map/StructureFactory'
-import ButtonComponent from '../../../view/menu/components/ButtonComponent'
+import StructureFactory from '../../../models/map/StructureFactory'
+import ButtonComponent from '../../components/ButtonComponent'
+import config from '../../../config'
 
 /**
  * Description goes here
@@ -20,19 +21,28 @@ export default function GrassActions (tile, structureTypes, gameTimer, player) {
   var createDairyFarm = new ButtonComponent({
     name: 'Build a dairy farm',
     functionToCall: sBuilder.buildDairyFarm,
-    context: sBuilder
+    context: sBuilder,
+    width: config.menuButtonWidth,
+    height: config.menuButtonHeight,
+    fontSize: config.menuFontSize
   })
 
   var createBerryFarm = new ButtonComponent({
     name: 'Build a berry farm',
     functionToCall: sBuilder.buildBerryFarm,
-    context: sBuilder
+    context: sBuilder,
+    width: config.menuButtonWidth,
+    height: config.menuButtonHeight,
+    fontSize: config.menuFontSize
   })
 
   var createFarm = new ButtonComponent({
     name: 'Build a farm',
     functionToCall: sBuilder.buildFarm,
-    context: sBuilder
+    context: sBuilder,
+    width: config.menuButtonWidth,
+    height: config.menuButtonHeight,
+    fontSize: config.menuFontSize
   })
 
   return [createDairyFarm, createBerryFarm, createFarm]

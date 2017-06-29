@@ -15,9 +15,10 @@ export default class Text {
    * @param {number} param.x
    * @param {number} param.y
    */
-  constructor ({game, viewGroup, text, fontSize, x, y}) {
+  constructor ({game, viewGroup, text, fontSize, x, y, anchor}) {
     var style = {font: fontSize + 'px Arial', fill: '#ffff00', align: 'center'}
     this.text = game.add.text(x, y, text, style, viewGroup)
+    this.text.anchor.set(anchor.x, anchor.y)
   }
 
   setText (text) {

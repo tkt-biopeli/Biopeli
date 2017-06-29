@@ -1,6 +1,7 @@
 import TextComponent from './components/TextComponent'
 import ButtonComponent from './components/ButtonComponent'
 import ResetDecorator from './ResetDecorator'
+import config from '../config'
 /**
  * Description goes here
  */
@@ -31,18 +32,18 @@ export default class MenuController {
 
     var sections = []
     sections.push([
-      new TextComponent('Ground type: ' + tile.tileType.name),
-      new TextComponent('X: ' + tile.x + ', Y: ' + tile.y)
+      new TextComponent('Ground type: ' + tile.tileType.name, config.menuFontSize),
+      new TextComponent('X: ' + tile.x + ', Y: ' + tile.y, config.menuFontSize)
     ])
 
     if(tile.structure != null){
       var structure = tile.structure
       sections.push([
-        new TextComponent('Structure: ' + structure.structureType.name),
-        new TextComponent('Founding year: ' + structure.foundingYear),
-        new TextComponent('Size: ' + structure.size),
-        new TextComponent('Production input: ' + structure.productionInput),
-        new TextComponent('Production per time: ' + structure.calculateProductionEfficiency())
+        new TextComponent('Structure: ' + structure.structureType.name, config.menuFontSize),
+        new TextComponent('Founding year: ' + structure.foundingYear, config.menuFontSize),
+        new TextComponent('Size: ' + structure.size, config.menuFontSize),
+        new TextComponent('Production input: ' + structure.productionInput, config.menuFontSize),
+        new TextComponent('Production per time: ' + structure.calculateProductionEfficiency(), config.menuFontSize)
       ])
     }
 
@@ -71,7 +72,10 @@ export default class MenuController {
       this.buttonComponents[i] = new ButtonComponent({
         name: buttonComponent.name,
         functionToCall: resetDecorator.act,
-        context: resetDecorator
+        context: resetDecorator,
+        width: buttonComponent.width,
+        height: buttonComponent.height,
+        fontSize: buttonComponent.fontSize
       })
     }
   }
