@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import ButtonComponent from '../../../src/view/menu/components/ButtonComponent'
+import ButtonComponent from '../../../src/controllers/components/ButtonComponent'
 
 describe('ButtonComponent tests', () =>{
   it('Constructor test', () =>{

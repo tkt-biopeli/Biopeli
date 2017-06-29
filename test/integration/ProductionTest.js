@@ -4,9 +4,6 @@ import TimeEvent from '../../src/view/TimeEvent'
 import StructureType from '../../src/models/map/StructureType'
 import TileType from '../../src/models/map/TileType'
 import ModelTile from '../../src/models/map/ModelTile'
-import TopBar from '../../src/models/topbar/TopBar'
-import TopBarController from '../../src/models/topbar/TopBarControllerDemo'
-import TopBarView from '../../src/view/topbar/TopBarView'
 import StructureFactory from '../../src/models/map/StructureFactory'
 import City from '../../src/models/city/City'
 import GameAdvancer from './helpers/GameAdvancer'
@@ -26,18 +23,6 @@ describe('Production tests', () => {
 
     player = new Player()
     city = new City({name: "testcity"})
-
-    topBar = new TopBar()
-    topBarView = new TopBarView({
-      game: game,
-      topBar: topBar,
-      topBarWidth: 768
-    })
-
-    topBarController = new TopBarController({
-      topBar: topBar,
-      topBarView: topBarView
-    })
 
     listener = new GameTimerListener({
       city: city,

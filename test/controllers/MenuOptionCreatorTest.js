@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import MenuOptionCreator from '../../src/models/menu/MenuOptionCreator'
+import MenuOptionCreator from '../../src/controllers/actioncreation/MenuOptionCreator'
 import TileType from '../../src/models/map/TileType'
 import StructureType from '../../src/models/map/StructureType'
 

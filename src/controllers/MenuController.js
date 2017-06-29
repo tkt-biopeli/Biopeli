@@ -1,6 +1,6 @@
 import TextComponent from './components/TextComponent'
 import ButtonComponent from './components/ButtonComponent'
-import ResetDecorator from './ResetDecorator'
+import ResetDecorator from './helpers/ResetDecorator'
 import config from '../config'
 /**
  * Description goes here

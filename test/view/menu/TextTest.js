@@ -1,4 +1,4 @@
-import Text from '../../../src/view/menu/Text'
+import Text from '../../../src/view/menu/menuitems/Text'
 const assert = require('assert')
 
 describe('Text test', () => {
