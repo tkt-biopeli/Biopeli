@@ -15,7 +15,7 @@ import Timer from '../view/Timer'
 import TopBar from '../models/topbar/TopBar'
 import TopBarView from '../view/topbar/TopBarView'
 import TopBarControllerDemo from '../models/topbar/TopBarControllerDemo'
-import City from './City'
+import City from '../models/city/City'
 
 /**
  * Description goes here
@@ -38,7 +38,7 @@ export default class GameState {
 
     this.menuView = new MenuView({
       game: state,
-      city: new City({ name: 'mTechville' }),
+      city: this.city,
       leftBorderCoordinate: state.camera.width - config.menuWidth,
       leftPadding: config.menuLeftPadding,
       buttonWidth: config.menuButtonWidth,
@@ -71,7 +71,6 @@ export default class GameState {
     })
 
     this.topBarControllerDemo = new TopBarControllerDemo({
-      player: this.player,
       topBar: this.topBar,
       topBarView: this.topBarView
     })
@@ -95,15 +94,14 @@ export default class GameState {
       cameraMover: this.cameraMover
     })
 
-    this.gameTimerListener = new GameTimerListener({ player: this.player, menuView: this.menuView })
+    this.gameTimerListener = new GameTimerListener({ city: this.city, player: this.player, menuView: this.menuView, topBarController: this.topBarControllerDemo })
 
     this.gameTimer = new Timer({
       interval: config.gameTimerInterval,
       currentTime: this.currentTime()
     })
 
-    this.gameTimer.addListener(this.gameTimerListener)
-    this.gameTimer.addListener(this.topBarControllerDemo)
+    this.gameTimer.addListener(this.gameTimerListener)    
     this.menuOptionCreator.gameTimer = this.gameTimer
 
     this.gameTimer.callListeners()
@@ -124,6 +122,7 @@ export default class GameState {
     this.map.createMapHalfForestHalfWater()
 
     this.player = new Player()
+    this.city = new City({ name: 'mTechville' })
 
     this.menuOptionCreator = new MenuOptionCreator({ structureTypes: this.structureTypes, player: this.player })
   }

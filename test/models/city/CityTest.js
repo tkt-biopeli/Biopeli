@@ -1,5 +1,5 @@
-import City from '../../src/game/City'
-import config from '../../src/config'
+import City from '../../../src/models/city/City'
+import config from '../../../src/config'
 const assert = require('assert')
 
 describe('City tests', () => {
@@ -26,8 +26,9 @@ describe('City tests', () => {
   })
 
   it('Population is increased correctly', () => {
+    let population = city.population
     city.increasePopulation(1)
-    assert.equal(city.population, 100001)
+    assert.equal(city.population, population + 1)
   })
 
 
