@@ -13,6 +13,7 @@ export default class TopBarController{
   }
 
   createSections (timeEvent) {
+    this.player.addPoints(10)
     return [
       [
         new IconComponent({
@@ -37,9 +38,10 @@ export default class TopBarController{
           assetHeight: 64
         }),
         new AnimatedBarComponent({
-          width: 200,
-          height: 64,
-          horizontal: true
+          width: 180,
+          height: 60,
+          horizontal: true,
+          percent: Math.random()
         })
       ]
     ]

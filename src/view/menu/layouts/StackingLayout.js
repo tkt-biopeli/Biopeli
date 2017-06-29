@@ -48,11 +48,11 @@ export default class StackingLayout {
     if(this.vertical){
       coords = {
         x: this.menuRect.x + (this.perpendicularSize - component.width) / 2,
-        y: this.drawLocation
+        y: /*this.menuRect.y +*/ this.drawLocation
       }
     }else{
       coords = {
-        x: this.drawLocation,
+        x: /*this.menuRect.x +*/ this.drawLocation,
         y: this.menuRect.y + (this.perpendicularSize - component.height) / 2
       }
     }

@@ -191,7 +191,8 @@ export default class MenuView {
       width: animatedBarComponent.width,
       height: animatedBarComponent.height,
       x: coords.x,
-      y: coords.y
+      y: coords.y,
+      percent: animatedBarComponent.percent
     })
 
     this.activeBars.push(animatedBar)

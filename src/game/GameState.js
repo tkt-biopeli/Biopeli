@@ -12,11 +12,9 @@ import MenuOptionCreator from '../controllers/actioncreation/MenuOptionCreator'
 import config from '../config'
 import GameTimerListener from '../models/GameTimerListener'
 import Timer from '../view/Timer'
-import TopBar from '../models/topbar/TopBar'
-import TopBarView from '../view/topbar/TopBarView'
-import TopBarControllerDemo from '../models/topbar/TopBarControllerDemo'
-import TopBarControllerT from '../controllers/TopBarController'
+import TopBarController from '../controllers/TopBarController'
 import StackingLayout from '../view/menu/layouts/StackingLayout'
+import StaticLayout from '../view/menu/layouts/StaticLayout'
 
 /**
  * Description goes here
@@ -53,9 +51,9 @@ export default class GameState {
       background: 'menuBg'
     })
 
-    this.topBarViewt = new MenuView({
+    this.topBarView = new MenuView({
       game: state,
-      layout: new StackingLayout({
+      layout: new StaticLayout({
         menuRect: {
           x: 0,
           y: 0,
@@ -63,14 +61,13 @@ export default class GameState {
           height: config.topBarSettings.height
         },
         linePadding: 5,
-        sectionPadding: 5,
         vertical: false
       }),
       background: null
     })
 
-    this.topBarControllert = new TopBarControllerT({
-      menuView: this.topBarViewt,
+    this.topBarController = new TopBarController({
+      menuView: this.topBarView,
       player: this.player
     })
 
@@ -98,11 +95,10 @@ export default class GameState {
 
     this.inputHandler = new InputHandler({ game: state, mapListener: this.mapListener, cameraMover: this.cameraMover })
 
-    this.gameTimerListener = new GameTimerListener({player: this.player, menuController: this.menuController, topBarController: this.topBarControllert})
+    this.gameTimerListener = new GameTimerListener({player: this.player, menuController: this.menuController, topBarController: this.topBarController})
 
     this.gameTimer = new Timer({ interval: config.gameTimerInterval, currentTime: this.currentTime() })
     this.gameTimer.addListener(this.gameTimerListener)
-    //this.gameTimer.addListener(this.topBarControllerDemo)
     this.menuOptionCreator.gameTimer = this.gameTimer
 
     this.gameTimer.callListeners()
