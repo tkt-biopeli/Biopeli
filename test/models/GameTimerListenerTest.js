@@ -22,7 +22,7 @@ describe('Game timer listener tests', () => {
       ],
     }
 
-    var menuView = { redraw: sinon.spy() }
+    var menuController = { redraw: sinon.spy() }
 
     var city = {
      buyTurnips: sinon.stub()
@@ -33,16 +33,22 @@ describe('Game timer listener tests', () => {
     })
 
     var topBarController = {
-      update: sinon.spy() 
+      redraw: sinon.spy() 
     } 
 
-    var l = new GameTimerListener({ player: player, menuView: menuView, city: city, topBarController: topBarController })
+    var l = new GameTimerListener({ player: player, menuController: menuController, city: city, topBarController: topBarController })
 
-    l.onTimer(new TimeEvent(1))
+    var event = new TimeEvent(1)
+    l.onTimer(event)
 
     assert.equal(1, player.structures[0].produce.callCount)
     assert.equal(1, player.structures[1].produce.callCount)
-    assert.equal(1, menuView.redraw.callCount)
-    assert.equal(1, topBarController.update.callCount)
+    assert.equal(1, menuController.redraw.callCount)
+    assert.equal(1, topBarController.redraw.callCount)
+
+    assert(player.structures[0].produce.calledWith(event))
+    assert(player.structures[1].produce.calledWith(event))
+    assert(menuController.redraw.calledWith(event))
+    assert(topBarController.redraw.calledWith(event))
   })
 })

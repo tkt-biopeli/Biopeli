@@ -135,6 +135,12 @@ export default class GameStub {
       width: width,
       height: height
     }
+
+    this.world = {
+      bringToTop: ()=>{},
+      moveDown: ()=>{},
+      setBounds: ()=>{}
+    }
   }
 
   /**
