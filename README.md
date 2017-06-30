@@ -18,6 +18,7 @@ Product Backlog, Definition of Done, Sprinttien burndown-käyrät ja tuntikirjan
 
 ### Asennusohjeet
 Pelin ajaminen paikallisesti:
+- asenna [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), jos se ei ole jo asennettuna
 - asenna [Node.js](https://nodejs.org/en/download/package-manager/), jos se ei ole jo asennettuna
 - kloonaa repositorio koneellesi: `git clone git@github.com:tkt-biopeli/Biopeli.git`
 - hae projektiin liittyvät moduulit ajamalla kloonin hakemistossa komento: `npm install`
