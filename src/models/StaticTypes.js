@@ -10,7 +10,7 @@ const tileTypes = {
   water: { name: 'water', asset: 'water', allowedStructures: [] }
 }
 
-const StaticTypes = (structureTypes, tileTypes) => {
+const addAllowedTilesAndStructures = (structureTypes, tileTypes) => {
   structureTypes.farm.allowedTiles = [tileTypes.forest]
   structureTypes.dairy_farm.allowedTiles = [tileTypes.forest, tileTypes.grass]
   structureTypes.berry_farm.allowedTiles = [tileTypes.forest, tileTypes.grass]
@@ -19,5 +19,7 @@ const StaticTypes = (structureTypes, tileTypes) => {
   tileTypes.water.allowedStructures = []
   return ({ structureTypes: structureTypes, tileTypes: tileTypes })
 }
+
+const StaticTypes = addAllowedTilesAndStructures(structureTypes, tileTypes)
 
 export default StaticTypes

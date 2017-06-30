@@ -1,6 +1,3 @@
-import ForestActions from './ActionCreators/ForestActions'
-import GrassActions from './ActionCreators/GrassActions'
-import WaterActions from './ActionCreators/WaterActions'
 import StaticTypes from '../StaticTypes'
 import ButtonAction from './ButtonAction'
 
@@ -15,10 +12,6 @@ export default class MenuOptionCreator {
    * @param {Player} player
    */
   constructor ({ player, structureFactory }) {
-//    this.tileOptions = new Map()
-//    this.tileOptions.set('forest', ForestActions)
-//    this.tileOptions.set('grass', GrassActions)
-//    this.tileOptions.set('water', WaterActions)
     this.player = player
     this.structureFactory = structureFactory
   }
@@ -32,13 +25,8 @@ export default class MenuOptionCreator {
    */
   getActions (tile) {
     if (tile.structure == null) {
-      return this.tileTypeOptions(tile)
+      return this.buttonActionsForTile(tile)
     }
-
-    /* var options = this.structureOptions(tile.structure)
-    options.concat(this.extraOptions(tile))
-
-    return options */
 
     return []
   }
@@ -50,24 +38,15 @@ export default class MenuOptionCreator {
    *
    * @return { ??? }
    */
-  tileTypeOptions (tile) {
+  buttonActionsForTile (tile) {
     var allowedStructures = tile.tileType.allowedStructures
     
     return allowedStructures.map(
       structureType => new ButtonAction({
         name: 'Build a ' + structureType.name,
-        functionToCall: this.structureFactory.buildBuilding(tile, structureType),
+        functionToCall: () => {this.structureFactory.buildBuilding(tile, structureType)},
         context: this.structureFactory
       }))
     
   }
-  /*
-    structureOptions (structure) {
-      return []
-    }
-
-    extraOptions (tile) {
-      return []
-    }
-  */
 }

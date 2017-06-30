@@ -26,7 +26,7 @@ export default class Structure {
     this.productionInput = 1
     this.foundingYear = foundingYear
 
-    this.produceFn = structureType.createProductionFn()
+//    this.produceFn = structureType.createProductionFn()
   }
 
   /**
@@ -54,6 +54,6 @@ export default class Structure {
    * @return {number} - Turnips produced
    */
   produce (timeEvent) {
-    return this.produceFn(timeEvent)
+//    return this.produceFn(timeEvent)
   }
 }

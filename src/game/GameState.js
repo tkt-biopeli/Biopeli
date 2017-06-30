@@ -34,7 +34,7 @@ export default class GameState {
     state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
 
     this.initializeModel(mapWidth, mapHeight, tileWidth, tileHeight)
-
+    
     this.menuView = new MenuView({
       game: state,
       city: new City({ name: 'mTechville' }),
@@ -96,16 +96,6 @@ export default class GameState {
 
     this.gameTimerListener = new GameTimerListener({ player: this.player, menuView: this.menuView })
 
-    this.gameTimer = new Timer({
-      interval: config.gameTimerInterval,
-      currentTime: this.currentTime()
-    })
-
-    this.structureFactory = new StructureFactory({
-      gameTimer: this.gameTimer,
-      player: this.player
-    })
-    
     this.gameTimer.addListener(this.gameTimerListener)
     this.gameTimer.addListener(this.topBarControllerDemo)
     this.menuOptionCreator.gameTimer = this.gameTimer
@@ -126,6 +116,16 @@ export default class GameState {
     this.map.createMapHalfForestHalfWater()
 
     this.player = new Player()
+    
+    this.gameTimer = new Timer({
+      interval: config.gameTimerInterval,
+      currentTime: this.currentTime()
+    })
+
+    this.structureFactory = new StructureFactory({
+      gameTimer: this.gameTimer,
+      player: this.player
+    })
 
     this.menuOptionCreator = new MenuOptionCreator({player: this.player, structureFactory: this.structureFactory })
   }
