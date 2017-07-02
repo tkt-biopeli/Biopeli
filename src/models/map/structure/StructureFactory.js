@@ -1,5 +1,6 @@
 import Structure from './Structure'
 import StructureTypes from './StructureType'
+import StructureProduction from './StructureProduction'
 
 /**
  * Description goes here
@@ -14,8 +15,6 @@ export default class StructureFactory {
    * @param {GameTimer} param.gameTimer
    */
   constructor ({gameTimer, player}) {
-    this.structureName = 'joku nimi'
-    this.structureSize = 10
     this.gameTimer = gameTimer
     this.player = player
   }
@@ -29,11 +28,17 @@ export default class StructureFactory {
   buildBuilding (tile, structureType) {
     tile.structure = new Structure({
       tile: tile,
-      name: this.structureName,
-      size: this.structureSize,
+      name: 'joku nimi',
+      size: 10,
       structureType: structureType,
-      foundingYear: this.gameTimer.currentTime.year
+      foundingYear: this.gameTimer.currentTime.year,
+      produceFn: this.createProductionFn(structureType)
     })
     this.player.addStructure(tile.structure)
+  }
+  
+  createProductionFn (structureType) {
+    var productionFn = StructureProduction.createProductionFn()
+    return productionFn
   }
 }

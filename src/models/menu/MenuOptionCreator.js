@@ -2,14 +2,14 @@ import StaticTypes from '../StaticTypes'
 import ButtonAction from './ButtonAction'
 
 /**
- * Description goes here
+ * The instance of this class creates button actions for the MenuView buttons.
  */
 export default class MenuOptionCreator {
   /**
-   * Description goes here
+   * Player and StructureFactory are given to the constructor as parameters.
    *
-   * @param {object} param
-   * @param {Player} player
+   * @param {Player} param.player
+   * @param {StructureFactory} param.structureFactory
    */
   constructor ({ player, structureFactory }) {
     this.player = player
@@ -17,11 +17,12 @@ export default class MenuOptionCreator {
   }
 
   /**
-   * Description goes here
+   * The function returns an array of button actions if there are no structures
+   * on the tile. Otherwise, it returns an empty array.
    *
-   * @param {ModelTile} tile
+   * @param {ModelTile} tile - the selected tile
    *
-   * @return { ???[] }
+   * @return {ButtonAction[]} array of button actions or an empty array
    */
   getActions (tile) {
     if (tile.structure == null) {
@@ -32,11 +33,12 @@ export default class MenuOptionCreator {
   }
 
   /**
-   * Description goes here
+   * The function first checks which structures can be build on the selected tile, 
+   * and then creates a button action for each of them.
    *
-   * @param {ModelTile} tile
+   * @param {ModelTile} tile - the selected tile
    *
-   * @return { ??? }
+   * @return {ButtonAction[]} array of button actions for the structure type
    */
   buttonActionsForTile (tile) {
     var allowedStructures = tile.tileType.allowedStructures

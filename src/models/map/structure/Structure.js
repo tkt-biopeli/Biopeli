@@ -17,16 +17,17 @@ export default class Structure {
    * @param {integer} param.size
    * @param {StructureType} param.structureType
    * @param {integer} productionInput - ????
+   * @param {integer} foundingYear
+   * @param {function} produceFn
    */
-  constructor ({ tile, name, size, structureType, foundingYear }) {
+  constructor ({ tile, name, size, structureType, foundingYear, produceFn }) {
     this.tile = tile
     this.name = name
     this.size = size
     this.structureType = structureType
     this.productionInput = 1
     this.foundingYear = foundingYear
-
-//    this.produceFn = structureType.createProductionFn()
+    this.produceFn = produceFn
   }
 
   /**
@@ -54,6 +55,6 @@ export default class Structure {
    * @return {number} - Turnips produced
    */
   produce (timeEvent) {
-//    return this.produceFn(timeEvent)
+    return this.produceFn(timeEvent)
   }
 }

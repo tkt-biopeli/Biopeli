@@ -2,7 +2,7 @@ const assert = require('assert')
 const sinon = require('sinon')
 import MenuOptionCreator from '../../src/models/menu/MenuOptionCreator'
 import StaticTypes from '../../src/models/StaticTypes'
-import StructureType from '../../src/models/map/StructureType'
+import StructureType from '../../src/models/map/structure/StructureType'
 
 describe('Menu option creator tests', () => {
   

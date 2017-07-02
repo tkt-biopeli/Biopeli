@@ -1,6 +1,6 @@
 //const assert = require("assert")
 //
-//import StructureType from '../../../src/models/map/StructureType'
+//import StructureType from '../../../src/models/map/structure/StructureType'
 //
 //describe('StructureType tests', () => {
 //  it('All structures are created', () => {

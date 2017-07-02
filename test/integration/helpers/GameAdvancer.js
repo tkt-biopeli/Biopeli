@@ -4,8 +4,8 @@ import GameState from '../../../src/game/GameState'
 import config from '../../../src/config'
 import ModelTile from '../../../src/models/map/ModelTile'
 import StaticTypes from '../../../src/models/StaticTypes'
-import StructureType from '../../../src/models/map/StructureType'
-import Structure from '../../../src/models/map/Structure'
+import StructureType from '../../../src/models/map/structure/StructureType'
+import Structure from '../../../src/models/map/structure/Structure'
 const assert = require("assert")
 
 /**
