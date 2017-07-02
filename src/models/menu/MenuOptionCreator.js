@@ -1,4 +1,3 @@
-import StaticTypes from '../StaticTypes'
 import ButtonAction from './ButtonAction'
 
 /**
@@ -33,7 +32,7 @@ export default class MenuOptionCreator {
   }
 
   /**
-   * The function first checks which structures can be build on the selected tile, 
+   * The function first checks which structures can be build on the selected tile,
    * and then creates a button action for each of them.
    *
    * @param {ModelTile} tile - the selected tile
@@ -42,13 +41,12 @@ export default class MenuOptionCreator {
    */
   buttonActionsForTile (tile) {
     var allowedStructures = tile.tileType.allowedStructures
-    
+
     return allowedStructures.map(
       structureType => new ButtonAction({
         name: 'Build a ' + structureType.name,
-        functionToCall: () => {this.structureFactory.buildBuilding(tile, structureType)},
+        functionToCall: () => { this.structureFactory.buildBuilding(tile, structureType) },
         context: this.structureFactory
       }))
-    
   }
 }

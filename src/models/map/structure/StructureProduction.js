@@ -1,11 +1,11 @@
 const createSeasonFn = () => {
-  return (timeEvent) => {
-    return timeEvent.month == 8 ? 100 : 0
+  return (timeEvent) => {
+    return timeEvent.month === 8 ? 100 : 0
   }
 }
 
 const createConstFn = () => {
-  return () => {
+  return () => {
     return 2
   }
 }

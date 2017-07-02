@@ -1,5 +1,4 @@
 import Structure from './Structure'
-import StructureTypes from './StructureType'
 import StructureProduction from './StructureProduction'
 
 /**
@@ -18,7 +17,7 @@ export default class StructureFactory {
     this.gameTimer = gameTimer
     this.player = player
   }
-  
+
   /**
    * Builds an structure on the tile defined in the constructor
    *
@@ -36,7 +35,7 @@ export default class StructureFactory {
     })
     this.player.addStructure(tile.structure)
   }
-  
+
   createProductionFn (structureType) {
     var productionFn = StructureProduction.createProductionFn()
     return productionFn

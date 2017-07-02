@@ -17,7 +17,7 @@ const addAllowedTilesAndStructures = (structureTypes, tileTypes) => {
   tileTypes.forest.allowedStructures = [structureTypes.farm]
   tileTypes.grass.allowedStructures = [structureTypes.farm, structureTypes.dairy_farm, structureTypes.berry_farm]
   tileTypes.water.allowedStructures = []
-  return ({ structureTypes: structureTypes, tileTypes: tileTypes })
+  return ({ structureTypes: structureTypes, tileTypes: tileTypes })
 }
 
 const StaticTypes = addAllowedTilesAndStructures(structureTypes, tileTypes)
