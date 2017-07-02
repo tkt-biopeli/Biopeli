@@ -19,7 +19,7 @@ export default class StructureFactory {
   }
 
   /**
-   * Builds an structure on the tile defined in the constructor
+   * Builds a structure on the tile defined in the constructor
    *
    * @param {ModelTile} tile
    * @param {StructureType} structureType

@@ -1,6 +1,6 @@
 // remove this class
 
-export class StructureType {
+export default class StructureType {
   constructor ({ name, asset, allowedTiles, createSeasonFn, createConstFn }) {
     this.name = name
     this.asset = asset

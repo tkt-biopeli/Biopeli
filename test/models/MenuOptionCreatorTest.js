@@ -6,11 +6,26 @@ import StructureType from '../../src/models/map/structure/StructureType'
 
 describe('Menu option creator tests', () => {
   
-  var menuOptionCreator, player, structureFactory
+  var menuOptionCreator, player, structureFactory, tile, sType, buildSpy
   
   beforeEach(() => {
+    buildSpy = sinon.spy()
+    
+    sType = {
+      name: 'navetta'
+    }
+    
+    tile = {
+      structure: null,
+      tileType: {
+        allowedStructures: [sType]
+      }
+    }
     player = {}
-    structureFactory = {}
+    structureFactory = {
+      buildBuilding: buildSpy
+    }
+
     menuOptionCreator = new MenuOptionCreator({ player: player, structureFactory: structureFactory })
   })
   
@@ -20,19 +35,22 @@ describe('Menu option creator tests', () => {
   })
   
   it('getActions returns empty array if tile has structure', () => {
-    var tile = {
-      structure : 4
-    }
+    tile.structure = 4
     assert.equal(0, menuOptionCreator.getActions(tile).length)
   })
   
   it('getActions calls buttonActionsForTile if tile has no structure', () => {
-    var tile = {
-      structure : null
-    }
     var fnSpy = sinon.spy()
     menuOptionCreator.buttonActionsForTile = fnSpy
     menuOptionCreator.getActions(tile)
     assert(fnSpy.calledWith(tile))
+  })
+  
+  it('buttonActionsForTile returns array of button actions', () => {
+    var buttonActions = menuOptionCreator.buttonActionsForTile(tile)
+    assert.equal('Build a navetta', buttonActions[0].name)
+    buttonActions[0].function.call()
+    assert(buildSpy.calledWith(tile, sType))
+    assert.equal(structureFactory, buttonActions[0].context)
   })
 })
