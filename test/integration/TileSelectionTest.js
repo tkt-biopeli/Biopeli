@@ -1,9 +1,6 @@
 import GameAdvancer from './helpers/GameAdvancer'
 
-// fix these
-/**
 describe('Integration test: Tile selection shows correctly in Menu', () => {
-
   var game
   var gameState
   var gameAdvancer
@@ -33,4 +30,4 @@ describe('Integration test: Tile selection shows correctly in Menu', () => {
       'Founding year: 1999', 'Size: 100', 'Production input: 1', 'Production per time: ')
   })
 })
-**/
+

@@ -4,7 +4,7 @@ import GameState from '../../../src/game/GameState'
 import config from '../../../src/config'
 import ModelTile from '../../../src/models/map/ModelTile'
 import StaticTypes from '../../../src/models/StaticTypes'
-import StructureType from '../../../src/models/map/structure/StructureType'
+import StructureProduction from '../../../src/models/map/structure/StructureProduction'
 import Structure from '../../../src/models/map/structure/Structure'
 const assert = require("assert")
 
@@ -55,7 +55,7 @@ export default class GameAdvancer {
     this.gameState.gameTimer.lastTime = 0
 
     this.tileTypes = StaticTypes.tileTypes
-    this.structureTypes = StructureType()
+    this.structureTypes = StaticTypes.structureTypes
 
   }
 
@@ -202,7 +202,8 @@ export default class GameAdvancer {
       name: name,
       size: size,
       structureType: this.structureTypes[structureTypeName],
-      foundingYear: foundingYear
+      foundingYear: foundingYear,
+      produceFn: StructureProduction.createProductionFn(structureTypeName)
     })
 
     tile.structure = structure

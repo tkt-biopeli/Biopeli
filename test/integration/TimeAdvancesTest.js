@@ -1,7 +1,5 @@
 import GameAdvancer from './helpers/GameAdvancer'
 
-// fix these
-/**
 describe('Integration test: Time advances, shows in top bar', () => {
 
   var game
@@ -16,7 +14,7 @@ describe('Integration test: Time advances, shows in top bar', () => {
     gameStateChecker = gameAdvancer.gamestateChecker
   })
 
-  it('Time displays correclty at init', () => {
+  it('Time displays correctly at init', () => {
     gameStateChecker.checkTime('1980/1/1')
   })
 
@@ -40,4 +38,3 @@ describe('Integration test: Time advances, shows in top bar', () => {
     gameStateChecker.checkTime('1980/1/1')
   })
 })
-**/

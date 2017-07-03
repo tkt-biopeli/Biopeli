@@ -2,8 +2,6 @@ import GameAdvancer from './helpers/GameAdvancer'
 const chai = require('chai')
 const assert = require('assert')
 
-// fix these
-/**
 describe('Integration test: The game is initialized properly when started', () => {
 
   var game
@@ -83,4 +81,4 @@ describe('Integration test: The game is initialized properly when started', () =
     checker.checkTilesModelCoordinates(1, 1, 0, 0)
   })
 })
-**/
+
