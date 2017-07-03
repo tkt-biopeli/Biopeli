@@ -13,7 +13,7 @@ export default class GameState {
    * Description goes here
    */
   update () {
-
+    this.state.add.sprite(0, 0, 'gameover')
   }
 
 }

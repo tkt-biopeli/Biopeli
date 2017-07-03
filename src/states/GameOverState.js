@@ -11,15 +11,14 @@ export default class extends Phaser.State {
    * Description goes here
    */
   init () { 
+    this.stage.backgroundColor = '#000000'
   }
 
   /**
    * Description goes here
    */
   preload () { 
-
-    this.gameOverImg = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'gameover')
-    centerGameObjects([this.gameOverImg])
+    this.load.image('gameover', 'assets/images/gameover.png')
   }
 
   /**
