@@ -156,4 +156,14 @@ export default class GamestateChecker {
     var text = this.gameState.topBarView.items.get('time').graphic.text
     assert.equal(time, text)
   }
+  
+  /**
+   * Checks if the total score is correct
+   * 
+   * @param {int} score
+   */
+  checkScore(score) {
+    var text = this.gameState.topBarView.items.get('score').graphic.text
+    assert.equal(score, text)
+  }
 }

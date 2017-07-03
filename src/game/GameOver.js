@@ -8,7 +8,7 @@ export default class GameOver {
   * Constructor
   * @param gameTimer {Timer} param.gameTimer - game timer
   */
-  constructor({ timer }) {
+  constructor ({ timer }) {
     this.gameTimer = timer
   }
   /**
@@ -18,7 +18,7 @@ export default class GameOver {
     if (this.gameTimer.createTimeEvent().year >= config.gameLength) {
       return true
     } else {
-        return false
+      return false
     }
   }
 }

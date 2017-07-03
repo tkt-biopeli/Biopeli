@@ -4,7 +4,7 @@ export default class TopBarControllerDemo {
     this.topBarView = topBarView
   }
 
-  update( {time, score, cash, fulfilledPct }) {
+  update ({ time, score, cash, fulfilledPct }) {
     this.topBar.setValueOf('score', score)
     this.topBar.setValueOf('time', time)
     this.topBar.setValueOf('turnip', fulfilledPct)
