@@ -14,7 +14,8 @@ import Timer from '../view/Timer'
 import TopBar from '../models/topbar/TopBar'
 import TopBarView from '../view/topbar/TopBarView'
 import TopBarControllerDemo from '../models/topbar/TopBarControllerDemo'
-import City from './City'
+import GameOver from './GameOver'
+import City from '../models/city/City'
 
 /**
  * Description goes here
@@ -37,7 +38,7 @@ export default class GameState {
 
     this.menuView = new MenuView({
       game: state,
-      city: new City({ name: 'mTechville' }),
+      city: this.city,
       leftBorderCoordinate: state.camera.width - config.menuWidth,
       leftPadding: config.menuLeftPadding,
       buttonWidth: config.menuButtonWidth,
@@ -70,7 +71,6 @@ export default class GameState {
     })
 
     this.topBarControllerDemo = new TopBarControllerDemo({
-      player: this.player,
       topBar: this.topBar,
       topBarView: this.topBarView
     })
@@ -94,13 +94,16 @@ export default class GameState {
       cameraMover: this.cameraMover
     })
 
-    this.gameTimerListener = new GameTimerListener({ player: this.player, menuView: this.menuView })
+    this.gameTimerListener = new GameTimerListener({ city: this.city, player: this.player, menuView: this.menuView, topBarController: this.topBarControllerDemo })
 
     this.gameTimer.addListener(this.gameTimerListener)
-    this.gameTimer.addListener(this.topBarControllerDemo)
     this.menuOptionCreator.gameTimer = this.gameTimer
 
     this.gameTimer.callListeners()
+
+    this.gameOver = new GameOver({
+      timer: this.gameTimer
+    })
   }
 
   initializeModel (mapWidth, mapHeight, tileWidth, tileHeight) {
@@ -115,6 +118,7 @@ export default class GameState {
     this.map.createMapHalfForestHalfWater()
 
     this.player = new Player()
+    this.city = new City({ name: 'mTechville' })
 
     this.gameTimer = new Timer({
       interval: config.gameTimerInterval,
@@ -134,7 +138,11 @@ export default class GameState {
    */
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
-    this.gameTimer.update(this.currentTime())
+    if (this.gameOver.isItOver()) {
+      // game over
+    } else {
+      this.gameTimer.update(this.currentTime())
+    }
   }
 
   currentTime () {

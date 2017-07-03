@@ -16,6 +16,6 @@ describe('TimeEvent tests', function () {
   it('ToString works', function () {
     var timer = new Timer({ name: 'test', interval: 1, currentTime: 4 })
     var event = new TimeEvent({ callTime: timer.callTime })
-    assert.equal(event.toString(), '1980/1/1')
+    assert.equal(event.toString(), '1980 / 01 / 1')
   })
 })

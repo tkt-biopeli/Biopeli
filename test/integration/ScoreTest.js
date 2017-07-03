@@ -13,13 +13,10 @@ describe('Integration test: Score increases in top bar', () => {
     gameStateChecker = gameAdvancer.gamestateChecker
   })
 
-  it('Total score is 10 at start', () => {
-    gameStateChecker.checkScore('10')
+  it('Total score is zero at start', () => {
+    gameStateChecker.checkScore('0')
   })
-  
-  it('Total score increases by 10 in a week', () => {
-    gameAdvancer.update(1000)
-    gameStateChecker.checkScore('20')
-  })
+
+  // production tests
 })
 

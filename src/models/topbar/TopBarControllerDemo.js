@@ -1,16 +1,14 @@
 export default class TopBarControllerDemo {
-  constructor ({ player, topBar, topBarView }) {
-    this.player = player
+  constructor ({ topBar, topBarView }) {
     this.topBar = topBar
     this.topBarView = topBarView
   }
 
-  onTimer (timerEvent) {
-    this.player.addPoints(10)
-    this.topBar.setValueOf('score', this.player.points)
-    let r = Math.floor(Math.random() * 100)
-    this.topBar.setValueOf('time', timerEvent.toString())
-    this.topBar.setValueOf('turnip', r)
+  update ({ time, score, cash, fulfilledPct }) {
+    this.topBar.setValueOf('score', score)
+    this.topBar.setValueOf('time', time)
+    this.topBar.setValueOf('turnip', fulfilledPct)
+    this.topBar.setValueOf('cash', cash)
     this.topBarView.update()
   }
 }

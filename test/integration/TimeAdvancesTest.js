@@ -14,27 +14,44 @@ describe('Integration test: Time advances, shows in top bar', () => {
     gameStateChecker = gameAdvancer.gamestateChecker
   })
 
-  it('Time displays correctly at init', () => {
-    gameStateChecker.checkTime('1980/1/1')
+  it('Time displays correclty at init', () => {
+    gameStateChecker.checkTime('1980 / 01 / 1')
   })
 
   it('Time advances correctly for a week', () => {
     gameAdvancer.update(1000)
-    gameStateChecker.checkTime('1980/1/2')
+    gameStateChecker.checkTime('1980 / 01 / 2')
   })
 
   it('Time advances correctly for a month', () => {
     gameAdvancer.updateSeveralTimes(4, 1000)
-    gameStateChecker.checkTime('1980/2/1')
+    gameStateChecker.checkTime('1980 / 02 / 1')
   })
 
   it('Time advances correctly for a year', () => {
     gameAdvancer.updateSeveralTimes(48, 1000)
-    gameStateChecker.checkTime('1981/1/1')
+    gameStateChecker.checkTime('1981 / 01 / 1')
   })
 
   it('Time does not jump or round', () => {
     gameAdvancer.update(999)
-    gameStateChecker.checkTime('1980/1/1')
+    gameStateChecker.checkTime('1980 / 01 / 1')
   })
+
+  it('Front zero works properly', () => {
+    gameAdvancer.updateSeveralTimes(40, 1000)
+    gameStateChecker.checkTime('1980 / 11 / 1')
+  })
+
+
+  it('Game ends when time runs out', () => {
+    gameAdvancer.updateSeveralTimes(480, 1000)
+    gameStateChecker.checkTime('1990 / 01 / 1')
+  })
+
+  it('Time stops running when game is over', () => {
+    gameAdvancer.updateSeveralTimes(600, 1000)
+    gameStateChecker.checkTime('1990 / 01 / 1')
+  })
+
 })

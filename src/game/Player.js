@@ -20,10 +20,20 @@ export default class {
     this.points += points
   }
 
+  /**
+   * Adds a structure for the player
+   *
+   * @param {Structure} structure - The structure to be added
+   */
   addStructure (structure) {
     this.structures.add(structure)
   }
 
+  /**
+   * Adds a structure for the player
+   *
+   * @param {Structure} structure - The structure to be removed
+   */
   removeStructure (structure) {
     this.structures.delete(structure)
   }
