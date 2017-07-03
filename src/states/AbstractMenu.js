@@ -26,6 +26,11 @@ export default class extends Phaser.State {
     game.world.width = this.game.width
   }
 
+  /**
+   * Menu title
+   * 
+   * @param {string} text - Title text
+   */
   createTitle (text) {
     var style = {
       font: config.font,
@@ -41,10 +46,18 @@ export default class extends Phaser.State {
     this.title.anchor.set(0.5)
   }
 
+  /**
+   * Menu description
+   * 
+   * @param {string} text - Description that is displayed in the menu
+   */
   createDescription (text) {
     var style = {
       font: config.font,
       fill: config.textColor,
+      wordWrap: true,
+      wordWrapWidth: game.world.width * 0.8,
+      align: 'center'
     }
 
     var x = game.world.centerX,
@@ -54,6 +67,12 @@ export default class extends Phaser.State {
     this.description.anchor.set(0.5)
   }
 
+  /**
+   * Adds a new button to the menu
+   * 
+   * @param {string} text - Button text
+   * @param {function} call - Function that is called when pressed
+   */
   createButton (text, call) {
     var style = {
       font: config.font,
