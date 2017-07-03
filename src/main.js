@@ -17,7 +17,7 @@ class Game extends Phaser.Game {
   /**
    * Description goes here
    */
-  constructor () {
+  constructor() {
     const docElement = document.documentElement
     const width = docElement.clientWidth > config.gameWidth ? config.gameWidth : docElement.clientWidth
     const height = docElement.clientHeight > config.gameHeight ? config.gameHeight : docElement.clientHeight
