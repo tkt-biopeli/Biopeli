@@ -1,18 +1,28 @@
-const createSeasonFn = () => {
+const createSeasonFn = (monthsToHarvest, harvestPoints) => {
   return (timeEvent) => {
-    return timeEvent.month === 8 ? 100 : 0
+    return monthsToHarvest.has(timeEvent.month) ? harvestPoints : 0
   }
 }
 
-const createConstFn = () => {
+const createConstFn = (basePoints) => {
   return () => {
-    return 2
+    return basePoints
   }
 }
 
-const createProductionFn = () => {
-  var seasonFn = createSeasonFn()
-  var constFn = createConstFn()
+const checkStructureType = (structureType) => {
+  return structureType === undefined ? {
+    monthsToHarvest: new Set([]),
+    harvestPoints: 0,
+    basePoints: 0
+  } : structureType
+}
+
+const createProductionFn = (structureType) => {
+  var sType = checkStructureType(structureType)
+  var seasonFn = createSeasonFn(sType.monthsToHarvest, sType.harvestPoints)
+  var constFn = createConstFn(sType.basePoints)
+
   return (timeEvent) => {
     var produced = 0
     produced += seasonFn(timeEvent)

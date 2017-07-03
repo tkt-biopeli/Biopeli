@@ -37,7 +37,7 @@ export default class StructureFactory {
   }
 
   createProductionFn (structureType) {
-    var productionFn = StructureProduction.createProductionFn()
+    var productionFn = StructureProduction.createProductionFn(structureType)
     return productionFn
   }
 }
