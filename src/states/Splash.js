@@ -37,7 +37,6 @@ export default class extends Phaser.State {
     this.load.image('score', 'assets/images/score.png')
     this.load.image('time', 'assets/images/time.png')
     this.load.image('cash', 'assets/images/cash.png')
-    this.load.image('gameover', 'assets/images/gameover.png')
   }
 
   /**

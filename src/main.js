@@ -5,10 +5,9 @@ import Phaser from 'phaser'
 import BootState from './states/Boot'
 import SplashState from './states/Splash'
 import GameState from './states/Play'
-import GameOverState from './states/GameOverState'
+import GameOverState from './states/GameOver'
 import StartState from './states/Start'
 import InstructionsState from './states/Instructions'
-
 import config from './config'
 
 /**
