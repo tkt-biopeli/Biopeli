@@ -1,72 +1,52 @@
 const assert = require("assert")
 const sinon = require("sinon")
-import StructureFactory from '../../../src/models/map/StructureFactory'
-import StructureTypes from '../../../src/models/map/StructureType'
+import StructureFactory from '../../../src/models/map/structure/StructureFactory'
 
 describe('StructureFactory tests', () => {
+  var sbuilder, gameTimer, player, addStructureSpy
+
+  beforeEach(() => {
+    addStructureSpy = sinon.spy()
+    
+    player = {
+      addStructure: addStructureSpy
+    }
+    
+    gameTimer = {
+      currentTime: {
+        year: 7
+      }
+    }
+    
+    sbuilder = new StructureFactory({
+      gameTimer: gameTimer,
+      player: player
+    })
+  })
 
   it('Constructor works', () => {
-    var sbuilder = new StructureFactory({
-      tile: 0,
-      structureTypes: 1,
-      gameTimer: 2
-    })
-    assert.equal(0, sbuilder.tile)
-    assert.equal(1, sbuilder.structureTypes)
-    assert.equal(2, sbuilder.gameTimer)
-    assert.notEqual(null, sbuilder.structureName)
-    assert.notEqual(null, sbuilder.structureSize)
-    assert.notEqual(null, sbuilder.gameTimer)
+    assert.equal(gameTimer, sbuilder.gameTimer)
+    assert.equal(player, sbuilder.player)
   })
 
   it('Build building works', () => {
-    var spy = sinon.spy()
-    var sbuilder = new StructureFactory({
-      tile: {},
-      structureTypes: {},
-      gameTimer: { currentTime: { getYear: () => { } } },
-      player: { addStructure: spy }
-    })
+    var tile = { structure: {} }
+    var structureType = {}
+    var createProductionFnSpy = sinon.spy()
+    sbuilder.createProductionFn = createProductionFnSpy
+    sbuilder.buildBuilding(tile, structureType)
 
-    sbuilder.buildBuilding({
-      name: 'test', 
-      createProductionFn: ()=>{}
-    })
-    assert.equal('test', sbuilder.tile.structure.structureType.name)
-    assert.equal(1, spy.callCount)
+    assert.equal(tile, tile.structure.tile)
+    assert.equal('joku nimi', tile.structure.name)
+    assert.equal(10, tile.structure.size)
+    assert.equal(structureType, tile.structure.structureType)
+    assert.equal(7, tile.structure.foundingYear)
+    assert(createProductionFnSpy.calledWith(structureType))
+    assert(addStructureSpy.calledWith(tile.structure))
   })
-
-  var spy
-  var builder
-  var types
-  var setSpy = function () {
-    types = StructureTypes()
-    spy = sinon.spy()
-    builder = new StructureFactory({ structureTypes: types, player: { addStructure: () => { } } })
-    builder.buildBuilding = spy
-  }
-
-  it('Build Farm works', () => {
-    setSpy()
-
-    builder.build.farm()
-
-    assert(spy.calledWith(types.farm))
-  })
-
-  it('Build dairy farm works', () => {
-    setSpy()
-
-    builder.build.dairyFarm()
-
-    assert(spy.calledWith(types.dairyFarm))
-  })
-
-  it('Build berry farm works', () => {
-    setSpy()
-
-    builder.build.berryFarm()
-
-    assert(spy.calledWith(types.berryFarm))
+  
+  it('createProductionFn works', () => {
+    var productionFn = sbuilder.createProductionFn({})
+    assert.equal('function', typeof productionFn)
   })
 })

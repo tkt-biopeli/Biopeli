@@ -1,7 +1,7 @@
 const assert = require("assert")
 const sinon = require("sinon")
-import StructureFactory from '../../../src/models/map/StructureFactory'
-import StructureTypes from '../../../src/models/map/StructureType'
+import StructureFactory from '../../../src/models/map/structure/StructureFactory'
+import StructureTypes from '../../../src/models/map/structure/StructureType'
 
 describe('StructureFactory tests', () =>{
 

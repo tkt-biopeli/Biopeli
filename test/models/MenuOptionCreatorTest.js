@@ -1,52 +1,56 @@
 const assert = require('assert')
 const sinon = require('sinon')
 import MenuOptionCreator from '../../src/models/menu/MenuOptionCreator'
-import TileType from '../../src/models/map/TileType'
-import StructureType from '../../src/models/map/StructureType'
+import StaticTypes from '../../src/models/StaticTypes'
+import StructureType from '../../src/models/map/structure/StructureType'
 
 describe('Menu option creator tests', () => {
-  it('All tiletypes have action creator', () => {
-    var creator = new MenuOptionCreator({ structureTypes: 0 })
-    var tiletypes = TileType()
-
-    var len = Object.keys(tiletypes).length
-
-    assert.equal(len, creator.tileOptions.size)
-  })
-
-  it('TileOptions gives right tile', () => {
-    var creator = new MenuOptionCreator({ structureTypes: StructureType() })
-    var grass = TileType().grass
-    var expectedValues = creator.tileOptions.get(grass.name)()
-    var got = creator.tileTypeOptions({ tileType: grass })
-
-    for (var i = 0; i < expectedValues.length; i++) {
-      assert.equal(expectedValues[i].name, got[i].name)
-      assert.equal(expectedValues[i].functionToCall, got[i].functionToCall)
+  
+  var menuOptionCreator, player, structureFactory, tile, sType, buildSpy
+  
+  beforeEach(() => {
+    buildSpy = sinon.spy()
+    
+    sType = {
+      name: 'navetta'
     }
+    
+    tile = {
+      structure: null,
+      tileType: {
+        allowedStructures: [sType]
+      }
+    }
+    player = {}
+    structureFactory = {
+      buildBuilding: buildSpy
+    }
+
+    menuOptionCreator = new MenuOptionCreator({ player: player, structureFactory: structureFactory })
   })
-
-  it('Option creator gives tile options when structure not presented', () => {
-    var creator = new MenuOptionCreator({ structureTypes: null })
-    var spy = sinon.spy()
-    creator.tileTypeOptions = spy
-    var tile = { structure: null }
-
-    creator.getActions(tile)
-
-    assert.equal(1, spy.callCount)
-    assert(spy.calledWith(tile))
+  
+  it('Constructor test', () => {
+    assert.equal(player, menuOptionCreator.player)
+    assert.equal(structureFactory, menuOptionCreator.structureFactory)
   })
-
-  it('Option creator doesn\t give tile options when tile has structure', () => {
-    var creator = new MenuOptionCreator({ structureTypes: null })
-    var spy = sinon.spy()
-    creator.tileTypeOptions = spy
-    var tile = { structure: 2 }
-
-    creator.getActions(tile)
-
-    assert(spy.notCalled)
+  
+  it('getActions returns empty array if tile has structure', () => {
+    tile.structure = 4
+    assert.equal(0, menuOptionCreator.getActions(tile).length)
   })
-
+  
+  it('getActions calls buttonActionsForTile if tile has no structure', () => {
+    var fnSpy = sinon.spy()
+    menuOptionCreator.buttonActionsForTile = fnSpy
+    menuOptionCreator.getActions(tile)
+    assert(fnSpy.calledWith(tile))
+  })
+  
+  it('buttonActionsForTile returns array of button actions', () => {
+    var buttonActions = menuOptionCreator.buttonActionsForTile(tile)
+    assert.equal('Build a navetta', buttonActions[0].name)
+    buttonActions[0].function.call()
+    assert(buildSpy.calledWith(tile, sType))
+    assert.equal(structureFactory, buttonActions[0].context)
+  })
 })

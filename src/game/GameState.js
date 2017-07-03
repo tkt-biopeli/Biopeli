@@ -5,12 +5,11 @@ import MenuView from '../view/menu/MenuView'
 import CameraMover from '../view/CameraMover'
 import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
-import TileTypes from '../models/map/TileType'
-import StructureTypes from '../models/map/StructureType'
 import Player from './Player'
 import MenuOptionCreator from '../models/menu/MenuOptionCreator'
 import config from '../config'
 import GameTimerListener from '../models/GameTimerListener'
+import StructureFactory from '../models/map/structure/StructureFactory'
 import Timer from '../view/Timer'
 import TopBar from '../models/topbar/TopBar'
 import TopBarView from '../view/topbar/TopBarView'
@@ -97,11 +96,6 @@ export default class GameState {
 
     this.gameTimerListener = new GameTimerListener({ city: this.city, player: this.player, menuView: this.menuView, topBarController: this.topBarControllerDemo })
 
-    this.gameTimer = new Timer({
-      interval: config.gameTimerInterval,
-      currentTime: this.currentTime()
-    })
-
     this.gameTimer.addListener(this.gameTimerListener)
     this.menuOptionCreator.gameTimer = this.gameTimer
 
@@ -113,9 +107,6 @@ export default class GameState {
   }
 
   initializeModel (mapWidth, mapHeight, tileWidth, tileHeight) {
-    this.tileTypes = TileTypes()
-    this.structureTypes = StructureTypes()
-
     this.map = new Map({
       gridSizeX: mapWidth,
       gridSizeY: mapHeight,
@@ -129,7 +120,17 @@ export default class GameState {
     this.player = new Player()
     this.city = new City({ name: 'mTechville' })
 
-    this.menuOptionCreator = new MenuOptionCreator({ structureTypes: this.structureTypes, player: this.player })
+    this.gameTimer = new Timer({
+      interval: config.gameTimerInterval,
+      currentTime: this.currentTime()
+    })
+
+    this.structureFactory = new StructureFactory({
+      gameTimer: this.gameTimer,
+      player: this.player
+    })
+
+    this.menuOptionCreator = new MenuOptionCreator({ player: this.player, structureFactory: this.structureFactory })
   }
 
   /**

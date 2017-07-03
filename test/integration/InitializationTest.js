@@ -81,3 +81,4 @@ describe('Integration test: The game is initialized properly when started', () =
     checker.checkTilesModelCoordinates(1, 1, 0, 0)
   })
 })
+

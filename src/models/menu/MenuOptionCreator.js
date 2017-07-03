@@ -1,63 +1,52 @@
-import ForestActions from './ActionCreators/ForestActions'
-import GrassActions from './ActionCreators/GrassActions'
-import WaterActions from './ActionCreators/WaterActions'
+import ButtonAction from './ButtonAction'
 
 /**
- * Description goes here
+ * The instance of this class creates button actions for the MenuView buttons.
  */
 export default class MenuOptionCreator {
   /**
-   * Description goes here
+   * Player and StructureFactory are given to the constructor as parameters.
    *
-   * @param {object} param
-   * @param {StructureType} structureTypes
+   * @param {Player} param.player
+   * @param {StructureFactory} param.structureFactory
    */
-  constructor ({ structureTypes, player }) {
-    this.tileOptions = new Map()
-    this.tileOptions.set('forest', ForestActions)
-    this.tileOptions.set('grass', GrassActions)
-    this.tileOptions.set('water', WaterActions)
-    this.structureTypes = structureTypes
+  constructor ({ player, structureFactory }) {
     this.player = player
+    this.structureFactory = structureFactory
   }
 
   /**
-   * Description goes here
+   * The function returns an array of button actions if there are no structures
+   * on the tile. Otherwise, it returns an empty array.
    *
-   * @param {ModelTile} tile
+   * @param {ModelTile} tile - the selected tile
    *
-   * @return { ???[] }
+   * @return {ButtonAction[]} array of button actions or an empty array
    */
   getActions (tile) {
     if (tile.structure == null) {
-      return this.tileTypeOptions(tile)
+      return this.buttonActionsForTile(tile)
     }
-
-    /* var options = this.structureOptions(tile.structure)
-    options.concat(this.extraOptions(tile))
-
-    return options */
 
     return []
   }
 
   /**
-   * Description goes here
+   * The function first checks which structures can be build on the selected tile,
+   * and then creates a button action for each of them.
    *
-   * @param {ModelTile} tile
+   * @param {ModelTile} tile - the selected tile
    *
-   * @return { ??? }
+   * @return {ButtonAction[]} array of button actions for the structure type
    */
-  tileTypeOptions (tile) {
-    return this.tileOptions.get(tile.tileType.name)(tile, this.structureTypes, this.gameTimer, this.player)
-  }
-  /*
-    structureOptions (structure) {
-      return []
-    }
+  buttonActionsForTile (tile) {
+    var allowedStructures = tile.tileType.allowedStructures
 
-    extraOptions (tile) {
-      return []
-    }
-  */
+    return allowedStructures.map(
+      structureType => new ButtonAction({
+        name: 'Build a ' + structureType.name,
+        functionToCall: () => { this.structureFactory.buildBuilding(tile, structureType) },
+        context: this.structureFactory
+      }))
+  }
 }
