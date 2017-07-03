@@ -14,7 +14,7 @@ import Timer from '../view/Timer'
 import TopBar from '../models/topbar/TopBar'
 import TopBarView from '../view/topbar/TopBarView'
 import TopBarControllerDemo from '../models/topbar/TopBarControllerDemo'
-import GameOver from './GameOver'
+import GameEvents from './GameEvents'
 import City from '../models/city/City'
 
 /**
@@ -101,7 +101,7 @@ export default class GameState {
 
     this.gameTimer.callListeners()
 
-    this.gameOver = new GameOver({
+    this.gameEvents = new GameEvents({
       timer: this.gameTimer
     })
   }
@@ -138,8 +138,8 @@ export default class GameState {
    */
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
-    if (this.gameOver.isItOver()) {
-      // game over
+    if (this.gameEvents.isGameOver()) {
+      this.state.state.start('GameOver', true, false, this.player.points, this.city.population)
     } else {
       this.gameTimer.update(this.currentTime())
     }

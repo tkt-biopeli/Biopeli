@@ -17,7 +17,6 @@ export default class GameTimerListener {
       produced += structure.produce(timerEvent)
     }
     this.player.addPoints(produced) // Replace with desired functionality
-
     let transaction = this.city.buyTurnips(produced)
     this.player.cash += transaction.earnings
     this.topBarController.update({
