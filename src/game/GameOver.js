@@ -15,10 +15,6 @@ export default class GameOver {
    * Check if game is over
    */
   isItOver () {
-    if (this.gameTimer.createTimeEvent().year >= config.gameLength) {
-      return true
-    } else {
-        return false
-    }
+    return this.gameTimer.createTimeEvent().year >= config.gameLength
   }
 }
