@@ -5,7 +5,7 @@ export default class {
   /**
    * Initially the player has 0 points
    */
-  constructor() {
+  constructor () {
     this.points = 0
     this.cash = 0
     this.structures = new Set()

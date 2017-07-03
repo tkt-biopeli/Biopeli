@@ -1,34 +1,36 @@
 import Phaser from 'phaser'
 import config from '../config'
-import main from '../main'
 
 /**
  * Generic menu with title, description and buttons
  */
 export default class extends Phaser.State {
-
   init () { }
 
   /**
    * Load images for menus here
    */
-  preload () { 
+  preload () {
     this.load.image('gameover', 'assets/images/gameover.png')
     this.load.image('start', 'assets/images/start.png')
   }
 
+  /**
+   * Create the menu with correct size
+   */
   create () {
     this.title = null
     this.description = null
     this.buttons = []
-    game.stage.backgroundColor = 0x6B8E23
-    game.world.height = this.game.height
-    game.world.width = this.game.width
+    this.game.stage.backgroundColor = 0x6B8E23
+    this.game.world.height = this.game.height
+    this.game.world.width = this.game.width
+    this.x = this.game.world.centerX
+    this.y = this.game.world.height
   }
 
   /**
    * Menu title
-   * 
    * @param {string} text - Title text
    */
   createTitle (text) {
@@ -39,16 +41,12 @@ export default class extends Phaser.State {
       fontSize: 32
     }
 
-    var x = game.world.centerX,
-      y = game.world.height / 4
-
-    this.title = game.add.text(x, y, text, style)
+    this.title = this.game.add.text(this.x, this.y / 4, text, style)
     this.title.anchor.set(0.5)
   }
 
   /**
    * Menu description
-   * 
    * @param {string} text - Description that is displayed in the menu
    */
   createDescription (text) {
@@ -56,20 +54,16 @@ export default class extends Phaser.State {
       font: config.font,
       fill: config.textColor,
       wordWrap: true,
-      wordWrapWidth: game.world.width * 0.8,
+      wordWrapWidth: this.game.world.width * 0.8,
       align: 'center'
     }
 
-    var x = game.world.centerX,
-      y = game.world.height / 2
-
-    this.description = game.add.text(x, y, text, style)
+    this.description = this.game.add.text(this.x, this.y / 2, text, style)
     this.description.anchor.set(0.5)
   }
 
   /**
    * Adds a new button to the menu
-   * 
    * @param {string} text - Button text
    * @param {function} call - Function that is called when pressed
    */
@@ -79,20 +73,17 @@ export default class extends Phaser.State {
       fill: config.textColor
     }
 
-    var x = game.world.centerX,
-      y = game.world.height * (2 / 3) + (this.buttons.length * 75)
-
-    var button = game.add.button(
-      x, y,
+    var button = this.game.add.button(
+      this.x, (this.y * (2 / 3) + (this.buttons.length * 75)),
       'emptyButton',
       call,
       this
     )
     button.anchor.set(0.5)
 
-    var buttonText = game.add.text(
-      x,
-      y,
+    var buttonText = this.game.add.text(
+      this.x,
+      (this.y * (2 / 3) + (this.buttons.length * 75)),
       text,
       style
     )

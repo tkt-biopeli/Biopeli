@@ -30,7 +30,7 @@ export default class GameState {
    * @param {Number} param.tileHeight - Tile height in pixels
    * @param {Number} param.menuWidth - Menu width in pixels
    */
-  constructor({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
+  constructor ({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
     this.state = state
 
     state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
@@ -102,13 +102,13 @@ export default class GameState {
       currentTime: this.currentTime()
     })
 
-    this.gameTimer.addListener(this.gameTimerListener)    
+    this.gameTimer.addListener(this.gameTimerListener)
     this.menuOptionCreator.gameTimer = this.gameTimer
 
     this.gameTimer.callListeners()
 
     this.gameEvents = new GameEvents({
-      timer : this.gameTimer
+      timer: this.gameTimer
     })
   }
 
