@@ -9,7 +9,7 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  init (cityName) { 
+  init (cityName) {
     this.cityName = cityName
   }
 
@@ -42,11 +42,7 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  render () {
-    if (__DEV__) {
-      // this.game.debug.cameraInfo(this.game.camera, 500, 32)
-    }
-  }
+  render () { }
 
   /**
    * Updates the  gameState associated with this object

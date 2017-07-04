@@ -1,6 +1,6 @@
 import Structure from './Structure'
 import StructureProduction from './StructureProduction'
-import StructureNameGenerator from '../../misc/StructureNameGenerator'
+import StructureNameGenerator from '../../namegeneration/StructureNameGenerator'
 
 /**
  * Description goes here
