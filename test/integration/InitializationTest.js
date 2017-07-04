@@ -26,12 +26,15 @@ describe('Integration test: The game is initialized properly when started', () =
     var components = [
       gameState.map,
       gameState.mapView,
-      gameState.menu,
+      gameState.menuController,
       gameState.menuView,
+      gameState.topBarView,
+      gameState.topBarController,
       gameState.cameraMover,
       gameState.inputHandler,
       gameState.mapListener,
       gameState.menuOptionCreator,
+      gameState.gameTimer,
       gameState.player
     ]
 
@@ -52,7 +55,7 @@ describe('Integration test: The game is initialized properly when started', () =
   })
 
   it('Menu doesn\'t have tile selected', () => {
-    assert(gameState.menu.selectedTile == null)
+    assert(gameState.menuController.selectedTile == null)
   })
 
   it('Updating the game draws the tiles again', () => {
@@ -81,3 +84,4 @@ describe('Integration test: The game is initialized properly when started', () =
     checker.checkTilesModelCoordinates(1, 1, 0, 0)
   })
 })
+

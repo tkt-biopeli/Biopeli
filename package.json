@@ -34,7 +34,7 @@
     "nyc": "^11.0.2",
     "qunit": "^1.0.0",
     "sinon": "^2.3.0",
-    "webpack": "^2.6.1"
+    "webpack": "^2.5.1"
   },
   "dependencies": {
     "phaser-ce": "^2.7.9",

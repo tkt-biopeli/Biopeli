@@ -1,16 +1,16 @@
-import Player from '../../src/game/Player.js';
+import Player from '../../src/game/Player';
 const assert = require("assert");
 
 describe('Player tests', function () {
-  it('Player should have 0 points in the beginning', function () {
-    var p = new Player();
-    assert.equal(0, p.points);
-    assert.equal(0, p.structures.size)
-  })
-
   var p
+  
   beforeEach(() => {
     p = new Player()
+  })
+  
+  it('Player should have 0 points in the beginning', function () {
+    assert.equal(0, p.points)
+    assert.equal(0, p.structures.size)
   })
 
   it('Points are added correctly', function () {

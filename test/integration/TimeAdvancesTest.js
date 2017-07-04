@@ -28,10 +28,13 @@ describe('Integration test: Time advances, shows in top bar', () => {
     gameStateChecker.checkTime('1980 / 02 / 1')
   })
 
+  // game duration is currently one year
+  /*
   it('Time advances correctly for a year', () => {
     gameAdvancer.updateSeveralTimes(48, 1000)
     gameStateChecker.checkTime('1981 / 01 / 1')
   })
+  */
 
   it('Time does not jump or round', () => {
     gameAdvancer.update(999)
@@ -43,15 +46,9 @@ describe('Integration test: Time advances, shows in top bar', () => {
     gameStateChecker.checkTime('1980 / 11 / 1')
   })
 
-
+  /*
   it('Game ends when time runs out', () => {
-    gameAdvancer.updateSeveralTimes(480, 1000)
-    gameStateChecker.checkTime('1990 / 01 / 1')
+    gameAdvancer.updateSeveralTimes(2400, 1000)
   })
-
-  it('Time stops running when game is over', () => {
-    gameAdvancer.updateSeveralTimes(600, 1000)
-    gameStateChecker.checkTime('1990 / 01 / 1')
-  })
-
+  */
 })

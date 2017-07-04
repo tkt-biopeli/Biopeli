@@ -16,7 +16,7 @@ export default class GamestateChecker {
     this.gameStub = gameStub
     this.gameState = gameState
     this.map = gameState.map
-    this.menu = gameState.menu
+    this.menu = gameState.menuController
     this.gameAdvancer = gameAdvancer
   }
 
@@ -153,7 +153,17 @@ export default class GamestateChecker {
    * @param {int} time
    */
   checkTime(time) {
-    var text = this.gameState.topBarView.items.get('time').graphic.text
+    var text = this.gameState.topBarView.activeTexts[0].text.text
     assert.equal(time, text)
+  }
+  
+  /**
+   * Checks if the total score is correct
+   * 
+   * @param {int} score
+   */
+  checkScore(score) {
+    var text = this.gameState.topBarView.activeTexts[1].text.text
+    assert.equal(score, text)
   }
 }

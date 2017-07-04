@@ -42,7 +42,7 @@ export default class Timer {
    *
    * @param {number} currentTime
    */
-  update (currentTime, player) {
+  update (currentTime) {
     if (currentTime - this.lastTime >= this.interval) {
       this.callTime++
       this.callListeners()

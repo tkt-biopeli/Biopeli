@@ -19,6 +19,7 @@ export default class {
   addPoints (points) {
     this.points += points
   }
+
   /**
    * Adds a structure for the player
    *
@@ -27,6 +28,7 @@ export default class {
   addStructure (structure) {
     this.structures.add(structure)
   }
+
   /**
    * Adds a structure for the player
    *

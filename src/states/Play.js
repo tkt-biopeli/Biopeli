@@ -9,7 +9,9 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  init () { }
+  init (cityName) {
+    this.cityName = cityName
+  }
 
   /**
    * Description goes here
@@ -23,7 +25,11 @@ export default class extends Phaser.State {
     // create before game state
     this.cursors = this.game.input.keyboard.createCursorKeys()
 
+    var cityName = this.cityName
+    this.cityName = undefined
+
     this.gameState = new GameState({
+      cityName: cityName,
       state: this,
       mapWidth: Math.ceil(this.game.width * config.madWidthMultiplier / config.tileWidth),
       mapHeight: Math.ceil(this.game.height * config.mapHeightMultiplier / config.tileHeight),
@@ -36,11 +42,7 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  render () {
-    if (__DEV__) {
-      // this.game.debug.cameraInfo(this.game.camera, 500, 32)
-    }
-  }
+  render () { }
 
   /**
    * Updates the  gameState associated with this object
