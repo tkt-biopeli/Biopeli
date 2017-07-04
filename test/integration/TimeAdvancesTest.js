@@ -28,13 +28,10 @@ describe('Integration test: Time advances, shows in top bar', () => {
     gameStateChecker.checkTime('1980 / 02 / 1')
   })
 
-  // game duration is currently one year
-  /*
   it('Time advances correctly for a year', () => {
     gameAdvancer.updateSeveralTimes(48, 1000)
     gameStateChecker.checkTime('1981 / 01 / 1')
   })
-  */
 
   it('Time does not jump or round', () => {
     gameAdvancer.update(999)
