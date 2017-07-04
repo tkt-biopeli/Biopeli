@@ -1,25 +1,22 @@
 import config from '../config'
-
 import Map from '../models/map/Map'
 import Player from './Player'
 import City from '../models/city/City'
 import StructureFactory from '../models/map/structure/StructureFactory'
 import GameEvents from './GameEvents'
-
 import MapView from '../view/map/MapView'
 import MenuView from '../view/menu/MenuView'
 import CameraMover from '../view/CameraMover'
 import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
 import Timer from '../view/Timer'
-
 import GameTimerListener from '../models/GameTimerListener'
 import MenuOptionCreator from '../controllers/actioncreation/MenuOptionCreator'
-
 import TopBarController from '../controllers/TopBarController'
 import MenuController from '../controllers/MenuController'
 import StackingLayout from '../view/menu/layouts/StackingLayout'
 import StaticLayout from '../view/menu/layouts/StaticLayout'
+
 /**
  * Description goes here
  */
@@ -32,7 +29,7 @@ export default class GameState {
    * @param {Number} param.tileHeight - Tile height in pixels
    * @param {Number} param.menuWidth - Menu width in pixels
    */
-  constructor({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
+  constructor ({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
     this.state = state
 
     state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
@@ -88,11 +85,11 @@ export default class GameState {
       viewWidthPx: state.game.width - menuWidth,
       viewHeightPx: state.game.height
     })
-    
-    this.cameraMover = new CameraMover({ 
-      game: state, 
-      xSpeed: config.cameraSpeed, 
-      ySpeed: config.cameraSpeed 
+
+    this.cameraMover = new CameraMover({
+      game: state,
+      xSpeed: config.cameraSpeed,
+      ySpeed: config.cameraSpeed
     })
 
     this.mapListener = new MapListener({

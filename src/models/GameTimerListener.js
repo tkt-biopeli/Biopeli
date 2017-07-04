@@ -1,7 +1,7 @@
 export default class GameTimerListener {
   constructor ({ city, player, menuController, topBarController, gameEvents }) {
     this.city = city
-    this.player = player 
+    this.player = player
     this.menuController = menuController
     this.topBarController = topBarController
     this.gameEvents = gameEvents

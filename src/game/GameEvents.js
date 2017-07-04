@@ -8,7 +8,7 @@ export default class GameOver {
   * Constructor
   * @param gameTimer {Timer} param.gameTimer - game timer
   */
-  constructor({ timer, game }) {
+  constructor ({ timer, game }) {
     this.gameTimer = timer
     this.game = game
   }

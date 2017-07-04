@@ -2,8 +2,8 @@ import IconComponent from './components/IconComponent'
 import TextComponent from './components/TextComponent'
 import AnimatedBarComponent from './components/AnimatedBarComponent'
 
-export default class TopBarController{
-  constructor({menuView, player, city}){
+export default class TopBarController {
+  constructor ({ menuView, player, city }) {
     this.menuView = menuView
     this.player = player
     this.city = city
@@ -29,7 +29,7 @@ export default class TopBarController{
           assetWidth: 64,
           assetHeight: 64
         }),
-        new TextComponent(""+this.player.points, 30)
+        new TextComponent('' + this.player.points, 30)
       ],
       [
         new IconComponent({
@@ -37,7 +37,7 @@ export default class TopBarController{
           assetHeight: 64,
           assetWidth: 64
         }),
-        new TextComponent(""+this.player.cash, 30)
+        new TextComponent('' + this.player.cash, 30)
       ],
       [
         new IconComponent({

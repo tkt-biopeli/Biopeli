@@ -2,6 +2,7 @@ import TextComponent from './components/TextComponent'
 import ButtonComponent from './components/ButtonComponent'
 import ResetDecorator from './helpers/ResetDecorator'
 import config from '../config'
+
 /**
  * Description goes here
  */
@@ -12,15 +13,14 @@ export default class MenuController {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor ({menuView, city}) {
+  constructor ({ menuView, city }) {
     this.menuView = menuView
-
     this.city = city
     this.selectedTile = null
     this.buttonComponents = []
   }
 
-  redraw(){
+  redraw () {
     this.menuView.draw(this.createSections())
   }
 
@@ -33,7 +33,7 @@ export default class MenuController {
       new TextComponent('Demand: ' + this.city.turnipDemand.customers(), config.menuFontSize)
     ])
 
-    if(this.selectedTile == null){
+    if (this.selectedTile == null) {
       return sections
     }
 
@@ -44,7 +44,7 @@ export default class MenuController {
       new TextComponent('X: ' + tile.x + ', Y: ' + tile.y, config.menuFontSize)
     ])
 
-    if(tile.structure != null){
+    if (tile.structure != null) {
       var structure = tile.structure
       sections.push([
         new TextComponent('Structure: ' + structure.structureType.name, config.menuFontSize),
@@ -73,10 +73,13 @@ export default class MenuController {
     this.redraw()
   }
 
-  decorateButtonComponents(){
-    for(let i = 0 ; i < this.buttonComponents.length ; i++){
+  decorateButtonComponents () {
+    for (let i = 0; i < this.buttonComponents.length; i++) {
       var buttonComponent = this.buttonComponents[i]
-      var resetDecorator = new ResetDecorator({action: buttonComponent, menu: this})
+      var resetDecorator = new ResetDecorator({
+        action: buttonComponent,
+        menu: this
+      })
       this.buttonComponents[i] = new ButtonComponent({
         name: buttonComponent.name,
         functionToCall: resetDecorator.act,

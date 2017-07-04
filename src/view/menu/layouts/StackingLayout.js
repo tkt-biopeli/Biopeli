@@ -1,11 +1,11 @@
 export default class StackingLayout {
-  constructor ({menuRect, linePadding, sectionPadding, vertical}) {
+  constructor ({ menuRect, linePadding, sectionPadding, vertical }) {
     this.menuRect = menuRect
-    
-    if(vertical){
+
+    if (vertical) {
       this.perpendicularSize = menuRect.width
       this.parallelSize = menuRect.height
-    }else{
+    } else {
       this.perpendicularSize = menuRect.height
       this.parallelSize = menuRect.width
     }
@@ -15,50 +15,50 @@ export default class StackingLayout {
     this.vertical = vertical
   }
 
-  init(){
-    if(this.vertical){
+  init () {
+    if (this.vertical) {
       this.drawLocation = this.menuRect.y
-    }else{
+    } else {
       this.drawLocation = this.menuRect.x
     }
     this.drawLocation += this.sectionPadding
   }
 
-  nextComponentLocation(component){
+  nextComponentLocation (component) {
     var location = this.coordinates(component)
     this.addComponentPadding(component)
     return location
   }
 
-  afterLine(){
+  afterLine () {
     this.drawLocation += this.linePadding
   }
 
-  afterSection(){
+  afterSection () {
     this.drawLocation += this.sectionPadding
   }
 
-  addComponentPadding(component){
-    if(this.vertical) this.drawLocation += component.height
+  addComponentPadding (component) {
+    if (this.vertical) this.drawLocation += component.height
     else this.drawLocation += component.width
   }
 
-  coordinates(component){
+  coordinates (component) {
     var coords
-    if(this.vertical){
+    if (this.vertical) {
       coords = {
         x: this.menuRect.x + (this.perpendicularSize - component.width) / 2,
-        y: /*this.menuRect.y +*/ this.drawLocation
+        y: this.drawLocation
       }
-    }else{
+    } else {
       coords = {
-        x: /*this.menuRect.x +*/ this.drawLocation,
+        x: this.drawLocation,
         y: this.menuRect.y + (this.perpendicularSize - component.height) / 2
       }
     }
 
-    if(component.type == 'text'){
-      if(this.vertical){
+    if (component.type === 'text') {
+      if (this.vertical) {
         coords.x = this.menuRect.x + this.perpendicularSize / 2
       } else {
         coords.y = this.menuRect.y + this.perpendicularSize / 2

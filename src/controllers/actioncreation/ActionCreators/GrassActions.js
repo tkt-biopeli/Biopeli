@@ -1,4 +1,4 @@
-import StructureFactory from '../../../models/map/StructureFactory'
+import StructureFactory from '../../../models/map/structure/StructureFactory'
 import ButtonComponent from '../../components/ButtonComponent'
 import config from '../../../config'
 
