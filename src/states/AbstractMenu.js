@@ -35,10 +35,9 @@ export default class extends Phaser.State {
    */
   createTitle (text) {
     var style = {
-      font: config.font,
-      fill: config.textColor,
-      fontWeight: 'bold',
-      fontSize: 32
+      font: '64px Arial',
+      fill: '#ffff00',
+      fontWeight: 'bold'
     }
 
     this.title = this.game.add.text(this.x, this.y / 4, text, style)
@@ -51,8 +50,8 @@ export default class extends Phaser.State {
    */
   createDescription (text) {
     var style = {
-      font: config.font,
-      fill: config.textColor,
+      font: '32px Arial',
+      fill: '#ffff00',
       wordWrap: true,
       wordWrapWidth: this.game.world.width * 0.8,
       align: 'center'
@@ -69,8 +68,8 @@ export default class extends Phaser.State {
    */
   createButton (text, call) {
     var style = {
-      font: config.font,
-      fill: config.textColor
+      font: '32px Arial',
+      fill:'#ffff00'
     }
 
     var button = this.game.add.button(
