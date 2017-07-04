@@ -56,7 +56,7 @@ export default class extends Phaser.State {
 
 /**
  * Creates final score
- * @param {string} text - score text 
+ * @param {string} text - score text
  */
   createScore (text) {
     this.score = this.game.add.text(this.x, this.y / 4, text, this.normalFont)

@@ -19,4 +19,3 @@ describe('Integration test: Score increases in top bar', () => {
 
   // production tests
 })
-

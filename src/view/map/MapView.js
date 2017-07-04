@@ -123,7 +123,7 @@ export default class MapView {
         var tile = this.map.getTileWithGridCoordinates(c, r)
         var pxCoords = this.ColAndRowToPx(c, r, viewArea.startCol, viewArea.startRow, offset)
 
-        if (typeof tile != 'undefined') this.createViewTileForFill(tile, pxCoords, viewArea, offset)
+        if (typeof tile !== 'undefined') this.createViewTileForFill(tile, pxCoords, viewArea, offset)
       }
     }
   }
@@ -149,7 +149,7 @@ export default class MapView {
    * @param {{x: number, y: number}} pxCoords
    */
   highlightSelectedTile (tile, pxCoords) {
-    if (tile == this.menu.selectedTile) {
+    if (tile === this.menu.selectedTile) {
       this.addToViewTexture(this.highlight(), pxCoords.x, pxCoords.y)
     }
   }

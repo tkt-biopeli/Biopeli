@@ -6,7 +6,7 @@ describe('Structure tests', () => {
 
   var structure, tile, stype, produceFnSpy, timeEvent
 
-  before(function () {
+  beforeEach(() => {
     produceFnSpy = sinon.spy()
 
     timeEvent = {
