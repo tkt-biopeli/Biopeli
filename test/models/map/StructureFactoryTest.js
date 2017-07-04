@@ -37,7 +37,6 @@ describe('StructureFactory tests', () => {
     sbuilder.buildBuilding(tile, structureType)
 
     assert.equal(tile, tile.structure.tile)
-    assert.equal('joku nimi', tile.structure.name)
     assert.equal(10, tile.structure.size)
     assert.equal(structureType, tile.structure.structureType)
     assert.equal(7, tile.structure.foundingYear)

@@ -7,18 +7,25 @@ export default class StructureNameGenerator {
       'Piippolan',
       'Vaarin',
       'Kyöstin',
-      'Jaakon'
+      'Jaakon',
+      'Mummon',
+      'Sallan',
+      'Reetan',
+      'Martan',
+      'Eevan'
     ]
     this.frontAdjectives = [
       'Juoppo',
-      'Iso',
+      'Ison',
       'Pikku',
-      'Hullu',
+      'Hullun',
       'Sekopää',
-      'Rauhanmies',
+      'Pelle',
       'Piippu',
       'Mustan',
-      'Pihi' 
+      'Pihi',
+      'Läski',
+      'Laihan' 
     ]
     this.endAdjectives = [
       'pieni',
@@ -29,13 +36,15 @@ export default class StructureNameGenerator {
       'puhdas',
       'laadukas',
       'kurja',
-      'huonon onnen',
+      'huonon tuurin',
       'pahan päivän',
       'surkea',
       'likainen',
       'kallis',
       'ylihinnoiteltu',
-      'luomu'
+      'luomumainen',
+      'aito',
+      'feikki'
     ]
   }
   createName (structureType) {
