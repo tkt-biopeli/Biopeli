@@ -13,11 +13,11 @@ export default class MapListener {
    * @param {MenuOptionCreator} param.menuOptionCreator
    * @param {Menu} param.menu
    */
-  constructor ({ game, map, menuOptionCreator, menu }) {
+  constructor ({ game, map, menuOptionCreator, menuController }) {
     this.game = game
     this.map = map
     this.menuOptionCreator = menuOptionCreator
-    this.menu = menu
+    this.menuController = menuController
   }
 
   /**
@@ -42,7 +42,7 @@ export default class MapListener {
    * @return {boolean}
    */
   pointerInMapArea (pointerEvent) {
-    return (pointerEvent !== undefined && pointerEvent.x <= this.menu.menuView.leftBorderCoordinate)
+    return (pointerEvent !== undefined && pointerEvent.x <= this.menuController.menuView.layout.menuRect.x)
   }
 
   /**
@@ -68,8 +68,8 @@ export default class MapListener {
   validTile (tile) {
     if (typeof tile === 'undefined') {
       return false
-    } else if (tile === this.menu.selectedTile) {
-      this.menu.reset()
+    } else if (tile === this.menuController.selectedTile) {
+      this.menuController.reset()
 
       return false
     }
@@ -83,6 +83,6 @@ export default class MapListener {
    * @param {ModelTile} tile
    */
   updateMenuOptions (tile) {
-    this.menu.chooseTile(tile, this.menuOptionCreator.getActions(tile))
+    this.menuController.chooseTile(tile, this.menuOptionCreator.getActions(tile))
   }
 }

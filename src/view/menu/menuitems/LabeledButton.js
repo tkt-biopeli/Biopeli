@@ -1,4 +1,4 @@
-import config from '../../config'
+import config from '../../../config'
 
 /**
  * Description goes here
@@ -19,8 +19,8 @@ export default class LabeledButton {
    * @param {number} param.buttonWidth
    * @param {number} param.buttonHeight
    */
-  constructor ({ game, viewGroup, label, x, y, callback, context, buttonWidth, buttonHeight }) {
-    var style = { font: config.font, fill: config.textColor, align: config.textAlignment }
+  constructor ({ game, viewGroup, label, fontSize, x, y, callback, context, buttonWidth, buttonHeight }) {
+    var style = {font: fontSize + 'px Arial', fill: '#ffff00', align: 'center'}
 
     var button = game.make.button(x, y, 'emptyButton', callback, context)
     viewGroup.add(button)

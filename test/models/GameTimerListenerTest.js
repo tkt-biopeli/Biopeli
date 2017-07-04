@@ -8,7 +8,7 @@ describe('Game timer listener tests', () => {
     var l = new GameTimerListener({ player: 0, menuView: 2, city: 3, topBarController: 4, gameEvents: 5 })
 
     assert.equal(0, l.player)
-    assert.equal(2, l.menuView)
+    assert.equal(2, l.menuController)
     assert.equal(3, l.city)
     assert.equal(4, l.topBarController)
     assert.equal(5, l.gameEvents)
@@ -43,14 +43,25 @@ describe('Game timer listener tests', () => {
       isGameOver: sinon.stub()
     }
 
-    var l = new GameTimerListener({ player: player, menuView: menuView, city: city, topBarController: topBarController, gameEvents: gameEvents })
+    var l = new GameTimerListener({
+      player: player,
+      menuView: menuView,
+      city: city,
+      topBarController: topBarController,
+      gameEvents: gameEvents 
+    })
 
-    l.onTimer(new TimeEvent(1))
+    var event = new TimeEvent(1)
+    l.onTimer(event)
 
     assert.equal(1, player.structures[0].produce.callCount)
     assert.equal(1, player.structures[1].produce.callCount)
-    assert.equal(1, menuView.redraw.callCount)
-    assert.equal(1, topBarController.update.callCount)
+    assert.equal(1, menuController.redraw.callCount)
+    assert.equal(1, topBarController.redraw.callCount)
     assert.equal(1, gameEvents.isGameOver.callCount)
+    assert(player.structures[0].produce.calledWith(event))
+    assert(player.structures[1].produce.calledWith(event))
+    assert(menuController.redraw.calledWith(event))
+    assert(topBarController.redraw.calledWith(event))
   })
 })

@@ -1,4 +1,5 @@
-import ButtonAction from './ButtonAction'
+import ButtonComponent from '../components/ButtonComponent'
+import config from '../../config'
 
 /**
  * The instance of this class creates button actions for the MenuView buttons.
@@ -43,10 +44,12 @@ export default class MenuOptionCreator {
     var allowedStructures = tile.tileType.allowedStructures
 
     return allowedStructures.map(
-      structureType => new ButtonAction({
+      structureType => new ButtonComponent({
         name: 'Build a ' + structureType.name,
         functionToCall: () => { this.structureFactory.buildBuilding(tile, structureType) },
-        context: this.structureFactory
+        context: this.structureFactory,
+        height: config.menuButtonHeight,
+        width: config.menuButtonWidth
       }))
   }
 }
