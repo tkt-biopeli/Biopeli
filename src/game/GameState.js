@@ -67,25 +67,6 @@ export default class GameState {
       background: null
     })
 
-    this.topBarController = new TopBarController({
-      menuView: this.topBarView,
-      player: this.player,
-      city: this.city
-    })
-
-    this.menuController = new MenuController({
-      menuView: this.menuView,
-      city: this.city
-    })
-
-    this.mapView = new MapView({
-      game: state,
-      map: this.map,
-      menu: this.menuController,
-      viewWidthPx: state.game.width - menuWidth,
-      viewHeightPx: state.game.height
-    })
-
     this.cameraMover = new CameraMover({
       game: state,
       xSpeed: config.cameraSpeed,
@@ -106,8 +87,27 @@ export default class GameState {
     })
 
     this.gameEvents = new GameEvents({
-      timer: this.gameTimer,
-      game: this.state
+      gameState: this
+    })
+
+    this.topBarController = new TopBarController({
+      menuView: this.topBarView,
+      player: this.player,
+      city: this.city
+    })
+
+    this.menuController = new MenuController({
+      menuView: this.menuView,
+      city: this.city,
+      gameEvents: this.gameEvents
+    })
+
+    this.mapView = new MapView({
+      game: state,
+      map: this.map,
+      menu: this.menuController,
+      viewWidthPx: state.game.width - menuWidth,
+      viewHeightPx: state.game.height
     })
 
     this.gameTimerListener = new GameTimerListener({
