@@ -29,7 +29,7 @@ export default class StructureFactory {
   buildBuilding (tile, structureType) {
     tile.structure = new Structure({
       tile: tile,
-      name: this.namer.createName(structureType),
+      name: this.namer.createName(structureType.name),
       size: 10,
       structureType: structureType,
       foundingYear: this.gameTimer.currentTime.year,
