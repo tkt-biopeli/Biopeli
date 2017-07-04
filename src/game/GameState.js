@@ -3,6 +3,7 @@ import config from '../config'
 import Map from '../models/map/Map'
 import Player from './Player'
 import City from '../models/city/City'
+import StructureFactory from '../models/map/structure/StructureFactory'
 import GameEvents from './GameEvents'
 
 import MapView from '../view/map/MapView'
@@ -115,8 +116,8 @@ export default class GameState {
     this.gameTimerListener = new GameTimerListener({
       city: this.city,
       player: this.player,
-      menuView: this.menuView,
-      topBarController: this.topBarControllerDemo,
+      menuController: this.menuController,
+      topBarController: this.topBarController,
       gameEvents: this.gameEvents
     })
 

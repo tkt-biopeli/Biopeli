@@ -5,7 +5,7 @@ import TimeEvent from '../../src/view/TimeEvent'
 
 describe('Game timer listener tests', () => {
   it('Constructor works', () => {
-    var l = new GameTimerListener({ player: 0, menuView: 2, city: 3, topBarController: 4, gameEvents: 5 })
+    var l = new GameTimerListener({ player: 0, menuController: 2, city: 3, topBarController: 4, gameEvents: 5 })
 
     assert.equal(0, l.player)
     assert.equal(2, l.menuController)
@@ -23,7 +23,7 @@ describe('Game timer listener tests', () => {
       ],
     }
 
-    var menuView = {
+    var menuController = {
       redraw: sinon.spy()
     }
 
@@ -36,7 +36,7 @@ describe('Game timer listener tests', () => {
     })
 
     var topBarController = {
-      update: sinon.spy()
+      redraw: sinon.spy()
     }
 
     var gameEvents = {
@@ -45,7 +45,7 @@ describe('Game timer listener tests', () => {
 
     var l = new GameTimerListener({
       player: player,
-      menuView: menuView,
+      menuController: menuController,
       city: city,
       topBarController: topBarController,
       gameEvents: gameEvents 
