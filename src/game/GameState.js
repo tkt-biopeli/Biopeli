@@ -1,10 +1,11 @@
 import config from '../config'
 
 import Map from '../models/map/Map'
-import TileTypes from '../models/map/TileType'
-import StructureTypes from '../models/map/StructureType'
+import StructureTypes from '../models/map/structure/StructureType'
 import Player from './Player'
 import City from '../models/city/City'
+import StructureFactory from '../models/map/structure/StructureFactory'
+import GameEvents from './GameEvents'
 
 import MapView from '../view/map/MapView'
 import MenuView from '../view/menu/MenuView'
@@ -12,7 +13,6 @@ import CameraMover from '../view/CameraMover'
 import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
 import Timer from '../view/Timer'
-import GameOver from './GameOver'
 
 import GameTimerListener from '../models/GameTimerListener'
 import MenuOptionCreator from '../controllers/actioncreation/MenuOptionCreator'
@@ -73,7 +73,8 @@ export default class GameState {
 
     this.topBarController = new TopBarController({
       menuView: this.topBarView,
-      player: this.player
+      player: this.player,
+      city: this.city
     })
 
     this.menuController = new MenuController({
@@ -116,25 +117,17 @@ export default class GameState {
       topBarController: this.topBarController 
     })
 
-    this.gameTimer = new Timer({
-      interval: config.gameTimerInterval,
-      currentTime: this.currentTime()
-    })
-
-    this.gameTimer.addListener(this.gameTimerListener)    
+    this.gameTimer.addListener(this.gameTimerListener)
     this.menuOptionCreator.gameTimer = this.gameTimer
 
     this.gameTimer.callListeners()
 
-    this.gameOver = new GameOver({
-      timer : this.gameTimer
+    this.gameEvents = new GameEvents({
+      timer: this.gameTimer
     })
   }
 
   initializeModel (mapWidth, mapHeight, tileWidth, tileHeight) {
-    this.tileTypes = TileTypes()
-    this.structureTypes = StructureTypes()
-
     this.map = new Map({
       gridSizeX: mapWidth,
       gridSizeY: mapHeight,
@@ -148,7 +141,17 @@ export default class GameState {
     this.player = new Player()
     this.city = new City({ name: 'mTechville' })
 
-    this.menuOptionCreator = new MenuOptionCreator({ structureTypes: this.structureTypes, player: this.player })
+    this.gameTimer = new Timer({
+      interval: config.gameTimerInterval,
+      currentTime: this.currentTime()
+    })
+
+    this.structureFactory = new StructureFactory({
+      gameTimer: this.gameTimer,
+      player: this.player
+    })
+
+    this.menuOptionCreator = new MenuOptionCreator({ player: this.player, structureFactory: this.structureFactory })
   }
 
   /**
@@ -156,8 +159,8 @@ export default class GameState {
    */
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
-    if (this.gameOver.isItOver()) {
-      // game over
+    if (this.gameEvents.isGameOver()) {
+      this.state.state.start('GameOver', true, false, this.player.points, this.city.population)
     } else {
       this.gameTimer.update(this.currentTime())
     }

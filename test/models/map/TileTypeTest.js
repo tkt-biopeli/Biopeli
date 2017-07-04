@@ -1,4 +1,4 @@
-const assert = require('assert')
+/*const assert = require('assert')
 import tileTypeCreator from '../../../src/models/map/TileType'
 
 describe('TileType test', () => {
@@ -20,3 +20,4 @@ describe('TileType test', () => {
     assert(water.asset == 'water')
   })
 })
+*/

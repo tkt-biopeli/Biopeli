@@ -30,7 +30,7 @@ export default class MenuController {
     sections.push([
       new TextComponent('City: ' + this.city.name, config.menuFontSize),
       new TextComponent('Population: ' + this.city.population, config.menuFontSize),
-      new TextComponent('Demand: ' + this.city.demand, config.menuFontSize)
+      new TextComponent('Demand: ' + this.city.turnipDemand.customers(), config.menuFontSize)
     ])
 
     if(this.selectedTile == null){

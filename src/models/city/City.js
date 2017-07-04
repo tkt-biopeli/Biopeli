@@ -13,8 +13,8 @@ export default class City {
   }
 
   buyTurnips (supply) {
-    let fulfilledAndEarnings = this.turnipDemand.calculate(supply)
-    return fulfilledAndEarnings
+    this.fulfilledAndEarnings = this.turnipDemand.calculate(supply)
+    return this.fulfilledAndEarnings
   }
 
   increasePopulation (amount) {

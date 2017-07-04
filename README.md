@@ -14,9 +14,23 @@ Pelimaailma on jaettu ruutuihin, joihin pelaaja voi rakentaa erilaisia tuotantol
 https://tkt-biopeli.github.io/Biopeli/
 
 ### Dokumentaatio
-
-https://docs.google.com/spreadsheets/d/1jGGEMFrbdNQ7DfI0Ranoajh7EyWghUSOJsJR0W0MmUg/edit?usp=sharing
+Product Backlog, Definition of Done, Sprinttien burndown-käyrät ja tuntikirjanpito [Google Docsissa](https://docs.google.com/spreadsheets/d/1jGGEMFrbdNQ7DfI0Ranoajh7EyWghUSOJsJR0W0MmUg/edit?usp=sharing).
 
 ### Asennusohjeet
+Pelin ajaminen paikallisesti:
+- asenna [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), jos se ei ole jo asennettuna
+- asenna [Node.js](https://nodejs.org/en/download/package-manager/), jos se ei ole jo asennettuna
+- kloonaa repositorio koneellesi: `git clone git@github.com:tkt-biopeli/Biopeli.git`
+- hae projektiin liittyvät moduulit ajamalla kloonin hakemistossa komento: `npm install`
+- käynnistä paikallinen palvelin komennolla: `npm run dev`
+
+Pelin pitäisi nyt näkyä selaimellasi; mikäli näin ei käy, kirjoita selaimeesi osoite: http://localhost:3002/ .
 
 ### Käyttöohjeet
+TBA
+
+### Tekijätiimi
+Hossein Bahmanpour, Ilja Häkkinen, Jarkko Karttunen, Jon-Erik Klint, Ilkka Koskinen, Miia Rämö
+
+### Lisenssi
+[MIT](https://opensource.org/licenses/MIT)

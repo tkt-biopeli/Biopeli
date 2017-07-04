@@ -3,9 +3,10 @@ import TextComponent from './components/TextComponent'
 import AnimatedBarComponent from './components/AnimatedBarComponent'
 
 export default class TopBarController{
-  constructor({menuView, player}){
+  constructor({menuView, player, city}){
     this.menuView = menuView
     this.player = player
+    this.city = city
   }
 
   redraw (timeEvent) {
@@ -20,7 +21,7 @@ export default class TopBarController{
           assetWidth: 64,
           assetHeight: 64
         }),
-        new TextComponent(timeEvent.toString(), 30)
+        new TextComponent(timeEvent.toString(), 20)
       ],
       [
         new IconComponent({
@@ -32,15 +33,23 @@ export default class TopBarController{
       ],
       [
         new IconComponent({
+          asset: 'cash',
+          assetHeight: 64,
+          assetWidth: 64
+        }),
+        new TextComponent(""+this.player.cash, 30)
+      ],
+      [
+        new IconComponent({
           asset: 'turnip',
           assetWidth: 64,
           assetHeight: 64
         }),
         new AnimatedBarComponent({
-          width: 180,
-          height: 60,
+          width: 100,
+          height: 40,
           horizontal: true,
-          percent: Math.random()
+          percent: this.city.fulfilledAndEarnings.percentage / 100
         })
       ]
     ]
