@@ -14,7 +14,9 @@ const checkStructureType = (structureType) => {
   return structureType === undefined ? {
     monthsToHarvest: new Set([]),
     harvestPoints: 0,
-    basePoints: 0
+    basePoints: 0,
+    continuousProduction: false,
+    turnipYield: 0
   } : structureType
 }
 
