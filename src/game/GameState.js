@@ -73,19 +73,6 @@ export default class GameState {
       ySpeed: config.cameraSpeed
     })
 
-    this.mapListener = new MapListener({
-      game: state,
-      map: this.map,
-      menuOptionCreator: this.menuOptionCreator,
-      menuController: this.menuController
-    })
-
-    this.inputHandler = new InputHandler({
-      game: state,
-      mapListener: this.mapListener,
-      cameraMover: this.cameraMover
-    })
-
     this.gameEvents = new GameEvents({
       gameState: this
     })
@@ -100,6 +87,19 @@ export default class GameState {
       menuView: this.menuView,
       city: this.city,
       gameEvents: this.gameEvents
+    })
+
+    this.mapListener = new MapListener({
+      game: state,
+      map: this.map,
+      menuOptionCreator: this.menuOptionCreator,
+      menuController: this.menuController
+    })
+
+    this.inputHandler = new InputHandler({
+      game: state,
+      mapListener: this.mapListener,
+      cameraMover: this.cameraMover
     })
 
     this.mapView = new MapView({
