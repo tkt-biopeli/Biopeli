@@ -47,12 +47,13 @@ export default class Timer {
       this.callTime++
       this.callListeners()
       this.lastTime = currentTime
+
     }
   }
 
   /**
    * Helper method for calling all of the listeners
-   */
+   */ 
   callListeners () {
     this.currentTime = this.createTimeEvent()
 

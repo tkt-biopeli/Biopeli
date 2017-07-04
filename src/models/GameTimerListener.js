@@ -17,8 +17,11 @@ export default class GameTimerListener {
     for (let structure of this.player.structures) {
       produced += structure.produce(timerEvent)
     }
-    this.player.addPoints(produced) // Replace with desired functionality
+    //this.player.countPoints(produced) // Replace with desired functionality  
+
     let transaction = this.city.buyTurnips(produced)
+    var fulfilledPct = transaction.percentage
+    this.player.countPoints(fulfilledPct)
     this.player.cash += transaction.earnings
 
     this.topBarController.redraw(timerEvent)
