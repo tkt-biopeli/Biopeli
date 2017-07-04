@@ -9,7 +9,7 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  init (cityName) { 
+  init (cityName) {
     this.cityName = cityName
   }
 

@@ -1,5 +1,5 @@
 import AbstractMenu from './AbstractMenu'
-import CityNameGenerator from '../models/misc/CityNameGenerator'
+import CityNameGenerator from '../models/namegeneration/CityNameGenerator'
 
 /**
  * Screen displayed when the game is started
