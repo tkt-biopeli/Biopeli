@@ -23,6 +23,7 @@ export default class GameAdvancer {
     this.game = new GameStub({ width: config.gameWidth, height: config.gameHeight })
 
     this.gameState = new GameState({
+      cityName: 'testVille',
       state: this.game,
       mapWidth: this.mapWidth,
       mapHeight: this.mapHeight,
