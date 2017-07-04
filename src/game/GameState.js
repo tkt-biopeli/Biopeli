@@ -160,6 +160,6 @@ export default class GameState {
   }
 
   currentTime () {
-    return Date.now() 
+    return Date.now()
   }
 }

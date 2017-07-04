@@ -4,64 +4,97 @@ import GameTimerListener from '../../src/models/GameTimerListener'
 import TimeEvent from '../../src/view/TimeEvent'
 
 describe('Game timer listener tests', () => {
-  it('Constructor works', () => {
-    var l = new GameTimerListener({ player: 0, menuController: 2, city: 3, topBarController: 4, gameEvents: 5 })
+  var gtListener, player, menuController, topBarController, city, gameEvents
+  var isGameOverSpy, tbcRedrawSpy, mcRedrawSpy, countPointsSpy
+  
+  beforeEach(() => {
+    isGameOverSpy = sinon.spy()
+    tbcRedrawSpy = sinon.spy()
+    mcRedrawSpy = sinon.spy()
+    countPointsSpy = sinon.spy()
 
-    assert.equal(0, l.player)
-    assert.equal(2, l.menuController)
-    assert.equal(3, l.city)
-    assert.equal(4, l.topBarController)
-    assert.equal(5, l.gameEvents)
-  })
-
-  it('onTimer calls all necessary functions', () => {
-    var player = {
-      addPoints: function (p) { },
-      structures: [
-        { produce: sinon.spy(), produceSeason: sinon.spy() },
-        { produce: sinon.spy(), produceSeason: sinon.spy() }
-      ],
+    menuController = {
+      redraw: mcRedrawSpy
+    }
+    
+    topBarController = {
+      redraw: tbcRedrawSpy
+    }
+    
+    gameEvents = {
+      isGameOver: isGameOverSpy
     }
 
-    var menuController = {
-      redraw: sinon.spy()
+    player = {
+      structures: 74,
+      cash: 788,
+      countPoints: countPointsSpy
     }
 
-    var city = {
-      buyTurnips: sinon.stub()
-    }
-    city.buyTurnips.withArgs().returns({
-      earnings: 50,
-      percentage: 50
-    })
-
-    var topBarController = {
-      redraw: sinon.spy()
+    city = {
+      buyTurnips: {}
     }
 
-    var gameEvents = {
-      isGameOver: sinon.stub()
-    }
-
-    var l = new GameTimerListener({
+    gtListener = new GameTimerListener({
       player: player,
       menuController: menuController,
       city: city,
       topBarController: topBarController,
       gameEvents: gameEvents
     })
+  })
 
-    var event = new TimeEvent(1)
-    l.onTimer(event)
+  it('Constructor works', () => {
+    assert.equal(player, gtListener.player)
+    assert.equal(menuController, gtListener.menuController)
+    assert.equal(city, gtListener.city)
+    assert.equal(topBarController, gtListener.topBarController)
+    assert.equal(gameEvents, gtListener.gameEvents)
+  })
 
-    assert.equal(1, player.structures[0].produce.callCount)
-    assert.equal(1, player.structures[1].produce.callCount)
-    assert.equal(1, menuController.redraw.callCount)
-    assert.equal(1, topBarController.redraw.callCount)
-    assert.equal(1, gameEvents.isGameOver.callCount)
-    assert(player.structures[0].produce.calledWith(event))
-    assert(player.structures[1].produce.calledWith(event))
-    assert(menuController.redraw.calledWith(event))
-    assert(topBarController.redraw.calledWith(event))
+  it('onTimer works correctly', () => {
+    var timerEvent = { year: 2 }
+    var countProdStub = sinon.stub()
+    countProdStub.withArgs(74, timerEvent).returns(37)
+    var doTransactionSpy = sinon.spy()
+    var redrawControllersSpy = sinon.spy()
+    
+    gtListener.countProductionFromStructures = countProdStub
+    gtListener.doTransaction = doTransactionSpy
+    gtListener.redrawControllers = redrawControllersSpy
+    gtListener.onTimer(timerEvent)
+    
+    assert(doTransactionSpy.calledWith(37))
+    assert(redrawControllersSpy.calledWith(timerEvent))
+    assert(isGameOverSpy.calledWith(2))
+  })
+
+  it('countProductionFromStructures works correctly', () => {
+    var timerEvent = 4
+    var str = { produce: function (timerEvent) {return 3 + timerEvent}}
+    var structures = [str, str, str]
+    
+    var result = gtListener.countProductionFromStructures(structures, timerEvent)
+    assert.equal(21, result)
+  })
+
+  it('doTransaction works correctly', () => {
+    var mockTransaction = {
+      percentage: 6,
+      earnings: 8
+    }
+    var buyTurnipsStub = sinon.stub()
+    buyTurnipsStub.withArgs(53).returns(mockTransaction)
+    city.buyTurnips = buyTurnipsStub
+
+    gtListener.doTransaction(53)
+    assert(countPointsSpy.calledWith(6))
+    assert.equal(796, player.cash)
+  })
+
+  it('redrawControllers works correctly', () => {
+    gtListener.redrawControllers(63)
+    assert(mcRedrawSpy.calledWith(63))
+    assert(tbcRedrawSpy.calledWith(63))
   })
 })
