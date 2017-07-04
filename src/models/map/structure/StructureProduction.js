@@ -1,36 +1,46 @@
-const createSeasonFn = (monthsToHarvest, harvestPoints) => {
+/**
+ * Yields turnips during the harvesting period (month.week).
+ */
+const createPeriodicProductionFn = (harvestingWeeks, turnipYield) => {
   return (timeEvent) => {
-    return monthsToHarvest.has(timeEvent.month) ? harvestPoints : 0
+    return harvestingWeeks.has(timeEvent.month + '.' + timeEvent.week)
+      ? turnipYield
+      : 0
   }
 }
 
-const createConstFn = (basePoints) => {
+/**
+ * Yields the same amount of turnips per week.
+ */
+const createContinuousProductionFn = (turnipYield) => {
   return () => {
-    return basePoints
+    return turnipYield
   }
 }
 
+/**
+ * If the structure type is undefined, create a new one.
+ */
 const checkStructureType = (structureType) => {
-  return structureType === undefined ? {
-    monthsToHarvest: new Set([]),
-    harvestPoints: 0,
-    basePoints: 0,
-    continuousProduction: false,
-    turnipYield: 0
-  } : structureType
+  return structureType === undefined
+    ? {
+      harvestingWeeks: new Set(),
+      continuousProduction: false,
+      turnipYield: 0
+    }
+    : structureType
 }
 
+/**
+ * Returns either a function that yields turnips weekly or one that
+ * yields only during harvesting months, depending on the structure type.
+ */
 const createProductionFn = (structureType) => {
   var sType = checkStructureType(structureType)
-  var seasonFn = createSeasonFn(sType.monthsToHarvest, sType.harvestPoints)
-  var constFn = createConstFn(sType.basePoints)
 
-  return (timeEvent) => {
-    var produced = 0
-    produced += seasonFn(timeEvent)
-    produced += constFn()
-    return produced
-  }
+  return sType.continuousProduction
+    ? createContinuousProductionFn(sType.turnipYield)
+    : createPeriodicProductionFn(sType.harvestingWeeks, sType.turnipYield)
 }
 
 export default { createProductionFn }

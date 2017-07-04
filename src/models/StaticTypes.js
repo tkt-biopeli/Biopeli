@@ -1,28 +1,25 @@
+/**
+ * Harvesting week format 'month.week'.
+ */
 const structureTypes = {
   farm: {
     name: 'farm',
     asset: 'farm',
-    monthsToHarvest: new Set([8]),
-    harvestPoints: 100,
-    basePoints: 2,
+    harvestingWeeks: new Set(['8.1']),
     continuousProduction: false,
     turnipYield: 200
   },
   dairy_farm: {
     name: 'dairy farm',
     asset: 'dairy_farm',
-    monthsToHarvest: new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]),
-    harvestPoints: 10,
-    basePoints: 2,
+    harvestingWeeks: new Set(),
     continuousProduction: true,
     turnipYield: 12
   },
   berry_farm: {
     name: 'berry farm',
     asset: 'berry_farm',
-    monthsToHarvest: new Set([8, 9]),
-    harvestPoints: 70,
-    basePoints: 3,
+    harvestingWeeks: new Set(),
     continuousProduction: true,
     turnipYield: 10
   }

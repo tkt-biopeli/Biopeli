@@ -6,7 +6,7 @@ describe('Structure tests', () => {
 
   var structure, tile, stype, produceFnSpy, timeEvent
 
-  before(function () {
+  beforeEach(() => {
     produceFnSpy = sinon.spy()
 
     timeEvent = {
@@ -16,6 +16,7 @@ describe('Structure tests', () => {
     }
       
     stype = {
+      continuousProduction: false,
       asset: 'sd'
     }
 
@@ -39,6 +40,12 @@ describe('Structure tests', () => {
     assert.equal(1, structure.productionInput)
     assert.equal(1999, structure.foundingYear)
     assert.equal(produceFnSpy, structure.produceFn)
+  })
+
+  it('hasContinuousProduction returns correct value', () => {
+    assert.equal(false, structure.hasContinuousProduction())
+    stype.continuousProduction = true
+    assert.equal(true, structure.hasContinuousProduction())
   })
 
   it('asset function returns correct value', () => {

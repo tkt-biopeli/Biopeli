@@ -31,6 +31,14 @@ export default class Structure {
   }
 
   /**
+   * Returns true if the structure produces throughout the year and false if
+   * only during harvesting periods.
+   */
+  hasContinuousProduction () {
+    return this.structureType.continuousProduction
+  }
+
+  /**
    * Returns the asset of the structure type
    */
   asset () {
@@ -38,6 +46,7 @@ export default class Structure {
   }
 
   /**
+   * (Currently not in use)
    * Calculates and returns the value of the structure's production efficiency
    * ie. number of production units per period
    */
