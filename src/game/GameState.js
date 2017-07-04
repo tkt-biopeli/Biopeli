@@ -140,11 +140,11 @@ export default class GameState {
     if (this.gameOver.isItOver()) {
       // game over
     } else {
-      this.gameTimer.update(this.currentTime())
+      this.gameTimer.update(this.currentTime(), this.player)
     }
   }
 
   currentTime () {
-    return Date.now()
+    return Date.now() 
   }
 }

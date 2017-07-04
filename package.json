@@ -8,7 +8,7 @@
     "dev": "webpack",
     "deploy": "webpack --config webpack.production.config.js",
     "test": "eslint \"src/**/*.js\"; nyc mocha --timeout=3000 --require babel-register \"test/**/*.js\"",
-     "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "license": "MIT",
   "devDependencies": {
@@ -34,7 +34,7 @@
     "nyc": "^11.0.2",
     "qunit": "^1.0.0",
     "sinon": "^2.3.0",
-    "webpack": "^2.5.1"
+    "webpack": "^2.6.1"
   },
   "dependencies": {
     "phaser-ce": "^2.7.9",

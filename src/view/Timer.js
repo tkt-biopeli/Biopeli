@@ -42,17 +42,22 @@ export default class Timer {
    *
    * @param {number} currentTime
    */
-  update (currentTime) {
+  update (currentTime, player) {
     if (currentTime - this.lastTime >= this.interval) {
       this.callTime++
-      this.callListeners()
+      this.callListeners(player)
+
+      if (this.currentTime.month == 1 && this.currentTime.week == 1) {
+        player.countAndAddPoints()
+      }
       this.lastTime = currentTime
+
     }
   }
 
   /**
    * Helper method for calling all of the listeners
-   */
+   */ 
   callListeners () {
     this.currentTime = this.createTimeEvent()
 

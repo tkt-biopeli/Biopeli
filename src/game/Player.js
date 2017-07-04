@@ -35,4 +35,11 @@ export default class {
   removeStructure (structure) {
     this.structures.delete(structure)
   }
+  /**
+   * Players points are increased
+   */
+  countAndAddPoints () {
+    // this.stuructures tsekataan
+    this.addPoints(10)
+  }
 }
