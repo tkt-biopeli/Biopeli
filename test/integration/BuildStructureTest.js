@@ -19,7 +19,7 @@ describe('Integration test: Building structures', () => {
     gameAdvancer.setTile(0, 0, 'grass')
     gameAdvancer.click(0, 0)
 
-    gameAdvancer.clickNthButton(3)
+    gameAdvancer.clickNthButton(4)
     gameStateChecker.checkSelectedTile()
     gameStateChecker.checkTilesInformation(0, 0, 'grass', 'berry farm')
   })

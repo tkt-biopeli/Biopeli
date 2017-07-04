@@ -1,5 +1,5 @@
 export default class StaticLayout {
-  constructor({ menuRect, vertical, linePadding }) {
+  constructor ({ menuRect, vertical, linePadding }) {
     this.menuRect = menuRect
 
     if (vertical) {
@@ -25,9 +25,9 @@ export default class StaticLayout {
     this.addComponentPadding(component)
     return coordinates
   }
-  
-  addComponentPadding(component){
-    if(this.vertical) this.currentLocation += component.height
+
+  addComponentPadding (component) {
+    if (this.vertical) this.currentLocation += component.height
     else this.currentLocation += component.width
   }
 
@@ -36,7 +36,7 @@ export default class StaticLayout {
   }
 
   afterSection () {
-    this.currentSection ++
+    this.currentSection++
     this.currentLocation = this.linePadding
   }
 
@@ -54,7 +54,7 @@ export default class StaticLayout {
       }
     }
 
-    if (component.type == 'text') {
+    if (component.type === 'text') {
       if (this.vertical) {
         coords.x = this.menuRect.x + this.perpendicularSize / 2
       } else {

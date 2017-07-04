@@ -10,7 +10,6 @@ export default class AnimatedBar {
     this.duration = 250
     this.group = group
     this.percent = percent
-
     this.draw()
   }
 
@@ -20,21 +19,17 @@ export default class AnimatedBar {
     bitmapBg.ctx.beginPath()
     bitmapBg.ctx.rect(0, 0, this.width, this.height)
     bitmapBg.ctx.fill()
-
     this.background = this.group.create(this.x, this.y, bitmapBg, null, this.group)
-
     var percentageSize = this.getPercentageSize()
-
     let bitmapBar = this.game.add.bitmapData(this.width, this.height)
     bitmapBar.ctx.fillStyle = this.colors.bar
     bitmapBar.ctx.beginPath()
     bitmapBar.ctx.rect(0, 0, percentageSize.width, percentageSize.height)
     bitmapBar.ctx.fill()
-
     this.bar = this.group.create(this.x, this.y, bitmapBar, null, this.group)
   }
 
-  getPercentageSize(){
+  getPercentageSize () {
     if (this.vertical) {
       return {
         width: this.width,
@@ -50,15 +45,14 @@ export default class AnimatedBar {
 
   /**
    * Animate bar fill to new value
-   *
    * @param {number} value - Percentage value between [0, 100]
    * @memberof AnimatedBar
    */
   setPercentage (value) {
-    if(this.vertical){
+    if (this.vertical) {
       let inPixels = value * this.width / 100
       this.game.add.tween(this.bar).to({ width: inPixels }, this.duration, 'Linear', true)
-    }else{
+    } else {
       let inPixels = value * this.height / 100
       this.game.add.tween(this.bar).to({ height: inPixels }, this.duration, 'Linear', true)
     }

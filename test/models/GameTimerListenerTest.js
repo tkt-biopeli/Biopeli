@@ -48,7 +48,7 @@ describe('Game timer listener tests', () => {
       menuController: menuController,
       city: city,
       topBarController: topBarController,
-      gameEvents: gameEvents 
+      gameEvents: gameEvents
     })
 
     var event = new TimeEvent(1)

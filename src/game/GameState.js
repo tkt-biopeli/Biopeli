@@ -1,25 +1,22 @@
 import config from '../config'
-
 import Map from '../models/map/Map'
 import Player from './Player'
 import City from '../models/city/City'
 import StructureFactory from '../models/map/structure/StructureFactory'
 import GameEvents from './GameEvents'
-
 import MapView from '../view/map/MapView'
 import MenuView from '../view/menu/MenuView'
 import CameraMover from '../view/CameraMover'
 import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
 import Timer from '../view/Timer'
-
 import GameTimerListener from '../models/GameTimerListener'
 import MenuOptionCreator from '../controllers/actioncreation/MenuOptionCreator'
-
 import TopBarController from '../controllers/TopBarController'
 import MenuController from '../controllers/MenuController'
 import StackingLayout from '../view/menu/layouts/StackingLayout'
 import StaticLayout from '../view/menu/layouts/StaticLayout'
+
 /**
  * Description goes here
  */
@@ -70,6 +67,16 @@ export default class GameState {
       background: null
     })
 
+    this.cameraMover = new CameraMover({
+      game: state,
+      xSpeed: config.cameraSpeed,
+      ySpeed: config.cameraSpeed
+    })
+
+    this.gameEvents = new GameEvents({
+      gameState: this
+    })
+
     this.topBarController = new TopBarController({
       menuView: this.topBarView,
       player: this.player,
@@ -78,21 +85,8 @@ export default class GameState {
 
     this.menuController = new MenuController({
       menuView: this.menuView,
-      city: this.city
-    })
-
-    this.mapView = new MapView({
-      game: state,
-      map: this.map,
-      menu: this.menuController,
-      viewWidthPx: state.game.width - menuWidth,
-      viewHeightPx: state.game.height
-    })
-    
-    this.cameraMover = new CameraMover({ 
-      game: state, 
-      xSpeed: config.cameraSpeed, 
-      ySpeed: config.cameraSpeed 
+      city: this.city,
+      gameEvents: this.gameEvents
     })
 
     this.mapListener = new MapListener({
@@ -108,9 +102,12 @@ export default class GameState {
       cameraMover: this.cameraMover
     })
 
-    this.gameEvents = new GameEvents({
-      timer: this.gameTimer,
-      game: this.state
+    this.mapView = new MapView({
+      game: state,
+      map: this.map,
+      menu: this.menuController,
+      viewWidthPx: state.game.width - menuWidth,
+      viewHeightPx: state.game.height
     })
 
     this.gameTimerListener = new GameTimerListener({

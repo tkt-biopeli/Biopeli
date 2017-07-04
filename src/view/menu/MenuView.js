@@ -7,21 +7,16 @@ import Icon from './menuitems/Icon'
  * Controls drawing of game's menu
  */
 export default class MenuView {
-  
   constructor ({ game, layout, background }) {
     this.game = game
-
     this.layout = layout
-
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
     this.game.world.bringToTop(this.menuViewGroup)
-    
     this.activeButtons = []
     this.activeTexts = []
     this.activeBars = []
     this.activeIcons = []
-
     this.createBackground(background)
   }
 
@@ -31,15 +26,10 @@ export default class MenuView {
     this.activeTexts = []
     this.activeBars = []
     this.activeIcons = []
-
     this.layout.init(sections)
     this.createMenuComponents(sections)
-    //
-    //
     this.game.world.bringToTop(this.background)
     this.game.world.bringToTop(this.menuViewGroup)
-    //
-    //
   }
 
   /**
@@ -48,18 +38,14 @@ export default class MenuView {
   createBackground (backgroundAsset) {
     var menuRect = this.layout.menuRect
 
-    if(backgroundAsset != null){
+    if (backgroundAsset != null) {
       this.background = this.game.add.sprite(menuRect.x, menuRect.y, backgroundAsset)
       this.background.fixedToCamera = true
       this.game.world.moveDown(this.background)
-    }else{
+    } else {
       this.background = this.game.make.graphics()
       this.background.beginFill(0x000000, 0.25)
-      //
-      //
-      this.background.drawRoundedRect(menuRect.x, menuRect.y, menuRect.width, menuRect.height, 1)            
-      //
-      //
+      this.background.drawRoundedRect(menuRect.x, menuRect.y, menuRect.width, menuRect.height, 1)
       this.background.endFill()
       this.background.fixedToCamera = true
       this.game.add.existing(this.background)
@@ -68,17 +54,16 @@ export default class MenuView {
   }
 
   createMenuComponents (sections) {
-    for(let i = 0 ; i < sections.length ; i++){
+    for (let i = 0; i < sections.length; i++) {
       this.createSection(sections[i])
-
-      if(i != sections.length -1){
+      if (i !== sections.length - 1) {
         this.layout.afterSection()
       }
     }
   }
 
   createSection (components) {
-    for (let i = 0 ; i < components.length ; i++) {
+    for (let i = 0; i < components.length; i++) {
       var component = components[i]
       switch (component.type) {
         case 'text': {
@@ -100,7 +85,7 @@ export default class MenuView {
         default: throw new Error('Invalid menu component type')
       }
 
-      if (i != components.length - 1) {
+      if (i !== components.length - 1) {
         this.layout.afterLine()
       }
     }
@@ -108,12 +93,10 @@ export default class MenuView {
 
   /**
    * Creates a button with given button action
-   *
    * @param {ButtonAction} buttonAction
    */
   createButton (buttonComponent) {
     var coords = this.layout.nextComponentLocation(buttonComponent)
-
     var button = new LabeledButton({
       game: this.game,
       viewGroup: this.menuViewGroup,
@@ -126,28 +109,25 @@ export default class MenuView {
       buttonWidth: buttonComponent.width,
       buttonHeight: buttonComponent.height
     })
-
     this.activeButtons.push(button)
   }
 
   /**
    * Creates a visible text with given text and font size
-   *
    * @param {*} text
    * @param {*} fontSize
-   *
    * @return { ??? }
    */
   createText (textComponent) {
     var coords = this.layout.nextComponentLocation(textComponent)
-
     var anchor
-    if(this.layout.vertical){
+
+    if (this.layout.vertical) {
       anchor = {
         x: 0.5,
         y: 0
       }
-    }else{
+    } else {
       anchor = {
         x: 0,
         y: 0.5

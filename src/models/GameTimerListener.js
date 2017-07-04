@@ -1,7 +1,7 @@
 export default class GameTimerListener {
   constructor ({ city, player, menuController, topBarController, gameEvents }) {
     this.city = city
-    this.player = player 
+    this.player = player
     this.menuController = menuController
     this.topBarController = topBarController
     this.gameEvents = gameEvents
@@ -25,6 +25,6 @@ export default class GameTimerListener {
     this.menuController.redraw(timerEvent)
 
     // is game over?
-    this.gameEvents.isGameOver()
+    this.gameEvents.isGameOver(timerEvent.year)
   }
 }
