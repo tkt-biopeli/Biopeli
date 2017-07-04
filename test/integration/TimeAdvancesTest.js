@@ -42,4 +42,10 @@ describe('Integration test: Time advances, shows in top bar', () => {
     gameAdvancer.updateSeveralTimes(40, 1000)
     gameStateChecker.checkTime('1980 / 11 / 1')
   })
+
+  /*
+  it('Game ends when time runs out', () => {
+    gameAdvancer.updateSeveralTimes(2400, 1000)
+  })
+  */
 })

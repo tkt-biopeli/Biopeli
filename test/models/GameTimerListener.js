@@ -5,27 +5,30 @@ import TimeEvent from '../../src/view/TimeEvent'
 
 describe('Game timer listener tests', () => {
   it('Constructor works', () => {
-    var l = new GameTimerListener({ player: 0, menuView: 2, city: 3, topBarController: 4 })
+    var l = new GameTimerListener({ player: 0, menuView: 2, city: 3, topBarController: 4, gameEvents: 5 })
 
     assert.equal(0, l.player)
     assert.equal(2, l.menuView)
     assert.equal(3, l.city)
     assert.equal(4, l.topBarController)
+    assert.equal(5, l.gameEvents)
   })
 
   it('onTimer calls all necessary functions', () => {
     var player = {
-      addPoints: function (p) {},
+      addPoints: function (p) { },
       structures: [
-        {produce: sinon.spy(), produceSeason: sinon.spy()}, 
-        {produce: sinon.spy(), produceSeason: sinon.spy()}
+        { produce: sinon.spy(), produceSeason: sinon.spy() },
+        { produce: sinon.spy(), produceSeason: sinon.spy() }
       ],
     }
 
-    var menuView = { redraw: sinon.spy() }
+    var menuView = {
+      redraw: sinon.spy()
+    }
 
     var city = {
-     buyTurnips: sinon.stub()
+      buyTurnips: sinon.stub()
     }
     city.buyTurnips.withArgs().returns({
       earnings: 50,
@@ -33,10 +36,14 @@ describe('Game timer listener tests', () => {
     })
 
     var topBarController = {
-      update: sinon.spy() 
-    } 
+      update: sinon.spy()
+    }
 
-    var l = new GameTimerListener({ player: player, menuView: menuView, city: city, topBarController: topBarController })
+    var gameEvents = {
+      isGameOver: sinon.stub()
+    }
+
+    var l = new GameTimerListener({ player: player, menuView: menuView, city: city, topBarController: topBarController, gameEvents: gameEvents })
 
     l.onTimer(new TimeEvent(1))
 
@@ -44,5 +51,6 @@ describe('Game timer listener tests', () => {
     assert.equal(1, player.structures[1].produce.callCount)
     assert.equal(1, menuView.redraw.callCount)
     assert.equal(1, topBarController.update.callCount)
+    assert.equal(1, gameEvents.isGameOver.callCount)
   })
 })

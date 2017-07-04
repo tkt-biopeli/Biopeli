@@ -29,7 +29,7 @@ export default class GameState {
    * @param {Number} param.tileHeight - Tile height in pixels
    * @param {Number} param.menuWidth - Menu width in pixels
    */
-  constructor ({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
+  constructor({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
     this.state = state
 
     state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
@@ -37,7 +37,7 @@ export default class GameState {
     this.initializeModel(mapWidth, mapHeight, tileWidth, tileHeight)
 
     this.menuView = new MenuView({
-      game: state,
+      game: this.state,
       city: this.city,
       leftBorderCoordinate: state.camera.width - config.menuWidth,
       leftPadding: config.menuLeftPadding,
@@ -47,13 +47,13 @@ export default class GameState {
       linePadding: config.linePadding,
       fontSize: config.menuFontSize
     })
+
     this.menuView.redraw()
 
     this.menu = new Menu({
       menuView: this.menuView
     })
 
-    // map view
     this.mapView = new MapView({
       game: state,
       map: this.map,
@@ -94,16 +94,23 @@ export default class GameState {
       cameraMover: this.cameraMover
     })
 
-    this.gameTimerListener = new GameTimerListener({ city: this.city, player: this.player, menuView: this.menuView, topBarController: this.topBarControllerDemo })
+    this.gameEvents = new GameEvents({
+      timer: this.gameTimer,
+      game: this.state
+    })
+
+    this.gameTimerListener = new GameTimerListener({
+      city: this.city,
+      player: this.player,
+      menuView: this.menuView,
+      topBarController: this.topBarControllerDemo,
+      gameEvents: this.gameEvents
+    })
 
     this.gameTimer.addListener(this.gameTimerListener)
     this.menuOptionCreator.gameTimer = this.gameTimer
 
     this.gameTimer.callListeners()
-
-    this.gameEvents = new GameEvents({
-      timer: this.gameTimer
-    })
   }
 
   initializeModel (mapWidth, mapHeight, tileWidth, tileHeight) {
@@ -138,11 +145,7 @@ export default class GameState {
    */
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
-    if (this.gameEvents.isGameOver()) {
-      this.state.state.start('GameOver', true, false, this.player.points, this.city.population)
-    } else {
-      this.gameTimer.update(this.currentTime())
-    }
+    this.gameTimer.update(this.currentTime())
   }
 
   currentTime () {
