@@ -91,7 +91,7 @@ export default class MenuView {
     this.addLinePadding()
     this.createText('Population: ' + this.city.population)
     this.addLinePadding()
-    this.createText('Demand: ' + this.city.demand)
+    this.createText('Demand: ' + this.city.turnipDemand.customers())
     this.addLinePadding()
     this.addLinePadding()
 
