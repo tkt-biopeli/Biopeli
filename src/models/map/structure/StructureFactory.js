@@ -1,5 +1,6 @@
 import Structure from './Structure'
 import StructureProduction from './StructureProduction'
+import StructureNameGenerator from '../../misc/StructureNameGenerator'
 
 /**
  * Description goes here
@@ -13,9 +14,10 @@ export default class StructureFactory {
    * @param {ModelTile} param.tile
    * @param {GameTimer} param.gameTimer
    */
-  constructor ({gameTimer, player}) {
+  constructor ({ gameTimer, player }) {
     this.gameTimer = gameTimer
     this.player = player
+    this.namer = new StructureNameGenerator({})
   }
 
   /**
@@ -27,7 +29,7 @@ export default class StructureFactory {
   buildBuilding (tile, structureType) {
     tile.structure = new Structure({
       tile: tile,
-      name: 'joku nimi',
+      name: this.namer.createName(structureType),
       size: 10,
       structureType: structureType,
       foundingYear: this.gameTimer.currentTime.year,
