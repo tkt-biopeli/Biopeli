@@ -1,42 +1,10 @@
+import StructureNameParts from './StructureNameParts'
+
 export default class StructureNameGenerator {
   constructor () {
-    this.names = [
-      'Pekan',
-      'Jukan',
-      'Kallen',
-      'Piippolan',
-      'Vaarin',
-      'Kyöstin',
-      'Jaakon'
-    ]
-    this.frontAdjectives = [
-      'Juoppo',
-      'Iso',
-      'Pikku',
-      'Hullu',
-      'Sekopää',
-      'Rauhanmies',
-      'Piippu',
-      'Mustan',
-      'Pihi' 
-    ]
-    this.endAdjectives = [
-      'pieni',
-      'iso',
-      'suuri',
-      'kämänen',
-      'siisti',
-      'puhdas',
-      'laadukas',
-      'kurja',
-      'huonon onnen',
-      'pahan päivän',
-      'surkea',
-      'likainen',
-      'kallis',
-      'ylihinnoiteltu',
-      'luomu'
-    ]
+    this.frontAdjectives = StructureNameParts[1]
+    this.names = StructureNameParts[0]
+    this.endAdjectives = StructureNameParts[2]
   }
   createName (structureType) {
     var type = this.findType(structureType)
@@ -49,7 +17,7 @@ export default class StructureNameGenerator {
   findType(structureType) {
       var type = ''
       if (structureType == 'farm') {
-          type = 'farmi'
+          type = 'tila'
       }
       if (structureType == 'dairy farm') {
         type = 'navetta'
