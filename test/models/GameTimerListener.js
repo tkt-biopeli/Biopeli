@@ -16,6 +16,7 @@ describe('Game timer listener tests', () => {
   it('onTimer calls all necessary functions', () => {
     var player = {
       addPoints: function (p) {},
+      countPoints: function (p) {},
       structures: [
         {produce: sinon.spy(), produceSeason: sinon.spy()}, 
         {produce: sinon.spy(), produceSeason: sinon.spy()}

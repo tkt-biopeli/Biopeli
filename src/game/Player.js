@@ -38,8 +38,11 @@ export default class {
   /**
    * Players points are increased
    */
-  countAndAddPoints () {
-    // this.stuructures tsekataan
-    this.addPoints(10)
+  countPoints (fulfilledPct) {
+    if (fulfilledPct >= 100) {
+      this.addPoints(100)
+    } else {
+      this.addPoints(fulfilledPct)
+    }
   }
 }
