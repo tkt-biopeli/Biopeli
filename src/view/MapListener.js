@@ -41,7 +41,7 @@ export default class MapListener {
    * @return {boolean}
    */
   pointerInMapArea (pointerEvent) {
-    return (pointerEvent != undefined && pointerEvent.x <= this.menuController.menuView.layout.menuRect.x)
+    return (pointerEvent !== undefined && pointerEvent.x <= this.menuController.menuView.layout.menuRect.x)
   }
 
   /**
@@ -65,9 +65,9 @@ export default class MapListener {
    * @return {Boolean}
    */
   validTile (tile) {
-    if (typeof tile == 'undefined') {
+    if (typeof tile === 'undefined') {
       return false
-    } else if (tile == this.menuController.selectedTile) {
+    } else if (tile === this.menuController.selectedTile) {
       this.menuController.reset()
 
       return false

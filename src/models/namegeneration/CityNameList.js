@@ -144,7 +144,7 @@ export default [
   {name: 'Qingdao', point: 4},
   {name: 'Tianjin', point: 4},
   {name: 'Urumqi', point: 4},
-  
+
   {name: 'Chicago', point: 3},
   {name: 'Atlanta', point: 5},
   {name: 'Dallas', point: 3},
@@ -165,7 +165,7 @@ export default [
   {name: 'Fiji', point: 2},
   {name: 'Kiribati', point: 4},
   {name: 'Tonga', point: 3},
-  
+
   {name: 'Brasilia', point: 5},
   {name: 'Lima', point: 2},
   {name: 'Santiago', point: 3},
@@ -208,5 +208,4 @@ export default [
   {name: 'Springfield', point: 6},
   {name: 'Avalon', point: 3},
   {name: 'Tylypahka', point: 4}
-  
 ]

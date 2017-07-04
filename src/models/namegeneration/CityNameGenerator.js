@@ -4,9 +4,9 @@ export default class CityNameGenerator {
   generateName () {
     var first = this.getRandomId()
     var second = this.getRandomId()
-    if(second == first){
-      second ++
-      if(second == cityNames.length){
+    if (second === first) {
+      second++
+      if (second === cityNames.length) {
         second = 0
       }
     }
@@ -19,7 +19,7 @@ export default class CityNameGenerator {
   getStart (id) {
     var no = cityNames[id]
 
-    if(no.full != null){
+    if (no.full != null) {
       return no.name.slice(0, no.full)
     }
 
@@ -29,14 +29,14 @@ export default class CityNameGenerator {
   getEnd (id, first) {
     var no = cityNames[id]
 
-    if(cityNames[first].full != null){
+    if (cityNames[first].full != null) {
       return no.name
     }
 
     return no.name.slice(no.point)
   }
 
-  getRandomId(){
+  getRandomId () {
     var r = Math.random()
     return Math.floor(r * (cityNames.length))
   }

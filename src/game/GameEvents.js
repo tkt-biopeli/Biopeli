@@ -3,12 +3,12 @@ import config from '../config'
 /**
  * Game events class, finishes the game etc
  */
-export default class GameOver {
+export default class GameEvents {
   /**
   * Constructor
   * @param gameState gameState
   */
-  constructor({ gameState }) {
+  constructor ({ gameState }) {
     this.gameState = gameState
   }
 

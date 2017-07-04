@@ -27,6 +27,22 @@ export default class extends Phaser.State {
     this.game.world.width = this.game.width
     this.x = this.game.world.centerX
     this.y = this.game.world.height
+    this.bigFont = {
+      font: config.fontBig,
+      fill: config.fontFill,
+      fontWeight: config.fontWeightBold
+    }
+    this.smallFont = {
+      font: config.fontSmall,
+      fill: config.fontFill,
+      wordWrap: true,
+      wordWrapWidth: this.game.world.width * 0.8,
+      align: 'center'
+    }
+    this.normalFont = {
+      font: config.fontNormal,
+      fill: config.fontFill
+    }
   }
 
   /**
@@ -34,14 +50,17 @@ export default class extends Phaser.State {
    * @param {string} text - Title text
    */
   createTitle (text) {
-    var style = {
-      font: '64px Arial',
-      fill: '#ffff00',
-      fontWeight: 'bold'
-    }
-
-    this.title = this.game.add.text(this.x, this.y / 4, text, style)
+    this.title = this.game.add.text(this.x, this.y / 4, text, this.bigFont)
     this.title.anchor.set(0.5)
+  }
+
+/**
+ * Creates final score
+ * @param {string} text - score text
+ */
+  createScore (text) {
+    this.score = this.game.add.text(this.x, this.y / 4, text, this.normalFont)
+    this.score.anchor.set(0.5)
   }
 
   /**
@@ -49,15 +68,7 @@ export default class extends Phaser.State {
    * @param {string} text - Description that is displayed in the menu
    */
   createDescription (text) {
-    var style = {
-      font: '32px Arial',
-      fill: '#ffff00',
-      wordWrap: true,
-      wordWrapWidth: this.game.world.width * 0.8,
-      align: 'center'
-    }
-
-    this.description = this.game.add.text(this.x, this.y / 2, text, style)
+    this.description = this.game.add.text(this.x, this.y / 2, text, this.smallFont)
     this.description.anchor.set(0.5)
   }
 
@@ -67,11 +78,6 @@ export default class extends Phaser.State {
    * @param {function} call - Function that is called when pressed
    */
   createButton (text, call) {
-    var style = {
-      font: '32px Arial',
-      fill:'#ffff00'
-    }
-
     var button = this.game.add.button(
       this.x, (this.y * (2 / 3) + (this.buttons.length * 75)),
       'emptyButton',
@@ -84,7 +90,7 @@ export default class extends Phaser.State {
       this.x,
       (this.y * (2 / 3) + (this.buttons.length * 75)),
       text,
-      style
+      this.normalFont
     )
     buttonText.anchor.set(0.5)
 
