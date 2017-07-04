@@ -54,5 +54,12 @@ export default {
   // configurations for city
   cityInitialDemand: 100,
   cityInitialTurnips: 0,
-  cityInitialPopulation: 100
+  cityInitialPopulation: 100,
+
+  // fonts
+  fontBig: '64px Arial',
+  fontNormal: '32px Arial',
+  fontSmall: '16px Arial',
+  fontWeightBold: 'bold',
+  fontFill: '#ffff00'
 }
