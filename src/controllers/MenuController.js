@@ -56,7 +56,7 @@ export default class MenuController {
     if (tile.structure != null) {
       var structure = tile.structure
       sections.push([
-        new TextComponent('Name: ' + structure.name, config.menuFontSize),
+        new TextComponent('Name: ' + structure.name, 14),
         new TextComponent('Structure: ' + structure.structureType.name, config.menuFontSize),
         new TextComponent('Founding year: ' + structure.foundingYear, config.menuFontSize),
         new TextComponent('Size: ' + structure.size, config.menuFontSize),
