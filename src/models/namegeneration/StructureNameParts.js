@@ -9,7 +9,12 @@ export default [
     'Jaakon',
     'Matin',
     'Maijan',
-    'Matleenan'
+    'Matleenan',
+    'Mummon',
+    'Sallan',
+    'Reetan',
+    'Martan',
+    'Eevan'
   ],
   [
     'Juoppo',
@@ -29,7 +34,9 @@ export default [
     'Maanviljelijä',
     'Merimies',
     'Akateemikko',
-    'Pihi'
+    'Pihi',
+    'Läski',
+    'Laihan'
   ],
   [
     'pieni',
@@ -45,16 +52,19 @@ export default [
     'ikivihreä',
     'vanhahtava',
     'kurja',
-    'huonon onnen',
+    'huonon tuurin',
     'pahan päivän',
     'surkea',
     'likainen',
     'kallis',
     'ylihinnoiteltu',
-    'luomu',
+    'aromikas',
     'viheliäinen',
     'onnekas',
     'luksus',
-    'naurettava'
+    'naurettava',
+    'luomumainen',
+    'aito',
+    'feikki'
   ]
 ]
