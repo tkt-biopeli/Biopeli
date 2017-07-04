@@ -200,6 +200,7 @@ export default [
   {name: 'Shangri-la', point: 8, full: 7},
   {name: 'El Dorado', point: 3, full: 3},
 
+  {name: 'Asdistania', point: 3},
   {name: 'Agrabah', point: 2},
   {name: 'Megacity', point: 4},
   {name: 'Atlantis', point: 5},
