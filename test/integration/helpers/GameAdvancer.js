@@ -31,7 +31,7 @@ export default class GameAdvancer {
       menuWidth: config.menuWidth
     })
 
-    this.gamestateChecker = new GamestateChecker({ gameStub: this.game, gameState: this.gameState })
+    this.gamestateChecker = new GamestateChecker({gameStub: this.game, gameState: this.gameState, gameAdvancer: this})
 
     var cm = this.gameState.cameraMover
     this.cameraXSpeed = cm.x

@@ -1,4 +1,4 @@
-import Player from '../../src/game/Player.js';
+import Player from '../../src/game/Player';
 const assert = require("assert");
 
 describe('Player tests', function () {

@@ -2,7 +2,7 @@
 /**
  * Description goes here
  */
-export default class ButtonAction {
+export default class ButtonComponent {
   /**
    * Description goes here
    *
@@ -12,9 +12,14 @@ export default class ButtonAction {
    * @param {function} param.functionToCall
    * @param {???} param.context
    */
-  constructor ({ name, functionToCall, context }) {
+  constructor ({name, functionToCall, context, height, width, fontSize}) {
+    this.type = 'button'
     this.name = name
     this.function = functionToCall
     this.context = context
+
+    this.height = height
+    this.width = width
+    this.fontSize = fontSize
   }
 }

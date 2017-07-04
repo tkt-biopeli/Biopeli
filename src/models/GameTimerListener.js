@@ -1,8 +1,9 @@
 export default class GameTimerListener {
-  constructor ({ city, player, menuView, topBarController }) {
-    this.city = city
+  constructor ({city, player, menuController, topBarController}) {
     this.player = player
-    this.menuView = menuView
+    this.city = city
+    
+    this.menuController = menuController
     this.topBarController = topBarController
   }
 
@@ -19,13 +20,8 @@ export default class GameTimerListener {
     this.player.addPoints(produced) // Replace with desired functionality
     let transaction = this.city.buyTurnips(produced)
     this.player.cash += transaction.earnings
-    this.topBarController.update({
-      time: timerEvent.toString(),
-      score: this.player.points,
-      cash: this.player.cash,
-      fulfilledPct: transaction.percentage
-    })
 
-    this.menuView.redraw()
+    this.topBarController.redraw(timerEvent)
+    this.menuController.redraw(timerEvent)
   }
 }

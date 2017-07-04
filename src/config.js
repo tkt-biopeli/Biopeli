@@ -26,11 +26,8 @@ export default {
   menuButtonWidth: 189,
   menuButtonHeight: 66,
   menuTextStartingPoint: 0.5,
-  font: '16px Arial',
-  textColor: '#ffff00',
-  textAlignment: 'center',
   linePadding: 8,
-  sectionPadding: 12,
+  sectionPadding: 18,
   menuFontSize: 16,
 
   // configuration for top bar
