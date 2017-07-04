@@ -49,7 +49,8 @@ export default class MenuOptionCreator {
         functionToCall: () => { this.structureFactory.buildBuilding(tile, structureType) },
         context: this.structureFactory,
         height: config.menuButtonHeight,
-        width: config.menuButtonWidth
+        width: config.menuButtonWidth,
+        fontSize: config.menuFontSize
       }))
   }
 }

@@ -22,6 +22,10 @@ describe('StructureFactory tests', () => {
       gameTimer: gameTimer,
       player: player
     })
+
+    sbuilder.namer = {
+      createName: ()=>'joku nimi'
+    }
   })
 
   it('Constructor works', () => {

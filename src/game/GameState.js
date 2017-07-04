@@ -29,12 +29,12 @@ export default class GameState {
    * @param {Number} param.tileHeight - Tile height in pixels
    * @param {Number} param.menuWidth - Menu width in pixels
    */
-  constructor ({ state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
+  constructor ({ cityName, state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
     this.state = state
 
     state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
 
-    this.initializeModel(mapWidth, mapHeight, tileWidth, tileHeight)
+    this.initializeModel(cityName, mapWidth, mapHeight, tileWidth, tileHeight)
 
     this.menuView = new MenuView({
       game: this.state,
@@ -67,6 +67,16 @@ export default class GameState {
       background: null
     })
 
+    this.cameraMover = new CameraMover({
+      game: state,
+      xSpeed: config.cameraSpeed,
+      ySpeed: config.cameraSpeed
+    })
+
+    this.gameEvents = new GameEvents({
+      gameState: this
+    })
+
     this.topBarController = new TopBarController({
       menuView: this.topBarView,
       player: this.player,
@@ -75,21 +85,8 @@ export default class GameState {
 
     this.menuController = new MenuController({
       menuView: this.menuView,
-      city: this.city
-    })
-
-    this.mapView = new MapView({
-      game: state,
-      map: this.map,
-      menu: this.menuController,
-      viewWidthPx: state.game.width - menuWidth,
-      viewHeightPx: state.game.height
-    })
-
-    this.cameraMover = new CameraMover({
-      game: state,
-      xSpeed: config.cameraSpeed,
-      ySpeed: config.cameraSpeed
+      city: this.city,
+      gameEvents: this.gameEvents
     })
 
     this.mapListener = new MapListener({
@@ -105,9 +102,12 @@ export default class GameState {
       cameraMover: this.cameraMover
     })
 
-    this.gameEvents = new GameEvents({
-      timer: this.gameTimer,
-      game: this.state
+    this.mapView = new MapView({
+      game: state,
+      map: this.map,
+      menu: this.menuController,
+      viewWidthPx: state.game.width - menuWidth,
+      viewHeightPx: state.game.height
     })
 
     this.gameTimerListener = new GameTimerListener({
@@ -124,7 +124,7 @@ export default class GameState {
     this.gameTimer.callListeners()
   }
 
-  initializeModel (mapWidth, mapHeight, tileWidth, tileHeight) {
+  initializeModel (cityName, mapWidth, mapHeight, tileWidth, tileHeight) {
     this.map = new Map({
       gridSizeX: mapWidth,
       gridSizeY: mapHeight,
@@ -136,7 +136,7 @@ export default class GameState {
     this.map.createMapHalfForestHalfWater()
 
     this.player = new Player()
-    this.city = new City({ name: 'mTechville' })
+    this.city = new City({ name: cityName })
 
     this.gameTimer = new Timer({
       interval: config.gameTimerInterval,

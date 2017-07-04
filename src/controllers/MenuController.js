@@ -13,11 +13,12 @@ export default class MenuController {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor ({ menuView, city }) {
+  constructor ({ menuView, city, gameEvents }) {
     this.menuView = menuView
     this.city = city
     this.selectedTile = null
     this.buttonComponents = []
+    this.gameEvents = gameEvents
   }
 
   redraw () {
@@ -30,7 +31,15 @@ export default class MenuController {
     sections.push([
       new TextComponent('City: ' + this.city.name, config.menuFontSize),
       new TextComponent('Population: ' + this.city.population, config.menuFontSize),
-      new TextComponent('Demand: ' + this.city.turnipDemand.customers(), config.menuFontSize)
+      new TextComponent('Demand: ' + this.city.turnipDemand.customers(), config.menuFontSize),
+      new ButtonComponent({
+        name: 'Lopeta',
+        functionToCall: this.gameEvents.finishGame,
+        context: this.gameEvents,
+        height: config.menuButtonHeight,
+        width: config.menuButtonWidth,
+        fontSize: config.menuFontSize
+      })
     ])
 
     if (this.selectedTile == null) {
@@ -47,6 +56,7 @@ export default class MenuController {
     if (tile.structure != null) {
       var structure = tile.structure
       sections.push([
+        new TextComponent('"' + structure.name + '"', config.menuFontSize),
         new TextComponent('Structure: ' + structure.structureType.name, config.menuFontSize),
         new TextComponent('Founding year: ' + structure.foundingYear, config.menuFontSize),
         new TextComponent('Size: ' + structure.size, config.menuFontSize),
