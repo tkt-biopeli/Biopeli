@@ -30,4 +30,13 @@ describe('Player tests', function () {
     p.removeStructure(1)
     assert.equal(0, p.structures.size)
   })
+
+  it('Counting points works', () => {
+    p.countPoints(100)
+    assert.equal(100, p.points)
+    p.countPoints(101)
+    assert.equal(200, p.points)
+    p.countPoints(99)
+    assert.equal(299, p.points)
+  })
 })

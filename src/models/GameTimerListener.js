@@ -13,18 +13,31 @@ export default class GameTimerListener {
   * @param {TimeEvent} timerEvent
   */
   onTimer (timerEvent) {
-    var produced = 0
-    for (let structure of this.player.structures) {
-      produced += structure.produce(timerEvent)
-    }
-    this.player.addPoints(produced) // Replace with desired functionality
-    let transaction = this.city.buyTurnips(produced)
-    this.player.cash += transaction.earnings
+    var producedTurnips = this.countProductionFromStructures(this.player.structures, timerEvent)
+    this.doTransaction(producedTurnips)
 
-    this.topBarController.redraw(timerEvent)
-    this.menuController.redraw(timerEvent)
-
+    this.redrawControllers(timerEvent)
     // is game over?
     this.gameEvents.isGameOver(timerEvent.year)
+  }
+
+  countProductionFromStructures (structures, timerEvent) {
+    var produced = 0
+    for (let structure of structures) {
+      produced += structure.produce(timerEvent)
+    }
+    return produced
+  }
+
+  doTransaction (producedTurnips) {
+    let transaction = this.city.buyTurnips(producedTurnips)
+    var fulfilledPct = transaction.percentage
+    this.player.countPoints(fulfilledPct)
+    this.player.cash += transaction.earnings
+  }
+
+  redrawControllers (timerEvent) {
+    this.topBarController.redraw(timerEvent)
+    this.menuController.redraw(timerEvent)
   }
 }

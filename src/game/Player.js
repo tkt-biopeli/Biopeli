@@ -37,4 +37,14 @@ export default class {
   removeStructure (structure) {
     this.structures.delete(structure)
   }
+  /**
+   * Players points are increased
+   */
+  countPoints (fulfilledPct) {
+    if (fulfilledPct >= 100) {
+      this.addPoints(100)
+    } else {
+      this.addPoints(fulfilledPct)
+    }
+  }
 }
