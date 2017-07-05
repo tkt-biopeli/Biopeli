@@ -7,9 +7,11 @@ import Icon from './menuitems/Icon'
  * Component that draws menu with given component list and with wanted layout
  */
 export default class MenuView {
-  constructor ({ game, layout, background }) {
+  constructor ({ game, layout, background, backgroundInTheMiddle }) {
     this.game = game
     this.layout = layout
+    this.backgroundInTheMiddle = backgroundInTheMiddle
+
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
     this.game.world.bringToTop(this.menuViewGroup)
@@ -43,7 +45,13 @@ export default class MenuView {
     var menuRect = this.layout.menuRect
 
     if (backgroundAsset != null) {
-      this.background = this.game.add.sprite(menuRect.x, menuRect.y, backgroundAsset)
+      var x = menuRect.x
+      var y = menuRect.y
+      if(backgroundInTheMiddle){
+        var aHeight = this.game.cache.getImage(backgroundAsset).height
+        var aWidth = this.game.cache.getImage(backgroundAsset).width
+      }
+      this.background = this.game.add.sprite(x, y, backgroundAsset)
       this.background.fixedToCamera = true
       this.game.world.moveDown(this.background)
     } else {
@@ -148,6 +156,7 @@ export default class MenuView {
 
     var tex = new Text({
       game: this.game,
+      menuSize: this.layout.menuRect.width,
       viewGroup: this.menuViewGroup,
       text: textComponent.text,
       fontSize: textComponent.fontSize,

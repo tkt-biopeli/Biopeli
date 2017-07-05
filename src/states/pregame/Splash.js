@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import { centerGameObjects } from '../utils'
+import { centerGameObjects } from '../../utils'
 
 /**
  * Description goes here
@@ -37,6 +37,9 @@ export default class extends Phaser.State {
     this.load.image('score', 'assets/images/score.png')
     this.load.image('time', 'assets/images/time.png')
     this.load.image('cash', 'assets/images/cash.png')
+
+    this.load.image('gameover', 'assets/images/gameover.png')
+    this.load.image('start', 'assets/images/start.png')
   }
 
   /**
