@@ -1,19 +1,18 @@
-import StructureNameParts from './StructureNameParts'
-
 export default class StructureNameGenerator {
-  constructor () {
-    this.frontAdjectives = StructureNameParts[1]
-    this.names = StructureNameParts[0]
-    this.endAdjectives = StructureNameParts[2]
+  constructor ({frontAdjectives, names, endAdjectives}) {
+    this.frontAdjectives = frontAdjectives
+    this.names = names
+    this.endAdjectives = endAdjectives
   }
   createName (structureType) {
     var type = this.findType(structureType)
-    var name = Math.floor(Math.random() * this.names.length)
-    var frontAdj = Math.floor(Math.random() * this.frontAdjectives.length)
-    var endAdj = Math.floor(Math.random() * this.endAdjectives.length)
+    var name = this.getRandom(this.names.length)
+    var frontAdj = this.getRandom(this.frontAdjectives.length)
+    var endAdj = this.getRandom(this.endAdjectives.length)
     var fullName = this.frontAdjectives[frontAdj] + ' ' + this.names[name] + ' ' + this.endAdjectives[endAdj] + ' ' + type
     return fullName
   }
+
   findType (structureType) {
     var type = ''
     if (structureType === 'farm') {
@@ -26,5 +25,9 @@ export default class StructureNameGenerator {
       type = 'marjatila'
     }
     return type
+  }
+
+  getRandom (max) {
+    return Math.floor(Math.random() * max)
   }
 }

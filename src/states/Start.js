@@ -1,12 +1,13 @@
 import AbstractMenu from './AbstractMenu'
 import CityNameGenerator from '../models/namegeneration/CityNameGenerator'
+import CityNames from '../models/namegeneration/CityNameList'
 
 /**
  * Screen displayed when the game is started
  */
 export default class Start extends AbstractMenu {
   create () {
-    var cityName = new CityNameGenerator().generateName()
+    var cityName = new CityNameGenerator({cityNames: CityNames}).generateName()
     super.create()
     this.createBackgroundImage('start')
     this.createTitle('Biopeli')

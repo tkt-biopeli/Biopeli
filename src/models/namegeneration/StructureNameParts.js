@@ -1,22 +1,5 @@
 export default [
   [
-    'Pekan',
-    'Jukan',
-    'Kallen',
-    'Piippolan',
-    'Vaarin',
-    'Kyöstin',
-    'Jaakon',
-    'Matin',
-    'Maijan',
-    'Matleenan',
-    'Mummon',
-    'Sallan',
-    'Reetan',
-    'Martan',
-    'Eevan'
-  ],
-  [
     'Juoppo',
     'Iso',
     'Hobitti',
@@ -37,6 +20,23 @@ export default [
     'Pihi',
     'Läski',
     'Laihan'
+  ],
+  [
+    'Pekan',
+    'Jukan',
+    'Kallen',
+    'Piippolan',
+    'Vaarin',
+    'Kyöstin',
+    'Jaakon',
+    'Matin',
+    'Maijan',
+    'Matleenan',
+    'Mummon',
+    'Sallan',
+    'Reetan',
+    'Martan',
+    'Eevan'
   ],
   [
     'pieni',

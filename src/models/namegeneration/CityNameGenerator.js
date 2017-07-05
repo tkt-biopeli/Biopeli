@@ -1,12 +1,15 @@
-import cityNames from './CityNameList'
-
 export default class CityNameGenerator {
+  constructor ({cityNames}) {
+    this.cityNames = cityNames
+  }
+
   generateName () {
     var first = this.getRandomId()
     var second = this.getRandomId()
+
     if (second === first) {
       second++
-      if (second === cityNames.length) {
+      if (second === this.cityNames.length) {
         second = 0
       }
     }
@@ -17,7 +20,7 @@ export default class CityNameGenerator {
   }
 
   getStart (id) {
-    var no = cityNames[id]
+    var no = this.cityNames[id]
 
     if (no.full != null) {
       return no.name.slice(0, no.full)
@@ -27,9 +30,9 @@ export default class CityNameGenerator {
   }
 
   getEnd (id, first) {
-    var no = cityNames[id]
+    var no = this.cityNames[id]
 
-    if (cityNames[first].full != null) {
+    if (this.cityNames[first].full != null) {
       return no.name
     }
 
@@ -38,6 +41,6 @@ export default class CityNameGenerator {
 
   getRandomId () {
     var r = Math.random()
-    return Math.floor(r * (cityNames.length))
+    return Math.floor(r * (this.cityNames.length))
   }
 }

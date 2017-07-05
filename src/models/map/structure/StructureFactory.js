@@ -1,6 +1,7 @@
 import Structure from './Structure'
 import StructureProduction from './StructureProduction'
 import StructureNameGenerator from '../../namegeneration/StructureNameGenerator'
+import StructureNameParts from '../../namegeneration/StructureNameParts'
 
 /**
  * Description goes here
@@ -17,7 +18,11 @@ export default class StructureFactory {
   constructor ({ gameTimer, player }) {
     this.gameTimer = gameTimer
     this.player = player
-    this.namer = new StructureNameGenerator({})
+    this.namer = new StructureNameGenerator({
+      frontAdjectives: StructureNameParts[0],
+      names: StructureNameParts[1],
+      endAdjectives: StructureNameParts[2]
+    })
   }
 
   /**
