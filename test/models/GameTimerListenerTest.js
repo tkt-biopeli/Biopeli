@@ -66,7 +66,7 @@ describe('Game timer listener tests', () => {
     
     assert(doTransactionSpy.calledWith(37))
     assert(redrawControllersSpy.calledWith(timerEvent))
-    assert(isGameOverSpy.calledWith(2))
+    assert(isGameOverSpy.calledWith(timerEvent))
   })
 
   it('countProductionFromStructures works correctly', () => {
