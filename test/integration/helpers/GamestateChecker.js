@@ -166,4 +166,10 @@ export default class GamestateChecker {
     var text = this.gameState.topBarView.activeTexts[1].text.text
     assert.equal(score, text)
   }
+
+  checkGameEnded(has) {
+    var mockerCalls = this.gameStub.mockers.callCount('end')
+
+    assert(has == (mockerCalls > 0))
+  }
 }

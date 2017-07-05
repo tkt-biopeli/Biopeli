@@ -35,7 +35,8 @@ export default class extends Phaser.State {
       mapHeight: Math.ceil(this.game.height * config.mapHeightMultiplier / config.tileHeight),
       tileWidth: config.tileWidth,
       tileHeight: config.tileHeight,
-      menuWidth: config.menuWidth
+      menuWidth: config.menuWidth,
+      gameLength: config.gameLength
     })
   }
 

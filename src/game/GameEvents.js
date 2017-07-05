@@ -1,5 +1,3 @@
-import config from '../config'
-
 /**
  * Game events class, finishes the game etc
  */
@@ -8,15 +6,16 @@ export default class GameEvents {
   * Constructor
   * @param gameState gameState
   */
-  constructor ({ gameState }) {
+  constructor ({ gameState, gameLength }) {
     this.gameState = gameState
+    this.gameLength = gameLength
   }
 
   /**
    * Check if game is over
    */
-  isGameOver (year) {
-    if (year >= config.gameLength) {
+  isGameOver (timeEvent) {
+    if (timeEvent.serialNumber >= this.gameLength) {
       this.finishGame()
     }
   }

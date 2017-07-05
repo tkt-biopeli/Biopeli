@@ -25,6 +25,6 @@ export default class GameTimerListener {
     this.menuController.redraw(timerEvent)
 
     // is game over?
-    this.gameEvents.isGameOver(timerEvent.year)
+    this.gameEvents.isGameOver(timerEvent)
   }
 }
