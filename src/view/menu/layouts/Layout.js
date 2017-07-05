@@ -1,3 +1,6 @@
+/**
+ * Base class for layouts. Layouts handle how the items are placed in menu
+ */
 export default class Layout {
   constructor (menuRect, vertical) {
     this.menuRect = menuRect
@@ -15,12 +18,20 @@ export default class Layout {
     this.vertical = vertical
   }
 
+  /**
+   * Gives the location of the next element
+   * @param {*} component
+   */
   nextComponentLocation (component) {
     var coordinates = this.coordinates(component)
     this.addComponentPadding(component)
     return coordinates
   }
 
+  /**
+   * Calculates the locatino of next component
+   * @param {*} component
+   */
   coordinates (component) {
     var coords
     if (this.vertical) {
@@ -46,6 +57,10 @@ export default class Layout {
     return coords
   }
 
+  /**
+   * Gives the component's size that is parallel to the menu
+   * @param {*} component
+   */
   componentParallelSize (component) {
     if (this.vertical) {
       return component.height

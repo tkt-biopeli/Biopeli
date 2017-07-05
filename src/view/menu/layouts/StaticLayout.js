@@ -1,5 +1,8 @@
 import Layout from './Layout'
 
+/**
+ * Layout that places the sections balanced distance away from each other
+ */
 export default class StaticLayout extends Layout {
   constructor ({ menuRect, vertical, linePadding }) {
     super(menuRect, vertical)

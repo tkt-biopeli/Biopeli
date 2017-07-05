@@ -1,5 +1,8 @@
 import Layout from './Layout'
 
+/**
+ * Layout that stacks the elements from the start of the menu towards
+ */
 export default class StackingLayout extends Layout {
   constructor ({ menuRect, linePadding, sectionPadding, vertical }) {
     super(menuRect, vertical)
