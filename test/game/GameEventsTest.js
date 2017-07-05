@@ -5,7 +5,7 @@ import config from '../../src/config'
 
 describe('GameEvents tests', () => {
   var gameState, gEvents, startSpy
-  var gameLength = config.gameLength
+  var gameLength = 1
 
   beforeEach(() => {
     startSpy = sinon.spy()
@@ -24,7 +24,7 @@ describe('GameEvents tests', () => {
       }
     }
 
-    gEvents = new GameEvents({ gameState: gameState})
+    gEvents = new GameEvents({ gameState: gameState, gameLength: gameLength})
   })
 
   it('Constructor works', () => {
@@ -35,13 +35,13 @@ describe('GameEvents tests', () => {
     var finishSpy = sinon.spy()
     gEvents.finishGame = finishSpy
 
-    gEvents.isGameOver(gameLength)
+    gEvents.isGameOver({serialNumber: gameLength})
     assert.equal(1, finishSpy.callCount)
 
-    gEvents.isGameOver(gameLength - 1)
+    gEvents.isGameOver({serialNumber: gameLength - 1})
     assert.equal(1, finishSpy.callCount)
 
-    gEvents.isGameOver(gameLength + 1)
+    gEvents.isGameOver({serialNumber: gameLength + 1})
     assert.equal(2, finishSpy.callCount)
   })
 

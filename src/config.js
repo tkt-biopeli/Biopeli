@@ -10,7 +10,7 @@ export default {
   localStorageName: 'biopeli',
 
   // configuration for game length
-  gameLength: 1982,
+  gameLength: 300,
 
   // configurations for tiles
   tileWidth: 128,

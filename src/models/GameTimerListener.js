@@ -18,7 +18,7 @@ export default class GameTimerListener {
 
     this.redrawControllers(timerEvent)
     // is game over?
-    this.gameEvents.isGameOver(timerEvent.year)
+    this.gameEvents.isGameOver(timerEvent)
   }
 
   countProductionFromStructures (structures, timerEvent) {

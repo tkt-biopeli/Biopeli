@@ -16,7 +16,11 @@ export default class GameAdvancer {
   /**
    * Initializes integration testing game
    */
-  constructor() {
+  constructor(gameLength) {
+    if(gameLength == null){
+      gameLength = 1000
+    }
+
     this.mapWidth = 20
     this.mapHeight = 10
 
@@ -29,7 +33,8 @@ export default class GameAdvancer {
       mapHeight: this.mapHeight,
       tileWidth: config.tileWidth,
       tileHeight: config.tileHeight,
-      menuWidth: config.menuWidth
+      menuWidth: config.menuWidth,
+      gameLength: gameLength
     })
 
     this.gamestateChecker = new GamestateChecker({gameStub: this.game, gameState: this.gameState, gameAdvancer: this})

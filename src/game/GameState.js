@@ -29,7 +29,7 @@ export default class GameState {
    * @param {Number} param.tileHeight - Tile height in pixels
    * @param {Number} param.menuWidth - Menu width in pixels
    */
-  constructor ({ cityName, state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth }) {
+  constructor ({ cityName, state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth, gameLength }) {
     this.state = state
 
     state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
@@ -74,7 +74,8 @@ export default class GameState {
     })
 
     this.gameEvents = new GameEvents({
-      gameState: this
+      gameState: this,
+      gameLength: gameLength
     })
 
     this.topBarController = new TopBarController({
