@@ -4,7 +4,7 @@ import AnimatedBar from './menuitems/AnimatedBar'
 import Icon from './menuitems/Icon'
 
 /**
- * Controls drawing of game's menu
+ * Component that draws menu with given component list and with wanted layout
  */
 export default class MenuView {
   constructor ({ game, layout, background }) {
@@ -20,6 +20,10 @@ export default class MenuView {
     this.createBackground(background)
   }
 
+  /**
+   * Redraws the menu with given components
+   * @param {*} sections
+   */
   draw (sections) {
     this.menuViewGroup.removeAll(true, true)
     this.activeButtons = []
@@ -53,6 +57,10 @@ export default class MenuView {
     }
   }
 
+  /**
+   * Iterates through given sections
+   * @param {*} sections
+   */
   createMenuComponents (sections) {
     for (let i = 0; i < sections.length; i++) {
       this.createSection(sections[i])
@@ -62,6 +70,10 @@ export default class MenuView {
     }
   }
 
+  /**
+   * Iterates through given components in a section
+   * @param {*} components
+   */
   createSection (components) {
     for (let i = 0; i < components.length; i++) {
       var component = components[i]
@@ -147,6 +159,10 @@ export default class MenuView {
     this.activeTexts.push(tex)
   }
 
+  /**
+   * Creates a new animated bar to the menu
+   * @param {*} animatedBarComponent
+   */
   createAnimatedBar (animatedBarComponent) {
     var coords = this.layout.nextComponentLocation(animatedBarComponent)
 
@@ -164,6 +180,10 @@ export default class MenuView {
     this.activeBars.push(animatedBar)
   }
 
+  /**
+   * Creates new icon to the menu
+   * @param {*} iconComponent
+   */
   createIcon (iconComponent) {
     var coords = this.layout.nextComponentLocation(iconComponent)
 
