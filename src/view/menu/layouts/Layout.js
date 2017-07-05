@@ -1,5 +1,5 @@
 export default class Layout {
-  constructor(menuRect, vertical){
+  constructor (menuRect, vertical) {
     this.menuRect = menuRect
 
     if (vertical) {
@@ -21,11 +21,7 @@ export default class Layout {
     return coordinates
   }
 
-  addComponentPadding (component) {
-    this.currentLocation += this.componentParallelSize(component)
-  }
-
-  coordinates(component) {
+  coordinates (component) {
     var coords
     if (this.vertical) {
       coords = {
@@ -50,10 +46,10 @@ export default class Layout {
     return coords
   }
 
-  componentParallelSize(component){
-    if(this.vertical){
+  componentParallelSize (component) {
+    if (this.vertical) {
       return component.height
-    }else{
+    } else {
       return component.width
     }
   }

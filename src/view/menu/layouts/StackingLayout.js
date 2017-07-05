@@ -1,11 +1,15 @@
 import Layout from './Layout'
 
-export default class StackingLayout extends Layout{
+export default class StackingLayout extends Layout {
   constructor ({ menuRect, linePadding, sectionPadding, vertical }) {
     super(menuRect, vertical)
 
     this.linePadding = linePadding
     this.sectionPadding = sectionPadding
+  }
+
+  addComponentPadding (component) {
+    this.currentLocation += this.componentParallelSize(component)
   }
 
   init () {

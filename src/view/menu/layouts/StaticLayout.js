@@ -1,6 +1,6 @@
 import Layout from './Layout'
 
-export default class StaticLayout extends Layout{
+export default class StaticLayout extends Layout {
   constructor ({ menuRect, vertical, linePadding }) {
     super(menuRect, vertical)
 
@@ -11,6 +11,10 @@ export default class StaticLayout extends Layout{
     this.sectionAmount = components.length
     this.currentSection = 0
     this.currentLocation = this.linePadding
+  }
+
+  addComponentPadding (component) {
+    this.currentLocation += this.componentParallelSize(component)
   }
 
   afterLine () {
