@@ -1,14 +1,15 @@
-import AbstractMenu from './AbstractMenu'
+import Phaser from 'phaser'
+import MenuBuilder from '../controllers/MenuBuilder'
 
 /**
  * Game instructions
  */
-export default class extends AbstractMenu {
+export default class extends Phaser.State {
   create () {
-    this.initializeMenu('start', this.camera.height / 4)
-    this.createTitle('Ohjeet')
-    this.createDescription('Trycka på knappen')
-    this.createButton('knapp', () => { this.state.start('Start') })
-    this.finishMenu()
+    this.menu = new MenuBuilder(this, 'start', this.camera.height / 4)
+    this.menu.createTitle('Ohjeet')
+    this.menu.createDescription('Trycka på knappen')
+    this.menu.createButton('knapp', () => { this.state.start('Start') })
+    this.menu.finishMenu()
   }
 }

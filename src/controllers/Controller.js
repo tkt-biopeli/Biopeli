@@ -4,9 +4,10 @@ import AnimatedBarComponent from './components/AnimatedBarComponent'
 import IconComponent from './components/IconComponent'
 
 export default class Controller {
-  constructor (game, style) {
+  constructor (game, style, menuView) {
     this.game = game
     this.style = style
+    this.menuView = menuView
   }
 
   redraw (timeEvent) {
@@ -27,7 +28,7 @@ export default class Controller {
   }
 
   finish () {
-    return this.sections
+    this.menuView.draw(this.sections)
   }
 
   section () {

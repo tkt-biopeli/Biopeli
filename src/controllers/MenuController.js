@@ -13,8 +13,8 @@ export default class MenuController extends Controller {
    * @param {MenuView} param.menuView
    */
   constructor ({ game, style, menuView, city, gameEvents }) {
-    super(game, style)
-    this.menuView = menuView
+    super(game, style, menuView)
+
     this.city = city
     this.selectedTile = null
     this.buttonComponents = []

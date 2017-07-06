@@ -5,8 +5,8 @@ import Controller from './Controller'
  */
 export default class TopBarController extends Controller {
   constructor ({ game, style, menuView, player, city }) {
-    super(game, style)
-    this.menuView = menuView
+    super(game, style, menuView)
+
     this.player = player
     this.city = city
   }
