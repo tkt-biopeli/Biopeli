@@ -31,7 +31,8 @@ export default class MenuController {
     sections.push([
       new TextComponent('City: ' + this.city.name, config.menuFontSize),
       new TextComponent('Population: ' + this.city.population, config.menuFontSize),
-      new TextComponent('Demand: ' + this.city.turnipDemand.customers(), config.menuFontSize),
+      new TextComponent('Weekly demand: ' + this.city.weeklyTurnipDemand, config.menuFontSize),
+      new TextComponent('Yearly demand: ' + this.city.yearlyTurnipDemand, config.menuFontSize),
       new ButtonComponent({
         name: 'Lopeta',
         functionToCall: this.gameEvents.finishGame,
