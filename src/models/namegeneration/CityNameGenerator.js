@@ -5,8 +5,6 @@
 export default class CityNameGenerator {
 
   /**
-   * Creates the generator
-   * 
    * @param {Object[]} param.cityNames - list of names that the generator uses  
    */
   constructor ({cityNames}) {
