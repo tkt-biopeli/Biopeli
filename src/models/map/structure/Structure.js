@@ -20,8 +20,9 @@ export default class Structure {
    * @param {integer} foundingYear
    * @param {function} produceFn
    */
-  constructor ({ tile, name, size, structureType, foundingYear, produceFn }) {
+  constructor ({ tile, owner, name, size, structureType, foundingYear, produceFn }) {
     this.tile = tile
+    this.owner = owner
     this.name = name
     this.size = size
     this.structureType = structureType
