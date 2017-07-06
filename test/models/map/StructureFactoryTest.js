@@ -24,7 +24,8 @@ describe('StructureFactory tests', () => {
     })
 
     sbuilder.namer = {
-      createName: ()=>'joku nimi'
+      createBuildingName: ()=>'joku nimi',
+      createOwnerName: ()=>'nimi joku'
     }
   })
 

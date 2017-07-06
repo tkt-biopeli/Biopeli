@@ -12,7 +12,7 @@ export default class StackingLayout extends Layout {
   }
 
   addComponentPadding (component) {
-    this.currentLocation += this.componentParallelSize(component)
+    this.drawLocation += this.componentParallelSize(component)
   }
 
   init () {

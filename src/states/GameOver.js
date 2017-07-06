@@ -16,11 +16,11 @@ export default class GameOver extends AbstractMenu {
   }
 
   create () {
-    super.create()
+    this.initializeMenu('gameover', this.camera.height * 5 / 9)
     this.stage.backgroundColor = 0x000000
     this.createScore('Loppupisteesi: ' + this.points +
                      '\n' + 'Kaupungin koko: ' + this.population)
-    this.createBackgroundImage('gameover')
     this.createButton('Jatka', () => { this.state.start('Start') })
+    this.finishMenu()
   }
 }
