@@ -71,11 +71,11 @@ describe('Game timer listener tests', () => {
 
   it('countProductionFromStructures works correctly', () => {
     var timerEvent = 4
-    var str = { produce: function (timerEvent) {return 3 + timerEvent}}
+    var str = { produce: function (timerEvent) {return 3 + timerEvent}, structureType : {name: "not a farm"}}
     var structures = [str, str, str]
     
     var result = gtListener.countProductionFromStructures(structures, timerEvent)
-    assert.equal(21, result)
+    assert.equal(21, result.weekly)
   })
 
   it('doTransaction works correctly', () => {
