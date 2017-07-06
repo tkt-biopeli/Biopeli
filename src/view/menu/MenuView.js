@@ -47,9 +47,14 @@ export default class MenuView {
     if (backgroundAsset != null) {
       var x = menuRect.x
       var y = menuRect.y
-      if(backgroundInTheMiddle){
+      if(this.backgroundInTheMiddle){
         var aHeight = this.game.cache.getImage(backgroundAsset).height
         var aWidth = this.game.cache.getImage(backgroundAsset).width
+        var mHeight = menuRect.height
+        var mWidth = menuRect.width
+
+        y = y + (mHeight - aHeight) / 2
+        x = x + (mWidth - aWidth) / 2
       }
       this.background = this.game.add.sprite(x, y, backgroundAsset)
       this.background.fixedToCamera = true
