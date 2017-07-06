@@ -1,9 +1,6 @@
-import IconComponent from './components/IconComponent'
-import TextComponent from './components/TextComponent'
-import AnimatedBarComponent from './components/AnimatedBarComponent'
 import Controller from './Controller'
 
-export default class TopBarController extends Controller{
+export default class TopBarController extends Controller {
   constructor ({ game, menuView, player, city }) {
     super(game, 20)
     this.menuView = menuView

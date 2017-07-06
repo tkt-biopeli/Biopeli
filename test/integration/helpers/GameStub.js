@@ -144,6 +144,10 @@ export default class GameStub {
     this.state = {
       start: this.mockers.createOneValueMocker('end', 1)
     }
+
+    this.cache = {
+      getImage: () => ({width: 1, height: 1})
+    }
   }
 
   /**

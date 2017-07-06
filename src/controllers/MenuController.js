@@ -1,4 +1,3 @@
-import TextComponent from './components/TextComponent'
 import ButtonComponent from './components/ButtonComponent'
 import ResetDecorator from './helpers/ResetDecorator'
 import Controller from './Controller'
@@ -34,7 +33,7 @@ export default class MenuController extends Controller {
       return
     }
 
-    var tile = this.selectedTile  
+    var tile = this.selectedTile
 
     this.section()
     this.text('Ground type: ' + tile.tileType.name)
@@ -54,7 +53,7 @@ export default class MenuController extends Controller {
 
     this.section()
 
-    for(let button of this.buttonComponents){
+    for (let button of this.buttonComponents) {
       this.add(button)
     }
   }

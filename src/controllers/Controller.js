@@ -5,8 +5,7 @@ import IconComponent from './components/IconComponent'
 import config from '../config'
 
 export default class Controller {
-
-  constructor(game, fontSize){
+  constructor (game, fontSize) {
     this.game = game
     this.fontSize = fontSize
   }
@@ -60,7 +59,7 @@ export default class Controller {
         context: context,
         height: config.menuButtonHeight,
         width: config.menuButtonWidth,
-        fontSize: config.menuFontSize
+        fontSize: this.fontSize
       })
     )
   }
