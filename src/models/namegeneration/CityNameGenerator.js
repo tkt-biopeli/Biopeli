@@ -22,7 +22,7 @@ export default class CityNameGenerator {
   getStart (id) {
     var no = this.cityNames[id]
 
-    if (no.full != null) {
+    if (no.full !== undefined) {
       return no.name.slice(0, no.full)
     }
 
@@ -32,7 +32,7 @@ export default class CityNameGenerator {
   getEnd (id, first) {
     var no = this.cityNames[id]
 
-    if (this.cityNames[first].full != null) {
+    if (this.cityNames[first].full !== undefined) {
       return no.name
     }
 
