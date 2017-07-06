@@ -63,6 +63,9 @@ export default class Layout {
    */
   componentParallelSize (component) {
     if (this.vertical) {
+      if(component.type === 'text'){
+        return component.height * (Math.ceil(component.fontSize * component.text.length / this.menuRect.width * 11 / 16))
+      }
       return component.height
     } else {
       return component.width
