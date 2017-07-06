@@ -51,15 +51,13 @@ export default [
     'Reetan',
     'Martan',
     'Eevan',
-    'Vaarin',
-    'Mummon',
-    'Mummin',
-    'Sedän',
-    'Ukin',
-    'Papan',
-    'Enon',
-    'Jannun',
-    'Junnun'
+    'vaarin',
+    'mummon',
+    'mummin',
+    'sedän',
+    'ukin',
+    'papan',
+    'enon'
   ],
   [
     'pieni',

@@ -1,15 +1,25 @@
 export default class StructureNameGenerator {
-  constructor ({frontAdjectives, names, endAdjectives}) {
+  constructor({ frontAdjectives, names, endAdjectives }) {
     this.frontAdjectives = frontAdjectives
     this.names = names
     this.endAdjectives = endAdjectives
   }
   createName (structureType) {
-    var type = this.findType(structureType)
+    var front = this.getRandom(this.frontAdjectives.length)
     var name = this.getRandom(this.names.length)
-    var frontAdj = this.getRandom(this.frontAdjectives.length)
-    var endAdj = this.getRandom(this.endAdjectives.length)
-    var fullName = this.frontAdjectives[frontAdj] + ' ' + this.names[name] + ' ' + this.endAdjectives[endAdj] + ' ' + type
+    var end = this.getRandom(this.endAdjectives.length)
+    var type = this.findType(structureType)
+    var fullName
+    if (front.length + name.length + end.length + type.length < 30) {
+      fullName = this.frontAdjectives[front] + ' ' + this.names[name]
+        + ' ' + this.endAdjectives[end] + ' ' + type
+    } else {
+      if (Math.random() < 0.5) {
+        fullName = this.frontAdjectives[front] + ' ' + this.names[name] + ' ' + type
+      } else {
+        fullName = this.names[name] + ' ' + this.endAdjectives[end] + ' ' + type
+      }
+    } 
     return fullName
   }
 
