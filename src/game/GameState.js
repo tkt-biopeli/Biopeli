@@ -79,12 +79,14 @@ export default class GameState {
     })
 
     this.topBarController = new TopBarController({
+      game: this.state,
       menuView: this.topBarView,
       player: this.player,
       city: this.city
     })
 
     this.menuController = new MenuController({
+      game: this.state,
       menuView: this.menuView,
       city: this.city,
       gameEvents: this.gameEvents

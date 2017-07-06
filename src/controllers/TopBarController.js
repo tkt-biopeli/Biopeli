@@ -1,57 +1,26 @@
 import IconComponent from './components/IconComponent'
 import TextComponent from './components/TextComponent'
 import AnimatedBarComponent from './components/AnimatedBarComponent'
+import Controller from './Controller'
 
-export default class TopBarController {
-  constructor ({ menuView, player, city }) {
+export default class TopBarController extends Controller{
+  constructor ({ game, menuView, player, city }) {
+    super(game, 20)
     this.menuView = menuView
     this.player = player
     this.city = city
   }
 
-  redraw (timeEvent) {
-    this.menuView.draw(this.createSections(timeEvent))
-  }
-
   createSections (timeEvent) {
-    return [
-      [
-        new IconComponent({
-          asset: 'time',
-          assetWidth: 64,
-          assetHeight: 64
-        }),
-        new TextComponent(timeEvent.toString(), 20)
-      ],
-      [
-        new IconComponent({
-          asset: 'score',
-          assetWidth: 64,
-          assetHeight: 64
-        }),
-        new TextComponent('' + this.player.points, 30)
-      ],
-      [
-        new IconComponent({
-          asset: 'cash',
-          assetHeight: 64,
-          assetWidth: 64
-        }),
-        new TextComponent('' + this.player.cash, 30)
-      ],
-      [
-        new IconComponent({
-          asset: 'turnip',
-          assetWidth: 64,
-          assetHeight: 64
-        }),
-        new AnimatedBarComponent({
-          width: 100,
-          height: 40,
-          horizontal: true,
-          percent: this.city.fulfilledAndEarnings.percentage / 100
-        })
-      ]
-    ]
+    this.icon('time')
+    this.text(timeEvent.toString())
+
+    this.section()
+    this.icon('score')
+    this.text('' + this.player.points)
+
+    this.section()
+    this.icon('turnip')
+    this.animatedBar(100, 40, true, this.city.fulfilledAndEarnings.percentage)
   }
 }

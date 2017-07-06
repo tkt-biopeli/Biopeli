@@ -1,19 +1,21 @@
 import TextComponent from './components/TextComponent'
 import ButtonComponent from './components/ButtonComponent'
 import ResetDecorator from './helpers/ResetDecorator'
+import Controller from './Controller'
 import config from '../config'
 
 /**
  * Description goes here
  */
-export default class MenuController {
+export default class MenuController extends Controller {
   /**
    * Description goes here
    *
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor ({ menuView, city, gameEvents }) {
+  constructor ({ game, menuView, city, gameEvents }) {
+    super(game, config.menuFontSize)
     this.menuView = menuView
     this.city = city
     this.selectedTile = null
@@ -21,54 +23,40 @@ export default class MenuController {
     this.gameEvents = gameEvents
   }
 
-  redraw () {
-    this.menuView.draw(this.createSections())
-  }
-
   createSections () {
-    var sections = []
-
-    sections.push([
-      new TextComponent('City: ' + this.city.name, config.menuFontSize),
-      new TextComponent('Population: ' + this.city.population, config.menuFontSize),
-      new TextComponent('Weekly demand: ' + this.city.weeklyTurnipDemand, config.menuFontSize),
-      new TextComponent('Yearly demand: ' + this.city.yearlyTurnipDemand, config.menuFontSize),
-      new ButtonComponent({
-        name: 'Lopeta',
-        functionToCall: this.gameEvents.finishGame,
-        context: this.gameEvents,
-        height: config.menuButtonHeight,
-        width: config.menuButtonWidth,
-        fontSize: config.menuFontSize
-      })
-    ])
+    this.text('City: ' + this.city.name)
+    this.text('Population: ' + this.city.population)
+    this.text('Weekly demand: ' + this.city.weeklyTurnipDemand)
+    this.text('Yearly demand: ' + this.city.yearlyTurnipDemand)
+    this.button('Lopeta', this.gameEvents.finishGame, this.gameEvents)
 
     if (this.selectedTile == null) {
-      return sections
+      return
     }
 
-    var tile = this.selectedTile
+    var tile = this.selectedTile  
 
-    sections.push([
-      new TextComponent('Ground type: ' + tile.tileType.name, config.menuFontSize),
-      new TextComponent('X: ' + tile.x + ', Y: ' + tile.y, config.menuFontSize)
-    ])
+    this.section()
+    this.text('Ground type: ' + tile.tileType.name)
+    this.text('X: ' + tile.x + ', Y: ' + tile.y)
 
     if (tile.structure != null) {
       var structure = tile.structure
-      sections.push([
-        new TextComponent('"' + structure.name + '"', config.menuFontSize),
-        new TextComponent('Structure: ' + structure.structureType.name, config.menuFontSize),
-        new TextComponent('Founding year: ' + structure.foundingYear, config.menuFontSize),
-        new TextComponent('Size: ' + structure.size, config.menuFontSize),
-        new TextComponent('Production input: ' + structure.productionInput, config.menuFontSize),
-        new TextComponent('Production per time: ' + structure.calculateProductionEfficiency(), config.menuFontSize)
-      ])
+
+      this.section()
+      this.text('"' + structure.name + '"')
+      this.text('Structure: ' + structure.structureType.name)
+      this.text('Founding year: ' + structure.foundingYear)
+      this.text('Size: ' + structure.size)
+      this.text('Production input: ' + structure.productionInput)
+      this.text('Production per time: ' + structure.calculateProductionEfficiency())
     }
 
-    sections.push(this.buttonComponents)
+    this.section()
 
-    return sections
+    for(let button of this.buttonComponents){
+      this.add(button)
+    }
   }
 
   /**
@@ -80,6 +68,7 @@ export default class MenuController {
   chooseTile (tile, buttonComponents) {
     this.selectedTile = tile
     this.buttonComponents = buttonComponents
+
     this.decorateButtonComponents()
     this.redraw()
   }
