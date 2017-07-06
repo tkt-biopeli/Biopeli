@@ -10,7 +10,7 @@ import ButtonComponent from '../controllers/components/ButtonComponent'
  * Generic menu with title, description and buttons
  */
 export default class extends Phaser.State {
-  initializeMenu(backgroundAsset, startHeight){
+  initializeMenu (backgroundAsset, startHeight) {
     this.game.stage.backgroundColor = 0x6B8E23
 
     this.menu = new MenuView({

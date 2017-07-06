@@ -1,5 +1,5 @@
 export default class StructureNameGenerator {
-  constructor({ frontAdjectives, names, endAdjectives }) {
+  constructor ({ frontAdjectives, names, endAdjectives }) {
     this.frontAdjectives = frontAdjectives
     this.names = names
     this.endAdjectives = endAdjectives

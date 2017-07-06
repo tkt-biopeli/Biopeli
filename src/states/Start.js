@@ -1,9 +1,6 @@
 import AbstractMenu from './AbstractMenu'
-import MenuView from '../view/menu/MenuView'
 import CityNameGenerator from '../models/namegeneration/CityNameGenerator'
 import CityNames from '../models/namegeneration/CityNameList'
-import TextComponent from '../controllers/components/TextComponent'
-import config from '../config'
 
 /**
  * Screen displayed when the game is started

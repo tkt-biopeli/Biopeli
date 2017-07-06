@@ -47,7 +47,7 @@ export default class MenuView {
     if (backgroundAsset != null) {
       var x = menuRect.x
       var y = menuRect.y
-      if(this.backgroundInTheMiddle){
+      if (this.backgroundInTheMiddle) {
         var aHeight = this.game.cache.getImage(backgroundAsset).height
         var aWidth = this.game.cache.getImage(backgroundAsset).width
         var mHeight = menuRect.height
