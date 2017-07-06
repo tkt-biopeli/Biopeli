@@ -21,7 +21,8 @@ export default class StructureFactory {
     this.namer = new StructureNameGenerator({
       frontAdjectives: StructureNameParts[0],
       names: StructureNameParts[1],
-      endAdjectives: StructureNameParts[2]
+      endAdjectives: StructureNameParts[2],
+      hyperboles: StructureNameParts[3]
     })
   }
 
