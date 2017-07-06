@@ -1,16 +1,23 @@
 import Controller from './Controller'
 
+/**
+ * Controller for game's topbar
+ */
 export default class TopBarController extends Controller {
-  constructor ({ game, menuView, player, city }) {
-    super(game, 20)
+  constructor ({ game, style, menuView, player, city }) {
+    super(game, style)
     this.menuView = menuView
     this.player = player
     this.city = city
   }
 
+  /**
+   * Creates the blueprint of the topBar
+   * @param {*} timeEvent
+   */
   createSections (timeEvent) {
     this.icon('time')
-    this.text(timeEvent.toString())
+    this.text(timeEvent.toString(), 'small')
 
     this.section()
     this.icon('score')

@@ -16,6 +16,7 @@ import TopBarController from '../controllers/TopBarController'
 import MenuController from '../controllers/MenuController'
 import StackingLayout from '../view/menu/layouts/StackingLayout'
 import StaticLayout from '../view/menu/layouts/StaticLayout'
+import Style from '../view/menu/Style'
 
 /**
  * Description goes here
@@ -80,6 +81,10 @@ export default class GameState {
 
     this.topBarController = new TopBarController({
       game: this.state,
+      style: new Style({
+        smallFont: 20,
+        mediumFont: 30
+      }),
       menuView: this.topBarView,
       player: this.player,
       city: this.city
@@ -87,6 +92,11 @@ export default class GameState {
 
     this.menuController = new MenuController({
       game: this.state,
+      style: new Style({
+        mediumFont: 16,
+        buttonHeight: config.menuButtonHeight,
+        buttonWidth: config.menuButtonWidth
+      }),
       menuView: this.menuView,
       city: this.city,
       gameEvents: this.gameEvents

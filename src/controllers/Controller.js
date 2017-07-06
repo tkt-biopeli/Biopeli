@@ -2,12 +2,11 @@ import TextComponent from './components/TextComponent'
 import ButtonComponent from './components/ButtonComponent'
 import AnimatedBarComponent from './components/AnimatedBarComponent'
 import IconComponent from './components/IconComponent'
-import config from '../config'
 
 export default class Controller {
-  constructor (game, fontSize) {
+  constructor (game, style) {
     this.game = game
-    this.fontSize = fontSize
+    this.style = style
   }
 
   redraw (timeEvent) {
@@ -15,11 +14,19 @@ export default class Controller {
   }
 
   buildSections (timeEvent) {
-    this.sections = []
-    this.section()
+    this.initialize()
 
     this.createSections(timeEvent)
 
+    return this.sections
+  }
+
+  initialize () {
+    this.sections = []
+    this.section()
+  }
+
+  finish () {
     return this.sections
   }
 
@@ -38,8 +45,13 @@ export default class Controller {
     )
   }
 
-  text (text) {
-    this.currentSection.push(new TextComponent(text, this.fontSize))
+  text (text, size) {
+    var fontSize = this.style.mediumFont
+    if (size != null) {
+      fontSize = this.style[size + 'Font']
+    }
+
+    this.currentSection.push(new TextComponent(text, fontSize))
   }
 
   animatedBar (width, height, horizontal, percent) {
@@ -57,9 +69,9 @@ export default class Controller {
         name: name,
         functionToCall: functionToCall,
         context: context,
-        height: config.menuButtonHeight,
-        width: config.menuButtonWidth,
-        fontSize: this.fontSize
+        height: this.style.buttonHeight,
+        width: this.style.buttonWidth,
+        fontSize: this.style.mediumFont
       })
     )
   }

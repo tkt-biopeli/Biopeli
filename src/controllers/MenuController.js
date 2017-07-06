@@ -1,10 +1,9 @@
 import ButtonComponent from './components/ButtonComponent'
 import ResetDecorator from './helpers/ResetDecorator'
 import Controller from './Controller'
-import config from '../config'
 
 /**
- * Description goes here
+ * Controller of side menu of the game
  */
 export default class MenuController extends Controller {
   /**
@@ -13,8 +12,8 @@ export default class MenuController extends Controller {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor ({ game, menuView, city, gameEvents }) {
-    super(game, config.menuFontSize)
+  constructor ({ game, style, menuView, city, gameEvents }) {
+    super(game, style)
     this.menuView = menuView
     this.city = city
     this.selectedTile = null
@@ -22,6 +21,9 @@ export default class MenuController extends Controller {
     this.gameEvents = gameEvents
   }
 
+  /**
+   * Create blueprint of the menu's contents
+   */
   createSections () {
     this.text('City: ' + this.city.name)
     this.text('Population: ' + this.city.population)
@@ -59,10 +61,9 @@ export default class MenuController extends Controller {
   }
 
   /**
-   * Description goes here
-   *
-   * @param {ModelTile} tile
-   * @param { ??? } buttonActions
+   * Sets the chose tile of the menu
+   * @param {*} tile
+   * @param {*} buttonComponents
    */
   chooseTile (tile, buttonComponents) {
     this.selectedTile = tile
@@ -72,6 +73,9 @@ export default class MenuController extends Controller {
     this.redraw()
   }
 
+  /**
+   * Creates reset decorator for buttons
+   */
   decorateButtonComponents () {
     for (let i = 0; i < this.buttonComponents.length; i++) {
       var buttonComponent = this.buttonComponents[i]
@@ -91,7 +95,7 @@ export default class MenuController extends Controller {
   }
 
   /**
-   * Description goes here
+   * Unchooses the chosen tile
    */
   reset () {
     this.chooseTile(null, [])
