@@ -31,7 +31,8 @@ export default class MenuController {
     sections.push([
       new TextComponent('City: ' + this.city.name, config.menuFontSize),
       new TextComponent('Population: ' + this.city.population, config.menuFontSize),
-      new TextComponent('Demand: ' + this.city.turnipDemand.customers(), config.menuFontSize),
+      new TextComponent('Weekly demand: ' + this.city.weeklyTurnipDemand, config.menuFontSize),
+      new TextComponent('Yearly demand: ' + this.city.yearlyTurnipDemand, config.menuFontSize),
       new ButtonComponent({
         name: 'Lopeta',
         functionToCall: this.gameEvents.finishGame,
@@ -56,6 +57,7 @@ export default class MenuController {
     if (tile.structure != null) {
       var structure = tile.structure
       sections.push([
+        new TextComponent('"' + structure.owner + '"', config.menuFontSize),
         new TextComponent('"' + structure.name + '"', config.menuFontSize),
         new TextComponent('Structure: ' + structure.structureType.name, config.menuFontSize),
         new TextComponent('Founding year: ' + structure.foundingYear, config.menuFontSize),

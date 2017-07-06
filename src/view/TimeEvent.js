@@ -4,6 +4,7 @@ export default class TimeEvent {
     this.week = this.serialNumber % 4 + 1
     this.month = Math.floor(this.serialNumber / 4) % 12 + 1
     this.year = Math.floor(this.serialNumber / 48) + 1980
+    this.endOfYear = this.month === 12 && this.week === 4
   }
 
   toString () {

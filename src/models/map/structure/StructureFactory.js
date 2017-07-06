@@ -21,7 +21,8 @@ export default class StructureFactory {
     this.namer = new StructureNameGenerator({
       frontAdjectives: StructureNameParts[0],
       names: StructureNameParts[1],
-      endAdjectives: StructureNameParts[2]
+      endAdjectives: StructureNameParts[2],
+      hyperboles: StructureNameParts[3]
     })
   }
 
@@ -34,7 +35,8 @@ export default class StructureFactory {
   buildBuilding (tile, structureType) {
     tile.structure = new Structure({
       tile: tile,
-      name: this.namer.createName(structureType.name),
+      owner: this.namer.createOwnerName(),
+      name: this.namer.createBuildingName(structureType.name),
       size: 10,
       structureType: structureType,
       foundingYear: this.gameTimer.currentTime.year,
