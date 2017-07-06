@@ -45,6 +45,7 @@ export default class MenuController extends Controller {
       var structure = tile.structure
 
       this.section()
+      this.text('"' + structure.owner + '"')
       this.text('"' + structure.name + '"')
       this.text('Structure: ' + structure.structureType.name)
       this.text('Founding year: ' + structure.foundingYear)
