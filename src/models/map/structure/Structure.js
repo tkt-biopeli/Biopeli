@@ -53,7 +53,9 @@ export default class Structure {
    */
   calculateProductionEfficiency () {
     // production efficiency is based on the potential of the tile, and size and input of structure
-    var value = this.productionInput * this.size * this.tile.potential
+    // var value = this.productionInput * this.size * this.tile.potential
+    // Fixed turnipYield for now
+    var value = this.structureType.turnipYield
     return value
   }
 

@@ -17,7 +17,8 @@ describe('Structure tests', () => {
       
     stype = {
       continuousProduction: false,
-      asset: 'sd'
+      asset: 'sd',
+      turnipYield: 100
     }
 
     tile = { potential: 10 }
