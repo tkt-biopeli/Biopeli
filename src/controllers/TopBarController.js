@@ -24,6 +24,10 @@ export default class TopBarController extends Controller {
     this.text('' + this.player.points)
 
     this.section()
+    this.icon('cash')
+    this.text('' + this.player.cash)
+
+    this.section()
     this.icon('turnip')
     this.animatedBar(100, 40, true, this.city.fulfilledAndEarnings.percentage)
   }
