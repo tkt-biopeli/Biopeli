@@ -1,5 +1,7 @@
 import ModelTile from './ModelTile'
 import StaticTypes from '../StaticTypes'
+import {Noise} from 'noisejs'
+//var Noise = require('noisejs')
 
 /**
  * Description goes here
@@ -125,6 +127,39 @@ export default class Map {
             }
           }
         }
+      }
+    }
+  }
+
+  isGround (noise) {
+    if (noise >  0.85) return false
+    if (noise < -0.85) return false
+    if (noise <  0.05 && 
+        noise > -0.05) return false
+    return true
+  }
+
+  isForest (noise) {
+    return noise > 0.3 
+  }
+
+  createMapPerlin () {
+    var tileTypes = StaticTypes.tileTypes,
+        noiseForest = new Noise(Math.random()), 
+        noiseGround = new Noise(Math.random())
+
+    var x, y, type
+    for (x = 0; x < this.gridSizeX; x++) {
+      for (y = 0; y < this.gridSizeY; y++) {
+        var nx = x / this.gridSizeX - 0.5
+        var ny = y / this.gridSizeY - 0.5
+
+        if(this.isGround(noiseGround.perlin2(nx,ny))){
+          type = this.isForest(noiseForest.perlin2(nx,ny)) > 0 ? tileTypes.forest:tileTypes.grass
+        }else
+          type = tileTypes.water
+
+        this.addTileWithGridCoordinates(x,y,type)
       }
     }
   }

@@ -115,7 +115,7 @@ export default class GameState {
     })
 
     // fill map grid with sample data
-    this.map.createMapHalfForestHalfWater()
+    this.map.createMapPerlin()
 
     this.player = new Player()
     this.city = new City({ name: 'mTechville' })
