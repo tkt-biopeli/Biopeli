@@ -3,31 +3,51 @@ const sinon = require("sinon")
 import StructureProduction from '../../../src/models/map/structure/StructureProduction'
 
 describe('StructureProduction tests', () => {
-  var structureType
-  var timeEvent = {
-    month: 6
-  }
+  var structureType, timeEvent
+
+  beforeEach(() => {
+    timeEvent = {
+      month: 6,
+      week: 1
+    }
+
+    structureType = {
+      harvestingWeeks: new Set(['7.1', '8.3']),
+      continuousProduction: true,
+      turnipYield: 17
+    }  
+  })
 
   it('productionFn returns zero when structure type is undefined', () => {
-    var productionFn = StructureProduction.createProductionFn(structureType)
-    
+    var foo
+    var productionFn = StructureProduction.createProductionFn(foo)
+
     assert.equal(0, productionFn(timeEvent))
   })
 
-  it('productionFn works with valid structure type', () => {
-    structureType = {
-      monthsToHarvest: new Set([7, 8]),
-      harvestPoints: 56,
-      basePoints: 1
-    }
+  it('productionFn works with constantly-yielding structure type', () => {
     var productionFn = StructureProduction.createProductionFn(structureType)
-    
-    assert.equal(1, productionFn(timeEvent))
+
+    assert.equal(17, productionFn(timeEvent))
     timeEvent.month = 7
-    assert.equal(57, productionFn(timeEvent))
+    assert.equal(17, productionFn(timeEvent))
+    timeEvent.week = 3
+    assert.equal(17, productionFn(timeEvent))
+  })
+
+  it('productionFn works with periodically-yielding structure type', () => {
+    structureType.continuousProduction = false
+    var productionFn = StructureProduction.createProductionFn(structureType)
+
+    assert.equal(0, productionFn(timeEvent))
+    timeEvent.month = 7
+    assert.equal(17, productionFn(timeEvent))
+    timeEvent.week = 2
+    assert.equal(0, productionFn(timeEvent))
+    timeEvent.week = 1
     timeEvent.month = 8
-    assert.equal(57, productionFn(timeEvent))
-    timeEvent.month = 9
-    assert.equal(1, productionFn(timeEvent))
+    assert.equal(0, productionFn(timeEvent))
+    timeEvent.week = 3
+    assert.equal(17, productionFn(timeEvent))
   })
 })

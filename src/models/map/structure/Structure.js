@@ -20,14 +20,23 @@ export default class Structure {
    * @param {integer} foundingYear
    * @param {function} produceFn
    */
-  constructor ({ tile, name, size, structureType, foundingYear, produceFn }) {
+  constructor ({ tile, owner, name, size, structureType, foundingYear, produceFn }) {
     this.tile = tile
+    this.owner = owner
     this.name = name
     this.size = size
     this.structureType = structureType
     this.productionInput = 1
     this.foundingYear = foundingYear
     this.produceFn = produceFn
+  }
+
+  /**
+   * Returns true if the structure produces throughout the year and false if
+   * only during harvesting periods.
+   */
+  hasContinuousProduction () {
+    return this.structureType.continuousProduction
   }
 
   /**
@@ -38,12 +47,15 @@ export default class Structure {
   }
 
   /**
+   * (Currently not in use)
    * Calculates and returns the value of the structure's production efficiency
    * ie. number of production units per period
    */
   calculateProductionEfficiency () {
     // production efficiency is based on the potential of the tile, and size and input of structure
-    var value = this.productionInput * this.size * this.tile.potential
+    // var value = this.productionInput * this.size * this.tile.potential
+    // Fixed turnipYield for now
+    var value = this.structureType.turnipYield
     return value
   }
 

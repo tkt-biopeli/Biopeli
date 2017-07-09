@@ -1,9 +1,10 @@
-import AbstractMenu from './AbstractMenu'
+import Phaser from 'phaser'
+import MenuBuilder from '../controllers/MenuBuilder'
 
 /**
  * Game over screen
  */
-export default class GameOver extends AbstractMenu {
+export default class GameOver extends Phaser.State {
   /**
    * Here we can add to the parameters any data we want to
    * carry over to the game over screen
@@ -16,11 +17,12 @@ export default class GameOver extends AbstractMenu {
   }
 
   create () {
-    super.create()
+    this.menu = new MenuBuilder(this, 'gameover', this.camera.height * 5 / 9)
     this.stage.backgroundColor = 0x000000
-    this.createTitle('Loppupisteesi: ' + this.points +
+
+    this.menu.createScore('Loppupisteesi: ' + this.points +
                      '\n' + 'Kaupungin koko: ' + this.population)
-    this.createBackgroundImage('gameover')
-    this.createButton('Jatka', () => { this.state.start('Start') })
+    this.menu.createButton('Jatka', () => { this.state.start('Start') })
+    this.menu.finishMenu()
   }
 }

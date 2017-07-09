@@ -45,7 +45,6 @@ export default class GameStub {
 
       tween: function () { return { to: cameraFunction } },
 
-
       text: (x, y, text) => ({
         anchor: { set: () => { } },
         x: x,
@@ -134,6 +133,20 @@ export default class GameStub {
     this.game = {
       width: width,
       height: height
+    }
+
+    this.world = {
+      bringToTop: ()=>{},
+      moveDown: ()=>{},
+      setBounds: ()=>{}
+    }
+
+    this.state = {
+      start: this.mockers.createOneValueMocker('end', 1)
+    }
+
+    this.cache = {
+      getImage: () => ({width: 1, height: 1})
     }
   }
 

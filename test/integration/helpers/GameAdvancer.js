@@ -16,22 +16,28 @@ export default class GameAdvancer {
   /**
    * Initializes integration testing game
    */
-  constructor() {
+  constructor(gameLength) {
+    if(gameLength == null){
+      gameLength = 1000
+    }
+
     this.mapWidth = 20
     this.mapHeight = 10
 
     this.game = new GameStub({ width: config.gameWidth, height: config.gameHeight })
 
     this.gameState = new GameState({
+      cityName: 'testVille',
       state: this.game,
       mapWidth: this.mapWidth,
       mapHeight: this.mapHeight,
       tileWidth: config.tileWidth,
       tileHeight: config.tileHeight,
-      menuWidth: config.menuWidth
+      menuWidth: config.menuWidth,
+      gameLength: gameLength
     })
 
-    this.gamestateChecker = new GamestateChecker({ gameStub: this.game, gameState: this.gameState })
+    this.gamestateChecker = new GamestateChecker({gameStub: this.game, gameState: this.gameState, gameAdvancer: this})
 
     var cm = this.gameState.cameraMover
     this.cameraXSpeed = cm.x

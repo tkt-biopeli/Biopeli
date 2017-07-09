@@ -1,16 +1,16 @@
-import Player from '../../src/game/Player.js';
+import Player from '../../src/game/Player';
 const assert = require("assert");
 
 describe('Player tests', function () {
-  it('Player should have 0 points in the beginning', function () {
-    var p = new Player();
-    assert.equal(0, p.points);
-    assert.equal(0, p.structures.size)
-  })
-
   var p
+  
   beforeEach(() => {
     p = new Player()
+  })
+  
+  it('Player should have 0 points in the beginning', function () {
+    assert.equal(0, p.points)
+    assert.equal(0, p.structures.size)
   })
 
   it('Points are added correctly', function () {
@@ -29,5 +29,14 @@ describe('Player tests', function () {
     assert.equal(1, p.structures.size)
     p.removeStructure(1)
     assert.equal(0, p.structures.size)
+  })
+
+  it('Counting points works', () => {
+    p.countPoints(100)
+    assert.equal(100, p.points)
+    p.countPoints(101)
+    assert.equal(200, p.points)
+    p.countPoints(99)
+    assert.equal(299, p.points)
   })
 })

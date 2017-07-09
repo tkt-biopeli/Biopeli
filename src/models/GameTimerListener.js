@@ -1,9 +1,10 @@
 export default class GameTimerListener {
-  constructor ({ city, player, menuView, topBarController }) {
+  constructor ({ city, player, menuController, topBarController, gameEvents }) {
     this.city = city
     this.player = player
-    this.menuView = menuView
+    this.menuController = menuController
     this.topBarController = topBarController
+    this.gameEvents = gameEvents
   }
 
   /**
@@ -12,20 +13,37 @@ export default class GameTimerListener {
   * @param {TimeEvent} timerEvent
   */
   onTimer (timerEvent) {
-    var produced = 0
-    for (let structure of this.player.structures) {
-      produced += structure.produce(timerEvent)
-    }
-    this.player.addPoints(produced) // Replace with desired functionality
-    let transaction = this.city.buyTurnips(produced)
-    this.player.cash += transaction.earnings
-    this.topBarController.update({
-      time: timerEvent.toString(),
-      score: this.player.points,
-      cash: this.player.cash,
-      fulfilledPct: transaction.percentage
-    })
+    var producedTurnips = this.countProductionFromStructures(this.player.structures, timerEvent)
+    this.doTransaction(producedTurnips, timerEvent.endOfYear)
 
-    this.menuView.redraw()
+    this.redrawControllers(timerEvent)
+    // is game over?
+    this.gameEvents.isGameOver(timerEvent)
+  }
+
+  countProductionFromStructures (structures, timerEvent) {
+    var weekly = 0
+    var yearly = 0
+    for (let structure of structures) {
+      // dirty differentation of production types
+      if (structure.structureType.name !== 'farm') {
+        weekly += structure.produce(timerEvent)
+      } else {
+        yearly += structure.produce(timerEvent)
+      }
+    }
+    return { weekly, yearly }
+  }
+
+  doTransaction (producedTurnips, buyYearlyHarvest) {
+    let transaction = this.city.buyTurnips(producedTurnips, buyYearlyHarvest)
+    var fulfilledPct = transaction.percentage
+    this.player.countPoints(fulfilledPct)
+    this.player.cash += transaction.earnings
+  }
+
+  redrawControllers (timerEvent) {
+    this.topBarController.redraw(timerEvent)
+    this.menuController.redraw(timerEvent)
   }
 }

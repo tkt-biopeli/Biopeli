@@ -1,21 +1,26 @@
-import config from '../config'
-
 /**
  * Game events class, finishes the game etc
  */
-export default class GameOver {
+export default class GameEvents {
   /**
   * Constructor
-  * @param gameTimer {Timer} param.gameTimer - game timer
+  * @param gameState gameState
   */
-  constructor ({ timer }) {
-    this.gameTimer = timer
+  constructor ({ gameState, gameLength }) {
+    this.gameState = gameState
+    this.gameLength = gameLength
   }
 
   /**
    * Check if game is over
    */
-  isGameOver () {
-    return (this.gameTimer.createTimeEvent().year >= config.gameLength)
+  isGameOver (timeEvent) {
+    if (timeEvent.serialNumber >= this.gameLength) {
+      this.finishGame()
+    }
+  }
+
+  finishGame () {
+    this.gameState.state.state.start('GameOver', true, false, this.gameState.player.points, this.gameState.city.population)
   }
 }
