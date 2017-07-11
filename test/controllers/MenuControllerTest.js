@@ -28,7 +28,7 @@ describe('Menu controller tests', () =>{
         allowedStructures: [sType]
       }
     }
-    player = {}
+    player = {enoughCashFor: function() {return true}}
     structureFactory = {
       buildBuilding: buildSpy
     }

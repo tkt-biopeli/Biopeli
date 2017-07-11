@@ -21,7 +21,7 @@ export default class ButtonComponent {
     this.asset = asset
   }
 
-  deactivate() {
+  deactivate () {
     this.type = 'unusablebutton'
     this.asset = 'unusableButton'
     this.function = ''

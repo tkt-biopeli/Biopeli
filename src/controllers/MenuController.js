@@ -13,7 +13,7 @@ export default class MenuController extends Controller {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor({ game, style, player, structureFactory, menuView, city, gameEvents }) {
+  constructor ({ game, style, player, structureFactory, menuView, city, gameEvents }) {
     super(game, style, menuView)
 
     this.structureFactory = structureFactory
@@ -39,6 +39,7 @@ export default class MenuController extends Controller {
     }
 
     var tile = this.selectedTile
+    this.refreshAvailableButtons()
 
     this.section()
     this.text('Ground type: ' + tile.tileType.name)
@@ -64,6 +65,17 @@ export default class MenuController extends Controller {
     }
   }
 
+  refreshAvailableButtons () {
+    let prices = this.selectedTile.tileType.allowedStructures.map(
+      structureType => structureType.cost
+    )
+    let minprice = Math.min.apply(Math, prices)
+    if (this.player.enoughCashFor(minprice)) {
+      this.buttonComponents = this.getActions(this.selectedTile)
+      this.decorateButtonComponents()
+    }
+  }
+
   /**
    * Sets the chose tile of the menu
    * @param {*} tile
@@ -72,7 +84,7 @@ export default class MenuController extends Controller {
   chooseTile (tile) {
     this.selectedTile = tile
     this.buttonComponents = this.getActions(tile)
-    
+
     this.decorateButtonComponents()
     this.redraw()
   }
@@ -117,7 +129,7 @@ export default class MenuController extends Controller {
   decorateButtonComponents () {
     for (let i = 0; i < this.buttonComponents.length; i++) {
       var buttonComponent = this.buttonComponents[i]
-      if (buttonComponent.type != 'button') {
+      if (buttonComponent.type !== 'button') {
         continue
       }
       var resetDecorator = new ResetDecorator({

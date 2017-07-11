@@ -48,7 +48,7 @@ export default class {
     }
   }
 
-  enoughCashFor(cost) {
+  enoughCashFor (cost) {
     return this.cash >= cost
   }
 }
