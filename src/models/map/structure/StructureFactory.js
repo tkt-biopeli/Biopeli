@@ -33,6 +33,8 @@ export default class StructureFactory {
    * @param {StructureType} structureType
    */
   buildBuilding (tile, structureType) {
+    if(!this.checkMoney(structureType)) return
+
     tile.structure = new Structure({
       tile: tile,
       owner: this.namer.createOwnerName(),
@@ -43,6 +45,16 @@ export default class StructureFactory {
       produceFn: this.createProductionFn(structureType)
     })
     this.player.addStructure(tile.structure)
+  }
+
+  checkMoney (structureType) {
+    if(this.player.cash < structureType.cost){
+      return false
+    }
+
+    this.player.cash -= structureType.cost
+
+    return true
   }
 
   createProductionFn (structureType) {
