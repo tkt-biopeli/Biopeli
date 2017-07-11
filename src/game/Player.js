@@ -1,3 +1,4 @@
+import config from '../config'
 /**
  * Keeps track of the player's points
  */
@@ -7,7 +8,7 @@ export default class {
    */
   constructor () {
     this.points = 0
-    this.cash = 0
+    this.cash = config.playerInitialCash
     this.structures = new Set()
   }
 

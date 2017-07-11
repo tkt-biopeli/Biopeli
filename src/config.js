@@ -61,5 +61,8 @@ export default {
   fontNormal: '32px Arial',
   fontSmall: '16px Arial',
   fontWeightBold: 'bold',
-  fontFill: '#ffff00'
+  fontFill: '#ffff00',
+
+  // player
+  playerInitialCash: 20000
 }

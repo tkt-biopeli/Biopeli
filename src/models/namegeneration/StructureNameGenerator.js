@@ -50,8 +50,8 @@ export default class StructureNameGenerator {
    */
   findType (structureType) {
     var type = ''
-    if (structureType === 'farm') {
-      type = 'tila'
+    if (structureType === 'wheat farm') {
+      type = 'viljatila'
     }
     if (structureType === 'dairy farm') {
       type = 'navetta'
