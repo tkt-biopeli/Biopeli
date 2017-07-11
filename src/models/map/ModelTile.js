@@ -17,4 +17,9 @@ export default class {
     this.structure = structure
     this.flowers = type.flowers
   }
+
+  getRadius(n) {
+    var tiles = []
+    }
+  
 }
