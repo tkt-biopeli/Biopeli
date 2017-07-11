@@ -9,7 +9,8 @@ describe('Menu option creator tests', () => {
   beforeEach(() => {
     buildSpy = sinon.spy()    
     sType = {
-      name: 'navetta'
+      name: 'navetta',
+      cost: 100
     }
     
     tile = {
@@ -45,7 +46,7 @@ describe('Menu option creator tests', () => {
   
   it('buttonActionsForTile returns array of button actions', () => {
     var buttonActions = menuOptionCreator.buttonActionsForTile(tile)
-    assert.equal('navetta : undefined€', buttonActions[0].name)
+    assert.equal('navetta : 100€', buttonActions[0].name)
     buttonActions[0].function.call()
     assert(buildSpy.calledWith(tile, sType))
     assert.equal(structureFactory, buttonActions[0].context)

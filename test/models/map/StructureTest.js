@@ -18,29 +18,34 @@ describe('Structure tests', () => {
     stype = {
       continuousProduction: false,
       asset: 'sd',
-      turnipYield: 100
+      turnipYield: 100,
+      cost: 100
     }
 
     tile = { potential: 10 }
 
     structure = new Structure({
       tile: tile,
-      name: 'Riston rustholli',
+      owner: 'Risto',
+      name: 'Rustholli',
       size: 10,
       structureType: stype,
       foundingYear: 1999,
-      produceFn: produceFnSpy
+      produceFn: produceFnSpy,
+      cost: stype.cost
     })
   })
 
   it('Constructor works', () => {
     assert.equal(tile, structure.tile)
     assert.equal(stype, structure.structureType)
-    assert.equal('Riston rustholli', structure.name)
+    assert.equal('Risto', structure.owner)
+    assert.equal('Rustholli', structure.name)
     assert.equal(10, structure.size)
     assert.equal(1, structure.productionInput)
     assert.equal(1999, structure.foundingYear)
     assert.equal(produceFnSpy, structure.produceFn)
+    assert.equal(100, structure.cost)
   })
 
   it('hasContinuousProduction returns correct value', () => {
