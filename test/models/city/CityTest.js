@@ -49,9 +49,4 @@ describe('City tests', () => {
     // test here
   })
 
-  it('Buy turnips returns a valid number', () => {
-	  var ret = city.buyTurnips(10)
-    assert(typeof ret == 'number')
-    assert(ret != NaN)
-  })
 })
