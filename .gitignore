@@ -7,4 +7,3 @@ dist/
 tsDefs/
 nbproject/
 .nyc_output/
-package-lock.json
