@@ -35,7 +35,7 @@ describe('StructureFactory tests', () => {
   })
 
   it('Build building works', () => {
-    var tile = { structure: {} }
+    var tile = { structure: {}, flowers: 0 }
     var structureType = {}
     var createProductionFnSpy = sinon.spy()
     sbuilder.createProductionFn = createProductionFnSpy
@@ -45,7 +45,7 @@ describe('StructureFactory tests', () => {
     assert.equal(10, tile.structure.size)
     assert.equal(structureType, tile.structure.structureType)
     assert.equal(7, tile.structure.foundingYear)
-    assert(createProductionFnSpy.calledWith(structureType))
+    assert(createProductionFnSpy.calledWith(structureType, tile))
     assert(addStructureSpy.calledWith(tile.structure))
   })
 
@@ -61,10 +61,5 @@ describe('StructureFactory tests', () => {
 
     assert(!sbuilder.checkMoney(st))
     assert.equal(0, player.cash)
-  })
-  
-  it('createProductionFn works', () => {
-    var productionFn = sbuilder.createProductionFn({})
-    assert.equal('function', typeof productionFn)
   })
 })
