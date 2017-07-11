@@ -45,7 +45,7 @@ export default class MenuOptionCreator {
 
     return allowedStructures.map(
       structureType => new ButtonComponent({
-        name: structureType.name + ' : ' + structureType.cost +'€',
+        name: structureType.name + ' : ' + structureType.cost + '€',
         functionToCall: () => { this.structureFactory.buildBuilding(tile, structureType) },
         context: this.structureFactory,
         height: config.menuButtonHeight,

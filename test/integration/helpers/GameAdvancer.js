@@ -92,7 +92,6 @@ export default class GameAdvancer {
    */
   clickNthButton(n) {
     var button = this.gameState.menuView.activeButtons[n - 1]
-
     this.clickButton(button.x, button.y)
   }
 
@@ -106,7 +105,6 @@ export default class GameAdvancer {
     this.game.setPointer(x, y)
     this.clickButton(x, y)
     this.gameState.inputHandler.onPointerDown()
-
   }
 
   /**
@@ -200,22 +198,24 @@ export default class GameAdvancer {
     return this.gameState.map.addTileWithGridCoordinates(gridX, gridY, this.tileTypes[tileTypeName])
   }
 
-  setStructure(gridX, gridY, name, structureTypeName, size, foundingYear) {
+  setStructure(gridX, gridY, owner, name, structureTypeName, size, foundingYear, cost) {
     var tile = this.getTile(gridX, gridY)
     var structure = new Structure({
       tile: tile,
+      owner: owner,
       name: name,
       size: size,
       structureType: this.structureTypes[structureTypeName],
       foundingYear: foundingYear,
-      produceFn: StructureProduction.createProductionFn(structureTypeName)
+      produceFn: StructureProduction.createProductionFn(structureTypeName),
+      cost: cost
     })
 
     tile.structure = structure
   }
 
-  setTileWithStructure(gridX, gridY, tileTypeName, structureType, sname, ssize, sfoundingYear) {
+  setTileWithStructure(gridX, gridY, tileTypeName, structureType, sowner, sname, ssize, sfoundingYear, scost) {
     this.setTile(gridX, gridY, tileTypeName)
-    this.setStructure(gridX, gridY, sname, structureType, ssize, sfoundingYear)
+    this.setStructure(gridX, gridY, sowner, sname, structureType, ssize, sfoundingYear, scost)
   }
 }

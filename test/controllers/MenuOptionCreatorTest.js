@@ -7,8 +7,7 @@ describe('Menu option creator tests', () => {
   var menuOptionCreator, player, structureFactory, tile, sType, buildSpy
   
   beforeEach(() => {
-    buildSpy = sinon.spy()
-    
+    buildSpy = sinon.spy()    
     sType = {
       name: 'navetta'
     }
@@ -46,7 +45,7 @@ describe('Menu option creator tests', () => {
   
   it('buttonActionsForTile returns array of button actions', () => {
     var buttonActions = menuOptionCreator.buttonActionsForTile(tile)
-    assert.equal('Build a navetta', buttonActions[0].name)
+    assert.equal('navetta : undefined€', buttonActions[0].name)
     buttonActions[0].function.call()
     assert(buildSpy.calledWith(tile, sType))
     assert.equal(structureFactory, buttonActions[0].context)
