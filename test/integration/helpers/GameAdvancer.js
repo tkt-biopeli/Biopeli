@@ -22,7 +22,7 @@ export default class GameAdvancer {
     }
 
     this.mapWidth = 20
-    this.mapHeight = 10
+    this.mapHeight = 20
 
     this.game = new GameStub({ width: config.gameWidth, height: config.gameHeight })
 
