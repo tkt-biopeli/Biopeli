@@ -56,6 +56,9 @@ export default {
   cityInitialTurnips: 0,
   cityInitialPopulation: 100,
 
+  // currency
+  currency: 'Ag',
+
   // fonts
   fontBig: '64px Arial',
   fontNormal: '32px Arial',
