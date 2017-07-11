@@ -32,16 +32,19 @@ const tileTypes = {
   forest: {
     name: 'forest',
     asset: 'forest',
+    flowers: 6,
     allowedStructures: []
   },
   grass: {
     name: 'grass',
     asset: 'grass',
+    flowers: 4,
     allowedStructures: []
   },
   water: {
     name: 'water',
     asset: 'water',
+    flowers: 5,
     allowedStructures: []
   }
 }

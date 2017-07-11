@@ -40,6 +40,7 @@ export default class MenuController extends Controller {
     this.section()
     this.text('Ground type: ' + tile.tileType.name)
     this.text('X: ' + tile.x + ', Y: ' + tile.y)
+    this.text('Flowers: ' + tile.flowers)
 
     if (tile.structure != null) {
       var structure = tile.structure
