@@ -35,10 +35,10 @@ const checkStructureType = (structureType) => {
  * Returns either a function that yields turnips weekly or one that
  * yields only during harvesting months, depending on the structure type.
  */
-const createProductionFn = (structureType) => {
+const createProductionFn = (structureType, tile) => {
   var sType = checkStructureType(structureType)
 
-  return sType.continuousProduction
+  return sType.continuousProduction * tile.flowers
     ? createContinuousProductionFn(sType.turnipYield)
     : createPeriodicProductionFn(sType.harvestingWeeks, sType.turnipYield)
 }

@@ -208,7 +208,7 @@ export default class GameAdvancer {
       size: size,
       structureType: this.structureTypes[structureTypeName],
       foundingYear: foundingYear,
-      produceFn: StructureProduction.createProductionFn(structureTypeName),
+      produceFn: StructureProduction.createProductionFn(structureTypeName, tile),
       cost: cost
     })
 
