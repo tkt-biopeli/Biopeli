@@ -28,6 +28,7 @@ export default class GameAdvancer {
 
     this.gameState = new GameState({
       cityName: 'testVille',
+      startMoney: 15000,
       state: this.game,
       mapWidth: this.mapWidth,
       mapHeight: this.mapHeight,
