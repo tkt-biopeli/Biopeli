@@ -50,7 +50,8 @@ export default class MenuOptionCreator {
         context: this.structureFactory,
         height: config.menuButtonHeight,
         width: config.menuButtonWidth,
-        fontSize: config.menuFontSize
+        fontSize: config.menuFontSize,
+        asset: 'emptyButton'
       }))
   }
 }

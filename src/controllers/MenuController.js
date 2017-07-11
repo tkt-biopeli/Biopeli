@@ -90,7 +90,8 @@ export default class MenuController extends Controller {
         context: resetDecorator,
         width: buttonComponent.width,
         height: buttonComponent.height,
-        fontSize: buttonComponent.fontSize
+        fontSize: buttonComponent.fontSize,
+        asset: buttonComponent.asset
       })
     }
   }

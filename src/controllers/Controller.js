@@ -72,7 +72,8 @@ export default class Controller {
         context: context,
         height: this.style.buttonHeight,
         width: this.style.buttonWidth,
-        fontSize: this.style.mediumFont
+        fontSize: this.style.mediumFont,
+        asset: 'emptyButton'
       })
     )
   }

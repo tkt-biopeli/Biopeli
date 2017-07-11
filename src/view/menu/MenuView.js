@@ -127,6 +127,7 @@ export default class MenuView {
       viewGroup: this.menuViewGroup,
       label: buttonComponent.name,
       fontSize: buttonComponent.fontSize,
+      asset: buttonComponent.asset,
       x: coords.x,
       y: coords.y,
       callback: buttonComponent.function,
