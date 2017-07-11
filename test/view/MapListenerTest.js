@@ -37,10 +37,9 @@ describe('MapListener tests', () => {
   })
 
   it('Constructor works', () => {
-    ml = new MapListener({ game: game, map: map, menuOptionCreator: "jasd", menuController: menuController })
+    ml = new MapListener({ game: game, map: map, menuController: menuController })
     assert.equal(ml.game, game)
     assert.equal(ml.map, map)
-    assert.equal(ml.menuOptionCreator, "jasd")
     assert.equal(ml.menuController, menuController)
   })
 
@@ -81,12 +80,9 @@ describe('MapListener tests', () => {
 
   it('Menu update functions are called', () => {
     var m1 = sinon.mock(menuController)
-    var m2 = sinon.mock(menuOptionCreator)
     m1.expects("chooseTile").once()
-    m2.expects("getActions").once()
     ml.updateMenuOptions("tile")
     m1.verify()
-    m2.verify()
   })
 
   it('Update with pointer in map area calls correct functions', () => {
@@ -102,13 +98,9 @@ describe('MapListener tests', () => {
     var mockMenu = sinon.mock(menuController)
     mockMenu.expects("chooseTile").once()
 
-    var mockMenuOptions = sinon.mock(menuOptionCreator)
-    mockMenuOptions.expects("getActions").once()
-
     ml.update(pointerEvent)
 
     mockMenu.verify()
-    mockMenuOptions.verify()
   })
 
   it('Update with pointer outside map area doesnt call any functions', () => {
@@ -117,12 +109,8 @@ describe('MapListener tests', () => {
     var mockMenu = sinon.mock(menuController)
     mockMenu.expects("chooseTile").never()
 
-    var mockMenuOptions = sinon.mock(menuOptionCreator)
-    mockMenuOptions.expects("getActions").never()
-
     ml.update(pointerEvent)
     mockMenu.verify()
-    mockMenuOptions.verify()
   })
 
   it('Unvalid selection in map are doesnt call any functions', () => {
@@ -135,13 +123,9 @@ describe('MapListener tests', () => {
     var mockMenu = sinon.mock(menuController)
     mockMenu.expects("chooseTile").never()
 
-    var mockMenuOptions = sinon.mock(menuOptionCreator)
-    mockMenuOptions.expects("getActions").never()
-
     ml.update(pointerEvent)
 
     mockMenu.verify()
-    mockMenuOptions.verify()
   })
 
 })
