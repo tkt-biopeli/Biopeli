@@ -76,6 +76,7 @@ export default class MenuController extends Controller {
     this.decorateButtonComponents()
     this.redraw()
   }
+  
   getActions (tile) {
     if(tile == null){
       return []

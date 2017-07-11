@@ -64,7 +64,11 @@ export default class Controller {
     }))
   }
 
-  button (name, functionToCall, context) {
+  button (name, functionToCall, context, asset) {
+    if (asset == null) {
+      asset = 'emptyButton'
+    }
+
     this.currentSection.push(
       new ButtonComponent({
         name: name,
@@ -73,7 +77,7 @@ export default class Controller {
         height: this.style.buttonHeight,
         width: this.style.buttonWidth,
         fontSize: this.style.mediumFont,
-        asset: 'emptyButton'
+        asset: asset
       })
     )
   }
