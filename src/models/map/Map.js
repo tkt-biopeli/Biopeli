@@ -1,7 +1,6 @@
 import ModelTile from './ModelTile'
 import StaticTypes from '../StaticTypes'
 import {Noise} from 'noisejs'
-//var Noise = require('noisejs')
 
 /**
  * Description goes here
@@ -98,68 +97,22 @@ export default class Map {
   }
 
   /**
-   * TEST DATA
+   * Generates the game map
+   * 
+   * @param {number} seed - optional seed for map generation 
+   * @todo seed does not work
    */
-  createMapHalfForestHalfWater () {
-    var limit = 0.2
-    var tileTypes = StaticTypes.tileTypes
-    var r = Math.random()
+  createMap (seed) {
+    var mapgen = new MapGen({
+      height: this.gridSizeY, 
+      width: this.gridSizeX,
+      seed: seed
+    })
 
-    for (var i = 0; i < this.gridSizeY; i++) {
-      if (i % 2 === 0) {
-        for (var j = 0; j < this.gridSizeX; j++) {
-          if (r > limit) {
-            this.addTileWithGridCoordinates(j, i, tileTypes.grass)
-          } else {
-            this.addTileWithGridCoordinates(j, i, tileTypes.grass)
-          }
-        }
-      } else {
-        for (var k = 0; k < this.gridSizeX; k++) {
-          r = Math.random()
-          if (r > limit) {
-            this.addTileWithGridCoordinates(k, i, tileTypes.grass)
-          } else {
-            if (r > 0.08) {
-              this.addTileWithGridCoordinates(k, i, tileTypes.forest)
-            } else {
-              this.addTileWithGridCoordinates(k, i, tileTypes.water)
-            }
-          }
-        }
-      }
-    }
-  }
-
-  isGround (noise) {
-    if (noise >  0.85) return false
-    if (noise < -0.85) return false
-    if (noise <  0.05 && 
-        noise > -0.05) return false
-    return true
-  }
-
-  isForest (noise) {
-    return noise > 0.3 
-  }
-
-  createMapPerlin () {
-    var tileTypes = StaticTypes.tileTypes,
-        noiseForest = new Noise(Math.random()), 
-        noiseGround = new Noise(Math.random())
-
-    var x, y, type
+    var x, y
     for (x = 0; x < this.gridSizeX; x++) {
       for (y = 0; y < this.gridSizeY; y++) {
-        var nx = x / this.gridSizeX - 0.5
-        var ny = y / this.gridSizeY - 0.5
-
-        if(this.isGround(noiseGround.perlin2(nx,ny))){
-          type = this.isForest(noiseForest.perlin2(nx,ny)) > 0 ? tileTypes.forest:tileTypes.grass
-        }else
-          type = tileTypes.water
-
-        this.addTileWithGridCoordinates(x,y,type)
+        this.addTileWithGridCoordinates(x, y, mapgen.typeAt(x,y))
       }
     }
   }
@@ -208,5 +161,64 @@ export default class Map {
    */
   gridToPixelsY (y) {
     return y * this.tileHeight
+  }
+}
+
+
+
+/**
+ * Maps coordinates to tile types 
+ */
+class MapGen {
+
+  /**
+   * 
+   * @param {object} param
+   * @param {number} param.seed - seed for forest generation, optional
+   * @param {number} param.height - map height
+   * @param {number} param.width - map width 
+   */
+  constructor ({seed, height, width}) {
+    var fseed, gseed
+    if(seed){
+      var str = seed + ''
+      var mid = str.length
+      var split = str.split({limit: mid / 2})
+
+      fseed = split[0]
+      gseed = split[1]
+    }else{
+      fseed = Math.random()
+      gseed = Math.random()
+    }
+    this.types = StaticTypes.tileTypes
+    this.forestnoise = new Noise(fseed)
+    this.groundnoise = new Noise(gseed)
+    this.height = height
+    this.width = width
+  }
+
+  /**
+   * returns the tile type at the given coordinate
+   * 
+   * @param {number} x - tile x coordinate
+   * @param {number} y - tile y coordinate 
+   * 
+   * @return {TileType} - tile type
+   */
+  typeAt (x, y) { 
+    var nx = x / this.width - 0.5, 
+        ny = y / this.height - 0.5
+
+    var gfreq = 5, ffreq = 7
+
+    if(this.groundnoise.perlin2(gfreq * nx, gfreq * ny) > -0.2){
+      if(this.forestnoise.perlin2(ffreq * nx, ffreq * ny) > -0.1)
+        return this.types.grass
+      else 
+        return this.types.forest
+    }else{
+      return this.types.water
+    }
   }
 }

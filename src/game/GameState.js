@@ -146,7 +146,7 @@ export default class GameState {
     })
 
     // fill map grid with sample data
-    this.map.createMapPerlin()
+    this.map.createMap()
 
     this.player = new Player()
     this.city = new City({ name: cityName })

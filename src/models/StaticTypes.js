@@ -1,3 +1,14 @@
+
+/**
+ * @typedef {object} StructureType
+ * @property {string} name
+ * @property {string} asset
+ * @property {set.<string>} harvestingWeeks
+ * @property {boolean} continuousProduction
+ * @property {number} turnipYield
+ */
+
+
 /**
  * Harvesting week format 'month.week'.
  */
@@ -24,6 +35,14 @@ const structureTypes = {
     turnipYield: 10
   }
 }
+
+
+/**
+ * @typedef {object} TileType
+ * @property {string} name
+ * @property {string} asset
+ * @property {StructureType[]} allowedStructures
+ */
 
 const tileTypes = {
   forest: {
