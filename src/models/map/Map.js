@@ -174,19 +174,18 @@ class MapGen {
   /**
    * 
    * @param {object} param
-   * @param {number} param.seed - seed for forest generation, optional
    * @param {number} param.height - map height
    * @param {number} param.width - map width 
+   * @param {number} param.seed - seed for forest generation, optional
    */
-  constructor ({seed, height, width}) {
+  constructor ({height, width, seed}) {
     var fseed, gseed
     if(seed){
       var str = seed + ''
-      var mid = str.length
-      var split = str.split({limit: mid / 2})
+      var mid = str.length / 2
 
-      fseed = split[0]
-      gseed = split[1]
+      fseed = str.substring(0, mid)
+      gseed = str.substr(mid, str.length)
     }else{
       fseed = Math.random()
       gseed = Math.random()
