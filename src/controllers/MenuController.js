@@ -110,6 +110,9 @@ export default class MenuController extends Controller {
   decorateButtonComponents () {
     for (let i = 0; i < this.buttonComponents.length; i++) {
       var buttonComponent = this.buttonComponents[i]
+      if(buttonComponent.type != 'button'){
+        continue
+      }
       var resetDecorator = new ResetDecorator({
         action: buttonComponent,
         menu: this
