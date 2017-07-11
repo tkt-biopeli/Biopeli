@@ -1,6 +1,7 @@
 import ButtonComponent from './components/ButtonComponent'
 import ResetDecorator from './helpers/ResetDecorator'
 import Controller from './Controller'
+import config from '../config'
 
 /**
  * Controller of side menu of the game
@@ -12,9 +13,11 @@ export default class MenuController extends Controller {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor ({ game, style, menuView, city, gameEvents }) {
+  constructor ({ game, style, player, structureFactory, menuView, city, gameEvents }) {
     super(game, style, menuView)
 
+    this.structureFactory = structureFactory
+    this.player = player
     this.city = city
     this.selectedTile = null
     this.buttonComponents = []
@@ -66,12 +69,38 @@ export default class MenuController extends Controller {
    * @param {*} tile
    * @param {*} buttonComponents
    */
-  chooseTile (tile, buttonComponents) {
+  chooseTile (tile) {
     this.selectedTile = tile
-    this.buttonComponents = buttonComponents
+    this.buttonComponents = this.getActions(tile)
 
     this.decorateButtonComponents()
     this.redraw()
+  }
+  getActions (tile) {
+    if(tile == null){
+      return []
+    }
+
+    if (tile.structure == null) {
+      return this.buttonActionsForTile(tile)
+    }
+
+    return []
+  }
+
+  buttonActionsForTile (tile) {
+    var allowedStructures = tile.tileType.allowedStructures
+
+    return allowedStructures.map(
+      structureType => new ButtonComponent({
+        name: structureType.name + ' : ' + structureType.cost + '€',
+        functionToCall: () => { this.structureFactory.buildBuilding(tile, structureType) },
+        context: this.structureFactory,
+        height: config.menuButtonHeight,
+        width: config.menuButtonWidth,
+        fontSize: config.menuFontSize,
+        asset: 'emptyButton'
+      }))
   }
 
   /**
@@ -100,6 +129,6 @@ export default class MenuController extends Controller {
    * Unchooses the chosen tile
    */
   reset () {
-    this.chooseTile(null, [])
+    this.chooseTile(null)
   }
 }

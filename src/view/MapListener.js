@@ -12,10 +12,9 @@ export default class MapListener {
    * @param {MenuOptionCreator} param.menuOptionCreator
    * @param {Menu} param.menu
    */
-  constructor ({ game, map, menuOptionCreator, menuController }) {
+  constructor ({ game, map, menuController }) {
     this.game = game
     this.map = map
-    this.menuOptionCreator = menuOptionCreator
     this.menuController = menuController
   }
 
@@ -82,6 +81,6 @@ export default class MapListener {
    * @param {ModelTile} tile
    */
   updateMenuOptions (tile) {
-    this.menuController.chooseTile(tile, this.menuOptionCreator.getActions(tile))
+    this.menuController.chooseTile(tile)
   }
 }

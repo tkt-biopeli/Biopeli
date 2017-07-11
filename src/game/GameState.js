@@ -99,13 +99,14 @@ export default class GameState {
       }),
       menuView: this.menuView,
       city: this.city,
-      gameEvents: this.gameEvents
+      gameEvents: this.gameEvents,
+      player: this.player,
+      structureFactory: this.structureFactory
     })
 
     this.mapListener = new MapListener({
       game: state,
       map: this.map,
-      menuOptionCreator: this.menuOptionCreator,
       menuController: this.menuController
     })
 
@@ -132,7 +133,6 @@ export default class GameState {
     })
 
     this.gameTimer.addListener(this.gameTimerListener)
-    this.menuOptionCreator.gameTimer = this.gameTimer
 
     this.gameTimer.callListeners()
   }
@@ -160,8 +160,6 @@ export default class GameState {
       gameTimer: this.gameTimer,
       player: this.player
     })
-
-    this.menuOptionCreator = new MenuOptionCreator({ player: this.player, structureFactory: this.structureFactory })
   }
 
   /**
