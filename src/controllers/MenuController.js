@@ -13,7 +13,7 @@ export default class MenuController extends Controller {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor ({ game, style, player, structureFactory, menuView, city, gameEvents }) {
+  constructor({ game, style, player, structureFactory, menuView, city, gameEvents }) {
     super(game, style, menuView)
 
     this.structureFactory = structureFactory
@@ -72,7 +72,7 @@ export default class MenuController extends Controller {
   chooseTile (tile) {
     this.selectedTile = tile
     this.buttonComponents = this.getActions(tile)
-
+    
     this.decorateButtonComponents()
     this.redraw()
   }
@@ -93,15 +93,22 @@ export default class MenuController extends Controller {
     var allowedStructures = tile.tileType.allowedStructures
 
     return allowedStructures.map(
-      structureType => new ButtonComponent({
-        name: structureType.name + ' : ' + structureType.cost + '€',
-        functionToCall: () => { this.structureFactory.buildBuilding(tile, structureType) },
-        context: this.structureFactory,
-        height: config.menuButtonHeight,
-        width: config.menuButtonWidth,
-        fontSize: config.menuFontSize,
-        asset: 'emptyButton'
-      }))
+      structureType => this.buttonForStructure(tile, structureType)
+    )
+  }
+
+  buttonForStructure (tile, structureType) {
+    let button = new ButtonComponent({
+      name: structureType.name + ' : ' + structureType.cost + '€',
+      functionToCall: () => { this.structureFactory.buildBuilding(tile, structureType) },
+      context: this.structureFactory,
+      height: config.menuButtonHeight,
+      width: config.menuButtonWidth,
+      fontSize: config.menuFontSize,
+      asset: 'emptyButton'
+    })
+    if (!this.player.enoughCashFor(structureType.cost)) button.deactivate()
+    return button
   }
 
   /**
@@ -110,7 +117,7 @@ export default class MenuController extends Controller {
   decorateButtonComponents () {
     for (let i = 0; i < this.buttonComponents.length; i++) {
       var buttonComponent = this.buttonComponents[i]
-      if(buttonComponent.type != 'button'){
+      if (buttonComponent.type != 'button') {
         continue
       }
       var resetDecorator = new ResetDecorator({
