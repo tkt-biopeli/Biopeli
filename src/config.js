@@ -13,8 +13,8 @@ export default {
   gameLength: 180,
 
   // configurations for tiles
-  tileWidth: 128,
-  tileHeight: 128,
+  tileWidth: 64,
+  tileHeight: 64,
 
   // configurations for map
   madWidthMultiplier: 4,
@@ -56,10 +56,16 @@ export default {
   cityInitialTurnips: 0,
   cityInitialPopulation: 100,
 
+  // currency
+  currency: 'Ag',
+
   // fonts
   fontBig: '64px Arial',
   fontNormal: '32px Arial',
   fontSmall: '16px Arial',
   fontWeightBold: 'bold',
-  fontFill: '#ffff00'
+  fontFill: '#ffff00',
+
+  // player
+  playerInitialCash: 20000
 }

@@ -24,10 +24,17 @@ Pelin ajaminen paikallisesti:
 - hae projektiin liittyvät moduulit ajamalla kloonin hakemistossa komento: `npm install`
 - käynnistä paikallinen palvelin komennolla: `npm run dev`
 
-Pelin pitäisi nyt näkyä selaimellasi; mikäli näin ei käy, kirjoita selaimeesi osoite: http://localhost:3002/ .
+Pelin pitäisi nyt näkyä selaimellasi; mikäli näin ei käy, kirjoita selaimeesi osoite: http://localhost:3000/ .
 
 ### Käyttöohjeet
-TBA
+Kontrollit:
+- liiku kartalla nuolinäppämillä
+- valitse ruutuja kartalta hiirellä ja rakenna niihin rakennuksia sivuvalikon valikoimasta
+- tarkastele jo rakentamiesi rakennuksien tietoja valitsemalla ruutu hiirellä
+
+Pelinäkymä rajautuu kartan lisäksi kahteen erilliseen alueeseen:
+- Yläreunan infopalkista näet peliajan etenemisen, keräämäsi pisteet ja rahan sekä turnipsituotannnon riittävyysasteen. Riittävyysaste on rakennuksiesi turnipsituotannon määrän suhde kaupungin kysymään määrään kunakin ajanhetkenä.
+- Sivuvalikosta näet kaupunkisi tiedot, valitun ruudun rakennusmahdollisuudet tai rakennuksesi tiedot.
 
 ### Tekijätiimi
 Hossein Bahmanpour, Ilja Häkkinen, Jarkko Karttunen, Jon-Erik Klint, Ilkka Koskinen, Miia Rämö

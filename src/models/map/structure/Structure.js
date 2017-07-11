@@ -20,7 +20,7 @@ export default class Structure {
    * @param {integer} foundingYear
    * @param {function} produceFn
    */
-  constructor ({ tile, owner, name, size, structureType, foundingYear, produceFn }) {
+  constructor ({ tile, owner, name, size, structureType, foundingYear, produceFn, cost }) {
     this.tile = tile
     this.owner = owner
     this.name = name
@@ -29,6 +29,7 @@ export default class Structure {
     this.productionInput = 1
     this.foundingYear = foundingYear
     this.produceFn = produceFn
+    this.cost = cost
   }
 
   /**

@@ -22,24 +22,24 @@ export default class extends Phaser.State {
     //
     // load your assets
     //
-    this.load.image('menuBg', 'assets/images/low-poly-bg.png')
-    this.load.spritesheet('button', 'assets/images/button_sprite_sheet.png', 193, 71)
-    this.load.image('emptyButton', 'assets/images/empty_button.png')
+    this.load.image('emptyButton', 'assets/images/buttons/empty_button.png')
+    this.load.image('unusableButton', 'assets/images/buttons/empty_unbutton.png')
 
     this.load.image('forest', 'assets/images/tiles/forest.png')
     this.load.image('water', 'assets/images/tiles/water.png')
     this.load.image('grass', 'assets/images/tiles/grass.png')
-    this.load.image('farm', 'assets/images/structures/farm.png')
+    this.load.image('wheat_farm', 'assets/images/structures/wheat_farm.png')
     this.load.image('berry_farm', 'assets/images/structures/berry_farm.png')
     this.load.image('dairy_farm', 'assets/images/structures/dairy_farm.png')
 
-    this.load.image('turnip', 'assets/images/turnip.png')
-    this.load.image('score', 'assets/images/score.png')
-    this.load.image('time', 'assets/images/time.png')
-    this.load.image('cash', 'assets/images/cash.png')
+    this.load.image('turnip', 'assets/images/icons/turnip.png')
+    this.load.image('score', 'assets/images/icons/score.png')
+    this.load.image('time', 'assets/images/icons/time.png')
+    this.load.image('cash', 'assets/images/icons/cash.png')
 
-    this.load.image('gameover', 'assets/images/gameover.png')
-    this.load.image('start', 'assets/images/start.png')
+    this.load.image('gameover', 'assets/images/backgrounds/gameover.png')
+    this.load.image('start', 'assets/images/backgrounds/start.png')
+    this.load.image('menuBg', 'assets/images/backgrounds/low-poly-bg.png')
   }
 
   /**

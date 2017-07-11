@@ -7,7 +7,7 @@ describe('Reset decorator tests', () => {
     var dec = new ResetDecorator({ action: 1, menu: 0 })
 
     assert.equal(1, dec.action)
-    assert.equal(0, dec.menu)
+    assert.equal(0, dec.menuController)
   })
 
   it('Decorator calls action right', () => {

@@ -54,13 +54,15 @@ export default [
     'Reetta',
     'Martta',
     'Eeva',
-    'vaarin',
-    'mummon',
-    'mummin',
-    'sedän',
-    'ukin',
-    'papan',
-    'enon'
+    'vaari',
+    'mummo',
+    'mummi',
+    'setä',
+    'ukki',
+    'pappa',
+    'eno',
+    'täti',
+    'kummisetä'
   ],
   [
     'Pieni',

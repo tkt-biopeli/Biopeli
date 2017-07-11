@@ -15,10 +15,9 @@ describe('Integration test: Building structures', () => {
     gameStateChecker = gameAdvancer.gamestateChecker
   })
 
-  it('Can build a farm on grass', () => {
+  it('Can build a berry farm on grass', () => {
     gameAdvancer.setTile(0, 0, 'grass')
     gameAdvancer.click(0, 0)
-
     gameAdvancer.clickNthButton(4)
     gameStateChecker.checkSelectedTile()
     gameStateChecker.checkTilesInformation(0, 0, 'grass', 'berry farm')

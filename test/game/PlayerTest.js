@@ -3,14 +3,16 @@ const assert = require("assert");
 
 describe('Player tests', function () {
   var p
+  var startMoney = 1
   
   beforeEach(() => {
-    p = new Player()
+    p = new Player({startMoney: startMoney})
   })
   
   it('Player should have 0 points in the beginning', function () {
     assert.equal(0, p.points)
     assert.equal(0, p.structures.size)
+    assert.equal(startMoney, p.cash)
   })
 
   it('Points are added correctly', function () {

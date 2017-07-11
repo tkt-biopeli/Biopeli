@@ -30,12 +30,12 @@ export default class GameState {
    * @param {Number} param.tileHeight - Tile height in pixels
    * @param {Number} param.menuWidth - Menu width in pixels
    */
-  constructor ({ cityName, state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth, gameLength }) {
+  constructor ({ cityName, startMoney, state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth, gameLength }) {
     this.state = state
 
     state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
 
-    this.initializeModel(cityName, mapWidth, mapHeight, tileWidth, tileHeight)
+    this.initializeModel(cityName, startMoney, mapWidth, mapHeight, tileWidth, tileHeight)
 
     this.menuView = new MenuView({
       game: this.state,
@@ -137,7 +137,7 @@ export default class GameState {
     this.gameTimer.callListeners()
   }
 
-  initializeModel (cityName, mapWidth, mapHeight, tileWidth, tileHeight) {
+  initializeModel (cityName, startMoney, mapWidth, mapHeight, tileWidth, tileHeight) {
     this.map = new Map({
       gridSizeX: mapWidth,
       gridSizeY: mapHeight,
@@ -148,7 +148,7 @@ export default class GameState {
     // fill map grid with sample data
     this.map.createMap()
 
-    this.player = new Player()
+    this.player = new Player({startMoney: startMoney})
     this.city = new City({ name: cityName })
 
     this.gameTimer = new Timer({
