@@ -2,7 +2,7 @@ const assert = require("assert")
 const sinon = require("sinon")
 import CityNameGenerator from '../../../src/models/namegeneration/CityNameGenerator'
 
-describe('Tests for city name gene"raion', () => {
+describe('Tests for city name generation', () => {
   var namegen, getEndSpy, getStartSpy, randomIdStub
   var oneFull
 

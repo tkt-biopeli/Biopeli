@@ -42,7 +42,8 @@ export default class StructureFactory {
       size: 10,
       structureType: structureType,
       foundingYear: this.gameTimer.currentTime.year,
-      produceFn: this.createProductionFn(structureType)
+      produceFn: this.createProductionFn(structureType),
+      cost: structureType.cost
     })
     this.player.addStructure(tile.structure)
   }
