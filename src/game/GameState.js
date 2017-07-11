@@ -13,6 +13,7 @@ import Timer from '../view/Timer'
 import GameTimerListener from '../models/GameTimerListener'
 import TopBarController from '../controllers/TopBarController'
 import MenuController from '../controllers/MenuController'
+import MultipleController from '../controllers/MultipleController'
 import StackingLayout from '../view/menu/layouts/StackingLayout'
 import StaticLayout from '../view/menu/layouts/StaticLayout'
 import Style from '../view/menu/Style'
@@ -34,16 +35,82 @@ export default class GameState {
 
     state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
 
-    this.initializeModel(cityName, startMoney, mapWidth, mapHeight, tileWidth, tileHeight)
+    this.initializeModel(cityName, gameLength, startMoney, mapWidth, mapHeight, tileWidth, tileHeight)
+    this.initializeView()
+    this.initializeControllers()
+    
+    this.mapListener = new MapListener({
+      game: state,
+      map: this.map,
+      menuController: this.menuController
+    })
 
+    this.inputHandler = new InputHandler({
+      game: state,
+      mapListener: this.mapListener,
+      cameraMover: this.cameraMover
+    })
+
+    this.mapView = new MapView({
+      game: state,
+      map: this.map,
+      menu: this.menuController,
+      viewWidthPx: state.game.width - menuWidth,
+      viewHeightPx: state.game.height
+    })
+
+    this.gameTimerListener = new GameTimerListener({
+      city: this.city,
+      player: this.player,
+      menuController: this.menuControllerContainer,
+      topBarController: this.topBarController,
+      gameEvents: this.gameEvents
+    })
+
+    this.gameTimer.addListener(this.gameTimerListener)
+
+    this.gameTimer.callListeners()
+  }
+
+  initializeModel (cityName, gameLength, startMoney, mapWidth, mapHeight, tileWidth, tileHeight) {
+    this.map = new Map({
+      gridSizeX: mapWidth,
+      gridSizeY: mapHeight,
+      tileWidth: tileWidth,
+      tileHeight: tileHeight
+    })
+
+    // fill map grid with sample data
+    this.map.createMapHalfForestHalfWater()
+
+    this.player = new Player({startMoney: startMoney})
+    this.city = new City({ name: cityName })
+
+    this.gameTimer = new Timer({
+      interval: config.gameTimerInterval,
+      currentTime: this.currentTime()
+    })
+
+    this.structureFactory = new StructureFactory({
+      gameTimer: this.gameTimer,
+      player: this.player
+    })
+
+    this.gameEvents = new GameEvents({
+      gameState: this,
+      gameLength: gameLength
+    })
+  }
+
+  initializeView () {
     this.menuView = new MenuView({
       game: this.state,
       layout: new StackingLayout({
         menuRect: {
-          x: state.camera.width - config.menuWidth,
+          x: this.state.camera.width - config.menuWidth,
           y: 0,
           width: config.menuWidth,
-          height: state.camera.height
+          height: this.state.camera.height
         },
         linePadding: config.linePadding,
         sectionPadding: config.sectionPadding,
@@ -58,7 +125,7 @@ export default class GameState {
         menuRect: {
           x: 0,
           y: 0,
-          width: state.camera.width - config.menuWidth,
+          width: this.state.camera.width - config.menuWidth,
           height: config.topBarSettings.height
         },
         linePadding: 5,
@@ -68,16 +135,13 @@ export default class GameState {
     })
 
     this.cameraMover = new CameraMover({
-      game: state,
+      game: this.state,
       xSpeed: config.cameraSpeed,
       ySpeed: config.cameraSpeed
     })
+  }
 
-    this.gameEvents = new GameEvents({
-      gameState: this,
-      gameLength: gameLength
-    })
-
+  initializeControllers () {
     this.topBarController = new TopBarController({
       game: this.state,
       style: new Style({
@@ -103,61 +167,10 @@ export default class GameState {
       structureFactory: this.structureFactory
     })
 
-    this.mapListener = new MapListener({
-      game: state,
-      map: this.map,
-      menuController: this.menuController
-    })
-
-    this.inputHandler = new InputHandler({
-      game: state,
-      mapListener: this.mapListener,
-      cameraMover: this.cameraMover
-    })
-
-    this.mapView = new MapView({
-      game: state,
-      map: this.map,
-      menu: this.menuController,
-      viewWidthPx: state.game.width - menuWidth,
-      viewHeightPx: state.game.height
-    })
-
-    this.gameTimerListener = new GameTimerListener({
-      city: this.city,
-      player: this.player,
-      menuController: this.menuController,
-      topBarController: this.topBarController,
-      gameEvents: this.gameEvents
-    })
-
-    this.gameTimer.addListener(this.gameTimerListener)
-
-    this.gameTimer.callListeners()
-  }
-
-  initializeModel (cityName, startMoney, mapWidth, mapHeight, tileWidth, tileHeight) {
-    this.map = new Map({
-      gridSizeX: mapWidth,
-      gridSizeY: mapHeight,
-      tileWidth: tileWidth,
-      tileHeight: tileHeight
-    })
-
-    // fill map grid with sample data
-    this.map.createMapHalfForestHalfWater()
-
-    this.player = new Player({startMoney: startMoney})
-    this.city = new City({ name: cityName })
-
-    this.gameTimer = new Timer({
-      interval: config.gameTimerInterval,
-      currentTime: this.currentTime()
-    })
-
-    this.structureFactory = new StructureFactory({
-      gameTimer: this.gameTimer,
-      player: this.player
+    this.menuControllerContainer = new MultipleController({
+      game: this.state,
+      menuView: this.menuView,
+      subcontrollers: [this.menuController]
     })
   }
 

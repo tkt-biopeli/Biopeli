@@ -16,6 +16,7 @@ export default class TopBarController extends Controller {
    * @param {*} timeEvent
    */
   createSections (timeEvent) {
+    this.section()
     this.icon('time')
     this.text(timeEvent.toString(), 'small')
 

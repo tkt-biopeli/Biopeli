@@ -28,6 +28,7 @@ export default class MenuController extends Controller {
    * Create blueprint of the menu's contents
    */
   createSections () {
+    this.section()
     this.text('City: ' + this.city.name)
     this.text('Population: ' + this.city.population)
     this.text('Weekly demand: ' + this.city.weeklyTurnipDemand)

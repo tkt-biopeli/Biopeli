@@ -15,7 +15,7 @@ export default class Controller {
   }
 
   buildSections (timeEvent) {
-    this.initialize()
+    this.sections = []
 
     this.createSections(timeEvent)
 
@@ -84,5 +84,15 @@ export default class Controller {
 
   add (component) {
     this.currentSection.push(component)
+  }
+
+  addSection (section) {
+    this.sections.push(section)
+    this.currentSection = section
+  }
+
+  addSections (sections) {
+    this.sections = this.sections.concat(sections)
+    this.currentSection = this.sections[this.sections.length - 1]
   }
 }
