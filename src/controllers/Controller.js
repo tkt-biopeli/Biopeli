@@ -13,9 +13,9 @@ export default class Controller {
   redraw (timeEvent) {
     this.menuView.draw(this.buildSections(timeEvent))
   }
-
+  
   buildSections (timeEvent) {
-    this.sections = []
+    this.initialize()
 
     this.createSections(timeEvent)
 
@@ -60,7 +60,7 @@ export default class Controller {
       width: 100,
       height: 40,
       horizontal: true,
-      percent: this.city.fulfilledAndEarnings.percentage / 100
+      percent: percent / 100
     }))
   }
 

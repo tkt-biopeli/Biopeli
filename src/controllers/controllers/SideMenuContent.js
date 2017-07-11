@@ -1,21 +1,20 @@
-import ButtonComponent from './components/ButtonComponent'
-import ResetDecorator from './helpers/ResetDecorator'
-import Controller from './Controller'
-import config from '../config'
+import ButtonComponent from '../components/ButtonComponent'
+import ResetDecorator from '../helpers/ResetDecorator'
+import MenuContent from './MenuContent'
+import config from '../../config'
 
 /**
  * Controller of side menu of the game
  */
-export default class MenuController extends Controller {
+export default class SideMenuContent extends MenuContent {
   /**
    * Description goes here
    *
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor ({ game, style, player, structureFactory, menuView, city, gameEvents }) {
-    super(game, style, menuView)
-
+  constructor ({ player, structureFactory, city, gameEvents }) {
+    super()
     this.structureFactory = structureFactory
     this.player = player
     this.city = city
@@ -28,12 +27,13 @@ export default class MenuController extends Controller {
    * Create blueprint of the menu's contents
    */
   createSections () {
-    this.section()
     this.text('City: ' + this.city.name)
     this.text('Population: ' + this.city.population)
     this.text('Weekly demand: ' + this.city.weeklyTurnipDemand)
     this.text('Yearly demand: ' + this.city.yearlyTurnipDemand)
     this.button('Lopeta', this.gameEvents.finishGame, this.gameEvents)
+
+    this.owner.changeButton('test', 1)
 
     if (this.selectedTile == null) {
       return
@@ -75,7 +75,7 @@ export default class MenuController extends Controller {
     this.buttonComponents = this.getActions(tile)
 
     this.decorateButtonComponents()
-    this.redraw()
+    this.owner.redraw()
   }
 
   getActions (tile) {

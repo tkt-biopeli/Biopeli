@@ -11,9 +11,13 @@ import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
 import Timer from '../view/Timer'
 import GameTimerListener from '../models/GameTimerListener'
-import TopBarController from '../controllers/TopBarController'
-import MenuController from '../controllers/MenuController'
-import MultipleController from '../controllers/MultipleController'
+
+import TopBarContent from '../controllers/controllers/TopBarContent'
+import SideMenuContent from '../controllers/controllers/SideMenuContent'
+import BuildStructureContent from '../controllers/controllers/BuildStructureContent'
+import SingleController from '../controllers/SingleController'
+import MulticontentController from '../controllers/MulticontentController'
+
 import StackingLayout from '../view/menu/layouts/StackingLayout'
 import StaticLayout from '../view/menu/layouts/StaticLayout'
 import Style from '../view/menu/Style'
@@ -42,7 +46,8 @@ export default class GameState {
     this.mapListener = new MapListener({
       game: state,
       map: this.map,
-      menuController: this.menuController
+      menuContent: this.menuContent,
+      menuView: this.menuView
     })
 
     this.inputHandler = new InputHandler({
@@ -54,7 +59,7 @@ export default class GameState {
     this.mapView = new MapView({
       game: state,
       map: this.map,
-      menu: this.menuController,
+      menu: this.menuContent,
       viewWidthPx: state.game.width - menuWidth,
       viewHeightPx: state.game.height
     })
@@ -62,7 +67,7 @@ export default class GameState {
     this.gameTimerListener = new GameTimerListener({
       city: this.city,
       player: this.player,
-      menuController: this.menuControllerContainer,
+      menuController: this.menuController,
       topBarController: this.topBarController,
       gameEvents: this.gameEvents
     })
@@ -142,35 +147,37 @@ export default class GameState {
   }
 
   initializeControllers () {
-    this.topBarController = new TopBarController({
+    this.topBarController = new SingleController({
       game: this.state,
       style: new Style({
         smallFont: 20,
         mediumFont: 30
       }),
       menuView: this.topBarView,
-      player: this.player,
-      city: this.city
+      content: new TopBarContent({
+        player: this.player,
+        city: this.city
+      })
     })
 
-    this.menuController = new MenuController({
-      game: this.state,
-      style: new Style({
-        mediumFont: 16,
-        buttonHeight: config.menuButtonHeight,
-        buttonWidth: config.menuButtonWidth
-      }),
-      menuView: this.menuView,
+    this.menuContent = new SideMenuContent({
       city: this.city,
       gameEvents: this.gameEvents,
       player: this.player,
       structureFactory: this.structureFactory
     })
 
-    this.menuControllerContainer = new MultipleController({
+    var buildStructureController = new BuildStructureContent()
+
+    this.menuController = new MulticontentController({
       game: this.state,
       menuView: this.menuView,
-      subcontrollers: [this.menuController]
+      style: new Style({
+        mediumFont: 16,
+        buttonHeight: config.menuButtonHeight,
+        buttonWidth: config.menuButtonWidth
+      }),
+      contents: [this.menuContent, buildStructureController]
     })
   }
 
