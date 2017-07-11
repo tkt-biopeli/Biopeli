@@ -16,11 +16,6 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  preload () { }
-
-  /**
-   * Description goes here
-   */
   create () {
     // create before game state
     this.cursors = this.game.input.keyboard.createCursorKeys()
@@ -30,6 +25,7 @@ export default class extends Phaser.State {
 
     this.gameState = new GameState({
       cityName: cityName,
+      startMoney: config.playerInitialCash,
       state: this,
       mapWidth: Math.ceil(this.game.width * config.madWidthMultiplier / config.tileWidth),
       mapHeight: Math.ceil(this.game.height * config.mapHeightMultiplier / config.tileHeight),
@@ -39,11 +35,6 @@ export default class extends Phaser.State {
       gameLength: config.gameLength
     })
   }
-
-  /**
-   * Description goes here
-   */
-  render () { }
 
   /**
    * Updates the  gameState associated with this object

@@ -6,9 +6,9 @@ export default class {
   /**
    * Initially the player has 0 points
    */
-  constructor () {
+  constructor ({startMoney}) {
     this.points = 0
-    this.cash = config.playerInitialCash
+    this.cash = startMoney
     this.structures = new Set()
   }
 
