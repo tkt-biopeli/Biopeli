@@ -6,7 +6,6 @@ import MapListener from '../../src/view/MapListener'
 describe('MapListener tests', () => {
   var game
   var map
-  var menuOptionCreator
   var menuController
   var ml
 
@@ -33,11 +32,7 @@ describe('MapListener tests', () => {
       getTileWithPixelCoordinates: function () { }
     }
 
-    menuOptionCreator = {
-      getActions: function () { }
-    }
-
-    ml = new MapListener({ game: game, map: map, menuOptionCreator: menuOptionCreator, menuController: menuController })
+    ml = new MapListener({ game: game, map: map, menuController: menuController })
 
   })
 
