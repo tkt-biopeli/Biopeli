@@ -3,12 +3,12 @@
  */
 export default class StructureNameGenerator {
   /**
-   * @param {Object[]} param.frontAdjectives - list of adjectives
-   * @param {Object[]} param.names - list of names
-   * @param {Object[]} param.endAdjectives - list of adjectives
-   * @param {Object[]} param.hyperboles - list of hyperbole words
-   */
-  constructor ({frontAdjectives, names, endAdjectives, hyperboles}) {
+  * @param {Object[]} param.frontAdjectives - list of adjectives
+  * @param {Object[]} param.names - list of names
+  * @param {Object[]} param.endAdjectives - list of adjectives
+  * @param {Object[]} param.hyperboles - list of hyperbole words
+  */
+  constructor ({ frontAdjectives, names, endAdjectives, hyperboles }) {
     this.frontAdjectives = frontAdjectives
     this.names = names
     this.endAdjectives = endAdjectives
@@ -16,8 +16,8 @@ export default class StructureNameGenerator {
   }
 
   /**
-   * @returns {String} Name of the owner of the building
-   */
+  * @returns {String} Name of the owner of the building
+  */
   createOwnerName () {
     var front = this.getRandom(this.frontAdjectives.length)
     var name = this.getRandom(this.names.length)

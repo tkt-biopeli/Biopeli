@@ -55,11 +55,9 @@ export default class CityNameGenerator {
    */
   getEnd (id, first) {
     var no = this.cityNames[id]
-
     if (this.cityNames[first].full !== undefined) {
       return no.name
     }
-
     return no.name.slice(no.point)
   }
 
