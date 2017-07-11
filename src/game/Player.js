@@ -1,4 +1,3 @@
-import config from '../config'
 /**
  * Keeps track of the player's points
  */

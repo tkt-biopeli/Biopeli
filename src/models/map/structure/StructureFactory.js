@@ -33,7 +33,7 @@ export default class StructureFactory {
    * @param {StructureType} structureType
    */
   buildBuilding (tile, structureType) {
-    if(!this.checkMoney(structureType)) return
+    if (!this.checkMoney(structureType)) return
 
     tile.structure = new Structure({
       tile: tile,
@@ -48,7 +48,7 @@ export default class StructureFactory {
   }
 
   checkMoney (structureType) {
-    if(this.player.cash < structureType.cost){
+    if (this.player.cash < structureType.cost) {
       return false
     }
 

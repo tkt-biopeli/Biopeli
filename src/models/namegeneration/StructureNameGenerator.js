@@ -2,7 +2,6 @@
  * Generates a random name for a building and it's owner
  */
 export default class StructureNameGenerator {
-
   /**
    * @param {Object[]} param.frontAdjectives - list of adjectives
    * @param {Object[]} param.names - list of names
@@ -27,7 +26,7 @@ export default class StructureNameGenerator {
 
   /**
    * Creates name for the structure
-   * 
+   *
    * @param {StructureType} param.structureType - the type of the structure
    * @returns {String} - name for building
    */
@@ -44,7 +43,7 @@ export default class StructureNameGenerator {
 
   /**
    * Helper to find the type of the structure
-   * 
+   *
    * @param {StructureType} structureType - type to be examined
    * @returns {String} - the typeof the structure
    */
@@ -64,7 +63,7 @@ export default class StructureNameGenerator {
 
   /**
    * Generates a random int smaller than max
-   * 
+   *
    * @param {int} max
    * @returns {int}
    */

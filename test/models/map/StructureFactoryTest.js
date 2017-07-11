@@ -48,6 +48,20 @@ describe('StructureFactory tests', () => {
     assert(createProductionFnSpy.calledWith(structureType))
     assert(addStructureSpy.calledWith(tile.structure))
   })
+
+  it('Money checking works', () =>{
+    player.cash = 2
+    var st = {cost: 1}
+
+    assert(sbuilder.checkMoney(st))
+    assert.equal(1, player.cash)
+
+    assert(sbuilder.checkMoney(st))
+    assert.equal(0, player.cash)
+
+    assert(!sbuilder.checkMoney(st))
+    assert.equal(0, player.cash)
+  })
   
   it('createProductionFn works', () => {
     var productionFn = sbuilder.createProductionFn({})
