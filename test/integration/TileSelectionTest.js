@@ -29,5 +29,16 @@ describe('Integration test: Tile selection shows correctly in Menu', () => {
     gameStateChecker.checkIfTextsExist('Ground type: grass', 'X: 0, Y: 0', 'Structure: wheat farm',
       'Founding year: 1999', 'Size: 100', 'Production input: 1', 'Production per time: ')
   })
+
+  it('Selecting chosen tile again empties the selection', () => {
+    gameAdvancer.setTile(0, 0, 'grass')
+    gameAdvancer.click(0, 0)
+    gameStateChecker.checkSelectedTile(0, 0)
+    gameStateChecker.checkButtonAmountInMenu(4)
+
+    gameAdvancer.click(0, 0)
+    gameStateChecker.checkSelectedTile()
+    gameStateChecker.checkButtonAmountInMenu(1)
+  })
 })
 
