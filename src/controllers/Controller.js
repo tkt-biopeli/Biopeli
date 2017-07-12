@@ -16,7 +16,7 @@ export default class Controller {
   redraw (timeEvent) {
     this.menuView.draw(this.buildSections(timeEvent))
   }
-  
+
   buildSections (timeEvent) {
     this.initialize()
 
@@ -85,7 +85,7 @@ export default class Controller {
     )
   }
 
-  resetDecoratedButton(name, asset, functionToCall, context, ...callValues){
+  resetDecoratedButton (name, asset, functionToCall, context, ...callValues) {
     var wrapped = this.wrapFunctionValueArray(functionToCall, context, callValues)
     var rd = new ResetDecorator({
       action: {
@@ -97,11 +97,11 @@ export default class Controller {
     this.button(name, rd.act, rd, asset)
   }
 
-  wrappedButton(name, asset, functionToCall, context, ...callValues){
+  wrappedButton (name, asset, functionToCall, context, ...callValues) {
     this.button(name, this.wrapFunctionValueArray(functionToCall, context, callValues), context, asset)
   }
 
-  addStateButton(name, asset, stateName, value) {
+  addStateButton (name, asset, stateName, value) {
     this.wrappedButton(name, asset, this.addState, this, stateName, value)
   }
 

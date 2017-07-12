@@ -42,7 +42,7 @@ export default class GameState {
     this.initializeModel(cityName, gameLength, startMoney, mapWidth, mapHeight, tileWidth, tileHeight)
     this.initializeView()
     this.initializeControllers()
-    
+
     this.mapListener = new MapListener({
       game: state,
       map: this.map,
@@ -161,9 +161,7 @@ export default class GameState {
 
     this.menuContent = new SideMenuContent({
       city: this.city,
-      gameEvents: this.gameEvents,
-      player: this.player,
-      structureFactory: this.structureFactory
+      gameEvents: this.gameEvents
     })
 
     var buildStructureController = new BuildStructureContent({

@@ -1,8 +1,4 @@
-import ButtonComponent from '../components/ButtonComponent'
-import ResetDecorator from '../helpers/ResetDecorator'
 import MenuContent from './MenuContent'
-import config from '../../config'
-
 /**
  * Controller of side menu of the game
  */
@@ -13,10 +9,8 @@ export default class SideMenuContent extends MenuContent {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor ({ player, structureFactory, city, gameEvents }) {
+  constructor ({ city, gameEvents }) {
     super()
-    this.structureFactory = structureFactory
-    this.player = player
     this.city = city
     this.gameEvents = gameEvents
   }
@@ -71,13 +65,13 @@ export default class SideMenuContent extends MenuContent {
   buttonActionsForTile (tile) {
     var allowedStructures = tile.tileType.allowedStructures
 
-    for(let structureType of allowedStructures) {
+    for (let structureType of allowedStructures) {
       this.owner.changeButton(
-        structureType.name, 
-        1, 
+        structureType.name,
+        1,
         this.owner.wrapFunction(this.owner.addState, this.owner, 'structureType', structureType),
         this
-        )
+      )
     }
   }
 }

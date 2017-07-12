@@ -1,5 +1,4 @@
 export default class MenuContent {
-
   setOwner (owner) {
     this.owner = owner
   }
