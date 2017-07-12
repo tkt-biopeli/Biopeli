@@ -60,8 +60,8 @@ export default class Controller {
 
   animatedBar (width, height, horizontal, percent) {
     this.currentSection.push(new AnimatedBarComponent({
-      width: 100,
-      height: 40,
+      width: width,
+      height: height,
       horizontal: true,
       percent: percent / 100
     }))
@@ -85,6 +85,20 @@ export default class Controller {
     )
   }
 
+  add (component) {
+    this.currentSection.push(component)
+  }
+
+  addSection (section) {
+    this.sections.push(section)
+    this.currentSection = section
+  }
+
+  addSections (sections) {
+    this.sections = this.sections.concat(sections)
+    this.currentSection = this.sections[this.sections.length - 1]
+  }
+
   resetDecoratedButton (name, asset, functionToCall, context, ...callValues) {
     var wrapped = this.wrapFunctionValueArray(functionToCall, context, callValues)
     var rd = new ResetDecorator({
@@ -103,20 +117,6 @@ export default class Controller {
 
   addStateButton (name, asset, stateName, value) {
     this.wrappedButton(name, asset, this.addState, this, stateName, value)
-  }
-
-  add (component) {
-    this.currentSection.push(component)
-  }
-
-  addSection (section) {
-    this.sections.push(section)
-    this.currentSection = section
-  }
-
-  addSections (sections) {
-    this.sections = this.sections.concat(sections)
-    this.currentSection = this.sections[this.sections.length - 1]
   }
 
   wrapFunction (func, context, ...values) {
