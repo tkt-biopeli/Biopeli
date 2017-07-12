@@ -31,8 +31,6 @@ export default class SideMenuContent extends MenuContent {
     this.text('Yearly demand: ' + this.city.yearlyTurnipDemand)
     this.button('Lopeta', this.gameEvents.finishGame, this.gameEvents)
 
-    this.owner.changeButton('test', 1)
-
     if (!this.owner.hasStateValue('selectedTile')) {
       return
     }
@@ -56,75 +54,30 @@ export default class SideMenuContent extends MenuContent {
       this.text('Production per time: ' + structure.calculateProductionEfficiency())
     }
 
-    this.section()
-    var buttonComponents = this.tileActions(tile)
-    for (let button of buttonComponents) {
-      this.add(button)
-    }
+    this.tileActions(tile)
   }
 
   tileActions (tile) {
-    var buttonActions = this.getActions(tile)
-    this.decorateButtonComponents(buttonActions)
-    return buttonActions
-  }
-
-  getActions (tile) {
     if (tile == null) {
-      return []
+      return
     }
 
     if (tile.structure == null) {
-      return this.buttonActionsForTile(tile)
+      this.section()
+      this.buttonActionsForTile(tile)
     }
-
-    return []
   }
 
   buttonActionsForTile (tile) {
     var allowedStructures = tile.tileType.allowedStructures
 
-    return allowedStructures.map(
-      structureType => this.buttonForStructure(tile, structureType)
-    )
-  }
-
-  buttonForStructure (tile, structureType) {
-    let button = new ButtonComponent({
-      name: structureType.name + ' : ' + structureType.cost + '€',
-      functionToCall: () => { this.structureFactory.buildBuilding(tile, structureType) },
-      context: this.structureFactory,
-      height: config.menuButtonHeight,
-      width: config.menuButtonWidth,
-      fontSize: config.menuFontSize,
-      asset: 'emptyButton'
-    })
-    if (!this.player.enoughCashFor(structureType.cost)) button.deactivate()
-    return button
-  }
-
-  /**
-   * Creates reset decorator for buttons
-   */
-  decorateButtonComponents (buttonComponents) {
-    for (let i = 0; i < buttonComponents.length; i++) {
-      var buttonComponent = buttonComponents[i]
-      if(buttonComponent.type != 'button'){
-        continue
-      }
-      var resetDecorator = new ResetDecorator({
-        action: buttonComponent,
-        controller: this.owner
-      })
-      buttonComponents[i] = new ButtonComponent({
-        name: buttonComponent.name,
-        functionToCall: resetDecorator.act,
-        context: resetDecorator,
-        width: buttonComponent.width,
-        height: buttonComponent.height,
-        fontSize: buttonComponent.fontSize,
-        asset: buttonComponent.asset
-      })
+    for(let structureType of allowedStructures) {
+      this.owner.changeButton(
+        structureType.name, 
+        1, 
+        this.owner.wrapFunction(this.owner.addState, this.owner, 'structureType', structureType),
+        this
+        )
     }
   }
 }

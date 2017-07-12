@@ -166,13 +166,17 @@ export default class GameState {
       structureFactory: this.structureFactory
     })
 
-    var buildStructureController = new BuildStructureContent()
+    var buildStructureController = new BuildStructureContent({
+      player: this.player,
+      structureFactory: this.structureFactory
+    })
 
     this.menuController = new MulticontentController({
       game: this.state,
       menuView: this.menuView,
       style: new Style({
         mediumFont: 16,
+        largeFont: 32,
         buttonHeight: config.menuButtonHeight,
         buttonWidth: config.menuButtonWidth
       }),

@@ -36,7 +36,6 @@ export default class MulticontentController extends Controller {
   changeContent (index, ...stateValues) {
     this.getStack.push(this.index)
     this.index = index
-    this.redraw()
   }
 
   changeButton (name, index, extraFunction, context) {
@@ -46,7 +45,8 @@ export default class MulticontentController extends Controller {
       if (extraFunction != null) {
         extraFunction.call(context)
       }
-    })(index), this)
+      this.redraw()
+    })(index, extraFunction, context), this)
   }
 
   reset () {

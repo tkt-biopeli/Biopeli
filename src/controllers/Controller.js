@@ -2,6 +2,7 @@ import TextComponent from './components/TextComponent'
 import ButtonComponent from './components/ButtonComponent'
 import AnimatedBarComponent from './components/AnimatedBarComponent'
 import IconComponent from './components/IconComponent'
+import ResetDecorator from './helpers/ResetDecorator'
 
 export default class Controller {
   constructor (game, style, menuView) {
@@ -82,6 +83,18 @@ export default class Controller {
         asset: asset
       })
     )
+  }
+
+  resetDecoratedButton(name, asset, functionToCall, context, ...callValues){
+    var wrapped = this.wrapFunctionValueArray(functionToCall, context, callValues)
+    var rd = new ResetDecorator({
+      action: {
+        function: wrapped,
+        context: this
+      },
+      controller: this
+    })
+    this.button(name, rd.act, rd, asset)
   }
 
   wrappedButton(name, asset, functionToCall, context, ...callValues){
