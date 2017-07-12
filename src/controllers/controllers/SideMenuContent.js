@@ -18,8 +18,6 @@ export default class SideMenuContent extends MenuContent {
     this.structureFactory = structureFactory
     this.player = player
     this.city = city
-    this.selectedTile = null
-    this.buttonComponents = []
     this.gameEvents = gameEvents
   }
 
@@ -35,11 +33,11 @@ export default class SideMenuContent extends MenuContent {
 
     this.owner.changeButton('test', 1)
 
-    if (this.selectedTile == null) {
+    if (!this.owner.hasStateValue('selectedTile')) {
       return
     }
 
-    var tile = this.selectedTile
+    var tile = this.owner.stateValue('selectedTile')
 
     this.section()
     this.text('Ground type: ' + tile.tileType.name)
@@ -59,23 +57,16 @@ export default class SideMenuContent extends MenuContent {
     }
 
     this.section()
-
-    for (let button of this.buttonComponents) {
+    var buttonComponents = this.tileActions(tile)
+    for (let button of buttonComponents) {
       this.add(button)
     }
   }
 
-  /**
-   * Sets the chose tile of the menu
-   * @param {*} tile
-   * @param {*} buttonComponents
-   */
-  chooseTile (tile) {
-    this.selectedTile = tile
-    this.buttonComponents = this.getActions(tile)
-
-    this.decorateButtonComponents()
-    this.owner.redraw()
+  tileActions (tile) {
+    var buttonActions = this.getActions(tile)
+    this.decorateButtonComponents(buttonActions)
+    return buttonActions
   }
 
   getActions (tile) {
@@ -108,17 +99,17 @@ export default class SideMenuContent extends MenuContent {
   /**
    * Creates reset decorator for buttons
    */
-  decorateButtonComponents () {
-    for (let i = 0; i < this.buttonComponents.length; i++) {
-      var buttonComponent = this.buttonComponents[i]
+  decorateButtonComponents (buttonComponents) {
+    for (let i = 0; i < buttonComponents.length; i++) {
+      var buttonComponent = buttonComponents[i]
       if(buttonComponent.type != 'button'){
         continue
       }
       var resetDecorator = new ResetDecorator({
         action: buttonComponent,
-        menu: this
+        controller: this.owner
       })
-      this.buttonComponents[i] = new ButtonComponent({
+      buttonComponents[i] = new ButtonComponent({
         name: buttonComponent.name,
         functionToCall: resetDecorator.act,
         context: resetDecorator,
@@ -128,12 +119,5 @@ export default class SideMenuContent extends MenuContent {
         asset: buttonComponent.asset
       })
     }
-  }
-
-  /**
-   * Unchooses the chosen tile
-   */
-  reset () {
-    this.chooseTile(null)
   }
 }

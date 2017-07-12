@@ -9,7 +9,9 @@ export default class MulticontentController extends Controller {
       content.setOwner(this)
     }
 
-    this.index = (startIndex != null ? startIndex : 0)
+    this.startIndex = (startIndex != null ? startIndex : 0)
+    this.index = this.startIndex
+    
     this.getStack = []
   }
 
@@ -31,13 +33,33 @@ export default class MulticontentController extends Controller {
     this.redraw()
   }
 
-  changeContent (index) {
+  changeContent (index, ...stateValues) {
     this.getStack.push(this.index)
     this.index = index
     this.redraw()
   }
 
-  changeButton (name, index) {
-    this.button(name, (index => () => this.changeContent(index))(index), this)
+  changeButton (name, index, extraFunction, context) {
+    this.button(name, 
+    ((index, extraFunction, context) => () => {
+      this.changeContent(index)
+      if (extraFunction != null) {
+        extraFunction.call(context)
+      }
+    })(index), this)
+  }
+
+  atStateChange(){
+    this.index = this.startIndex
+    this.getStack = []
+
+    super.atStateChange()
+  }
+
+  reset () {
+    this.index = this.startIndex
+    this.getStack = []
+
+    super.reset()
   }
 }

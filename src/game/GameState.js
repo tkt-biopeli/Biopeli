@@ -46,8 +46,7 @@ export default class GameState {
     this.mapListener = new MapListener({
       game: state,
       map: this.map,
-      menuContent: this.menuContent,
-      menuView: this.menuView
+      menuController: this.menuController
     })
 
     this.inputHandler = new InputHandler({
@@ -59,7 +58,7 @@ export default class GameState {
     this.mapView = new MapView({
       game: state,
       map: this.map,
-      menu: this.menuContent,
+      menuController: this.menuController,
       viewWidthPx: state.game.width - menuWidth,
       viewHeightPx: state.game.height
     })

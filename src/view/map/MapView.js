@@ -15,10 +15,10 @@ export default class MapView {
    * @param {number} param.viewWidthPx
    * @param {number} param.viewHeightPx
    */
-  constructor ({ game, map, menu, viewWidthPx, viewHeightPx }) {
+  constructor ({ game, map, menuController, viewWidthPx, viewHeightPx }) {
     this.game = game
     this.map = map
-    this.menu = menu
+    this.menuController = menuController
     this.viewWidthPx = viewWidthPx
     this.viewHeightPx = viewHeightPx
     this.tileWidth = map.tileWidth
@@ -149,7 +149,7 @@ export default class MapView {
    * @param {{x: number, y: number}} pxCoords
    */
   highlightSelectedTile (tile, pxCoords) {
-    if (tile === this.menu.selectedTile) {
+    if (tile === this.menuController.stateValue('selectedTile')) {
       this.addToViewTexture(this.highlight(), pxCoords.x, pxCoords.y)
     }
   }

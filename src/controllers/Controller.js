@@ -8,6 +8,8 @@ export default class Controller {
     this.game = game
     this.style = style
     this.menuView = menuView
+
+    this.state = new Map()
   }
 
   redraw (timeEvent) {
@@ -82,6 +84,14 @@ export default class Controller {
     )
   }
 
+  wrappedButton(name, asset, functionToCall, context, ...callValues){
+    this.button(name, this.wrapFunctionValueArray(functionToCall, context, callValues), context, asset)
+  }
+
+  addStateButton(name, asset, stateName, value) {
+    this.wrappedButton(name, asset, this.addState, this, stateName, value)
+  }
+
   add (component) {
     this.currentSection.push(component)
   }
@@ -94,5 +104,35 @@ export default class Controller {
   addSections (sections) {
     this.sections = this.sections.concat(sections)
     this.currentSection = this.sections[this.sections.length - 1]
+  }
+
+  wrapFunction (func, context, ...values) {
+    return this.wrapFunctionValueArray(func, context, values)
+  }
+
+  wrapFunctionValueArray (func, context, values) {
+    return ((func, context, values) => () => func.apply(context, values))(func, context, values)
+  }
+
+  addState (name, value) {
+    this.state.set(name, value)
+    this.atStateChange()
+  }
+
+  stateValue (name) {
+    return this.state.get(name)
+  }
+
+  hasStateValue (name) {
+    return this.state.get(name) != null
+  }
+
+  atStateChange () {
+    this.redraw()
+  }
+
+  reset () {
+    this.state.clear()
+    this.redraw()
   }
 }
