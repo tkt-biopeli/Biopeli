@@ -1,3 +1,4 @@
+import utils from '../../utils'
 /**
  * Generates a random name for a building and it's owner
  */
@@ -13,6 +14,7 @@ export default class StructureNameGenerator {
     this.names = names
     this.endAdjectives = endAdjectives
     this.hyperboles = hyperboles
+    this.mathRandom = utils.random
   }
 
   /**
@@ -34,7 +36,7 @@ export default class StructureNameGenerator {
     var end = this.getRandom(this.endAdjectives.length)
     var type = this.findType(structureType)
     var hyper = this.getRandom(this.hyperboles.length)
-    if (Math.random() < 0.25) {
+    if (this.mathRandom() < 0.25) {
       var tmp = this.endAdjectives[end].toLowerCase()
       return this.hyperboles[hyper] + '-' + tmp + ' ' + type
     }
@@ -68,6 +70,6 @@ export default class StructureNameGenerator {
    * @returns {int}
    */
   getRandom (max) {
-    return Math.floor(Math.random() * max)
+    return Math.floor(this.mathRandom() * max)
   }
 }

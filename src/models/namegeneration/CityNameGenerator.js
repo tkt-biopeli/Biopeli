@@ -1,3 +1,4 @@
+import utils from '../../utils'
 /**
  * Generates a random name for the city
  */
@@ -7,6 +8,7 @@ export default class CityNameGenerator {
    */
   constructor ({cityNames}) {
     this.cityNames = cityNames
+    this.mathRandom = utils.random
   }
 
   /**
@@ -67,7 +69,7 @@ export default class CityNameGenerator {
    * @returns {int} - randomly chosen id
    */
   getRandomId () {
-    var r = Math.random()
+    var r = this.mathRandom()
     return Math.floor(r * (this.cityNames.length))
   }
 }
