@@ -82,6 +82,7 @@ export default class MapListener {
    * @param {ModelTile} tile
    */
   updateMenuOptions (tile) {
+    this.menuController.reset()
     this.menuController.addState('selectedTile', tile)
   }
 }

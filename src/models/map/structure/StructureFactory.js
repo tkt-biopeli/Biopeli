@@ -11,8 +11,6 @@ export default class StructureFactory {
    * Description goes here
    *
    * @param {object} param
-   *
-   * @param {ModelTile} param.tile
    * @param {GameTimer} param.gameTimer
    */
   constructor ({ gameTimer, player }) {
@@ -42,7 +40,8 @@ export default class StructureFactory {
       size: 10,
       structureType: structureType,
       foundingYear: this.gameTimer.currentTime.year,
-      produceFn: this.createProductionFn(structureType)
+      produceFn: this.createProductionFn(structureType, tile),
+      cost: structureType.cost
     })
     this.player.addStructure(tile.structure)
   }
@@ -51,14 +50,11 @@ export default class StructureFactory {
     if (this.player.cash < structureType.cost) {
       return false
     }
-
     this.player.cash -= structureType.cost
-
     return true
   }
 
-  createProductionFn (structureType) {
-    var productionFn = StructureProduction.createProductionFn(structureType)
-    return productionFn
+  createProductionFn (structureType, tile) {
+    return StructureProduction.createProductionFn(structureType, tile)
   }
 }

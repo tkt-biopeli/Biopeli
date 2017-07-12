@@ -3,7 +3,7 @@ const sinon = require("sinon")
 import StructureProduction from '../../../src/models/map/structure/StructureProduction'
 
 describe('StructureProduction tests', () => {
-  var structureType, timeEvent
+  var structureType, timeEvent, tile
 
   beforeEach(() => {
     timeEvent = {
@@ -16,17 +16,22 @@ describe('StructureProduction tests', () => {
       continuousProduction: true,
       turnipYield: 17
     }  
+
+    tile = {
+      flowers: 1
+    }
   })
 
   it('productionFn returns zero when structure type is undefined', () => {
     var foo
-    var productionFn = StructureProduction.createProductionFn(foo)
+   
+    var productionFn = StructureProduction.createProductionFn(foo, tile)
 
     assert.equal(0, productionFn(timeEvent))
   })
 
   it('productionFn works with constantly-yielding structure type', () => {
-    var productionFn = StructureProduction.createProductionFn(structureType)
+    var productionFn = StructureProduction.createProductionFn(structureType, tile)
 
     assert.equal(17, productionFn(timeEvent))
     timeEvent.month = 7
@@ -37,7 +42,7 @@ describe('StructureProduction tests', () => {
 
   it('productionFn works with periodically-yielding structure type', () => {
     structureType.continuousProduction = false
-    var productionFn = StructureProduction.createProductionFn(structureType)
+    var productionFn = StructureProduction.createProductionFn(structureType, tile)
 
     assert.equal(0, productionFn(timeEvent))
     timeEvent.month = 7

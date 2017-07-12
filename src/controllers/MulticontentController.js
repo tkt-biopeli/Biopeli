@@ -49,13 +49,6 @@ export default class MulticontentController extends Controller {
     })(index), this)
   }
 
-  atStateChange(){
-    this.index = this.startIndex
-    this.getStack = []
-
-    super.atStateChange()
-  }
-
   reset () {
     this.index = this.startIndex
     this.getStack = []

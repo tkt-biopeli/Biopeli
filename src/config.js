@@ -13,8 +13,8 @@ export default {
   gameLength: 180,
 
   // configurations for tiles
-  tileWidth: 128,
-  tileHeight: 128,
+  tileWidth: 64,
+  tileHeight: 64,
 
   // configurations for map
   madWidthMultiplier: 4,
@@ -55,6 +55,9 @@ export default {
   cityInitialDemand: 100,
   cityInitialTurnips: 0,
   cityInitialPopulation: 100,
+
+  // currency
+  currency: 'Ag',
 
   // fonts
   fontBig: '64px Arial',

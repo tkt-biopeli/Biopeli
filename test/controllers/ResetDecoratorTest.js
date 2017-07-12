@@ -4,7 +4,7 @@ import ResetDecorator from '../../src/controllers/helpers/ResetDecorator'
 
 describe('Reset decorator tests', () => {
   it('Constructor test', () => {
-    var dec = new ResetDecorator({ action: 1, menu: 0 })
+    var dec = new ResetDecorator({ action: 1,  controller: 0 })
 
     assert.equal(1, dec.action)
     assert.equal(0, dec.controller)
@@ -13,7 +13,7 @@ describe('Reset decorator tests', () => {
   it('Decorator calls action right', () => {
     var spy = sinon.spy()
     var action = { function: spy, context: 2 }
-    var decor = new ResetDecorator({ action: action, menu: { reset: function () { } } })
+    var decor = new ResetDecorator({ action: action, controller: { reset: function () { } } })
     decor.act()
 
     assert.equal(1, spy.callCount)
@@ -22,8 +22,8 @@ describe('Reset decorator tests', () => {
 
   it('Reset is called', () => {
     var spy = sinon.spy()
-    var menuView = { reset: spy }
-    var decor = new ResetDecorator({ action: { function: function () { }, context: 0 }, menu: menuView })
+    var controller = { reset: spy }
+    var decor = new ResetDecorator({ action: { function: function () { }, context: 0 }, controller: controller })
     decor.act()
 
     assert.equal(1, spy.callCount)

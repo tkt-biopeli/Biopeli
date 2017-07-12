@@ -23,6 +23,9 @@ export default class Map {
     this.grid = []
   }
 
+  // to be added
+  getTilesInRadius (n, tile) { }
+
   /**
    * Description goes here
    *
@@ -135,7 +138,6 @@ export default class Map {
    * Description goes here
    *
    * @param {Number} x
-   *
    * @return {Number}
    */
   pixelsToGridX (x) {
@@ -146,7 +148,6 @@ export default class Map {
    * Description goes here
    *
    * @param {Number} y
-   *
    * @return {Number}
    */
   pixelsToGridY (y) {
@@ -157,7 +158,6 @@ export default class Map {
    * Description goes here
    *
    * @param {Number} x
-   *
    * @return {Number}
    */
   gridToPixelsX (x) {
@@ -168,7 +168,6 @@ export default class Map {
    * Description goes here
    *
    * @param {Number} y
-   *
    * @return {Number}
    */
   gridToPixelsY (y) {

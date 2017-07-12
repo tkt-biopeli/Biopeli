@@ -116,7 +116,7 @@ export default class Controller {
 
   addState (name, value) {
     this.state.set(name, value)
-    this.atStateChange()
+    this.redraw()
   }
 
   stateValue (name) {
@@ -125,10 +125,6 @@ export default class Controller {
 
   hasStateValue (name) {
     return this.state.get(name) != null
-  }
-
-  atStateChange () {
-    this.redraw()
   }
 
   reset () {

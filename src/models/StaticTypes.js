@@ -2,7 +2,7 @@
  * Harvesting week format 'month.week'.
  */
 const structureTypes = {
-  farm: {
+  wheat_farm: {
     name: 'wheat farm',
     asset: 'wheat_farm',
     harvestingWeeks: new Set(['8.1']),
@@ -32,23 +32,25 @@ const tileTypes = {
   forest: {
     name: 'forest',
     asset: 'forest',
+    flowers: 6,
     allowedStructures: []
   },
   grass: {
     name: 'grass',
     asset: 'grass',
+    flowers: 4,
     allowedStructures: []
   },
   water: {
     name: 'water',
     asset: 'water',
+    flowers: 5,
     allowedStructures: []
   }
 }
 
 const addAllowedStructures = (structureTypes, tileTypes) => {
-  tileTypes.forest.allowedStructures = [structureTypes.farm]
-  tileTypes.grass.allowedStructures = [structureTypes.farm, structureTypes.dairy_farm, structureTypes.berry_farm]
+  tileTypes.grass.allowedStructures = [structureTypes.wheat_farm, structureTypes.dairy_farm, structureTypes.berry_farm]
   tileTypes.water.allowedStructures = []
   return ({ structureTypes: structureTypes, tileTypes: tileTypes })
 }

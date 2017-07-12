@@ -104,6 +104,7 @@ describe('MapListener tests', () => {
 
     var mockMenu = sinon.mock(menuController)
     mockMenu.expects('addState').once()
+    mockMenu.expects('reset').once()
 
     ml.update(pointerEvent)
 

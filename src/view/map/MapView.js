@@ -138,6 +138,7 @@ export default class MapView {
    */
   createViewTileForFill (tile, pxCoords, viewArea, offset) {
     var viewTile = new ViewTile({ game: this.game, x: 0, y: 0, modelTile: tile })
+    viewTile.tileSprite.scale.setTo(0.5)
     this.addToViewTexture(viewTile.tileSprite, pxCoords.x, pxCoords.y)
 
     this.highlightSelectedTile(tile, pxCoords)
