@@ -12,9 +12,9 @@ import InputHandler from '../view/InputHandler'
 import Timer from '../view/Timer'
 import GameTimerListener from '../models/GameTimerListener'
 
-import TopBarContent from '../controllers/controllers/TopBarContent'
-import SideMenuContent from '../controllers/controllers/SideMenuContent'
-import BuildStructureContent from '../controllers/controllers/BuildStructureContent'
+import TopBarContent from '../controllers/contents/TopBarContent'
+import SideMenuContent from '../controllers/contents/SideMenuContent'
+import BuildStructureContent from '../controllers/contents/BuildStructureContent'
 import SingleController from '../controllers/SingleController'
 import MulticontentController from '../controllers/MulticontentController'
 
