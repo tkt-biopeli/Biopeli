@@ -85,15 +85,22 @@ export default class SideMenuContent extends MenuContent {
     var allowedStructures = tile.tileType.allowedStructures
 
     return allowedStructures.map(
-      structureType => new ButtonComponent({
-        name: structureType.name + ' : ' + structureType.cost + '€',
-        functionToCall: () => { this.structureFactory.buildBuilding(tile, structureType) },
-        context: this.structureFactory,
-        height: config.menuButtonHeight,
-        width: config.menuButtonWidth,
-        fontSize: config.menuFontSize,
-        asset: 'emptyButton'
-      }))
+      structureType => this.buttonForStructure(tile, structureType)
+    )
+  }
+
+  buttonForStructure (tile, structureType) {
+    let button = new ButtonComponent({
+      name: structureType.name + ' : ' + structureType.cost + '€',
+      functionToCall: () => { this.structureFactory.buildBuilding(tile, structureType) },
+      context: this.structureFactory,
+      height: config.menuButtonHeight,
+      width: config.menuButtonWidth,
+      fontSize: config.menuFontSize,
+      asset: 'emptyButton'
+    })
+    if (!this.player.enoughCashFor(structureType.cost)) button.deactivate()
+    return button
   }
 
   /**

@@ -99,6 +99,10 @@ export default class MenuView {
           this.createButton(component)
           break
         }
+        case 'unusablebutton': {
+          this.createButton(component)
+          break
+        }
         case 'icon': {
           this.createIcon(component)
           break

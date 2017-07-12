@@ -47,4 +47,8 @@ export default class {
       this.addPoints(fulfilledPct)
     }
   }
+
+  enoughCashFor (cost) {
+    return this.cash >= cost
+  }
 }
