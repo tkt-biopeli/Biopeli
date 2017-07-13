@@ -50,13 +50,15 @@ describe('StructureFactory tests', () => {
     assert(createProducerSpy.calledWith(structureType, tile))
     assert(addStructureSpy.calledWith(tile.structure))
   })
+  it('Build building does not do anything if checkMoney returns false', () => {
+    var tile = { structure: undefined, flowers: 0 }
+    var structureType = {}
+    var checkMoneyStub = sinon.stub()
+    checkMoneyStub.withArgs(structureType).returns(false)
 
-  it('If player doesn\'t have money, building isn\'t build', ()=>{
-    sfactory.checkMoney = () => false
-    var stype = {cost: 1}
-    sfactory.buildBuilding(null, stype)
-
-    assert.equal(0, player.addStructure.callCount)
+    sfactory.checkMoney = checkMoneyStub
+    sfactory.buildBuilding(tile, structureType)
+    assert.equal(tile.structure, undefined)
   })
 
   it('Money checking works', () =>{

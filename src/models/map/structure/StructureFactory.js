@@ -2,6 +2,7 @@ import Structure from './Structure'
 import ProducerFactory from './producers/ProducerFactory'
 import StructureNameGenerator from '../../namegeneration/StructureNameGenerator'
 import StructureNameParts from '../../namegeneration/StructureNameParts'
+import utils from '../../../utils'
 
 /**
  * Description goes here
@@ -20,7 +21,9 @@ export default class StructureFactory {
       frontAdjectives: StructureNameParts[0],
       names: StructureNameParts[1],
       endAdjectives: StructureNameParts[2],
-      hyperboles: StructureNameParts[3]
+      hyperboles: StructureNameParts[3],
+      random: utils.randomNoBounds,
+      randomWithBounds: utils.randomWithBounds
     })
   }
 
