@@ -4,7 +4,6 @@ import config from '../config'
  * Money is encapsulated in this class.
  */
 export default class Money {
-
   /**
   * The constructor fetches the currency string from the config
   * and sets the amount of money to zero.
@@ -52,7 +51,7 @@ const shownAmountConverter = (amount) => {
  * This function moves the decimal point in a number n by 'exponent' places
  * to the left. The return value is rounded to one decimal.
  */
-function moveDecimal(n, exponent) {
-  var v = n/Math.pow(10, exponent)
+function moveDecimal (n, exponent) {
+  var v = n / Math.pow(10, exponent)
   return v.toFixed(1)
 }

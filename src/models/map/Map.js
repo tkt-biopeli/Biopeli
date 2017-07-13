@@ -1,5 +1,4 @@
 import ModelTile from './ModelTile'
-import StaticTypes from '../StaticTypes'
 import MapGen from './MapGen'
 
 /**
@@ -101,13 +100,13 @@ export default class Map {
 
   /**
    * Generates the game map
-   * 
-   * @param {number} seed - optional seed for map generation 
+   *
+   * @param {number} seed - optional seed for map generation
    * @todo seed does not work
    */
   createMap (seed) {
     var mapgen = new MapGen({
-      height: this.gridSizeY, 
+      height: this.gridSizeY,
       width: this.gridSizeX,
       seed: seed
     })
@@ -115,7 +114,7 @@ export default class Map {
     var x, y
     for (x = 0; x < this.gridSizeX; x++) {
       for (y = 0; y < this.gridSizeY; y++) {
-        this.addTileWithGridCoordinates(x, y, mapgen.typeAt(x,y))
+        this.addTileWithGridCoordinates(x, y, mapgen.typeAt(x, y))
       }
     }
   }
@@ -162,4 +161,3 @@ export default class Map {
     return y * this.tileHeight
   }
 }
-
