@@ -3,13 +3,17 @@ import Phaser from 'phaser'
 import MenuBuilder from '../controllers/MenuBuilder'
 import CityNameGenerator from '../models/namegeneration/CityNameGenerator'
 import CityNames from '../models/namegeneration/CityNameList'
+import utils from '../utils'
 
 /**
  * Screen displayed when the game is started
  */
 export default class Start extends Phaser.State {
   create () {
-    var cityName = new CityNameGenerator({cityNames: CityNames}).generateName()
+    var cityName = new CityNameGenerator({
+      cityNames: CityNames,
+      randomWithBounds: utils.randomWithBounds
+    }).generateName()
 
     this.menu = new MenuBuilder(this, 'start', this.camera.height / 4)
     this.menu.createTitle('Biopeli')

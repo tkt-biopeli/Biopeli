@@ -1,19 +1,23 @@
 const assert = require("assert")
 const sinon = require("sinon")
 import CityNameGenerator from '../../../src/models/namegeneration/CityNameGenerator'
+import utils from '../../../src/utils'
 
 describe('Tests for city name generation', () => {
-  var namegen, getEndSpy, getStartSpy, randomIdStub
-  var oneFull
+  var namegen, randomStub, oneFull
 
   beforeEach(() => {
-    randomIdStub = sinon.stub()
+    randomStub = sinon.stub()
 
     oneFull = [
       {name: 'Helsinki', point: 6},
       {name: 'Turku', point: 3, full: 5}
     ]
-    namegen = new CityNameGenerator({cityNames: oneFull})
+    namegen = new CityNameGenerator({
+      cityNames: oneFull,
+      random: utils.randomNoBounds,
+      randomWithBounds: utils.randomWithBounds
+    })
   })
 
   it('getStart works', () => {
@@ -27,28 +31,26 @@ describe('Tests for city name generation', () => {
   })
 
   it('Name is generated correctly', () => {
-    namegen.getRandomId = randomIdStub
-    randomIdStub.onCall(0).returns(0)
-    randomIdStub.onCall(1).returns(1)
+    namegen.randomWithBounds = randomStub
+    randomStub.onCall(0).returns(0)
+    randomStub.onCall(1).returns(1)
     var name = namegen.generateName()
     assert.equal(name, 'Helsinku')
   })
 
   it('Changes first and second if same', () => {
-    namegen.getRandomId = randomIdStub
-    randomIdStub.onCall(0).returns(0)
-    randomIdStub.onCall(1).returns(0)
+    namegen.randomWithBounds = randomStub
+    randomStub.onCall(0).returns(0)
+    randomStub.onCall(1).returns(0)
     var name = namegen.generateName()
     assert.equal(name, 'Helsinku')
   })
 
   it('Changes first and second if same and last', () => {
-    namegen.getRandomId = randomIdStub
-    randomIdStub.onCall(0).returns(1)
-    randomIdStub.onCall(1).returns(1)
+    namegen.randomWithBounds = randomStub
+    randomStub.onCall(0).returns(1)
+    randomStub.onCall(1).returns(1)
     var name = namegen.generateName()
     assert.equal(name, 'TurkuHelsinki')
   })
-  
-
 })

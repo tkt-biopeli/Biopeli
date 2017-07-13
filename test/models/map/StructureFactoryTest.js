@@ -49,6 +49,17 @@ describe('StructureFactory tests', () => {
     assert(addStructureSpy.calledWith(tile.structure))
   })
 
+  it('Build building does not do anything if checkMoney returns false', () => {
+    var tile = { structure: undefined, flowers: 0 }
+    var structureType = {}
+    var checkMoneyStub = sinon.stub()
+    checkMoneyStub.withArgs(structureType).returns(false)
+
+    sbuilder.checkMoney = checkMoneyStub
+    sbuilder.buildBuilding(tile, structureType)
+    assert.equal(tile.structure, undefined)
+  })
+
   it('Money checking works', () =>{
     player.cash = 2
     var st = {cost: 1}
