@@ -85,7 +85,7 @@ export default class GameState {
     })
 
     // fill map grid with sample data
-    this.map.createMapHalfForestHalfWater()
+    this.map.createMap()
 
     this.player = new Player({startMoney: startMoney})
     this.city = new City({ name: cityName })

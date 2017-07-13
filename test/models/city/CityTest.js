@@ -1,13 +1,19 @@
 import City from '../../../src/models/city/City'
 import config from '../../../src/config'
+import DemandFunction from '../../../src/models/city/DemandFunction'
 const assert = require('assert')
 
 describe('City tests', () => {
 
-  var city
+  var city, demandFn
 
   before(() => {
     city = new City({ name: 'test' })
+    demandFn = new DemandFunction({
+      city: city, 
+      popularityPct: 10, 
+      slope:10
+    })
   })
 
   it('Constructor works', () => {
@@ -42,4 +48,5 @@ describe('City tests', () => {
   it('City pays money to player according to satisfaction level', () => {
     // test here
   })
+
 })

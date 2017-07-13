@@ -1,5 +1,5 @@
 import ModelTile from './ModelTile'
-import StaticTypes from '../StaticTypes'
+import MapGen from './MapGen'
 
 /**
  * Description goes here
@@ -99,35 +99,22 @@ export default class Map {
   }
 
   /**
-   * TEST DATA
+   * Generates the game map
+   *
+   * @param {number} seed - optional seed for map generation
+   * @todo seed does not work
    */
-  createMapHalfForestHalfWater () {
-    var limit = 0.2
-    var tileTypes = StaticTypes.tileTypes
-    var r = Math.random()
+  createMap (seed) {
+    var mapgen = new MapGen({
+      height: this.gridSizeY,
+      width: this.gridSizeX,
+      seed: seed
+    })
 
-    for (var i = 0; i < this.gridSizeY; i++) {
-      if (i % 2 === 0) {
-        for (var j = 0; j < this.gridSizeX; j++) {
-          if (r > limit) {
-            this.addTileWithGridCoordinates(j, i, tileTypes.grass)
-          } else {
-            this.addTileWithGridCoordinates(j, i, tileTypes.grass)
-          }
-        }
-      } else {
-        for (var k = 0; k < this.gridSizeX; k++) {
-          r = Math.random()
-          if (r > limit) {
-            this.addTileWithGridCoordinates(k, i, tileTypes.grass)
-          } else {
-            if (r > 0.08) {
-              this.addTileWithGridCoordinates(k, i, tileTypes.forest)
-            } else {
-              this.addTileWithGridCoordinates(k, i, tileTypes.water)
-            }
-          }
-        }
+    var x, y
+    for (x = 0; x < this.gridSizeX; x++) {
+      for (y = 0; y < this.gridSizeY; y++) {
+        this.addTileWithGridCoordinates(x, y, mapgen.typeAt(x, y))
       }
     }
   }
