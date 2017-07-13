@@ -7,7 +7,10 @@ export default {
       object.anchor.setTo(0.5)
     })
   },
-  random: () => {
+  randomNoBounds: () => {
     return Math.random()
+  },
+  randomWithBounds: (lower, upper) => {
+    return Math.floor(Math.random() * upper + lower)
   }
 }

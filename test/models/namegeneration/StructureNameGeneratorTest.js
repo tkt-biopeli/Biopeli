@@ -1,12 +1,14 @@
 const assert = require("assert")
 const sinon = require("sinon")
 import StructureNameGenerator from '../../../src/models/namegeneration/StructureNameGenerator'
+import utils from '../../../src/utils'
 
 describe('Tests for structure name generation', () => {
-  var namegen, randomStub, parts, structureType
+  var namegen, randomStub, randomWithBoundsStub, parts, structureType
 
   beforeEach(() => {
     randomStub = sinon.stub()
+    randomWithBoundsStub = sinon.stub()
 
     structureType = 'wheat farm'
 
@@ -21,12 +23,15 @@ describe('Tests for structure name generation', () => {
       frontAdjectives: parts[0],
       names: parts[1],
       endAdjectives: parts[2],
-      hyperboles: parts[3]
+      hyperboles: parts[3],
+      random: utils.randomNoBounds,
+      randomWithBounds: utils.randomWithBounds
     })
 
-    namegen.mathRandom = randomStub
-    randomStub.onCall(0).returns(0)
-    randomStub.onCall(1).returns(0)
+    namegen.random = randomStub
+    namegen.randomWithBounds = randomWithBoundsStub
+    randomWithBoundsStub.onCall(0).returns(0)
+    randomWithBoundsStub.onCall(1).returns(0)
   })
 
   it('findType works', () => {
@@ -37,12 +42,12 @@ describe('Tests for structure name generation', () => {
   })
 
   it('createBuildingName produces name with hyperbole', () => {
-    randomStub.onCall(2).returns(0.24)
+    randomStub.onCall(0).returns(0.24)
     assert.equal(namegen.createBuildingName(structureType), 'foo-bar viljatila')
   })
 
   it('createBuildingName produces name without hyperbole', () => {
-    randomStub.onCall(2).returns(0.25)
+    randomStub.onCall(0).returns(0.25)
     assert.equal(namegen.createBuildingName(structureType), 'bar viljatila')
   })
 

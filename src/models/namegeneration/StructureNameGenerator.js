@@ -1,4 +1,3 @@
-import utils from '../../utils'
 /**
  * Generates a random name for a building and it's owner
  */
@@ -9,20 +8,21 @@ export default class StructureNameGenerator {
   * @param {Object[]} param.endAdjectives - list of adjectives
   * @param {Object[]} param.hyperboles - list of hyperbole words
   */
-  constructor ({ frontAdjectives, names, endAdjectives, hyperboles }) {
+  constructor ({ frontAdjectives, names, endAdjectives, hyperboles, random, randomWithBounds }) {
     this.frontAdjectives = frontAdjectives
     this.names = names
     this.endAdjectives = endAdjectives
     this.hyperboles = hyperboles
-    this.mathRandom = utils.random
+    this.random = random
+    this.randomWithBounds = randomWithBounds
   }
 
   /**
   * @returns {String} Name of the owner of the building
   */
   createOwnerName () {
-    var front = this.getRandom(this.frontAdjectives.length)
-    var name = this.getRandom(this.names.length)
+    var front = this.randomWithBounds(0, this.frontAdjectives.length)
+    var name = this.randomWithBounds(0, this.names.length)
     return this.frontAdjectives[front] + ' ' + this.names[name]
   }
 
@@ -33,10 +33,10 @@ export default class StructureNameGenerator {
    * @returns {String} - name for building
    */
   createBuildingName (structureType) {
-    var end = this.getRandom(this.endAdjectives.length)
+    var end = this.randomWithBounds(0, this.endAdjectives.length)
     var type = this.findType(structureType)
-    var hyper = this.getRandom(this.hyperboles.length)
-    if (this.mathRandom() < 0.25) {
+    var hyper = this.randomWithBounds(0, this.hyperboles.length)
+    if (this.random() < 0.25) {
       var tmp = this.endAdjectives[end].toLowerCase()
       return this.hyperboles[hyper] + '-' + tmp + ' ' + type
     }
@@ -61,15 +61,5 @@ export default class StructureNameGenerator {
       type = 'marjatila'
     }
     return type
-  }
-
-  /**
-   * Generates a random int smaller than max
-   *
-   * @param {int} max
-   * @returns {int}
-   */
-  getRandom (max) {
-    return Math.floor(this.mathRandom() * max)
   }
 }
