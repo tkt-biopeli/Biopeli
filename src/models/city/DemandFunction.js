@@ -3,40 +3,45 @@ export default class DemandFunction {
     this.city = city
     this.popularityPct = popularityPct
     this.slope = slope
+
+    this.calculateYearlyDemand()
+  }
+
+  calculateYearlyDemand () {
+    this.collectedSupply = 0
+    this.yearDemand = this.demandedAmount()
+
+    this.constantPoint = this.yearDemand / 2
+    this.constantPrice = this.slope * this.constantPoint * -1
   }
 
   weekly (supply) {
-    let demand = this.demandedAmount()
-    this.city.weeklyTurnipDemand = demand / 2
-    this.city.yearlyTurnipDemand += demand / 4
-    return this.calculate(supply, demand, true)
+    var price = this.pay(supply)
+    this.collectedSupply += supply
+    return price
   }
 
-  yearly (supply) {
-    let demand = this.city.yearlyTurnipDemand * 2
-    let fulfilledAndEarnings = this.calculate(supply, demand)
-    this.city.yearlyTurnipDemand = 0
-    return fulfilledAndEarnings
+  yearly () {
+    this.calculateYearlyDemand()
   }
 
-  calculate (supply, demand, weekly) {
-    let ratio = weekly ? supply / this.city.weeklyTurnipDemand : supply / this.city.yearlyTurnipDemand
-    let fulfilledPct = ratio < 1 ? ratio * 100 : 100
-    let slope = weekly ? this.slope : this.slope * 6
+  pay (supply) {
+    var newSupply = this.collectedSupply + supply
+    var startPrice = this.priceAt(this.collectedSupply)
+    var endPrice = this.priceAt(newSupply)
 
-    return {
-      percentage: Math.floor(fulfilledPct),
-      earnings: Math.floor(supply * this.price(supply, demand, slope))
+    if(this.collectedSupply < this.constantPoint &&  newSupply > this.constantPoint) {
+      var overSupply = (newSupply - this.constantPoint)
+      return startPrice * (newSupply - overSupply) + (startPrice + endPrice) / 2 * overSupply
     }
+
+    return (startPrice + endPrice) / 2 * supply
   }
 
-  price (supply, demand, slope) {
-    let price = (demand - supply) / slope
-    return price > 0 ? price : 0
-  }
-
-  customers () {
-    return this.city.population * this.popularityPct / 100
+  priceAt (supplyPoint) {
+    return (supplyPoint < this.constantPoint) ? 
+    this.constantPrice : 
+    Math.max(0, this.slope * (supplyPoint - this.yearDemand))
   }
 
   demandedAmount () {

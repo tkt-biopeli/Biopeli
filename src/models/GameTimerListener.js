@@ -14,7 +14,7 @@ export default class GameTimerListener {
   */
   onTimer (timerEvent) {
     var producedTurnips = this.countProductionFromStructures(this.player.structures, timerEvent)
-    this.doTransaction(producedTurnips, timerEvent.endOfYear)
+    this.doTransaction(producedTurnips, timerEvent)
 
     this.redrawControllers()
     // is game over?
@@ -22,24 +22,17 @@ export default class GameTimerListener {
   }
 
   countProductionFromStructures (structures, timerEvent) {
-    var weekly = 0
-    var yearly = 0
+    var sum = 0
     for (let structure of structures) {
-      // dirty differentation of production types
-      if (structure.structureType.name !== 'wheat farm') {
-        weekly += structure.produce(timerEvent)
-      } else {
-        yearly += structure.produce(timerEvent)
-      }
+      sum += structure.produce(timerEvent)
     }
-    return { weekly, yearly }
+    return sum
   }
 
-  doTransaction (producedTurnips, buyYearlyHarvest) {
-    let transaction = this.city.buyTurnips(producedTurnips, buyYearlyHarvest)
-    var fulfilledPct = transaction.percentage
-    this.player.countPoints(fulfilledPct)
-    this.player.cash += transaction.earnings
+  doTransaction (producedTurnips, timerEvent) {
+    let transaction = this.city.buyTurnips(producedTurnips, timerEvent.endOfYear)
+    this.player.countPoints(transaction)
+    this.player.cash += transaction
   }
 
   redrawControllers () {
