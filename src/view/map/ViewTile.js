@@ -18,7 +18,7 @@ export default class ViewTile {
     this.modelTile = modelTile
     this.tileSprite = this.makeTileSprite(x, y)
     this.structureSprite = null
-
+    this.textSprite = this.addTextToSprite()
     this.update()
   }
 
@@ -50,5 +50,10 @@ export default class ViewTile {
   makeStructureSprite () {
     let sprite = this.game.make.sprite(0, 0, this.modelTile.structure.asset())
     return this.tileSprite.addChild(sprite)
+  }
+
+  addTextToSprite () {
+    let text = this.game.add.text(0, 0, this.modelTile.flowers)
+    return this.tileSprite.addChild(text)
   }
 }

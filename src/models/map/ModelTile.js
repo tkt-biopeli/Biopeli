@@ -1,3 +1,4 @@
+import TextComponent from '../../../src/controllers/components/TextComponent'
 /**
 * Description goes here
 */

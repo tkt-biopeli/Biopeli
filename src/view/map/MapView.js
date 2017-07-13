@@ -47,7 +47,6 @@ export default class MapView {
     var viewArea = this.viewAreaLimits(cameraX, cameraY)
     var offset = this.offset(cameraX, cameraY, viewArea.startCol, viewArea.startRow)
     this.fillView(viewArea, offset)
-
     this.renderS.reset(cameraX, cameraY)
   }
 
@@ -122,7 +121,6 @@ export default class MapView {
       for (var r = viewArea.startRow; r <= viewArea.endRow; r++) {
         var tile = this.map.getTileWithGridCoordinates(c, r)
         var pxCoords = this.ColAndRowToPx(c, r, viewArea.startCol, viewArea.startRow, offset)
-
         if (typeof tile !== 'undefined') this.createViewTileForFill(tile, pxCoords, viewArea, offset)
       }
     }
@@ -140,7 +138,6 @@ export default class MapView {
     var viewTile = new ViewTile({ game: this.game, x: 0, y: 0, modelTile: tile })
     viewTile.tileSprite.scale.setTo(0.5)
     this.addToViewTexture(viewTile.tileSprite, pxCoords.x, pxCoords.y)
-
     this.highlightSelectedTile(tile, pxCoords)
   }
 
@@ -152,6 +149,7 @@ export default class MapView {
   highlightSelectedTile (tile, pxCoords) {
     if (tile === this.menu.selectedTile) {
       this.addToViewTexture(this.highlight(), pxCoords.x, pxCoords.y)
+      
     }
   }
 

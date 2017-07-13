@@ -19,7 +19,7 @@ describe('View tile tests', () => {
       },
       structure: null
     }
-
+    
     viewTile = new ViewTile({ game: game, x: 6, y: 6, modelTile: modelTile })
   })
 
@@ -76,5 +76,6 @@ describe('View tile tests', () => {
     assert.equal(viewTile.structureSprite, null)
     assert.equal(destroySpy.callCount, 1)
   })
+
 
 })
