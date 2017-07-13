@@ -155,7 +155,8 @@ export default class GameState {
       menuView: this.topBarView,
       content: new TopBarContent({
         player: this.player,
-        city: this.city
+        city: this.city,
+        timer: this.gameTimer
       })
     })
 

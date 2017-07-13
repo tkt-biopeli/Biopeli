@@ -8,7 +8,7 @@ export default class SingleController extends Controller {
     this.content.setOwner(this)
   }
 
-  createSections (timeEvent) {
-    this.content.createSections(timeEvent)
+  createSections () {
+    this.content.createSections()
   }
 }

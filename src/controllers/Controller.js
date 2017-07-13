@@ -13,14 +13,14 @@ export default class Controller {
     this.state = new Map()
   }
 
-  redraw (timeEvent) {
-    this.menuView.draw(this.buildSections(timeEvent))
+  redraw () {
+    this.menuView.draw(this.buildSections())
   }
 
-  buildSections (timeEvent) {
+  buildSections () {
     this.initialize()
 
-    this.createSections(timeEvent)
+    this.createSections()
 
     return this.sections
   }

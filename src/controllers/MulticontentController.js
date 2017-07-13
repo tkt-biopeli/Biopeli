@@ -15,8 +15,8 @@ export default class MulticontentController extends Controller {
     this.getStack = []
   }
 
-  createSections (timeEvent) {
-    this.contents[this.index].createSections(timeEvent)
+  createSections () {
+    this.contents[this.index].createSections()
 
     if (this.getStack.length > 0) {
       this.section()
@@ -33,19 +33,19 @@ export default class MulticontentController extends Controller {
     this.redraw()
   }
 
-  changeContent (index, ...stateValues) {
+  changeContent (index) {
     this.getStack.push(this.index)
     this.index = index
+    this.redraw()
   }
 
   changeButton (name, index, extraFunction, context) {
     this.button(name,
       ((index, extraFunction, context) => () => {
-        this.changeContent(index)
         if (extraFunction != null) {
           extraFunction.call(context)
         }
-        this.redraw()
+        this.changeContent(index)
       })(index, extraFunction, context), this)
   }
 

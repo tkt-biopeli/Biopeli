@@ -13,7 +13,7 @@ describe('StructureFactory tests', () => {
     }
     
     gameTimer = {
-      currentTime: {
+      currentTimeEvent: {
         year: 7
       }
     }
