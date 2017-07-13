@@ -1,10 +1,10 @@
 export default class Producer {
-  constructor({tile, turnipYield}){
+  constructor ({ tile, turnipYield }) {
     this.tile = tile
     this.turnipYield = turnipYield
   }
 
   produce (timeEvent) {
-    this.productionThisWeek(timeEvent) * tile.flowers
+    return this.productionThisWeek(timeEvent) * this.tile.flowers / 5
   }
 }
