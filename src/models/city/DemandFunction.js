@@ -1,24 +1,29 @@
 export default class DemandFunction {
-  constructor ({ city, popularityPct, slope }) {
+  constructor ({ city, popularityPct, startConstantPrice }) {
     this.city = city
     this.popularityPct = popularityPct
-    this.slope = slope
+    this.constantPrice = startConstantPrice
 
     this.calculateYearlyDemand()
   }
 
   calculateYearlyDemand () {
     this.collectedSupply = 0
-    this.yearDemand = this.demandedAmount()
+    this.wholeDemand = this.demandedAmount()
 
-    this.constantPoint = this.yearDemand / 2
-    this.constantPrice = this.slope * this.constantPoint * -1
+    this.yearDemand = this.wholeDemand / 2
+    
+    this.slope = -1 / this.yearDemand
   }
 
   weekly (supply) {
     var price = this.pay(supply)
     this.collectedSupply += supply
     return price
+  }
+
+  percentageSupplied () {
+    return this.collectedSupply / this.yearDemand
   }
 
   yearly () {
@@ -30,8 +35,10 @@ export default class DemandFunction {
     var startPrice = this.priceAt(this.collectedSupply)
     var endPrice = this.priceAt(newSupply)
 
-    if(this.collectedSupply < this.constantPoint &&  newSupply > this.constantPoint) {
-      var overSupply = (newSupply - this.constantPoint)
+    console.log(startPrice + " " + endPrice)
+
+    if(this.collectedSupply < this.yearDemand &&  newSupply > this.yearDemand) {
+      var overSupply = (newSupply - this.yearDemand)
       return startPrice * (newSupply - overSupply) + (startPrice + endPrice) / 2 * overSupply
     }
 
@@ -39,9 +46,9 @@ export default class DemandFunction {
   }
 
   priceAt (supplyPoint) {
-    return (supplyPoint < this.constantPoint) ? 
+    return (supplyPoint <= this.yearDemand) ? 
     this.constantPrice : 
-    Math.max(0, this.slope * (supplyPoint - this.yearDemand))
+    Math.max(0, Math.floor(this.slope * (supplyPoint - this.yearDemand)))
   }
 
   demandedAmount () {

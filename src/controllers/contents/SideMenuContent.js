@@ -21,8 +21,8 @@ export default class SideMenuContent extends MenuContent {
   createSections () {
     this.text('City: ' + this.city.name)
     this.text('Population: ' + this.city.population)
-    this.text('Weekly demand: ' + this.city.weeklyTurnipDemand)
-    this.text('Yearly demand: ' + this.city.yearlyTurnipDemand)
+    this.text('Yearly demand: ' + this.city.turnipDemand.yearDemand)
+    this.text('Demand supplied: ' + this.city.turnipDemand.collectedSupply)
     this.button('Lopeta', this.gameEvents.finishGame, this.gameEvents)
 
     if (!this.owner.hasStateValue('selectedTile')) {

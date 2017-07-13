@@ -88,7 +88,7 @@ export default class GameState {
     this.map.createMap()
 
     this.player = new Player({startMoney: startMoney})
-    this.city = new City({ name: cityName })
+    this.city = new City({ name: cityName, startPopulation: config.cityInitialPopulation })
 
     this.gameTimer = new Timer({
       interval: config.gameTimerInterval,

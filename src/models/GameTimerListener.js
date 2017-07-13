@@ -30,9 +30,9 @@ export default class GameTimerListener {
   }
 
   doTransaction (producedTurnips, timerEvent) {
-    let transaction = this.city.buyTurnips(producedTurnips, timerEvent.endOfYear)
-    this.player.countPoints(transaction)
-    this.player.cash += transaction
+    let money = this.city.buyTurnips(producedTurnips, timerEvent.endOfYear)
+    this.player.countPoints(money)
+    this.player.cash += money
   }
 
   redrawControllers () {
