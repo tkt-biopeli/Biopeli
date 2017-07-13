@@ -39,7 +39,7 @@ export default class StructureFactory {
       name: this.namer.createBuildingName(structureType.name),
       size: 10,
       structureType: structureType,
-      foundingYear: this.gameTimer.currentTime.year,
+      foundingYear: this.gameTimer.currentTimeEvent.year,
       produceFn: this.createProductionFn(structureType, tile),
       cost: structureType.cost
     })

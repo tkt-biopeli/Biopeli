@@ -6,18 +6,22 @@ import MapListener from '../../src/view/MapListener'
 describe('MapListener tests', () => {
   var game
   var map
-  var menuOptionCreator
   var menuController
   var ml
 
-
   beforeEach(() => {
-
     menuController = {
       menuView: { layout: {menuRect: {x: 0}}},
-      selectedTile: null, 
       reset: function () { },
-      chooseTile: function () { }
+      chooseTile: function () { },
+      stateValue: function (value) {
+        if(value != 'selectedTile'){
+          throw new Exception('map listener doesn\'t look for selected tile!')
+        }
+
+        return 'tile'
+      },
+      addState: () => {}
     }
 
     game = {
@@ -33,19 +37,14 @@ describe('MapListener tests', () => {
       getTileWithPixelCoordinates: function () { }
     }
 
-    menuOptionCreator = {
-      getActions: function () { }
-    }
-
-    ml = new MapListener({ game: game, map: map, menuOptionCreator: menuOptionCreator, menuController: menuController })
+    ml = new MapListener({ game: game, map: map, menuController: menuController })
 
   })
 
   it('Constructor works', () => {
-    ml = new MapListener({ game: game, map: map, menuOptionCreator: "jasd", menuController: menuController })
+    ml = new MapListener({ game: game, map: map, menuController: menuController })
     assert.equal(ml.game, game)
     assert.equal(ml.map, map)
-    assert.equal(ml.menuOptionCreator, "jasd")
     assert.equal(ml.menuController, menuController)
   })
 
@@ -62,11 +61,11 @@ describe('MapListener tests', () => {
   })
 
   it('Selected tile is recognized', () => {
-    menuController.selectedTile = "tile"
-    var mock = sinon.mock(menuController)
-    mock.expects("reset").once()
+    menuController.stateValue = ()=>"tile"
+    var spy = sinon.spy()
+    menuController.reset = spy
     assert.equal(ml.validTile("tile"), false)
-    mock.verify()
+    assert.equal(1, spy.callCount)
   })
 
   it('New selected tile is recognized', () => {
@@ -85,13 +84,12 @@ describe('MapListener tests', () => {
   })
 
   it('Menu update functions are called', () => {
-    var m1 = sinon.mock(menuController)
-    var m2 = sinon.mock(menuOptionCreator)
-    m1.expects("chooseTile").once()
-    m2.expects("getActions").once()
+    var mock = sinon.mock(menuController)
+    mock.expects('addState').once().withArgs('selectedTile', 'tile')
+
     ml.updateMenuOptions("tile")
-    m1.verify()
-    m2.verify()
+
+    mock.verify()
   })
 
   it('Update with pointer in map area calls correct functions', () => {
@@ -105,32 +103,25 @@ describe('MapListener tests', () => {
     stub.returns("justATile")
 
     var mockMenu = sinon.mock(menuController)
-    mockMenu.expects("chooseTile").once()
-
-    var mockMenuOptions = sinon.mock(menuOptionCreator)
-    mockMenuOptions.expects("getActions").once()
+    mockMenu.expects('addState').once()
+    mockMenu.expects('reset').once()
 
     ml.update(pointerEvent)
 
     mockMenu.verify()
-    mockMenuOptions.verify()
   })
 
   it('Update with pointer outside map area doesnt call any functions', () => {
     var pointerEvent = { x: 70, y: 50 }
     menuController.menuView.layout.menuRect.x = 60
     var mockMenu = sinon.mock(menuController)
-    mockMenu.expects("chooseTile").never()
-
-    var mockMenuOptions = sinon.mock(menuOptionCreator)
-    mockMenuOptions.expects("getActions").never()
+    mockMenu.expects("addState").never()
 
     ml.update(pointerEvent)
     mockMenu.verify()
-    mockMenuOptions.verify()
   })
 
-  it('Unvalid selection in map are doesnt call any functions', () => {
+  it('Invalid selection in map are doesnt call any functions', () => {
     var pointerEvent = { x: 70, y: 50 }
     menuController.menuView.leftBorderCoordinate = 80
 
@@ -140,13 +131,9 @@ describe('MapListener tests', () => {
     var mockMenu = sinon.mock(menuController)
     mockMenu.expects("chooseTile").never()
 
-    var mockMenuOptions = sinon.mock(menuOptionCreator)
-    mockMenuOptions.expects("getActions").never()
-
     ml.update(pointerEvent)
 
     mockMenu.verify()
-    mockMenuOptions.verify()
   })
 
 })

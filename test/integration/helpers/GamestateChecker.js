@@ -16,7 +16,7 @@ export default class GamestateChecker {
     this.gameStub = gameStub
     this.gameState = gameState
     this.map = gameState.map
-    this.menu = gameState.menuController
+    this.menuController = gameState.menuController
     this.gameAdvancer = gameAdvancer
   }
 
@@ -86,7 +86,7 @@ export default class GamestateChecker {
    * @param {number} y 
    */
   checkSelectedTile(x, y) {
-    var selected = this.menu.selectedTile
+    var selected = this.menuController.state.get('selectedTile')
 
     if (x == null) {
       assert(selected == null)

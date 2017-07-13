@@ -33,7 +33,6 @@ describe('Integration test: The game is initialized properly when started', () =
       gameState.cameraMover,
       gameState.inputHandler,
       gameState.mapListener,
-      gameState.menuOptionCreator,
       gameState.gameTimer,
       gameState.player
     ]

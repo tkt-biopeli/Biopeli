@@ -33,7 +33,7 @@ describe('MapView tests', () => {
     }
 
     menu = {
-      selectedTile: 7
+      stateValue: () => 7
     }
 
     mockRenderTexture = {
@@ -55,7 +55,7 @@ describe('MapView tests', () => {
     renderTextureStub.returns(mockRenderTexture)
     spriteStub.returns(mockRenderSprite)
     makeGraphicsStub.returns(mockHighlight)
-    mapView = new MapView({ game: game, map: map, menu: menu, viewWidthPx: 277, viewHeightPx: 653 })
+    mapView = new MapView({ game: game, map: map, menuController: menu, viewWidthPx: 277, viewHeightPx: 653 })
   })
 
   it('MapView costructor works', () => {

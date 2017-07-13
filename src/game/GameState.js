@@ -11,9 +11,13 @@ import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
 import Timer from '../view/Timer'
 import GameTimerListener from '../models/GameTimerListener'
-import MenuOptionCreator from '../controllers/actioncreation/MenuOptionCreator'
-import TopBarController from '../controllers/TopBarController'
-import MenuController from '../controllers/MenuController'
+
+import TopBarContent from '../controllers/contents/TopBarContent'
+import SideMenuContent from '../controllers/contents/SideMenuContent'
+import BuildStructureContent from '../controllers/contents/BuildStructureContent'
+import SingleController from '../controllers/SingleController'
+import MulticontentController from '../controllers/MulticontentController'
+
 import StackingLayout from '../view/menu/layouts/StackingLayout'
 import StaticLayout from '../view/menu/layouts/StaticLayout'
 import Style from '../view/menu/Style'
@@ -35,77 +39,13 @@ export default class GameState {
 
     state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
 
-    this.initializeModel(cityName, startMoney, mapWidth, mapHeight, tileWidth, tileHeight)
-
-    this.menuView = new MenuView({
-      game: this.state,
-      layout: new StackingLayout({
-        menuRect: {
-          x: state.camera.width - config.menuWidth,
-          y: 0,
-          width: config.menuWidth,
-          height: state.camera.height
-        },
-        linePadding: config.linePadding,
-        sectionPadding: config.sectionPadding,
-        vertical: true
-      }),
-      background: 'menuBg'
-    })
-
-    this.topBarView = new MenuView({
-      game: this.state,
-      layout: new StaticLayout({
-        menuRect: {
-          x: 0,
-          y: 0,
-          width: state.camera.width - config.menuWidth,
-          height: config.topBarSettings.height
-        },
-        linePadding: 5,
-        vertical: false
-      }),
-      background: null
-    })
-
-    this.cameraMover = new CameraMover({
-      game: state,
-      xSpeed: config.cameraSpeed,
-      ySpeed: config.cameraSpeed
-    })
-
-    this.gameEvents = new GameEvents({
-      gameState: this,
-      gameLength: gameLength
-    })
-
-    this.topBarController = new TopBarController({
-      game: this.state,
-      style: new Style({
-        smallFont: 20,
-        mediumFont: 30
-      }),
-      menuView: this.topBarView,
-      player: this.player,
-      city: this.city
-    })
-
-    this.menuController = new MenuController({
-      game: this.state,
-      style: new Style({
-        mediumFont: 16,
-        buttonHeight: config.menuButtonHeight,
-        buttonWidth: config.menuButtonWidth
-      }),
-      menuView: this.menuView,
-      city: this.city,
-      gameEvents: this.gameEvents
-    })
+    this.initializeModel(cityName, gameLength, startMoney, mapWidth, mapHeight, tileWidth, tileHeight)
+    this.initializeView()
+    this.initializeControllers()
 
     this.mapListener = new MapListener({
       game: state,
       map: this.map,
-      menuOptionCreator: this.menuOptionCreator,
       menuController: this.menuController
     })
 
@@ -118,7 +58,7 @@ export default class GameState {
     this.mapView = new MapView({
       game: state,
       map: this.map,
-      menu: this.menuController,
+      menuController: this.menuController,
       viewWidthPx: state.game.width - menuWidth,
       viewHeightPx: state.game.height
     })
@@ -132,12 +72,11 @@ export default class GameState {
     })
 
     this.gameTimer.addListener(this.gameTimerListener)
-    this.menuOptionCreator.gameTimer = this.gameTimer
 
     this.gameTimer.callListeners()
   }
 
-  initializeModel (cityName, startMoney, mapWidth, mapHeight, tileWidth, tileHeight) {
+  initializeModel (cityName, gameLength, startMoney, mapWidth, mapHeight, tileWidth, tileHeight) {
     this.map = new Map({
       gridSizeX: mapWidth,
       gridSizeY: mapHeight,
@@ -161,7 +100,87 @@ export default class GameState {
       player: this.player
     })
 
-    this.menuOptionCreator = new MenuOptionCreator({ player: this.player, structureFactory: this.structureFactory })
+    this.gameEvents = new GameEvents({
+      gameState: this,
+      gameLength: gameLength
+    })
+  }
+
+  initializeView () {
+    this.menuView = new MenuView({
+      game: this.state,
+      layout: new StackingLayout({
+        menuRect: {
+          x: this.state.camera.width - config.menuWidth,
+          y: 0,
+          width: config.menuWidth,
+          height: this.state.camera.height
+        },
+        linePadding: config.linePadding,
+        sectionPadding: config.sectionPadding,
+        vertical: true
+      }),
+      background: 'menuBg'
+    })
+
+    this.topBarView = new MenuView({
+      game: this.state,
+      layout: new StaticLayout({
+        menuRect: {
+          x: 0,
+          y: 0,
+          width: this.state.camera.width - config.menuWidth,
+          height: config.topBarSettings.height
+        },
+        linePadding: 5,
+        vertical: false
+      }),
+      background: null
+    })
+
+    this.cameraMover = new CameraMover({
+      game: this.state,
+      xSpeed: config.cameraSpeed,
+      ySpeed: config.cameraSpeed
+    })
+  }
+
+  initializeControllers () {
+    this.topBarController = new SingleController({
+      game: this.state,
+      style: new Style({
+        smallFont: 20,
+        mediumFont: 30
+      }),
+      menuView: this.topBarView,
+      content: new TopBarContent({
+        player: this.player,
+        city: this.city,
+        timer: this.gameTimer
+      })
+    })
+
+    this.menuContent = new SideMenuContent({
+      city: this.city,
+      gameEvents: this.gameEvents
+    })
+
+    var buildStructureController = new BuildStructureContent({
+      player: this.player,
+      structureFactory: this.structureFactory
+    })
+
+    this.menuController = new MulticontentController({
+      game: this.state,
+      menuView: this.menuView,
+      style: new Style({
+        mediumFont: 16,
+        largeFont: 32,
+        buttonHeight: config.menuButtonHeight,
+        buttonWidth: config.menuButtonWidth
+      }),
+      contents: [this.menuContent, buildStructureController]
+    })
   }
 
   /**

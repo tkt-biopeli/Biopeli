@@ -15,7 +15,7 @@ export default class Timer {
     this.interval = interval
     this.lastTime = currentTime
     this.callTime = 0
-    this.currentTime = currentTime
+    this.currentTimeEvent = null
     this.listeners = new Set()
   }
 
@@ -54,11 +54,11 @@ export default class Timer {
    * Helper method for calling all of the listeners
    */
   callListeners () {
-    this.currentTime = this.createTimeEvent()
+    this.currentTimeEvent = this.createTimeEvent()
 
     for (let listener of this.listeners) {
       var method = listener['on' + this.name + 'Timer']
-      method.call(listener, this.currentTime)
+      method.call(listener, this.currentTimeEvent)
     }
   }
 

@@ -65,7 +65,7 @@ describe('Game timer listener tests', () => {
     gtListener.onTimer(timerEvent)
     
     assert(doTransactionSpy.calledWith(37))
-    assert(redrawControllersSpy.calledWith(timerEvent))
+    assert(redrawControllersSpy.calledWith())
     assert(isGameOverSpy.calledWith(timerEvent))
   })
 
@@ -93,8 +93,8 @@ describe('Game timer listener tests', () => {
   })
 
   it('redrawControllers works correctly', () => {
-    gtListener.redrawControllers(63)
-    assert(mcRedrawSpy.calledWith(63))
-    assert(tbcRedrawSpy.calledWith(63))
+    gtListener.redrawControllers()
+    assert(mcRedrawSpy.calledWith())
+    assert(tbcRedrawSpy.calledWith())
   })
 })

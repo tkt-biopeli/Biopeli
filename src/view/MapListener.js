@@ -12,11 +12,11 @@ export default class MapListener {
    * @param {MenuOptionCreator} param.menuOptionCreator
    * @param {Menu} param.menu
    */
-  constructor ({ game, map, menuOptionCreator, menuController }) {
+  constructor ({ game, map, menuController }) {
     this.game = game
     this.map = map
-    this.menuOptionCreator = menuOptionCreator
     this.menuController = menuController
+    this.menuView = menuController.menuView
   }
 
   /**
@@ -40,7 +40,7 @@ export default class MapListener {
    * @return {boolean}
    */
   pointerInMapArea (pointerEvent) {
-    return (pointerEvent !== undefined && pointerEvent.x <= this.menuController.menuView.layout.menuRect.x)
+    return (pointerEvent !== undefined && pointerEvent.x <= this.menuView.layout.menuRect.x)
   }
 
   /**
@@ -66,7 +66,7 @@ export default class MapListener {
   validTile (tile) {
     if (typeof tile === 'undefined') {
       return false
-    } else if (tile === this.menuController.selectedTile) {
+    } else if (tile === this.menuController.stateValue('selectedTile')) {
       this.menuController.reset()
 
       return false
@@ -81,6 +81,7 @@ export default class MapListener {
    * @param {ModelTile} tile
    */
   updateMenuOptions (tile) {
-    this.menuController.chooseTile(tile, this.menuOptionCreator.getActions(tile))
+    this.menuController.reset()
+    this.menuController.addState('selectedTile', tile)
   }
 }

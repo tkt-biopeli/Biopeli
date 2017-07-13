@@ -16,7 +16,7 @@ export default class GameTimerListener {
     var producedTurnips = this.countProductionFromStructures(this.player.structures, timerEvent)
     this.doTransaction(producedTurnips, timerEvent.endOfYear)
 
-    this.redrawControllers(timerEvent)
+    this.redrawControllers()
     // is game over?
     this.gameEvents.isGameOver(timerEvent)
   }
@@ -42,8 +42,8 @@ export default class GameTimerListener {
     this.player.cash += transaction.earnings
   }
 
-  redrawControllers (timerEvent) {
-    this.topBarController.redraw(timerEvent)
-    this.menuController.redraw(timerEvent)
+  redrawControllers () {
+    this.topBarController.redraw()
+    this.menuController.redraw()
   }
 }
