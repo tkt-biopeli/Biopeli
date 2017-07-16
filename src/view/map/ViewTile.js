@@ -18,7 +18,6 @@ export default class ViewTile {
     this.modelTile = modelTile
     this.tileSprite = this.makeTileSprite(x, y)
     this.structureSprite = null
-    this.textSprite = this.addTextToSprite()
     this.update()
   }
 
@@ -32,6 +31,7 @@ export default class ViewTile {
       this.structureSprite.destroy()
       this.structureSprite = null
     }
+    this.addTextSprite(this.modelTile.flowers)
   }
 
   /**
@@ -52,8 +52,13 @@ export default class ViewTile {
     return this.tileSprite.addChild(sprite)
   }
 
-  addTextToSprite () {
-    let text = this.game.add.text(0, 0, this.modelTile.flowers)
+  /**
+   * This method adds a text on top of the tile
+   *
+   * @param {string} toAdd
+   */
+  addTextSprite (toAdd) {
+    let text = this.game.add.text(0, 0, toAdd)
     return this.tileSprite.addChild(text)
   }
 }

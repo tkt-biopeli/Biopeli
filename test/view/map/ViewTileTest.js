@@ -4,22 +4,26 @@ import ViewTile from '../../../src/view/map/ViewTile'
 
 describe('View tile tests', () => {
 
-  var game, modelTile, viewTile
+  var game, modelTile, viewTile, textSprite
   var makeSpriteSpy = sinon.spy()
+  var addTextSpy = sinon.spy()
 
   beforeEach(() => {
     game = {
       make: {
         sprite: makeSpriteSpy
+      },
+      add: {
+        text: addTextSpy
       }
     }
     modelTile = {
       tileType: {
-        asset: "test"
+        asset: "test",
+        flowers: 4
       },
       structure: null
     }
-    
     viewTile = new ViewTile({ game: game, x: 6, y: 6, modelTile: modelTile })
   })
 
