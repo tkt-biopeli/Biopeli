@@ -26,7 +26,7 @@ export default class GameTimerListener {
     var yearly = 0
     for (let structure of structures) {
       // dirty differentation of production types
-      if (structure.structureType.name !== 'farm') {
+      if (structure.structureType.name !== 'wheat farm') {
         weekly += structure.produce(timerEvent)
       } else {
         yearly += structure.produce(timerEvent)

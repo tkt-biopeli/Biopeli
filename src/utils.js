@@ -1,11 +1,16 @@
-
 /**
- * Description goes here
- *
- * @param { ??? } objects
+ * Utility functions
  */
-export const centerGameObjects = (objects) => {
-  objects.forEach(function (object) {
-    object.anchor.setTo(0.5)
-  })
+export default {
+  centerGameObjects: (objects) => {
+    objects.forEach(function (object) {
+      object.anchor.setTo(0.5)
+    })
+  },
+  randomNoBounds: () => {
+    return Math.random()
+  },
+  randomWithBounds: (lower, upper) => {
+    return Math.floor(Math.random() * upper + lower)
+  }
 }

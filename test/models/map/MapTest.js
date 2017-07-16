@@ -63,9 +63,11 @@ describe('Map tests', () => {
     assert.equal(map.gridToPixelsY(2), 256)
   })
 
-  it('Hard coded map fill works', () => {
-    map.createMapHalfForestHalfWater()
-    assert.notEqual(map.getTileWithGridCoordinates(map.gridSizeX - 2, map.gridSizeY - 2), undefined)
+  it('Map generation works', () => {
+    map.createMap()
+    for(var x = 0; x < map.gridSizeX; x++)
+      for(var y = 0; y < map.gridSizeY; y++)
+        assert(map.getTileWithGridCoordinates(x,y) != undefined)
   })
 
 })

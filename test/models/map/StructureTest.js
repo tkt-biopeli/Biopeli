@@ -4,10 +4,12 @@ import Structure from '../../../src/models/map/structure/Structure'
 
 describe('Structure tests', () => {
 
-  var structure, tile, stype, produceFnSpy, timeEvent
+  var structure, tile, stype, producer, timeEvent
 
   beforeEach(() => {
-    produceFnSpy = sinon.spy()
+    producer = {
+      produce: sinon.spy()
+    }
 
     timeEvent = {
       week: 1,
@@ -31,7 +33,7 @@ describe('Structure tests', () => {
       size: 10,
       structureType: stype,
       foundingYear: 1999,
-      produceFn: produceFnSpy,
+      producer: producer,
       cost: stype.cost
     })
   })
@@ -44,7 +46,7 @@ describe('Structure tests', () => {
     assert.equal(10, structure.size)
     assert.equal(1, structure.productionInput)
     assert.equal(1999, structure.foundingYear)
-    assert.equal(produceFnSpy, structure.produceFn)
+    assert.equal(producer, structure.producer)
     assert.equal(100, structure.cost)
   })
 
@@ -75,6 +77,6 @@ describe('Structure tests', () => {
   
   it('produce calls production function with correct parameter', () => {
     structure.produce(timeEvent)
-    assert(produceFnSpy.calledWith(timeEvent))
+    assert(producer.produce.calledWith(timeEvent))
   })
 })
