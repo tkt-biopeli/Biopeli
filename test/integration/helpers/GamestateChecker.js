@@ -52,7 +52,7 @@ export default class GamestateChecker {
    * @param {number} x 
    * @param {number} y 
    * @param {TileType} tileType 
-   * @param {StructureType} structureType 
+   * @param {string} structureType 
    */
   checkTilesInformation(x, y, tileType, structureType) {
     var tile = this.getTile(x, y)
@@ -165,6 +165,16 @@ export default class GamestateChecker {
   checkScore(score) {
     var text = this.gameState.topBarView.activeTexts[1].text.text
     assert.equal(score, text)
+  }
+
+  /**
+   * Checks if the total amount of money is correct
+   * 
+   * @param {int} money
+   */
+  checkMoney(money) {
+    var text = this.gameState.topBarView.activeTexts[2].text.text
+    assert.equal(money, text)
   }
 
   checkGameEnded(has) {

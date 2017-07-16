@@ -219,4 +219,8 @@ export default class GameAdvancer {
     this.setTile(gridX, gridY, tileTypeName)
     this.setStructure(gridX, gridY, sowner, sname, structureType, ssize, sfoundingYear, scost)
   }
+
+  setMoney(value) {
+    this.gameState.player.cash = value
+  } 
 }
