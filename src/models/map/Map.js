@@ -4,7 +4,7 @@ import MapGen from './MapGen'
 /**
  * Generates the map with given measurements for grid and tiles
  */
-export default class Map {
+export default class MapGrid {
   /**
    * @param {object} param - Parameter object
    *
@@ -27,50 +27,57 @@ export default class Map {
    * @param {*} tile the tile from wich radius is calculated
    */
   getTilesInRadius (n, tile) {
-    var hashmap = {}
+    var hashmap = new Map()
+
     var x = tile.x
     var y = tile.y
     for (var j = y - n; j < y + n; j++) {
       for (var i = x - n; i < x + n; i++) {
-        if (i >= this.gridSizeX && j >= this.gridSizeY) {
-          hashmap[getDistance(n, i, j)] = (this.getTileWithGridCoordinates(i, j))
+        if (i <= this.gridSizeX && j <= this.gridSizeY && i >= 0 && j >= 0) {
+          //hashmap.set(this.getDistance(x, y, i, j), [])
+          hashmap.set(this.getDistance(x, y, i, j)), (this.getTileWithGridCoordinates(i, j)))
         }
       }
+    }
+    for (var [key, value] of hashmap) {
+      console.log(key + ' = ' + value.x + ' ' + value.y + ' flow: ' + value.flowers);
     }
     return hashmap
   }
 
   /**
-   * calculates the distance of x and y from n
-   * @param {*} n integer n
-   * @param {*} x integer x
-   * @param {*} y integer y
+   * 
+   * @param {*} x 
+   * @param {*} y 
+   * @param {*} i 
+   * @param {*} j 
    */
-  getDistance (n, x, y) {
+  getDistance (x, y, i, j) {
+    if (y == j) {
+      return this.calculateIntoPositive(x, i)
+    }
+    if (x == i) {
+      return this.calculateIntoPositive(y, j)
+    }
     var distance = 0
-    if (y == n) {
-      return x
-    }
-    if (x == n) {
-      return y
-    }
-    distance += calculateIntoPositive(n, x)
-    distance += calculateIntoPositive(n, y)
+    distance += this.calculateIntoPositive(x, i)
+    distance += this.calculateIntoPositive(y, j)
     Math.round(distance / 2)
+
     return distance
   }
 
   /**
    * turns the difference in integers into positives
-   * @param {*} n integer n
-   * @param {*} z second integer
+   * @param {*} a first int
+   * @param {*} b second integer
    */
-  calculateIntoPositive (n, z) {
+  calculateIntoPositive (a, b) {
     var number
-    if (x > z) {
-      number += x - z
+    if (a > b) {
+      number = a - b
     } else {
-      number += z - x
+      number = b - a
     }
     return number
   }

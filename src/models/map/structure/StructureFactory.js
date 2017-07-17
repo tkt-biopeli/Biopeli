@@ -13,9 +13,10 @@ export default class StructureFactory {
    * @param {GameTimer} gameTimer
    * @param {Player} player
    */
-  constructor ({ gameTimer, player }) {
+  constructor ({ gameTimer, player, map }) {
     this.gameTimer = gameTimer
     this.player = player
+    this.map = map
     this.namer = new StructureNameGenerator({
       frontAdjectives: StructureNameParts[0],
       names: StructureNameParts[1],
@@ -43,7 +44,8 @@ export default class StructureFactory {
       structureType: structureType,
       foundingYear: this.gameTimer.currentTimeEvent.year,
       producer: this.createProducer(structureType, tile),
-      cost: structureType.cost
+      cost: structureType.cost,
+      map: this.map
     })
     this.player.addStructure(tile.structure)
   }

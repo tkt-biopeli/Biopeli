@@ -97,7 +97,8 @@ export default class GameState {
 
     this.structureFactory = new StructureFactory({
       gameTimer: this.gameTimer,
-      player: this.player
+      player: this.player,
+      map: this.map
     })
 
     this.gameEvents = new GameEvents({
