@@ -5,13 +5,13 @@ import ViewTile from '../../../src/view/map/ViewTile'
 describe('View tile tests', () => {
 
   var game, modelTile, viewTile, textSprite
-  var makeSpriteStub = sinon.stub()
+  var makeSpriteSpy = sinon.spy()
   var addTextStub = sinon.stub()
   var addChildSpy = sinon.spy()
   var makeTileSpriteStub = sinon.stub()
 
   beforeEach(() => {
-    makeTileSpriteStub.withArgs(0, 0).returns({ addChild: addChildSpy })
+    makeTileSpriteStub.returns({ addChild: addChildSpy })
     game = {
       make: {
         sprite: makeTileSpriteStub
@@ -28,6 +28,7 @@ describe('View tile tests', () => {
       structure: null
     }
     viewTile = new ViewTile({ game: game, x: 6, y: 6, modelTile: modelTile })
+    viewTile.update()
   })
 
   it('ViewTile costructor works', () => {
@@ -37,8 +38,9 @@ describe('View tile tests', () => {
   })
 
   it('makeTileSprite calls game.make.sprite with correct parameters', () => {
+    game.make.sprite = makeSpriteSpy
     viewTile.makeTileSprite(11, 5)
-    assert(makeSpriteStub.calledWith(11, 5, "test"))
+    assert(makeSpriteSpy.calledWith(11, 5, "test"))
   })
 
   it('makeStructureSprite adds child to tileSprite correctly', () => {

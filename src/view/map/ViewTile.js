@@ -18,7 +18,7 @@ export default class ViewTile {
     this.modelTile = modelTile
     this.tileSprite = this.makeTileSprite(x, y)
     this.structureSprite = null
-    this.update()
+    // this.update()
   }
 
   /**
