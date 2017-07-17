@@ -23,7 +23,7 @@ export default class TopBarContent extends MenuContent {
 
     this.section()
     this.icon('cash')
-    this.text('' + this.player.cash)
+    this.text('' + this.format(this.player.cash))
 
     this.section()
     this.icon('turnip')

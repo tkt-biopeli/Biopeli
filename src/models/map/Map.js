@@ -13,7 +13,7 @@ export default class MapGrid {
    * @param {number} param.tileWidth
    * @param {number} param.tileHeight
    */
-  constructor({ gridSizeX, gridSizeY, tileWidth, tileHeight }) {
+  constructor ({ gridSizeX, gridSizeY, tileWidth, tileHeight }) {
     this.gridSizeX = gridSizeX
     this.gridSizeY = gridSizeY
     this.tileWidth = tileWidth

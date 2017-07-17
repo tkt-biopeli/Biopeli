@@ -28,7 +28,7 @@ describe('Game timer listener tests', () => {
     player = {
       structures: 74,
       cash: 788,
-      countPoints: countPointsSpy
+      addPoints: countPointsSpy
     }
 
     city = {

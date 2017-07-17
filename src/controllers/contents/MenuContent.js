@@ -34,4 +34,8 @@ export default class MenuContent {
   addSections (sections) {
     this.owner.addSections(sections)
   }
+
+  format (number) {
+    return number.toFixed(0)
+  }
 }

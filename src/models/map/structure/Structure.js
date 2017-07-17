@@ -70,5 +70,4 @@ export default class Structure {
   produce (timeEvent) {
     return this.producer === undefined ? 0 : this.producer.produce(timeEvent)
   }
-  
 }

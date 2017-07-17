@@ -41,19 +41,6 @@ export default class {
   }
 
   /**
-   * The amount of points to be added to the player are calculated
-   *
-   * @param {number} fulFilledPct - how much of city's demand has the player fulfilled
-   */
-  countPoints (fulfilledPct) {
-    if (fulfilledPct >= 100) {
-      this.addPoints(100)
-    } else {
-      this.addPoints(fulfilledPct)
-    }
-  }
-
-  /**
    * Checks if the player has enough money for an action (eg. building a structure)
    *
    * @param {number} cost - cost of the action

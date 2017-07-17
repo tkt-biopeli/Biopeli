@@ -53,7 +53,7 @@ export default class GameTimerListener {
    */
   doTransaction (producedTurnips, timerEvent) {
     let money = this.city.buyTurnips(producedTurnips, timerEvent.endOfYear)
-    this.player.countPoints(money)
+    this.player.addPoints(money)
     this.player.cash += money
   }
 

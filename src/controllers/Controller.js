@@ -63,7 +63,7 @@ export default class Controller {
       width: width,
       height: height,
       horizontal: true,
-      percent: percent / 100
+      percent: percent
     }))
   }
 
