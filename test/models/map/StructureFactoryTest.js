@@ -62,18 +62,17 @@ describe('StructureFactory tests', () => {
   })
 
   it('Money checking works', () =>{
-    player.cash = 2
-    var st = {cost: 1}
+    var enoughCashForStub = sinon.stub()
+    player.enoughCashFor = enoughCashForStub
+    player.cash = 211
+    enoughCashForStub.withArgs(78).returns(false)
+    enoughCashForStub.withArgs(97).returns(true)
 
-    assert(sfactory.checkMoney(st))
-    assert.equal(1, player.cash)
-
-    assert(sfactory.checkMoney(st))
-    assert.equal(0, player.cash)
-
-    sfactory.checkMoney = () => false
-
-    assert(!sfactory.checkMoney(st))
-    assert.equal(0, player.cash)
+    var st = {cost: 78}
+    assert.equal(sfactory.checkMoney(st), false)
+    assert.equal(player.cash, 211)
+    st = {cost: 97}
+    assert(sfactory.checkMoney(st), true)
+    assert.equal(player.cash, 114)
   })
 })
