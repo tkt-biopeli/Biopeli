@@ -1,12 +1,10 @@
 import ViewTile from './ViewTile'
 
 /**
- * Description goes here
+ * Handles viewing of the game map
  */
 export default class MapView {
   /**
-   * Description goes here
-   *
    * @param {object} param
    *
    * @param {Phaser.Game} param.game
@@ -26,9 +24,6 @@ export default class MapView {
     this.initialize()
   }
 
-  /**
-   * Description goes here
-   */
   initialize () {
     this.viewTexture = this.game.add.renderTexture(this.viewWidthPx, this.viewHeightPx, 'maptexture')
     this.renderS = this.game.add.sprite(0, 0, this.viewTexture)
@@ -36,8 +31,6 @@ export default class MapView {
   }
 
   /**
-   * Description goes here
-   *
    * @param {number} cameraX
    * @param {number} cameraY
    */
@@ -51,8 +44,6 @@ export default class MapView {
   }
 
   /**
-   * Description goes here
-   *
    * @param {Phaser.Sprite} sprite
    * @param {number} x
    * @param {number} y
@@ -62,8 +53,6 @@ export default class MapView {
   }
 
   /**
-   * Description goes here
-   *
    * @param {number} cameraX
    * @param {number} cameraY
    */
@@ -80,8 +69,8 @@ export default class MapView {
   }
 
   /**
-   * Description goes here
-   *
+   * Calculates the amount of tiles shown at borders of the viewed area 
+   * 
    * @param {number} cameraX
    * @param {number} cameraY
    * @param {number} startCol
@@ -95,8 +84,6 @@ export default class MapView {
   }
 
   /**
-   * Description goes here
-   *
    * @param {number} col
    * @param {number} row
    * @param {number} startCol
@@ -127,7 +114,7 @@ export default class MapView {
   }
 
   /**
-   * Creates a ViewTile for the MapView
+   * Creates a view for a given tile on the map
    *
    * @param {ModelTile} tile
    * @param {{x: number, y: number}} pxCoords
@@ -144,6 +131,7 @@ export default class MapView {
 
   /**
    * Highlights the given tile with help from highlight function
+   * 
    * @param {ModelTile} tile
    * @param {{x: number, y: number}} pxCoords
    */
@@ -155,7 +143,6 @@ export default class MapView {
 
   /**
    * Helper for highlighting a tile
-   * @return { ??? }
    */
   highlight () {
     var highlight = this.game.make.graphics()
