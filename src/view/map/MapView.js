@@ -1,12 +1,10 @@
 import ViewTile from './ViewTile'
 
 /**
- * Description goes here
+ * Handles viewing of the game map
  */
 export default class MapView {
   /**
-   * Description goes here
-   *
    * @param {object} param
    *
    * @param {Phaser.Game} param.game
@@ -26,9 +24,6 @@ export default class MapView {
     this.initialize()
   }
 
-  /**
-   * Description goes here
-   */
   initialize () {
     this.viewTexture = this.game.add.renderTexture(this.viewWidthPx, this.viewHeightPx, 'maptexture')
     this.renderS = this.game.add.sprite(0, 0, this.viewTexture)
@@ -36,8 +31,6 @@ export default class MapView {
   }
 
   /**
-   * Description goes here
-   *
    * @param {number} cameraX
    * @param {number} cameraY
    */
@@ -47,13 +40,10 @@ export default class MapView {
     var viewArea = this.viewAreaLimits(cameraX, cameraY)
     var offset = this.offset(cameraX, cameraY, viewArea.startCol, viewArea.startRow)
     this.fillView(viewArea, offset)
-
     this.renderS.reset(cameraX, cameraY)
   }
 
   /**
-   * Description goes here
-   *
    * @param {Phaser.Sprite} sprite
    * @param {number} x
    * @param {number} y
@@ -63,8 +53,6 @@ export default class MapView {
   }
 
   /**
-   * Description goes here
-   *
    * @param {number} cameraX
    * @param {number} cameraY
    */
@@ -81,7 +69,7 @@ export default class MapView {
   }
 
   /**
-   * Description goes here
+   * Calculates the amount of tiles shown at borders of the viewed area
    *
    * @param {number} cameraX
    * @param {number} cameraY
@@ -96,8 +84,6 @@ export default class MapView {
   }
 
   /**
-   * Description goes here
-   *
    * @param {number} col
    * @param {number} row
    * @param {number} startCol
@@ -112,7 +98,7 @@ export default class MapView {
   }
 
   /**
-   * Description goes here
+   * Fills the shown area
    *
    * @param { ??? } viewArea
    * @param { ??? } offset
@@ -122,14 +108,13 @@ export default class MapView {
       for (var r = viewArea.startRow; r <= viewArea.endRow; r++) {
         var tile = this.map.getTileWithGridCoordinates(c, r)
         var pxCoords = this.ColAndRowToPx(c, r, viewArea.startCol, viewArea.startRow, offset)
-
         if (typeof tile !== 'undefined') this.createViewTileForFill(tile, pxCoords, viewArea, offset)
       }
     }
   }
 
   /**
-   * Description goes here
+   * Creates a view for a given tile on the map
    *
    * @param {ModelTile} tile
    * @param {{x: number, y: number}} pxCoords
@@ -138,14 +123,15 @@ export default class MapView {
    */
   createViewTileForFill (tile, pxCoords, viewArea, offset) {
     var viewTile = new ViewTile({ game: this.game, x: 0, y: 0, modelTile: tile })
+    viewTile.update()
     viewTile.tileSprite.scale.setTo(0.5)
     this.addToViewTexture(viewTile.tileSprite, pxCoords.x, pxCoords.y)
-
     this.highlightSelectedTile(tile, pxCoords)
   }
 
   /**
-   * Description goes here
+   * Highlights the given tile with help from highlight function
+   *
    * @param {ModelTile} tile
    * @param {{x: number, y: number}} pxCoords
    */
@@ -156,8 +142,7 @@ export default class MapView {
   }
 
   /**
-   * Description goes here
-   * @return { ??? }
+   * Helper for highlighting a tile
    */
   highlight () {
     var highlight = this.game.make.graphics()
