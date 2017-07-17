@@ -1,5 +1,5 @@
 import Structure from './Structure'
-import StructureProduction from './StructureProduction'
+import ProducerFactory from './producers/ProducerFactory'
 import StructureNameGenerator from '../../namegeneration/StructureNameGenerator'
 import StructureNameParts from '../../namegeneration/StructureNameParts'
 import utils from '../../../utils'
@@ -43,21 +43,21 @@ export default class StructureFactory {
       size: 10,
       structureType: structureType,
       foundingYear: this.gameTimer.currentTimeEvent.year,
-      produceFn: this.createProductionFn(structureType, tile),
+      producer: this.createProducer(structureType, tile),
       cost: structureType.cost
     })
     this.player.addStructure(tile.structure)
   }
 
   checkMoney (structureType) {
-    if (this.player.cash < structureType.cost) {
+    if (!this.player.enoughCashFor(structureType.cost)) {
       return false
     }
     this.player.cash -= structureType.cost
     return true
   }
 
-  createProductionFn (structureType, tile) {
-    return StructureProduction.createProductionFn(structureType, tile)
+  createProducer (structureType, tile) {
+    return ProducerFactory.createProducer(structureType, tile)
   }
 }

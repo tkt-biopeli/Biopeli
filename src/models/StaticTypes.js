@@ -1,4 +1,14 @@
 /**
+ *
+ * @typedef {object} StructureType
+ * @property {string} name
+ * @property {string} asset
+ * @property {set.<string>} harvestingWeeks
+ * @property {boolean} continuousProduction
+ * @property {number} turnipYield
+ */
+
+/**
  * Harvesting week format 'month.week'.
  */
 const structureTypes = {
@@ -7,7 +17,7 @@ const structureTypes = {
     asset: 'wheat_farm',
     harvestingWeeks: new Set(['8.1']),
     continuousProduction: false,
-    turnipYield: 200,
+    turnipYield: 12,
     cost: 10000
   },
   dairy_farm: {
@@ -15,7 +25,7 @@ const structureTypes = {
     asset: 'dairy_farm',
     harvestingWeeks: new Set(),
     continuousProduction: true,
-    turnipYield: 12,
+    turnipYield: 16,
     cost: 15000
   },
   berry_farm: {
@@ -27,6 +37,13 @@ const structureTypes = {
     cost: 10000
   }
 }
+
+/**
+ * @typedef {object} TileType
+ * @property {string} name
+ * @property {string} asset
+ * @property {StructureType[]} allowedStructures
+ */
 
 const tileTypes = {
   forest: {

@@ -27,7 +27,6 @@ export default class MapListener {
   update (pointerEvent) {
     if (this.pointerInMapArea(pointerEvent)) {
       var tile = this.getTileFromMap(pointerEvent)
-
       if (!this.validTile(tile)) return
       this.updateMenuOptions(tile)
     }

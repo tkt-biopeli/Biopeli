@@ -4,7 +4,7 @@ import GameState from '../../../src/game/GameState'
 import config from '../../../src/config'
 import ModelTile from '../../../src/models/map/ModelTile'
 import StaticTypes from '../../../src/models/StaticTypes'
-import StructureProduction from '../../../src/models/map/structure/StructureProduction'
+import ProducerFactory from '../../../src/models/map/structure/producers/ProducerFactory'
 import Structure from '../../../src/models/map/structure/Structure'
 const assert = require("assert")
 
@@ -214,7 +214,7 @@ export default class GameAdvancer {
       size: size,
       structureType: this.structureTypes[structureTypeName],
       foundingYear: foundingYear,
-      produceFn: StructureProduction.createProductionFn(structureTypeName, tile),
+      producer: ProducerFactory.createProducer(structureTypeName, tile),
       cost: cost
     })
 

@@ -20,7 +20,7 @@ export default class Structure {
    * @param {integer} foundingYear
    * @param {function} produceFn
    */
-  constructor ({ tile, owner, name, size, structureType, foundingYear, produceFn, cost }) {
+  constructor ({ tile, owner, name, size, structureType, foundingYear, producer, cost }) {
     this.tile = tile
     this.owner = owner
     this.name = name
@@ -28,7 +28,7 @@ export default class Structure {
     this.structureType = structureType
     this.productionInput = 1
     this.foundingYear = foundingYear
-    this.produceFn = produceFn
+    this.producer = producer
     this.cost = cost
   }
 
@@ -68,6 +68,6 @@ export default class Structure {
    * @return {number} - Turnips produced
    */
   produce (timeEvent) {
-    return this.produceFn === undefined ? 0 : this.produceFn(timeEvent)
+    return this.producer === undefined ? 0 : this.producer.produce(timeEvent)
   }
 }

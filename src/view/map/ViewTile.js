@@ -18,12 +18,11 @@ export default class ViewTile {
     this.modelTile = modelTile
     this.tileSprite = this.makeTileSprite(x, y)
     this.structureSprite = null
-
-    this.update()
+    // this.update()
   }
 
   /**
-   * Description goes here
+   * Updates the view for the tile
    */
   update () {
     if (this.modelTile.structure != null && this.structureSprite == null) {
@@ -32,10 +31,11 @@ export default class ViewTile {
       this.structureSprite.destroy()
       this.structureSprite = null
     }
+    this.addTextSprite(this.modelTile.flowers)
   }
 
   /**
-   * Description goes here
+   * Creates the view for the using the asset related to modeltile's type
    *
    * @param {number} x
    * @param {number} y
@@ -45,10 +45,20 @@ export default class ViewTile {
   }
 
   /**
-   * Description goes here
+   * Creates a structure to be added as a child for the tile
    */
   makeStructureSprite () {
     let sprite = this.game.make.sprite(0, 0, this.modelTile.structure.asset())
     return this.tileSprite.addChild(sprite)
+  }
+
+  /**
+   * Adds a given text as a child for the tile
+   *
+   * @param {string} toAdd
+   */
+  addTextSprite (toAdd) {
+    let text = this.game.add.text(0, 0, toAdd)
+    return this.tileSprite.addChild(text)
   }
 }
