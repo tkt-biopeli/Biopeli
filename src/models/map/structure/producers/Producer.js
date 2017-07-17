@@ -1,3 +1,7 @@
+/**
+ * Base class for producers. Producers determine what amount of
+ * turnips a structure produces at given week
+ */
 export default class Producer {
   constructor ({ tile, turnipYield }) {
     this.tile = tile

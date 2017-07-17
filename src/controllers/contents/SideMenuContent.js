@@ -1,8 +1,8 @@
-import MenuContent from './MenuContent'
+import Content from './Content'
 /**
  * Controller of side menu of the game
  */
-export default class SideMenuContent extends MenuContent {
+export default class SideMenuContent extends Content {
   /**
    * Description goes here
    *

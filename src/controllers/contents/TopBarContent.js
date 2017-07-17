@@ -1,8 +1,8 @@
-import MenuContent from './MenuContent'
+import Content from './Content'
 /**
  * Controller for game's topbar
  */
-export default class TopBarContent extends MenuContent {
+export default class TopBarContent extends Content {
   constructor ({ player, city, timer }) {
     super()
     this.player = player

@@ -1,7 +1,7 @@
 import DemandFunction from './DemandFunction'
 
  /**
-  * Tracks the demand and population of the city
+  * Tracks the population of the city
   *
   * @param {String} name
   */
