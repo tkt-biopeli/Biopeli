@@ -19,7 +19,9 @@ export default class GameEvents {
       this.finishGame()
     }
   }
-
+  /**
+   * Finish the game
+   */
   finishGame () {
     this.gameState.state.state.start('GameOver', true, false, this.gameState.player.points, this.gameState.city.population)
   }

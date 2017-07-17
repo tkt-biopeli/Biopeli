@@ -5,14 +5,13 @@ import StructureNameParts from '../../namegeneration/StructureNameParts'
 import utils from '../../../utils'
 
 /**
- * Description goes here
+ * Creates a structure for the player
  */
 export default class StructureFactory {
+
   /**
-   * Description goes here
-   *
-   * @param {object} param
-   * @param {GameTimer} param.gameTimer
+   * @param {GameTimer} gameTimer
+   * @param {Player} player
    */
   constructor ({ gameTimer, player }) {
     this.gameTimer = gameTimer
@@ -28,7 +27,7 @@ export default class StructureFactory {
   }
 
   /**
-   * Builds a structure on the tile defined in the constructor
+   * Builds a structure on the tile given as a parameter
    *
    * @param {ModelTile} tile
    * @param {StructureType} structureType
@@ -49,6 +48,12 @@ export default class StructureFactory {
     this.player.addStructure(tile.structure)
   }
 
+  /**
+   * Checks if the player has enough money for a given type of structure 
+   * decreases players cash if true
+   * 
+   * @param {StructureType} structureType 
+   */
   checkMoney (structureType) {
     if (!this.player.enoughCashFor(structureType.cost)) {
       return false
@@ -56,7 +61,10 @@ export default class StructureFactory {
     this.player.cash -= structureType.cost
     return true
   }
-
+  /**
+   * @param {StructureType} structureType 
+   * @param {?} tile 
+   */
   createProducer (structureType, tile) {
     return ProducerFactory.createProducer(structureType, tile)
   }
