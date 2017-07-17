@@ -1,12 +1,14 @@
-import config from '../../config'
 import DemandFunction from './DemandFunction'
 
 export default class City {
-  constructor ({ name, startPopulation }) {
+  constructor ({ name, startPopulation, popularityPct, demandRandomVariance, startPrice }) {
     this.name = name
     this.population = startPopulation
     this.turnipDemand = new DemandFunction({
-      city: this, popularityPct: 250, startConstantPrice: 10
+      city: this,
+      popularityPct: popularityPct,
+      demandRandomVariance: demandRandomVariance,
+      startConstantPrice: startPrice
     })
   }
 
@@ -16,17 +18,17 @@ export default class City {
     return cash
   }
 
-  endOfTheYear(){
+  endOfTheYear () {
     this.increasePopulation(this.turnipDemand.percentageSupplied())
-    this.turnipDemand.yearly()
+    this.turnipDemand.calculateYearlyDemand()
   }
 
   increasePopulation (percentageSupplied) {
-    var percentage = percentageSupplied <= 1 ?
-    0.5 * percentageSupplied - 0.25 :
-    percentageSupplied - 0.5
+    var percentage = percentageSupplied <= 1
+      ? 0.5 * percentageSupplied + 0.75
+      : percentageSupplied + 0.25
 
     this.population *= percentage
-    this.population = Math.floor(this.population)
+    this.population = Math.ceil(this.population)
   }
 }

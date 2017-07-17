@@ -10,7 +10,7 @@ export default {
   localStorageName: 'biopeli',
 
   // configuration for game length
-  gameLength: 180,
+  gameLength: 300,
 
   // configurations for tiles
   tileWidth: 64,
@@ -52,9 +52,10 @@ export default {
   gameTimerInterval: 1000,
 
   // configurations for city
-  cityInitialDemand: 100,
-  cityInitialTurnips: 0,
-  cityInitialPopulation: 100,
+  cityInitialPopulation: 250,
+  cityDemandMultiplier: 3,
+  cityDemandRandomVariance: 0.1,
+  startTurnipPrice: 50,
 
   // currency
   currency: 'Ag',
