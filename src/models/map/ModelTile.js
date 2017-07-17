@@ -1,9 +1,9 @@
+import TextComponent from '../../../src/controllers/components/TextComponent'
 /**
-* Description goes here
+* This is a model of a tile on the map
 */
 export default class {
   /**
-  * Description goes here
   * @param {object} param
   * @param {number} param.x
   * @param {number} param.y
