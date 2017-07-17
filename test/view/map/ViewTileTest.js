@@ -11,9 +11,10 @@ describe('View tile tests', () => {
   var makeTileSpriteStub = sinon.stub()
 
   beforeEach(() => {
+    makeTileSpriteStub.withArgs(0, 0).returns({ addChild: addChildSpy })
     game = {
       make: {
-        sprite: makeSpriteStub
+        sprite: makeTileSpriteStub
       },
       add: {
         text: addTextStub
@@ -26,8 +27,6 @@ describe('View tile tests', () => {
       },
       structure: null
     }
-    makeTileSpriteStub.withArgs(0, 0).returns("huuhaa")
-    makeTileSpriteStub = { addChild: addChildSpy }
     viewTile = new ViewTile({ game: game, x: 6, y: 6, modelTile: modelTile })
   })
 
