@@ -122,8 +122,6 @@ export default class Map {
   // Pixel-Grid-Pixel conversion helpers
 
   /**
-   * Description goes here
-   *
    * @param {Number} x
    * @return {Number}
    */
@@ -132,8 +130,6 @@ export default class Map {
   }
 
   /**
-   * Description goes here
-   *
    * @param {Number} y
    * @return {Number}
    */
@@ -142,8 +138,6 @@ export default class Map {
   }
 
   /**
-   * Description goes here
-   *
    * @param {Number} x
    * @return {Number}
    */
@@ -152,8 +146,6 @@ export default class Map {
   }
 
   /**
-   * Description goes here
-   *
    * @param {Number} y
    * @return {Number}
    */

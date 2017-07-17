@@ -111,7 +111,7 @@ export default class MapView {
   }
 
   /**
-   * Description goes here
+   * Fills the shown area
    *
    * @param { ??? } viewArea
    * @param { ??? } offset
@@ -127,7 +127,7 @@ export default class MapView {
   }
 
   /**
-   * Description goes here
+   * Creates a ViewTile for the MapView
    *
    * @param {ModelTile} tile
    * @param {{x: number, y: number}} pxCoords
@@ -143,7 +143,7 @@ export default class MapView {
   }
 
   /**
-   * Description goes here
+   * Highlights the given tile with help from highlight function
    * @param {ModelTile} tile
    * @param {{x: number, y: number}} pxCoords
    */
@@ -154,7 +154,7 @@ export default class MapView {
   }
 
   /**
-   * Description goes here
+   * Helper for highlighting a tile
    * @return { ??? }
    */
   highlight () {
