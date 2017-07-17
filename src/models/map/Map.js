@@ -2,12 +2,10 @@ import ModelTile from './ModelTile'
 import MapGen from './MapGen'
 
 /**
- * Description goes here
+ * Generates the map with given measurements for grid and tiles
  */
 export default class Map {
   /**
-   * Description goes here
-   *
    * @param {object} param - Parameter object
    *
    * @param {number} param.gridSizeX
@@ -27,8 +25,6 @@ export default class Map {
   getTilesInRadius (n, tile) { }
 
   /**
-   * Description goes here
-   *
    * @param {Number} gx
    * @param {Number} gy
    * @param {TileType} tileType
@@ -40,8 +36,6 @@ export default class Map {
   }
 
   /**
-   * Description goes here
-   *
    * @param {Number} px
    * @param {Number} py
    * @param {TileType} tileType
@@ -53,8 +47,6 @@ export default class Map {
   }
 
   /**
-   * Description goes here
-   *
    * @param {Number} gx
    * @param {Number} gy
    *
@@ -65,8 +57,6 @@ export default class Map {
   }
 
   /**
-   * Description goes here
-   *
    * @param {Number} px
    * @param {Number} py
    *
@@ -79,8 +69,6 @@ export default class Map {
   }
 
   /**
-   * Description goes here
-   *
    * @param {Number} gx
    * @param {Number} gy
    */
@@ -89,8 +77,6 @@ export default class Map {
   }
 
   /**
-   * Description goes here
-   *
    * @param {Number} px
    * @param {Number} py
    */
