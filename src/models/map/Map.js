@@ -102,7 +102,6 @@ export default class Map {
    * Generates the game map
    *
    * @param {number} seed - optional seed for map generation
-   * @todo seed does not work
    */
   createMap (seed) {
     var mapgen = new MapGen({
