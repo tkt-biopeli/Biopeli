@@ -22,67 +22,6 @@ export default class MapGrid {
   }
 
   /**
-   * returns a hashmap containing lists of tiles with the distance n
-   * @param {*} n the distance n
-   * @param {*} tile the tile from wich radius is calculated
-   */
-  getTilesInRadius (n, tile) {
-    var hashmap = new Map()
-
-    var x = tile.x
-    var y = tile.y
-    for (var j = y - n; j < y + n; j++) {
-      for (var i = x - n; i < x + n; i++) {
-        if (i <= this.gridSizeX && j <= this.gridSizeY && i >= 0 && j >= 0) {
-          //hashmap.set(this.getDistance(x, y, i, j), [])
-          hashmap.set(this.getDistance(x, y, i, j)), (this.getTileWithGridCoordinates(i, j)))
-        }
-      }
-    }
-    for (var [key, value] of hashmap) {
-      console.log(key + ' = ' + value.x + ' ' + value.y + ' flow: ' + value.flowers);
-    }
-    return hashmap
-  }
-
-  /**
-   * 
-   * @param {*} x 
-   * @param {*} y 
-   * @param {*} i 
-   * @param {*} j 
-   */
-  getDistance (x, y, i, j) {
-    if (y == j) {
-      return this.calculateIntoPositive(x, i)
-    }
-    if (x == i) {
-      return this.calculateIntoPositive(y, j)
-    }
-    var distance = 0
-    distance += this.calculateIntoPositive(x, i)
-    distance += this.calculateIntoPositive(y, j)
-    Math.round(distance / 2)
-
-    return distance
-  }
-
-  /**
-   * turns the difference in integers into positives
-   * @param {*} a first int
-   * @param {*} b second integer
-   */
-  calculateIntoPositive (a, b) {
-    var number
-    if (a > b) {
-      number = a - b
-    } else {
-      number = b - a
-    }
-    return number
-  }
-
-  /**
    * @param {Number} gx
    * @param {Number} gy
    * @param {TileType} tileType
