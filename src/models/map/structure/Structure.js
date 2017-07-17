@@ -77,7 +77,7 @@ export default class Structure {
     var distance = 1
     var pollution = 4
     var list = hashmap[distance]
-    
+    /**
     while (pollution > 0) {
       for (var i = 0; i < list.length; i++) {
         list[i].flowers -= pollution
@@ -86,7 +86,7 @@ export default class Structure {
       distance++
       pollution--
     }
-     
-    
+  }
+   */
   }
 }

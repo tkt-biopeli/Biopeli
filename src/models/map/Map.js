@@ -13,7 +13,7 @@ export default class MapGrid {
    * @param {number} param.tileWidth
    * @param {number} param.tileHeight
    */
-  constructor({ gridSizeX, gridSizeY, tileWidth, tileHeight }) {
+  constructor ({ gridSizeX, gridSizeY, tileWidth, tileHeight }) {
     this.gridSizeX = gridSizeX
     this.gridSizeY = gridSizeY
     this.tileWidth = tileWidth
@@ -28,14 +28,18 @@ export default class MapGrid {
    */
   getTilesInRadius (n, tile) {
     var hashmap = new Map()
-//ei toimi
     var x = tile.x
     var y = tile.y
-    for (var j = y - n; j < y + n; j++) {
-      for (var i = x - n; i < x + n; i++) {
+    // Init
+    for (var i = 0; i <= n; i++) {
+      hashmap.set(i, [])
+    }
+
+    // Calculate
+    for (var j = y - n; j <= y + n; j++) {
+      for (var i = x - n; i <= x + n; i++) {
         if (i <= this.gridSizeX && j <= this.gridSizeY && i >= 0 && j >= 0) {
-          //hashmap.set(this.getDistance(x, y, i, j), [])
-          hashmap.set(this.getDistance(x, y, i, j)), (this.getTileWithGridCoordinates(i, j)))
+          hashmap[this.getDistance(x, y, i, j)] += this.getTileWithGridCoordinates(i, j)
         }
       }
     }
