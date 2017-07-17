@@ -5,16 +5,18 @@ import ViewTile from '../../../src/view/map/ViewTile'
 describe('View tile tests', () => {
 
   var game, modelTile, viewTile, textSprite
-  var makeSpriteSpy = sinon.spy()
-  var addTextSpy = sinon.spy()
+  var makeSpriteStub = sinon.stub()
+  var addTextStub = sinon.stub()
+  var addChildSpy = sinon.spy()
+  var makeTileSpriteStub = sinon.stub()
 
   beforeEach(() => {
     game = {
       make: {
-        sprite: makeSpriteSpy
+        sprite: makeSpriteStub
       },
       add: {
-        text: addTextSpy
+        text: addTextStub
       }
     }
     modelTile = {
@@ -24,6 +26,8 @@ describe('View tile tests', () => {
       },
       structure: null
     }
+    makeTileSpriteStub.withArgs(0, 0).returns("huuhaa")
+    makeTileSpriteStub = { addChild: addChildSpy }
     viewTile = new ViewTile({ game: game, x: 6, y: 6, modelTile: modelTile })
   })
 
@@ -35,15 +39,15 @@ describe('View tile tests', () => {
 
   it('makeTileSprite calls game.make.sprite with correct parameters', () => {
     viewTile.makeTileSprite(11, 5)
-    assert(makeSpriteSpy.calledWith(11, 5, "test"))
+    assert(makeSpriteStub.calledWith(11, 5, "test"))
   })
 
   it('makeStructureSprite adds child to tileSprite correctly', () => {
-    var addChildSpy = sinon.spy()
+    // var addChildSpy = sinon.spy()
     viewTile.tileSprite = { addChild: addChildSpy }
 
-    var makeTileSpriteStub = sinon.stub()
-    makeTileSpriteStub.withArgs(0, 0).returns("huuhaa")
+    // var makeTileSpriteStub = sinon.stub()
+    // makeTileSpriteStub.withArgs(0, 0).returns("huuhaa")
     viewTile.makeTileSprite = makeTileSpriteStub
 
     var structure = {
