@@ -69,8 +69,8 @@ export default class MapView {
   }
 
   /**
-   * Calculates the amount of tiles shown at borders of the viewed area 
-   * 
+   * Calculates the amount of tiles shown at borders of the viewed area
+   *
    * @param {number} cameraX
    * @param {number} cameraY
    * @param {number} startCol
@@ -131,7 +131,7 @@ export default class MapView {
 
   /**
    * Highlights the given tile with help from highlight function
-   * 
+   *
    * @param {ModelTile} tile
    * @param {{x: number, y: number}} pxCoords
    */

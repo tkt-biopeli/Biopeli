@@ -2,10 +2,9 @@
  * Keeps track of the player's points, money and structures
  */
 export default class {
-  
   /**
    * Initially the player has 0 points and structures.
-   * 
+   *
    * @param {number} startMoney - initial amount of money, controlled by state Play
    */
   constructor ({startMoney}) {
@@ -43,7 +42,7 @@ export default class {
 
   /**
    * The amount of points to be added to the player are calculated
-   * 
+   *
    * @param {number} fulFilledPct - how much of city's demand has the player fulfilled
    */
   countPoints (fulfilledPct) {
@@ -56,7 +55,7 @@ export default class {
 
   /**
    * Checks if the player has enough money for an action (eg. building a structure)
-   * 
+   *
    * @param {number} cost - cost of the action
    */
   enoughCashFor (cost) {

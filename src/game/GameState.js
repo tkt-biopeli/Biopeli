@@ -88,7 +88,13 @@ export default class GameState {
     this.map.createMap()
 
     this.player = new Player({startMoney: startMoney})
-    this.city = new City({ name: cityName })
+    this.city = new City({
+      name: cityName,
+      startPopulation: config.cityInitialPopulation,
+      popularityPct: config.cityDemandMultiplier,
+      demandRandomVariance: config.cityDemandRandomVariance,
+      startPrice: config.startTurnipPrice
+    })
 
     this.gameTimer = new Timer({
       interval: config.gameTimerInterval,

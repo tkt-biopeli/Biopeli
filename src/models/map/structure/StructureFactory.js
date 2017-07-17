@@ -8,7 +8,6 @@ import utils from '../../../utils'
  * Creates a structure for the player
  */
 export default class StructureFactory {
-
   /**
    * @param {GameTimer} gameTimer
    * @param {Player} player
@@ -51,10 +50,10 @@ export default class StructureFactory {
   }
 
   /**
-   * Checks if the player has enough money for a given type of structure 
+   * Checks if the player has enough money for a given type of structure
    * decreases players cash if true
-   * 
-   * @param {StructureType} structureType 
+   *
+   * @param {StructureType} structureType
    */
   checkMoney (structureType) {
     if (!this.player.enoughCashFor(structureType.cost)) {
@@ -64,8 +63,8 @@ export default class StructureFactory {
     return true
   }
   /**
-   * @param {StructureType} structureType 
-   * @param {?} tile 
+   * @param {StructureType} structureType
+   * @param {?} tile
    */
   createProducer (structureType, tile) {
     return ProducerFactory.createProducer(structureType, tile)
