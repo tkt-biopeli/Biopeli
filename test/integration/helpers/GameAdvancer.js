@@ -202,7 +202,7 @@ export default class GameAdvancer {
    * @param {*} tileTypeName 
    */
   setTile(gridX, gridY, tileTypeName) {
-    return this.gameState.map.addTileWithGridCoordinates(gridX, gridY, this.tileTypes[tileTypeName])
+    var tile = this.gameState.map.addTileWithGridCoordinates(gridX, gridY, this.tileTypes[tileTypeName])
   }
 
   setStructure(gridX, gridY, owner, name, structureTypeName, size, foundingYear, cost) {

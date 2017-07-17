@@ -21,7 +21,7 @@ describe('Integration test: Building structures', () => {
 
   it('Can build a wheat farm on grass', () => {
     gameAdvancer.setTile(1, 1, 'grass')
-    gameAdvancer.click(1, 1)
+    gameAdvancer.clickTile(1, 1)
     gameStateChecker.checkButtonAmountInMenu(4)
     gameAdvancer.clickNthButton(2)
     gameStateChecker.checkButtonAmountInMenu(2)
@@ -29,7 +29,7 @@ describe('Integration test: Building structures', () => {
     gameStateChecker.checkButtonAmountInMenu(1)
     
     gameStateChecker.checkSelectedTile()
-    gameStateChecker.checkTilesInformation(1, 1, 'grass', 'wheat farm')
+    gameStateChecker.checkTilesInformation(1, 1, 'grass', 'wheat farm', true)
   })
 
   it('Can build a dairy farm on grass', () => {
@@ -55,8 +55,8 @@ describe('Integration test: Building structures', () => {
     buildFarm({x: 1, y: 1, tileType: 'grass', firstButton: 2, secondButton: 1})
     gameAdvancer.update(1000)
     gameStateChecker.checkMoney(765)
-    gameStateChecker.checkSelectedTile(1, 1) // not working: it claims that the selected tile is (0, 0) ?!
-    gameStateChecker.checkTilesInformation(1, 1, 'grass')
+    gameStateChecker.checkSelectedTile(1, 1)
+    gameStateChecker.checkTilesInformation(1, 1, 'grass', null, true)
   })
 
   it('Back button returns to structure type selection', () => {
