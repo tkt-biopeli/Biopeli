@@ -28,7 +28,7 @@ export default class MapGrid {
    */
   getTilesInRadius (n, tile) {
     var hashmap = new Map()
-
+//ei toimi
     var x = tile.x
     var y = tile.y
     for (var j = y - n; j < y + n; j++) {
