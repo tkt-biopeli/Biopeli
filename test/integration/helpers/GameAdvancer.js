@@ -108,6 +108,12 @@ export default class GameAdvancer {
     this.gameState.inputHandler.onPointerDown()
   }
 
+  clickTile(x, y){
+    var tileSize = this.gameState.map.tileWidth
+    this.game.setPointer(x * tileSize, y * tileSize)
+    this.gameState.inputHandler.onPointerDown()
+  }
+
   /**
    * Simulates click of a pointer to certain point in camera but only checks buttons
    * 

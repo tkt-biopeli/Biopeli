@@ -7,7 +7,7 @@ describe('Integration test: Building structures', () => {
 
   var buildFarm = ({x, y, tileType, firstButton, secondButton}) => {
     gameAdvancer.setTile(x, y, tileType)
-    gameAdvancer.click(x, y)
+    gameAdvancer.clickTile(x, y)
     gameAdvancer.clickNthButton(firstButton)
     gameAdvancer.clickNthButton(secondButton)
   }
@@ -35,13 +35,13 @@ describe('Integration test: Building structures', () => {
   it('Can build a dairy farm on grass', () => {
     buildFarm({x: 1, y: 1, tileType: 'grass', firstButton: 3, secondButton: 1})
     gameStateChecker.checkSelectedTile()
-    gameStateChecker.checkTilesInformation(1, 1, 'grass', 'dairy farm')
+    gameStateChecker.checkTilesInformation(1, 1, 'grass', 'dairy farm', true)
   })
 
   it('Can build a berry farm on grass', () => {
     buildFarm({x: 1, y: 1, tileType: 'grass', firstButton: 4, secondButton: 1})
     gameStateChecker.checkSelectedTile()
-    gameStateChecker.checkTilesInformation(1, 1, 'grass', 'berry farm')
+    gameStateChecker.checkTilesInformation(1, 1, 'grass', 'berry farm', true)
   })
 
   it('Building a farm reduces the total amount of money', () => {
@@ -55,7 +55,7 @@ describe('Integration test: Building structures', () => {
     buildFarm({x: 1, y: 1, tileType: 'grass', firstButton: 2, secondButton: 1})
     gameAdvancer.update(1000)
     gameStateChecker.checkMoney(765)
-//    gameStateChecker.checkSelectedTile(1, 1) // not working: it claims that the selected tile is (0, 0) ?!
+    gameStateChecker.checkSelectedTile(1, 1) // not working: it claims that the selected tile is (0, 0) ?!
     gameStateChecker.checkTilesInformation(1, 1, 'grass')
   })
 
