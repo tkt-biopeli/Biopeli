@@ -1,4 +1,3 @@
-import TextComponent from '../../../src/controllers/components/TextComponent'
 /**
 * This is a model of a tile on the map
 */

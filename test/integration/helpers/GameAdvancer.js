@@ -108,6 +108,12 @@ export default class GameAdvancer {
     this.gameState.inputHandler.onPointerDown()
   }
 
+  clickTile(x, y){
+    var tileSize = this.gameState.map.tileWidth
+    this.game.setPointer(x * tileSize, y * tileSize)
+    this.gameState.inputHandler.onPointerDown()
+  }
+
   /**
    * Simulates click of a pointer to certain point in camera but only checks buttons
    * 
@@ -196,7 +202,7 @@ export default class GameAdvancer {
    * @param {*} tileTypeName 
    */
   setTile(gridX, gridY, tileTypeName) {
-    return this.gameState.map.addTileWithGridCoordinates(gridX, gridY, this.tileTypes[tileTypeName])
+    var tile = this.gameState.map.addTileWithGridCoordinates(gridX, gridY, this.tileTypes[tileTypeName])
   }
 
   setStructure(gridX, gridY, owner, name, structureTypeName, size, foundingYear, cost) {
@@ -219,4 +225,8 @@ export default class GameAdvancer {
     this.setTile(gridX, gridY, tileTypeName)
     this.setStructure(gridX, gridY, sowner, sname, structureType, ssize, sfoundingYear, scost)
   }
+
+  setMoney(value) {
+    this.gameState.player.cash = value
+  } 
 }
