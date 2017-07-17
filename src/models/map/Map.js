@@ -13,7 +13,7 @@ export default class Map {
    * @param {number} param.tileWidth
    * @param {number} param.tileHeight
    */
-  constructor ({ gridSizeX, gridSizeY, tileWidth, tileHeight }) {
+  constructor({ gridSizeX, gridSizeY, tileWidth, tileHeight }) {
     this.gridSizeX = gridSizeX
     this.gridSizeY = gridSizeY
     this.tileWidth = tileWidth
@@ -21,8 +21,59 @@ export default class Map {
     this.grid = []
   }
 
-  // to be added
-  getTilesInRadius (n, tile) { }
+  /**
+   * returns a hashmap containing lists of tiles with the distance n
+   * @param {*} n the distance n
+   * @param {*} tile the tile from wich radius is calculated
+   */
+  getTilesInRadius (n, tile) {
+    var hashmap = {}
+    var x = tile.x
+    var y = tile.y
+    for (var j = y - n; j < y + n; j++) {
+      for (var i = x - n; i < x + n; i++) {
+        if (i >= this.gridSizeX && j >= this.gridSizeY) {
+          hashmap[getDistance(n, i, j)] = (this.getTileWithGridCoordinates(i, j))
+        }
+      }
+    }
+    return hashmap
+  }
+
+  /**
+   * calculates the distance of x and y from n
+   * @param {*} n integer n
+   * @param {*} x integer x
+   * @param {*} y integer y
+   */
+  getDistance (n, x, y) {
+    var distance = 0
+    if (y == n) {
+      return x
+    }
+    if (x == n) {
+      return y
+    }
+    distance += calculateIntoPositive(n, x)
+    distance += calculateIntoPositive(n, y)
+    Math.round(distance / 2)
+    return distance
+  }
+
+  /**
+   * turns the difference in integers into positives
+   * @param {*} n integer n
+   * @param {*} z second integer
+   */
+  calculateIntoPositive (n, z) {
+    var number
+    if (x > z) {
+      number += x - z
+    } else {
+      number += z - x
+    }
+    return number
+  }
 
   /**
    * @param {Number} gx
