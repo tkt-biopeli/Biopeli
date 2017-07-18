@@ -19,7 +19,7 @@ export default class TopBarContent extends Content {
 
     this.section()
     this.icon('score')
-    this.text('' + this.player.points)
+    this.text('' + this.format(this.player.points))
 
     this.section()
     this.icon('cash')

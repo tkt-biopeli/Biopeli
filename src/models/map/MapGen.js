@@ -42,8 +42,8 @@ export default class MapGen {
     var nx = x / this.width - 0.5
     var ny = y / this.height - 0.5
 
-    var gfreq = 5
-    var ffreq = 7
+    var gfreq = 8
+    var ffreq = 20
 
     if (this.groundnoise.perlin2(gfreq * nx, gfreq * ny) > -0.2) {
       if (this.forestnoise.perlin2(ffreq * nx, ffreq * ny) > -0.1) {
