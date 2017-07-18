@@ -49,8 +49,8 @@ describe('Integration test: Building structures', () => {
     gameAdvancer.clickNthButton(1)
     gameAdvancer.update(1000)
     gameAdvancer.clickTile(0, 1)
-    gameAdvancer.clickNthButton(2)
-    gameAdvancer.clickNthButton(1)
+    // gameAdvancer.clickNthButton(2)
+    // gameAdvancer.clickNthButton(1)
     gameAdvancer.update(1000)
     /**Ei toimi?
     gameStateChecker.checkPollution(0, 0, 4)
