@@ -1,6 +1,6 @@
-import MenuContent from './MenuContent'
+import Content from './Content'
 
-export default class BuildStructureController extends MenuContent {
+export default class BuildStructureController extends Content {
   constructor ({ player, structureFactory }) {
     super()
     this.structureFactory = structureFactory

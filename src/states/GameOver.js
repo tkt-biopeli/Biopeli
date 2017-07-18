@@ -20,7 +20,7 @@ export default class GameOver extends Phaser.State {
     this.menu = new MenuBuilder(this, 'gameover', this.camera.height * 5 / 9)
     this.stage.backgroundColor = 0x000000
 
-    this.menu.createScore('Loppupisteesi: ' + this.points +
+    this.menu.createScore('Loppupisteesi: ' + this.points.toFixed(0) +
                      '\n' + 'Kaupungin koko: ' + this.population)
     this.menu.createButton('Jatka', () => { this.state.start('Start') })
     this.menu.finishMenu()

@@ -1,4 +1,3 @@
-import config from '../../config'
 import DemandFunction from './DemandFunction'
 
  /**
@@ -6,15 +5,14 @@ import DemandFunction from './DemandFunction'
   * @param {String} name
   */
 export default class City {
-  constructor ({ name }) {
+  constructor ({ name, startPopulation, popularityPct, demandRandomVariance, startPrice }) {
     this.name = name
-    this.population = config.cityInitialPopulation
-    this.weeklyTurnipDemand = 0
-    this.yearlyTurnipDemand = 0
-    this.harvestedTurnips = 0
-    this.fulfilledAndEarnings = { percentage: 0, earnings: 0 }
-    this.turnipDemandFn = new DemandFunction({
-      city: this, popularityPct: 250, slope: 6
+    this.population = startPopulation
+    this.turnipDemand = new DemandFunction({
+      city: this,
+      popularityPct: popularityPct,
+      demandRandomVariance: demandRandomVariance,
+      startConstantPrice: startPrice
     })
   }
 
@@ -23,29 +21,30 @@ export default class City {
    * @param {number} producedTurnips
    * @param {boolean} buyYearlyHarvest
    */
-  buyTurnips (producedTurnips, buyYearlyHarvest) {
-    this.fulfilledAndEarnings = this.turnipDemandFn.weekly(producedTurnips.weekly)
-    this.harvestedTurnips += producedTurnips.yearly
-    if (buyYearlyHarvest) this.buyYearlyTurnips(this.harvestedTurnips)
-    return this.fulfilledAndEarnings
+  buyTurnips (producedTurnips, endOfTheYear) {
+    let cash = this.turnipDemand.weekly(producedTurnips)
+    if (endOfTheYear) this.endOfTheYear()
+    return cash
   }
 
   /**
    * Helper for buyTurnips to buy turnips according to yearly demand
    * @param {number} supply
    */
-  buyYearlyTurnips (supply) {
-    let yearlyfulfilledAndEarnings = this.turnipDemandFn.yearly(supply)
-    this.harvestedTurnips = 0
-    this.fulfilledAndEarnings.earnings += yearlyfulfilledAndEarnings.earnings
-    this.fulfilledAndEarnings.percentage = yearlyfulfilledAndEarnings.percentage
+  endOfTheYear () {
+    this.increasePopulation(this.turnipDemand.percentageSupplied())
+    this.turnipDemand.calculateYearlyDemand()
   }
 
   /**
-   * Increases the amount of population in the city
-   * @param {number} amount - to be added to the existing amount
+   * Increases population according to the demand fulfilled by the player
    */
-  increasePopulation (amount) {
-    this.population = this.population + amount
+  increasePopulation (percentageSupplied) {
+    var percentage = percentageSupplied <= 1
+      ? 0.5 * percentageSupplied + 0.75
+      : percentageSupplied + 0.25
+
+    this.population *= percentage
+    this.population = Math.ceil(this.population)
   }
 }

@@ -1,46 +1,113 @@
+/**
+ * Determines how much money the player gets from the produced turnips
+ */
 export default class DemandFunction {
-  constructor ({ city, popularityPct, slope }) {
+  constructor ({ city, popularityPct, demandRandomVariance, startConstantPrice }) {
     this.city = city
     this.popularityPct = popularityPct
-    this.slope = slope
+    this.demandRandomVariance = demandRandomVariance
+    this.constantPrice = startConstantPrice
+
+    this.calculateYearlyDemand()
   }
 
+  /**
+   * Sets the yearly demand based on demanded amount and initializes helper values
+   */
+  calculateYearlyDemand () {
+    this.collectedSupply = 0
+
+    this.yearDemand = this.demandedAmount()
+    this.wholeDemand = this.yearDemand * 2
+
+    this.slope = -1 * this.constantPrice / this.yearDemand
+  }
+
+  /**
+   * Done every week. Saves the supply and gives money of it
+   *
+   * @param {*} supply
+   */
   weekly (supply) {
-    let demand = this.demandedAmount()
-    this.city.weeklyTurnipDemand = demand / 2
-    this.city.yearlyTurnipDemand += demand / 4
-    return this.calculate(supply, demand, true)
+    var price = this.pay(supply)
+    this.collectedSupply += supply
+    return price
   }
 
-  yearly (supply) {
-    let demand = this.city.yearlyTurnipDemand * 2
-    let fulfilledAndEarnings = this.calculate(supply, demand)
-    this.city.yearlyTurnipDemand = 0
-    return fulfilledAndEarnings
+  /**
+   * Gives the percentage of demand the player has supplied this year
+   */
+  percentageSupplied () {
+    return this.collectedSupply / this.yearDemand
   }
 
-  calculate (supply, demand, weekly) {
-    let ratio = weekly ? supply / this.city.weeklyTurnipDemand : supply / this.city.yearlyTurnipDemand
-    let fulfilledPct = ratio < 1 ? ratio * 100 : 100
-    let slope = weekly ? this.slope : this.slope * 6
+  /**
+   * Calculates the amount of money player will get from the given supply. Is based on
+   * how much player supplies and how much they have supplied.
+   * @param {*} supply amount supplied this week
+   */
+  pay (supply) {
+    var newSupply = this.collectedSupply + supply
+    var startPrice = this.priceAt(this.collectedSupply)
+    var endPrice = this.priceAt(newSupply)
 
-    return {
-      percentage: Math.floor(fulfilledPct),
-      earnings: Math.floor(supply * this.price(supply, demand, slope))
+    if ((this.collectedSupply < this.yearDemand && newSupply > this.yearDemand) || (this.collectedSupply < this.wholeDemand && newSupply > this.wholeDemand)) {
+      var overSupply = (newSupply - this.yearDemand)
+      if (newSupply > this.wholeDemand) {
+        overSupply = (newSupply - this.wholeDemand)
+      }
+      var underSupply = supply - overSupply
+      var underSupplyPrice = this.priceAt(underSupply + this.collectedSupply)
+      return this.priceBetween(startPrice, underSupplyPrice, underSupply) +
+        this.priceBetween(underSupplyPrice, endPrice, overSupply)
     }
+
+    return this.priceBetween(startPrice, endPrice, supply)
   }
 
-  price (supply, demand, slope) {
-    let price = (demand - supply) / slope
-    return price > 0 ? price : 0
+  /**
+   * Gives the integral of the linear function between two price points. Gives the
+   * money of the difference
+   *
+   * @param {*} startPrice
+   * @param {*} endPrice
+   * @param {*} supply
+   */
+  priceBetween (startPrice, endPrice, supply) {
+    return (startPrice + endPrice) / 2 * supply
   }
 
-  customers () {
-    return this.city.population * this.popularityPct / 100
+  /**
+   * The price of turnips at the point that the player has supplied
+   */
+  currentPrice () {
+    return this.priceAt(this.collectedSupply)
   }
 
+  /**
+   * Gives the price at the given point of supply curve
+   *
+   * @param {*} supplyPoint
+   */
+  priceAt (supplyPoint) {
+    return (supplyPoint <= this.yearDemand)
+      ? this.constantPrice
+      : Math.max(0, Math.floor(this.slope * (supplyPoint - this.yearDemand) + this.constantPrice))
+  }
+
+  /**
+   * Calculates the amount of turnips the city will demand next year. Is based on the
+   * city size, given multiplier and random element
+   */
   demandedAmount () {
-    let rvar = (-0.5 + Math.random()) * 20
-    return (Math.floor(this.city.population * (this.popularityPct + rvar) / 100))
+    let rvar = (-0.5 + this.random()) * this.demandRandomVariance
+    return Math.floor(this.city.population * this.popularityPct * (1 + rvar))
+  }
+
+  /**
+   * Random for testing purposes
+   */
+  random () {
+    return Math.random()
   }
 }

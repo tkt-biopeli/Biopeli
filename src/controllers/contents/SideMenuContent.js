@@ -1,8 +1,8 @@
-import MenuContent from './MenuContent'
+import Content from './Content'
 /**
  * Controller of side menu of the game
  */
-export default class SideMenuContent extends MenuContent {
+export default class SideMenuContent extends Content {
   /**
    * Description goes here
    *
@@ -21,8 +21,9 @@ export default class SideMenuContent extends MenuContent {
   createSections () {
     this.text('City: ' + this.city.name)
     this.text('Population: ' + this.city.population)
-    this.text('Weekly demand: ' + this.city.weeklyTurnipDemand)
-    this.text('Yearly demand: ' + this.city.yearlyTurnipDemand)
+    this.text('Yearly demand: ' + this.city.turnipDemand.yearDemand)
+    this.text('Demand supplied: ' + this.format(this.city.turnipDemand.collectedSupply))
+    this.text('Current turnip price: ' + this.city.turnipDemand.currentPrice())
     this.button('Lopeta', this.gameEvents.finishGame, this.gameEvents)
 
     if (!this.owner.hasStateValue('selectedTile')) {

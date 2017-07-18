@@ -1,8 +1,8 @@
-import MenuContent from './MenuContent'
+import Content from './Content'
 /**
  * Controller for game's topbar
  */
-export default class TopBarContent extends MenuContent {
+export default class TopBarContent extends Content {
   constructor ({ player, city, timer }) {
     super()
     this.player = player
@@ -19,14 +19,14 @@ export default class TopBarContent extends MenuContent {
 
     this.section()
     this.icon('score')
-    this.text('' + this.player.points)
+    this.text('' + this.format(this.player.points))
 
     this.section()
     this.icon('cash')
-    this.text('' + this.player.cash)
+    this.text('' + this.format(this.player.cash))
 
     this.section()
     this.icon('turnip')
-    this.animatedBar(100, 40, true, this.city.fulfilledAndEarnings.percentage)
+    this.animatedBar(100, 40, true, this.city.turnipDemand.percentageSupplied())
   }
 }

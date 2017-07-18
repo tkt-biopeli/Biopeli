@@ -1,4 +1,3 @@
-import { Noise } from 'noisejs'
 import StaticTypes from '../StaticTypes'
 
 /**
@@ -12,7 +11,7 @@ export default class MapGen {
    * @param {number} param.width - map width
    * @param {number} param.seed - seed for forest generation, optional
    */
-  constructor ({ height, width, seed }) {
+  constructor ({ height, width, seed, Noise }) {
     var fseed, gseed
     if (seed) {
       var str = seed + ''
@@ -42,8 +41,8 @@ export default class MapGen {
     var nx = x / this.width - 0.5
     var ny = y / this.height - 0.5
 
-    var gfreq = 5
-    var ffreq = 7
+    var gfreq = 8
+    var ffreq = 20
 
     if (this.groundnoise.perlin2(gfreq * nx, gfreq * ny) > -0.2) {
       if (this.forestnoise.perlin2(ffreq * nx, ffreq * ny) > -0.1) {

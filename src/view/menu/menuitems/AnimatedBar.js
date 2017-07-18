@@ -50,10 +50,10 @@ export default class AnimatedBar {
    */
   setPercentage (value) {
     if (this.vertical) {
-      let inPixels = value * this.width / 100
+      let inPixels = value * this.width
       this.game.add.tween(this.bar).to({ width: inPixels }, this.duration, 'Linear', true)
     } else {
-      let inPixels = value * this.height / 100
+      let inPixels = value * this.height
       this.game.add.tween(this.bar).to({ height: inPixels }, this.duration, 'Linear', true)
     }
   }

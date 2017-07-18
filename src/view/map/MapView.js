@@ -112,7 +112,6 @@ export default class MapView {
 
   /**
    * Creates a view for a given tile on the map
-   *
    * @param {ModelTile} tile
    * @param {{x: number, y: number}} pxCoords
    * @param { ??? } viewArea

@@ -4,10 +4,6 @@
  */
 export default class ViewTile {
   /**
-   * Description goes here
-   *
-   * @param {object} param
-   *
    * @param {Phaser.Game} param.game
    * @param {number} param.x
    * @param {number} param.y
@@ -36,7 +32,6 @@ export default class ViewTile {
 
   /**
    * Creates the view for the using the asset related to modeltile's type
-   *
    * @param {number} x
    * @param {number} y
    */
@@ -54,7 +49,6 @@ export default class ViewTile {
 
   /**
    * Adds a given text as a child for the tile
-   *
    * @param {string} toAdd
    */
   addTextSprite (toAdd) {

@@ -1,4 +1,8 @@
-export default class MenuContent {
+/**
+ * A base class for content creators. Content creators use Controller's interface
+ * to create the blueprint of the menu for the menuView to draw.
+ */
+export default class Content {
   setOwner (owner) {
     this.owner = owner
   }
@@ -33,5 +37,14 @@ export default class MenuContent {
 
   addSections (sections) {
     this.owner.addSections(sections)
+  }
+
+  /**
+   * Helper function to format a number to not have decimals.
+   *
+   * @param {*} number
+   */
+  format (number) {
+    return number.toFixed(0)
   }
 }

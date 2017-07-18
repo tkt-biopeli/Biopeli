@@ -108,7 +108,7 @@ describe('Controller tests', ()=>{
     })
 
     it('Adding animated bar works', ()=>{
-      controller.animatedBar(1, 2, true, 100)
+      controller.animatedBar(1, 2, true, 1)
 
       var bar = cs()
       assert.equal(1, bar.width)

@@ -33,13 +33,13 @@ describe('Player tests', function () {
     assert.equal(0, p.structures.size)
   })
 
-  it('Counting points works', () => {
-    p.countPoints(100)
+  it('Adding points works', () => {
+    p.addPoints(100)
     assert.equal(100, p.points)
-    p.countPoints(101)
-    assert.equal(200, p.points)
-    p.countPoints(99)
-    assert.equal(299, p.points)
+    p.addPoints(101)
+    assert.equal(201, p.points)
+    p.addPoints(99)
+    assert.equal(300, p.points)
   })
 
   it('Check money works', () => {

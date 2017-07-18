@@ -28,11 +28,11 @@ describe('Game timer listener tests', () => {
     player = {
       structures: 74,
       cash: 788,
-      countPoints: countPointsSpy
+      addPoints: countPointsSpy
     }
 
     city = {
-      buyTurnips: {}
+      buyTurnips: () => 1
     }
 
     gtListener = new GameTimerListener({
@@ -75,21 +75,13 @@ describe('Game timer listener tests', () => {
     var structures = [str, str, str]
     
     var result = gtListener.countProductionFromStructures(structures, timerEvent)
-    assert.equal(21, result.weekly)
+    assert.equal(21, result)
   })
 
   it('doTransaction works correctly', () => {
-    var mockTransaction = {
-      percentage: 6,
-      earnings: 8
-    }
-    var buyTurnipsStub = sinon.stub()
-    buyTurnipsStub.withArgs(53).returns(mockTransaction)
-    city.buyTurnips = buyTurnipsStub
-
-    gtListener.doTransaction(53)
-    assert(countPointsSpy.calledWith(6))
-    assert.equal(796, player.cash)
+    gtListener.doTransaction(6, {endOfTheYear: true})
+    assert(countPointsSpy.calledWith(1))
+    assert.equal(789, player.cash)
   })
 
   it('redrawControllers works correctly', () => {

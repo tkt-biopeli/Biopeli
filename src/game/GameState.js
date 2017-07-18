@@ -34,12 +34,12 @@ export default class GameState {
    * @param {Number} param.tileHeight - Tile height in pixels
    * @param {Number} param.menuWidth - Menu width in pixels
    */
-  constructor ({ cityName, startMoney, state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth, gameLength }) {
+  constructor ({ cityName, perlinNoise, startMoney, state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth, gameLength }) {
     this.state = state
 
     state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
 
-    this.initializeModel(cityName, gameLength, startMoney, mapWidth, mapHeight, tileWidth, tileHeight)
+    this.initializeModel(cityName, perlinNoise, gameLength, startMoney, mapWidth, mapHeight, tileWidth, tileHeight)
     this.initializeView()
     this.initializeControllers()
 
@@ -76,19 +76,26 @@ export default class GameState {
     this.gameTimer.callListeners()
   }
 
-  initializeModel (cityName, gameLength, startMoney, mapWidth, mapHeight, tileWidth, tileHeight) {
+  initializeModel (cityName, perlinNoise, gameLength, startMoney, mapWidth, mapHeight, tileWidth, tileHeight) {
     this.map = new Map({
       gridSizeX: mapWidth,
       gridSizeY: mapHeight,
       tileWidth: tileWidth,
-      tileHeight: tileHeight
+      tileHeight: tileHeight,
+      perlinNoise: perlinNoise
     })
 
     // fill map grid with sample data
     this.map.createMap()
 
     this.player = new Player({startMoney: startMoney})
-    this.city = new City({ name: cityName })
+    this.city = new City({
+      name: cityName,
+      startPopulation: config.cityInitialPopulation,
+      popularityPct: config.cityDemandMultiplier,
+      demandRandomVariance: config.cityDemandRandomVariance,
+      startPrice: config.startTurnipPrice
+    })
 
     this.gameTimer = new Timer({
       interval: config.gameTimerInterval,

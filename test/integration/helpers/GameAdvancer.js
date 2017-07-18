@@ -25,10 +25,21 @@ export default class GameAdvancer {
     this.mapHeight = 20
 
     this.game = new GameStub({ width: config.gameWidth, height: config.gameHeight })
+    this.Noise = class Noise{
+      constructor(){
+        this.callCount = 0
+      }
+
+      perlin2(){
+        this.callCount ++
+        return 1
+      }
+    }
 
     this.gameState = new GameState({
       cityName: 'testVille',
       startMoney: 15000,
+      perlinNoise: this.Noise,
       state: this.game,
       mapWidth: this.mapWidth,
       mapHeight: this.mapHeight,

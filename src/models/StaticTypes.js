@@ -37,7 +37,7 @@ const structureTypes = {
     continuousProduction: true,
     turnipYield: 10,
     cost: 10000,
-    pollution: 2
+    pollution: 3
   }
 }
 
