@@ -8,7 +8,7 @@ export default class AnimatedBar {
     this.x = x
     this.y = y
     this.colors = { background: '#2e221f', bar: '#67244f' }
-    this.duration = 250
+    this.duration = 1
     this.group = group
     this.percent = percent
     this.draw()
@@ -21,6 +21,8 @@ export default class AnimatedBar {
     this.bar.x = x
     this.bar.y = y
     this.setPercentage(percent)
+
+    this.group.bringToTop(this.bar)
   }
 
   destroy () {
@@ -62,11 +64,11 @@ export default class AnimatedBar {
 
   /**
    * Animate bar fill to new value
-   * @param {number} value - Percentage value between [0, 100]
+   * @param {number} value - Percentage value between [0, 1]
    * @memberof AnimatedBar
    */
   setPercentage (value) {
-    if (this.vertical) {
+    if (!this.vertical) {
       let inPixels = value * this.width
       this.game.add.tween(this.bar).to({ width: inPixels }, this.duration, 'Linear', true)
     } else {

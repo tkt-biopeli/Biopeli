@@ -1,7 +1,7 @@
 export default class AnimatedBarComponent {
-  constructor ({ width, height, horizontal, percent }) {
+  constructor ({ width, height, vertical, percent }) {
     this.type = 'bar'
-    this.horizontal = horizontal
+    this.vertical = vertical
     this.height = height
     this.width = width
     this.percent = percent

@@ -189,7 +189,7 @@ export default class MenuView {
     return new AnimatedBar({
       game: this.game,
       group: this.menuViewGroup,
-      horizontal: animatedBarComponent.horizontal,
+      vertical: animatedBarComponent.vertical,
       width: animatedBarComponent.width,
       height: animatedBarComponent.height,
       x: coords.x,

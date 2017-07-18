@@ -94,11 +94,11 @@ export default class Controller {
    * @param {*} horizontal does the bar's size grow horizontal or vertical
    * @param {*} percent the amount of the bar that is filled
    */
-  animatedBar (width, height, horizontal, percent) {
+  animatedBar (width, height, vertical, percent) {
     this.currentSection.components.push(new AnimatedBarComponent({
       width: width,
       height: height,
-      horizontal: true,
+      vertical: vertical,
       percent: percent
     }))
   }
