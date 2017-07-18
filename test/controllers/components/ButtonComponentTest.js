@@ -29,11 +29,4 @@ describe('ButtonComponent tests', () => {
     assert.equal(buttonComponent.fontSize, 14)
     assert.equal(buttonComponent.asset, 'foobar')
   })
-
-  it('Deactivate method deactivates the button component', () => {
-    buttonComponent.deactivate()
-    assert.equal(buttonComponent.type, 'unusablebutton')
-    assert.equal(buttonComponent.function, '')
-    assert.equal(buttonComponent.asset, 'unusableButton')
-  })
 })
