@@ -20,14 +20,14 @@ export default class ViewTile {
   /**
    * Updates the view for the tile
    */
-  update () {
+  update (showFlowers) {
     if (this.modelTile.structure != null && this.structureSprite == null) {
       this.structureSprite = this.makeStructureSprite()
     } else if (this.modelTile.structure == null && this.structureSprite != null) {
       this.structureSprite.destroy()
       this.structureSprite = null
     }
-    this.addTextSprite(this.modelTile.flowers)
+    if (showFlowers) this.addTextSprite(this.modelTile.flowers)
   }
 
   /**

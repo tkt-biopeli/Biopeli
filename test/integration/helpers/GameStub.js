@@ -127,6 +127,11 @@ export default class GameStub {
       }
     }
 
+    this.flowersKey = {
+      isDown: false,
+      onDown: { add: function () {} }
+    }
+
     this.camera = {
       x: 0,
       y: 0,
