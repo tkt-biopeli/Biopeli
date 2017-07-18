@@ -53,6 +53,10 @@ describe('Integration test: The game is initialized properly when started', () =
     }
   })
 
+  it('Map is initialized with mapgen', ()=>{
+    checker.checkPerlinNoiseCallAmount(gameAdvancer.mapWidth * gameAdvancer.mapHeight)
+  })
+
   it('Menu doesn\'t have tile selected', () => {
     assert(gameState.menuController.selectedTile == null)
   })

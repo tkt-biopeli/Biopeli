@@ -1,4 +1,3 @@
-import { Noise } from 'noisejs'
 import StaticTypes from '../StaticTypes'
 
 /**
@@ -12,7 +11,7 @@ export default class MapGen {
    * @param {number} param.width - map width
    * @param {number} param.seed - seed for forest generation, optional
    */
-  constructor ({ height, width, seed }) {
+  constructor ({ height, width, seed, Noise }) {
     var fseed, gseed
     if (seed) {
       var str = seed + ''
