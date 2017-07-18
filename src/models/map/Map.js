@@ -36,7 +36,6 @@ export default class MapGrid {
       for (var y = bounds.sy; y <= bounds.ey; y++) {
         let dx = Math.abs(x - tile.x)
         let dy = Math.abs(y - tile.y)
-
         let distance = this.radiusFunction(dx, dy)
         if (distance <= n) {
           let distArray = tiles.get(distance)
@@ -143,10 +142,9 @@ export default class MapGrid {
       }
     }
   }
-
-  // Pixel-Grid-Pixel conversion helpers
   
-   /**
+  /**
+   * Pixel-Grid-Pixel conversion helpers
    * @param {Number} x
    * @return {Number}
    */
