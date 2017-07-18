@@ -20,10 +20,4 @@ export default class ButtonComponent {
     this.fontSize = fontSize
     this.asset = asset
   }
-
-  deactivate () {
-    this.type = 'unusablebutton'
-    this.asset = 'unusableButton'
-    this.function = ''
-  }
 }

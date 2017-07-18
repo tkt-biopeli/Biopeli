@@ -6,7 +6,7 @@ describe('Producer tests', () => {
 
   var p, turnip, tile
   beforeEach(()=>{
-    tile = {flowers: 5}
+    tile = {flowers: 10}
     turnip = 1
     p = new Producer({
       turnipYield: turnip,
@@ -24,7 +24,7 @@ describe('Producer tests', () => {
     assert.equal(5, p.produce())
     tile.flowers = 0
     assert.equal(0, p.produce())
-    tile.flowers = 2
-    assert.equal(2, p.produce())
+    tile.flowers = 5
+    assert.equal(2.5, p.produce())
   })
 })

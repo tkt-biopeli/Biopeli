@@ -19,6 +19,7 @@ export default class SideMenuContent extends Content {
    * Create blueprint of the menu's contents
    */
   createSections () {
+    this.sectionName('city')
     this.text('City: ' + this.city.name)
     this.text('Population: ' + this.city.population)
     this.text('Yearly demand: ' + this.city.turnipDemand.yearDemand)
@@ -32,7 +33,7 @@ export default class SideMenuContent extends Content {
 
     var tile = this.owner.stateValue('selectedTile')
 
-    this.section()
+    this.section('tile')
     this.text('Ground type: ' + tile.tileType.name)
     this.text('X: ' + tile.x + ', Y: ' + tile.y)
     this.text('Flowers: ' + tile.flowers)
@@ -40,7 +41,7 @@ export default class SideMenuContent extends Content {
     if (tile.structure != null) {
       var structure = tile.structure
 
-      this.section()
+      this.section('structure')
       this.text('"' + structure.owner + '"')
       this.text('"' + structure.name + '"')
       this.text('Structure: ' + structure.structureType.name)
@@ -59,7 +60,7 @@ export default class SideMenuContent extends Content {
     }
 
     if (tile.structure == null) {
-      this.section()
+      this.section('actions')
       this.buttonActionsForTile(tile)
     }
   }

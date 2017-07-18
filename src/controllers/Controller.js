@@ -2,6 +2,7 @@ import TextComponent from './components/TextComponent'
 import ButtonComponent from './components/ButtonComponent'
 import AnimatedBarComponent from './components/AnimatedBarComponent'
 import IconComponent from './components/IconComponent'
+import Section from './components/MenuSection'
 import ResetDecorator from './helpers/ResetDecorator'
 
 /**
@@ -54,8 +55,8 @@ export default class Controller {
   /**
    * Adds new section to section list
    */
-  section () {
-    this.currentSection = []
+  section (name) {
+    this.currentSection = new Section(name)
     this.sections.push(this.currentSection)
   }
 
@@ -64,7 +65,7 @@ export default class Controller {
    * @param {*} asset
    */
   icon (asset) {
-    this.currentSection.push(
+    this.currentSection.components.push(
       new IconComponent({
         asset: asset,
         assetWidth: this.game.cache.getImage(asset).width,
@@ -82,7 +83,7 @@ export default class Controller {
       fontSize = this.style[size + 'Font']
     }
 
-    this.currentSection.push(new TextComponent(text, fontSize))
+    this.currentSection.components.push(new TextComponent(text, fontSize))
   }
 
   /**
@@ -94,7 +95,7 @@ export default class Controller {
    * @param {*} percent the amount of the bar that is filled
    */
   animatedBar (width, height, horizontal, percent) {
-    this.currentSection.push(new AnimatedBarComponent({
+    this.currentSection.components.push(new AnimatedBarComponent({
       width: width,
       height: height,
       horizontal: true,
@@ -115,7 +116,7 @@ export default class Controller {
       asset = 'emptyButton'
     }
 
-    this.currentSection.push(
+    this.currentSection.components.push(
       new ButtonComponent({
         name: name,
         functionToCall: functionToCall,
@@ -134,7 +135,7 @@ export default class Controller {
    * @param {*} component
    */
   add (component) {
-    this.currentSection.push(component)
+    this.currentSection.components.push(component)
   }
 
   /**

@@ -17,7 +17,7 @@ const structureTypes = {
     asset: 'wheat_farm',
     harvestingWeeks: new Set(['8.1']),
     continuousProduction: false,
-    turnipYield: 12,
+    turnipYield: 25,
     cost: 10000,
     pollution: 4
   },
@@ -26,7 +26,7 @@ const structureTypes = {
     asset: 'dairy_farm',
     harvestingWeeks: new Set(),
     continuousProduction: true,
-    turnipYield: 16,
+    turnipYield: 35,
     cost: 15000,
     pollution: 5
   },
@@ -35,7 +35,7 @@ const structureTypes = {
     asset: 'berry_farm',
     harvestingWeeks: new Set(),
     continuousProduction: true,
-    turnipYield: 10,
+    turnipYield: 20,
     cost: 10000,
     pollution: 3
   }

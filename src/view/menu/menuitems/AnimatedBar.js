@@ -1,5 +1,6 @@
 export default class AnimatedBar {
   constructor ({ game, group, vertical, width, height, x, y, percent }) {
+    this.type = 'bar'
     this.game = game
     this.vertical = vertical
     this.width = width
@@ -13,6 +14,20 @@ export default class AnimatedBar {
     this.draw()
   }
 
+  update (x, y, percent) {
+    this.background.x = x
+    this.background.y = y
+
+    this.bar.x = x
+    this.bar.y = y
+    this.setPercentage(percent)
+  }
+
+  destroy () {
+    this.bar.destroy()
+    this.background.destroy()
+  }
+
   draw () {
     let bitmapBg = this.game.add.bitmapData(this.width, this.height)
     bitmapBg.ctx.fillStyle = this.colors.background
@@ -20,7 +35,9 @@ export default class AnimatedBar {
     bitmapBg.ctx.rect(0, 0, this.width, this.height)
     bitmapBg.ctx.fill()
     this.background = this.group.create(this.x, this.y, bitmapBg, null, this.group)
+
     var percentageSize = this.getPercentageSize()
+
     let bitmapBar = this.game.add.bitmapData(this.width, this.height)
     bitmapBar.ctx.fillStyle = this.colors.bar
     bitmapBar.ctx.beginPath()

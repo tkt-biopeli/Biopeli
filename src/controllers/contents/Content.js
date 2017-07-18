@@ -6,9 +6,12 @@ export default class Content {
   setOwner (owner) {
     this.owner = owner
   }
+  sectionName (name) {
+    this.owner.currentSection.name = name
+  }
 
-  section () {
-    this.owner.section()
+  section (name) {
+    this.owner.section(name)
   }
 
   icon (asset) {

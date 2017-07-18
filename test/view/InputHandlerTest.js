@@ -27,6 +27,9 @@ describe('Inputhandler tests', () => {
             y: 0
           }
         }
+      },
+      flowersKey: {
+        onDown: { add: function () { } }
       }
     }
 

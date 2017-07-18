@@ -49,7 +49,8 @@ export default class GameStub {
         anchor: { set: () => { } },
         x: x,
         y: y,
-        text: text
+        text: text,
+        destroy: () => {}
       }),
 
       renderTexture: renderCreatorFunction,
@@ -57,7 +58,8 @@ export default class GameStub {
       group: this.mockers.createOneValueMocker('add.group', {
         add: function () { },
         removeAll: buttonMarkerFunction,
-        create: function () { }
+        removeChild: () => {},
+        create: () => ({})
       }),
 
       sprite: this.mockers.createOneValueMocker('add.sprite', {
@@ -78,7 +80,16 @@ export default class GameStub {
     }
 
     this.make = {
-      button: this.mockers.createGetValueMocker('make.button', 'x', 'y', 'asset', 'function', 'context'),
+      button: (x, y, asset, callback, context) => {
+      return {
+        type: 'button',
+        x: x,
+        y: y,
+        asset: asset,
+        callback: callback,
+        context: context,
+        destroy: () => {}
+      }},
 
       graphics: this.mockers.createOneValueMocker('make.graphics', {
         beginFill: function () { },
@@ -125,6 +136,11 @@ export default class GameStub {
         isDown: false,
         onDown: { add: function () { } }
       }
+    }
+
+    this.flowersKey = {
+      isDown: false,
+      onDown: { add: function () {} }
     }
 
     this.camera = {

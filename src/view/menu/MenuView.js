@@ -15,27 +15,10 @@ export default class MenuView {
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
     this.game.world.bringToTop(this.menuViewGroup)
-    this.activeButtons = []
-    this.activeTexts = []
-    this.activeBars = []
-    this.activeIcons = []
-    this.createBackground(background)
-  }
 
-  /**
-   * Redraws the menu with given components
-   * @param {*} sections
-   */
-  draw (sections) {
-    this.menuViewGroup.removeAll(true, true)
-    this.activeButtons = []
-    this.activeTexts = []
-    this.activeBars = []
-    this.activeIcons = []
-    this.layout.init(sections)
-    this.createMenuComponents(sections)
-    this.game.world.bringToTop(this.background)
-    this.game.world.bringToTop(this.menuViewGroup)
+    this.activeMenuitems = new Map()
+
+    this.createBackground(background)
   }
 
   /**
@@ -71,16 +54,46 @@ export default class MenuView {
   }
 
   /**
+   * Redraws the menu with given components
+   * @param {*} sections
+   */
+  draw (sections) {
+    this.active = new Set()
+    this.activeSections = []
+
+    this.activeButtons = []
+    this.activeTexts = []
+
+    this.layout.init(sections)
+    this.updateMenu(sections)
+    this.game.world.bringToTop(this.background)
+    this.game.world.bringToTop(this.menuViewGroup)
+  }
+
+  /**
    * Iterates through given sections
    * @param {*} sections
    */
-  createMenuComponents (sections) {
+  updateMenu (sections) {
+    var newSections = new Map()
+
     for (let i = 0; i < sections.length; i++) {
-      this.createSection(sections[i])
+      var section = sections[i]
+
+      var menuitems = this.activeMenuitems.has(section.name)
+        ? this.updateSection(this.activeMenuitems.get(section.name), section.components)
+        : this.createSection(section.components)
+
+      this.activeSections.push(menuitems)
+      newSections.set(section.name, menuitems)
+
       if (i !== sections.length - 1) {
         this.layout.afterSection()
       }
     }
+
+    this.removeExtraSections(this.activeMenuitems, newSections)
+    this.activeMenuitems = newSections
   }
 
   /**
@@ -88,44 +101,33 @@ export default class MenuView {
    * @param {*} components
    */
   createSection (components) {
+    var menuitems = []
     for (let i = 0; i < components.length; i++) {
-      var component = components[i]
-      switch (component.type) {
-        case 'text': {
-          this.createText(component)
-          break
-        }
-        case 'button': {
-          this.createButton(component)
-          break
-        }
-        case 'unusablebutton': {
-          this.createButton(component)
-          break
-        }
-        case 'icon': {
-          this.createIcon(component)
-          break
-        }
-        case 'bar': {
-          this.createAnimatedBar(component)
-          break
-        }
-        default: throw new Error('Invalid menu component type')
-      }
+      menuitems.push(this.createComponent(components[i]))
 
       if (i !== components.length - 1) {
         this.layout.afterLine()
       }
     }
+
+    return menuitems
+  }
+
+  createComponent (component) {
+    var coords = this.layout.nextComponentLocation(component)
+
+    return this.componentFunction(component.type, 'create').call(this, coords, component)
+  }
+
+  componentFunction (type, prefix) {
+    return this[prefix + type.charAt(0).toUpperCase() + type.slice(1)]
   }
 
   /**
    * Creates a button with given button action
    * @param {ButtonAction} buttonAction
    */
-  createButton (buttonComponent) {
-    var coords = this.layout.nextComponentLocation(buttonComponent)
+  createButton (coords, buttonComponent) {
     var button = new LabeledButton({
       game: this.game,
       viewGroup: this.menuViewGroup,
@@ -140,6 +142,7 @@ export default class MenuView {
       buttonHeight: buttonComponent.height
     })
     this.activeButtons.push(button)
+    return button
   }
 
   /**
@@ -148,8 +151,7 @@ export default class MenuView {
    * @param {*} fontSize
    * @return { ??? }
    */
-  createText (textComponent) {
-    var coords = this.layout.nextComponentLocation(textComponent)
+  createText (coords, textComponent) {
     var anchor
 
     if (this.layout.vertical) {
@@ -176,16 +178,15 @@ export default class MenuView {
     })
 
     this.activeTexts.push(tex)
+    return tex
   }
 
   /**
    * Creates a new animated bar to the menu
    * @param {*} animatedBarComponent
    */
-  createAnimatedBar (animatedBarComponent) {
-    var coords = this.layout.nextComponentLocation(animatedBarComponent)
-
-    var animatedBar = new AnimatedBar({
+  createBar (coords, animatedBarComponent) {
+    return new AnimatedBar({
       game: this.game,
       group: this.menuViewGroup,
       horizontal: animatedBarComponent.horizontal,
@@ -195,25 +196,94 @@ export default class MenuView {
       y: coords.y,
       percent: animatedBarComponent.percent
     })
-
-    this.activeBars.push(animatedBar)
   }
 
   /**
    * Creates new icon to the menu
    * @param {*} iconComponent
    */
-  createIcon (iconComponent) {
-    var coords = this.layout.nextComponentLocation(iconComponent)
-
-    var icon = new Icon({
+  createIcon (coords, iconComponent) {
+    return new Icon({
       game: this.game,
       group: this.menuViewGroup,
       x: coords.x,
       y: coords.y,
       asset: iconComponent.asset
     })
+  }
 
-    this.activeIcons.push(icon)
+  updateSection (section, components) {
+    var menuitems = []
+
+    var i = 0
+    for (let j = 0; j < components.length; j++) {
+      var component = components[j]
+      var menuitem = section[i]
+      if (i < section.length && menuitem.type === component.type) {
+        if (component.type === 'button' &&
+          (component.asset !== menuitem.asset || component.function !== menuitem.callback)) {
+          menuitems.push(this.createComponent(component))
+          menuitem.destroy()
+        } else {
+          menuitems.push(menuitem)
+          this.updateComponent(menuitem, component)
+        }
+        i++
+      } else {
+        menuitems.push(this.createComponent(component))
+      }
+
+      if (j !== components.length - 1) {
+        this.layout.afterLine()
+      }
+    }
+
+    this.removeExtraMenuitems(section, i)
+
+    return menuitems
+  }
+
+  removeExtraMenuitems (section, startIndex) {
+    for (let i = section.length - 1; i >= startIndex; i--) {
+      section[i].destroy()
+      section.pop()
+    }
+  }
+
+  updateComponent (menuitem, component) {
+    var coords = this.layout.nextComponentLocation(component)
+
+    this.componentFunction(component.type, 'update').call(this, coords, component, menuitem)
+  }
+
+  updateButton (coords, component, button) {
+    button.update(component.name, component.fontSize, coords.x, coords.y,
+      component.function, component.context, component.width, component.height)
+    this.activeButtons.push(button)
+  }
+
+  updateText (coords, component, text) {
+    text.update(component.text, component.fontSize, coords.x, coords.y)
+    this.activeTexts.push(text)
+  }
+
+  updateIcon (coords, component, icon) {
+    icon.update(coords.x, coords.y)
+  }
+
+  updateBar (coords, component, bar) {
+    bar.update(coords.x, coords.y, component.percent)
+  }
+
+  removeExtraSections (oldSections, newSections) {
+    for (let key of oldSections.keys()) {
+      if (!newSections.has(key)) this.destroySection(oldSections.get(key))
+    }
+  }
+
+  destroySection (menuitems) {
+    for (let menuitem of menuitems) {
+      menuitem.destroy()
+    }
   }
 }

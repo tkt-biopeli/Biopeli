@@ -1,3 +1,4 @@
+import config from '../../../../config'
 /**
  * Base class for producers. Producers determine what amount of
  * turnips a structure produces at given week
@@ -9,6 +10,6 @@ export default class Producer {
   }
 
   produce (timeEvent) {
-    return this.productionThisWeek(timeEvent) * this.tile.flowers / 5
+    return this.productionThisWeek(timeEvent) * this.tile.flowers / config.maxFlowers
   }
 }
