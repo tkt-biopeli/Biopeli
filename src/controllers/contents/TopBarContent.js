@@ -14,18 +14,19 @@ export default class TopBarContent extends Content {
    * Creates the blueprint of the topBar
    */
   createSections () {
+    this.sectionName('time')
     this.icon('time')
     this.text(this.timer.currentTimeEvent.toString(), 'small')
 
-    this.section()
+    this.section('points')
     this.icon('score')
     this.text('' + this.format(this.player.points))
 
-    this.section()
+    this.section('money')
     this.icon('cash')
     this.text('' + this.format(this.player.cash))
 
-    this.section()
+    this.section('demand')
     this.icon('turnip')
     this.animatedBar(100, 40, true, this.city.turnipDemand.percentageSupplied())
   }

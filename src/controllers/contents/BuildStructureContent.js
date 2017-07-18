@@ -5,9 +5,11 @@ export default class BuildStructureController extends Content {
     super()
     this.structureFactory = structureFactory
     this.player = player
+    this.emptyFunction = () => {}
   }
 
   createSections () {
+    this.sectionName('info')
     var stype = this.owner.stateValue('structureType')
     var tile = this.owner.stateValue('selectedTile')
 
@@ -24,11 +26,11 @@ export default class BuildStructureController extends Content {
     this.text('Yield: ' + stype.turnipYield)
     this.text('Price: ' + stype.cost, 'large')
 
-    this.section()
+    this.section('build')
     if (this.player.enoughCashFor(stype.cost)) {
       this.owner.resetDecoratedButton('Build', null, this.structureFactory.buildBuilding, this.structureFactory, tile, stype)
     } else {
-      this.button('Not enough money', () => { }, null, 'unusableButton')
+      this.button('Not enough money', this.emptyFunction, null, 'unusableButton')
     }
   }
 }
