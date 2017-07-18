@@ -20,6 +20,7 @@ export default class MapView {
     this.viewHeightPx = viewHeightPx
     this.tileWidth = map.tileWidth
     this.tileHeight = map.tileHeight
+    this.showFlowers = false
     this.initialize()
   }
 
@@ -119,7 +120,7 @@ export default class MapView {
    */
   createViewTileForFill (tile, pxCoords, viewArea, offset) {
     var viewTile = new ViewTile({ game: this.game, x: 0, y: 0, modelTile: tile })
-    viewTile.update()
+    viewTile.update(this.showFlowers)
     viewTile.tileSprite.scale.setTo(0.5)
     this.addToViewTexture(viewTile.tileSprite, pxCoords.x, pxCoords.y)
     this.highlightSelectedTile(tile, pxCoords)

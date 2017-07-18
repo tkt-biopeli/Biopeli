@@ -49,18 +49,19 @@ export default class GameState {
       menuController: this.menuController
     })
 
-    this.inputHandler = new InputHandler({
-      game: state,
-      mapListener: this.mapListener,
-      cameraMover: this.cameraMover
-    })
-
     this.mapView = new MapView({
       game: state,
       map: this.map,
       menuController: this.menuController,
       viewWidthPx: state.game.width - menuWidth,
       viewHeightPx: state.game.height
+    })
+
+    this.inputHandler = new InputHandler({
+      game: state,
+      mapListener: this.mapListener,
+      cameraMover: this.cameraMover,
+      mapView: this.mapView
     })
 
     this.gameTimerListener = new GameTimerListener({

@@ -20,6 +20,7 @@ export default class extends Phaser.State {
   create () {
     // create before game state
     this.cursors = this.game.input.keyboard.createCursorKeys()
+    this.flowersKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
 
     var cityName = this.cityName
     this.cityName = undefined

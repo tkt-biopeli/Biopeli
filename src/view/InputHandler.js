@@ -10,10 +10,11 @@ export default class InputHandler {
    * @param {MapListener} param.mapListener - Current map listener
    * @param {CameraMover} param.cameraMover - Current camera mover
    */
-  constructor ({ game, mapListener, cameraMover }) {
+  constructor ({ game, mapListener, cameraMover, mapView }) {
     this.game = game
     this.mapListener = mapListener
     this.cameraMover = cameraMover
+    this.mapView = mapView
 
     this.initialize()
   }
@@ -28,6 +29,9 @@ export default class InputHandler {
     cursors.down.onDown.add(this.onCursorDown, this)
     cursors.left.onDown.add(this.onCursorDown, this)
     cursors.right.onDown.add(this.onCursorDown, this)
+    // let daisiesKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
+    let flowersKey = this.game.flowersKey
+    flowersKey.onDown.add(this.flowersOnOff, this)
   }
 
   /**
@@ -56,5 +60,9 @@ export default class InputHandler {
     }
 
     this.cameraMover.update({ cursor: cursorEvent })
+  }
+
+  flowersOnOff () {
+    this.mapView.showFlowers === true ? this.mapView.showFlowers = false : this.mapView.showFlowers = true
   }
 }
