@@ -113,7 +113,7 @@ describe('Controller tests', ()=>{
       var bar = cs()
       assert.equal(1, bar.width)
       assert.equal(2, bar.height)
-      assert.equal(true, bar.horizontal)
+      assert.equal(true, bar.vertical)
       assert.equal(1, bar.percent)
     })
 
