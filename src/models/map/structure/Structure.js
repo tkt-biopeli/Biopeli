@@ -20,7 +20,7 @@ export default class Structure {
    * @param {integer} foundingYear
    * @param {function} produceFn
    */
-  constructor ({ tile, owner, name, size, structureType, foundingYear, producer, cost, map }) {
+  constructor({ tile, owner, name, size, structureType, foundingYear, producer, cost, map }) {
     this.tile = tile
     this.owner = owner
     this.name = name
@@ -73,20 +73,17 @@ export default class Structure {
   }
 
   createPollution (map) {
-    var hashmap = map.getTilesInRadius(3, this.tile)
-    var distance = 1
-    var pollution = 4
-    var list = hashmap[distance]
-    /**
-    while (pollution > 0) {
-      for (var i = 0; i < list.length; i++) {
-        list[i].flowers -= pollution
-        console.log('aaa')
-      }
-      distance++
-      pollution--
+    var hashmap = map.getTilesInRadius(2, this.tile)
+    var distance = 0
+    var list = hashmap.get(distance)
+    while (distance < 2) {
+    for (var i = 0; i < list.length; i++) {
+      list[i].flowers--
+      console.log(list[i].flowers)
     }
+    distance++
   }
-   */
   }
+  
+
 }

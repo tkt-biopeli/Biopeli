@@ -39,7 +39,8 @@ export default class MapGrid {
     for (var j = y - n; j <= y + n; j++) {
       for (var i = x - n; i <= x + n; i++) {
         if (i <= this.gridSizeX && j <= this.gridSizeY && i >= 0 && j >= 0) {
-        //  hashmap.get(this.getDistance(x, y, i, j)) += this.getTileWithGridCoordinates(i, j)
+         var list =  hashmap.get(this.getDistance(x, y, i, j))
+         list.push(this.getTileWithGridCoordinates(i, j))
         }
       }
     }
@@ -57,16 +58,17 @@ export default class MapGrid {
    * @param {*} j 
    */
   getDistance (x, y, i, j) {
-    if (y == j) {
+    if (y === j) {
       return this.calculateIntoPositive(x, i)
     }
-    if (x == i) {
+    if (x === i) {
       return this.calculateIntoPositive(y, j)
     }
+   
     var distance = 0
-    distance += this.calculateIntoPositive(x, i)
-    distance += this.calculateIntoPositive(y, j)
-    Math.round(distance / 2)
+   // distance += this.calculateIntoPositive(x, i)
+   // distance += this.calculateIntoPositive(y, j)
+   // Math.round(distance / 2)
 
     return distance
   }
