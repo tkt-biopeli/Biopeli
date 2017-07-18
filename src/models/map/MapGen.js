@@ -5,7 +5,6 @@ import StaticTypes from '../StaticTypes'
  */
 export default class MapGen {
   /**
-   *
    * @param {object} param
    * @param {number} param.height - map height
    * @param {number} param.width - map width
@@ -34,16 +33,13 @@ export default class MapGen {
    * returns the tile type at the given coordinate
    * @param {number} x - tile x coordinate
    * @param {number} y - tile y coordinate
-   *
    * @return {TileType} - tile type
    */
   typeAt (x, y) {
     var nx = x / this.width - 0.5
     var ny = y / this.height - 0.5
-
     var gfreq = 8
     var ffreq = 20
-
     if (this.groundnoise.perlin2(gfreq * nx, gfreq * ny) > -0.2) {
       if (this.forestnoise.perlin2(ffreq * nx, ffreq * ny) > -0.1) {
         return this.types.grass
