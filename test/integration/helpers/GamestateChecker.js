@@ -187,9 +187,26 @@ export default class GamestateChecker {
     assert.equal(money, text)
   }
 
+  /**
+   * Checks if the game has ended
+   *
+   * @param {*} has
+   */
   checkGameEnded(has) {
     var mockerCalls = this.gameStub.mockers.callCount('end')
 
     assert(has == (mockerCalls > 0))
+  }
+
+  /**
+   * Checks that the noises of mapgen have been called as many times as wanted
+   *
+   * @param {*} wantedAmount
+   */
+  checkPerlinNoiseCallAmount(wantedAmount){
+    var mapgen = this.gameState.map.mapgen
+
+    assert.equal(wantedAmount, mapgen.forestnoise.callCount)
+    assert.equal(wantedAmount, mapgen.groundnoise.callCount)
   }
 }

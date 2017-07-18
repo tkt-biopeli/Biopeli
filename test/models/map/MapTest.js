@@ -7,6 +7,7 @@ import StaticTypes from '../../../src/models/StaticTypes'
 describe('Map tests', () => {
   var game
   var map
+  var Noise = class Noise{perlin2(){return 1}}
 
   before(function () {
     game = { world: { setBounds: function () { } } }
@@ -16,7 +17,8 @@ describe('Map tests', () => {
       gridSizeX: 100,
       gridSizeY: 100,
       tileWidth: 128,
-      tileHeight: 128
+      tileHeight: 128,
+      perlinNoise: Noise
     })
   })
 
@@ -29,6 +31,7 @@ describe('Map tests', () => {
     assert.equal(map.gridSizeY, 100)
     assert.equal(map.tileHeight, 128)
     assert.equal(map.tileWidth, 128)
+    assert.equal(Noise, map.perlinNoise)
 
   })
 

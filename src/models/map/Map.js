@@ -13,12 +13,13 @@ export default class MapGrid {
    * @param {number} param.tileWidth
    * @param {number} param.tileHeight
    */
-  constructor ({ gridSizeX, gridSizeY, tileWidth, tileHeight }) {
+  constructor ({ gridSizeX, gridSizeY, tileWidth, tileHeight, perlinNoise }) {
     this.gridSizeX = gridSizeX
     this.gridSizeY = gridSizeY
     this.tileWidth = tileWidth
     this.tileHeight = tileHeight
     this.grid = []
+    this.perlinNoise = perlinNoise
   }
 
   /**
@@ -87,16 +88,17 @@ export default class MapGrid {
    * @param {number} seed - optional seed for map generation
    */
   createMap (seed) {
-    var mapgen = new MapGen({
+    this.mapgen = new MapGen({
       height: this.gridSizeY,
       width: this.gridSizeX,
-      seed: seed
+      seed: seed,
+      Noise: this.perlinNoise
     })
 
     var x, y
     for (x = 0; x < this.gridSizeX; x++) {
       for (y = 0; y < this.gridSizeY; y++) {
-        this.addTileWithGridCoordinates(x, y, mapgen.typeAt(x, y))
+        this.addTileWithGridCoordinates(x, y, this.mapgen.typeAt(x, y))
       }
     }
   }

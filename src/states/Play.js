@@ -1,3 +1,4 @@
+import { Noise } from 'noisejs'
 import Phaser from 'phaser'
 import GameState from '../game/GameState'
 import config from '../config'
@@ -25,6 +26,7 @@ export default class extends Phaser.State {
 
     this.gameState = new GameState({
       cityName: cityName,
+      perlinNoise: Noise,
       startMoney: config.playerInitialCash,
       state: this,
       mapWidth: Math.ceil(this.game.width * config.madWidthMultiplier / config.tileWidth),
