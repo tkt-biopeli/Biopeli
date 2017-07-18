@@ -18,7 +18,7 @@ export default class MapGrid {
     this.tileHeight = tileHeight
     this.grid = []
     this.perlinNoise = perlinNoise
-    }
+  }
 
   /**
    * returns a hashmap containing lists of tiles with the distance n
@@ -142,7 +142,7 @@ export default class MapGrid {
       }
     }
   }
-  
+
   /**
    * Pixel-Grid-Pixel conversion helpers
    * @param {Number} x
