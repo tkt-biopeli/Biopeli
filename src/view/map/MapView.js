@@ -6,7 +6,6 @@ import ViewTile from './ViewTile'
 export default class MapView {
   /**
    * @param {object} param
-   *
    * @param {Phaser.Game} param.game
    * @param {Map} param.map
    * @param {Menu} param.menu
@@ -21,6 +20,7 @@ export default class MapView {
     this.viewHeightPx = viewHeightPx
     this.tileWidth = map.tileWidth
     this.tileHeight = map.tileHeight
+    this.showFlowers = false
     this.initialize()
   }
 
@@ -70,7 +70,6 @@ export default class MapView {
 
   /**
    * Calculates the amount of tiles shown at borders of the viewed area
-   *
    * @param {number} cameraX
    * @param {number} cameraY
    * @param {number} startCol
@@ -99,7 +98,6 @@ export default class MapView {
 
   /**
    * Fills the shown area
-   *
    * @param { ??? } viewArea
    * @param { ??? } offset
    */
@@ -115,7 +113,6 @@ export default class MapView {
 
   /**
    * Creates a view for a given tile on the map
-   *
    * @param {ModelTile} tile
    * @param {{x: number, y: number}} pxCoords
    * @param { ??? } viewArea
@@ -123,7 +120,7 @@ export default class MapView {
    */
   createViewTileForFill (tile, pxCoords, viewArea, offset) {
     var viewTile = new ViewTile({ game: this.game, x: 0, y: 0, modelTile: tile })
-    viewTile.update()
+    viewTile.update(this.showFlowers)
     viewTile.tileSprite.scale.setTo(0.5)
     this.addToViewTexture(viewTile.tileSprite, pxCoords.x, pxCoords.y)
     this.highlightSelectedTile(tile, pxCoords)
@@ -131,7 +128,6 @@ export default class MapView {
 
   /**
    * Highlights the given tile with help from highlight function
-   *
    * @param {ModelTile} tile
    * @param {{x: number, y: number}} pxCoords
    */

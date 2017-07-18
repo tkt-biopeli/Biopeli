@@ -6,8 +6,6 @@ import MapGen from './MapGen'
  */
 export default class MapGrid {
   /**
-   * @param {object} param - Parameter object
-   *
    * @param {number} param.gridSizeX
    * @param {number} param.gridSizeY
    * @param {number} param.tileWidth
@@ -20,6 +18,48 @@ export default class MapGrid {
     this.tileHeight = tileHeight
     this.grid = []
     this.perlinNoise = perlinNoise
+  }
+
+  /**
+   * returns a hashmap containing lists of tiles with the distance n
+   * @param {*} n the distance n
+   * @param {*} tile the tile from wich radius is calculated
+   */
+  getTilesInRadius (n, tile) {
+    let bounds = this.boundsForRadius(tile.x, tile.y, n)
+    let tiles = new Map()
+    for (var i = 0; i <= n; i++) {
+      tiles.set(i, [])
+    }
+
+    for (var x = bounds.sx; x <= bounds.ex; x++) {
+      for (var y = bounds.sy; y <= bounds.ey; y++) {
+        let dx = Math.abs(x - tile.x)
+        let dy = Math.abs(y - tile.y)
+        let distance = this.radiusFunction(dx, dy)
+        if (distance <= n) {
+          let distArray = tiles.get(distance)
+          distArray.push(this.getTileWithGridCoordinates(x, y))
+        }
+      }
+    }
+    return tiles
+  }
+
+  boundsForRadius (tx, ty, n) {
+    let start = this.ensureCoordsInGrid(tx - n, ty - n)
+    let end = this.ensureCoordsInGrid(tx + n, ty + n)
+    return {
+      sx: start.x,
+      sy: start.y,
+      ex: end.x,
+      ey: end.y
+    }
+  }
+
+  radiusFunction (hori, veri) {
+    // hypotenuse
+    return Math.floor(Math.sqrt(Math.pow(hori, 2) + Math.pow(veri, 2)))
   }
 
   /**
@@ -103,9 +143,8 @@ export default class MapGrid {
     }
   }
 
-  // Pixel-Grid-Pixel conversion helpers
-
   /**
+   * Pixel-Grid-Pixel conversion helpers
    * @param {Number} x
    * @return {Number}
    */
@@ -135,5 +174,13 @@ export default class MapGrid {
    */
   gridToPixelsY (y) {
     return y * this.tileHeight
+  }
+
+  ensureCoordsInGrid (x, y) {
+    x = x >= 0 ? x : 0
+    x = x <= this.gridSizeX ? x : this.gridSizeX
+    y = y >= 0 ? y : 0
+    y = y <= this.gridSizeY ? y : this.gridSizeY
+    return { x, y }
   }
 }

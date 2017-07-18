@@ -28,7 +28,6 @@ export default class StructureFactory {
 
   /**
    * Builds a structure on the tile given as a parameter
-   *
    * @param {ModelTile} tile
    * @param {StructureType} structureType
    */
@@ -43,16 +42,15 @@ export default class StructureFactory {
       structureType: structureType,
       foundingYear: this.gameTimer.currentTimeEvent.year,
       producer: this.createProducer(structureType, tile),
-      cost: structureType.cost,
-      map: this.map
+      cost: structureType.cost
     })
     this.player.addStructure(tile.structure)
+    this.createInitialPollution(structureType.pollution, tile)
   }
 
   /**
    * Checks if the player has enough money for a given type of structure
    * decreases players cash if true
-   *
    * @param {StructureType} structureType
    */
   checkMoney (structureType) {
@@ -62,11 +60,27 @@ export default class StructureFactory {
     this.player.cash -= structureType.cost
     return true
   }
+
   /**
    * @param {StructureType} structureType
    * @param {?} tile
    */
   createProducer (structureType, tile) {
     return ProducerFactory.createProducer(structureType, tile)
+  }
+
+  /**
+   * Creates initial pollution to the map when building a building
+   * @param {*} pollution
+   * @param {*} map
+   */
+  createInitialPollution (pollution, tile) {
+    let tiles = this.map.getTilesInRadius(3, tile)
+    for (var [distance, tilesArray] of tiles) {
+      tilesArray.forEach(function (tmpTile) {
+        tmpTile.flowers -= (pollution - distance)
+        if (tmpTile.flowers < 1) { tmpTile.flowers = 1 }
+      }, this)
+    }
   }
 }
