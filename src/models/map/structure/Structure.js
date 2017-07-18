@@ -20,7 +20,7 @@ export default class Structure {
    * @param {integer} foundingYear
    * @param {function} produceFn
    */
-  constructor ({ tile, owner, name, size, structureType, foundingYear, producer, cost, map }) {
+  constructor ({ tile, owner, name, size, structureType, foundingYear, producer, cost }) {
     this.tile = tile
     this.owner = owner
     this.name = name
@@ -62,9 +62,7 @@ export default class Structure {
 
   /**
    * Returns the amount of turnips produced by this structure
-   *
    * @param {TimeEvent} timeEvent - Current ingame date
-   *
    * @return {number} - Turnips produced
    */
   produce (timeEvent) {

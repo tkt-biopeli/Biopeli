@@ -1,8 +1,7 @@
 import DemandFunction from './DemandFunction'
 
  /**
-  * Tracks the population of the city
-  *
+  * Tracks the demand and population of the city
   * @param {String} name
   */
 export default class City {
@@ -18,10 +17,9 @@ export default class City {
   }
 
   /**
-   * City buys turnips
-   *
-   * @param {*} producedTurnips
-   * @param {*} endOfTheYear
+   * Buys produced turnips for the city according to weekly and sometimes yearly demand
+   * @param {number} producedTurnips
+   * @param {boolean} buyYearlyHarvest
    */
   buyTurnips (producedTurnips, endOfTheYear) {
     let cash = this.turnipDemand.weekly(producedTurnips)
@@ -30,7 +28,8 @@ export default class City {
   }
 
   /**
-   * Increases population and updates city's demand for new year
+   * Helper for buyTurnips to buy turnips according to yearly demand
+   * @param {number} supply
    */
   endOfTheYear () {
     this.increasePopulation(this.turnipDemand.percentageSupplied())
