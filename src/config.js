@@ -52,10 +52,13 @@ export default {
   gameTimerInterval: 1000,
 
   // configurations for city
-  cityInitialPopulation: 250,
-  cityDemandMultiplier: 3,
+  cityInitialPopulation: 500,
+  cityDemandMultiplier: 2,
   cityDemandRandomVariance: 0.1,
-  startTurnipPrice: 50,
+  startTurnipPrice: 20,
+
+  // max amount of flowers
+  maxFlowers: 10,
 
   // currency
   currency: 'Ag',
