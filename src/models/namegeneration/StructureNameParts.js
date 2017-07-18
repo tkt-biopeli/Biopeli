@@ -32,7 +32,11 @@ export default [
     'Karjalaisen',
     'Ruotsalaisen',
     'Tanskalaisen',
-    'Suomalaisen'
+    'Suomalaisen',
+    'Kiinalaisen',
+    'Munkki',
+    'Professori',
+    'Luukkaisen'
   ],
   [
     'Olli',
@@ -48,6 +52,13 @@ export default [
     'Reetta',
     'Martta',
     'Eeva',
+    'Jon-Erik',
+    'Hossein',
+    'Ilkka',
+    'Ilja',
+    'Jarkko',
+    'Miia',
+    'Juha',
     'vaari',
     'mummo',
     'mummi',
@@ -102,6 +113,8 @@ export default [
     'Kohtalaisen',
     'Hieman',
     'Hivenen',
-    'Just ja just'
+    'Just ja just',
+    'Järkyttävän',
+    'Mielettömän'
   ]
 ]
