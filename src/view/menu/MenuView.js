@@ -16,11 +16,11 @@ export default class MenuView {
     this.menuViewGroup.fixedToCamera = true
     this.game.world.bringToTop(this.menuViewGroup)
 
-    this.activeSections = new Map()
+    this.activeMenuitems = new Map()
 
     this.createBackground(background)
   }
-  
+
   /**
    * Creates background image of menu
    */
@@ -59,13 +59,17 @@ export default class MenuView {
    */
   draw (sections) {
     this.active = new Set()
+    this.activeSections = []
+
+    this.activeButtons = []
+    this.activeTexts = []
 
     this.layout.init(sections)
     this.updateMenu(sections)
     this.game.world.bringToTop(this.background)
     this.game.world.bringToTop(this.menuViewGroup)
   }
-  
+
   /**
    * Iterates through given sections
    * @param {*} sections
@@ -76,10 +80,11 @@ export default class MenuView {
     for (let i = 0; i < sections.length; i++) {
       var section = sections[i]
 
-      var menuitems = this.activeSections.has(section.name) 
-        ? this.updateSection(this.activeSections.get(section.name), section.components)
+      var menuitems = this.activeMenuitems.has(section.name)
+        ? this.updateSection(this.activeMenuitems.get(section.name), section.components)
         : this.createSection(section.components)
 
+      this.activeSections.push(menuitems)
       newSections.set(section.name, menuitems)
 
       if (i !== sections.length - 1) {
@@ -87,8 +92,8 @@ export default class MenuView {
       }
     }
 
-    this.removeExtraSections(this.activeSections, newSections)
-    this.activeSections = newSections
+    this.removeExtraSections(this.activeMenuitems, newSections)
+    this.activeMenuitems = newSections
   }
 
   /**
@@ -114,8 +119,8 @@ export default class MenuView {
     return this.componentFunction(component.type, 'create').call(this, coords, component)
   }
 
-  componentFunction(type, prefix){
-    return this[prefix+type.charAt(0).toUpperCase()+type.slice(1)]
+  componentFunction (type, prefix) {
+    return this[prefix + type.charAt(0).toUpperCase() + type.slice(1)]
   }
 
   /**
@@ -123,7 +128,7 @@ export default class MenuView {
    * @param {ButtonAction} buttonAction
    */
   createButton (coords, buttonComponent) {
-    return new LabeledButton({
+    var button = new LabeledButton({
       game: this.game,
       viewGroup: this.menuViewGroup,
       label: buttonComponent.name,
@@ -136,6 +141,8 @@ export default class MenuView {
       buttonWidth: buttonComponent.width,
       buttonHeight: buttonComponent.height
     })
+    this.activeButtons.push(button)
+    return button
   }
 
   /**
@@ -159,7 +166,7 @@ export default class MenuView {
       }
     }
 
-    return new Text({
+    var tex = new Text({
       game: this.game,
       menuSize: this.layout.menuRect.width,
       viewGroup: this.menuViewGroup,
@@ -169,6 +176,9 @@ export default class MenuView {
       y: coords.y,
       anchor: anchor
     })
+
+    this.activeTexts.push(tex)
+    return tex
   }
 
   /**
@@ -202,28 +212,28 @@ export default class MenuView {
     })
   }
 
-  updateSection(section, components){
+  updateSection (section, components) {
     var menuitems = []
 
     var i = 0
-    for(let j = 0 ; j < components.length ; j++){
+    for (let j = 0; j < components.length; j++) {
       var component = components[j]
       var menuitem = section[i]
-      if(i < section.length && menuitem.type == component.type){
-        if(component.type == 'button' && 
-          (component.asset != menuitem.asset || component.function != menuitem.callback)){
+      if (i < section.length && menuitem.type === component.type) {
+        if (component.type === 'button' &&
+          (component.asset !== menuitem.asset || component.function !== menuitem.callback)) {
           menuitems.push(this.createComponent(component))
           menuitem.destroy()
-        }else{
+        } else {
           menuitems.push(menuitem)
           this.updateComponent(menuitem, component)
         }
         i++
-      }else{
+      } else {
         menuitems.push(this.createComponent(component))
       }
 
-      if(j != components.length - 1){
+      if (j !== components.length - 1) {
         this.layout.afterLine()
       }
     }
@@ -233,44 +243,46 @@ export default class MenuView {
     return menuitems
   }
 
-  removeExtraMenuitems(section, startIndex){
-    for(let i = section.length -1 ; i >= startIndex ; i--){
+  removeExtraMenuitems (section, startIndex) {
+    for (let i = section.length - 1; i >= startIndex; i--) {
       section[i].destroy()
       section.pop()
     }
   }
 
-  updateComponent(menuitem, component){
+  updateComponent (menuitem, component) {
     var coords = this.layout.nextComponentLocation(component)
 
     this.componentFunction(component.type, 'update').call(this, coords, component, menuitem)
   }
 
-  updateButton(coords, component, button) {
-    button.update(component.name, component.fontSize, coords.x, coords.y, 
+  updateButton (coords, component, button) {
+    button.update(component.name, component.fontSize, coords.x, coords.y,
       component.function, component.context, component.width, component.height)
+    this.activeButtons.push(button)
   }
 
-  updateText(coords, component, text) {
+  updateText (coords, component, text) {
     text.update(component.text, component.fontSize, coords.x, coords.y)
+    this.activeTexts.push(text)
   }
 
-  updateIcon(coords, component, icon) {
+  updateIcon (coords, component, icon) {
     icon.update(coords.x, coords.y)
   }
 
-  updateBar(coords, component, bar) {
+  updateBar (coords, component, bar) {
     bar.update(coords.x, coords.y, component.percent)
   }
 
-  removeExtraSections(oldSections, newSections){
-    for(let key of oldSections.keys()){
-      if(!newSections.has(key)) this.destroySection(oldSections.get(key))
+  removeExtraSections (oldSections, newSections) {
+    for (let key of oldSections.keys()) {
+      if (!newSections.has(key)) this.destroySection(oldSections.get(key))
     }
   }
 
-  destroySection(menuitems){
-    for(let menuitem of menuitems){
+  destroySection (menuitems) {
+    for (let menuitem of menuitems) {
       menuitem.destroy()
     }
   }

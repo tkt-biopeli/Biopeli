@@ -11,7 +11,7 @@ export default class Icon {
     this.icon.y = y
   }
 
-  destroy(){
+  destroy () {
     this.icon.destroy()
   }
 }

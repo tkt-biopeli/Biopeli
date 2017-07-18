@@ -14,16 +14,16 @@ export default class AnimatedBar {
     this.draw()
   }
 
-  update(x, y, percent){
+  update (x, y, percent) {
     this.background.x = x
     this.background.y = y
-    
+
     this.bar.x = x
     this.bar.y = y
     this.setPercentage(percent)
   }
 
-  destroy(){
+  destroy () {
     this.bar.destroy()
     this.background.destroy()
   }

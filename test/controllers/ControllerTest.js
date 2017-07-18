@@ -5,7 +5,7 @@ import Controller from '../../src/controllers/Controller'
 describe('Controller tests', ()=>{
   var controller, menuView, game, style, m
 
-  var cs = () => controller.currentSection[controller.currentSection.length -1]
+  var cs = () => controller.currentSection.components[controller.currentSection.components.length -1]
 
   beforeEach(()=>{
     m = {
@@ -55,7 +55,7 @@ describe('Controller tests', ()=>{
     controller.initialize()
 
     assert.equal(1, controller.sections.length)
-    assert.equal(0, controller.currentSection.length)
+    assert(controller.currentSection.components)
   })
 
   it('Finish works', ()=>{
@@ -72,16 +72,16 @@ describe('Controller tests', ()=>{
       controller.initialize()
       controller.add(4)
 
-      assert.equal(4, controller.currentSection[0])
-      assert.equal(1, controller.currentSection.length)
+      assert.equal(4, controller.currentSection.components[0])
+      assert.equal(1, controller.currentSection.components.length)
 
-      controller.addSection([2])
+      controller.addSection({components: [2]})
       assert.equal(2, controller.sections.length)
-      assert.equal(2, controller.currentSection[0])
+      assert.equal(2, controller.currentSection.components[0])
 
-      controller.addSections([[1], [3]])
+      controller.addSections([{components: [1]}, {components: [3]}])
       assert.equal(4, controller.sections.length)
-      assert.equal(3, controller.currentSection[0])
+      assert.equal(3, controller.currentSection.components[0])
     })
 
     it('Adding text works', ()=> {

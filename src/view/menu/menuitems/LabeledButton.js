@@ -19,8 +19,8 @@ export default class LabeledButton {
    */
   constructor ({ game, viewGroup, label, fontSize, asset, x, y, callback, context, buttonWidth, buttonHeight }) {
     this.type = 'button'
-    
-    this.style = {font: fontSize + 'px Arial', fill: '#ffff00', align: 'center'}
+
+    this.style = { font: fontSize + 'px Arial', fill: '#ffff00', align: 'center' }
     this.group = viewGroup
 
     this.button = game.make.button(x, y, asset, callback, context)
@@ -46,13 +46,13 @@ export default class LabeledButton {
     this.button.callback = callback
     this.button.context = context
 
-    this.style.font = fontSize + "px Arial"
+    this.style.font = fontSize + 'px Arial'
     this.text.text = label
     this.text.x = Math.floor(x + this.width / 2)
     this.text.y = Math.floor(y + this.height / 2)
   }
 
-  destroy(){
+  destroy () {
     this.group.removeChild(this.button)
     this.text.destroy()
     this.button.destroy()

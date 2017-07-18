@@ -15,10 +15,10 @@ export default class Text {
    * @param {number} param.x
    * @param {number} param.y
    */
-  constructor ({game, menuSize, viewGroup, text, fontSize, x, y, anchor}) {
+  constructor ({ game, menuSize, viewGroup, text, fontSize, x, y, anchor }) {
     this.type = 'text'
-    
-    this.style = {font: fontSize + 'px Arial', fill: '#ffff00', align: 'center'}
+
+    this.style = { font: fontSize + 'px Arial', fill: '#ffff00', align: 'center' }
     this.text = game.add.text(x, y, text, this.style, viewGroup)
     this.text.anchor.set(anchor.x, anchor.y)
     this.text.wordWrap = true
@@ -26,14 +26,14 @@ export default class Text {
   }
 
   update (text, fontSize, x, y) {
-    this.style.font = fontSize+"px Arial"
+    this.style.font = fontSize + 'px Arial'
 
     this.text.text = text
     this.text.x = x
     this.text.y = y
   }
 
-  destroy(){
+  destroy () {
     this.text.destroy()
   }
 }
