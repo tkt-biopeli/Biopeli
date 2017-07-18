@@ -74,6 +74,11 @@ export default class GamestateChecker {
     }
   }
 
+  checkPollution(x, y, pollution) {
+    var tile = this.getTileModel(x, y)
+    assert.equal(pollution, tile.flowers)
+  }
+
   /**
    * Checks all information of tile in given screen coordinates
    * 
