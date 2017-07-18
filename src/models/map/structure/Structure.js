@@ -30,7 +30,7 @@ export default class Structure {
     this.foundingYear = foundingYear
     this.producer = producer
     this.cost = cost
-    this.createPollution(map)
+    this.createPollution(structureType.pollution, map)
   }
 
   /**
@@ -72,18 +72,16 @@ export default class Structure {
     return this.producer === undefined ? 0 : this.producer.produce(timeEvent)
   }
 
-  createPollution (map) {
-    var hashmap = map.getTilesInRadius(2, this.tile)
-    var distance = 0
-    var list = hashmap.get(distance)
-    while (distance < 2) {
-    for (var i = 0; i < list.length; i++) {
-      list[i].flowers--
-      console.log(list[i].flowers)
+  createPollution (pollution, map) {
+    let tiles = map.getTilesInRadius(3, this.tile)
+    for (var [distance, tilesArray] of tiles) {
+      tilesArray.forEach(function(tile) {
+        tile.flowers -= (pollution - distance)
+        if (tile.flowers < 1) {tile.flowers = 1}
+      }, this);
     }
-    distance++
   }
-  }
+  
   
 
 }

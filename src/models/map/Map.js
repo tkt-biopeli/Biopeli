@@ -13,7 +13,7 @@ export default class MapGrid {
    * @param {number} param.tileWidth
    * @param {number} param.tileHeight
    */
-  constructor ({ gridSizeX, gridSizeY, tileWidth, tileHeight }) {
+  constructor({ gridSizeX, gridSizeY, tileWidth, tileHeight }) {
     this.gridSizeX = gridSizeX
     this.gridSizeY = gridSizeY
     this.tileWidth = tileWidth
@@ -27,65 +27,42 @@ export default class MapGrid {
    * @param {*} tile the tile from wich radius is calculated
    */
   getTilesInRadius (n, tile) {
-    var hashmap = new Map()
-    var x = tile.x
-    var y = tile.y
-    // Init
+    let bounds = this.boundsForRadius(tile.x, tile.y, n)
+    let tiles = new Map()
     for (var i = 0; i <= n; i++) {
-      hashmap.set(i, [])
+      tiles.set(i, [])
     }
 
-    // Calculate
-    for (var j = y - n; j <= y + n; j++) {
-      for (var i = x - n; i <= x + n; i++) {
-        if (i <= this.gridSizeX && j <= this.gridSizeY && i >= 0 && j >= 0) {
-         var list =  hashmap.get(this.getDistance(x, y, i, j))
-         list.push(this.getTileWithGridCoordinates(i, j))
+    for (var x = bounds.sx; x <= bounds.ex; x++) {
+      for (var y = bounds.sy; y <= bounds.ey; y++) {
+        let dx = Math.abs(x - tile.x)
+        let dy = Math.abs(y - tile.y)
+
+        let distance = this.radiusFunction(dx, dy)
+        if (distance <= n) {
+          let distArray = tiles.get(distance)
+          distArray.push(this.getTileWithGridCoordinates(x, y))
         }
       }
     }
-    for (var [key, value] of hashmap) {
-      console.log(key + ' = ' + value.x + ' ' + value.y + ' flow: ' + value.flowers);
-    }
-    return hashmap
+
+    return tiles
   }
 
-  /**
-   * 
-   * @param {*} x 
-   * @param {*} y 
-   * @param {*} i 
-   * @param {*} j 
-   */
-  getDistance (x, y, i, j) {
-    if (y === j) {
-      return this.calculateIntoPositive(x, i)
+  boundsForRadius (tx, ty, n) {
+    let start = this.ensureCoordsInGrid(tx - n, ty - n)
+    let end = this.ensureCoordsInGrid(tx + n, ty + n)
+    return {
+      sx: start.x,
+      sy: start.y,
+      ex: end.x,
+      ey: end.y
     }
-    if (x === i) {
-      return this.calculateIntoPositive(y, j)
-    }
-   
-    var distance = 0
-   // distance += this.calculateIntoPositive(x, i)
-   // distance += this.calculateIntoPositive(y, j)
-   // Math.round(distance / 2)
-
-    return distance
   }
 
-  /**
-   * turns the difference in integers into positives
-   * @param {*} a first int
-   * @param {*} b second integer
-   */
-  calculateIntoPositive (a, b) {
-    var number
-    if (a > b) {
-      number = a - b
-    } else {
-      number = b - a
-    }
-    return number
+  radiusFunction (hori, veri) {
+    // hypotenuse
+    return Math.floor(Math.sqrt(Math.pow(hori, 2) + Math.pow(veri, 2)))
   }
 
   /**
@@ -200,5 +177,13 @@ export default class MapGrid {
    */
   gridToPixelsY (y) {
     return y * this.tileHeight
+  }
+
+  ensureCoordsInGrid (x, y) {
+    x = x >= 0 ? x : 0
+    x = x <= this.gridSizeX ? x : this.gridSizeX
+    y = y >= 0 ? y : 0
+    y = y <= this.gridSizeY ? y : this.gridSizeY
+    return { x, y }
   }
 }

@@ -18,7 +18,8 @@ const structureTypes = {
     harvestingWeeks: new Set(['8.1']),
     continuousProduction: false,
     turnipYield: 12,
-    cost: 10000
+    cost: 10000,
+    pollution: 4
   },
   dairy_farm: {
     name: 'dairy farm',
@@ -26,7 +27,8 @@ const structureTypes = {
     harvestingWeeks: new Set(),
     continuousProduction: true,
     turnipYield: 16,
-    cost: 15000
+    cost: 15000,
+    pollution: 5
   },
   berry_farm: {
     name: 'berry farm',
@@ -34,7 +36,8 @@ const structureTypes = {
     harvestingWeeks: new Set(),
     continuousProduction: true,
     turnipYield: 10,
-    cost: 10000
+    cost: 10000,
+    pollution: 2
   }
 }
 
@@ -49,19 +52,19 @@ const tileTypes = {
   forest: {
     name: 'forest',
     asset: 'forest',
-    flowers: 6,
+    flowers: 10,
     allowedStructures: []
   },
   grass: {
     name: 'grass',
     asset: 'grass',
-    flowers: 4,
+    flowers: 10,
     allowedStructures: []
   },
   water: {
     name: 'water',
     asset: 'water',
-    flowers: 5,
+    flowers: 10,
     allowedStructures: []
   }
 }
