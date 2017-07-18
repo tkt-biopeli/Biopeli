@@ -20,7 +20,7 @@ export default class Structure {
    * @param {integer} foundingYear
    * @param {function} produceFn
    */
-  constructor({ tile, owner, name, size, structureType, foundingYear, producer, cost, map }) {
+  constructor ({ tile, owner, name, size, structureType, foundingYear, producer, cost }) {
     this.tile = tile
     this.owner = owner
     this.name = name
@@ -30,7 +30,6 @@ export default class Structure {
     this.foundingYear = foundingYear
     this.producer = producer
     this.cost = cost
-    this.createPollution(structureType.pollution, map)
   }
 
   /**
@@ -63,25 +62,10 @@ export default class Structure {
 
   /**
    * Returns the amount of turnips produced by this structure
-   *
    * @param {TimeEvent} timeEvent - Current ingame date
-   *
    * @return {number} - Turnips produced
    */
   produce (timeEvent) {
     return this.producer === undefined ? 0 : this.producer.produce(timeEvent)
   }
-
-  createPollution (pollution, map) {
-    let tiles = map.getTilesInRadius(3, this.tile)
-    for (var [distance, tilesArray] of tiles) {
-      tilesArray.forEach(function(tile) {
-        tile.flowers -= (pollution - distance)
-        if (tile.flowers < 1) {tile.flowers = 1}
-      }, this);
-    }
-  }
-  
-  
-
 }

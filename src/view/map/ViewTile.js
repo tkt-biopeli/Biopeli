@@ -58,10 +58,8 @@ export default class ViewTile {
    * @param {string} toAdd
    */
   addTextSprite (toAdd) {
-    let daisies = this.game.make.sprite(0,0, 'daisy')
+    let daisies = this.game.make.sprite(0, 0, 'daisy')
     daisies.frame = 10 - this.modelTile.flowers
-    daisies.scale.setTo(2)
-
     return this.tileSprite.addChild(daisies)
   }
 }

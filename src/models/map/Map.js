@@ -6,14 +6,12 @@ import MapGen from './MapGen'
  */
 export default class MapGrid {
   /**
-   * @param {object} param - Parameter object
-   *
    * @param {number} param.gridSizeX
    * @param {number} param.gridSizeY
    * @param {number} param.tileWidth
    * @param {number} param.tileHeight
    */
-  constructor({ gridSizeX, gridSizeY, tileWidth, tileHeight }) {
+  constructor ({ gridSizeX, gridSizeY, tileWidth, tileHeight }) {
     this.gridSizeX = gridSizeX
     this.gridSizeY = gridSizeY
     this.tileWidth = tileWidth
@@ -45,7 +43,6 @@ export default class MapGrid {
         }
       }
     }
-
     return tiles
   }
 

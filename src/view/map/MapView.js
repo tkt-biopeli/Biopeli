@@ -6,7 +6,6 @@ import ViewTile from './ViewTile'
 export default class MapView {
   /**
    * @param {object} param
-   *
    * @param {Phaser.Game} param.game
    * @param {Map} param.map
    * @param {Menu} param.menu
@@ -69,8 +68,7 @@ export default class MapView {
   }
 
   /**
-   * Calculates the amount of tiles shown at borders of the viewed area 
-   * 
+   * Calculates the amount of tiles shown at borders of the viewed area
    * @param {number} cameraX
    * @param {number} cameraY
    * @param {number} startCol
@@ -99,7 +97,6 @@ export default class MapView {
 
   /**
    * Fills the shown area
-   *
    * @param { ??? } viewArea
    * @param { ??? } offset
    */
@@ -131,7 +128,6 @@ export default class MapView {
 
   /**
    * Highlights the given tile with help from highlight function
-   * 
    * @param {ModelTile} tile
    * @param {{x: number, y: number}} pxCoords
    */

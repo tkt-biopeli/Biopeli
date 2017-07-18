@@ -3,14 +3,16 @@ const sinon = require("sinon")
 import StructureFactory from '../../../src/models/map/structure/StructureFactory'
 
 describe('StructureFactory tests', () => {
-  var sfactory, gameTimer, player, addStructureSpy
+  var sfactory, gameTimer, player, addStructureSpy, map
 
   beforeEach(() => {
+    map = {
+      getTilesInRadius: () => new Map()
+    }
     addStructureSpy = sinon.spy()
-    
     player = {
       addStructure: addStructureSpy,
-      enoughCashFor: () => true ,
+      enoughCashFor: () => true,
       cash: 0
     }
     
@@ -22,7 +24,8 @@ describe('StructureFactory tests', () => {
     
     sfactory = new StructureFactory({
       gameTimer: gameTimer,
-      player: player
+      player: player,
+      map: map
     })
 
     sfactory.namer = {

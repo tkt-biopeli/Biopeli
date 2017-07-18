@@ -2,7 +2,6 @@
  * This is a listener for the GameTimer object
  */
 export default class GameTimerListener {
-
   /**
    * @param {City} city
    * @param {Player} player
@@ -20,13 +19,11 @@ export default class GameTimerListener {
 
   /**
   * Calls all things that need to be updated after game timer call
-  *
   * @param {TimerEvent} timerEvent
   */
   onTimer (timerEvent) {
     var producedTurnips = this.countProductionFromStructures(this.player.structures, timerEvent)
     this.doTransaction(producedTurnips, timerEvent.endOfYear)
-
     this.redrawControllers()
     // is game over?
     this.gameEvents.isGameOver(timerEvent)
@@ -34,9 +31,8 @@ export default class GameTimerListener {
 
   /**
    * Goes through given structures and sums yearly and weekly productions
-   * 
-   * @param {Structure[]} structures 
-   * @param {TimerEvent} timerEvent 
+   * @param {Structure[]} structures
+   * @param {TimerEvent} timerEvent
    */
   countProductionFromStructures (structures, timerEvent) {
     var weekly = 0
@@ -54,9 +50,8 @@ export default class GameTimerListener {
 
   /**
    * Handles the transaction between city and the player
-   * 
-   * @param {number} producedTurnips 
-   * @param {boolean} buyYearlyHarvest 
+   * @param {number} producedTurnips
+   * @param {boolean} buyYearlyHarvest
    */
   doTransaction (producedTurnips, buyYearlyHarvest) {
     let transaction = this.city.buyTurnips(producedTurnips, buyYearlyHarvest)
