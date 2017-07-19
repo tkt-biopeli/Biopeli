@@ -11,7 +11,9 @@ describe('City tests', () => {
       name: 'test',
       startPopulation: 100,
       startPrice: 10,
-      popularityPct: 11
+      popularityPct: 11,
+      increaseAtOne: 1.25,
+      increaseAtTwo: 2.25
     })
   })
 
@@ -94,7 +96,31 @@ describe('City tests', () => {
       city.increasePopulation(3)
       assert.equal(325, city.population)
     })
+
+    it('Changing increaseAtWorks', ()=>{
+      city = new City({ 
+        name: 'test',
+        startPopulation: 100,
+        startPrice: 10,
+        popularityPct: 11,
+        increaseAtOne: 10,
+        increaseAtTwo: 20
+      })
+
+      city.increasePopulation(1)
+      assert.equal(1000, city.population)
+
+      city.population = 100
+      city.increasePopulation(2)
+      assert.equal(2000, city.population)
+
+      city.population = 100
+      city.increasePopulation(0.5)
+      assert.equal(100, city.population)
+
+      city.population = 100
+      city.increasePopulation(0)
+      assert.equal(-800, city.population)
+    })
   })
-
-
 })

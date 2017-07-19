@@ -1,19 +1,23 @@
-import DemandFunction from './DemandFunction'
+import DemandCalculator from './DemandCalculator'
+import {createLineWithPoints} from './LinearFunction'
 
  /**
   * Tracks the demand and population of the city
   * @param {String} name
   */
 export default class City {
-  constructor ({ name, startPopulation, popularityPct, demandRandomVariance, startPrice }) {
+  constructor ({ name, startPopulation, popularityPct, demandRandomVariance, startPrice, increaseAtOne, increaseAtTwo }) {
     this.name = name
     this.population = startPopulation
-    this.turnipDemand = new DemandFunction({
+    this.turnipDemand = new DemandCalculator({
       city: this,
       popularityPct: popularityPct,
       demandRandomVariance: demandRandomVariance,
       startConstantPrice: startPrice
     })
+
+    this.normalFunction = createLineWithPoints(0.5, 1, 1, increaseAtOne)
+    this.overFunction = createLineWithPoints(1, increaseAtOne, 2, increaseAtTwo)
   }
 
   /**
@@ -41,8 +45,8 @@ export default class City {
    */
   increasePopulation (percentageSupplied) {
     var percentage = percentageSupplied <= 1
-      ? 0.5 * percentageSupplied + 0.75
-      : percentageSupplied + 0.25
+      ? this.normalFunction(percentageSupplied)
+      : this.overFunction(percentageSupplied)
 
     this.population *= percentage
     this.population = Math.ceil(this.population)

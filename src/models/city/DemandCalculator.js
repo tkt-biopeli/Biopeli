@@ -1,7 +1,9 @@
+import {createLineWithPoints} from './LinearFunction'
+
 /**
  * Determines how much money the player gets from the produced turnips
  */
-export default class DemandFunction {
+export default class DemandCalculator {
   constructor ({ city, popularityPct, demandRandomVariance, startConstantPrice }) {
     this.city = city
     this.popularityPct = popularityPct
@@ -20,7 +22,8 @@ export default class DemandFunction {
     this.yearDemand = this.demandedAmount()
     this.wholeDemand = this.yearDemand * 2
 
-    this.slope = -1 * this.constantPrice / this.yearDemand
+    this.constantFunction = createLineWithPoints(0, this.constantPrice, this.yearDemand, this.constantPrice)
+    this.decreasingFunction = createLineWithPoints(this.yearDemand, this.constantPrice, this.wholeDemand, 0)
   }
 
   /**
@@ -91,8 +94,8 @@ export default class DemandFunction {
    */
   priceAt (supplyPoint) {
     return (supplyPoint <= this.yearDemand)
-      ? this.constantPrice
-      : Math.max(0, Math.floor(this.slope * (supplyPoint - this.yearDemand) + this.constantPrice))
+      ? this.constantFunction(supplyPoint)
+      : Math.max(0, this.decreasingFunction(supplyPoint))
   }
 
   /**

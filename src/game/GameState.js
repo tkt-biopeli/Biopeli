@@ -95,7 +95,9 @@ export default class GameState {
       startPopulation: config.cityInitialPopulation,
       popularityPct: config.cityDemandMultiplier,
       demandRandomVariance: config.cityDemandRandomVariance,
-      startPrice: config.startTurnipPrice
+      startPrice: config.startTurnipPrice,
+      increaseAtOne: config.populationChangeAt100,
+      increaseAtTwo: config.populationChangeAt200
     })
 
     this.gameTimer = new Timer({

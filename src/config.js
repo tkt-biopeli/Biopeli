@@ -56,6 +56,8 @@ export default {
   cityDemandMultiplier: 2,
   cityDemandRandomVariance: 0.1,
   startTurnipPrice: 20,
+  populationChangeAt100: 1.5,
+  populationChangeAt200: 2.5,
 
   // max amount of flowers
   maxFlowers: 10,

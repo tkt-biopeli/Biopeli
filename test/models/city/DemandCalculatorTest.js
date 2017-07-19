@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import DemandFunction from '../../../src/models/city/DemandFunction'
+import DemandCalculator from '../../../src/models/city/DemandCalculator'
 
 describe('DemandFunction tests', () => {
 
@@ -9,7 +9,7 @@ describe('DemandFunction tests', () => {
 
   beforeEach(() => {
     city = { population: 100 }
-    demand = new DemandFunction({ city: city, popularityPct: 1, startConstantPrice: 2, demandRandomVariance: 0.2 })
+    demand = new DemandCalculator({ city: city, popularityPct: 1, startConstantPrice: 2, demandRandomVariance: 0.2 })
   })
 
   it('Constructor works', () => {
@@ -27,7 +27,8 @@ describe('DemandFunction tests', () => {
     assert.equal(0, demand.collectedSupply)
     assert.equal(2, demand.wholeDemand)
     assert.equal(1, demand.yearDemand)
-    assert.equal(-2, demand.slope)
+    assert(demand.constantFunction)
+    assert(demand.decreasingFunction)
   })
 
   it('Calculating the demand works', ()=>{
@@ -66,38 +67,31 @@ describe('DemandFunction tests', () => {
   })
 
   describe('Calculating money gotten from the supply works', ()=>{
-    it('Price at under 100% works', ()=>{
-      demand.yearDemand = 10
+    beforeEach(()=>{
+      demand.demandedAmount = () => 10
+      demand.constantPrice = 100
+      demand.calculateYearlyDemand()
+    })
 
-      assert.equal(2, demand.priceAt(0))
-      assert.equal(2, demand.priceAt(2.6))
-      assert.equal(2, demand.priceAt(10))
+    it('Price at under 100% works', ()=>{
+      assert.equal(100, demand.priceAt(0))
+      assert.equal(100, demand.priceAt(2.6))
+      assert.equal(100, demand.priceAt(10))
     })
 
     it('Price between 100 and 200 % is right', ()=>{
-      demand.yearDemand = 10
-      demand.constantPrice = 100
-      demand.slope = - demand.constantPrice / demand.yearDemand
-
       assert.equal(50, demand.priceAt(15))
       assert.equal(20, demand.priceAt(18))
       assert.equal(90, demand.priceAt(11))
     })
 
     it('Price over 200% is 0', ()=>{
-      demand.yearDemand = 10
-      demand.slope = - demand.constantPrice / demand.yearDemand
-
       assert.equal(0, demand.priceAt(20))
       assert.equal(0, demand.priceAt(500000))
       assert.equal(0, demand.priceAt(21))
     })
 
     it('Pay between constant prices', ()=>{
-      demand.yearDemand = 10
-      demand.constantPrice = 100
-      demand.slope = - demand.constantPrice / demand.yearDemand
-
       assert.equal(1000, demand.pay(10))
 
       demand.collectedSupply = 0
@@ -106,41 +100,26 @@ describe('DemandFunction tests', () => {
     })
 
     it('Pay with only sloped prices', ()=>{
-      demand.yearDemand = 10
-      demand.constantPrice = 100
       demand.collectedSupply = 10
-      demand.slope = - demand.constantPrice / demand.yearDemand
-
       assert.equal(500, demand.pay(10))
 
       demand.collectedSupply = 15
-
       assert.equal(125, demand.pay(5))
 
       demand.collectedSupply = 10
-
       assert.equal(375, demand.pay(5))
     })
 
     it('Pay with both price types works', ()=>{
-      demand.yearDemand = 10
-      demand.constantPrice = 100
       demand.collectedSupply = 5
-      demand.slope = - demand.constantPrice / demand.yearDemand
-
       assert.equal(875, demand.pay(10))
 
       demand.collectedSupply = 8
-
       assert.equal(575, demand.pay(7))
     })
 
     it('If pay is called with between 1 and 2 and over 2 works', ()=>{
-      demand.yearDemand = 10
-      demand.wholeDemand = 20
-      demand.constantPrice = 100
       demand.collectedSupply = 15
-      demand.slope = - demand.constantPrice / demand.yearDemand
 
       assert.equal(125, demand.pay(10))
     })
