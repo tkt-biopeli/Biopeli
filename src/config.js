@@ -21,6 +21,8 @@ export default {
   mapHeight: 24, // THIS TOO
   gfreq: 10,
   ffreq: 20,
+  noiseWidth: 64,
+  noiseHeight: 64,
 
   // configurations for menu
   menuWidth: 256,

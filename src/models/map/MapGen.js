@@ -26,8 +26,8 @@ export default class MapGen {
     this.types = StaticTypes.tileTypes
     this.forestnoise = new Noise(fseed)
     this.groundnoise = new Noise(gseed)
-    this.height = 64
-    this.width = 64
+    this.height = config.noiseHeight
+    this.width = config.noiseWidth
   }
 
   /**
