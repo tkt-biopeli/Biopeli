@@ -43,18 +43,29 @@ export default class MapGrid {
         }
       }
     }
+    console.log(tiles)
     return tiles
   }
 
   boundsForRadius (tx, ty, n) {
     let start = this.ensureCoordsInGrid(tx - n, ty - n)
     let end = this.ensureCoordsInGrid(tx + n, ty + n)
+    console.log(start)
+    console.log(end)
     return {
       sx: start.x,
       sy: start.y,
       ex: end.x,
       ey: end.y
     }
+  }
+
+  ensureCoordsInGrid (x, y) {
+    x = x >= 0 ? x : 0
+    x = x <= this.gridSizeX - 1 ? x : this.gridSizeX - 1
+    y = y >= 0 ? y : 0
+    y = y <= this.gridSizeY - 1 ? y : this.gridSizeY - 1
+    return { x, y }
   }
 
   radiusFunction (hori, veri) {
@@ -174,11 +185,4 @@ export default class MapGrid {
     return y * this.tileHeight
   }
 
-  ensureCoordsInGrid (x, y) {
-    x = x >= 0 ? x : 0
-    x = x <= this.gridSizeX ? x : this.gridSizeX
-    y = y >= 0 ? y : 0
-    y = y <= this.gridSizeY ? y : this.gridSizeY
-    return { x, y }
-  }
 }

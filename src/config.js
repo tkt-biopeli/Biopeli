@@ -17,8 +17,8 @@ export default {
   tileHeight: 64,
 
   // configurations for map
-  mapWidth: 24, // NOTE TO CHANGER! VALUES UNDER 12 BUG THE MAP!
-  mapHeight: 24, // THIS TOO
+  mapWidth: 18, // NOTE TO CHANGER! VALUES UNDER 12 BUG THE MAP!
+  mapHeight: 18, // THIS TOO
   gfreq: 10,
   ffreq: 20,
   noiseWidth: 64,
