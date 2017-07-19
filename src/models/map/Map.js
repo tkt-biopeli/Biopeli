@@ -43,15 +43,12 @@ export default class MapGrid {
         }
       }
     }
-    console.log(tiles)
     return tiles
   }
 
   boundsForRadius (tx, ty, n) {
     let start = this.ensureCoordsInGrid(tx - n, ty - n)
     let end = this.ensureCoordsInGrid(tx + n, ty + n)
-    console.log(start)
-    console.log(end)
     return {
       sx: start.x,
       sy: start.y,
@@ -184,5 +181,4 @@ export default class MapGrid {
   gridToPixelsY (y) {
     return y * this.tileHeight
   }
-
 }
