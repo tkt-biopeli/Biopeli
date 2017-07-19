@@ -129,8 +129,6 @@ export default class MapGrid {
    */
   createMap (seed) {
     this.mapgen = new MapGen({
-      height: this.gridSizeY,
-      width: this.gridSizeX,
       seed: seed,
       Noise: this.perlinNoise
     })

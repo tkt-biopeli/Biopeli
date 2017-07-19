@@ -17,8 +17,10 @@ export default {
   tileHeight: 64,
 
   // configurations for map
-  madWidthMultiplier: 4,
-  mapHeightMultiplier: 4,
+  mapWidth: 24, // NOTE TO CHANGER! VALUES UNDER 12 BUG THE MAP!
+  mapHeight: 24, // THIS TOO
+  gfreq: 10,
+  ffreq: 20,
 
   // configurations for menu
   menuWidth: 256,

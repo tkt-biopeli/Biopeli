@@ -1,4 +1,5 @@
 import StaticTypes from '../StaticTypes'
+import config from '../../config'
 
 /**
  * Maps coordinates to tile types
@@ -10,7 +11,7 @@ export default class MapGen {
    * @param {number} param.width - map width
    * @param {number} param.seed - seed for forest generation, optional
    */
-  constructor ({ height, width, seed, Noise }) {
+  constructor ({ seed, Noise }) {
     var fseed, gseed
     if (seed) {
       var str = seed + ''
@@ -25,8 +26,8 @@ export default class MapGen {
     this.types = StaticTypes.tileTypes
     this.forestnoise = new Noise(fseed)
     this.groundnoise = new Noise(gseed)
-    this.height = height
-    this.width = width
+    this.height = 64
+    this.width = 64
   }
 
   /**
@@ -38,8 +39,8 @@ export default class MapGen {
   typeAt (x, y) {
     var nx = x / this.width - 0.5
     var ny = y / this.height - 0.5
-    var gfreq = 8
-    var ffreq = 20
+    var gfreq = config.gfreq
+    var ffreq = config.ffreq
     if (this.groundnoise.perlin2(gfreq * nx, gfreq * ny) > -0.2) {
       if (this.forestnoise.perlin2(ffreq * nx, ffreq * ny) > -0.1) {
         return this.types.grass
