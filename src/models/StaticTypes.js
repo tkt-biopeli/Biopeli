@@ -19,7 +19,8 @@ const structureTypes = {
     continuousProduction: false,
     turnipYield: 25,
     cost: 10000,
-    pollution: 4
+    pollution: 4,
+    reach: 2
   },
   dairy_farm: {
     name: 'dairy farm',
@@ -28,7 +29,8 @@ const structureTypes = {
     continuousProduction: true,
     turnipYield: 35,
     cost: 15000,
-    pollution: 5
+    pollution: 5,
+    reach: 2
   },
   berry_farm: {
     name: 'berry farm',
@@ -37,7 +39,8 @@ const structureTypes = {
     continuousProduction: true,
     turnipYield: 20,
     cost: 10000,
-    pollution: 3
+    pollution: 3,
+    reach: 2
   },
   mill: {
     name: 'mill',
@@ -46,7 +49,8 @@ const structureTypes = {
     buysFrom: [],
     cost: 50000,
     multiplier: 10,
-    pollution: 1
+    pollution: 1,
+    reach: 1
   }
 }
 
