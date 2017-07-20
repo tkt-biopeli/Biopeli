@@ -5,7 +5,7 @@ export default class BuildStructureController extends Content {
     super()
     this.structureFactory = structureFactory
     this.player = player
-    this.emptyFunction = () => {}
+    this.emptyFunction = () => { }
   }
 
   createSections () {
@@ -15,17 +15,17 @@ export default class BuildStructureController extends Content {
 
     this.text('Type: ' + stype.name)
     if (!stype.refinery) {
-    if (stype.continuousProduction) {
-      this.text('Continuous production')
-    } else {
-      var text = 'Harvests: '
-      for (let harvest of stype.harvestingWeeks) {
-        text += harvest
+      if (stype.continuousProduction) {
+        this.text('Continuous production')
+      } else {
+        var text = 'Harvests: '
+        for (let harvest of stype.harvestingWeeks) {
+          text += harvest
+        }
+        this.text(text)
       }
-      this.text(text)
-    }
-    
-    this.text('Yield: ' + stype.turnipYield)
+
+      this.text('Yield: ' + stype.turnipYield)
     }
     this.text('Price: ' + stype.cost, 'large')
 

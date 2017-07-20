@@ -33,7 +33,6 @@ export default class StructureFactory {
    */
   buildBuilding (tile, structureType) {
     if (!this.checkMoney(structureType)) return
-    if (tile.owner != null) return
     tile.structure = new Structure({
       tile: tile,
       owner: this.namer.createOwnerName(),
