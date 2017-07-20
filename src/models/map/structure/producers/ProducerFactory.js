@@ -60,13 +60,8 @@ const checkStructureType = (structureType) => {
 const createProducer = (tileFinder, structureType, tile) => {
   var sType = checkStructureType(structureType)
 
-<<<<<<< HEAD
   return sType.refinery
-    ? createRefiner(sType.buysFrom, sType.multiplier, sType.reach, tile)
-=======
-  return sType.refiner
-    ? createRefiner(tileFinder, sType.inputTypes, sType.multiplier, sType.radius, tile)
->>>>>>> jalostus
+    ? createRefiner(tileFinder, sType.buysFrom, sType.multiplier, sType.reach, tile)
     : sType.continuousProduction
       ? createContinuousProducer(sType.turnipYield, tile)
       : createSeasonalProducer(sType.harvestingWeeks, sType.turnipYield, tile)

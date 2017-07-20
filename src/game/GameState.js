@@ -112,6 +112,7 @@ export default class GameState {
     })
 
     this.structureFactory = new StructureFactory({
+      tileFinder: this.tileFinder,
       gameTimer: this.gameTimer,
       player: this.player,
       map: this.map

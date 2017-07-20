@@ -23,7 +23,7 @@ export default class BuildStructureController extends Content {
         }
         this.text(text)
       }
-      
+
       this.text('Yield: ' + stype.turnipYield)
     }
     this.text('Price: ' + stype.cost, 'large')

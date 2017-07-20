@@ -47,7 +47,6 @@ export default class StructureFactory {
     this.player.addStructure(tile.structure)
     this.buyLandInReach(tile)
     this.createInitialPollution(structureType.pollution, tile)
-
   }
 
   /**
@@ -88,7 +87,7 @@ export default class StructureFactory {
 
   buyLandInReach (tile) {
     let tiles = this.map.getTilesInRadius(tile.structure.reach, tile)
-    for (var [distance, tilesArray] of tiles) {
+    for (var [, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
         if (tmpTile.owner == null) {
           tmpTile.owner = tile.structure.owner
@@ -97,5 +96,4 @@ export default class StructureFactory {
       }, this)
     }
   }
-
 }

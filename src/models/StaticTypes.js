@@ -50,7 +50,7 @@ const structureTypes = {
     cost: 30000,
     multiplier: 10,
     pollution: 1,
-    reach: 1
+    reach: 10
   }
 }
 
