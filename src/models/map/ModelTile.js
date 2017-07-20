@@ -15,5 +15,6 @@ export default class {
     this.tileType = type
     this.structure = structure
     this.flowers = type.flowers
+    this.owner = null
   }
 }

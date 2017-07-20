@@ -27,6 +27,8 @@ export default class Structure {
     this.foundingYear = foundingYear
     this.producer = producer
     this.cost = cost
+    this.ownedTiles = []
+    this.reach = structureType.reach
   }
 
   /**
