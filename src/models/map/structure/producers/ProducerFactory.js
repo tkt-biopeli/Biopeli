@@ -31,6 +31,7 @@ const createContinuousProducer = (turnipYield, tile) => {
  * @param {*} tile
  */
 const createRefiner = (inputTypes, multiplier, radius, tile) => {
+  console.log("asd")
   return new Refiner({
     inputTypes: inputTypes,
     multiplier: multiplier,
@@ -59,8 +60,8 @@ const checkStructureType = (structureType) => {
 const createProducer = (structureType, tile) => {
   var sType = checkStructureType(structureType)
 
-  return sType.refiner
-    ? createRefiner(sType.inputTypes, sType.multiplier, sType.radius, tile)
+  return sType.refinery
+    ? createRefiner(sType.buysFrom, sType.multiplier, sType.reach, tile)
     : sType.continuousProduction
       ? createContinuousProducer(sType.turnipYield, tile)
       : createSeasonalProducer(sType.harvestingWeeks, sType.turnipYield, tile)

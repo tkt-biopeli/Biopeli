@@ -47,7 +47,7 @@ const structureTypes = {
     asset: 'mill',
     refinery: true,
     buysFrom: [],
-    cost: 50000,
+    cost: 30000,
     multiplier: 10,
     pollution: 1,
     reach: 1
