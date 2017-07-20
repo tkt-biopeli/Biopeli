@@ -38,6 +38,15 @@ const structureTypes = {
     turnipYield: 20,
     cost: 10000,
     pollution: 3
+  },
+  mill: {
+    name: 'mill',
+    asset: 'mill',
+    refinery: true,
+    buysFrom: [],
+    cost: 5000,
+    multiplier: 10,
+    pollution: 2
   }
 }
 
@@ -70,7 +79,7 @@ const tileTypes = {
 }
 
 const addAllowedStructures = (structureTypes, tileTypes) => {
-  tileTypes.grass.allowedStructures = [structureTypes.wheat_farm, structureTypes.dairy_farm, structureTypes.berry_farm]
+  tileTypes.grass.allowedStructures = [structureTypes.wheat_farm, structureTypes.dairy_farm, structureTypes.berry_farm, structureTypes.mill]
   tileTypes.water.allowedStructures = []
   return ({ structureTypes: structureTypes, tileTypes: tileTypes })
 }

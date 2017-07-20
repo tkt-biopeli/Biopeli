@@ -14,6 +14,7 @@ export default class BuildStructureController extends Content {
     var tile = this.owner.stateValue('selectedTile')
 
     this.text('Type: ' + stype.name)
+    if (!stype.refinery) {
     if (stype.continuousProduction) {
       this.text('Continuous production')
     } else {
@@ -23,7 +24,9 @@ export default class BuildStructureController extends Content {
       }
       this.text(text)
     }
+    
     this.text('Yield: ' + stype.turnipYield)
+    }
     this.text('Price: ' + stype.cost, 'large')
 
     this.section('build')
