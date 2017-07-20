@@ -37,6 +37,7 @@ export default [
     'Intialainen',
     'Amerikkalainen',
     'Venäläinen',
+    'Thaimaalainen',
     'Munkki',
     'Professori',
     'Luukkaisen'
