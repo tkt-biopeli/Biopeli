@@ -30,10 +30,10 @@ const createContinuousProducer = (turnipYield, tile) => {
  * @param {*} radius
  * @param {*} tile
  */
-const createRefiner = (inputTypes, multiplier, radius, tile) => {
-  console.log("asd")
+const createRefiner = (tileFinder, inputTypes, multiplier, radius, tile) => {
   return new Refiner({
     inputTypes: inputTypes,
+    zone: tileFinder.findTilesInDistanceOf(tile, radius),
     multiplier: multiplier,
     radius: radius,
     tile: tile
@@ -57,11 +57,16 @@ const checkStructureType = (structureType) => {
  * Returns either a function that yields turnips weekly or one that
  * yields only during harvesting months, depending on the structure type.
  */
-const createProducer = (structureType, tile) => {
+const createProducer = (tileFinder, structureType, tile) => {
   var sType = checkStructureType(structureType)
 
+<<<<<<< HEAD
   return sType.refinery
     ? createRefiner(sType.buysFrom, sType.multiplier, sType.reach, tile)
+=======
+  return sType.refiner
+    ? createRefiner(tileFinder, sType.inputTypes, sType.multiplier, sType.radius, tile)
+>>>>>>> jalostus
     : sType.continuousProduction
       ? createContinuousProducer(sType.turnipYield, tile)
       : createSeasonalProducer(sType.harvestingWeeks, sType.turnipYield, tile)

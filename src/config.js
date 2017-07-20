@@ -24,6 +24,12 @@ export default {
   noiseWidth: 64,
   noiseHeight: 64,
 
+  moveCosts: {
+    grass: 1,
+    water: 5,
+    forest: 2
+  },
+
   // configurations for menu
   menuWidth: 256,
   menuLeftPadding: 35,

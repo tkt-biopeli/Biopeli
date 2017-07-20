@@ -25,7 +25,7 @@ describe('ProducerFactory tests', () => {
   it('productionFn returns zero when structure type is undefined', () => {
     var foo
    
-    var producer = StructureProduction.createProducer(foo, tile)
+    var producer = StructureProduction.createProducer(null, foo, tile)
 
     assert.equal(0, producer.turnipYield)
   })
