@@ -22,7 +22,7 @@ describe('Integration test: Building structures', () => {
   it('Can build a wheat farm on grass', () => {
     gameAdvancer.setTile(1, 1, 'grass')
     gameAdvancer.clickTile(1, 1)
-    gameStateChecker.checkButtonAmountInMenu(4)
+    gameStateChecker.checkButtonAmountInMenu(5)
     gameAdvancer.clickNthButton(2)
     gameStateChecker.checkButtonAmountInMenu(2)
     gameAdvancer.clickNthButton(1)
@@ -61,7 +61,7 @@ describe('Integration test: Building structures', () => {
 
   it('Back button returns to structure type selection', () => {
     buildFarm({x: 1, y: 1, tileType: 'grass', firstButton: 4, secondButton: 2})
-    gameStateChecker.checkButtonAmountInMenu(4)
+    gameStateChecker.checkButtonAmountInMenu(5)
   })
 
   it('Back button works when insufficient funds', () => {
@@ -69,6 +69,6 @@ describe('Integration test: Building structures', () => {
     buildFarm({x: 1, y: 1, tileType: 'grass', firstButton: 4, secondButton: 1})
     gameStateChecker.checkButtonAmountInMenu(2)
     gameAdvancer.clickNthButton(2)
-    gameStateChecker.checkButtonAmountInMenu(4)
+    gameStateChecker.checkButtonAmountInMenu(5)
   })
 })

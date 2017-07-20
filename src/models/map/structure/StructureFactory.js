@@ -33,7 +33,7 @@ export default class StructureFactory {
    */
   buildBuilding (tile, structureType) {
     if (!this.checkMoney(structureType)) return
-
+    if (tile.owner != null) return
     tile.structure = new Structure({
       tile: tile,
       owner: this.namer.createOwnerName(),
@@ -45,7 +45,9 @@ export default class StructureFactory {
       cost: structureType.cost
     })
     this.player.addStructure(tile.structure)
+    this.buyLandInReach(tile)
     this.createInitialPollution(structureType.pollution, tile)
+
   }
 
   /**
@@ -83,4 +85,17 @@ export default class StructureFactory {
       }, this)
     }
   }
+
+  buyLandInReach (tile) {
+    let tiles = this.map.getTilesInRadius(tile.structure.reach, tile)
+    for (var [distance, tilesArray] of tiles) {
+      tilesArray.forEach(function (tmpTile) {
+        if (tmpTile.owner == null) {
+          tmpTile.owner = tile.structure.owner
+          tile.structure.ownedTiles.push(tmpTile)
+        }
+      }, this)
+    }
+  }
+
 }
