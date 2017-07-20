@@ -1,12 +1,17 @@
-import {createLine} from '../../../logic/LinearFunction'
+import { createLine } from '../../../logic/LinearFunction'
 
+/**
+ * Refiner takes production from given type buildingsnear it and enchancts their production
+ */
 export default class Refiner {
-  constructor ({inputTypes, multiplier, radius}) {
+  constructor ({ inputTypes, multiplier, radius, tile }) {
+    this.tile = tile
+
     this.inputTypes = inputTypes
     this.multiplier = multiplier
     this.radius = radius
-    
-    this.distancefunction = createLine(1, 1, radius, 1/multiplier)
+
+    this.distancefunction = createLine(1, 1, radius, 1 / multiplier)
 
     this.producerHolders = []
   }
