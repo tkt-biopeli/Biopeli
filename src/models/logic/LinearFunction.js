@@ -11,7 +11,7 @@ const ConstantFunction = constant => () => constant
  * @param {*} x2
  * @param {*} y2
  */
-const createLineWithPoints = function (x1, y1, x2, y2) {
+const createLine = function (x1, y1, x2, y2) {
   if (x1 === x2) {
     return null
   }
@@ -40,7 +40,7 @@ const createLineWithPoints = function (x1, y1, x2, y2) {
  * @param {*} slope
  * @param {*} constant
  */
-const createLine = function (slope, constant) {
+const initializeLine = function (slope, constant) {
   if (slope === 0) {
     return ConstantFunction(constant)
   }
@@ -48,4 +48,4 @@ const createLine = function (slope, constant) {
   return LinearFunction(slope, constant)
 }
 
-export { createLineWithPoints, createLine }
+export { createLine, initializeLine }

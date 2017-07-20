@@ -1,4 +1,4 @@
-import {createLineWithPoints} from './LinearFunction'
+import {createLine} from '../logic/LinearFunction'
 
 /**
  * Determines how much money the player gets from the produced turnips
@@ -22,8 +22,8 @@ export default class DemandCalculator {
     this.yearDemand = this.demandedAmount()
     this.wholeDemand = this.yearDemand * 2
 
-    this.constantFunction = createLineWithPoints(0, this.constantPrice, this.yearDemand, this.constantPrice)
-    this.decreasingFunction = createLineWithPoints(this.yearDemand, this.constantPrice, this.wholeDemand, 0)
+    this.constantFunction = createLine(0, this.constantPrice, this.yearDemand, this.constantPrice)
+    this.decreasingFunction = createLine(this.yearDemand, this.constantPrice, this.wholeDemand, 0)
   }
 
   /**

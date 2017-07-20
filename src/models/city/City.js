@@ -1,5 +1,5 @@
 import DemandCalculator from './DemandCalculator'
-import {createLineWithPoints} from './LinearFunction'
+import {createLine} from '../logic/LinearFunction'
 
  /**
   * Tracks the demand and population of the city
@@ -16,8 +16,8 @@ export default class City {
       startConstantPrice: startPrice
     })
 
-    this.normalFunction = createLineWithPoints(0.5, 1, 1, increaseAtOne)
-    this.overFunction = createLineWithPoints(1, increaseAtOne, 2, increaseAtTwo)
+    this.normalFunction = createLine(0.5, 1, 1, increaseAtOne)
+    this.overFunction = createLine(1, increaseAtOne, 2, increaseAtTwo)
   }
 
   /**
