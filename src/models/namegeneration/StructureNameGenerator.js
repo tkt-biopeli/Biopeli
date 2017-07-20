@@ -60,6 +60,9 @@ export default class StructureNameGenerator {
     if (structureType === 'berry farm') {
       type = 'marjatila'
     }
+    if (structureType === 'mill') {
+      type = 'mylly'
+    }
     return type
   }
 }
