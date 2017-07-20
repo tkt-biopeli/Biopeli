@@ -119,6 +119,9 @@ export default [
     'Hivenen',
     'Just ja just',
     'Järkyttävän',
-    'Mielettömän'
+    'Mielettömän',
+    'Ihan järkyttävän',
+    'Jäätävän'
+
   ]
 ]
