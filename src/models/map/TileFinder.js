@@ -9,7 +9,14 @@ export default class TileFinder {
     this.multipliers = multipliers
   }
 
-  findTilesInDistanceFromTile (tile, radius) {
+  /**
+   * Finds tiles in distance radius of given tile. Gives them back as set of
+   * capsules, which hold the tile and the distance to the tile
+   *
+   * @param {*} tile from which
+   * @param {*} radius in distance
+   */
+  findTilesInDistanceOf (tile, radius) {
     var heap = new Heap([],
       (a, b) => a.distance === b.distance,
       (a, b) => b.distance - a.distance)
@@ -45,6 +52,10 @@ export default class TileFinder {
     return { tile: tile, distance: distance }
   }
 
+  /**
+   * Gives tiles next to the given tile
+   * @param {*} tile
+   */
   tilesNextTo (tile) {
     var x = tile.x
     var y = tile.y
@@ -63,6 +74,11 @@ export default class TileFinder {
     if (this.isInMap(x, y)) list.push(this.map.getTileWithGridCoordinates(x, y))
   }
 
+  /**
+   * Returns true if tile is in map
+   * @param {*} x
+   * @param {*} y
+   */
   isInMap (x, y) {
     return x < this.width && x >= 0 && y >= 0 && y < this.height
   }

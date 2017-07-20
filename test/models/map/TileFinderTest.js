@@ -139,50 +139,50 @@ describe('Tile finder tests', () => {
     })
 
     it('Distance one gives correct with no obstructions', ()=>{
-      var found = tileFinder.findTilesInDistanceFromTile(map.getTileWithGridCoordinates(2, 0), 1)
+      var found = tileFinder.findTilesInDistanceOf(map.getTileWithGridCoordinates(2, 0), 1)
 
       hasTilesInVector(found, 1, 0, 2, 1, 3, 0)
       assert.equal(3, found.size)
 
-      found = tileFinder.findTilesInDistanceFromTile(map.getTileWithGridCoordinates(4, 0), 1)
+      found = tileFinder.findTilesInDistanceOf(map.getTileWithGridCoordinates(4, 0), 1)
 
       hasTilesInVector(found, 4, 1, 3, 0)
       assert.equal(2, found.size)
 
-      found = tileFinder.findTilesInDistanceFromTile(map.getTileWithGridCoordinates(2, 1), 1)
+      found = tileFinder.findTilesInDistanceOf(map.getTileWithGridCoordinates(2, 1), 1)
 
       hasTilesInVector(found, 1, 1, 2, 0, 2, 2, 3, 1)
       assert.equal(4, found.size)
     })
 
     it('Distance gives correct with over one and no obstructions', ()=>{
-      var found = tileFinder.findTilesInDistanceFromTile(map.getTileWithGridCoordinates(2, 0), 2)
+      var found = tileFinder.findTilesInDistanceOf(map.getTileWithGridCoordinates(2, 0), 2)
 
       hasTilesInVector(found, 0, 0, 1, 0, 1, 1, 2, 1, 2, 2, 3, 0, 3, 1, 4, 0)
       assert.equal(8, found.size)
     })
 
     it('If the cost is too high, the tile is not added', ()=>{
-      var found = tileFinder.findTilesInDistanceFromTile(map.getTileWithGridCoordinates(2, 2), 1)
+      var found = tileFinder.findTilesInDistanceOf(map.getTileWithGridCoordinates(2, 2), 1)
 
       hasTilesInVector(found, 1, 2, 2, 1, 3, 2)
       assert.equal(3, found.size)
 
-      found = tileFinder.findTilesInDistanceFromTile(map.getTileWithGridCoordinates(0, 4), 1)
+      found = tileFinder.findTilesInDistanceOf(map.getTileWithGridCoordinates(0, 4), 1)
       hasTilesInVector(found, 0, 5)
       assert.equal(1, found.size)
     })
 
     it('Works in complex situations', ()=>{
-      var found = tileFinder.findTilesInDistanceFromTile(map.getTileWithGridCoordinates(4, 4), 5)
+      var found = tileFinder.findTilesInDistanceOf(map.getTileWithGridCoordinates(4, 4), 5)
       
       assert.equal(8, found.size)
 
-      found = tileFinder.findTilesInDistanceFromTile(map.getTileWithGridCoordinates(2, 2), 6)
+      found = tileFinder.findTilesInDistanceOf(map.getTileWithGridCoordinates(2, 2), 6)
       
       assert.equal(18, found.size)
 
-      found = tileFinder.findTilesInDistanceFromTile(map.getTileWithGridCoordinates(0, 0), 3)
+      found = tileFinder.findTilesInDistanceOf(map.getTileWithGridCoordinates(0, 0), 3)
 
       assert.equal(8, found.size)
     })

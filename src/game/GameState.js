@@ -11,6 +11,7 @@ import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
 import Timer from '../view/Timer'
 import GameTimerListener from '../models/GameTimerListener'
+import TileFinder from '../models/map/TileFinder'
 
 import TopBarContent from '../controllers/contents/TopBarContent'
 import SideMenuContent from '../controllers/contents/SideMenuContent'
@@ -88,6 +89,11 @@ export default class GameState {
 
     // fill map grid with sample data
     this.map.createMap()
+
+    this.tileFinder = new TileFinder({
+      map: this.map,
+      multipliers: config.moveCosts
+    })
 
     this.player = new Player({startMoney: startMoney})
     this.city = new City({
