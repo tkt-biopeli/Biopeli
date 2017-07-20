@@ -5,7 +5,7 @@ export default class BuildStructureController extends Content {
     super()
     this.structureFactory = structureFactory
     this.player = player
-    this.emptyFunction = () => {}
+    this.emptyFunction = () => { }
   }
 
   createSections () {
