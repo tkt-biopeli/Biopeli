@@ -38,6 +38,7 @@
     "webpack": "^2.5.1"
   },
   "dependencies": {
+    "collections": "^5.0.6",
     "phaser-ce": "^2.7.9",
     "webfontloader": "^1.6.27"
   }
