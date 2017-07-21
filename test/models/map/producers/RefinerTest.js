@@ -29,8 +29,8 @@ describe('Refiner tests', () => {
   })
 
   describe('Produce tests', ()=>{
-    var producer1 = {produce: () => 3}
-    var producer2 = {produce: () => 7}
+    var producer1 = {production: () => 3}
+    var producer2 = {production: () => 7}
     var radius1, radius2
 
     var holders = () => {
