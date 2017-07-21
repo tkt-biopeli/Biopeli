@@ -3,28 +3,26 @@ const sinon = require("sinon")
 import Producer from '../../../../src/models/map/structure/producers/Producer'
 
 describe('Producer tests', () => {
+  var producer
 
-  var p, turnip, tile
   beforeEach(()=>{
-    tile = {flowers: 10}
-    turnip = 1
-    p = new Producer({
-      turnipYield: turnip,
-      tile: tile
-    })
+    producer = new Producer()
+    producer.produce = sinon.spy()
   })
 
-  it('Constructor test', ()=>{
-    assert.equal(turnip, p.turnipYield)
-    assert.equal(tile, p.tile)
-  })
+  it('Producer calls only when meant to', ()=>{
+    producer.production()
 
-  it('Pollution is counted in', ()=>{
-    p.productionThisWeek = () => 5
-    assert.equal(5, p.produce())
-    tile.flowers = 0
-    assert.equal(0, p.produce())
-    tile.flowers = 5
-    assert.equal(2.5, p.produce())
+    assert.equal(1, producer.produce.callCount)
+
+    producer.owner = 4
+    producer.production()
+
+    assert.equal(1, producer.produce.callCount)
+
+    producer.production(0, true)
+    producer.production()
+
+    assert.equal(2, producer.produce.callCount)
   })
 })

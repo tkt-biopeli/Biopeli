@@ -1,9 +1,9 @@
-import Producer from './Producer'
+import PrimaryProducer from './PrimaryProducer'
 
 /**
  * produces turnips all the time and gives the collected turnips at harvest seasons
  */
-export default class SeasonalProducer extends Producer {
+export default class SeasonalProducer extends PrimaryProducer {
   constructor ({ turnipYield, tile, harvestWeeks }) {
     super({
       turnipYield: turnipYield,

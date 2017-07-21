@@ -8,7 +8,7 @@ describe('Structure tests', () => {
 
   beforeEach(() => {
     producer = {
-      produce: sinon.spy()
+      production: sinon.spy()
     }
 
     timeEvent = {
@@ -77,6 +77,6 @@ describe('Structure tests', () => {
   
   it('produce calls production function with correct parameter', () => {
     structure.produce(timeEvent)
-    assert(producer.produce.calledWith(timeEvent))
+    assert(producer.production.calledWith(timeEvent))
   })
 })
