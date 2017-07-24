@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 
-import MenuBuilder from '../controllers/MenuBuilder'
+import MenuBuilder from '../controllers/menucontrol/MenuBuilder'
 import CityNameGenerator from '../models/namegeneration/CityNameGenerator'
 import CityNames from '../models/namegeneration/CityNameList'
 import utils from '../utils'

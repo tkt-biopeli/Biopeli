@@ -1,9 +1,9 @@
-import config from '../config'
+import config from '../../config'
 
-import MenuView from '../view/menu/MenuView'
-import StackingLayout from '../view/menu/layouts/StackingLayout'
-import Style from '../view/menu/Style'
-import Controller from '../controllers/Controller'
+import MenuView from '../../view/menu/MenuView'
+import StackingLayout from '../../view/menu/layouts/StackingLayout'
+import Style from '../../view/menu/Style'
+import Controller from './Controller'
 
 /**
  * Generic menu with title, description and buttons

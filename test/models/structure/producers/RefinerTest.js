@@ -3,20 +3,18 @@ const sinon = require("sinon")
 import Refiner from '../../../../src/models/structure/producers/Refiner'
 
 describe('Refiner tests', () => {
-  var inputTypes, multiplier, radius, refiner, tile
+  var inputTypes, multiplier, radius, refiner
 
   var create = () => refiner = new Refiner({
     inputTypes: inputTypes,
     multiplier: multiplier,
-    radius: radius,
-    tile: tile
+    radius: radius
   })
 
   beforeEach(()=>{
     multiplier = 2
     radius = 3
     inputTypes = []
-    tile = {}
 
     create()
   })
@@ -25,7 +23,6 @@ describe('Refiner tests', () => {
     assert.equal(multiplier, refiner.multiplier)
     assert.equal(radius, refiner.radius)
     assert.equal(inputTypes, refiner.inputTypes)
-    assert.equal(tile, refiner.tile)
   })
 
   describe('Produce tests', ()=>{

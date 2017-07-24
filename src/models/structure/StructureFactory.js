@@ -13,11 +13,11 @@ export default class StructureFactory {
    * @param {GameTimer} gameTimer
    * @param {Player} player
    */
-  constructor({ gameTimer, player, map, tileFinder }) {
+  constructor ({ gameTimer, eventController, player, map, tileFinder }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
-
+    this.eventController = eventController
     this.namer = new StructureNameGenerator({
       frontAdjectives: StructureNameParts[0],
       names: StructureNameParts[1],
@@ -26,7 +26,10 @@ export default class StructureFactory {
       random: utils.randomNoBounds,
       randomWithBounds: utils.randomWithBounds
     })
-    this.producerFactory = new ProducerFactory({ tileFinder: tileFinder })
+    this.producerFactory = new ProducerFactory({
+      tileFinder: tileFinder,
+      eventController: eventController
+    })
   }
 
   /**
@@ -49,7 +52,10 @@ export default class StructureFactory {
     this.player.addStructure(tile.structure)
     this.buyLand(tile)
     this.createInitialPollution(structureType.pollution, tile)
+
     this.calculateSize(tile.structure)
+
+    this.eventController.event('buildStructure', tile)
   }
 
   /**
@@ -74,7 +80,8 @@ export default class StructureFactory {
     let tiles = this.map.getTilesInRadius(3, tile)
     for (var [distance, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
-        tmpTile.flowers -= (pollution - distance)
+        let amount = pollution - distance > 0 ? pollution - distance : 0
+        tmpTile.flowers -= amount
         if (tmpTile.flowers < 1) { tmpTile.flowers = 1 }
       }, this)
     }
