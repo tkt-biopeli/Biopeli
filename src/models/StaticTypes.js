@@ -49,7 +49,7 @@ const structureTypes = {
     buysFrom: [],
     cost: 3000,
     multiplier: 10,
-    pollution: 1,
+    pollution: 2,
     radiusForTileOwnership: 1
   }
 }

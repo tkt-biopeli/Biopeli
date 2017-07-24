@@ -13,7 +13,7 @@ export default class StructureFactory {
    * @param {GameTimer} gameTimer
    * @param {Player} player
    */
-  constructor ({ gameTimer, player, map, tileFinder }) {
+  constructor({ gameTimer, player, map, tileFinder }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
@@ -26,7 +26,7 @@ export default class StructureFactory {
       random: utils.randomNoBounds,
       randomWithBounds: utils.randomWithBounds
     })
-    this.producerFactory = new ProducerFactory({tileFinder: tileFinder})
+    this.producerFactory = new ProducerFactory({ tileFinder: tileFinder })
   }
 
   /**
@@ -95,10 +95,12 @@ export default class StructureFactory {
 
   buyLandForRefinery (tile, distance, tmpTile) {
     if (distance === 0 || tmpTile.structure === null) {
+      if (tmpTile.tileType.name === 'field') {
+        tmpTile.owner.size--
+      }
       this.setAssetForRefinery(tile, tmpTile)
       if (tmpTile.owner !== null) {
         tmpTile.owner.ownedTiles.pop(tmpTile)
-        tmpTile.owner.size--
       }
       tmpTile.owner = tile.structure
       tile.structure.ownedTiles.push(tmpTile)
