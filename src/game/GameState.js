@@ -81,7 +81,7 @@ export default class GameState {
 
   initializeModel (cityName, perlinNoise, gameLength, startMoney, mapWidth, mapHeight, tileWidth, tileHeight) {
     this.eventController = new EventController()
-    
+
     this.map = new Map({
       gridSizeX: mapWidth,
       gridSizeY: mapHeight,

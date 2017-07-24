@@ -10,12 +10,12 @@ export default class EventController {
   }
 
   addListener (name, callback, context) {
-    this.events.get(name).push({callback: callback, context: context})
+    this.events.get(name).push({ callback: callback, context: context })
   }
 
   event (name, ...values) {
     var listeners = this.events.get(name)
-    if(listeners != null) {
+    if (listeners != null) {
       for (let listener of listeners) {
         listener.callback.apply(listener.context, values)
       }

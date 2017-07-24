@@ -41,7 +41,7 @@ describe('Integration test: Building structures', () => {
     gameAdvancer.setMoney(999999)
     gameAdvancer.buildBuilding(1, 1, 'grass', 5)
     gameStateChecker.checkSelectedTile()
-    gameStateChecker.checkTilesInformation(1, 1, 'grass', 'mill', true)
+    gameStateChecker.checkTilesInformation(1, 1, 'industrial', 'mill', true)
   })
 
   it('Can not build on tile with structure', () => {
