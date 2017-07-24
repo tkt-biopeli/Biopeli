@@ -3,7 +3,7 @@ const sinon = require("sinon")
 import StructureFactory from '../../../src/models/structure/StructureFactory'
 
 describe('StructureFactory tests', () => {
-  var sfactory, gameTimer, player, addStructureSpy, map
+  var sfactory, gameTimer, player, addStructureSpy, map, eventController
 
   beforeEach(() => {
     map = {
@@ -21,11 +21,16 @@ describe('StructureFactory tests', () => {
         year: 7
       }
     }
+
+    eventController = {
+      event: sinon.spy()
+    }
     
     sfactory = new StructureFactory({
       gameTimer: gameTimer,
       player: player,
-      map: map
+      map: map,
+      eventController: eventController
     })
 
     sfactory.namer = {
@@ -52,7 +57,9 @@ describe('StructureFactory tests', () => {
     assert.equal(7, tile.structure.foundingYear)
     assert(createProducerSpy.calledWith(structureType, tile))
     assert(addStructureSpy.calledWith(tile.structure))
+    assert.equal(1, eventController.event.callCount)
   })
+
   it('Build building does not do anything if checkMoney returns false', () => {
     var tile = { structure: undefined, flowers: 0 }
     var structureType = {}

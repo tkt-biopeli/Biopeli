@@ -7,8 +7,9 @@ import CallcheckDecorator from './producers/decorators/CallcheckDecorator'
  * Yields turnips during the harvesting period (month.week).
  */
 export default class ProducerFactory {
-  constructor ({tileFinder}) {
+  constructor ({tileFinder, eventController}) {
     this.tileFinder = tileFinder
+    this.eventController = eventController
   }
 
   /**
@@ -58,13 +59,17 @@ export default class ProducerFactory {
    * @param {*} tile
    */
   createRefiner (inputTypes, multiplier, radius, tile) {
-    return new Refiner({
+    var refiner = new Refiner({
       inputTypes: inputTypes,
       zone: this.tileFinder.findTilesInDistanceOf(tile, radius),
       multiplier: multiplier,
       radius: radius,
       tile: tile
     })
+
+    this.eventController.addListener('structureBuilt', refiner.structureCreated, refiner)
+
+    return refiner
   }
 
   /**

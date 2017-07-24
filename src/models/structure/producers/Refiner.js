@@ -4,8 +4,7 @@ import { createLine } from '../../logic/LinearFunction'
  * Refiner takes production from given type buildingsnear it and enchancts their production
  */
 export default class Refiner {
-  constructor ({ zone, inputTypes, multiplier, radius, tile }) {
-    this.tile = tile
+  constructor ({ zone, inputTypes, multiplier, radius }) {
     this.zone = zone
     this.inputTypes = inputTypes
     this.multiplier = multiplier
@@ -46,8 +45,8 @@ export default class Refiner {
       return true
     }
   }
-
-  structureCreated(tile) {
     
+  structureCreated (tile) {
+
   }
 }
