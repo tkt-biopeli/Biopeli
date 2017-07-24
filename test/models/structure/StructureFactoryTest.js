@@ -4,11 +4,12 @@ import StructureFactory from '../../../src/models/structure/StructureFactory'
 
 describe('StructureFactory tests', () => {
   var sfactory, gameTimer, player, addStructureSpy, map, tileFinder, tile, structureType
-  var addStructureSpy, buyLandSpy, createPollutionSpy, calcSizeSpy, createProducerSpy
+  var addStructureSpy, buyLandSpy, createPollutionSpy, calcSizeSpy, createProducerSpy, setAssetForRefinerySpy
   var checkMoneyStub, tilesInRadiusStub
 
   beforeEach(() => {
     addStructureSpy = sinon.spy()
+    setAssetForRefinerySpy = sinon.spy()
     tilesInRadiusStub = sinon.stub()
 
     tileFinder = {}
@@ -58,10 +59,10 @@ describe('StructureFactory tests', () => {
     createPollutionSpy = sinon.spy()
     calcSizeSpy = sinon.spy()
     sfactory.checkMoney = checkMoneyStub
-    sfactory.createProducer = createProducerSpy
-    sfactory.buyLandInRadiusForTileOwnership = buyLandSpy
+    sfactory.producerFactory.createProducer = createProducerSpy
+    sfactory.buyLand = buyLandSpy
     sfactory.createInitialPollution = createPollutionSpy
-    sfactory.calculateSizeAndChangeAssets = calcSizeSpy
+    sfactory.calculateSize = calcSizeSpy
   }
 
   it('Build building works', () => {
@@ -69,19 +70,19 @@ describe('StructureFactory tests', () => {
     checkMoneyStub.withArgs(structureType).returns(true)
     sfactory.buildBuilding(tile, structureType)
 
-//    assert.equal(tile.structure.tile, tile)
-//    assert.equal(tile.structure.ownerName, 'joku omistaja')
-//    assert.equal(tile.structure.structureName, 'joku rakennus')
-//    assert.equal(tile.structure.size, 0)
-//    assert.equal(tile.structure.structureType, structureType)
-//    assert.equal(tile.structure.foundingYear, 7)
-//    assert(createProducerSpy.calledWith(structureType, tile))
-//    assert.equal(tile.structure.cost, structureType.cost)
-//
-//    assert(addStructureSpy.calledWith(tile.structure))
-//    assert(buyLandSpy.calledWith(tile))
-//    assert(createPollutionSpy.calledWith(structureType.pollution, tile))
-//    assert(calcSizeSpy.calledWith(tile.structure))
+    assert.equal(tile.structure.tile, tile)
+    assert.equal(tile.structure.ownerName, 'joku omistaja')
+    assert.equal(tile.structure.structureName, 'joku rakennus')
+    assert.equal(tile.structure.size, 0)
+    assert.equal(tile.structure.structureType, structureType)
+    assert.equal(tile.structure.foundingYear, 7)
+    assert(createProducerSpy.calledWith(structureType, tile))
+    assert.equal(tile.structure.cost, structureType.cost)
+
+    assert(addStructureSpy.calledWith(tile.structure))
+    assert(buyLandSpy.calledWith(tile))
+    assert(createPollutionSpy.calledWith(structureType.pollution, tile))
+    assert(calcSizeSpy.calledWith(tile.structure))
   })
 
   it('Build building does not do anything if checkMoney returns false', () => {
@@ -89,12 +90,12 @@ describe('StructureFactory tests', () => {
     checkMoneyStub.withArgs(structureType).returns(false)
     sfactory.buildBuilding(tile, structureType)
 
-//    assert.equal(tile.structure, undefined)
-//    assert.equal(createProducerSpy.callCount, 0)
-//    assert.equal(addStructureSpy.callCount, 0)
-//    assert.equal(buyLandSpy.callCount, 0)
-//    assert.equal(createPollutionSpy.callCount, 0)
-//    assert.equal(calcSizeSpy.callCount, 0)
+    assert.equal(tile.structure, undefined)
+    assert.equal(createProducerSpy.callCount, 0)
+    assert.equal(addStructureSpy.callCount, 0)
+    assert.equal(buyLandSpy.callCount, 0)
+    assert.equal(createPollutionSpy.callCount, 0)
+    assert.equal(calcSizeSpy.callCount, 0)
   })
 
   it('Money checking works', () =>{
@@ -112,9 +113,12 @@ describe('StructureFactory tests', () => {
     assert.equal(player.cash, 114)
   })
 
-  it('buyLandInRadiusForTileOwnership works', () =>{
-    tile.structure = {
-      radiusForTileOwnership: 63
-    }
+  it('buyLandForRefinery works only if distance is 0 or structure null', () =>{
+    sfactory.setAssetForRefinery = setAssetForRefinerySpy
+    var tmpTile = { structure: null }
+    var distance = 0
+    sfactory.buyLandForRefinery(tile, distance, tmpTile)
+    
+//    tile, distance, tmpTile
   })
 })
