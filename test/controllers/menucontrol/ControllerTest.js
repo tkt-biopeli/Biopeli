@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import Controller from '../../src/controllers/menucontrol/Controller'
+import Controller from '../../../src/controllers/menucontrol/Controller'
 
 describe('Controller tests', ()=>{
   var controller, menuView, game, style, m

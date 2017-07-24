@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import MulticontentController from '../../src/controllers/menucontrol/MulticontentController'
+import MulticontentController from '../../../src/controllers/menucontrol/MulticontentController'
 
 describe('Multicontent controller tests', ()=>{
   var controller, contents, startIndex

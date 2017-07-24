@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import ResetDecorator from '../../../src/controllers/menucontrol/helpers/ResetDecorator'
+import ResetDecorator from '../../../../src/controllers/menucontrol/helpers/ResetDecorator'
 
 describe('Reset decorator tests', () => {
   it('Constructor test', () => {
