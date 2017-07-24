@@ -6,14 +6,11 @@ import { createLine } from '../../logic/LinearFunction'
 export default class Refiner {
   constructor ({ zone, inputTypes, multiplier, radius, tile }) {
     this.tile = tile
-
     this.zone = zone
     this.inputTypes = inputTypes
     this.multiplier = multiplier
     this.radius = radius
-
     this.distancefunction = createLine(1, 1, radius, 1 / multiplier)
-
     this.producerHolders = []
   }
 
@@ -22,7 +19,6 @@ export default class Refiner {
     for (let producerHolder of this.producerHolders) {
       productionSum += this.distancefunction(producerHolder.distance) * producerHolder.producer.production(timeEvent, true)
     }
-
     return Math.round(productionSum * this.multiplier)
   }
 }
