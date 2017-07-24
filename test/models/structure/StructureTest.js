@@ -44,7 +44,6 @@ describe('Structure tests', () => {
     assert.equal('Risto', structure.ownerName)
     assert.equal('Rustholli', structure.structureName)
     assert.equal(10, structure.size)
-    assert.equal(1, structure.productionInput)
     assert.equal(1999, structure.foundingYear)
     assert.equal(producer, structure.producer)
     assert.equal(100, structure.cost)
