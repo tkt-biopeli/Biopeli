@@ -50,7 +50,7 @@ export default class SideMenuContent extends Content {
       this.text('Structure: ' + structure.structureType.name)
       this.text('Founding year: ' + structure.foundingYear)
       this.text('Size: ' + structure.size)
-      this.text('Production per time: ' + structure.calculateProductionEfficiency())
+      this.text('Production: ')
     }
 
     this.tileActions(tile)
