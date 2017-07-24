@@ -5,7 +5,7 @@
  * and the function that calculates the value for production efficiency
  * (production unit / time period).
  */
-export default class Structure { 
+export default class Structure {
   /**
    * tile, name, size, and structureType are given to the constructor as parameters.
    * the initial value of productionInput is 0.

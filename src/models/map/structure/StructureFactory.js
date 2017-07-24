@@ -110,8 +110,8 @@ export default class StructureFactory {
   calculateSizeAndChangeAssetsForProducer (structure) {
     structure.ownedTiles.forEach(function (tmpTile) {
       if (tmpTile.tileType.name === 'grass') {
-          tmpTile.tileType = StaticTypes.tileTypes.field
-          structure.size++
+        tmpTile.tileType = StaticTypes.tileTypes.field
+        structure.size++
       }
     }, this)
   }

@@ -47,7 +47,7 @@ describe('StructureFactory tests', () => {
     sfactory.buildBuilding(tile, structureType)
 
     assert.equal(tile, tile.structure.tile)
-    assert.equal(10, tile.structure.size)
+    assert.equal(0, tile.structure.size)
     assert.equal(structureType, tile.structure.structureType)
     assert.equal(7, tile.structure.foundingYear)
     assert(createProducerSpy.calledWith(structureType, tile))

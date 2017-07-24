@@ -29,19 +29,19 @@ describe('Integration test: Building structures', () => {
     gameStateChecker.checkButtonAmountInMenu(1)
     
     gameStateChecker.checkSelectedTile()
-    gameStateChecker.checkTilesInformation(1, 1, 'grass', 'wheat farm', true)
+    gameStateChecker.checkTilesInformation(1, 1, 'field', 'wheat farm', true)
   })
 
   it('Can build a dairy farm on grass', () => {
     buildFarm({x: 1, y: 1, tileType: 'grass', firstButton: 3, secondButton: 1})
     gameStateChecker.checkSelectedTile()
-    gameStateChecker.checkTilesInformation(1, 1, 'grass', 'dairy farm', true)
+    gameStateChecker.checkTilesInformation(1, 1, 'field', 'dairy farm', true)
   })
 
   it('Can build a berry farm on grass', () => {
     buildFarm({x: 1, y: 1, tileType: 'grass', firstButton: 4, secondButton: 1})
     gameStateChecker.checkSelectedTile()
-    gameStateChecker.checkTilesInformation(1, 1, 'grass', 'berry farm', true)
+    gameStateChecker.checkTilesInformation(1, 1, 'field', 'berry farm', true)
   })
 
   it('Building a farm reduces the total amount of money', () => {
