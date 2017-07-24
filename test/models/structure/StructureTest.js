@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import Structure from '../../../src/models/map/structure/Structure'
+import Structure from '../../../src/models/structure/Structure'
 
 describe('Structure tests', () => {
 
@@ -8,7 +8,7 @@ describe('Structure tests', () => {
 
   beforeEach(() => {
     producer = {
-      production: sinon.spy()
+      produce: sinon.spy()
     }
 
     timeEvent = {
@@ -28,8 +28,8 @@ describe('Structure tests', () => {
 
     structure = new Structure({
       tile: tile,
-      owner: 'Risto',
-      name: 'Rustholli',
+      ownerName: 'Risto',
+      structureName: 'Rustholli',
       size: 10,
       structureType: stype,
       foundingYear: 1999,
@@ -41,8 +41,8 @@ describe('Structure tests', () => {
   it('Constructor works', () => {
     assert.equal(tile, structure.tile)
     assert.equal(stype, structure.structureType)
-    assert.equal('Risto', structure.owner)
-    assert.equal('Rustholli', structure.name)
+    assert.equal('Risto', structure.ownerName)
+    assert.equal('Rustholli', structure.structureName)
     assert.equal(10, structure.size)
     assert.equal(1, structure.productionInput)
     assert.equal(1999, structure.foundingYear)
@@ -67,7 +67,7 @@ describe('Structure tests', () => {
   it('produce returns zero if there is no produce function', () => {
     var structure2 = new Structure({
       tile: tile,
-      name: 'Riston rustholli',
+      ownerName: 'Riston rustholli',
       size: 10,
       structureType: stype,
       foundingYear: 1999
@@ -77,6 +77,6 @@ describe('Structure tests', () => {
   
   it('produce calls production function with correct parameter', () => {
     structure.produce(timeEvent)
-    assert(producer.production.calledWith(timeEvent))
+    assert(producer.produce.calledWith(timeEvent))
   })
 })

@@ -1,11 +1,11 @@
 import GameStub from './GameStub'
 import GamestateChecker from './GamestateChecker'
 import GameState from '../../../src/game/GameState'
+
 import config from '../../../src/config'
-import ModelTile from '../../../src/models/map/ModelTile'
 import StaticTypes from '../../../src/models/StaticTypes'
-import ProducerFactory from '../../../src/models/map/structure/producers/ProducerFactory'
-import Structure from '../../../src/models/map/structure/Structure'
+
+import Structure from '../../../src/models/structure/Structure'
 const assert = require("assert")
 
 /**
@@ -75,6 +75,7 @@ export default class GameAdvancer {
     this.tileTypes = StaticTypes.tileTypes
     this.structureTypes = StaticTypes.structureTypes
 
+    this.structureFactory = this.gameState.structureFactory
   }
 
   /**
@@ -218,18 +219,23 @@ export default class GameAdvancer {
 
   setStructure(gridX, gridY, owner, name, structureTypeName, size, foundingYear, cost) {
     var tile = this.getTile(gridX, gridY)
-    var structure = new Structure({
-      tile: tile,
-      owner: owner,
-      name: name,
-      size: size,
-      structureType: this.structureTypes[structureTypeName],
-      foundingYear: foundingYear,
-      producer: ProducerFactory.createProducer(structureTypeName, tile),
-      cost: cost
-    })
 
-    tile.structure = structure
+    this.structureFactory.buildBuilding(tile, this.structureTypes[structureTypeName])
+
+    var str = tile.structure
+    str.owner = owner
+    str.name = name
+    str.size = size
+    str.foundingYear = foundingYear
+    str.cost = cost
+  }
+
+  buildBuilding (x, y, tileType, button, button2) {
+    if(button2 == null) button2 = 1
+    this.setTile(x, y, tileType)
+    this.clickTile(x, y)
+    this.clickNthButton(button)
+    this.clickNthButton(button2)
   }
 
   setTileWithStructure(gridX, gridY, tileTypeName, structureType, sowner, sname, ssize, sfoundingYear, scost) {

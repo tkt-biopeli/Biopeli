@@ -85,12 +85,20 @@ const tileTypes = {
     asset: 'field',
     flowers: 10,
     allowedStructures: []
+  },
+  industrial: {
+    name: 'industrial',
+    asset: 'industrial',
+    flowers: 10,
+    allowedStructures: []
   }
 }
 
 const addAllowedStructures = (structureTypes, tileTypes) => {
   tileTypes.grass.allowedStructures = [structureTypes.wheat_farm, structureTypes.dairy_farm, structureTypes.berry_farm, structureTypes.mill]
   tileTypes.water.allowedStructures = []
+  tileTypes.field.allowedStructures = [structureTypes.mill]
+  tileTypes.industrial.allowedStructures = [structureTypes.mill]
   return ({ structureTypes: structureTypes, tileTypes: tileTypes })
 }
 
