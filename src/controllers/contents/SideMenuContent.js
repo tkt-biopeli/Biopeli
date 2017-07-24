@@ -62,10 +62,6 @@ export default class SideMenuContent extends Content {
       return
     }
 
-    if (tile.owner != null) {
-      return
-    }
-
     if (tile.structure == null) {
       this.section('actions')
       this.buttonActionsForTile(tile)

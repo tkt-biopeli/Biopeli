@@ -13,7 +13,7 @@ export default class StructureFactory {
    * @param {GameTimer} gameTimer
    * @param {Player} player
    */
-  constructor ({ gameTimer, player, map, tileFinder }) {
+  constructor({ gameTimer, player, map, tileFinder }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
@@ -89,13 +89,29 @@ export default class StructureFactory {
 
   buyLandInRadiusForTileOwnership (tile) {
     let tiles = this.map.getTilesInRadius(tile.structure.radiusForTileOwnership, tile)
-    for (var [, tilesArray] of tiles) {
+    for (var [distance, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
-        if (tmpTile.owner === null) {
-          tmpTile.owner = tile.structure.owner
-          tile.structure.ownedTiles.push(tmpTile)
+        if (tile.structure.structureType.refinery) {
+          this.buyLandInRadiusForTileOwnershipForRefinery(tile, distance, tmpTile)
+        } else {
+          this.buyLandInRadiusForTileOwnershipForProducer(tile, distance, tmpTile)
         }
       }, this)
+    }
+
+  }
+
+  buyLandInRadiusForTileOwnershipForRefinery (tile, distance, tmpTile) {
+    if (distance === 0 || tmpTile.structure === null) {
+      tmpTile.owner = tile.structure.owner
+      tile.structure.ownedTiles.push(tmpTile)
+    }
+  }
+
+  buyLandInRadiusForTileOwnershipForProducer (tile, distance, tmpTile) {
+    if (tmpTile.owner === null) {
+      tmpTile.owner = tile.structure.owner
+      tile.structure.ownedTiles.push(tmpTile)
     }
   }
 
@@ -116,7 +132,7 @@ export default class StructureFactory {
     }, this)
   }
 
-  calculateSizeAndChangeAssetsForRefinery(structure) {
+  calculateSizeAndChangeAssetsForRefinery (structure) {
     //miia tekee
   }
 }
