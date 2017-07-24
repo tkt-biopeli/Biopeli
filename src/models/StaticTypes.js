@@ -15,6 +15,7 @@ const structureTypes = {
   wheat_farm: {
     name: 'wheat farm',
     asset: 'wheat_farm',
+    health: 6,
     harvestingWeeks: new Set(['8.1']),
     continuousProduction: false,
     turnipYield: 25,
@@ -25,6 +26,7 @@ const structureTypes = {
   dairy_farm: {
     name: 'dairy farm',
     asset: 'dairy_farm',
+    health: 6,
     harvestingWeeks: new Set(),
     continuousProduction: true,
     turnipYield: 35,
@@ -35,6 +37,7 @@ const structureTypes = {
   berry_farm: {
     name: 'berry farm',
     asset: 'berry_farm',
+    health: 4,
     harvestingWeeks: new Set(),
     continuousProduction: true,
     turnipYield: 20,
@@ -45,6 +48,7 @@ const structureTypes = {
   mill: {
     name: 'mill',
     asset: 'mill',
+    health: 10,
     refinery: true,
     buysFrom: [],
     cost: 3000,

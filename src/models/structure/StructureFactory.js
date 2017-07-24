@@ -1,8 +1,12 @@
 import Structure from './Structure'
+import StructureHealth from './health/StructureHealth'
+import HealthManager from './health/HealthManager'
+
 import ProducerFactory from './ProducerFactory'
 import StructureNameGenerator from '../namegeneration/StructureNameGenerator'
 import StructureNameParts from '../namegeneration/StructureNameParts'
 import utils from '../../utils'
+import config from '../../config'
 import StaticTypes from '../StaticTypes'
 
 /**
@@ -41,8 +45,14 @@ export default class StructureFactory {
    */
   buildBuilding (tile, structureType) {
     if (!this.checkMoney(structureType)) return
+
+    var health = new StructureHealth({maxHealth: structureType.health})
+    var manager = new HealthManager({health: health, minRuinTime: config.minRuin, maxRuinTime: config.maxRuin})
+
     tile.structure = new Structure({
       tile: tile,
+      health: health,
+      manager: manager,
       ownerName: this.namer.createOwnerName(),
       structureName: this.namer.createBuildingName(structureType.name),
       size: 0,
