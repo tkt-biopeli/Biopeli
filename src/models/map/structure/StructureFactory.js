@@ -117,6 +117,11 @@ export default class StructureFactory {
   }
 
   calculateSizeAndChangeAssetsForRefinery(structure) {
-    //miia tekee
+    structure.ownedTiles.forEach(function (tmpTile) {
+      if (tmpTile.tileType.name === 'grass') {
+        tmpTile.tileType = StaticTypes.tileTypes.industrial
+        // how shall we calculate the size for this??
+      }
+    }, this)
   }
 }
