@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import MenuBuilder from '../controllers/MenuBuilder'
+import MenuBuilder from '../controllers/menucontrol/MenuBuilder'
 
 /**
  * Game over screen
