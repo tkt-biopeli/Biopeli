@@ -12,6 +12,7 @@ import InputHandler from '../view/InputHandler'
 import Timer from '../view/Timer'
 import GameTimerListener from '../models/GameTimerListener'
 import TileFinder from '../models/map/TileFinder'
+import EventController from '../controllers/events/EventController'
 
 import TopBarContent from '../controllers/menucontrol/contents/TopBarContent'
 import SideMenuContent from '../controllers/menucontrol/contents/SideMenuContent'
@@ -79,6 +80,8 @@ export default class GameState {
   }
 
   initializeModel (cityName, perlinNoise, gameLength, startMoney, mapWidth, mapHeight, tileWidth, tileHeight) {
+    this.eventController = new EventController()
+    
     this.map = new Map({
       gridSizeX: mapWidth,
       gridSizeY: mapHeight,
@@ -115,6 +118,7 @@ export default class GameState {
       tileFinder: this.tileFinder,
       gameTimer: this.gameTimer,
       player: this.player,
+      eventController: this.eventController,
       map: this.map
     })
 
