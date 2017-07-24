@@ -1,26 +1,26 @@
 const assert = require("assert")
 const sinon = require("sinon")
-import PrimaryProducerDecorator from '../../../../src/models/map/structure/producers/PrimaryProducerDecorator'
+import PrimaryProducerDecorator from '../../../../src/models/structure/producers/decorators/PrimaryProducerDecorator'
 
-describe('Primary producer tests', () => {
+describe('Primary producer decorator tests', () => {
 
-  var p, turnip, tile
+  var p, ip, turnip, tile
   beforeEach(()=>{
     tile = {flowers: 10}
-    turnip = 1
+    ip = {}
     p = new PrimaryProducerDecorator({
-      turnipYield: turnip,
+      producer: ip,
       tile: tile
     })
   })
 
   it('Constructor test', ()=>{
-    assert.equal(turnip, p.turnipYield)
     assert.equal(tile, p.tile)
+    assert.equal(ip, p.producer)
   })
 
   it('Pollution is counted in', ()=>{
-    p.productionThisWeek = () => 5
+    ip.produce = () => 5
     assert.equal(5, p.produce())
     tile.flowers = 0
     assert.equal(0, p.produce())

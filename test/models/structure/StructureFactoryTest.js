@@ -1,6 +1,6 @@
 const assert = require("assert")
 const sinon = require("sinon")
-import StructureFactory from '../../../src/models/map/structure/StructureFactory'
+import StructureFactory from '../../../src/models/structure/StructureFactory'
 
 describe('StructureFactory tests', () => {
   var sfactory, gameTimer, player, addStructureSpy, map
@@ -43,7 +43,7 @@ describe('StructureFactory tests', () => {
     var tile = { structure: {}, flowers: 0 }
     var structureType = {}
     var createProducerSpy = sinon.spy()
-    sfactory.createProducer = createProducerSpy
+    sfactory.producerFactory.createProducer = createProducerSpy
     sfactory.buildBuilding(tile, structureType)
 
     assert.equal(tile, tile.structure.tile)
