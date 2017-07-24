@@ -22,12 +22,11 @@ describe('Integration test: Tile selection shows correctly in Menu', () => {
   })
 
   it('Selecting tile with built structure shows correct options in Menu', () => {
-    gameAdvancer.setTileWithStructure(0, 0, 'grass', 'wheat_farm', 'piippolan vaari', 'navetta', 100, 1999, 0)
+    gameAdvancer.buildBuilding(0, 0, 'grass', 2)
     gameAdvancer.click(0, 0)
     gameStateChecker.checkSelectedTile(0, 0)
     gameStateChecker.checkButtonAmountInMenu(1)
-    gameStateChecker.checkIfTextsExist('Ground type: grass', 'X: 0, Y: 0', 'Structure: wheat farm',
-      'Founding year: 1999', 'Size: 100', 'Production input: 1', 'Production per time: ')
+    gameStateChecker.checkIfTextsExist('Ground type: field', 'X: 0, Y: 0', 'Structure: wheat farm')
   })
 
   it('Selecting chosen tile again empties the selection', () => {

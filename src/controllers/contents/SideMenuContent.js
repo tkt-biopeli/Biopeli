@@ -38,15 +38,15 @@ export default class SideMenuContent extends Content {
     this.text('X: ' + tile.x + ', Y: ' + tile.y)
     this.text('Flowers: ' + tile.flowers)
     if (tile.owner != null) {
-      this.text('Land owner: ' + tile.owner)
+      this.text('Land owner: ' + tile.owner.ownerName)
     }
 
     if (tile.structure != null) {
       var structure = tile.structure
 
       this.section('structure')
-      this.text('"' + structure.owner + '"')
-      this.text('"' + structure.name + '"')
+      this.text('"' + structure.ownerName + '"')
+      this.text('"' + structure.structureName + '"')
       this.text('Structure: ' + structure.structureType.name)
       this.text('Founding year: ' + structure.foundingYear)
       this.text('Size: ' + structure.size)
@@ -59,10 +59,6 @@ export default class SideMenuContent extends Content {
 
   tileActions (tile) {
     if (tile == null) {
-      return
-    }
-
-    if (tile.owner != null) {
       return
     }
 

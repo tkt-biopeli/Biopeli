@@ -1,6 +1,6 @@
 const assert = require("assert")
 const sinon = require("sinon")
-import SeasonalProducer from '../../../../src/models/map/structure/producers/SeasonalProducer'
+import SeasonalProducer from '../../../../src/models/structure/producers/SeasonalProducer'
 
 describe('Seasonal producer tests', () => {
   it('production works', () => {

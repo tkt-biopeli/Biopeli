@@ -1,6 +1,6 @@
 const assert = require("assert")
 const sinon = require("sinon")
-import Refiner from '../../../../src/models/map/structure/producers/Refiner'
+import Refiner from '../../../../src/models/structure/producers/Refiner'
 
 describe('Refiner tests', () => {
   var inputTypes, multiplier, radius, refiner, tile

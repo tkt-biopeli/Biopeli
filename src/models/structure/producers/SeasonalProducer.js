@@ -1,15 +1,9 @@
-import PrimaryProducer from './PrimaryProducer'
-
 /**
  * produces turnips all the time and gives the collected turnips at harvest seasons
  */
-export default class SeasonalProducer extends PrimaryProducer {
-  constructor ({ turnipYield, tile, harvestWeeks }) {
-    super({
-      turnipYield: turnipYield,
-      tile: tile
-    })
-
+export default class SeasonalProducer {
+  constructor ({ turnipYield, harvestWeeks }) {
+    this.turnipYield = turnipYield
     this.harvestWeeks = harvestWeeks
 
     this.produced = 0

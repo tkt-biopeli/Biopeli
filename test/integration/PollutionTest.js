@@ -42,19 +42,11 @@ describe('Integration test: Building structures', () => {
   })
 
   it('Multiple structures create cumulative pollution', () => {
+    gameAdvancer.setMoney(10000000)
     gameAdvancer.setTile(0, 0, 'grass')
-    gameAdvancer.setTile(0, 1, 'grass')
-    gameAdvancer.clickTile(0, 0)
-    gameAdvancer.clickNthButton(2)
-    gameAdvancer.clickNthButton(1)
-    gameAdvancer.update(1000)
-    gameAdvancer.clickTile(0, 1)
-    // gameAdvancer.clickNthButton(2)
-    // gameAdvancer.clickNthButton(1)
-    gameAdvancer.update(1000)
-    /**Ei toimi?
-    gameStateChecker.checkPollution(0, 0, 4)
-    gameStateChecker.checkPollution(0, 1, 4)
-    */
+    gameAdvancer.setTile(0, 3, 'grass')
+    gameAdvancer.buildBuilding(0, 0, 'grass', 4)
+    gameAdvancer.buildBuilding(0, 3, 'grass', 4)
+    gameStateChecker.checkPollution(0, 1, 7)
   })
 })

@@ -1,6 +1,6 @@
 const assert = require("assert")
 const sinon = require("sinon")
-import ContinuousProducer from '../../../../src/models/map/structure/producers/ContinuousProducer'
+import ContinuousProducer from '../../../../src/models/structure/producers/ContinuousProducer'
 
 describe('Continuous producer tests', () => {
   it('production works', () => {
@@ -18,10 +18,10 @@ describe('Continuous producer tests', () => {
       week: 1
     }
 
-    assert.equal(17, producer.productionThisWeek(timeEvent))
+    assert.equal(17, producer.produce(timeEvent))
     timeEvent.month = 7
-    assert.equal(17, producer.productionThisWeek(timeEvent))
+    assert.equal(17, producer.produce(timeEvent))
     timeEvent.week = 3
-    assert.equal(17, producer.productionThisWeek(timeEvent))
+    assert.equal(17, producer.produce(timeEvent))
   })
 })
