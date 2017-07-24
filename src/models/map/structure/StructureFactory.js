@@ -115,4 +115,8 @@ export default class StructureFactory {
       }
     }, this)
   }
+
+  calculateSizeAndChangeAssetsForRefinery(structure) {
+    //miia tekee
+  }
 }
