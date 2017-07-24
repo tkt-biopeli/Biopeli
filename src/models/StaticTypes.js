@@ -50,7 +50,8 @@ const structureTypes = {
     cost: 3000,
     multiplier: 10,
     pollution: 2,
-    radiusForTileOwnership: 1
+    radiusForTileOwnership: 1,
+    reach: 5
   }
 }
 

@@ -135,6 +135,7 @@ export default class MapView {
     if (tile === this.menuController.stateValue('selectedTile')) {
       this.addToViewTexture(this.highlight(), pxCoords.x, pxCoords.y)
       if (tile.structure !== null && tile.structure.structureType.refinery) {
+        this.highlightZone(tile)
         this.highlightStructuresOwnedByRefinery(tile)
       }
     }
@@ -160,4 +161,10 @@ export default class MapView {
     }, this)
   }
 
+  highlightZone(tile) {
+    tile.structure.producer.producer.zone.forEach(function (tmp) {
+      console.log(tmp.tile.x)
+      this.addToViewTexture(this.highlight(), tmp.tile.x, tmp.tile.y)
+    }, this)
+  }
 }
