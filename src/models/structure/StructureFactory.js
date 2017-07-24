@@ -148,7 +148,7 @@ export default class StructureFactory {
 
   calculateSizeForRefinery (structure) {
     structure.ownedTiles.forEach(function (tmpTile) {
-      // structure.structureType.producerHolders.length
+      structure.producer.producer.producerHolders.length
     }, this)
   }
 }
