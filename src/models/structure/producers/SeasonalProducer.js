@@ -9,15 +9,13 @@ export default class SeasonalProducer {
     this.produced = 0
   }
 
-  productionThisWeek (timeEvent) {
+  produce (timeEvent) {
     this.produced += this.turnipYield
-
     if (this.harvestWeeks.has(timeEvent.month + '.' + timeEvent.week)) {
       var harvest = this.produced
       this.produced = 0
       return harvest
     }
-
     return 0
   }
 }

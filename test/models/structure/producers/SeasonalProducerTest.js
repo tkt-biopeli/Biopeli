@@ -15,18 +15,18 @@ describe('Seasonal producer tests', () => {
     var turnipYield = 1
 
     var producer = new SeasonalProducer({
-      turnipYield: turnipYield, 
+      turnipYield: turnipYield,
       tile: tile,
       harvestWeeks: harvestingWeeks
     })
 
-    assert.equal(0, producer.productionThisWeek(timeEvent))
-    assert.equal(0, producer.productionThisWeek(timeEvent))
-    assert.equal(0, producer.productionThisWeek(timeEvent))
+    assert.equal(0, producer.produce(timeEvent))
+    assert.equal(0, producer.produce(timeEvent))
+    assert.equal(0, producer.produce(timeEvent))
     timeEvent.month = 7
-    assert.equal(4, producer.productionThisWeek(timeEvent))
+    assert.equal(4, producer.produce(timeEvent))
     timeEvent.week = 3
     timeEvent.month = 8
-    assert.equal(1, producer.productionThisWeek(timeEvent))
+    assert.equal(1, producer.produce(timeEvent))
   })
 })
