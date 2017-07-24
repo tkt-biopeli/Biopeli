@@ -74,7 +74,8 @@ export default class StructureFactory {
     let tiles = this.map.getTilesInRadius(3, tile)
     for (var [distance, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
-        tmpTile.flowers -= (pollution - distance)
+        let amount = pollution - distance > 0 ? pollution - distance : 0
+        tmpTile.flowers -= amount
         if (tmpTile.flowers < 1) { tmpTile.flowers = 1 }
       }, this)
     }
