@@ -52,9 +52,7 @@ export default class StructureFactory {
     this.player.addStructure(tile.structure)
     this.buyLand(tile)
     this.createInitialPollution(structureType.pollution, tile)
-
     this.calculateSize(tile.structure)
-
     this.eventController.event('buildStructure', tile)
   }
 
@@ -150,7 +148,7 @@ export default class StructureFactory {
 
   calculateSizeForRefinery (structure) {
     structure.ownedTiles.forEach(function (tmpTile) {
-     // structure.structureType.producerHolders
+      // structure.structureType.producerHolders.length
     }, this)
   }
 }

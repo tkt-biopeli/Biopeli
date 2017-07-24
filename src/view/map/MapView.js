@@ -134,6 +134,9 @@ export default class MapView {
   highlightSelectedTile (tile, pxCoords) {
     if (tile === this.menuController.stateValue('selectedTile')) {
       this.addToViewTexture(this.highlight(), pxCoords.x, pxCoords.y)
+      if (tile.structure !== null && tile.structure.structureType.refinery) {
+        this.highlightStructuresOwnedByRefinery(tile)
+      }
     }
   }
 
@@ -147,4 +150,14 @@ export default class MapView {
     highlight.endFill()
     return highlight
   }
+
+  /**
+   * Highlight zone of refiner
+   */
+  highlightStructuresOwnedByRefinery (tile) {
+    tile.structure.producer.producer.producerHolders.forEach(function (tmpTile) {
+      this.addToViewTexture(this.highlight(), tmpTile.x, tmpTile.y)
+    }, this)
+  }
+
 }
