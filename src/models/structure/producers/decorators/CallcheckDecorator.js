@@ -1,5 +1,5 @@
 export default class CallcheckDecorator {
-  constructor({producer}){
+  constructor ({producer}) {
     this.producer = producer
   }
 

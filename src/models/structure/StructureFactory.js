@@ -47,7 +47,7 @@ export default class StructureFactory {
       cost: structureType.cost
     })
     this.player.addStructure(tile.structure)
-    this.buyLandInReach(tile)
+    this.buyLandInRadiusForTileOwnership(tile)
     this.createInitialPollution(structureType.pollution, tile)
     this.calculateSizeAndChangeAssets(tile.structure)
   }
@@ -80,20 +80,35 @@ export default class StructureFactory {
     }
   }
 
-  buyLandInReach (tile) {
-    let tiles = this.map.getTilesInRadius(tile.structure.reach, tile)
-    for (var [, tilesArray] of tiles) {
+  buyLandInRadiusForTileOwnership (tile) {
+    let tiles = this.map.getTilesInRadius(tile.structure.radiusForTileOwnership, tile)
+    for (var [distance, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
-        if (tmpTile.owner === null) {
-          tmpTile.owner = tile.structure.owner
-          tile.structure.ownedTiles.push(tmpTile)
+        if (tile.structure.structureType.refinery) {
+          this.buyLandInRadiusForTileOwnershipForRefinery(tile, distance, tmpTile)
+        } else {
+          this.buyLandInRadiusForTileOwnershipForProducer(tile, distance, tmpTile)
         }
       }, this)
     }
   }
 
+  buyLandInRadiusForTileOwnershipForRefinery (tile, distance, tmpTile) {
+    if (distance === 0 || tmpTile.structure === null) {
+      tmpTile.owner = tile.structure.owner
+      tile.structure.ownedTiles.push(tmpTile)
+    }
+  }
+
+  buyLandInRadiusForTileOwnershipForProducer (tile, distance, tmpTile) {
+    if (tmpTile.owner === null) {
+      tmpTile.owner = tile.structure.owner
+      tile.structure.ownedTiles.push(tmpTile)
+    }
+  }
+
   calculateSizeAndChangeAssets (structure) {
-    if (structure.refinery) {
+    if (structure.structureType.refinery) {
       this.calculateSizeAndChangeAssetsForRefinery(structure)
     } else {
       this.calculateSizeAndChangeAssetsForProducer(structure)
@@ -107,5 +122,9 @@ export default class StructureFactory {
         structure.size++
       }
     }, this)
+  }
+
+  calculateSizeAndChangeAssetsForRefinery (structure) {
+    // miia tekee
   }
 }

@@ -20,7 +20,7 @@ describe('Integration test: Building structures', () => {
     gameStateChecker.checkButtonAmountInMenu(2)
     gameAdvancer.clickNthButton(1)
     gameStateChecker.checkButtonAmountInMenu(1)
-    
+
     gameStateChecker.checkSelectedTile()
     gameStateChecker.checkTilesInformation(1, 1, 'field', 'wheat farm', true)
   })
@@ -35,6 +35,25 @@ describe('Integration test: Building structures', () => {
     gameAdvancer.buildBuilding(1, 1, 'grass', 4)
     gameStateChecker.checkSelectedTile()
     gameStateChecker.checkTilesInformation(1, 1, 'field', 'berry farm', true)
+  })
+
+  it('Can build a mill on grass', () => {
+    gameAdvancer.setMoney(999999)
+    gameAdvancer.buildBuilding(1, 1, 'grass', 5)
+    gameStateChecker.checkSelectedTile()
+    gameStateChecker.checkTilesInformation(1, 1, 'grass', 'mill', true)
+  })
+
+  it('Can not build on tile with structure', () => {
+    gameAdvancer.buildBuilding(1, 1, 'grass', 2)
+    gameAdvancer.clickTile(1, 1)
+    gameStateChecker.checkButtonAmountInMenu(1)
+  })
+
+  it('Can not build producer on tile that is owned', () => {
+    gameAdvancer.buildBuilding(1, 1, 'grass', 2)
+    gameAdvancer.clickTile(1, 2)
+    gameStateChecker.checkButtonAmountInMenu(2)
   })
 
   it('Building a farm reduces the total amount of money', () => {

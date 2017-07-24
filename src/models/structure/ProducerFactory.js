@@ -10,7 +10,7 @@ export default class ProducerFactory {
   constructor ({tileFinder}) {
     this.tileFinder = tileFinder
   }
-  
+
   /**
    * Returns either a function that yields turnips weekly or one that
    * yields only during harvesting months, depending on the structure type.
@@ -30,7 +30,7 @@ export default class ProducerFactory {
      ? this.createContinuousProducer(sType.turnipYield)
      : this.createSeasonalProducer(sType.harvestingWeeks, sType.turnipYield)
 
-     return new PrimaryProducerDecorator({tile: tile, producer: producer})
+    return new PrimaryProducerDecorator({tile: tile, producer: producer})
   }
 
   createSeasonalProducer (harvestingWeeks, turnipYield) {

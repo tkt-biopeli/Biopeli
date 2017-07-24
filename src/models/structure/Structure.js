@@ -28,7 +28,7 @@ export default class Structure {
     this.producer = producer
     this.cost = cost
     this.ownedTiles = []
-    this.reach = structureType.reach
+    this.radiusForTileOwnership = structureType.radiusForTileOwnership
   }
 
   /**
