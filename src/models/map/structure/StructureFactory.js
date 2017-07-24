@@ -3,6 +3,7 @@ import ProducerFactory from './producers/ProducerFactory'
 import StructureNameGenerator from '../../namegeneration/StructureNameGenerator'
 import StructureNameParts from '../../namegeneration/StructureNameParts'
 import utils from '../../../utils'
+import StaticTypes from '../../StaticTypes'
 
 /**
  * Creates a structure for the player
@@ -38,7 +39,7 @@ export default class StructureFactory {
       tile: tile,
       owner: this.namer.createOwnerName(),
       name: this.namer.createBuildingName(structureType.name),
-      size: 10,
+      size: 0,
       structureType: structureType,
       foundingYear: this.gameTimer.currentTimeEvent.year,
       producer: this.createProducer(structureType, tile),
@@ -47,6 +48,7 @@ export default class StructureFactory {
     this.player.addStructure(tile.structure)
     this.buyLandInReach(tile)
     this.createInitialPollution(structureType.pollution, tile)
+    this.calculateSizeAndChangeAssets(tile.structure)
   }
 
   /**
@@ -89,11 +91,28 @@ export default class StructureFactory {
     let tiles = this.map.getTilesInRadius(tile.structure.reach, tile)
     for (var [, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
-        if (tmpTile.owner == null) {
+        if (tmpTile.owner === null) {
           tmpTile.owner = tile.structure.owner
           tile.structure.ownedTiles.push(tmpTile)
         }
       }, this)
     }
+  }
+
+  calculateSizeAndChangeAssets (structure) {
+    if (structure.refinery) {
+      this.calculateSizeAndChangeAssetsForRefinery(structure)
+    } else {
+      this.calculateSizeAndChangeAssetsForProducer(structure)
+    }
+  }
+
+  calculateSizeAndChangeAssetsForProducer (structure) {
+    structure.ownedTiles.forEach(function (tmpTile) {
+      if (tmpTile.tileType.name === 'grass') {
+          tmpTile.tileType = StaticTypes.tileTypes.field
+          structure.size++
+      }
+    }, this)
   }
 }

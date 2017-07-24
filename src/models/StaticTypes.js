@@ -79,6 +79,12 @@ const tileTypes = {
     asset: 'water',
     flowers: 10,
     allowedStructures: []
+  },
+  field: {
+    name: 'field',
+    asset: 'field',
+    flowers: 10,
+    allowedStructures: []
   }
 }
 
