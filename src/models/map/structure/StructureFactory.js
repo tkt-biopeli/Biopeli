@@ -46,7 +46,7 @@ export default class StructureFactory {
       cost: structureType.cost
     })
     this.player.addStructure(tile.structure)
-    this.buyLandInReach(tile)
+    this.buyLandInRadiusForTileOwnership(tile)
     this.createInitialPollution(structureType.pollution, tile)
     this.calculateSizeAndChangeAssets(tile.structure)
   }
@@ -87,8 +87,8 @@ export default class StructureFactory {
     }
   }
 
-  buyLandInReach (tile) {
-    let tiles = this.map.getTilesInRadius(tile.structure.reach, tile)
+  buyLandInRadiusForTileOwnership (tile) {
+    let tiles = this.map.getTilesInRadius(tile.structure.radiusForTileOwnership, tile)
     for (var [, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
         if (tmpTile.owner === null) {
@@ -100,7 +100,7 @@ export default class StructureFactory {
   }
 
   calculateSizeAndChangeAssets (structure) {
-    if (structure.refinery) {
+    if (structure.structureType.refinery) {
       this.calculateSizeAndChangeAssetsForRefinery(structure)
     } else {
       this.calculateSizeAndChangeAssetsForProducer(structure)
