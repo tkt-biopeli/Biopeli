@@ -118,7 +118,7 @@ export default class StructureFactory {
 
   calculateSizeAndChangeAssetsForRefinery(structure) {
     structure.ownedTiles.forEach(function (tmpTile) {
-      if (tmpTile.tileType.name === 'grass') {
+      if (tmpTile.tileType.name === 'grass' || tmpTile.tileType.name === 'forest') {
         tmpTile.tileType = StaticTypes.tileTypes.industrial
         // how shall we calculate the size for this??
       }
