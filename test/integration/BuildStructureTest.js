@@ -48,7 +48,7 @@ describe('Integration test: Building structures', () => {
     gameAdvancer.setMoney(999999)
     build({ x: 1, y: 1, tileType: 'grass', firstButton: 5, secondButton: 1 })
     gameStateChecker.checkSelectedTile()
-    gameStateChecker.checkTilesInformation(1, 1, 'grass', 'mill', true)
+    gameStateChecker.checkTilesInformation(1, 1, 'industrial', 'mill', true)
   })
 
   it('Can not build on tile with structure', () => {
@@ -60,7 +60,7 @@ describe('Integration test: Building structures', () => {
   it('Can not build producer on tile that is owned', () => {
     build({ x: 1, y: 1, tileType: 'grass', firstButton: 2, secondButton: 1 })
     gameAdvancer.clickTile(1, 2)
-    gameStateChecker.checkButtonAmountInMenu(1)
+    gameStateChecker.checkButtonAmountInMenu(2)
   })
 
   it('Building a farm reduces the total amount of money', () => {

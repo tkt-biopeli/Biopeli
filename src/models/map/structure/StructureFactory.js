@@ -13,7 +13,7 @@ export default class StructureFactory {
    * @param {GameTimer} gameTimer
    * @param {Player} player
    */
-  constructor({ gameTimer, player, map, tileFinder }) {
+  constructor ({ gameTimer, player, map, tileFinder }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
@@ -37,8 +37,8 @@ export default class StructureFactory {
     if (!this.checkMoney(structureType)) return
     tile.structure = new Structure({
       tile: tile,
-      owner: this.namer.createOwnerName(),
-      name: this.namer.createBuildingName(structureType.name),
+      ownerName: this.namer.createOwnerName(),
+      structureName: this.namer.createBuildingName(structureType.name),
       size: 0,
       structureType: structureType,
       foundingYear: this.gameTimer.currentTimeEvent.year,
@@ -46,9 +46,9 @@ export default class StructureFactory {
       cost: structureType.cost
     })
     this.player.addStructure(tile.structure)
-    this.buyLandInRadiusForTileOwnership(tile)
+    this.buyLand(tile)
     this.createInitialPollution(structureType.pollution, tile)
-    this.calculateSizeAndChangeAssets(tile.structure)
+    this.calculateSize(tile.structure)
   }
 
   /**
@@ -87,52 +87,68 @@ export default class StructureFactory {
     }
   }
 
-  buyLandInRadiusForTileOwnership (tile) {
+  buyLand (tile) {
     let tiles = this.map.getTilesInRadius(tile.structure.radiusForTileOwnership, tile)
     for (var [distance, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
         if (tile.structure.structureType.refinery) {
-          this.buyLandInRadiusForTileOwnershipForRefinery(tile, distance, tmpTile)
+          this.buyLandForRefinery(tile, distance, tmpTile)
         } else {
-          this.buyLandInRadiusForTileOwnershipForProducer(tile, distance, tmpTile)
+          this.buyLandForProducer(tile, tmpTile)
         }
       }, this)
     }
-
   }
 
-  buyLandInRadiusForTileOwnershipForRefinery (tile, distance, tmpTile) {
+  buyLandForRefinery (tile, distance, tmpTile) {
     if (distance === 0 || tmpTile.structure === null) {
-      tmpTile.owner = tile.structure.owner
-      tile.structure.ownedTiles.push(tmpTile)
-    }
-  }
-
-  buyLandInRadiusForTileOwnershipForProducer (tile, distance, tmpTile) {
-    if (tmpTile.owner === null) {
-      tmpTile.owner = tile.structure.owner
-      tile.structure.ownedTiles.push(tmpTile)
-    }
-  }
-
-  calculateSizeAndChangeAssets (structure) {
-    if (structure.structureType.refinery) {
-      this.calculateSizeAndChangeAssetsForRefinery(structure)
-    } else {
-      this.calculateSizeAndChangeAssetsForProducer(structure)
-    }
-  }
-
-  calculateSizeAndChangeAssetsForProducer (structure) {
-    structure.ownedTiles.forEach(function (tmpTile) {
-      if (tmpTile.tileType.name === 'grass') {
-        tmpTile.tileType = StaticTypes.tileTypes.field
-        structure.size++
+      this.setAssetForRefinery(tile, tmpTile)
+      if (tmpTile.owner !== null) {
+        tmpTile.owner.ownedTiles.pop(tmpTile)
+        tmpTile.owner.size--
       }
+      tmpTile.owner = tile.structure
+      tile.structure.ownedTiles.push(tmpTile)
+    }
+  }
+
+  buyLandForProducer (tile, tmpTile) {
+    if (tmpTile.owner === null) {
+      this.setAssetForProducer(tile, tmpTile)
+      tmpTile.owner = tile.structure
+      tile.structure.ownedTiles.push(tmpTile)
+    }
+  }
+
+  setAssetForRefinery (tile, tmpTile) {
+    if (tmpTile.tileType.name !== 'water') {
+      tmpTile.tileType = StaticTypes.tileTypes.industrial
+    }
+  }
+
+  setAssetForProducer (tile, tmpTile) {
+    if (tmpTile.tileType.name === 'grass') {
+      tmpTile.tileType = StaticTypes.tileTypes.field
+    }
+  }
+
+  calculateSize (structure) {
+    if (structure.structureType.refinery) {
+      this.calculateSizeForRefinery(structure)
+    } else {
+      this.calculateSizeForProducer(structure)
+    }
+  }
+
+  calculateSizeForProducer (structure) {
+    structure.ownedTiles.forEach(function (tmpTile) {
+      if (tmpTile.tileType.name === 'field') { structure.size++ }
     }, this)
   }
 
-  calculateSizeAndChangeAssetsForRefinery (structure) {
-    //miia tekee
+  calculateSizeForRefinery (structure) {
+    structure.ownedTiles.forEach(function (tmpTile) {
+      // structure.structureType.producerHolders.length
+    }, this)
   }
 }
