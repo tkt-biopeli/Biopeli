@@ -3,7 +3,7 @@ export default class CallcheckDecorator {
     this.producer = producer
   }
 
-  production (timeEvent, ownerCall) {
+  produce (timeEvent, ownerCall) {
     if (this.owner != null && !ownerCall) {
       return 0
     }
