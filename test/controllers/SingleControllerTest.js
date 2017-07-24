@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import SingleController from '../../src/controllers/SingleController'
+import SingleController from '../../src/controllers/menucontrol/SingleController'
 
 describe('Single controller tests', ()=>{
   var content, c
