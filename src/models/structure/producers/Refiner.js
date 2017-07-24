@@ -1,13 +1,10 @@
-import { createLine } from '../../../logic/LinearFunction'
-import Producer from './Producer'
+import { createLine } from '../../logic/LinearFunction'
 
 /**
  * Refiner takes production from given type buildingsnear it and enchancts their production
  */
-export default class Refiner extends Producer {
+export default class Refiner {
   constructor ({ zone, inputTypes, multiplier, radius, tile }) {
-    super()
-
     this.tile = tile
 
     this.zone = zone

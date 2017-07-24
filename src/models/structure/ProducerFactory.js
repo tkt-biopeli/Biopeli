@@ -1,0 +1,83 @@
+import ContinuousProducer from './producers/ContinuousProducer'
+import SeasonalProducer from './producers/SeasonalProducer'
+import Refiner from './producers/Refiner'
+import PrimaryProducerDecorator from './producers/decorators/PrimaryProducerDecorator'
+import CallcheckDecorator from './producers/decorators/CallcheckDecorator'
+/**
+ * Yields turnips during the harvesting period (month.week).
+ */
+export default class ProducerFactory {
+  constructor ({tileFinder}) {
+    this.tileFinder = tileFinder
+  }
+  
+  /**
+   * Returns either a function that yields turnips weekly or one that
+   * yields only during harvesting months, depending on the structure type.
+   */
+  createProducer (structureType, tile) {
+    var sType = this.checkStructureType(structureType)
+
+    var producer = sType.refinery
+      ? this.createRefiner(sType.buysFrom, sType.multiplier, sType.reach, tile)
+      : this.createPrimaryProducer(sType, tile)
+
+    return new CallcheckDecorator({producer: producer})
+  }
+
+  createPrimaryProducer (sType, tile) {
+    var producer = sType.continuousProduction
+     ? this.createContinuousProducer(sType.turnipYield)
+     : this.createSeasonalProducer(sType.harvestingWeeks, sType.turnipYield)
+
+     return new PrimaryProducerDecorator({tile: tile, producer: producer})
+  }
+
+  createSeasonalProducer (harvestingWeeks, turnipYield) {
+    return new SeasonalProducer({
+      turnipYield: turnipYield,
+      harvestWeeks: harvestingWeeks
+    })
+  }
+
+  /**
+   * Yields the same amount of turnips per week.
+   */
+  createContinuousProducer (turnipYield) {
+    return new ContinuousProducer({
+      turnipYield: turnipYield
+    })
+  }
+
+  /**
+   * Creates refiner
+   *
+   * @param {*} inputTypes
+   * @param {*} multiplier
+   * @param {*} radius
+   * @param {*} tile
+   */
+  createRefiner (inputTypes, multiplier, radius, tile) {
+    return new Refiner({
+      inputTypes: inputTypes,
+      zone: this.tileFinder.findTilesInDistanceOf(tile, radius),
+      multiplier: multiplier,
+      radius: radius,
+      tile: tile
+    })
+  }
+
+  /**
+   * If the structure type is undefined, create a new one.
+   */
+  checkStructureType (structureType) {
+    return structureType === undefined
+      ? {
+        refinery: false,
+        harvestingWeeks: new Set(),
+        continuousProduction: false,
+        turnipYield: 0
+      }
+      : structureType
+  }
+}

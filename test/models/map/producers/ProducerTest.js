@@ -1,12 +1,12 @@
 const assert = require("assert")
 const sinon = require("sinon")
-import Producer from '../../../../src/models/map/structure/producers/Producer'
+import CallcheckDecorator from '../../../../src/models/map/structure/producers/Producer'
 
 describe('Producer tests', () => {
   var producer
 
   beforeEach(()=>{
-    producer = new Producer()
+    producer = new CallcheckDecorator()
     producer.produce = sinon.spy()
   })
 

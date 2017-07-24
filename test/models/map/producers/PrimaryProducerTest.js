@@ -1,6 +1,6 @@
 const assert = require("assert")
 const sinon = require("sinon")
-import PrimaryProducer from '../../../../src/models/map/structure/producers/PrimaryProducer'
+import PrimaryProducerDecorator from '../../../../src/models/map/structure/producers/PrimaryProducerDecorator'
 
 describe('Primary producer tests', () => {
 
@@ -8,7 +8,7 @@ describe('Primary producer tests', () => {
   beforeEach(()=>{
     tile = {flowers: 10}
     turnip = 1
-    p = new PrimaryProducer({
+    p = new PrimaryProducerDecorator({
       turnipYield: turnip,
       tile: tile
     })
