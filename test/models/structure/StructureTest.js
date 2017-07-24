@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import Structure from '../../../src/models/map/structure/Structure'
+import Structure from '../../../src/models/structure/Structure'
 
 describe('Structure tests', () => {
 
@@ -8,7 +8,7 @@ describe('Structure tests', () => {
 
   beforeEach(() => {
     producer = {
-      production: sinon.spy()
+      produce: sinon.spy()
     }
 
     timeEvent = {
@@ -77,6 +77,6 @@ describe('Structure tests', () => {
   
   it('produce calls production function with correct parameter', () => {
     structure.produce(timeEvent)
-    assert(producer.production.calledWith(timeEvent))
+    assert(producer.produce.calledWith(timeEvent))
   })
 })

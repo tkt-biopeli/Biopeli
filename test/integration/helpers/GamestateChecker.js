@@ -188,8 +188,7 @@ export default class GamestateChecker {
    * @param {int} money
    */
   checkMoney(money) {
-    var text = this.gameState.topBarView.activeTexts[2].text.text
-    assert.equal(money, text)
+    assert.equal(money, this.gameState.player.cash)
   }
 
   /**

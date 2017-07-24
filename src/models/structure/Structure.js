@@ -65,6 +65,6 @@ export default class Structure {
    * @return {number} - Turnips produced
    */
   produce (timeEvent) {
-    return this.producer === undefined ? 0 : this.producer.production(timeEvent)
+    return this.producer === undefined ? 0 : this.producer.produce(timeEvent)
   }
 }

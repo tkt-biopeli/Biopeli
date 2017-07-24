@@ -1,9 +1,9 @@
 import Structure from './Structure'
-import ProducerFactory from './producers/ProducerFactory'
-import StructureNameGenerator from '../../namegeneration/StructureNameGenerator'
-import StructureNameParts from '../../namegeneration/StructureNameParts'
-import utils from '../../../utils'
-import StaticTypes from '../../StaticTypes'
+import ProducerFactory from './ProducerFactory'
+import StructureNameGenerator from '../namegeneration/StructureNameGenerator'
+import StructureNameParts from '../namegeneration/StructureNameParts'
+import utils from '../../utils'
+import StaticTypes from '../StaticTypes'
 
 /**
  * Creates a structure for the player
@@ -17,7 +17,7 @@ export default class StructureFactory {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
-    this.tileFinder = tileFinder
+
     this.namer = new StructureNameGenerator({
       frontAdjectives: StructureNameParts[0],
       names: StructureNameParts[1],
@@ -26,6 +26,7 @@ export default class StructureFactory {
       random: utils.randomNoBounds,
       randomWithBounds: utils.randomWithBounds
     })
+    this.producerFactory = new ProducerFactory({tileFinder: tileFinder})
   }
 
   /**
@@ -42,7 +43,7 @@ export default class StructureFactory {
       size: 0,
       structureType: structureType,
       foundingYear: this.gameTimer.currentTimeEvent.year,
-      producer: this.createProducer(structureType, tile),
+      producer: this.producerFactory.createProducer(structureType, tile),
       cost: structureType.cost
     })
     this.player.addStructure(tile.structure)
@@ -62,14 +63,6 @@ export default class StructureFactory {
     }
     this.player.cash -= structureType.cost
     return true
-  }
-
-  /**
-   * @param {StructureType} structureType
-   * @param {?} tile
-   */
-  createProducer (structureType, tile) {
-    return ProducerFactory.createProducer(this.tileFinder, structureType, tile)
   }
 
   /**
