@@ -28,15 +28,15 @@ describe('Health manager tests', () => {
   })
 
   it('Next ruining is calculated correctly', ()=>{
-    manager.rand = () => 0.5
-    manager.calculateNextRuin(0)
+    manager.rand = () => 0.5 
+    manager.calculateNextRuin({serialNumber: 0})
 
     assert.equal(3, manager.nextRuin)
-    manager.calculateNextRuin(2)
+    manager.calculateNextRuin({serialNumber: 2})
     assert.equal(5, manager.nextRuin)
 
     manager.rand = () => 0.99
-    manager.calculateNextRuin(0)
+    manager.calculateNextRuin({serialNumber: 0})
     assert.equal(5, manager.nextRuin)
   })
 

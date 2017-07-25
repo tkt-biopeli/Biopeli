@@ -15,4 +15,12 @@ export default class StructureHealth {
   loseOne () {
     this.loseHealth(1)
   }
+
+  toString () {
+    return this.currentHealth + '/' + this.maxHealth
+  }
+
+  percent () {
+    return this.currentHealth / this.maxHealth
+  }
 }

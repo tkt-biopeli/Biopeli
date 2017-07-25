@@ -52,6 +52,15 @@ export default class SideMenuContent extends Content {
       this.text('Size: ' + structure.size)
       this.text('Production input: ' + structure.productionInput)
       this.text('Production per time: ' + structure.calculateProductionEfficiency())
+
+      this.section('ruin')
+      this.text('Structure health: ' + structure.health.toString())
+      this.animatedBar(200, 50, true, structure.health.percent())
+      if (structure.health.percent() < 1) {
+        this.button('Repair: ', structure.healthManager.fix, structure.healthManager, 'emptyButton')
+      } else {
+        this.button('Perfect condition', () => {}, null, 'unusableButton')
+      }
     }
 
     this.tileActions(tile)

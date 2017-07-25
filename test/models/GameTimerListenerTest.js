@@ -55,26 +55,29 @@ describe('Game timer listener tests', () => {
   it('onTimer works correctly', () => {
     var timerEvent = { year: 2 }
     var countProdStub = sinon.stub()
-    countProdStub.withArgs(74, timerEvent).returns(37)
+    countProdStub.withArgs(timerEvent).returns(37)
     var doTransactionSpy = sinon.spy()
     var redrawControllersSpy = sinon.spy()
     
     gtListener.countProductionFromStructures = countProdStub
     gtListener.doTransaction = doTransactionSpy
     gtListener.redrawControllers = redrawControllersSpy
+    gtListener.checkBuildingRuining = sinon.spy()
     gtListener.onTimer(timerEvent)
     
-    assert(doTransactionSpy.calledWith(37))
+    assert(doTransactionSpy.calledWith(37, timerEvent))
     assert(redrawControllersSpy.calledWith())
     assert(isGameOverSpy.calledWith(timerEvent))
+    assert(gtListener.checkBuildingRuining.calledWith(timerEvent))
   })
 
   it('countProductionFromStructures works correctly', () => {
     var timerEvent = 4
     var str = { produce: function (timerEvent) {return 3 + timerEvent}, structureType : {name: "not a farm"}}
     var structures = [str, str, str]
+    player.structures = structures
     
-    var result = gtListener.countProductionFromStructures(structures, timerEvent)
+    var result = gtListener.countProductionFromStructures(timerEvent)
     assert.equal(21, result)
   })
 

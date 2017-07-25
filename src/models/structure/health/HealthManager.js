@@ -5,14 +5,14 @@ export default class HealthManager {
     this.difference = maxRuinTime - minRuinTime
   }
 
-  calculateNextRuin (currentTime) {
-    this.nextRuin = currentTime + this.min + Math.floor(this.rand() * (this.difference + 1))
+  calculateNextRuin (timeEvent) {
+    this.nextRuin = timeEvent.serialNumber + this.min + Math.floor(this.rand() * (this.difference + 1))
   }
 
   checkRuin (timeEvent) {
     if (timeEvent.serialNumber >= this.nextRuin) {
       this.health.loseOne()
-      this.calculateNextRuin()
+      this.calculateNextRuin(timeEvent)
     }
   }
 

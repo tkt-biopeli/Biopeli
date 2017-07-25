@@ -25,7 +25,7 @@ describe('Integration test: Tile selection shows correctly in Menu', () => {
     gameAdvancer.buildBuilding(0, 0, 'grass', 2)
     gameAdvancer.click(0, 0)
     gameStateChecker.checkSelectedTile(0, 0)
-    gameStateChecker.checkButtonAmountInMenu(1)
+    gameStateChecker.checkButtonAmountInMenu(2)
     gameStateChecker.checkIfTextsExist('Ground type: field', 'X: 0, Y: 0', 'Structure: wheat farm')
   })
 

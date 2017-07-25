@@ -48,11 +48,12 @@ export default class StructureFactory {
 
     var health = new StructureHealth({maxHealth: structureType.health})
     var manager = new HealthManager({health: health, minRuinTime: config.minRuin, maxRuinTime: config.maxRuin})
+    manager.calculateNextRuin(this.gameTimer.currentTimeEvent)
 
     tile.structure = new Structure({
       tile: tile,
       health: health,
-      manager: manager,
+      healthManager: manager,
       ownerName: this.namer.createOwnerName(),
       structureName: this.namer.createBuildingName(structureType.name),
       size: 0,

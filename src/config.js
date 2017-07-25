@@ -16,6 +16,9 @@ export default {
   tileWidth: 64,
   tileHeight: 64,
 
+  minRuin: 8, // minimum time between two ruining events
+  maxRuin: 48, // maxium tiem between two ruining events
+
   // configurations for map
   mapWidth: 18, // NOTE TO CHANGER! VALUES UNDER 12 BUG THE MAP!
   mapHeight: 18, // THIS TOO
