@@ -56,6 +56,11 @@ export default class MulticontentController extends Controller {
     this.redraw()
   }
 
+  setContent (index) {
+    this.index = index
+    this.redraw()
+  }
+
   /**
    * Creates a button that changes the current content creator to the given
    *

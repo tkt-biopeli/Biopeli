@@ -20,21 +20,13 @@ export default class SideMenuContent extends Content {
    * Create blueprint of the menu's contents
    */
   createSections () {
-    this.sectionName('city')
-    this.text('City: ' + this.city.name)
-    this.text('Population: ' + this.city.population)
-    this.text('Yearly demand: ' + this.city.turnipDemand.yearDemand)
-    this.text('Demand supplied: ' + this.format(this.city.turnipDemand.collectedSupply))
-    this.text('Current turnip price: ' + this.city.turnipDemand.currentPrice())
-    this.button('Lopeta', this.gameEvents.finishGame, this.gameEvents)
-
     if (!this.owner.hasStateValue('selectedTile')) {
       return
     }
 
     var tile = this.owner.stateValue('selectedTile')
 
-    this.section('tile')
+    this.sectionName('tile')
     this.text('Ground type: ' + tile.tileType.name)
     this.text('X: ' + tile.x + ', Y: ' + tile.y)
     this.text('Flowers: ' + tile.flowers)
@@ -87,7 +79,7 @@ export default class SideMenuContent extends Content {
     for (let structureType of allowedStructures) {
       this.owner.changeButton(
         structureType.name,
-        1,
+        2,
         this.owner.wrapFunction(this.owner.addState, this.owner, 'structureType', structureType),
         this
       )

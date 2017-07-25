@@ -16,7 +16,8 @@ import EventController from '../controllers/events/EventController'
 import PurchaseManager from '../models/PurchaseManager'
 
 import TopBarContent from '../controllers/menucontrol/contents/TopBarContent'
-import SideMenuContent from '../controllers/menucontrol/contents/SideMenuContent'
+import TileContent from '../controllers/menucontrol/contents/TileContent'
+import CityContent from '../controllers/menucontrol/contents/CityContent'
 import BuildStructureContent from '../controllers/menucontrol/contents/BuildStructureContent'
 import SingleController from '../controllers/menucontrol/SingleController'
 import MulticontentController from '../controllers/menucontrol/MulticontentController'
@@ -185,7 +186,12 @@ export default class GameState {
       })
     })
 
-    this.menuContent = new SideMenuContent({
+    this.cityContent = new CityContent({
+      city: this.city,
+      gameEvents: this.gameEvents
+    })
+
+    this.tileContent = new TileContent({
       city: this.city,
       purchaseManager: this.purchaseManager,
       gameEvents: this.gameEvents
@@ -205,7 +211,7 @@ export default class GameState {
         buttonHeight: config.menuButtonHeight,
         buttonWidth: config.menuButtonWidth
       }),
-      contents: [this.menuContent, buildStructureController]
+      contents: [this.cityContent, this.tileContent, buildStructureController]
     })
   }
 

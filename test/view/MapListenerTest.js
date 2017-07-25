@@ -21,7 +21,8 @@ describe('MapListener tests', () => {
 
         return 'tile'
       },
-      addState: () => {}
+      addState: () => {},
+      setContent: () => {}
     }
 
     game = {
@@ -104,7 +105,7 @@ describe('MapListener tests', () => {
 
     var mockMenu = sinon.mock(menuController)
     mockMenu.expects('addState').once()
-    mockMenu.expects('reset').once()
+    mockMenu.expects('setContent').once()
 
     ml.update(pointerEvent)
 
