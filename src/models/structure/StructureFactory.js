@@ -100,34 +100,38 @@ export default class StructureFactory {
 
   buyLandForRefinery (tile, distance, tmpTile) {
     if (distance === 0 || tmpTile.structure === null) {
+      this.decreaseOwnedTiles(tmpTile)
+      this.setAssetForRefinery(tmpTile)
+      tmpTile.owner = tile.structure
+      tile.structure.ownedTiles.push(tmpTile)
+    }
+  }
+
+  decreaseOwnedTiles (tmpTile) {
+    if (tmpTile.owner !== null) {
       if (tmpTile.tileType.name === 'field') {
         tmpTile.owner.size--
         this.calculateFarmLand(tmpTile.owner)
       }
-      this.setAssetForRefinery(tile, tmpTile)
-      if (tmpTile.owner !== null) {
-        tmpTile.owner.ownedTiles.pop(tmpTile)
-      }
-      tmpTile.owner = tile.structure
-      tile.structure.ownedTiles.push(tmpTile)
+      tmpTile.owner.ownedTiles.pop(tmpTile)
     }
   }
 
   buyLandForProducer (tile, tmpTile) {
     if (tmpTile.owner === null) {
-      this.setAssetForProducer(tile, tmpTile)
+      this.setAssetForProducer(tmpTile)
       tmpTile.owner = tile.structure
       tile.structure.ownedTiles.push(tmpTile)
     }
   }
 
-  setAssetForRefinery (tile, tmpTile) {
+  setAssetForRefinery (tmpTile) {
     if (tmpTile.tileType.name !== 'water') {
       tmpTile.tileType = StaticTypes.tileTypes.industrial
     }
   }
 
-  setAssetForProducer (tile, tmpTile) {
+  setAssetForProducer (tmpTile) {
     if (tmpTile.tileType.name === 'grass') {
       tmpTile.tileType = StaticTypes.tileTypes.field
     }
