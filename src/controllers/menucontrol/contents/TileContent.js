@@ -9,11 +9,10 @@ export default class SideMenuContent extends Content {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor ({ city, purchaseManager, gameEvents }) {
+  constructor ({ purchaseManager, topBarController }) {
     super()
-    this.city = city
     this.purchaseManager = purchaseManager
-    this.gameEvents = gameEvents
+    this.topBarController = topBarController
 
     this.emptyFunction = () => {}
   }
@@ -68,6 +67,7 @@ export default class SideMenuContent extends Content {
       var fix = (structure => () => {
         structure.healthManager.fix()
         this.owner.redraw()
+        this.topBarController.redraw()
       })(structure)
       this.button('Repair', fix, this, 'emptyButton')
     } else if (structure.health.percent() < 1 && !this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
