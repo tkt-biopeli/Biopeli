@@ -4,7 +4,7 @@ import config from '../../../../config'
  * turnips a structure produces at given week
  */
 export default class PrimaryProducerDecorator {
-  constructor({ tile, producer }) {
+  constructor ({ tile, producer }) {
     this.tile = tile
     this.producer = producer
     this.ownedFarmLand = []

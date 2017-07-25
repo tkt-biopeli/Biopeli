@@ -13,7 +13,7 @@ export default class StructureFactory {
    * @param {GameTimer} gameTimer
    * @param {Player} player
    */
-  constructor({ gameTimer, eventController, player, map, tileFinder }) {
+  constructor ({ gameTimer, eventController, player, map, tileFinder }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
@@ -154,7 +154,7 @@ export default class StructureFactory {
 
   calculateSizeForRefinery (structure) {
     structure.ownedTiles.forEach(function (tmpTile) {
-      structure.producer.producer.producerHolders.length
+//      structure.producer.producer.producerHolders.length
     }, this)
   }
 

@@ -156,12 +156,15 @@ describe('StructureFactory tests', () => {
 
   it('decreaseOwnedTiles decreases the size of the owner structure', () =>{
     sfactory.setAssetForRefinery = setAssetSpy
+    var calcFarmSpy = sinon.spy()
+    sfactory.calculateFarmLand = calcFarmSpy
     var tmpTile = createTmpTile(null, {name: 'field'}, tile.structure, 0)
     tile.structure.ownedTiles.push(tmpTile)
     assert.equal(tile.structure.ownedTiles.length, 1)
     sfactory.decreaseOwnedTiles(tmpTile)
     assert.equal(tile.structure.size, 66)
     assert.equal(tile.structure.ownedTiles.length, 0)
+    assert(calcFarmSpy.calledWith(tmpTile.owner))
   })
 
   it('buyLandForProducer is functioning properly', () =>{
@@ -200,12 +203,15 @@ describe('StructureFactory tests', () => {
   })
 
   it('calculateSizeForProducer is functioning properly', () =>{
+    var calcFarmSpy = sinon.spy()
+    sfactory.calculateFarmLand = calcFarmSpy
     var fieldT = createTmpTile(null, {name: 'field'}, null, 0)
     var fooT = createTmpTile(null, {name: 'foo'}, null, 0)
     var owned = [fieldT, fooT, fieldT, fieldT, fooT]
     tile.structure.ownedTiles = owned
     sfactory.calculateSizeForProducer(tile.structure)
     assert.equal(tile.structure.size, 70)
+    assert(calcFarmSpy.calledWith(tile.structure))
   })
 
   var helperFunctionForInitPollutionTests = (pollution, distance, tmpTile) => {
