@@ -12,7 +12,7 @@ export default class MapView {
    * @param {number} param.viewWidthPx
    * @param {number} param.viewHeightPx
    */
-  constructor({ game, map, menuController, viewWidthPx, viewHeightPx }) {
+  constructor ({ game, map, menuController, viewWidthPx, viewHeightPx }) {
     this.game = game
     this.map = map
     this.menuController = menuController
@@ -143,7 +143,7 @@ export default class MapView {
     this.addHighlights(viewTile, pxCoords)
     viewTile.tileSprite.width = this.tileWidth
     viewTile.tileSprite.height = this.tileHeight
-    this.addToViewTexture(viewTile.tileSprite, pxCoords.x, pxCoords.y) 
+    this.addToViewTexture(viewTile.tileSprite, pxCoords.x, pxCoords.y)
   }
 
   /**
@@ -172,7 +172,7 @@ export default class MapView {
    * Helper for highlighting a tile
    */
   highlight (alpha, round, col) {
-    let corners = round == true ? 15 : 1
+    let corners = round ? 15 : 1
     let palette = new Map()
     palette.set('black', 0x000000)
     palette.set('blue', 0x1631f8)
@@ -193,8 +193,8 @@ export default class MapView {
   /**
    *  Helper for optional highlight background
    */
-  highlightBackground() {
-    let bg = game.make.sprite(0, 0, 'area')
+  highlightBackground () {
+    let bg = this.game.make.sprite(0, 0, 'area')
     bg.width = this.tileWidth
     bg.height = this.tileHeight
     bg.alpha = 0.2

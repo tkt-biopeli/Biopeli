@@ -4,7 +4,7 @@ import { createLine } from '../../logic/LinearFunction'
  * Refiner takes production from given type buildingsnear it and enchancts their production
  */
 export default class Refiner {
-  constructor({ zone, inputTypes, multiplier, radius }) {
+  constructor ({ zone, inputTypes, multiplier, radius }) {
     this.zone = zone
     this.inputTypes = inputTypes
     this.multiplier = multiplier
@@ -30,12 +30,11 @@ export default class Refiner {
   /**
    * Helper for produce method: before taking production check if some other refinery has claimed
    * the ownership of the producer
-   * @param {*} producerHolder 
+   * @param {*} producerHolder
    */
   verifyOwnership (producerHolder) {
     return producerHolder.producer.refinery === this
   }
-
 
   findProducers () {
     for (let capsule of this.zone) {
@@ -48,7 +47,6 @@ export default class Refiner {
           this.producerHolders.push({ distance: distance, producer: producer })
         }
       }
-
     }
   }
 
@@ -72,7 +70,7 @@ export default class Refiner {
 
   /**
    * Listens to new structures built by the user
-   * @param {*} tile 
+   * @param {*} tile
    */
   structureCreated (tile) {
     if (this.canRefineOutputOf(tile.structure)) {
