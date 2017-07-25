@@ -13,7 +13,6 @@ export default class Structure {
    * @param {string} param.name
    * @param {integer} param.size
    * @param {StructureType} param.structureType
-   * @param {integer} productionInput - ????
    * @param {integer} foundingYear
    * @param {function} produceFn
    */
@@ -23,7 +22,6 @@ export default class Structure {
     this.structureName = structureName
     this.size = size
     this.structureType = structureType
-    this.productionInput = 1
     this.foundingYear = foundingYear
     this.producer = producer
     this.cost = cost
