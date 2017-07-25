@@ -54,7 +54,7 @@ export default class StructureFactory {
       maxRuinTime: config.maxRuin,
       purchaseManager: this.purchaseManager,
       buildingCost: structureType.cost,
-      maxPrice: config.fixMaxMultiplier
+      priceMultiplier: config.fixMultiplier
     })
     manager.calculateNextRuin(this.gameTimer.currentTimeEvent)
 

@@ -187,6 +187,7 @@ export default class GameState {
 
     this.menuContent = new SideMenuContent({
       city: this.city,
+      purchaseManager: this.purchaseManager,
       gameEvents: this.gameEvents
     })
 

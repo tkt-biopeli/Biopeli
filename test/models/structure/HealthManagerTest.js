@@ -11,7 +11,8 @@ describe('Health manager tests', () => {
 
     health = {
       fill: sinon.spy(),
-      loseOne: sinon.spy()
+      loseOne: sinon.spy(),
+      percent: () => 1
     }
 
     purchaseManager = {
@@ -25,7 +26,7 @@ describe('Health manager tests', () => {
       maxRuinTime: max,
       minRuinTime: min,
       buildingCost: 5,
-      maxPrice: 1
+      priceMultiplier: 1
     })
   })
 
@@ -34,7 +35,7 @@ describe('Health manager tests', () => {
     assert.equal(min, manager.min)
     assert.equal(max - min, manager.difference)
     assert.equal(purchaseManager, manager.purchaseManager)
-    assert.equal(5, manager.buildingCost)
+    assert.equal(5, manager.maxCost)
     assert(manager.priceFunction != null)
   })
 
@@ -74,18 +75,14 @@ describe('Health manager tests', () => {
   })
 
   it('Fix works', ()=>{
-    manager.calculateNextRuin = sinon.spy()
-
     manager.fix()
 
-    assert.equal(1, manager.calculateNextRuin.callCount)
     assert.equal(1, health.fill.callCount)
 
     purchaseManager.purchase = () => false
 
     manager.fix()
 
-    assert.equal(1, manager.calculateNextRuin.callCount)
     assert.equal(1, health.fill.callCount)
   })
 

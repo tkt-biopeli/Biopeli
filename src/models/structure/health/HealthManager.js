@@ -1,15 +1,15 @@
 import { createCircle } from '../../logic/Functions'
 
 export default class HealthManager {
-  constructor ({ purchaseManager, health, minRuinTime, maxRuinTime, buildingCost, maxPrice }) {
+  constructor ({ purchaseManager, health, minRuinTime, maxRuinTime, buildingCost, priceMultiplier }) {
     this.purchaseManager = purchaseManager
 
     this.health = health
     this.min = minRuinTime
     this.difference = maxRuinTime - minRuinTime
 
-    this.buildingCost = buildingCost
-    this.priceFunction = createCircle(0, maxPrice, maxPrice, false)
+    this.maxCost = buildingCost * priceMultiplier
+    this.priceFunction = createCircle(0, 1, 1, false)
   }
 
   calculateNextRuin (timeEvent) {
@@ -26,11 +26,10 @@ export default class HealthManager {
   fix () {
     if (!this.purchaseManager.purchase(this.fixPrice())) return
     this.health.fill()
-    this.calculateNextRuin()
   }
 
   fixPrice () {
-    return this.priceFunction() * this.buildingCost
+    return Math.floor(this.priceFunction(1 - this.health.percent()) * this.maxCost)
   }
 
   rand () { return Math.random() }
