@@ -37,7 +37,9 @@ export default class GameTimerListener {
   countProductionFromStructures (structures, timerEvent) {
     var sum = 0
     for (let structure of structures) {
-      sum += structure.produce(timerEvent)
+      let amount = structure.produce(timerEvent)
+      console.log(structure.structureName + " " + amount)
+      sum += amount
     }
     return sum
   }

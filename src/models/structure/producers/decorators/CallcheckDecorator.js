@@ -1,10 +1,12 @@
 export default class CallcheckDecorator {
   constructor ({producer}) {
     this.producer = producer
+    this.refinery = null
+    this.refineryDistance = null
   }
 
   produce (timeEvent, ownerCall) {
-    if (this.owner != null && !ownerCall) {
+    if (this.refinery != null && !ownerCall) {
       return 0
     }
 

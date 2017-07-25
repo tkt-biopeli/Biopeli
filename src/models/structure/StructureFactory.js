@@ -57,7 +57,7 @@ export default class StructureFactory {
 
     this.calculateSize(tile.structure)
 
-    this.eventController.event('buildStructure', tile)
+    this.eventController.event('structureBuilt', tile)
   }
 
   /**

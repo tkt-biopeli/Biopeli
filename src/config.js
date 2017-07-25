@@ -27,7 +27,9 @@ export default {
   moveCosts: {
     grass: 1,
     water: 5,
-    forest: 2
+    forest: 2,
+    field: 1,
+    industrial: 1
   },
 
   // configurations for menu
@@ -59,7 +61,7 @@ export default {
   tweenCameraDuration: 500,
 
   // amount of time between time events
-  gameTimerInterval: 1000,
+  gameTimerInterval: 600,
 
   // configurations for city
   cityInitialPopulation: 500,

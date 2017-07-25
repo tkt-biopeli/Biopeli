@@ -46,11 +46,12 @@ const structureTypes = {
     name: 'mill',
     asset: 'mill',
     refinery: true,
-    buysFrom: [],
+    buysFrom: ['wheat farm'],
     cost: 3000,
     multiplier: 10,
     pollution: 1,
-    radiusForTileOwnership: 1
+    radiusForTileOwnership: 1,
+    reach: 5
   }
 }
 
