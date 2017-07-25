@@ -3,7 +3,7 @@ const sinon = require('sinon')
 import HealthManager from '../../../src/models/structure/health/HealthManager'
 
 describe('Health manager tests', () => {
-  var manager, health, min, max
+  var manager, health, purchaseManager, min, max
 
   beforeEach(()=>{
     min = 1
@@ -14,10 +14,18 @@ describe('Health manager tests', () => {
       loseOne: sinon.spy()
     }
 
+    purchaseManager = {
+      purchase: () => true,
+      hasCash: () => true
+    }
+
     manager = new HealthManager({
+      purchaseManager: purchaseManager,
       health: health,
       maxRuinTime: max,
-      minRuinTime: min
+      minRuinTime: min,
+      buildingCost: 5,
+      maxPrice: 1
     })
   })
 
@@ -64,6 +72,13 @@ describe('Health manager tests', () => {
 
   it('Fix works', ()=>{
     manager.calculateNextRuin = sinon.spy()
+
+    manager.fix()
+
+    assert.equal(1, manager.calculateNextRuin.callCount)
+    assert.equal(1, health.fill.callCount)
+
+    purchaseManager.purchase = () => false
 
     manager.fix()
 

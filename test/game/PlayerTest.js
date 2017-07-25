@@ -41,10 +41,4 @@ describe('Player tests', function () {
     p.addPoints(99)
     assert.equal(300, p.points)
   })
-
-  it('Check money works', () => {
-    assert.equal(p.enoughCashFor(2), false)
-    assert.equal(p.enoughCashFor(1), true)
-    assert.equal(p.enoughCashFor(0), true)
-  })
 })

@@ -42,7 +42,12 @@ export default class AnimatedBar {
     bitmapBar.ctx.rect(0, 0, this.width, this.height)
     bitmapBar.ctx.fill()
     this.bar = this.group.create(this.x, this.y, bitmapBar, null, this.group)
-    this.bar.width = 0
+
+    if (this.vertical) {
+      this.bar.height = this.height * this.percent
+    } else {
+      this.bar.width = this.width * this.percent
+    }
   }
 
   /**
@@ -55,7 +60,7 @@ export default class AnimatedBar {
       let inPixels = value * this.width <= this.width ? value * this.width : this.width
       this.game.add.tween(this.bar).to({ width: inPixels }, this.duration, 'Linear', true)
     } else {
-      let inPixels = value * this.height
+      let inPixels = value * this.height <= this.height ? value * this.height : this.height
       this.game.add.tween(this.bar).to({ height: inPixels }, this.duration, 'Linear', true)
     }
   }

@@ -1,4 +1,4 @@
-import { createLine } from '../../logic/LinearFunction'
+import { createLine } from '../../logic/Functions'
 
 /**
  * Refiner takes production from given type buildingsnear it and enchancts their production

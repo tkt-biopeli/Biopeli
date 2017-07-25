@@ -26,7 +26,7 @@ export default class GameTimerListener {
     this.doTransaction(producedTurnips, timerEvent)
 
     this.checkBuildingRuining(timerEvent)
-    
+
     this.redrawControllers()
     // is game over?
     this.gameEvents.isGameOver(timerEvent)
@@ -46,7 +46,7 @@ export default class GameTimerListener {
   }
 
   checkBuildingRuining (timerEvent) {
-    for(let structure of this.player.structures) {
+    for (let structure of this.player.structures) {
       structure.healthManager.checkRuin(timerEvent)
     }
   }

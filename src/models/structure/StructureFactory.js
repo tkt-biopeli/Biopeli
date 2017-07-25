@@ -17,12 +17,13 @@ export default class StructureFactory {
    * @param {GameTimer} gameTimer
    * @param {Player} player
    */
-  constructor ({ gameTimer, eventController, player, map, tileFinder }) {
+  constructor ({ purchaseManager, gameTimer, eventController, player, map, tileFinder }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
 
     this.eventController = eventController
+    this.purchaseManager = purchaseManager
 
     this.namer = new StructureNameGenerator({
       frontAdjectives: StructureNameParts[0],
@@ -44,10 +45,17 @@ export default class StructureFactory {
    * @param {StructureType} structureType
    */
   buildBuilding (tile, structureType) {
-    if (!this.checkMoney(structureType)) return
+    if (!this.purchaseManager.purchase(structureType.cost)) return
 
-    var health = new StructureHealth({maxHealth: structureType.health})
-    var manager = new HealthManager({health: health, minRuinTime: config.minRuin, maxRuinTime: config.maxRuin})
+    var health = new StructureHealth({ maxHealth: structureType.health })
+    var manager = new HealthManager({
+      health: health,
+      minRuinTime: config.minRuin,
+      maxRuinTime: config.maxRuin,
+      purchaseManager: this.purchaseManager,
+      buildingCost: structureType.cost,
+      maxPrice: config.fixMaxMultiplier
+    })
     manager.calculateNextRuin(this.gameTimer.currentTimeEvent)
 
     tile.structure = new Structure({
@@ -69,19 +77,6 @@ export default class StructureFactory {
     this.calculateSize(tile.structure)
 
     this.eventController.event('buildStructure', tile)
-  }
-
-  /**
-   * Checks if the player has enough money for a given type of structure
-   * decreases players cash if true
-   * @param {StructureType} structureType
-   */
-  checkMoney (structureType) {
-    if (!this.player.enoughCashFor(structureType.cost)) {
-      return false
-    }
-    this.player.cash -= structureType.cost
-    return true
   }
 
   /**

@@ -13,6 +13,7 @@ import Timer from '../view/Timer'
 import GameTimerListener from '../models/GameTimerListener'
 import TileFinder from '../models/map/TileFinder'
 import EventController from '../controllers/events/EventController'
+import PurchaseManager from '../models/PurchaseManager'
 
 import TopBarContent from '../controllers/menucontrol/contents/TopBarContent'
 import SideMenuContent from '../controllers/menucontrol/contents/SideMenuContent'
@@ -99,6 +100,7 @@ export default class GameState {
     })
 
     this.player = new Player({startMoney: startMoney})
+    this.purchaseManager = new PurchaseManager({player: this.player})
     this.city = new City({
       name: cityName,
       startPopulation: config.cityInitialPopulation,
@@ -119,6 +121,7 @@ export default class GameState {
       gameTimer: this.gameTimer,
       player: this.player,
       eventController: this.eventController,
+      purchaseManager: this.purchaseManager,
       map: this.map
     })
 
@@ -188,7 +191,7 @@ export default class GameState {
     })
 
     var buildStructureController = new BuildStructureContent({
-      player: this.player,
+      purchaseManager: this.purchaseManager,
       structureFactory: this.structureFactory
     })
 

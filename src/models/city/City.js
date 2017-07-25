@@ -1,5 +1,5 @@
 import DemandCalculator from './DemandCalculator'
-import {createLine} from '../logic/LinearFunction'
+import {createLine} from '../logic/Functions'
 
  /**
   * Tracks the demand and population of the city

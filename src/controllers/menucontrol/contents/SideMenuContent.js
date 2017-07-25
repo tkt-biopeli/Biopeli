@@ -9,9 +9,10 @@ export default class SideMenuContent extends Content {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor ({ city, gameEvents }) {
+  constructor ({ city, purchaseManager, gameEvents }) {
     super()
     this.city = city
+    this.purchaseManager = purchaseManager
     this.gameEvents = gameEvents
   }
 
@@ -55,11 +56,14 @@ export default class SideMenuContent extends Content {
 
       this.section('ruin')
       this.text('Structure health: ' + structure.health.toString())
-      this.animatedBar(200, 50, true, structure.health.percent())
-      if (structure.health.percent() < 1) {
-        this.button('Repair: ', structure.healthManager.fix, structure.healthManager, 'emptyButton')
+      this.animatedBar(200, 50, false, structure.health.percent())
+      this.text('Fix cost: ' + structure.healthManager.fixPrice())
+      if (structure.health.percent() < 1 && this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
+        this.button('Repair', structure.healthManager.fix, structure.healthManager, 'emptyButton')
+      } else if (structure.health.percent() < 1 && !this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
+        this.button('Not enough money', () => { }, null, 'unusableButton')
       } else {
-        this.button('Perfect condition', () => {}, null, 'unusableButton')
+        this.button('Perfect condition', () => { }, null, 'unusableButton')
       }
     }
 

@@ -3,7 +3,7 @@ const sinon = require("sinon")
 import StructureFactory from '../../../src/models/structure/StructureFactory'
 
 describe('StructureFactory tests', () => {
-  var sfactory, gameTimer, player, addStructureSpy, map, eventController
+  var sfactory, gameTimer, player, addStructureSpy, map, eventController, checkMoneyStub
 
   beforeEach(() => {
     map = {
@@ -25,12 +25,15 @@ describe('StructureFactory tests', () => {
     eventController = {
       event: sinon.spy()
     }
+
+    checkMoneyStub = {purchase: () => true}
     
     sfactory = new StructureFactory({
       gameTimer: gameTimer,
       player: player,
       map: map,
-      eventController: eventController
+      eventController: eventController,
+      purchaseManager: checkMoneyStub
     })
 
     sfactory.namer = {
@@ -63,26 +66,9 @@ describe('StructureFactory tests', () => {
   it('Build building does not do anything if checkMoney returns false', () => {
     var tile = { structure: undefined, flowers: 0 }
     var structureType = {}
-    var checkMoneyStub = sinon.stub()
-    checkMoneyStub.withArgs(structureType).returns(false)
+    checkMoneyStub.purchase = () => false
 
-    sfactory.checkMoney = checkMoneyStub
     sfactory.buildBuilding(tile, structureType)
     assert.equal(tile.structure, undefined)
-  })
-
-  it('Money checking works', () =>{
-    var enoughCashForStub = sinon.stub()
-    player.enoughCashFor = enoughCashForStub
-    player.cash = 211
-    enoughCashForStub.withArgs(78).returns(false)
-    enoughCashForStub.withArgs(97).returns(true)
-
-    var st = {cost: 78}
-    assert.equal(sfactory.checkMoney(st), false)
-    assert.equal(player.cash, 211)
-    st = {cost: 97}
-    assert(sfactory.checkMoney(st), true)
-    assert.equal(player.cash, 114)
   })
 })
