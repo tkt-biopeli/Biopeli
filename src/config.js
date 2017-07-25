@@ -57,11 +57,11 @@ export default {
   },
 
   // configurations for camera
-  cameraSpeed: 400,
+  cameraSpeed: 200,
   tweenCameraDuration: 500,
 
   // amount of time between time events
-  gameTimerInterval: 600,
+  gameTimerInterval: 1000,
 
   // configurations for city
   cityInitialPopulation: 500,
