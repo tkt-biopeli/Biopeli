@@ -79,6 +79,11 @@ export default class GamestateChecker {
     assert.equal(pollution, tile.flowers)
   }
 
+  checkStructureOwnedTiles(x, y, expectedValue) {
+    var s = this.getTileModel(x, y).structure
+    assert.equal(expectedValue, s.ownedTiles.length)
+  }
+
   /**
    * Checks all information of tile in given screen coordinates
    * 
