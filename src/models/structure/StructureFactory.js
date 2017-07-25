@@ -13,11 +13,11 @@ export default class StructureFactory {
    * @param {GameTimer} gameTimer
    * @param {Player} player
    */
-  constructor ({ gameTimer, player, map, tileFinder }) {
+  constructor ({ gameTimer, eventController, player, map, tileFinder }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
-
+    this.eventController = eventController
     this.namer = new StructureNameGenerator({
       frontAdjectives: StructureNameParts[0],
       names: StructureNameParts[1],
@@ -26,7 +26,10 @@ export default class StructureFactory {
       random: utils.randomNoBounds,
       randomWithBounds: utils.randomWithBounds
     })
-    this.producerFactory = new ProducerFactory({tileFinder: tileFinder})
+    this.producerFactory = new ProducerFactory({
+      tileFinder: tileFinder,
+      eventController: eventController
+    })
   }
 
   /**
@@ -49,7 +52,10 @@ export default class StructureFactory {
     this.player.addStructure(tile.structure)
     this.buyLand(tile)
     this.createInitialPollution(structureType.pollution, tile)
+
     this.calculateSize(tile.structure)
+
+    this.eventController.event('buildStructure', tile)
   }
 
   /**
@@ -74,7 +80,8 @@ export default class StructureFactory {
     let tiles = this.map.getTilesInRadius(3, tile)
     for (var [distance, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
-        tmpTile.flowers -= (pollution - distance)
+        let amount = pollution - distance > 0 ? pollution - distance : 0
+        tmpTile.flowers -= amount
         if (tmpTile.flowers < 1) { tmpTile.flowers = 1 }
       }, this)
     }
@@ -95,31 +102,37 @@ export default class StructureFactory {
 
   buyLandForRefinery (tile, distance, tmpTile) {
     if (distance === 0 || tmpTile.structure === null) {
-      this.setAssetForRefinery(tile, tmpTile)
-      if (tmpTile.owner !== null) {
-        tmpTile.owner.ownedTiles.pop(tmpTile)
-        tmpTile.owner.size--
-      }
+      this.decreaseOwnedTiles(tmpTile)
+      this.setAssetForRefinery(tmpTile)
       tmpTile.owner = tile.structure
       tile.structure.ownedTiles.push(tmpTile)
+    }
+  }
+
+  decreaseOwnedTiles (tmpTile) {
+    if (tmpTile.owner !== null) {
+      if (tmpTile.tileType.name === 'field') {
+        tmpTile.owner.size--
+      }
+      tmpTile.owner.ownedTiles.pop(tmpTile)
     }
   }
 
   buyLandForProducer (tile, tmpTile) {
     if (tmpTile.owner === null) {
-      this.setAssetForProducer(tile, tmpTile)
+      this.setAssetForProducer(tmpTile)
       tmpTile.owner = tile.structure
       tile.structure.ownedTiles.push(tmpTile)
     }
   }
 
-  setAssetForRefinery (tile, tmpTile) {
+  setAssetForRefinery (tmpTile) {
     if (tmpTile.tileType.name !== 'water') {
       tmpTile.tileType = StaticTypes.tileTypes.industrial
     }
   }
 
-  setAssetForProducer (tile, tmpTile) {
+  setAssetForProducer (tmpTile) {
     if (tmpTile.tileType.name === 'grass') {
       tmpTile.tileType = StaticTypes.tileTypes.field
     }
