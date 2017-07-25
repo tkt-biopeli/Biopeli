@@ -28,7 +28,7 @@ export default class Structure {
     this.size = size
     this.structureType = structureType
     this.foundingYear = foundingYear
-    this.cost = cost
+
     this.ownedTiles = []
     this.radiusForTileOwnership = structureType.radiusForTileOwnership
   }
@@ -48,17 +48,8 @@ export default class Structure {
     return this.structureType.asset
   }
 
-  /**
-   * (Currently not in use)
-   * Calculates and returns the value of the structure's production efficiency
-   * ie. number of production units per period
-   */
-  calculateProductionEfficiency () {
-    // production efficiency is based on the potential of the tile, and size and input of structure
-    // var value = this.productionInput * this.size * this.tile.potential
-    // Fixed turnipYield for now
-    var value = this.structureType.turnipYield
-    return value
+  turnipProduction () {
+    return this.lastProduce
   }
 
   /**
@@ -67,6 +58,7 @@ export default class Structure {
    * @return {number} - Turnips produced
    */
   produce (timeEvent) {
-    return this.producer === undefined ? 0 : this.producer.produce(timeEvent)
+    this.lastProduce = this.producer === undefined ? 0 : this.producer.produce(timeEvent)
+    return this.lastProduce
   }
 }

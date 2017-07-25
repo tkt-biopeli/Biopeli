@@ -193,7 +193,8 @@ export default class GameState {
 
     this.tileContent = new TileContent({
       topBarController: this.topBarController,
-      purchaseManager: this.purchaseManager
+      purchaseManager: this.purchaseManager,
+      demandFunction: this.city.turnipDemand
     })
 
     var buildStructureController = new BuildStructureContent({

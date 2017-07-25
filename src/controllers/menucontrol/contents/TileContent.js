@@ -9,8 +9,9 @@ export default class SideMenuContent extends Content {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor ({ purchaseManager, topBarController }) {
+  constructor ({ demandFunction, purchaseManager, topBarController }) {
     super()
+    this.demandFunction = demandFunction
     this.purchaseManager = purchaseManager
     this.topBarController = topBarController
 
@@ -54,8 +55,10 @@ export default class SideMenuContent extends Content {
     this.text('Structure: ' + structure.structureType.name)
     this.text('Founding year: ' + structure.foundingYear)
     this.text('Size: ' + structure.size)
-    this.text('Production input: ' + structure.productionInput)
-    this.text('Production per time: ' + structure.calculateProductionEfficiency())
+
+    var turnipProduction = structure.turnipProduction()
+    this.text('Production per time: ' + this.format(turnipProduction, 2))
+    this.text('Money per time: ' + this.format(this.demandFunction.pay(turnipProduction), 2))
   }
 
   structureRuining (structure) {
