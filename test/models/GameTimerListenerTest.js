@@ -81,6 +81,15 @@ describe('Game timer listener tests', () => {
     assert.equal(21, result)
   })
 
+  it('Ruining calls ruinign functions', ()=>{
+    var str = {healthManager: {checkRuin: sinon.spy()}}
+    player.structures = [str, str, str]
+
+    gtListener.checkBuildingRuining(1)
+    assert.equal(3, str.healthManager.checkRuin.callCount)
+    assert(str.healthManager.checkRuin.calledWith(1))
+  })
+
   it('doTransaction works correctly', () => {
     gtListener.doTransaction(6, {endOfTheYear: true})
     assert(countPointsSpy.calledWith(1))
