@@ -27,6 +27,11 @@ export default class Refiner {
     return Math.round(productionSum * this.multiplier)
   }
 
+  /**
+   * Helper for produce method: before taking production check if some other refinery has claimed
+   * the ownership of the producer
+   * @param {*} producerHolder 
+   */
   verifyOwnership (producerHolder) {
     return producerHolder.producer.refinery === this
   }
@@ -65,6 +70,10 @@ export default class Refiner {
     }
   }
 
+  /**
+   * Listens to new structures built by the user
+   * @param {*} tile 
+   */
   structureCreated (tile) {
     if (this.canRefineOutputOf(tile.structure)) {
       let match = this.isInZone(tile)

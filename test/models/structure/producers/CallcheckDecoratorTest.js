@@ -20,7 +20,7 @@ describe('Callcheck decorator tests', () => {
 
     assert.equal(1, inproducer.produce.callCount)
 
-    producer.owner = 4
+    producer.refinery = 4
     producer.produce()
 
     assert.equal(1, inproducer.produce.callCount)
