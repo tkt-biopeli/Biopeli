@@ -7,9 +7,14 @@ export default class PrimaryProducerDecorator {
   constructor ({ tile, producer }) {
     this.tile = tile
     this.producer = producer
+    this.ownedFarmLand = []
   }
 
   produce (timeEvent) {
-    return this.producer.produce(timeEvent) * this.tile.flowers / config.maxFlowers
+    var value = 0
+    this.ownedFarmLand.forEach(function (tile) {
+      value += tile.flowers / config.maxFlowers
+    }, this)
+    return this.producer.produce(timeEvent) * value
   }
 }

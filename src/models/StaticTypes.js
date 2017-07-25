@@ -18,7 +18,7 @@ const structureTypes = {
     health: 6,
     harvestingWeeks: new Set(['8.1']),
     continuousProduction: false,
-    turnipYield: 25,
+    turnipYield: 1.8,
     cost: 10000,
     pollution: 4,
     radiusForTileOwnership: 2
@@ -29,7 +29,7 @@ const structureTypes = {
     health: 6,
     harvestingWeeks: new Set(),
     continuousProduction: true,
-    turnipYield: 35,
+    turnipYield: 2.5,
     cost: 15000,
     pollution: 5,
     radiusForTileOwnership: 2
@@ -40,7 +40,7 @@ const structureTypes = {
     health: 4,
     harvestingWeeks: new Set(),
     continuousProduction: true,
-    turnipYield: 20,
+    turnipYield: 1.2,
     cost: 10000,
     pollution: 3,
     radiusForTileOwnership: 2
@@ -53,8 +53,9 @@ const structureTypes = {
     buysFrom: [],
     cost: 3000,
     multiplier: 10,
-    pollution: 1,
-    radiusForTileOwnership: 1
+    pollution: 2,
+    radiusForTileOwnership: 1,
+    reach: 5
   }
 }
 

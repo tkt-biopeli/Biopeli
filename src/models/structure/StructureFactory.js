@@ -21,7 +21,6 @@ export default class StructureFactory {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
-
     this.eventController = eventController
     this.purchaseManager = purchaseManager
 
@@ -73,9 +72,7 @@ export default class StructureFactory {
     this.player.addStructure(tile.structure)
     this.buyLand(tile)
     this.createInitialPollution(structureType.pollution, tile)
-
     this.calculateSize(tile.structure)
-
     this.eventController.event('buildStructure', tile)
   }
 
@@ -110,10 +107,13 @@ export default class StructureFactory {
 
   buyLandForRefinery (tile, distance, tmpTile) {
     if (distance === 0 || tmpTile.structure === null) {
+      if (tmpTile.tileType.name === 'field') {
+        tmpTile.owner.size--
+        this.calculateFarmLand(tmpTile.owner)
+      }
       this.setAssetForRefinery(tile, tmpTile)
       if (tmpTile.owner !== null) {
         tmpTile.owner.ownedTiles.pop(tmpTile)
-        tmpTile.owner.size--
       }
       tmpTile.owner = tile.structure
       tile.structure.ownedTiles.push(tmpTile)
@@ -152,11 +152,18 @@ export default class StructureFactory {
     structure.ownedTiles.forEach(function (tmpTile) {
       if (tmpTile.tileType.name === 'field') { structure.size++ }
     }, this)
+    this.calculateFarmLand(structure)
   }
 
   calculateSizeForRefinery (structure) {
     structure.ownedTiles.forEach(function (tmpTile) {
-      // structure.structureType.producerHolders.length
+      // structure.producer.producer.producerHolders.length
+    }, this)
+  }
+
+  calculateFarmLand (structure) {
+    structure.ownedTiles.forEach(function (tmpTile) {
+      structure.producer.producer.ownedFarmLand.push(tmpTile)
     }, this)
   }
 }
