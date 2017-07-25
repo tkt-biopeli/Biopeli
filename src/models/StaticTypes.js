@@ -50,7 +50,7 @@ const structureTypes = {
     asset: 'mill',
     health: 20,
     refinery: true,
-    buysFrom: [],
+    buysFrom: ['wheat farm'],
     cost: 20000,
     multiplier: 2,
     pollution: 2,
