@@ -163,8 +163,8 @@ export default class MapView {
 
   highlightZone(tile) {
     tile.structure.producer.producer.zone.forEach(function (tmp) {
-      console.log(tmp.tile.x)
-      this.addToViewTexture(this.highlight(), tmp.tile.x, tmp.tile.y)
+      console.log(tmp.tile.x + "    " + tmp.tile.y)
+      this.addToViewTexture(this.highlight(), tmp.tile.x * this.tileWidth, tmp.tile.y * this.tileHeight)
     }, this)
   }
 }
