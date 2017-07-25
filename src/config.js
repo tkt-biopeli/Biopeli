@@ -16,7 +16,7 @@ export default {
   tileWidth: 64,
   tileHeight: 64,
 
-  minRuin: 8, // minimum time between two ruining events
+  minRuin: 4, // minimum time between two ruining events
   maxRuin: 48, // maxium time between two ruining events
   fixMultiplier: 2,
 
@@ -67,9 +67,9 @@ export default {
 
   // configurations for city
   cityInitialPopulation: 500,
-  cityDemandMultiplier: 2,
+  cityDemandMultiplier: 4,
   cityDemandRandomVariance: 0.1,
-  startTurnipPrice: 20,
+  startTurnipPrice: 6,
   populationChangeAt100: 1.5,
   populationChangeAt200: 2.5,
 
