@@ -14,6 +14,8 @@ export default class SideMenuContent extends Content {
     this.city = city
     this.purchaseManager = purchaseManager
     this.gameEvents = gameEvents
+
+    this.emptyFunction = () => {}
   }
 
   /**
@@ -63,11 +65,15 @@ export default class SideMenuContent extends Content {
     this.animatedBar(200, 50, false, structure.health.percent())
     this.text('Fix cost: ' + structure.healthManager.fixPrice())
     if (structure.health.percent() < 1 && this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
-      this.button('Repair', structure.healthManager.fix, structure.healthManager, 'emptyButton')
+      var fix = (structure => () => {
+        structure.healthManager.fix()
+        this.owner.redraw()
+      })(structure)
+      this.button('Repair', fix, this, 'emptyButton')
     } else if (structure.health.percent() < 1 && !this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
-      this.button('Not enough money', () => { }, null, 'unusableButton')
+      this.button('Not enough money', this.emptyFunction, null, 'unusableButton')
     } else {
-      this.button('Perfect condition', () => { }, null, 'unusableButton')
+      this.button('Perfect condition', this.emptyFunction, null, 'unusableButton')
     }
   }
 
