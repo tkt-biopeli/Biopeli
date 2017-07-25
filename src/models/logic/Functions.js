@@ -4,7 +4,9 @@ const LinearFunction = (multiplier, constantAddition) =>
 const ConstantFunction = constant => () => constant
 
 const Circle = (xo, yo, radius, mult) => x =>
-  yo + mult * Math.sqrt(radius * radius - (x - xo) * (x - xo))
+  x >= -radius + xo && x <= radius + xo
+    ? yo + mult * Math.sqrt(radius * radius - (x - xo) * (x - xo))
+    : 0
 
 /**
  * Creates linear function that goes through given points

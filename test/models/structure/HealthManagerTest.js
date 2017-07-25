@@ -33,6 +33,9 @@ describe('Health manager tests', () => {
     assert.equal(health, manager.health)
     assert.equal(min, manager.min)
     assert.equal(max - min, manager.difference)
+    assert.equal(purchaseManager, manager.purchaseManager)
+    assert.equal(5, manager.buildingCost)
+    assert(manager.priceFunction != null)
   })
 
   it('Next ruining is calculated correctly', ()=>{
@@ -84,5 +87,10 @@ describe('Health manager tests', () => {
 
     assert.equal(1, manager.calculateNextRuin.callCount)
     assert.equal(1, health.fill.callCount)
+  })
+
+  it('Fix price works', ()=>{
+    manager.priceFunction = () => 1
+    assert.equal(5, manager.fixPrice())
   })
 })
