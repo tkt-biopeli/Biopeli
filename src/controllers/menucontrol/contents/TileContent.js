@@ -25,7 +25,18 @@ export default class SideMenuContent extends Content {
     }
 
     var tile = this.owner.stateValue('selectedTile')
+    this.tileInformation(tile)
 
+    if (tile.structure != null) {
+      var structure = tile.structure
+      this.structureInformation(structure)
+      this.structureRuining(structure)
+    } else {
+      this.createBuildingButtons(tile)
+    }
+  }
+
+  tileInformation (tile) {
     this.sectionName('tile')
     this.text('Ground type: ' + tile.tileType.name)
     this.text('X: ' + tile.x + ', Y: ' + tile.y)
@@ -33,47 +44,36 @@ export default class SideMenuContent extends Content {
     if (tile.owner != null) {
       this.text('Land owner: ' + tile.owner.ownerName)
     }
-
-    if (tile.structure != null) {
-      var structure = tile.structure
-
-      this.section('structure')
-      this.text('"' + structure.ownerName + '"')
-      this.text('"' + structure.structureName + '"')
-      this.text('Structure: ' + structure.structureType.name)
-      this.text('Founding year: ' + structure.foundingYear)
-      this.text('Size: ' + structure.size)
-      this.text('Production input: ' + structure.productionInput)
-      this.text('Production per time: ' + structure.calculateProductionEfficiency())
-
-      this.section('ruin')
-      this.text('Structure health: ' + structure.health.toString())
-      this.animatedBar(200, 50, false, structure.health.percent())
-      this.text('Fix cost: ' + structure.healthManager.fixPrice())
-      if (structure.health.percent() < 1 && this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
-        this.button('Repair', structure.healthManager.fix, structure.healthManager, 'emptyButton')
-      } else if (structure.health.percent() < 1 && !this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
-        this.button('Not enough money', () => { }, null, 'unusableButton')
-      } else {
-        this.button('Perfect condition', () => { }, null, 'unusableButton')
-      }
-    }
-
-    this.tileActions(tile)
   }
 
-  tileActions (tile) {
-    if (tile == null) {
-      return
-    }
+  structureInformation (structure) {
+    this.section('structure')
+    this.text('"' + structure.ownerName + '"')
+    this.text('"' + structure.structureName + '"')
+    this.text('Structure: ' + structure.structureType.name)
+    this.text('Founding year: ' + structure.foundingYear)
+    this.text('Size: ' + structure.size)
+    this.text('Production input: ' + structure.productionInput)
+    this.text('Production per time: ' + structure.calculateProductionEfficiency())
+  }
 
-    if (tile.structure == null) {
-      this.section('actions')
-      this.buttonActionsForTile(tile)
+  structureRuining (structure) {
+    this.section('ruin')
+    this.text('Structure health: ' + structure.health.toString())
+    this.animatedBar(200, 50, false, structure.health.percent())
+    this.text('Fix cost: ' + structure.healthManager.fixPrice())
+    if (structure.health.percent() < 1 && this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
+      this.button('Repair', structure.healthManager.fix, structure.healthManager, 'emptyButton')
+    } else if (structure.health.percent() < 1 && !this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
+      this.button('Not enough money', () => { }, null, 'unusableButton')
+    } else {
+      this.button('Perfect condition', () => { }, null, 'unusableButton')
     }
   }
 
-  buttonActionsForTile (tile) {
+  createBuildingButtons (tile) {
+    this.section('actions')
+
     var allowedStructures = tile.tileType.allowedStructures
 
     for (let structureType of allowedStructures) {
