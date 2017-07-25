@@ -134,10 +134,6 @@ export default class MapView {
   highlightSelectedTile (tile, pxCoords) {
     if (tile === this.menuController.stateValue('selectedTile')) {
       this.addToViewTexture(this.highlight(), pxCoords.x, pxCoords.y)
-      if (tile.structure !== null && tile.structure.structureType.refinery) {
-        this.highlightZone(tile)
-        this.highlightStructuresOwnedByRefinery(tile)
-      }
     }
   }
 
@@ -150,21 +146,5 @@ export default class MapView {
     highlight.drawRoundedRect(0, 0, this.tileWidth, this.tileHeight, 9)
     highlight.endFill()
     return highlight
-  }
-
-  /**
-   * Highlight zone of refiner
-   */
-  highlightStructuresOwnedByRefinery (tile) {
-    tile.structure.producer.producer.producerHolders.forEach(function (tmpTile) {
-      this.addToViewTexture(this.highlight(), tmpTile.x, tmpTile.y)
-    }, this)
-  }
-
-  highlightZone(tile) {
-    tile.structure.producer.producer.zone.forEach(function (tmp) {
-      console.log(tmp.tile.x + "    " + tmp.tile.y)
-      this.addToViewTexture(this.highlight(), tmp.tile.x * this.tileWidth, tmp.tile.y * this.tileHeight)
-    }, this)
   }
 }
