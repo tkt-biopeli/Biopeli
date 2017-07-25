@@ -73,7 +73,8 @@ export default class StructureFactory {
     this.buyLand(tile)
     this.createInitialPollution(structureType.pollution, tile)
     this.calculateSize(tile.structure)
-    this.eventController.event('buildStructure', tile)
+
+    this.eventController.event('structureBuilt', tile)
   }
 
   /**

@@ -2,10 +2,12 @@ export default class AllDecorator {
   constructor ({producer, tile}) {
     this.producer = producer
     this.tile = tile
+    this.refinery = null
+    this.refineryDistance = null
   }
 
   produce (timeEvent, ownerCall) {
-    if (this.owner != null && !ownerCall) {
+    if (this.refinery != null && !ownerCall) {
       return 0
     }
 

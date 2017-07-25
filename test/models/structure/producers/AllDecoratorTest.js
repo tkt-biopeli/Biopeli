@@ -25,7 +25,7 @@ describe('AllDecorator tests', () => {
 
     assert.equal(1, p.produce.callCount)
 
-    producer.owner = 4
+    producer.refinery = 4
     producer.produce()
 
     assert.equal(1, p.produce.callCount)

@@ -56,4 +56,10 @@ export default class ViewTile {
     daisies.frame = 10 - this.modelTile.flowers
     return this.tileSprite.addChild(daisies)
   }
+
+  addHighlight (toAdd) {
+    toAdd.width = this.tileSprite.width
+    toAdd.height = this.tileSprite.height
+    this.tileSprite.addChild(toAdd)
+  }
 }
