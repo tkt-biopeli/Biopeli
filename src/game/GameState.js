@@ -123,7 +123,8 @@ export default class GameState {
       player: this.player,
       eventController: this.eventController,
       purchaseManager: this.purchaseManager,
-      map: this.map
+      map: this.map,
+      ruinSettings: config.ruinSettings
     })
 
     this.gameEvents = new GameEvents({

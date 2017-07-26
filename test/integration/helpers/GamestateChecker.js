@@ -218,4 +218,13 @@ export default class GamestateChecker {
     assert.equal(wantedAmount, mapgen.forestnoise.callCount)
     assert.equal(wantedAmount, mapgen.groundnoise.callCount)
   }
+
+  checkStructureRuinAmount(x, y, wantedHealth) {
+    var tile = this.getTileModel(x, y)
+    assert(tile.structure != null)
+
+    var health = tile.structure.health
+
+    assert.equal(wantedHealth, health.currentHealth)
+  }
 }

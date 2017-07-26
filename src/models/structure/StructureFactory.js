@@ -6,7 +6,6 @@ import ProducerFactory from './ProducerFactory'
 import StructureNameGenerator from '../namegeneration/StructureNameGenerator'
 import StructureNameParts from '../namegeneration/StructureNameParts'
 import utils from '../../utils'
-import config from '../../config'
 import StaticTypes from '../StaticTypes'
 
 /**
@@ -17,7 +16,7 @@ export default class StructureFactory {
    * @param {GameTimer} gameTimer
    * @param {Player} player
    */
-  constructor ({ purchaseManager, gameTimer, eventController, player, map, tileFinder }) {
+  constructor ({ purchaseManager, gameTimer, eventController, player, map, tileFinder, ruinSettings }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
@@ -36,6 +35,10 @@ export default class StructureFactory {
       tileFinder: tileFinder,
       eventController: eventController
     })
+
+    this.minRuin = ruinSettings.minRuin
+    this.maxRuin = ruinSettings.maxRuin
+    this.priceMultiplier = ruinSettings.fixMultiplier
   }
 
   /**
@@ -49,11 +52,11 @@ export default class StructureFactory {
     var health = new StructureHealth({ maxHealth: structureType.health })
     var manager = new HealthManager({
       health: health,
-      minRuinTime: config.minRuin,
-      maxRuinTime: config.maxRuin,
+      minRuinTime: this.minRuin,
+      maxRuinTime: this.maxRuin,
       purchaseManager: this.purchaseManager,
       buildingCost: structureType.cost,
-      priceMultiplier: config.fixMultiplier
+      priceMultiplier: this.priceMultiplier
     })
     manager.calculateNextRuin(this.gameTimer.currentTimeEvent)
 

@@ -27,13 +27,16 @@ describe('StructureFactory tests', () => {
     }
 
     checkMoneyStub = {purchase: () => true}
+
+    var settings = {}
     
     sfactory = new StructureFactory({
       gameTimer: gameTimer,
       player: player,
       map: map,
       eventController: eventController,
-      purchaseManager: checkMoneyStub
+      purchaseManager: checkMoneyStub,
+      ruinSettings: settings
     })
 
     sfactory.namer = {

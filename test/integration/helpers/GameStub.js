@@ -99,7 +99,8 @@ export default class GameStub {
 
       sprite: this.mockers.createOneValueMocker('make.sprite', { 
         addChild: function () {},
-        scale: { setTo: function () {} }
+        scale: { setTo: function () {} },
+        anchor: {set: ()=>{}}
        })
 
     }

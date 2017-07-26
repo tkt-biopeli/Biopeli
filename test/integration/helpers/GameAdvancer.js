@@ -82,9 +82,12 @@ export default class GameAdvancer {
    * Sets the time to wanted number and updates the game
    */
   update(time) {
-    if (time != null) {
-      this.timeObject.time = time
+    if(time == null) {
+      time = 0
     }
+    
+    this.timeObject.time += time
+
     this.gameState.update()
   }
 
@@ -95,7 +98,7 @@ export default class GameAdvancer {
   */
   updateSeveralTimes(times, interval) {
     for (let i = 0; i < times; i++) {
-      this.update(interval * (i + 1))
+      this.update(interval)
     }
   }
 
@@ -246,4 +249,10 @@ export default class GameAdvancer {
   setMoney(value) {
     this.gameState.player.cash = value
   } 
+
+  setRuiningTime(value) {
+    var sf = this.gameState.structureFactory
+    sf.minRuin = value
+    sf.maxRuin = value
+  }
 }
