@@ -45,7 +45,7 @@ export default class extends Phaser.State {
     this.load.image('menuBg', 'assets/images/backgrounds/low-poly-bg.png')
 
     this.load.spritesheet('daisy', 'assets/images/daisy.png', 32, 32, 10)
-    this.loaderBar.spritesheet('hammers', 'assets/images/hammers.png', 128, 128, 4)
+    this.load.spritesheet('hammers', 'assets/images/hammers.png', 128, 128, 4)
   }
 
   /**

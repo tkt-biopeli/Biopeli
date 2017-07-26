@@ -48,6 +48,7 @@ export default class Content {
    * @param {*} number
    */
   format (number, decimals) {
+    if(number == null) return number
     if(decimals == null) decimals = 0
     return number.toFixed(decimals)
   }
