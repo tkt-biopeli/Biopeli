@@ -15,9 +15,10 @@ const structureTypes = {
   wheat_farm: {
     name: 'wheat farm',
     asset: 'wheat_farm',
+    health: 12,
     harvestingWeeks: new Set(['8.1']),
     continuousProduction: false,
-    turnipYield: 1.8,
+    turnipYield: 4,
     cost: 10000,
     pollution: 4,
     radiusForTileOwnership: 2
@@ -25,9 +26,10 @@ const structureTypes = {
   dairy_farm: {
     name: 'dairy farm',
     asset: 'dairy_farm',
+    health: 15,
     harvestingWeeks: new Set(),
     continuousProduction: true,
-    turnipYield: 2.5,
+    turnipYield: 6,
     cost: 15000,
     pollution: 5,
     radiusForTileOwnership: 2
@@ -35,9 +37,10 @@ const structureTypes = {
   berry_farm: {
     name: 'berry farm',
     asset: 'berry_farm',
+    health: 8,
     harvestingWeeks: new Set(),
     continuousProduction: true,
-    turnipYield: 1.2,
+    turnipYield: 3,
     cost: 10000,
     pollution: 3,
     radiusForTileOwnership: 2
@@ -45,10 +48,11 @@ const structureTypes = {
   mill: {
     name: 'mill',
     asset: 'mill',
+    health: 20,
     refinery: true,
-    buysFrom: [],
-    cost: 3000,
-    multiplier: 10,
+    buysFrom: ['wheat farm'],
+    cost: 20000,
+    multiplier: 2,
     pollution: 2,
     radiusForTileOwnership: 1,
     reach: 5

@@ -1,4 +1,7 @@
 import Structure from './Structure'
+import StructureHealth from './health/StructureHealth'
+import HealthManager from './health/HealthManager'
+
 import ProducerFactory from './ProducerFactory'
 import StructureNameGenerator from '../namegeneration/StructureNameGenerator'
 import StructureNameParts from '../namegeneration/StructureNameParts'
@@ -13,11 +16,13 @@ export default class StructureFactory {
    * @param {GameTimer} gameTimer
    * @param {Player} player
    */
-  constructor ({ gameTimer, eventController, player, map, tileFinder }) {
+  constructor ({ purchaseManager, gameTimer, eventController, player, map, tileFinder, ruinSettings }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
     this.eventController = eventController
+    this.purchaseManager = purchaseManager
+
     this.namer = new StructureNameGenerator({
       frontAdjectives: StructureNameParts[0],
       names: StructureNameParts[1],
@@ -30,6 +35,10 @@ export default class StructureFactory {
       tileFinder: tileFinder,
       eventController: eventController
     })
+
+    this.minRuin = ruinSettings.minRuin
+    this.maxRuin = ruinSettings.maxRuin
+    this.priceMultiplier = ruinSettings.fixMultiplier
   }
 
   /**
@@ -38,9 +47,23 @@ export default class StructureFactory {
    * @param {StructureType} structureType
    */
   buildBuilding (tile, structureType) {
-    if (!this.checkMoney(structureType)) return
+    if (!this.purchaseManager.purchase(structureType.cost)) return
+
+    var health = new StructureHealth({ maxHealth: structureType.health })
+    var manager = new HealthManager({
+      health: health,
+      minRuinTime: this.minRuin,
+      maxRuinTime: this.maxRuin,
+      purchaseManager: this.purchaseManager,
+      buildingCost: structureType.cost,
+      priceMultiplier: this.priceMultiplier
+    })
+    manager.calculateNextRuin(this.gameTimer.currentTimeEvent)
+
     tile.structure = new Structure({
       tile: tile,
+      health: health,
+      healthManager: manager,
       ownerName: this.namer.createOwnerName(),
       structureName: this.namer.createBuildingName(structureType.name),
       size: 0,
@@ -53,20 +76,8 @@ export default class StructureFactory {
     this.buyLand(tile)
     this.createInitialPollution(structureType.pollution, tile)
     this.calculateSize(tile.structure)
-    this.eventController.event('buildStructure', tile)
-  }
 
-  /**
-   * Checks if the player has enough money for a given type of structure
-   * decreases players cash if true
-   * @param {StructureType} structureType
-   */
-  checkMoney (structureType) {
-    if (!this.player.enoughCashFor(structureType.cost)) {
-      return false
-    }
-    this.player.cash -= structureType.cost
-    return true
+    this.eventController.event('structureBuilt', tile)
   }
 
   /**
@@ -154,7 +165,7 @@ export default class StructureFactory {
 
   calculateSizeForRefinery (structure) {
     structure.ownedTiles.forEach(function (tmpTile) {
-//      structure.producer.producer.producerHolders.length
+    // structure.producer.producer.producerHolders.length
     }, this)
   }
 

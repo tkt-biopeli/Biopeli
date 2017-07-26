@@ -1,4 +1,4 @@
-
+import config from '../../config'
 /**
  * Description goes here
  */
@@ -23,11 +23,12 @@ export default class ViewTile {
   update (showFlowers) {
     if (this.modelTile.structure != null && this.structureSprite == null) {
       this.structureSprite = this.makeStructureSprite()
+      this.hammerSprite = this.makeHammerSprite()
     } else if (this.modelTile.structure == null && this.structureSprite != null) {
       this.structureSprite.destroy()
       this.structureSprite = null
     }
-    if (showFlowers) this.addTextSprite(this.modelTile.flowers)
+    if (showFlowers) this.makeFlowerSprite()
   }
 
   /**
@@ -47,13 +48,27 @@ export default class ViewTile {
     return this.tileSprite.addChild(sprite)
   }
 
+  makeHammerSprite () {
+    let hammers = this.game.make.sprite(config.tileWidth, config.tileHeight, 'hammers')
+    hammers.anchor.set(0.5, 0.5)
+    hammers.scale.setTo(0.7, 0.7)
+    hammers.frame = Math.max(Math.min(3, 4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)), 0)
+    return this.tileSprite.addChild(hammers)
+  }
+
   /**
    * Adds a given text as a child for the tile
    * @param {string} toAdd
    */
-  addTextSprite (toAdd) {
+  makeFlowerSprite () {
     let daisies = this.game.make.sprite(0, 0, 'daisy')
     daisies.frame = 10 - this.modelTile.flowers
     return this.tileSprite.addChild(daisies)
+  }
+
+  addHighlight (toAdd) {
+    toAdd.width = this.tileSprite.width
+    toAdd.height = this.tileSprite.height
+    this.tileSprite.addChild(toAdd)
   }
 }

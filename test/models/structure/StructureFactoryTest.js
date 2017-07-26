@@ -6,12 +6,12 @@ import StaticTypes from '../../../src/models/StaticTypes'
 describe('StructureFactory tests', () => {
   var sfactory, gameTimer, player, addStructureSpy, map, eventController, tile, structureType
   var addStructureSpy, buyLandSpy, createPollutionSpy, calcSizeSpy, createProducerSpy, setAssetSpy
-  var checkMoneyStub, getMapStub
+  var purchaseStub, getMapStub
   var tileTypes
 
   beforeEach(() => {
     tileTypes = StaticTypes.tileTypes
-
+    purchaseStub = sinon.stub()
     addStructureSpy = sinon.spy()
     setAssetSpy = sinon.spy()
     getMapStub = sinon.stub()
@@ -35,12 +35,16 @@ describe('StructureFactory tests', () => {
     eventController = {
       event: sinon.spy()
     }
+
+    var settings = {}
     
     sfactory = new StructureFactory({
       gameTimer: gameTimer,
       player: player,
       map: map,
-      eventController: eventController
+      eventController: eventController,
+      purchaseManager: {purchase: purchaseStub},
+      ruinSettings: settings
     })
 
     sfactory.namer = {
@@ -65,12 +69,10 @@ describe('StructureFactory tests', () => {
   })
 
   var mockMethodsForBuildBuildingTests = () => {
-    checkMoneyStub = sinon.stub()
     createProducerSpy = sinon.spy()
     buyLandSpy = sinon.spy()
     createPollutionSpy = sinon.spy()
     calcSizeSpy = sinon.spy()
-    sfactory.checkMoney = checkMoneyStub
     sfactory.producerFactory.createProducer = createProducerSpy
     sfactory.buyLand = buyLandSpy
     sfactory.createInitialPollution = createPollutionSpy
@@ -79,7 +81,7 @@ describe('StructureFactory tests', () => {
 
   it('Build building works', () => {
     mockMethodsForBuildBuildingTests()
-    checkMoneyStub.withArgs(structureType).returns(true)
+    purchaseStub.withArgs(structureType.cost).returns(true)
     sfactory.buildBuilding(tile, structureType)
 
     assert.equal(tile.structure.tile, tile)
@@ -101,7 +103,7 @@ describe('StructureFactory tests', () => {
   it('Build building does not do anything if checkMoney returns false', () => {
     tile.structure = null
     mockMethodsForBuildBuildingTests()
-    checkMoneyStub.withArgs(structureType).returns(false)
+    purchaseStub.withArgs(structureType.cost).returns(false)
     sfactory.buildBuilding(tile, structureType)
 
     assert.equal(tile.structure, null)
