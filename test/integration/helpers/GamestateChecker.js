@@ -196,6 +196,10 @@ export default class GamestateChecker {
     assert.equal(money, this.gameState.player.cash)
   }
 
+  checkMoneyUnder(under) {
+    assert(under > this.gameState.player.cash, "Excpected under: "+under+" Found: "+this.gameState.player.cash)
+  }
+
   /**
    * Checks if the game has ended
    *

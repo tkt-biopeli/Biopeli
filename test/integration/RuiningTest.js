@@ -46,4 +46,26 @@ describe('Integration test: Structures ruin by time', () => {
     gameStateChecker.checkStructureRuinAmount(0, 0, 7)
     gameStateChecker.checkStructureRuinAmount(0, 5, 7)
   })
+
+  it('Fixing buildings is possible and costs money', ()=>{
+    gameAdvancer.buildBuilding(0, 0, 'grass', 3)
+
+    gameAdvancer.updateSeveralTimes(2, 1000)
+
+    gameAdvancer.setMoney(10000)
+    gameAdvancer.click(1, 1)
+    gameAdvancer.clickNthButton(1)
+
+    gameStateChecker.checkMoneyUnder(10000)
+    gameStateChecker.checkSelectedTile(0, 0)
+    gameStateChecker.checkStructureRuinAmount(0, 0, 8)
+  })
+
+  it('Trying to fix non-ruidner building doesn\'t cost money', ()=>{
+    gameAdvancer.buildBuilding(0, 0, 'grass', 3)
+    gameAdvancer.setMoney(10000)
+    gameAdvancer.click(1, 1)
+    gameAdvancer.clickNthButton(1)
+    gameStateChecker.checkMoney(10000)
+  })
 })
