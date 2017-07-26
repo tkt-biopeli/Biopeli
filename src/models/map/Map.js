@@ -76,7 +76,7 @@ export default class MapGrid {
    * @param {TileType} tileType
    */
   addTileWithGridCoordinates (gx, gy, tileType, moisture, fertility) {
-    var tile = new ModelTile({ 
+    var tile = new ModelTile({
       x: gx,
       y: gy,
       type: tileType,
