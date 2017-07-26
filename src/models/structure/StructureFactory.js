@@ -69,8 +69,7 @@ export default class StructureFactory {
       size: 0,
       structureType: structureType,
       foundingYear: this.gameTimer.currentTimeEvent.year,
-      producer: this.producerFactory.createProducer(structureType, tile),
-      cost: structureType.cost
+      producer: this.producerFactory.createProducer(structureType, tile)
     })
     this.player.addStructure(tile.structure)
     this.buyLand(tile)

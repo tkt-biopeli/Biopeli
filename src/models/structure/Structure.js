@@ -16,7 +16,7 @@ export default class Structure {
    * @param {integer} foundingYear
    * @param {function} produceFn
    */
-  constructor ({ tile, health, healthManager, ownerName, structureName, size, structureType, foundingYear, producer, cost }) {
+  constructor ({ tile, health, healthManager, ownerName, structureName, size, structureType, foundingYear, producer }) {
     this.tile = tile
 
     this.health = health

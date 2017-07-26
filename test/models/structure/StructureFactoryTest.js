@@ -81,7 +81,7 @@ describe('StructureFactory tests', () => {
 
   it('Build building works', () => {
     mockMethodsForBuildBuildingTests()
-    purchaseStub.withArgs(structureType.cost).returns(true)
+    purchaseStub.withArgs(888).returns(true)
     sfactory.buildBuilding(tile, structureType)
 
     assert.equal(tile.structure.tile, tile)
@@ -91,7 +91,6 @@ describe('StructureFactory tests', () => {
     assert.equal(tile.structure.structureType, structureType)
     assert.equal(tile.structure.foundingYear, 7)
     assert(createProducerSpy.calledWith(structureType, tile))
-    assert.equal(tile.structure.cost, structureType.cost)
 
     assert(addStructureSpy.calledWith(tile.structure))
     assert(buyLandSpy.calledWith(tile))
@@ -100,10 +99,10 @@ describe('StructureFactory tests', () => {
     assert.equal(eventController.event.callCount, 1)
   })
 
-  it('Build building does not do anything if checkMoney returns false', () => {
+  it('Build building does not do anything if insufficient funds', () => {
     tile.structure = null
     mockMethodsForBuildBuildingTests()
-    purchaseStub.withArgs(structureType.cost).returns(false)
+    purchaseStub.withArgs(888).returns(false)
     sfactory.buildBuilding(tile, structureType)
 
     assert.equal(tile.structure, null)
@@ -113,21 +112,6 @@ describe('StructureFactory tests', () => {
     assert.equal(createPollutionSpy.callCount, 0)
     assert.equal(calcSizeSpy.callCount, 0)
     assert.equal(eventController.event.callCount, 0)
-  })
-
-  it('Money checking works', () =>{
-    var enoughCashForStub = sinon.stub()
-    player.enoughCashFor = enoughCashForStub
-    player.cash = 211
-    enoughCashForStub.withArgs(78).returns(false)
-    enoughCashForStub.withArgs(97).returns(true)
-
-    var st = {cost: 78}
-    assert.equal(sfactory.checkMoney(st), false)
-    assert.equal(player.cash, 211)
-    st = {cost: 97}
-    assert(sfactory.checkMoney(st), true)
-    assert.equal(player.cash, 114)
   })
 
   var createTmpTile = (structure, tileType, owner, flowers) => {
