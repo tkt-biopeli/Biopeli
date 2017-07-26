@@ -43,6 +43,8 @@ export default class SideMenuContent extends Content {
     this.text('Ground type: ' + tile.tileType.name)
     this.text('X: ' + tile.x + ', Y: ' + tile.y)
     this.text('Flowers: ' + tile.flowers)
+    this.text('Moisture: ' + tile.moisture + '%')
+    this.text('Fertility: ' + tile.fertility)
     if (tile.owner != null) {
       this.text('Land owner: ' + tile.owner.ownerName)
     }
