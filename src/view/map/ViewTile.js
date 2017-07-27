@@ -36,7 +36,7 @@ export default class ViewTile {
    * 
    * @return {Phaser.Graphics}
    */
-  makeBorderSprite (x,) {
+  makeBorderSprite () {
     var border = this.game.make.graphics()
     border.beginFill(0x000000, 1)
 
