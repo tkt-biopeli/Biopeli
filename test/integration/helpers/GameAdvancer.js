@@ -41,10 +41,8 @@ export default class GameAdvancer {
       startMoney: 15000,
       perlinNoise: this.Noise,
       state: this.game,
-      mapWidth: this.mapWidth,
-      mapHeight: this.mapHeight,
-      tileWidth: config.tileWidth,
-      tileHeight: config.tileHeight,
+      mapSize: {width: this.mapWidth, height: this.mapHeight},
+      tileSize: config.tileSize,
       menuWidth: config.menuWidth,
       gameLength: gameLength
     })
@@ -57,7 +55,6 @@ export default class GameAdvancer {
 
     this.estimatedX = this.game.camera.x
     this.estimatedY = this.game.camera.y
-
 
     this.mapRealWidth = this.mapWidth * config.tileWidth
     this.mapRealHeight = this.mapHeight * config.tileHeight
