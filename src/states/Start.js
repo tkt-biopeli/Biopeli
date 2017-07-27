@@ -10,9 +10,6 @@ import utils from '../utils'
  */
 export default class Start extends Phaser.State {
   create () {
-
-    console.log("asd")
-
     var cityName = new CityNameGenerator({
       cityNames: CityNames,
       randomWithBounds: utils.randomWithBounds

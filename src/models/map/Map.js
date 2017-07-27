@@ -147,8 +147,7 @@ export default class MapGrid {
       seed: seed,
       Noise: this.perlinNoise
     })
-
-    console.log("asd")
+    
     // generoitava luonnin yhteydessä moisture ja fertility
     var x, y
     for (x = 0; x < this.gridSizeX; x++) {

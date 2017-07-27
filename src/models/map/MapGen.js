@@ -93,6 +93,6 @@ export default class MapGen {
     var nx = x / this.width - 0.5
     var ny = y / this.height - 0.5
 
-    return noise.perlin(freq * nx, freq * ny)
+    return noise.perlin2(freq * nx, freq * ny)
   }
 }

@@ -42,8 +42,6 @@ export default class GameState {
   constructor ({ cityName, perlinNoise, startMoney, state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth, gameLength }) {
     this.state = state
 
-    console.log("asd")
-
     state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
 
     this.initializeModel(cityName, perlinNoise, gameLength, startMoney, mapWidth, mapHeight, tileWidth, tileHeight)
