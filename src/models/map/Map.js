@@ -65,7 +65,7 @@ export default class MapGrid {
 
   radiusFunction (hori, veri) {
     // hypotenuse
-    return Math.floor(Math.sqrt(Math.pow(hori, 2) + Math.pow(veri, 2)))
+    return Math.floor(Math.sqrt(Math.pow(hori, 2) + Math.pow(veri, 2)) * 1.2)
   }
 
   /**

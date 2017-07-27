@@ -72,8 +72,8 @@ export default class StructureFactory {
       producer: this.producerFactory.createProducer(structureType, tile)
     })
     this.player.addStructure(tile.structure)
-    this.buyLand(tile)
     this.createInitialPollution(structureType.pollution, tile)
+    this.buyLand(tile.structure)
     this.calculateSize(tile.structure)
 
     this.eventController.event('structureBuilt', tile)
@@ -95,20 +95,20 @@ export default class StructureFactory {
     }
   }
 
-  buyLand (tile) {
-    let tiles = this.map.getTilesInRadius(tile.structure.radiusForTileOwnership, tile)
+  buyLand (structure) {
+    let tiles = this.map.getTilesInRadius(structure.radiusForTileOwnership, structure.tile)
     for (var [distance, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
-        if (tile.structure.structureType.refinery) {
-          this.buyLandForRefinery(tile, distance, tmpTile)
+        if (structure.structureType.refinery) {
+          this.buyLandForRefinery(structure, distance, tmpTile)
         } else {
-          this.buyLandForProducer(tile, tmpTile)
+          this.buyLandForProducer(structure, tmpTile)
         }
       }, this)
     }
   }
 
-  buyLandForRefinery (tile, distance, tmpTile) {
+  buyLandForRefinery (structure, distance, tmpTile) {
     if (distance === 0 || tmpTile.structure === null) {
       this.decreaseOwnedTiles(tmpTile)
       this.setAssetForRefinery(tmpTile)
@@ -120,18 +120,32 @@ export default class StructureFactory {
   decreaseOwnedTiles (tmpTile) {
     if (tmpTile.owner !== null) {
       if (tmpTile.tileType.name === 'field') {
-        tmpTile.owner.size--
-        this.calculateFarmLand(tmpTile.owner)
+        let index = tmpTile.owner.producer.producer.ownedFarmLand.indexOf(tmpTile)
+        if (index > -1) {
+          tmpTile.owner.producer.producer.ownedFarmLand.splice(index, 1);
+          tmpTile.owner.size--
+        }
       }
-      tmpTile.owner.ownedTiles.pop(tmpTile)
+      if (tmpTile.owner !== null) {
+        let index = tmpTile.owner.ownedTiles.indexOf(tmpTile)
+        if (index > -1) {
+          tmpTile.owner.ownedTiles.splice(index, 1);
+        }
+      }
+      this.setAssetForRefinery(tmpTile)
+      tmpTile.owner = structure
+      structure.ownedTiles.push(tmpTile)
     }
   }
 
-  buyLandForProducer (tile, tmpTile) {
+  buyLandForProducer (structure, tmpTile) {
     if (tmpTile.owner === null) {
       this.setAssetForProducer(tmpTile)
-      tmpTile.owner = tile.structure
-      tile.structure.ownedTiles.push(tmpTile)
+      tmpTile.owner = structure
+      structure.ownedTiles.push(tmpTile)
+      if (tmpTile.tileType.name === 'field') {
+        structure.producer.producer.ownedFarmLand.push(tmpTile)
+      }
     }
   }
 
@@ -156,21 +170,11 @@ export default class StructureFactory {
   }
 
   calculateSizeForProducer (structure) {
-    structure.ownedTiles.forEach(function (tmpTile) {
-      if (tmpTile.tileType.name === 'field') { structure.size++ }
-    }, this)
-    this.calculateFarmLand(structure)
+    structure.size = structure.producer.producer.ownedFarmLand.length
   }
 
   calculateSizeForRefinery (structure) {
-    structure.ownedTiles.forEach(function (tmpTile) {
-    // structure.producer.producer.producerHolders.length
-    }, this)
-  }
-
-  calculateFarmLand (structure) {
-    structure.ownedTiles.forEach(function (tmpTile) {
-      structure.producer.producer.ownedFarmLand.push(tmpTile)
-    }, this)
+    structure.size = structure.producer.producer.producerHolders.length
   }
 }
+

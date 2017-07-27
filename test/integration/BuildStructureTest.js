@@ -27,7 +27,9 @@ describe('Integration test: Building structures', () => {
     gameAdvancer.buildBuilding(0, 0, 'grass', 1)
     gameStateChecker.checkSelectedTile()
     gameStateChecker.checkTilesInformation(0, 0, 'field', 'wheat farm', true)
-    gameStateChecker.checkStructureOwnedTiles(0, 0, 9)
+    gameStateChecker.checkStructureOwnedTiles(0, 0, 8)
+    gameStateChecker.checkStructureOwnedFarmLand(0, 0, 8)
+    gameStateChecker.checkStructureSize(0, 0, 8)
   })
 
   it('Farmland is based on grasstiles, not forest or water', () => {
@@ -39,7 +41,9 @@ describe('Integration test: Building structures', () => {
     gameStateChecker.checkTilesInformation(1, 1, 'forest', null, true)
     gameStateChecker.checkTilesInformation(0, 1, 'water', null, true)
     gameStateChecker.checkTilesInformation(1, 0, 'field', null, true)
-    gameStateChecker.checkStructureOwnedTiles(0, 0, 9)
+    gameStateChecker.checkStructureOwnedTiles(0, 0, 8)
+    gameStateChecker.checkStructureOwnedFarmLand(0, 0, 6)
+    gameStateChecker.checkStructureSize(0, 0, 6)
   })
 
   it('Can build a dairy farm on grass', () => {
@@ -59,6 +63,8 @@ describe('Integration test: Building structures', () => {
     gameAdvancer.buildBuilding(1, 1, 'grass', 4)
     gameStateChecker.checkSelectedTile()
     gameStateChecker.checkTilesInformation(1, 1, 'industrial', 'mill', true)
+    gameStateChecker.checkStructureOwnedTiles(1, 1, 9)
+    gameStateChecker.checkStructureSize(1, 1, 0)
   })
 
   it('Can not build on tile with structure', () => {
@@ -110,7 +116,9 @@ describe('Integration test: Building structures', () => {
     gameStateChecker.checkTilesInformation(0, 1, 'field', null, true)
     gameStateChecker.checkTilesInformation(1, 0, 'field', null, true)
     gameStateChecker.checkTilesInformation(1, 1, 'field', null, true)
-    gameStateChecker.checkStructureOwnedTiles(0, 0, 9)
+    gameStateChecker.checkStructureOwnedTiles(0, 0, 8)
+    gameStateChecker.checkStructureOwnedFarmLand(0, 0, 8)
+    gameStateChecker.checkStructureSize(0, 0, 8)
     gameAdvancer.clickTile(1, 1)
     gameStateChecker.checkButtonAmountInMenu(1)
     gameAdvancer.clickNthButton(1)
@@ -124,6 +132,9 @@ describe('Integration test: Building structures', () => {
     gameStateChecker.checkTilesInformation(1, 1, 'industrial', 'mill', true)
     gameStateChecker.checkStructureOwnedTiles(0, 0, 1)
     gameStateChecker.checkStructureOwnedTiles(1, 1, 8)
+    gameStateChecker.checkStructureOwnedTiles(0, 0, 1)
+    gameStateChecker.checkStructureOwnedFarmLand(0, 0, 1)
+    gameStateChecker.checkStructureSize(0, 0, 1)
 
   })
 

@@ -123,6 +123,7 @@ export default class MapView {
   fillView (viewArea, offset) {
     for (var c = viewArea.startCol; c <= viewArea.endCol; c++) {
       for (var r = viewArea.startRow; r <= viewArea.endRow; r++) {
+
         var tile = this.map.getTileWithGridCoordinates(c, r)
         var pxCoords = this.ColAndRowToPx(c, r, viewArea.startCol, viewArea.startRow, offset)
         if (typeof tile !== 'undefined') this.createViewTileForFill(tile, pxCoords, viewArea, offset)

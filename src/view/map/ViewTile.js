@@ -32,12 +32,51 @@ export default class ViewTile {
   }
 
   /**
+   * Creates a graphics object that contains the borders of this tile
+   * 
+   * @return {Phaser.Graphics}
+   */
+  makeBorders () {
+    var sprite = this.game.make.graphics(this.x, this.y)
+    sprite.beginFill(0x8B4513, 1)
+
+    var tile = this.modelTile,
+        structure = this.modelTile.owner
+    var width = Config.tileWidth * 2,
+        height = Config.tileHeight * 2,
+        thickness = 3
+
+    if(!structure.ownsTileAt(tile.x+1, tile.y)){ 
+      sprite.drawRect(width - thickness, 0, thickness, height)
+    }
+    if(!structure.ownsTileAt(tile.x-1, tile.y)){ 
+      sprite.drawRect(0, 0, thickness, height)
+    }
+    if(!structure.ownsTileAt(tile.x, tile.y+1)){ 
+      sprite.drawRect(0, height - thickness, width, thickness)
+    }
+    if(!structure.ownsTileAt(tile.x, tile.y-1)){ 
+      sprite.drawRect(0, 0, width, thickness)
+    }
+
+    sprite.endFill()
+    return sprite
+  }
+
+  /**
    * Creates the view for the using the asset related to modeltile's type
    * @param {number} x
    * @param {number} y
+   * @return {Phaser.Graphics}
    */
   makeTileSprite (x, y) {
-    return this.game.make.sprite(x, y, this.modelTile.tileType.asset)
+    var sprite = this.game.make.sprite(x, y, this.modelTile.tileType.asset)
+    
+    if(this.modelTile.owner != undefined){
+      sprite.addChild(this.makeBorders())
+    }
+
+    return sprite
   }
 
   /**

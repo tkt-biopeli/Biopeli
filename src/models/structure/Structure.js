@@ -34,6 +34,21 @@ export default class Structure {
   }
 
   /**
+   * checks whether this structure owns the given tile
+   * @param {number} x
+   * @param {number} y
+   * @return {boolean}
+   */
+  ownsTileAt (x, y) {
+    for (var i = 0; i < this.ownedTiles.length; i++) {
+      var tile = this.ownedTiles[i]
+      if(tile.x == x && tile.y == y)
+        return true
+    }
+    return false
+  }
+
+  /**
    * Returns true if the structure produces throughout the year and false if
    * only during harvesting periods.
    */
