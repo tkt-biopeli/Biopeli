@@ -48,7 +48,7 @@ describe('StructureFactory tests', () => {
     var tile = { structure: {}, flowers: 0 }
     var structureType = {}
     var createProducerSpy = sinon.spy()
-    sfactory.producerFactory.createProducer = createProducerSpy
+    createProducerFactory.producer = {}
     sfactory.buildBuilding(tile, structureType)
 
     assert.equal(tile, tile.structure.tile)

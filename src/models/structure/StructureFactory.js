@@ -105,6 +105,7 @@ export default class StructureFactory {
         let index = tmpTile.owner.producer.producer.ownedFarmLand.indexOf(tmpTile)
         if (index > -1) {
           tmpTile.owner.producer.producer.ownedFarmLand.splice(index, 1);
+          tmpTile.owner.size--
         }
       }
 
@@ -115,7 +116,7 @@ export default class StructureFactory {
         }
 
       }
-      this.calculateSize(tmpTile.owner)
+
       this.setAssetForRefinery(tmpTile)
       tmpTile.owner = structure
       structure.ownedTiles.push(tmpTile)
