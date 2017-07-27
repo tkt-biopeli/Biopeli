@@ -24,7 +24,7 @@ describe('Map generation tests', () => {
       Noise: Noise
     })
     var types = StaticTypes.tileTypes
-    var type = mg.typeAt(0,0)
+    var type = mg.tileTypeAt(0,0)
     for(var key in types){
       if(types[key] == type)
         return

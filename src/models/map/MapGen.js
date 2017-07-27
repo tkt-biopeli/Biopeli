@@ -12,7 +12,7 @@ export default class MapGen {
    * @param {number} param.seed - seed for forest generation, optional
    */
   constructor ({ seed, Noise }) {
-    var fseed, gseed
+    var fseed, gseed, ferseed
     if (seed) {
       var str = seed + ''
       var mid = str.length / 2
@@ -23,11 +23,22 @@ export default class MapGen {
       fseed = Math.random()
       gseed = Math.random()
     }
+    ferseed = Math.random()
+
     this.types = StaticTypes.tileTypes
+
+    this.fertilitynoise = new Noise(ferseed)
     this.forestnoise = new Noise(fseed)
     this.groundnoise = new Noise(gseed)
+
     this.height = config.noiseHeight
     this.width = config.noiseWidth
+    this.qfreq = config.gfreq
+    this.ffreq = config.ffreq
+    this.fefreq = config.ferrreq
+
+    this.groundLimit = -0.2
+    this.forestLimit = -0.1
   }
 
   /**
@@ -36,19 +47,52 @@ export default class MapGen {
    * @param {number} y - tile y coordinate
    * @return {TileType} - tile type
    */
-  typeAt (x, y) {
+  tileTypeAt (x, y) {
+    var noises = this.noisesAt(x, y)
+    if (noises.ground > this.groundLimit) {
+      if (noises.forest > this.forestLimit) {
+        return this.types.grass
+      }
+
+      return this.types.forest
+    }
+
+    return this.types.water
+  }
+
+  moistureAt (x, y) {
+    var noise = this.noiseValueAt(x, y, this.groundnoise, this.gfreq)
+
+    if(noise <= this.groundLimit) {
+      return 1
+    }
+
+    var difference = 1 - this.groundLimit
+
+    console.log((noise - this.groundLimit) / difference)
+    return (noise - this.groundLimit) / difference
+  }
+
+  fertilityAt (x, y) {
+    var noise = this.noiseValueAt(x, y, this.fertilitynoise, this.ferfreq)
+
+    return (noise + 1) / 2
+  }
+
+  noisesAt (x, y) {
     var nx = x / this.width - 0.5
     var ny = y / this.height - 0.5
-    var gfreq = config.gfreq
-    var ffreq = config.ffreq
-    if (this.groundnoise.perlin2(gfreq * nx, gfreq * ny) > -0.2) {
-      if (this.forestnoise.perlin2(ffreq * nx, ffreq * ny) > -0.1) {
-        return this.types.grass
-      } else {
-        return this.types.forest
-      }
-    } else {
-      return this.types.water
+
+    return {
+      ground: this.groundnoise.perlin2(this.gfreq * nx, this.gfreq * ny),
+      forest: this.forestnoise.perlin2(this.ffreq * nx, this.ffreq * ny)
     }
+  }
+
+  noiseValueAt (x, y, noise, freq) {
+    var nx = x / this.width - 0.5
+    var ny = y / this.height - 0.5
+
+    return noise.perlin(freq * nx, freq * ny)
   }
 }

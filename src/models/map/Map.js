@@ -147,11 +147,17 @@ export default class MapGrid {
       seed: seed,
       Noise: this.perlinNoise
     })
+
+    console.log("asd")
     // generoitava luonnin yhteydessä moisture ja fertility
     var x, y
     for (x = 0; x < this.gridSizeX; x++) {
       for (y = 0; y < this.gridSizeY; y++) {
-        this.addTileWithGridCoordinates(x, y, this.mapgen.typeAt(x, y), 0, 0)
+        var tileType = this.mapgen.tileTypeAt(x, y)
+        var moisture = this.mapgen.moistureAt(x, y)
+        var fertility = this.mapgen.fertilityAt(x, y)
+        console.log(fertility)
+        this.addTileWithGridCoordinates(x, y, tileType, moisture, fertility)
       }
     }
   }
