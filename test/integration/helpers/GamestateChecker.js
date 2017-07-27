@@ -28,11 +28,11 @@ export default class GamestateChecker {
    * 
    * @return {ModelTile} - Tile at (x,y)
    */
-  getTilePixel(x, y) {
+  getTilePixel (x, y) {
     return this.map.getTileWithPixelCoordinates(x, y)
   }
 
-  getTileModel(x, y) {
+  getTileModel (x, y) {
     return this.map.getTileWithGridCoordinates(x, y)
   }
 
@@ -44,7 +44,7 @@ export default class GamestateChecker {
    * @param {number} gridX 
    * @param {number} gridY 
    */
-  checkTilesModelCoordinates(x, y, gridX, gridY) {
+  checkTilesModelCoordinates (x, y, gridX, gridY) {
     var tile = this.getTilePixel(x, y)
     assert.equal(gridX, tile.x)
     assert.equal(gridY, tile.y)
@@ -58,11 +58,11 @@ export default class GamestateChecker {
    * @param {TileType} tileType 
    * @param {string} structureType 
    */
-  checkTilesInformation(x, y, tileType, structureType, modelCoords) {
+  checkTilesInformation (x, y, tileType, structureType, modelCoords) {
     var tile
-    if(modelCoords){
+    if (modelCoords) {
       tile = this.getTileModel(x, y)
-    }else{
+    } else {
       tile = this.getTilePixel(x, y)
     }
 
@@ -74,14 +74,24 @@ export default class GamestateChecker {
     }
   }
 
-  checkPollution(x, y, pollution) {
+  checkPollution (x, y, pollution) {
     var tile = this.getTileModel(x, y)
     assert.equal(pollution, tile.flowers)
   }
 
-  checkStructureOwnedTiles(x, y, expectedValue) {
+  checkStructureOwnedTiles (x, y, expectedValue) {
     var s = this.getTileModel(x, y).structure
     assert.equal(expectedValue, s.ownedTiles.length)
+  }
+
+  checkStructureOwnedFarmLand (x, y, expectedValue) {
+    var s = this.getTileModel(x, y).structure
+    assert.equal(expectedValue, s.producer.producer.ownedFarmLand.length)
+  }
+
+  checkStructureSize (x, y, expectedValue) {
+    var s = this.getTileModel(x, y).structure
+    assert.equal(expectedValue, s.size)
   }
 
   /**
@@ -94,7 +104,7 @@ export default class GamestateChecker {
    * @param {TileType} tileType 
    * @param {StructureType} structureType 
    */
-  checkTile(x, y, gridX, gridY, tileType, structureType) {
+  checkTile (x, y, gridX, gridY, tileType, structureType) {
     this.checkTilesModelCoordinates(x, y, gridX, gridY)
     this.checkTilesInformation(x, y, tileType, structureType)
   }
@@ -105,7 +115,7 @@ export default class GamestateChecker {
    * @param {number} x 
    * @param {number} y 
    */
-  checkSelectedTile(x, y) {
+  checkSelectedTile (x, y) {
     var selected = this.menuController.state.get('selectedTile')
 
     if (x == null) {
@@ -121,7 +131,7 @@ export default class GamestateChecker {
    * 
    * @param {{x: number, y: number}} estimated 
    */
-  checkCameraLocation(estimated) {
+  checkCameraLocation (estimated) {
     var real = this.gameStub.getCamera()
     assert.equal(estimated.x, real.x)
     assert.equal(estimated.y, real.y)
@@ -132,7 +142,7 @@ export default class GamestateChecker {
    * 
    * @param {{x: number, y: number}} estimated 
    */
-  checkTileUnderCamera(estimated) {
+  checkTileUnderCamera (estimated) {
     var ex = Math.floor(estimated.x / config.tileSize.width)
     var ey = Math.floor(estimated.y / config.tileSize.height)
     var camera = this.gameStub.getCamera()
@@ -144,12 +154,12 @@ export default class GamestateChecker {
    * 
    * @param {int} expectedAmount 
    */
-  checkButtonAmountInMenu(expectedAmount) {
+  checkButtonAmountInMenu (expectedAmount) {
     var buttons = this.gameState.menuView.activeButtons
     assert.equal(expectedAmount, buttons.length)
   }
 
-  checkIfTextsExist(...texts) {
+  checkIfTextsExist (...texts) {
     var textImages = this.gameState.menuView.activeTexts
 
     for (let text of texts) {
@@ -172,17 +182,17 @@ export default class GamestateChecker {
    * 
    * @param {int} time
    */
-  checkTime(time) {
+  checkTime (time) {
     var text = this.gameState.topBarView.activeTexts[0].text.text
     assert.equal(time, text)
   }
-  
+
   /**
    * Checks if the total score is correct
    * 
    * @param {int} score
    */
-  checkScore(score) {
+  checkScore (score) {
     var text = this.gameState.topBarView.activeTexts[1].text.text
     assert.equal(score, text)
   }
@@ -192,12 +202,12 @@ export default class GamestateChecker {
    * 
    * @param {int} money
    */
-  checkMoney(money) {
+  checkMoney (money) {
     assert.equal(money, this.gameState.player.cash)
   }
 
-  checkMoneyUnder(under) {
-    assert(under > this.gameState.player.cash, "Excpected under: "+under+" Found: "+this.gameState.player.cash)
+  checkMoneyUnder (under) {
+    assert(under > this.gameState.player.cash, "Excpected under: " + under + " Found: " + this.gameState.player.cash)
   }
 
   /**
@@ -205,7 +215,7 @@ export default class GamestateChecker {
    *
    * @param {*} has
    */
-  checkGameEnded(has) {
+  checkGameEnded (has) {
     var mockerCalls = this.gameStub.mockers.callCount('end')
 
     assert(has == (mockerCalls > 0))
@@ -216,7 +226,7 @@ export default class GamestateChecker {
    *
    * @param {*} wantedAmount
    */
-  checkPerlinNoiseCallAmount(forwanted, gwanted, ferwanted){
+  checkPerlinNoiseCallAmount (forwanted, gwanted, ferwanted) {
     var gen = this.gameState.mapGenerator.perlinGenerator
 
     assert.equal(forwanted, gen.forestnoise.callCount)
@@ -224,7 +234,7 @@ export default class GamestateChecker {
     assert.equal(ferwanted, gen.fertilitynoise.callCount)
   }
 
-  checkStructureRuinAmount(x, y, wantedHealth) {
+  checkStructureRuinAmount (x, y, wantedHealth) {
     var tile = this.getTileModel(x, y)
     assert(tile.structure != null)
 
