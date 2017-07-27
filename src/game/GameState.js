@@ -131,6 +131,10 @@ export default class GameState {
       gameState: this,
       gameLength: gameLength
     })
+
+    this.music = this.state.add.audio('music')
+    this.music.play()
+    this.music.loopFull()
   }
 
   initializeView () {
