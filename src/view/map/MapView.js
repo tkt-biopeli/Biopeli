@@ -136,8 +136,6 @@ export default class MapView {
     if (tile === this.menuController.stateValue('selectedTile')) {
       this.addToViewTexture(this.highlight(), pxCoords.x, pxCoords.y)
       if (tile.structure !== null && tile.structure.producer.producer.ownedFarmLand !== null) {
-        // console.log(tile.structure.ownedTiles)
-        console.log(tile.structure.producer.producer.ownedFarmLand)
       }
     }
   }
