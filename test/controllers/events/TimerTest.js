@@ -1,4 +1,4 @@
-import Timer from '../../src/view/Timer'
+import Timer from '../../../src/controllers/events/time/Timer'
 const assert = require('assert')
 const sinon = require('sinon')
 

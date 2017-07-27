@@ -1,7 +1,7 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import GameTimerListener from '../../src/models/GameTimerListener'
-import TimeEvent from '../../src/view/TimeEvent'
+import GameTimerListener from '../../../src/controllers/events/time/GameTimerListener'
+import TimeEvent from '../../../src/controllers/events/time/TimeEvent'
 
 describe('Game timer listener tests', () => {
   var gtListener, player, menuController, topBarController, city, gameEvents
