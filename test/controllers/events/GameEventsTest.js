@@ -1,7 +1,7 @@
 const assert = require("assert")
 const sinon = require("sinon")
-import GameEvents from '../../src/game/GameEvents'
-import config from '../../src/config'
+import GameEvents from '../../../src/controllers/events/GameEvents'
+import config from '../../../src/config'
 
 describe('GameEvents tests', () => {
   var gameState, gEvents, startSpy
