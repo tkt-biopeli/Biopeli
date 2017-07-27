@@ -33,6 +33,13 @@ export default class Structure {
     this.radiusForTileOwnership = structureType.radiusForTileOwnership
   }
 
+  /**
+   * checks whether this structure owns the tile at the given coordinates
+   * 
+   * @param {number} x 
+   * @param {number} y 
+   * @return {boolean}
+   */
   ownsTileAt (x, y) {
     var i, tile, len = this.ownedTiles.length
     for (i = 0; i < len; i++) {

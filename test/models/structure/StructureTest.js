@@ -37,6 +37,21 @@ describe('Structure tests', () => {
     })
   })
 
+  it('ownsTileAt works', () => {
+    var tiles = [
+      {x:0, y:1},
+      {x:1, y:0},
+      {x:1, y:1},
+      {x:-1, y:-1},
+      {x:7, y:7}
+    ]
+    structure.ownedTiles = tiles
+    assert(structure.ownsTileAt(0,0) == false)
+    assert(structure.ownsTileAt(7,7) == true)
+    assert(structure.ownsTileAt(1,1) == true)
+    assert(structure.ownsTileAt(10,10) == false)
+  })
+
   it('Constructor works', () => {
     assert.equal(tile, structure.tile)
     assert.equal(stype, structure.structureType)

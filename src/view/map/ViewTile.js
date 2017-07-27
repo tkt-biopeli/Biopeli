@@ -67,6 +67,7 @@ export default class ViewTile {
    * Creates the view for the using the asset related to modeltile's type
    * @param {number} x
    * @param {number} y
+   * @return {Phaser.Sprite}
    */
   makeTileSprite (x, y) {
     var sprite = this.game.make.sprite(x, y, this.modelTile.tileType.asset)
