@@ -104,6 +104,7 @@ export default class MapView {
   fillView (viewArea, offset) {
     for (var c = viewArea.startCol; c <= viewArea.endCol; c++) {
       for (var r = viewArea.startRow; r <= viewArea.endRow; r++) {
+
         var tile = this.map.getTileWithGridCoordinates(c, r)
         var pxCoords = this.ColAndRowToPx(c, r, viewArea.startCol, viewArea.startRow, offset)
         if (typeof tile !== 'undefined') this.createViewTileForFill(tile, pxCoords, viewArea, offset)
@@ -134,6 +135,10 @@ export default class MapView {
   highlightSelectedTile (tile, pxCoords) {
     if (tile === this.menuController.stateValue('selectedTile')) {
       this.addToViewTexture(this.highlight(), pxCoords.x, pxCoords.y)
+      if (tile.structure !== null && tile.structure.producer.producer.ownedFarmLand !== null) {
+        // console.log(tile.structure.ownedTiles)
+        console.log(tile.structure.producer.producer.ownedFarmLand)
+      }
     }
   }
 

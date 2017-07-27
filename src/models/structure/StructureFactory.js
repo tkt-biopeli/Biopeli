@@ -106,7 +106,11 @@ export default class StructureFactory {
       }
       this.setAssetForRefinery(tile, tmpTile)
       if (tmpTile.owner !== null) {
-        tmpTile.owner.ownedTiles.pop(tmpTile)
+        let index = tmpTile.owner.ownedTiles.indexOf(tmpTile)
+        if (index > -1) {
+          tmpTile.owner.ownedTiles.splice(index, 1);
+        }
+
       }
       tmpTile.owner = tile.structure
       tile.structure.ownedTiles.push(tmpTile)
@@ -154,6 +158,7 @@ export default class StructureFactory {
     }, this)
   }
 
+  // bugi
   calculateFarmLand (structure) {
     structure.ownedTiles.forEach(function (tmpTile) {
       structure.producer.producer.ownedFarmLand.push(tmpTile)
