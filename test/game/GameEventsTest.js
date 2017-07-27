@@ -9,7 +9,6 @@ describe('GameEvents tests', () => {
 
   beforeEach(() => {
     startSpy = sinon.spy()
-    
     gameState = {
       player: {
         points: 574
@@ -20,7 +19,17 @@ describe('GameEvents tests', () => {
       state: {
         state: {
           start: startSpy
+        },
+        add: {
+          audio: {
+            play: () => {},
+            stop: () => {},
+            fullLoop: () => {}
+          }
         }
+      },
+      music: {
+        stop: () => {}
       }
     }
 
