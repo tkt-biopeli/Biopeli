@@ -22,22 +22,24 @@ export default class PerlinGenerator {
   }
 
   noisesAt (x, y) {
-    var nx = x / this.width - 0.5
-    var ny = y / this.height - 0.5
+    var c = this.coordinateChange(x, y)
 
     return {
-      ground: this.groundnoise.perlin2(this.groundfreq * nx, this.groundfreq * ny),
-      forest: this.forestnoise.perlin2(this.forestfreq * nx, this.forestfreq * ny),
-      fertility: this.fertilitynoise.perlin2(this.fertilityfreq * nx, this.fertilityfreq * ny)
+      ground: this.groundnoise.perlin2(this.groundfreq * c.x, this.groundfreq * c.y),
+      forest: this.forestnoise.perlin2(this.forestfreq * c.x, this.forestfreq * c.y),
+      fertility: this.fertilitynoise.perlin2(this.fertilityfreq * c.x, this.fertilityfreq * c.y)
     }
   }
 
   noiseValueAt (x, y, noiseName) {
-    var nx = x / this.width - 0.5
-    var ny = y / this.height - 0.5
+    var c = this.coordinateChange(x, y)
 
     var noise = this[noiseName + 'noise']
     var freq = this[noiseName + 'freq']
-    return noise.perlin2(freq * nx, freq * ny)
+    return noise.perlin2(freq * c.x, freq * c.y)
+  }
+
+  coordinateChange (x, y) {
+    return {x: x / this.width - 0.5, y: y / this.height - 0.5}
   }
 }
