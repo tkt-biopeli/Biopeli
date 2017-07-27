@@ -1,18 +1,20 @@
 import config from '../config'
+
 import Map from '../models/map/Map'
 import Player from './Player'
 import City from '../models/city/City'
 import StructureFactory from '../models/structure/StructureFactory'
-import GameEvents from './GameEvents'
+import PurchaseManager from '../models/PurchaseManager'
+import TileFinder from '../models/map/TileFinder'
+
 import MapView from '../view/map/MapView'
 import MenuView from '../view/menu/MenuView'
 import CameraMover from '../view/CameraMover'
 import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
-import TileFinder from '../models/map/TileFinder'
-import EventController from '../controllers/events/EventController'
-import PurchaseManager from '../models/PurchaseManager'
 
+import EventController from '../controllers/events/EventController'
+import GameEvents from '../controllers/events/GameEvents'
 import GameTimerListener from '../controllers/events/time/GameTimerListener'
 import Timer from '../controllers/events/time/Timer'
 
