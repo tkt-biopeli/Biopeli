@@ -15,18 +15,14 @@ describe('Map tests', () => {
     map = new Map({
       game: game,
       width: 100,
-      height: 100
+      height: 100,
+      tileSize: {width: 128, height: 128}
     })
   })
 
   it('Constructor test', () => {
-
-    /*    var mock = sinon.mock(game.world)
-        mock.expects("setBounds").once().withArgs(0, 0, 100 * 128, 100 * 128)*/
-
     assert.equal(map.gridSizeX, 100)
     assert.equal(map.gridSizeY, 100)
-
   })
 
   it('Tile is added and returned with grid coordinates', () => {
@@ -59,12 +55,4 @@ describe('Map tests', () => {
     assert.equal(map.gridToPixelsX(2), 256)
     assert.equal(map.gridToPixelsY(2), 256)
   })
-
-  it('Map generation works', () => {
-    map.createMap()
-    for(var x = 0; x < map.gridSizeX; x++)
-      for(var y = 0; y < map.gridSizeY; y++)
-        assert(map.getTileWithGridCoordinates(x,y) != undefined)
-  })
-
 })

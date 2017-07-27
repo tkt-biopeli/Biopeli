@@ -3,11 +3,13 @@ import PerlinGenerator from './PerlinGenerator'
 import StaticTypes from '../StaticTypes'
 
 export default class MapGenerator {
-  constructor({width, height, generatingSettings, perlinNoise, noiseSettings}) {
+  constructor ({mapSize, tileSize, generatingSettings, perlinNoise, noiseSettings}) {
     this.types = StaticTypes.tileTypes
 
-    this.width = width
-    this.height = height
+    this.width = mapSize.width
+    this.height = mapSize.height
+
+    this.tileSize = tileSize
 
     this.perlinGenerator = new PerlinGenerator({
       Noise: perlinNoise,
@@ -28,7 +30,8 @@ export default class MapGenerator {
   generateMap (seed) {
     var map = new Map({
       width: this.width,
-      height: this.height
+      height: this.height,
+      tileSize: this.tileSize
     })
 
     var x, y
@@ -37,7 +40,7 @@ export default class MapGenerator {
         var tileType = this.tileTypeAt(x, y)
         var moisture = this.moistureAt(x, y)
         var fertility = this.fertilityAt(x, y)
-        
+
         map.addTileWithGridCoordinates(x, y, tileType, moisture, fertility)
       }
     }
@@ -68,7 +71,7 @@ export default class MapGenerator {
   moistureAt (x, y) {
     var noise = this.perlinGenerator.noiseValueAt(x, y, 'ground')
 
-    if(noise <= this.groundLimit) {
+    if (noise <= this.groundLimit) {
       return 100
     }
 

@@ -133,8 +133,8 @@ export default class GamestateChecker {
    * @param {{x: number, y: number}} estimated 
    */
   checkTileUnderCamera(estimated) {
-    var ex = Math.floor(estimated.x / config.tileWidth)
-    var ey = Math.floor(estimated.y / config.tileHeight)
+    var ex = Math.floor(estimated.x / config.tileSize.width)
+    var ey = Math.floor(estimated.y / config.tileSize.height)
     var camera = this.gameStub.getCamera()
     this.checkTilesModelCoordinates(camera.x, camera.y, ex, ey)
   }
@@ -216,11 +216,12 @@ export default class GamestateChecker {
    *
    * @param {*} wantedAmount
    */
-  checkPerlinNoiseCallAmount(wantedAmount){
-    var mapgen = this.gameState.map.mapgen
+  checkPerlinNoiseCallAmount(forwanted, gwanted, ferwanted){
+    var gen = this.gameState.mapGenerator.perlinGenerator
 
-    assert.equal(wantedAmount, mapgen.forestnoise.callCount)
-    assert.equal(wantedAmount, mapgen.groundnoise.callCount)
+    assert.equal(forwanted, gen.forestnoise.callCount)
+    assert.equal(gwanted, gen.groundnoise.callCount)
+    assert.equal(ferwanted, gen.fertilitynoise.callCount)
   }
 
   checkStructureRuinAmount(x, y, wantedHealth) {

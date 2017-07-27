@@ -13,8 +13,10 @@ export default {
   gameLength: 300,
 
   // configurations for tiles
-  tileWidth: 64,
-  tileHeight: 64,
+  tileSize: {
+    width: 64,
+    height: 64
+  },
 
   ruinSettings: {
     minRuin: 4, // minimum time between two ruining events
@@ -23,8 +25,10 @@ export default {
   },
 
   // configurations for map
-  mapWidth: 18, // NOTE TO CHANGER! VALUES UNDER 12 BUG THE MAP!
-  mapHeight: 18, // THIS TOO
+  mapSize: {
+    width: 18, // NOTE TO CHANGER! VALUES UNDER 12 BUG THE MAP!
+    height: 18 // THIS TOO
+  },
   noise: {
     freqs: {
       groundfreq: 10,
@@ -38,7 +42,6 @@ export default {
     groundLimit: -0.2,
     forestLimit: -0.1
   },
-
   moveCosts: {
     grass: 1,
     water: 5,

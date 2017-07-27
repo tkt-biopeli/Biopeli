@@ -1,21 +1,20 @@
 import ModelTile from './ModelTile'
-import config from '../../config'
 
 /**
  * Generates the map with given measurements for grid and tiles
  */
-export default class Map {
+export default class MapGrid {
   /**
    * @param {number} param.gridSizeX
    * @param {number} param.gridSizeY
    * @param {number} param.tileWidth
    * @param {number} param.tileHeight
    */
-  constructor ({ width, height}) {
+  constructor ({width, height, tileSize}) {
     this.gridSizeX = width
     this.gridSizeY = height
-    this.tileWidth = config.tileWidth
-    this.tileHeight = config.tileHeight
+    this.tileWidth = tileSize.width
+    this.tileHeight = tileSize.height
     this.grid = []
   }
 
