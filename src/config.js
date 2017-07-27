@@ -25,10 +25,19 @@ export default {
   // configurations for map
   mapWidth: 18, // NOTE TO CHANGER! VALUES UNDER 12 BUG THE MAP!
   mapHeight: 18, // THIS TOO
-  gfreq: 10,
-  ffreq: 20,
-  noiseWidth: 64,
-  noiseHeight: 64,
+  noise: {
+    freqs: {
+      groundfreq: 10,
+      forestfreq: 20,
+      fertilityfreq: 5
+    },
+    noiseWidth: 64,
+    noiseHeight: 64
+  },
+  generatingSettings: {
+    groundLimit: -0.2,
+    forestLimit: -0.1
+  },
 
   moveCosts: {
     grass: 1,

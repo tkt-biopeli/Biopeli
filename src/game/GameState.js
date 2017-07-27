@@ -1,6 +1,6 @@
 import config from '../config'
 
-import Map from '../models/map/Map'
+import MapGenerator from '../models/map/MapGenerator'
 import Player from './Player'
 import City from '../models/city/City'
 import StructureFactory from '../models/structure/StructureFactory'
@@ -84,19 +84,17 @@ export default class GameState {
     this.gameTimer.callListeners()
   }
 
-  initializeModel (cityName, perlinNoise, gameLength, startMoney, mapWidth, mapHeight, tileWidth, tileHeight) {
+  initializeModel (cityName, perlinNoise, gameLength, startMoney, mapWidth, mapHeight) {
     this.eventController = new EventController()
 
-    this.map = new Map({
-      gridSizeX: mapWidth,
-      gridSizeY: mapHeight,
-      tileWidth: tileWidth,
-      tileHeight: tileHeight,
-      perlinNoise: perlinNoise
+    var mapGenerator = new MapGenerator({
+      width: mapWidth,
+      height: mapHeight,
+      generatingSettings: config.generatingSettings,
+      perlinNoise: perlinNoise,
+      noiseSettings: config.noise
     })
-
-    // fill map grid with sample data
-    this.map.createMap()
+    this.map = mapGenerator.generateMap()
 
     this.tileFinder = new TileFinder({
       map: this.map,

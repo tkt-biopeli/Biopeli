@@ -1,23 +1,22 @@
 import ModelTile from './ModelTile'
-import MapGen from './MapGen'
+import config from '../../config'
 
 /**
  * Generates the map with given measurements for grid and tiles
  */
-export default class MapGrid {
+export default class Map {
   /**
    * @param {number} param.gridSizeX
    * @param {number} param.gridSizeY
    * @param {number} param.tileWidth
    * @param {number} param.tileHeight
    */
-  constructor ({ gridSizeX, gridSizeY, tileWidth, tileHeight, perlinNoise }) {
-    this.gridSizeX = gridSizeX
-    this.gridSizeY = gridSizeY
-    this.tileWidth = tileWidth
-    this.tileHeight = tileHeight
+  constructor ({ width, height}) {
+    this.gridSizeX = width
+    this.gridSizeY = height
+    this.tileWidth = config.tileWidth
+    this.tileHeight = config.tileHeight
     this.grid = []
-    this.perlinNoise = perlinNoise
   }
 
   /**
@@ -135,30 +134,6 @@ export default class MapGrid {
    */
   removeTileWithPixelCoordinates (px, py) {
     this.grid[this.pixelsToGridX(py) * this.gridSizeX + this.pixelsToGridX(px)] = undefined
-  }
-
-  /**
-   * Generates the game map
-   *
-   * @param {number} seed - optional seed for map generation
-   */
-  createMap (seed) {
-    this.mapgen = new MapGen({
-      seed: seed,
-      Noise: this.perlinNoise
-    })
-    
-    // generoitava luonnin yhteydessä moisture ja fertility
-    var x, y
-    for (x = 0; x < this.gridSizeX; x++) {
-      for (y = 0; y < this.gridSizeY; y++) {
-        var tileType = this.mapgen.tileTypeAt(x, y)
-        var moisture = this.mapgen.moistureAt(x, y)
-        var fertility = this.mapgen.fertilityAt(x, y)
-        console.log(fertility)
-        this.addTileWithGridCoordinates(x, y, tileType, moisture, fertility)
-      }
-    }
   }
 
   /**

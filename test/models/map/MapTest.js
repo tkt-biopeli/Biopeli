@@ -14,11 +14,8 @@ describe('Map tests', () => {
 
     map = new Map({
       game: game,
-      gridSizeX: 100,
-      gridSizeY: 100,
-      tileWidth: 128,
-      tileHeight: 128,
-      perlinNoise: Noise
+      width: 100,
+      height: 100
     })
   })
 
@@ -29,9 +26,6 @@ describe('Map tests', () => {
 
     assert.equal(map.gridSizeX, 100)
     assert.equal(map.gridSizeY, 100)
-    assert.equal(map.tileHeight, 128)
-    assert.equal(map.tileWidth, 128)
-    assert.equal(Noise, map.perlinNoise)
 
   })
 
