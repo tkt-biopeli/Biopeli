@@ -66,6 +66,12 @@ export default class GameStub {
         reset: function () { }
       }),
 
+      audio: this.mockers.createOneValueMocker('add.audio', {
+        play: () => {},
+        loopFull: () => {},
+        stop: () => {}
+      }),
+
       existing: this.mockers.createOneValueMocker('add.existing', {
       }),
 
