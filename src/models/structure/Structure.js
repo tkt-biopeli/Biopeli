@@ -33,6 +33,16 @@ export default class Structure {
     this.radiusForTileOwnership = structureType.radiusForTileOwnership
   }
 
+  ownsTileAt (x, y) {
+    var i, tile, len = this.ownedTiles.length
+    for (i = 0; i < len; i++) {
+      tile = this.ownedTiles[i]
+      if (x == tile.x && y == tile.y) 
+        return true
+    }
+    return false
+  }
+
   /**
    * Returns true if the structure produces throughout the year and false if
    * only during harvesting periods.
