@@ -12,7 +12,9 @@ describe('Model tile tests', () => {
       x: 1,
       y: 2,
       type: tileType,
-      structure: -1
+      structure: -1,
+      moisture: 3,
+      fertility: 3
     })
 
     assert.equal(1, tile.x)
@@ -20,5 +22,7 @@ describe('Model tile tests', () => {
     assert.equal(tileType, tile.tileType)
     assert.equal(-1, tile.structure)
     assert.equal(5, tile.flowers)
+    assert.equal(3, tile.moisture)
+    assert.equal(3, tile.fertility)
   })
 })

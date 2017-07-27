@@ -3,6 +3,11 @@ const LinearFunction = (multiplier, constantAddition) =>
 
 const ConstantFunction = constant => () => constant
 
+const Circle = (xo, yo, radius, mult) => x =>
+  x >= -radius + xo && x <= radius + xo
+    ? yo + mult * Math.sqrt(radius * radius - (x - xo) * (x - xo))
+    : 0
+
 /**
  * Creates linear function that goes through given points
  *
@@ -48,4 +53,11 @@ const initializeLine = function (slope, constant) {
   return LinearFunction(slope, constant)
 }
 
-export { createLine, initializeLine }
+const createCircle = function (x, y, radius, upper) {
+  var mult = -1
+  if (upper) mult = 1
+
+  return Circle(x, y, radius, mult)
+}
+
+export { createLine, initializeLine, createCircle }

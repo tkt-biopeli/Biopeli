@@ -1,4 +1,4 @@
-import {createLine} from '../logic/LinearFunction'
+import {createLine} from '../logic/Functions'
 
 /**
  * Determines how much money the player gets from the produced turnips

@@ -75,8 +75,15 @@ export default class MapGrid {
    * @param {Number} gy
    * @param {TileType} tileType
    */
-  addTileWithGridCoordinates (gx, gy, tileType) {
-    var tile = new ModelTile({ x: gx, y: gy, type: tileType, structure: null })
+  addTileWithGridCoordinates (gx, gy, tileType, moisture, fertility) {
+    var tile = new ModelTile({
+      x: gx,
+      y: gy,
+      type: tileType,
+      structure: null,
+      moisture: moisture,
+      fertility: fertility
+    })
     this.grid[gy * this.gridSizeX + gx] = tile
     return tile
   }
@@ -86,10 +93,10 @@ export default class MapGrid {
    * @param {Number} py
    * @param {TileType} tileType
    */
-  addTileWithPixelCoordinates (px, py, tileType) {
+  addTileWithPixelCoordinates (px, py, tileType, moisture, fertility) {
     var gx = this.pixelsToGridX(px)
     var gy = this.pixelsToGridY(py)
-    return this.addTileWithGridCoordinates(gx, gy, tileType)
+    return this.addTileWithGridCoordinates(gx, gy, tileType, moisture, fertility)
   }
 
   /**
@@ -140,11 +147,11 @@ export default class MapGrid {
       seed: seed,
       Noise: this.perlinNoise
     })
-
+    // generoitava luonnin yhteydessä moisture ja fertility
     var x, y
     for (x = 0; x < this.gridSizeX; x++) {
       for (y = 0; y < this.gridSizeY; y++) {
-        this.addTileWithGridCoordinates(x, y, this.mapgen.typeAt(x, y))
+        this.addTileWithGridCoordinates(x, y, this.mapgen.typeAt(x, y), 0, 0)
       }
     }
   }

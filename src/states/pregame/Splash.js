@@ -25,6 +25,9 @@ export default class extends Phaser.State {
     this.load.image('emptyButton', 'assets/images/buttons/empty_button.png')
     this.load.image('unusableButton', 'assets/images/buttons/empty_unbutton.png')
 
+    this.load.audio('music', 'assets/music/music.ogg')
+    this.load.audio('menu', 'assets/music/menu.ogg')
+
     this.load.image('forest', 'assets/images/tiles/forest.png')
     this.load.image('water', 'assets/images/tiles/water.png')
     this.load.image('grass', 'assets/images/tiles/grass.png')
@@ -45,6 +48,8 @@ export default class extends Phaser.State {
     this.load.image('menuBg', 'assets/images/backgrounds/low-poly-bg.png')
 
     this.load.spritesheet('daisy', 'assets/images/daisy.png', 32, 32, 10)
+    this.load.image('area', 'assets/images/tiles/area.png')
+    this.load.spritesheet('hammers', 'assets/images/hammers.png', 128, 128, 4)
   }
 
   /**

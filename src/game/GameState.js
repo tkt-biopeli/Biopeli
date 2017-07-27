@@ -1,21 +1,26 @@
 import config from '../config'
+
 import Map from '../models/map/Map'
 import Player from './Player'
 import City from '../models/city/City'
 import StructureFactory from '../models/structure/StructureFactory'
-import GameEvents from './GameEvents'
+import PurchaseManager from '../models/PurchaseManager'
+import TileFinder from '../models/map/TileFinder'
+
 import MapView from '../view/map/MapView'
 import MenuView from '../view/menu/MenuView'
 import CameraMover from '../view/CameraMover'
 import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
-import Timer from '../view/Timer'
-import GameTimerListener from '../models/GameTimerListener'
-import TileFinder from '../models/map/TileFinder'
+
 import EventController from '../controllers/events/EventController'
+import GameEvents from '../controllers/events/GameEvents'
+import GameTimerListener from '../controllers/events/time/GameTimerListener'
+import Timer from '../controllers/events/time/Timer'
 
 import TopBarContent from '../controllers/menucontrol/contents/TopBarContent'
-import SideMenuContent from '../controllers/menucontrol/contents/SideMenuContent'
+import TileContent from '../controllers/menucontrol/contents/TileContent'
+import CityContent from '../controllers/menucontrol/contents/CityContent'
 import BuildStructureContent from '../controllers/menucontrol/contents/BuildStructureContent'
 import SingleController from '../controllers/menucontrol/SingleController'
 import MulticontentController from '../controllers/menucontrol/MulticontentController'
@@ -99,6 +104,7 @@ export default class GameState {
     })
 
     this.player = new Player({startMoney: startMoney})
+    this.purchaseManager = new PurchaseManager({player: this.player})
     this.city = new City({
       name: cityName,
       startPopulation: config.cityInitialPopulation,
@@ -119,13 +125,19 @@ export default class GameState {
       gameTimer: this.gameTimer,
       player: this.player,
       eventController: this.eventController,
-      map: this.map
+      purchaseManager: this.purchaseManager,
+      map: this.map,
+      ruinSettings: config.ruinSettings
     })
 
     this.gameEvents = new GameEvents({
       gameState: this,
       gameLength: gameLength
     })
+
+    this.music = this.state.add.audio('music')
+    this.music.play()
+    this.music.loopFull()
   }
 
   initializeView () {
@@ -182,13 +194,19 @@ export default class GameState {
       })
     })
 
-    this.menuContent = new SideMenuContent({
+    this.cityContent = new CityContent({
       city: this.city,
       gameEvents: this.gameEvents
     })
 
+    this.tileContent = new TileContent({
+      topBarController: this.topBarController,
+      purchaseManager: this.purchaseManager,
+      demandFunction: this.city.turnipDemand
+    })
+
     var buildStructureController = new BuildStructureContent({
-      player: this.player,
+      purchaseManager: this.purchaseManager,
       structureFactory: this.structureFactory
     })
 
@@ -201,7 +219,7 @@ export default class GameState {
         buttonHeight: config.menuButtonHeight,
         buttonWidth: config.menuButtonWidth
       }),
-      contents: [this.menuContent, buildStructureController]
+      contents: [this.cityContent, this.tileContent, buildStructureController]
     })
   }
 

@@ -1,8 +1,9 @@
 import ContinuousProducer from './producers/ContinuousProducer'
 import SeasonalProducer from './producers/SeasonalProducer'
 import Refiner from './producers/Refiner'
+
 import PrimaryProducerDecorator from './producers/decorators/PrimaryProducerDecorator'
-import CallcheckDecorator from './producers/decorators/CallcheckDecorator'
+import AllDecorator from './producers/decorators/AllDecorator'
 /**
  * Yields turnips during the harvesting period (month.week).
  */
@@ -23,7 +24,7 @@ export default class ProducerFactory {
       ? this.createRefiner(sType.buysFrom, sType.multiplier, sType.reach, tile)
       : this.createPrimaryProducer(sType, tile)
 
-    return new CallcheckDecorator({producer: producer})
+    return new AllDecorator({producer: producer, tile: tile})
   }
 
   createPrimaryProducer (sType, tile) {

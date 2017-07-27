@@ -1,7 +1,7 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import GameTimerListener from '../../src/models/GameTimerListener'
-import TimeEvent from '../../src/view/TimeEvent'
+import GameTimerListener from '../../../src/controllers/events/time/GameTimerListener'
+import TimeEvent from '../../../src/controllers/events/time/TimeEvent'
 
 describe('Game timer listener tests', () => {
   var gtListener, player, menuController, topBarController, city, gameEvents
@@ -55,27 +55,39 @@ describe('Game timer listener tests', () => {
   it('onTimer works correctly', () => {
     var timerEvent = { year: 2 }
     var countProdStub = sinon.stub()
-    countProdStub.withArgs(74, timerEvent).returns(37)
+    countProdStub.withArgs(timerEvent).returns(37)
     var doTransactionSpy = sinon.spy()
     var redrawControllersSpy = sinon.spy()
     
     gtListener.countProductionFromStructures = countProdStub
     gtListener.doTransaction = doTransactionSpy
     gtListener.redrawControllers = redrawControllersSpy
+    gtListener.checkBuildingRuining = sinon.spy()
     gtListener.onTimer(timerEvent)
     
-    assert(doTransactionSpy.calledWith(37))
+    assert(doTransactionSpy.calledWith(37, timerEvent))
     assert(redrawControllersSpy.calledWith())
     assert(isGameOverSpy.calledWith(timerEvent))
+    assert(gtListener.checkBuildingRuining.calledWith(timerEvent))
   })
 
   it('countProductionFromStructures works correctly', () => {
     var timerEvent = 4
     var str = { produce: function (timerEvent) {return 3 + timerEvent}, structureType : {name: "not a farm"}}
     var structures = [str, str, str]
+    player.structures = structures
     
-    var result = gtListener.countProductionFromStructures(structures, timerEvent)
+    var result = gtListener.countProductionFromStructures(timerEvent)
     assert.equal(21, result)
+  })
+
+  it('Ruining calls ruinign functions', ()=>{
+    var str = {healthManager: {checkRuin: sinon.spy()}}
+    player.structures = [str, str, str]
+
+    gtListener.checkBuildingRuining(1)
+    assert.equal(3, str.healthManager.checkRuin.callCount)
+    assert(str.healthManager.checkRuin.calledWith(1))
   })
 
   it('doTransaction works correctly', () => {

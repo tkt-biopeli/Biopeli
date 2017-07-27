@@ -16,6 +16,12 @@ export default {
   tileWidth: 64,
   tileHeight: 64,
 
+  ruinSettings: {
+    minRuin: 4, // minimum time between two ruining events
+    maxRuin: 48, // maxium time between two ruining events
+    fixMultiplier: 2
+  },
+
   // configurations for map
   mapWidth: 18, // NOTE TO CHANGER! VALUES UNDER 12 BUG THE MAP!
   mapHeight: 18, // THIS TOO
@@ -27,7 +33,9 @@ export default {
   moveCosts: {
     grass: 1,
     water: 5,
-    forest: 2
+    forest: 2,
+    field: 1,
+    industrial: 1
   },
 
   // configurations for menu
@@ -55,7 +63,7 @@ export default {
   },
 
   // configurations for camera
-  cameraSpeed: 400,
+  cameraSpeed: 200,
   tweenCameraDuration: 500,
 
   // amount of time between time events
@@ -63,9 +71,9 @@ export default {
 
   // configurations for city
   cityInitialPopulation: 500,
-  cityDemandMultiplier: 2,
+  cityDemandMultiplier: 4,
   cityDemandRandomVariance: 0.1,
-  startTurnipPrice: 20,
+  startTurnipPrice: 6,
   populationChangeAt100: 1.5,
   populationChangeAt200: 2.5,
 

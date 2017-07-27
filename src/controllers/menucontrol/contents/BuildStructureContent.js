@@ -1,11 +1,12 @@
 import Content from './Content'
 
 export default class BuildStructureController extends Content {
-  constructor ({ player, structureFactory }) {
+  constructor ({ player, structureFactory, purchaseManager }) {
     super()
     this.structureFactory = structureFactory
-    this.player = player
-    this.emptyFunction = () => { }
+    this.purchaseManager = purchaseManager
+
+    this.emptyFunction = () => {}
   }
 
   createSections () {
@@ -29,7 +30,7 @@ export default class BuildStructureController extends Content {
     this.text('Price: ' + stype.cost, 'large')
 
     this.section('build')
-    if (this.player.enoughCashFor(stype.cost)) {
+    if (this.purchaseManager.hasCash(stype.cost)) {
       this.owner.resetDecoratedButton('Build', null, this.structureFactory.buildBuilding, this.structureFactory, tile, stype)
     } else {
       this.button('Not enough money', this.emptyFunction, null, 'unusableButton')

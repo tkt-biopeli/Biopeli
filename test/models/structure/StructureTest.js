@@ -33,8 +33,7 @@ describe('Structure tests', () => {
       size: 10,
       structureType: stype,
       foundingYear: 1999,
-      producer: producer,
-      cost: stype.cost
+      producer: producer
     })
   })
 
@@ -46,7 +45,6 @@ describe('Structure tests', () => {
     assert.equal(10, structure.size)
     assert.equal(1999, structure.foundingYear)
     assert.equal(producer, structure.producer)
-    assert.equal(100, structure.cost)
   })
 
   it('hasContinuousProduction returns correct value', () => {
@@ -57,10 +55,6 @@ describe('Structure tests', () => {
 
   it('asset function returns correct value', () => {
     assert.equal('sd', structure.asset())
-  })
-
-  it('calculateProductionEfficiency returns correct value', () => {
-    assert.equal(100, structure.calculateProductionEfficiency())
   })
   
   it('produce returns zero if there is no produce function', () => {

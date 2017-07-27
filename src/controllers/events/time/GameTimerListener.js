@@ -22,8 +22,11 @@ export default class GameTimerListener {
   * @param {TimerEvent} timerEvent
   */
   onTimer (timerEvent) {
-    var producedTurnips = this.countProductionFromStructures(this.player.structures, timerEvent)
+    var producedTurnips = this.countProductionFromStructures(timerEvent)
     this.doTransaction(producedTurnips, timerEvent)
+
+    this.checkBuildingRuining(timerEvent)
+
     this.redrawControllers()
     // is game over?
     this.gameEvents.isGameOver(timerEvent)
@@ -34,12 +37,20 @@ export default class GameTimerListener {
    * @param {Structure[]} structures
    * @param {TimerEvent} timerEvent
    */
-  countProductionFromStructures (structures, timerEvent) {
+  countProductionFromStructures (timerEvent) {
     var sum = 0
-    for (let structure of structures) {
-      sum += structure.produce(timerEvent)
+    for (let structure of this.player.structures) {
+      let amount = structure.produce(timerEvent)
+      // console.log(structure.structureName + ' ' + amount)
+      sum += amount
     }
     return sum
+  }
+
+  checkBuildingRuining (timerEvent) {
+    for (let structure of this.player.structures) {
+      structure.healthManager.checkRuin(timerEvent)
+    }
   }
 
   /**

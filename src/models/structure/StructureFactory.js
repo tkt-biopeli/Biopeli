@@ -1,4 +1,7 @@
 import Structure from './Structure'
+import StructureHealth from './health/StructureHealth'
+import HealthManager from './health/HealthManager'
+
 import ProducerFactory from './ProducerFactory'
 import StructureNameGenerator from '../namegeneration/StructureNameGenerator'
 import StructureNameParts from '../namegeneration/StructureNameParts'
@@ -13,11 +16,13 @@ export default class StructureFactory {
    * @param {GameTimer} gameTimer
    * @param {Player} player
    */
-  constructor ({ gameTimer, eventController, player, map, tileFinder }) {
+  constructor ({ purchaseManager, gameTimer, eventController, player, map, tileFinder, ruinSettings }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
     this.eventController = eventController
+    this.purchaseManager = purchaseManager
+
     this.namer = new StructureNameGenerator({
       frontAdjectives: StructureNameParts[0],
       names: StructureNameParts[1],
@@ -30,6 +35,10 @@ export default class StructureFactory {
       tileFinder: tileFinder,
       eventController: eventController
     })
+
+    this.minRuin = ruinSettings.minRuin
+    this.maxRuin = ruinSettings.maxRuin
+    this.priceMultiplier = ruinSettings.fixMultiplier
   }
 
   /**
@@ -38,35 +47,36 @@ export default class StructureFactory {
    * @param {StructureType} structureType
    */
   buildBuilding (tile, structureType) {
-    if (!this.checkMoney(structureType)) return
+    if (!this.purchaseManager.purchase(structureType.cost)) return
+
+    var health = new StructureHealth({ maxHealth: structureType.health })
+    var manager = new HealthManager({
+      health: health,
+      minRuinTime: this.minRuin,
+      maxRuinTime: this.maxRuin,
+      purchaseManager: this.purchaseManager,
+      buildingCost: structureType.cost,
+      priceMultiplier: this.priceMultiplier
+    })
+    manager.calculateNextRuin(this.gameTimer.currentTimeEvent)
+
     tile.structure = new Structure({
       tile: tile,
+      health: health,
+      healthManager: manager,
       ownerName: this.namer.createOwnerName(),
       structureName: this.namer.createBuildingName(structureType.name),
       size: 0,
       structureType: structureType,
       foundingYear: this.gameTimer.currentTimeEvent.year,
-      producer: this.producerFactory.createProducer(structureType, tile),
-      cost: structureType.cost
+      producer: this.producerFactory.createProducer(structureType, tile)
     })
     this.player.addStructure(tile.structure)
     this.createInitialPollution(structureType.pollution, tile)
     this.buyLand(tile.structure)
     this.calculateSize(tile.structure)
-    this.eventController.event('buildStructure', tile)
-  }
 
-  /**
-   * Checks if the player has enough money for a given type of structure
-   * decreases players cash if true
-   * @param {StructureType} structureType
-   */
-  checkMoney (structureType) {
-    if (!this.player.enoughCashFor(structureType.cost)) {
-      return false
-    }
-    this.player.cash -= structureType.cost
-    return true
+    this.eventController.event('structureBuilt', tile)
   }
 
   /**
@@ -100,23 +110,28 @@ export default class StructureFactory {
 
   buyLandForRefinery (structure, distance, tmpTile) {
     if (distance === 0 || tmpTile.structure === null) {
-      if (tmpTile.tileType.name === 'field') {
+      this.decreaseOwnedTiles(tmpTile)
+      this.setAssetForRefinery(tmpTile)
+      tmpTile.owner = tile.structure
+      tile.structure.ownedTiles.push(tmpTile)
+    }
+  }
 
+  decreaseOwnedTiles (tmpTile) {
+    if (tmpTile.owner !== null) {
+      if (tmpTile.tileType.name === 'field') {
         let index = tmpTile.owner.producer.producer.ownedFarmLand.indexOf(tmpTile)
         if (index > -1) {
           tmpTile.owner.producer.producer.ownedFarmLand.splice(index, 1);
           tmpTile.owner.size--
         }
       }
-
       if (tmpTile.owner !== null) {
         let index = tmpTile.owner.ownedTiles.indexOf(tmpTile)
         if (index > -1) {
           tmpTile.owner.ownedTiles.splice(index, 1);
         }
-
       }
-
       this.setAssetForRefinery(tmpTile)
       tmpTile.owner = structure
       structure.ownedTiles.push(tmpTile)

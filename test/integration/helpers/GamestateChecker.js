@@ -206,6 +206,10 @@ export default class GamestateChecker {
     assert.equal(money, this.gameState.player.cash)
   }
 
+  checkMoneyUnder(under) {
+    assert(under > this.gameState.player.cash, "Excpected under: "+under+" Found: "+this.gameState.player.cash)
+  }
+
   /**
    * Checks if the game has ended
    *
@@ -227,5 +231,14 @@ export default class GamestateChecker {
 
     assert.equal(wantedAmount, mapgen.forestnoise.callCount)
     assert.equal(wantedAmount, mapgen.groundnoise.callCount)
+  }
+
+  checkStructureRuinAmount(x, y, wantedHealth) {
+    var tile = this.getTileModel(x, y)
+    assert(tile.structure != null)
+
+    var health = tile.structure.health
+
+    assert.equal(wantedHealth, health.currentHealth)
   }
 }

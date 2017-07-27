@@ -66,6 +66,12 @@ export default class GameStub {
         reset: function () { }
       }),
 
+      audio: this.mockers.createOneValueMocker('add.audio', {
+        play: () => {},
+        loopFull: () => {},
+        stop: () => {}
+      }),
+
       existing: this.mockers.createOneValueMocker('add.existing', {
       }),
 
@@ -99,7 +105,8 @@ export default class GameStub {
 
       sprite: this.mockers.createOneValueMocker('make.sprite', { 
         addChild: function () {},
-        scale: { setTo: function () {} }
+        scale: { setTo: function () {} },
+        anchor: {set: ()=>{}}
        })
 
     }

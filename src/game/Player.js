@@ -47,12 +47,4 @@ export default class {
       this.addPoints(fulfilledPct)
     }
   }
-
-  /**
-   * Checks if the player has enough money for an action (eg. building a structure)
-   * @param {number} cost - cost of the action
-   */
-  enoughCashFor (cost) {
-    return this.cash >= cost
-  }
 }
