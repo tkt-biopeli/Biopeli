@@ -23,13 +23,13 @@ export default class SideMenuContent extends Content {
    */
   createSections () {
     if (!this.owner.hasStateValue('selectedTile')) {
-      return
+      return null
     }
 
     var tile = this.owner.stateValue('selectedTile')
     this.tileInformation(tile)
 
-    if (tile.structure != null) {
+    if (tile.structure !== null) {
       var structure = tile.structure
       this.structureInformation(structure)
       this.structureRuining(structure)
