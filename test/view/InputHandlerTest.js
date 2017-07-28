@@ -41,7 +41,12 @@ describe('Inputhandler tests', () => {
       update: cameraMoverSpy
     }
 
-    handler = new InputHandler({ game: game, mapListener: mapListener, cameraMover: cameraMover })
+    handler = new InputHandler({
+      game: game,
+      mapListener: mapListener,
+      cameraMover: cameraMover,
+      mapView: {showFlowers: true}
+    })
   })
 
   function setInput(up, down, left, right, isDown, x, y) {
@@ -84,5 +89,10 @@ describe('Inputhandler tests', () => {
     assert(cameraMoverSpy.calledWith({ cursor: { up: true, down: false, left: true, right: false } }))
   })
 
-
+  it('Switching flowers on and off works properly', () => {
+    handler.flowersOnOff()
+    assert.equal(handler.mapView.showFlowers, false)
+    handler.flowersOnOff()
+    assert.equal(handler.mapView.showFlowers, true)
+  })
 })

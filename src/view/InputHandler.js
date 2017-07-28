@@ -63,6 +63,8 @@ export default class InputHandler {
   }
 
   flowersOnOff () {
-    this.mapView.showFlowers === true ? this.mapView.showFlowers = false : this.mapView.showFlowers = true
+    this.mapView.showFlowers === true
+      ? this.mapView.showFlowers = false
+      : this.mapView.showFlowers = true
   }
 }
