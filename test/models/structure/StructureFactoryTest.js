@@ -55,7 +55,12 @@ describe('StructureFactory tests', () => {
     tile = {
       structure: {
         size: 67,
-        ownedTiles: []
+        ownedTiles: [],
+        producer: {
+          producer: {
+            ownedFarmLand: []
+          }
+        }
       },
       flowers: 0
     }
@@ -194,5 +199,39 @@ describe('StructureFactory tests', () => {
     assert.equal(tmpTile.flowers, 9)
     helperFunctionForInitPollutionTests(9, 0, tmpTile)
     assert.equal(tmpTile.flowers, 1)
+  })
+
+  it('decreaseOwnedTiles is functioning properly', () =>{
+    var spy = sinon.spy()
+    sfactory.decreaseOwnedFarmland = spy
+    // the first 'if' is true; returns null
+    var tmpTile = createTmpTile(null, {name: 'foo'}, null, 0)
+    assert.equal(sfactory.decreaseOwnedTiles(tmpTile), null)
+    // the second and third 'ifs' are true
+    tmpTile = createTmpTile(null, {name: 'field'}, tile.structure, 0)
+    tile.structure.ownedTiles = ['foo', 'foo', tmpTile, 'foo']
+    sfactory.decreaseOwnedTiles(tmpTile)
+    assert.equal(tile.structure.ownedTiles.length, 3)
+    assert.equal(tile.structure.ownedTiles[2], 'foo')
+    assert(spy.calledWith(tmpTile))
+    // only the second 'if' is true
+    sfactory.decreaseOwnedTiles(tmpTile)
+    assert.equal(tile.structure.ownedTiles.length, 3)
+    assert(spy.calledWith(tmpTile))
+    // the second 'if' is false; the tile type is not 'field'
+    tmpTile = createTmpTile(null, {name: 'foo'}, tile.structure, 0)
+    assert.equal(spy.callCount, 2)
+  })
+
+  it('decreaseOwnedTiles is functioning properly', () =>{
+    var tmpTile = createTmpTile(null, {name: 'field'}, tile.structure, 0)
+    tile.structure.producer.producer.ownedFarmLand = ['foo', 'foo', tmpTile, 'foo']
+    sfactory.decreaseOwnedFarmland(tmpTile)
+    assert.equal(tile.structure.size, 66)
+    assert.equal(tile.structure.producer.producer.ownedFarmLand.length, 3)
+    // tmpTile is no longer in ownedFarmLand
+    sfactory.decreaseOwnedFarmland(tmpTile)
+    assert.equal(tile.structure.size, 66)
+    assert.equal(tile.structure.producer.producer.ownedFarmLand.length, 3)
   })
 })
