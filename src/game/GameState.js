@@ -1,19 +1,22 @@
 import config from '../config'
-import Map from '../models/map/Map'
+
+import MapGenerator from '../models/map/MapGenerator'
 import Player from './Player'
 import City from '../models/city/City'
 import StructureFactory from '../models/structure/StructureFactory'
-import GameEvents from './GameEvents'
+import PurchaseManager from '../models/PurchaseManager'
+import TileFinder from '../models/map/TileFinder'
+
 import MapView from '../view/map/MapView'
 import MenuView from '../view/menu/MenuView'
 import CameraMover from '../view/CameraMover'
 import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
-import Timer from '../view/Timer'
-import GameTimerListener from '../models/GameTimerListener'
-import TileFinder from '../models/map/TileFinder'
+
 import EventController from '../controllers/events/EventController'
-import PurchaseManager from '../models/PurchaseManager'
+import GameEvents from '../controllers/events/GameEvents'
+import GameTimerListener from '../controllers/events/time/GameTimerListener'
+import Timer from '../controllers/events/time/Timer'
 
 import TopBarContent from '../controllers/menucontrol/contents/TopBarContent'
 import TileContent from '../controllers/menucontrol/contents/TileContent'
@@ -38,12 +41,12 @@ export default class GameState {
    * @param {Number} param.tileHeight - Tile height in pixels
    * @param {Number} param.menuWidth - Menu width in pixels
    */
-  constructor ({ cityName, perlinNoise, startMoney, state, mapWidth, mapHeight, tileWidth, tileHeight, menuWidth, gameLength }) {
+  constructor ({ cityName, perlinNoise, startMoney, state, mapSize, tileSize, menuWidth, gameLength }) {
     this.state = state
 
-    state.world.setBounds(0, 0, mapWidth * tileWidth + menuWidth, mapHeight * tileHeight)
+    state.world.setBounds(0, 0, mapSize.width * tileSize.width + menuWidth, mapSize.height * tileSize.height)
 
-    this.initializeModel(cityName, perlinNoise, gameLength, startMoney, mapWidth, mapHeight, tileWidth, tileHeight)
+    this.initializeModel(cityName, perlinNoise, gameLength, startMoney, mapSize, tileSize)
     this.initializeView()
     this.initializeControllers()
 
@@ -81,19 +84,17 @@ export default class GameState {
     this.gameTimer.callListeners()
   }
 
-  initializeModel (cityName, perlinNoise, gameLength, startMoney, mapWidth, mapHeight, tileWidth, tileHeight) {
+  initializeModel (cityName, perlinNoise, gameLength, startMoney, mapSize, tileSize) {
     this.eventController = new EventController()
 
-    this.map = new Map({
-      gridSizeX: mapWidth,
-      gridSizeY: mapHeight,
-      tileWidth: tileWidth,
-      tileHeight: tileHeight,
-      perlinNoise: perlinNoise
+    this.mapGenerator = new MapGenerator({
+      mapSize: mapSize,
+      tileSize: tileSize,
+      generatingSettings: config.generatingSettings,
+      perlinNoise: perlinNoise,
+      noiseSettings: config.noise
     })
-
-    // fill map grid with sample data
-    this.map.createMap()
+    this.map = this.mapGenerator.generateMap()
 
     this.tileFinder = new TileFinder({
       map: this.map,
@@ -131,6 +132,10 @@ export default class GameState {
       gameState: this,
       gameLength: gameLength
     })
+
+    this.music = this.state.add.audio('music')
+    this.music.play()
+    this.music.loopFull()
   }
 
   initializeView () {

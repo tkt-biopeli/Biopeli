@@ -54,10 +54,11 @@ export default class Refiner {
     return this.inputTypes.includes(structure.structureType.name)
   }
 
-  isInZone (tile) {
+  getMatchedCapsule (tile) {
     for (let capsule of this.zone) {
       if (tile === capsule.tile) { return capsule }
     }
+    return null
   }
 
   isCloser (producer, distance) {
@@ -66,6 +67,7 @@ export default class Refiner {
       producer.refineryDistance = distance
       return true
     }
+    return false
   }
 
   /**
@@ -74,8 +76,8 @@ export default class Refiner {
    */
   structureCreated (tile) {
     if (this.canRefineOutputOf(tile.structure)) {
-      let match = this.isInZone(tile)
-      if (match) {
+      let match = this.getMatchedCapsule(tile)
+      if (match !== null) {
         if (this.isCloser(match.tile.structure.producer, match.distance)) {
           this.producerHolders.push({ distance: match.distance, producer: match.tile.structure.producer })
         }

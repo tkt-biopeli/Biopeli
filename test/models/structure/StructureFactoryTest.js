@@ -55,7 +55,12 @@ describe('StructureFactory tests', () => {
     tile = {
       structure: {
         size: 67,
-        ownedTiles: []
+        ownedTiles: [],
+        producer: {
+          producer: {
+            ownedFarmLand: []
+          }
+        }
       },
       flowers: 0
     }
@@ -93,7 +98,7 @@ describe('StructureFactory tests', () => {
     assert(createProducerSpy.calledWith(structureType, tile))
 
     assert(addStructureSpy.calledWith(tile.structure))
-    assert(buyLandSpy.calledWith(tile))
+    assert(buyLandSpy.calledWith(tile.structure))
     assert(createPollutionSpy.calledWith(structureType.pollution, tile))
     assert(calcSizeSpy.calledWith(tile.structure))
     assert.equal(eventController.event.callCount, 1)
@@ -127,30 +132,17 @@ describe('StructureFactory tests', () => {
   it('buyLandForRefinery works only if distance is 0 or structure null', () =>{
     sfactory.setAssetForRefinery = setAssetSpy
     var tmpTile = createTmpTile(null, {name: 'foo'}, null, 0)
-    sfactory.buyLandForRefinery(tile, 0, tmpTile)
+    sfactory.buyLandForRefinery(tile.structure, 0, tmpTile)
     assert.equal(setAssetSpy.withArgs(tmpTile).callCount, 1)
     assert.equal(tmpTile.owner, tile.structure)
     assert.equal(tile.structure.ownedTiles.length, 1)
-    sfactory.buyLandForRefinery(tile, 1, tmpTile)
+    sfactory.buyLandForRefinery(tile.structure, 1, tmpTile)
     assert.equal(setAssetSpy.withArgs(tmpTile).callCount, 2)
     tmpTile.structure = 1
-    sfactory.buyLandForRefinery(tile, 0, tmpTile)
+    sfactory.buyLandForRefinery(tile.structure, 0, tmpTile)
     assert.equal(setAssetSpy.withArgs(tmpTile).callCount, 3)
-    sfactory.buyLandForRefinery(tile, 1, tmpTile)
+    sfactory.buyLandForRefinery(tile.structure, 1, tmpTile)
     assert.equal(setAssetSpy.withArgs(tmpTile).callCount, 3)
-  })
-
-  it('decreaseOwnedTiles decreases the size of the owner structure', () =>{
-    sfactory.setAssetForRefinery = setAssetSpy
-    var calcFarmSpy = sinon.spy()
-    sfactory.calculateFarmLand = calcFarmSpy
-    var tmpTile = createTmpTile(null, {name: 'field'}, tile.structure, 0)
-    tile.structure.ownedTiles.push(tmpTile)
-    assert.equal(tile.structure.ownedTiles.length, 1)
-    sfactory.decreaseOwnedTiles(tmpTile)
-    assert.equal(tile.structure.size, 66)
-    assert.equal(tile.structure.ownedTiles.length, 0)
-    assert(calcFarmSpy.calledWith(tmpTile.owner))
   })
 
   it('buyLandForProducer is functioning properly', () =>{
@@ -160,7 +152,7 @@ describe('StructureFactory tests', () => {
     assert.equal(setAssetSpy.withArgs(tmpTile).callCount, 0)
 
     tmpTile.owner = null
-    sfactory.buyLandForProducer(tile, tmpTile)
+    sfactory.buyLandForProducer(tile.structure, tmpTile)
     assert.equal(setAssetSpy.withArgs(tmpTile).callCount, 1)
     assert.equal(tmpTile.owner, tile.structure)
     assert.equal(tile.structure.ownedTiles.length, 1)
@@ -188,18 +180,6 @@ describe('StructureFactory tests', () => {
     assert.equal(tmpTile.tileType, tileTypes.field)
   })
 
-  it('calculateSizeForProducer is functioning properly', () =>{
-    var calcFarmSpy = sinon.spy()
-    sfactory.calculateFarmLand = calcFarmSpy
-    var fieldT = createTmpTile(null, {name: 'field'}, null, 0)
-    var fooT = createTmpTile(null, {name: 'foo'}, null, 0)
-    var owned = [fieldT, fooT, fieldT, fieldT, fooT]
-    tile.structure.ownedTiles = owned
-    sfactory.calculateSizeForProducer(tile.structure)
-    assert.equal(tile.structure.size, 70)
-    assert(calcFarmSpy.calledWith(tile.structure))
-  })
-
   var helperFunctionForInitPollutionTests = (pollution, distance, tmpTile) => {
     var newMap = new Map()
     newMap.set(distance, [tmpTile])
@@ -219,5 +199,39 @@ describe('StructureFactory tests', () => {
     assert.equal(tmpTile.flowers, 9)
     helperFunctionForInitPollutionTests(9, 0, tmpTile)
     assert.equal(tmpTile.flowers, 1)
+  })
+
+  it('decreaseOwnedTiles is functioning properly', () =>{
+    var spy = sinon.spy()
+    sfactory.decreaseOwnedFarmland = spy
+    // the first 'if' is true; returns null
+    var tmpTile = createTmpTile(null, {name: 'foo'}, null, 0)
+    assert.equal(sfactory.decreaseOwnedTiles(tmpTile), null)
+    // the second and third 'ifs' are true
+    tmpTile = createTmpTile(null, {name: 'field'}, tile.structure, 0)
+    tile.structure.ownedTiles = ['foo', 'foo', tmpTile, 'foo']
+    sfactory.decreaseOwnedTiles(tmpTile)
+    assert.equal(tile.structure.ownedTiles.length, 3)
+    assert.equal(tile.structure.ownedTiles[2], 'foo')
+    assert(spy.calledWith(tmpTile))
+    // only the second 'if' is true
+    sfactory.decreaseOwnedTiles(tmpTile)
+    assert.equal(tile.structure.ownedTiles.length, 3)
+    assert(spy.calledWith(tmpTile))
+    // the second 'if' is false; the tile type is not 'field'
+    tmpTile = createTmpTile(null, {name: 'foo'}, tile.structure, 0)
+    assert.equal(spy.callCount, 2)
+  })
+
+  it('decreaseOwnedTiles is functioning properly', () =>{
+    var tmpTile = createTmpTile(null, {name: 'field'}, tile.structure, 0)
+    tile.structure.producer.producer.ownedFarmLand = ['foo', 'foo', tmpTile, 'foo']
+    sfactory.decreaseOwnedFarmland(tmpTile)
+    assert.equal(tile.structure.size, 66)
+    assert.equal(tile.structure.producer.producer.ownedFarmLand.length, 3)
+    // tmpTile is no longer in ownedFarmLand
+    sfactory.decreaseOwnedFarmland(tmpTile)
+    assert.equal(tile.structure.size, 66)
+    assert.equal(tile.structure.producer.producer.ownedFarmLand.length, 3)
   })
 })

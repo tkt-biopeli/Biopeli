@@ -11,12 +11,12 @@ describe('Event controller tests', ()=>{
 
   it('Constructor works', ()=>{
     assert.equal(1, controller.events.size)
-    assert(controller.events.get('structureBuilt') != null)
+    assert(controller.events.get('structureBuilt') !== null)
   })
 
   it('Adding event works', ()=>{
     controller.addEvent('test')
-    assert(controller.events.get('test') != null)
+    assert(controller.events.get('test') !== null)
   })
 
   it('Adding listener works', ()=>{
@@ -33,5 +33,6 @@ describe('Event controller tests', ()=>{
     controller.event('structureBuilt')
 
     assert.equal(1, spy.callCount)
+    assert.equal(controller.event('foobar'), null)
   })
 })

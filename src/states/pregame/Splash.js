@@ -25,6 +25,9 @@ export default class extends Phaser.State {
     this.load.image('emptyButton', 'assets/images/buttons/empty_button.png')
     this.load.image('unusableButton', 'assets/images/buttons/empty_unbutton.png')
 
+    this.load.audio('music', 'assets/music/music.ogg')
+    this.load.audio('menu', 'assets/music/menu.ogg')
+
     this.load.image('forest', 'assets/images/tiles/forest.png')
     this.load.image('water', 'assets/images/tiles/water.png')
     this.load.image('grass', 'assets/images/tiles/grass.png')

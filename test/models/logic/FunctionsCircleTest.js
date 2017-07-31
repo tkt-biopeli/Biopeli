@@ -1,8 +1,8 @@
 const assert = require('assert')
 
-import {createCircle} from '../../src/models/logic/Functions'
+import {createCircle} from '../../../src/models/logic/Functions'
 
-describe('Function tests', () => {
+describe('Circle Functions tests', () => {
   var floatCheck = (value, wanted) => {
     assert(value > wanted - 0.01 && value < wanted + 0.01, 'Value: '+value+", Wanted: "+wanted)
   }
