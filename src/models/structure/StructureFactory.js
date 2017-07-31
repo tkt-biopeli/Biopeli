@@ -1,13 +1,11 @@
 import Structure from './Structure'
 import StructureHealth from './health/StructureHealth'
 import HealthManager from './health/HealthManager'
-
 import ProducerFactory from './ProducerFactory'
 import StructureNameGenerator from '../namegeneration/StructureNameGenerator'
 import StructureNameParts from '../namegeneration/StructureNameParts'
 import utils from '../../utils'
 import StaticTypes from '../StaticTypes'
-
 /**
  * Creates a structure for the player
  */
@@ -72,10 +70,9 @@ export default class StructureFactory {
       producer: this.producerFactory.createProducer(structureType, tile)
     })
     this.player.addStructure(tile.structure)
-    this.buyLand(tile)
     this.createInitialPollution(structureType.pollution, tile)
+    this.buyLand(tile.structure)
     this.calculateSize(tile.structure)
-
     this.eventController.event('structureBuilt', tile)
   }
 
@@ -95,43 +92,56 @@ export default class StructureFactory {
     }
   }
 
-  buyLand (tile) {
-    let tiles = this.map.getTilesInRadius(tile.structure.radiusForTileOwnership, tile)
+  buyLand (structure) {
+    let tiles = this.map.getTilesInRadius(structure.radiusForTileOwnership, structure.tile)
     for (var [distance, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
-        if (tile.structure.structureType.refinery) {
-          this.buyLandForRefinery(tile, distance, tmpTile)
+        if (structure.structureType.refinery) {
+          this.buyLandForRefinery(structure, distance, tmpTile)
         } else {
-          this.buyLandForProducer(tile, tmpTile)
+          this.buyLandForProducer(structure, tmpTile)
         }
       }, this)
     }
   }
 
-  buyLandForRefinery (tile, distance, tmpTile) {
+  buyLandForRefinery (structure, distance, tmpTile) {
     if (distance === 0 || tmpTile.structure === null) {
       this.decreaseOwnedTiles(tmpTile)
       this.setAssetForRefinery(tmpTile)
-      tmpTile.owner = tile.structure
-      tile.structure.ownedTiles.push(tmpTile)
+      tmpTile.owner = structure
+      structure.ownedTiles.push(tmpTile)
     }
   }
 
   decreaseOwnedTiles (tmpTile) {
-    if (tmpTile.owner !== null) {
-      if (tmpTile.tileType.name === 'field') {
-        tmpTile.owner.size--
-        this.calculateFarmLand(tmpTile.owner)
-      }
-      tmpTile.owner.ownedTiles.pop(tmpTile)
+    if (tmpTile.owner === null) return null
+
+    if (tmpTile.tileType.name === 'field') {
+      this.decreaseOwnedFarmland(tmpTile)
+    }
+    let index = tmpTile.owner.ownedTiles.indexOf(tmpTile)
+    if (index > -1) {
+      tmpTile.owner.ownedTiles.splice(index, 1)
     }
   }
 
-  buyLandForProducer (tile, tmpTile) {
+  decreaseOwnedFarmland (tmpTile) {
+    let index = tmpTile.owner.producer.producer.ownedFarmLand.indexOf(tmpTile)
+    if (index > -1) {
+      tmpTile.owner.producer.producer.ownedFarmLand.splice(index, 1)
+      tmpTile.owner.size--
+    }
+  }
+
+  buyLandForProducer (structure, tmpTile) {
     if (tmpTile.owner === null) {
       this.setAssetForProducer(tmpTile)
-      tmpTile.owner = tile.structure
-      tile.structure.ownedTiles.push(tmpTile)
+      tmpTile.owner = structure
+      structure.ownedTiles.push(tmpTile)
+      if (tmpTile.tileType.name === 'field') {
+        structure.producer.producer.ownedFarmLand.push(tmpTile)
+      }
     }
   }
 
@@ -156,21 +166,10 @@ export default class StructureFactory {
   }
 
   calculateSizeForProducer (structure) {
-    structure.ownedTiles.forEach(function (tmpTile) {
-      if (tmpTile.tileType.name === 'field') { structure.size++ }
-    }, this)
-    this.calculateFarmLand(structure)
+    structure.size = structure.producer.producer.ownedFarmLand.length
   }
 
   calculateSizeForRefinery (structure) {
-    structure.ownedTiles.forEach(function (tmpTile) {
-    // structure.producer.producer.producerHolders.length
-    }, this)
-  }
-
-  calculateFarmLand (structure) {
-    structure.ownedTiles.forEach(function (tmpTile) {
-      structure.producer.producer.ownedFarmLand.push(tmpTile)
-    }, this)
+    structure.size = structure.producer.producer.producerHolders.length
   }
 }

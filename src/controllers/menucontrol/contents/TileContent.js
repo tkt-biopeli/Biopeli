@@ -23,13 +23,13 @@ export default class SideMenuContent extends Content {
    */
   createSections () {
     if (!this.owner.hasStateValue('selectedTile')) {
-      return
+      return null
     }
 
     var tile = this.owner.stateValue('selectedTile')
     this.tileInformation(tile)
 
-    if (tile.structure != null) {
+    if (tile.structure !== null) {
       var structure = tile.structure
       this.structureInformation(structure)
       this.structureRuining(structure)
@@ -43,8 +43,8 @@ export default class SideMenuContent extends Content {
     this.text('Ground type: ' + tile.tileType.name)
     this.text('X: ' + tile.x + ', Y: ' + tile.y)
     this.text('Flowers: ' + tile.flowers)
-    this.text('Moisture: ' + tile.moisture + '%')
-    this.text('Fertility: ' + tile.fertility)
+    this.text('Moisture: ' + this.format(tile.moisture) + '%')
+    this.text('Fertility: ' + this.format(tile.fertility) + '%')
     if (tile.owner != null) {
       this.text('Land owner: ' + tile.owner.ownerName)
     }

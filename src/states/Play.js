@@ -30,10 +30,8 @@ export default class extends Phaser.State {
       perlinNoise: Noise,
       startMoney: config.playerInitialCash,
       state: this,
-      mapWidth: config.mapWidth,
-      mapHeight: config.mapHeight,
-      tileWidth: config.tileWidth,
-      tileHeight: config.tileHeight,
+      mapSize: config.mapSize,
+      tileSize: config.tileSize,
       menuWidth: config.menuWidth,
       gameLength: config.gameLength
     })
