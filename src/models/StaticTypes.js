@@ -22,8 +22,10 @@ const structureTypes = {
     cost: 10000,
     pollution: 4,
     radiusForTileOwnership: 2,
-    moisture_min: 20,
-    moisture_max: 50
+    moisture_min: 40,
+    moisture_max: 70,
+    fertility_min: 40,
+    fertility_max: 70
   },
   dairy_farm: {
     name: 'dairy farm',
@@ -35,8 +37,10 @@ const structureTypes = {
     cost: 15000,
     pollution: 5,
     radiusForTileOwnership: 2,
-    moisture_min: 20,
-    moisture_max: 50
+    moisture_min: 40,
+    moisture_max: 70,
+    fertility_min: 40,
+    fertility_max: 70
   },
   berry_farm: {
     name: 'berry farm',
@@ -48,8 +52,10 @@ const structureTypes = {
     cost: 10000,
     pollution: 3,
     radiusForTileOwnership: 2,
-    moisture_min: 20,
-    moisture_max: 50
+    moisture_min: 40,
+    moisture_max: 70,
+    fertility_min: 40,
+    fertility_max: 70
   },
   mill: {
     name: 'mill',

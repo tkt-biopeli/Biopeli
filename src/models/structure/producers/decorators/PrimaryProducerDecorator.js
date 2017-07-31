@@ -15,9 +15,24 @@ export default class PrimaryProducerDecorator {
     this.structure = structure
     this.producer.initialize(structure)
     
-    this.underFunction = createLine(0.5, 0.5, 1, 1)
-    this.preferFunction = createLine(1, 1, 1, 1)
-    this.overFunction = createLine(1, 1, 0.5, 0.5)
+    this.underFunction = createLine(
+      structure.structureType.moisture_min - 10,
+      0,
+      structure.structureType.moisture_min,
+      1
+    )
+    this.preferFunction = createLine(
+      structure.structureType.moisture_min,
+      1,
+      structure.structureType.moisture_max,
+      1
+    )
+    this.overFunction = createLine(
+      structure.structureType.moisture_max,
+      1,
+      structure.structureType.moisture_max + 10,
+      0
+    )
   }
 
   produce (timeEvent) {
@@ -25,15 +40,45 @@ export default class PrimaryProducerDecorator {
     this.ownedFarmLand.forEach(function (tile) {
       value += tile.flowers / config.maxFlowers
     }, this)
-    var howPreferable
-    if (this.tile.moisture < this.structure.moisture_min) {
-      howPreferable = this.underFunction(this.tile.moisture)
-    } else if (this.tile.moisture > this.structure.moisture_max) {
-      howPreferable = this.overFunction(this.tile.moisture)
-    } else {
-      howPreferable = this.preferFunction(this.tile.moisture)
+    var howPreferableMoisture, howPreferableFertility
+    howPreferableMoisture = this.getMoistureMultiplier()
+    howPreferableFertility = this.getFertilityMultiplier()
+    return this.producer.produce(timeEvent) * value *
+      howPreferableMoisture * howPreferableFertility
+  }
+
+  /**
+   * Checks if moisture is preferable for structuretype
+   * @return {number} - between 0 and 1
+   */
+  getMoistureMultiplier () {
+    if (this.tile.moisture < this.structure.structureType.moisture_min - 10) {
+      return 0
+    } else if (this.tile.moisture > this.structure.structureType.moisture_max + 10) {
+      return 0
+    } else if (this.tile.moisture < this.structure.structureType.moisture_min) {
+      return this.underFunction(this.tile.moisture)
+    } else if (this.structure.structureType.moisture_max <  this.tile.moisture) {
+      return this.overFunction(this.tile.moisture)
+    } else  {
+      return this.preferFunction(this.tile.moisture)
     }
-    console.log(howPreferable)
-    return this.producer.produce(timeEvent) * value
+  }
+  /**
+   * Checks if fertility is preferable for structuretype
+   * @return {number} - between 0 and 1
+   */
+  getFertilityMultiplier () {
+    if (this.tile.fertility < this.structure.structureType.fertility_min - 10) {
+      return 0
+    } else if (this.tile.fertility > this.structure.structureType.fertility_max + 10) {
+      return 0
+    } else if (this.tile.fertility < this.structure.structureType.fertility_min) {
+      return this.underFunction(this.tile.fertility)
+    } else if (this.structure.structureType.fertility_max <  this.tile.fertility) {
+      return this.overFunction(this.tile.fertility)
+    } else  {
+      return this.preferFunction(this.tile.fertility)
+    }
   }
 }
