@@ -15,10 +15,9 @@ export default class EventController {
 
   event (name, ...values) {
     var listeners = this.events.get(name)
-    if (listeners != null) {
-      for (let listener of listeners) {
-        listener.callback.apply(listener.context, values)
-      }
+    if (listeners === undefined || null) return null
+    for (let listener of listeners) {
+      listener.callback.apply(listener.context, values)
     }
   }
 }

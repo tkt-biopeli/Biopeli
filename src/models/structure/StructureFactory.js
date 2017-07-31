@@ -115,20 +115,22 @@ export default class StructureFactory {
   }
 
   decreaseOwnedTiles (tmpTile) {
-    if (tmpTile.owner !== null) {
-      if (tmpTile.tileType.name === 'field') {
-        let index = tmpTile.owner.producer.producer.ownedFarmLand.indexOf(tmpTile)
-        if (index > -1) {
-          tmpTile.owner.producer.producer.ownedFarmLand.splice(index, 1)
-          tmpTile.owner.size--
-        }
-      }
-      if (tmpTile.owner !== null) {
-        let index = tmpTile.owner.ownedTiles.indexOf(tmpTile)
-        if (index > -1) {
-          tmpTile.owner.ownedTiles.splice(index, 1)
-        }
-      }
+    if (tmpTile.owner === null) return null
+
+    if (tmpTile.tileType.name === 'field') {
+      this.decreaseOwnedFarmland(tmpTile)
+    }
+    let index = tmpTile.owner.ownedTiles.indexOf(tmpTile)
+    if (index > -1) {
+      tmpTile.owner.ownedTiles.splice(index, 1)
+    }
+  }
+
+  decreaseOwnedFarmland (tmpTile) {
+    let index = tmpTile.owner.producer.producer.ownedFarmLand.indexOf(tmpTile)
+    if (index > -1) {
+      tmpTile.owner.producer.producer.ownedFarmLand.splice(index, 1)
+      tmpTile.owner.size--
     }
   }
 

@@ -35,16 +35,4 @@ export default class {
   removeStructure (structure) {
     this.structures.delete(structure)
   }
-
-  /**
-   * The amount of points to be added to the player are calculated
-   * @param {number} fulFilledPct - how much of city's demand has the player fulfilled
-   */
-  countPoints (fulfilledPct) {
-    if (fulfilledPct >= 100) {
-      this.addPoints(100)
-    } else {
-      this.addPoints(fulfilledPct)
-    }
-  }
 }
