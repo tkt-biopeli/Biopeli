@@ -1,5 +1,5 @@
 import config from '../../../../config'
-import Functions from '../../../logic/Functions'
+import {createLine} from '../../../logic/Functions'
 /**
  * Base class for producers. Producers determine what amount of
  * turnips a structure produces at given week
@@ -9,7 +9,12 @@ export default class PrimaryProducerDecorator {
     this.tile = tile
     this.producer = producer
     this.ownedFarmLand = []
-    this.underFunction = createLine(0.5, 1, 1, increaseAtOne)
+  }
+
+  initialize (structure) {
+    this.underFunction = createLine(1, 1, 1, 1)
+    this.preferFunction = createLine(1, 1, 1, 1)
+    this.overFunction = createLine(1, 1, 1, 1.5)
   }
 
   produce (timeEvent) {
