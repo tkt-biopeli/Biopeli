@@ -21,7 +21,9 @@ const structureTypes = {
     turnipYield: 4,
     cost: 10000,
     pollution: 4,
-    radiusForTileOwnership: 2
+    radiusForTileOwnership: 2,
+    moisture_min: 20,
+    moisture_max: 50
   },
   dairy_farm: {
     name: 'dairy farm',
@@ -32,7 +34,9 @@ const structureTypes = {
     turnipYield: 6,
     cost: 15000,
     pollution: 5,
-    radiusForTileOwnership: 2
+    radiusForTileOwnership: 2,
+    moisture_min: 20,
+    moisture_max: 50
   },
   berry_farm: {
     name: 'berry farm',
@@ -43,7 +47,9 @@ const structureTypes = {
     turnipYield: 3,
     cost: 10000,
     pollution: 3,
-    radiusForTileOwnership: 2
+    radiusForTileOwnership: 2,
+    moisture_min: 20,
+    moisture_max: 50
   },
   mill: {
     name: 'mill',

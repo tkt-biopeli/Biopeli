@@ -15,6 +15,9 @@ export default class PrimaryProducerDecorator {
     this.ownedFarmLand.forEach(function (tile) {
       value += tile.flowers / config.maxFlowers
     }, this)
+    if (tile.moisture < 20) {
+      value = 0
+    }
     return this.producer.produce(timeEvent) * value
   }
 }
