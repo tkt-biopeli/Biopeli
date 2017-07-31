@@ -21,6 +21,7 @@ import Timer from '../controllers/events/time/Timer'
 import TopBarContent from '../controllers/menucontrol/contents/TopBarContent'
 import TileContent from '../controllers/menucontrol/contents/TileContent'
 import CityContent from '../controllers/menucontrol/contents/CityContent'
+import BottomContent from '../controllers/menucontrol/contents/BottomContent'
 import BuildStructureContent from '../controllers/menucontrol/contents/BuildStructureContent'
 import SingleController from '../controllers/menucontrol/SingleController'
 import MulticontentController from '../controllers/menucontrol/MulticontentController'
@@ -74,8 +75,7 @@ export default class GameState {
     this.gameTimerListener = new GameTimerListener({
       city: this.city,
       player: this.player,
-      menuController: this.menuController,
-      topBarController: this.topBarController,
+      controllers: this.controllers,
       gameEvents: this.gameEvents
     })
 
@@ -170,6 +170,22 @@ export default class GameState {
       background: null
     })
 
+    this.bottomView = new MenuView({
+      game: this.state,
+      layout: new StackingLayout({
+        menuRect: {
+          x: this.state.camera.width - config.menuWidth,
+          y: 200,
+          width: config.menuWidth,
+          height: this.state.camera.height - 20
+        },
+        linePadding: config.linePadding,
+        sectionPadding: config.sectionPadding,
+        vertical: true
+      }),
+      background: null
+    })
+
     this.cameraMover = new CameraMover({
       game: this.state,
       xSpeed: config.cameraSpeed,
@@ -219,6 +235,23 @@ export default class GameState {
       }),
       contents: [this.cityContent, this.tileContent, buildStructureController]
     })
+
+    this.bottomController = new SingleController({
+      game: this.state,
+      style: new Style({
+        buttonHeight: config.menuButtonHeight,
+        buttonWidth: config.menuButtonWidth
+      }),
+      menuView: this.bottomView,
+      content: new BottomContent({
+        mapView: this.mapView
+      })
+    })
+
+    this.controllers = []
+    this.controllers.push(this.menuController)
+    this.controllers.push(this.topBarController)
+    this.controllers.push(this.bottomController)
   }
 
   /**

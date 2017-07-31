@@ -1,10 +1,13 @@
 import TextComponent from './components/TextComponent'
 import ButtonComponent from './components/ButtonComponent'
 import AnimatedBarComponent from './components/AnimatedBarComponent'
-import RadioButtonsComponent from './components/RadioButtonsComponent'
 import IconComponent from './components/IconComponent'
+import MenuComponent from './components/MenuComponent'
+
 import Section from './components/MenuSection'
+
 import ResetDecorator from './helpers/ResetDecorator'
+import StateSetDecorator from './helpers/StateSetDecorator'
 
 /**
  * The base class for controllers. Takes care of creating components, giving them to menuView,
@@ -62,28 +65,64 @@ export default class Controller {
   }
 
   /**
+   * Creates submenu to the menu. Returns controller that creates components to submenu
+   *
+   * @param {*} layoutType 
+   * @param {*} perpindicular 
+   * @param {*} linePadding 
+   * @param {*} sectionPadding 
+   */
+  submenu (layoutType, perpindicular, linePadding, sectionPadding) {
+    var sections = []
+    var menuVertical = this.menuView.layout.vertical
+
+    var menu = new MenuComponent({
+      layoutType: layoutType,
+      sectionPadding: sectionPadding,
+      linePadding: linePadding,
+      vertical: menuVertical != perpindicular,
+      sections: sections
+    })
+    this.currentSection.components.push(menu)
+
+    var controller = new Controller(this.game, this.style)
+
+    controller.sections = sections
+    controller.section()
+
+    return controller
+  }
+
+  /**
    * Creates a new radio button set
    */
-  radio (name, activeAsset, inactiveAsset, initActive, ...buttonInfos) {
+  radio (name, perpindicular, activeAsset, inactiveAsset, initActive, ...buttonInfos) {
     var selectedButton = this.getActiveRadioButton(name, initActive)
-    buttonInfos.forEach((info) => {
-      
-    })
-    this.currentSection.components.push(
-      new RadioButtonsComponent({
-        activeAsset: activeAsset,
-        inactiveAsset: inactiveAsset,
-        selectedButton: selectedButton,
-        buttonInfos: buttonInfos
+
+    var submenuController = this.submenu('static', perpindicular, 0)
+
+    for(let i = 0 ; i < buttonInfos.length ; i++) {
+      var info = buttonInfos[i]
+      var action = {function: info.function, context: info.context}
+      var radioDecorator = new StateSetDecorator({
+        action: action,
+        controller: this,
+        name: name+'Radio',
+        value: i
       })
-    )
+
+      let asset = inactiveAsset
+      if(selectedButton == i) asset = activeAsset
+
+      submenuController.button(i.name, radioDecorator.act, radioDecorator, asset)
+    }
   }
   
   getActiveRadioButton (name, initActive) {
     if (this.hasStateValue(name)) {
       return this.stateValue(name)
     }
-    addState(name, initActive)
+    this.state.set(name, initActive)
     return initActive
   }
 
