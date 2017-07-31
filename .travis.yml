@@ -2,7 +2,9 @@ language: node_js
 node_js:
   - "node"
 after_success: npm run coverage
-before_deploy: npm run deploy
+before_deploy: 
+  - npm run deploy
+  - sed -i '/dist/d' ./.gitignore
 deploy:
   provider: pages
   skip-cleanup: true
