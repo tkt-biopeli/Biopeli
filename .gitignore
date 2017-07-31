@@ -1,6 +1,6 @@
 typings/
 node_modules/
-devdist/
+dist/
 .vscode/
 *.log
 .idea/*
