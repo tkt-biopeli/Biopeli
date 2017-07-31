@@ -23,8 +23,8 @@ module.exports = {
   devtool: 'cheap-source-map',
   output: {
     pathinfo: true,
-    path: path.resolve(__dirname, 'devdist'),
-    publicPath: './devdist/',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: './dist/',
     filename: 'bundle.js'
   },
   watch: true,
