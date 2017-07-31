@@ -15,10 +15,6 @@ export default class AllDecorator {
       return 0
     }
 
-    if (this.health == null) {
-      this.health = this.structure.health
-    }
-
-    return this.producer.produce(timeEvent) * this.health.percent()
+    return this.producer.produce(timeEvent) * this.structure.health.percent()
   }
 }

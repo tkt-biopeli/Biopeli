@@ -14,7 +14,7 @@ export default class PrimaryProducerDecorator {
   initialize (structure) {
     this.structure = structure
     this.producer.initialize(structure)
-    
+
     this.underFunction = createLine(1, 1, 1, 1)
     this.preferFunction = createLine(1, 1, 1, 1)
     this.overFunction = createLine(1, 1, 1, 1.5)
