@@ -4,7 +4,7 @@ import { createLine } from '../../logic/Functions'
  * Refiner takes production from given type buildingsnear it and enchancts their production
  */
 export default class Refiner {
-  constructor({ zone, inputTypes, multiplier, radius, tile }) {
+  constructor ({ zone, inputTypes, multiplier, radius, tile }) {
     this.zone = zone
     this.inputTypes = inputTypes
     this.multiplier = multiplier
@@ -48,11 +48,7 @@ export default class Refiner {
         }
       }
     }
-    if (this.tile.structure !== null) {
-      this.tile.structure.size = this.tile.structure.producer.producer.producerHolders.length
-    }
   }
-
 
   canRefineOutputOf (structure) {
     return this.inputTypes.includes(structure.structureType.name)

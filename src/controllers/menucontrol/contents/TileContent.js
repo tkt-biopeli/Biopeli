@@ -9,7 +9,7 @@ export default class SideMenuContent extends Content {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor({ demandFunction, purchaseManager, topBarController }) {
+  constructor ({ demandFunction, purchaseManager, topBarController }) {
     super()
     this.demandFunction = demandFunction
     this.purchaseManager = purchaseManager
