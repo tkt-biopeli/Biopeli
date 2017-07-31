@@ -15,9 +15,9 @@ export default class PrimaryProducerDecorator {
     this.structure = structure
     this.producer.initialize(structure)
     
-    this.underFunction = createLine(1, 1, 1, 1)
+    this.underFunction = createLine(0.5, 0.5, 1, 1)
     this.preferFunction = createLine(1, 1, 1, 1)
-    this.overFunction = createLine(1, 1, 1, 1.5)
+    this.overFunction = createLine(1, 1, 0.5, 0.5)
   }
 
   produce (timeEvent) {
@@ -25,9 +25,15 @@ export default class PrimaryProducerDecorator {
     this.ownedFarmLand.forEach(function (tile) {
       value += tile.flowers / config.maxFlowers
     }, this)
-    if (this.tile.moisture < 20 || this.tile.moisture > 50) {
-      value = value / 2
+    var howPreferable
+    if (this.tile.moisture < this.structure.moisture_min) {
+      howPreferable = this.underFunction(this.tile.moisture)
+    } else if (this.tile.moisture > this.structure.moisture_max) {
+      howPreferable = this.overFunction(this.tile.moisture)
+    } else {
+      howPreferable = this.preferFunction(this.tile.moisture)
     }
+    console.log(howPreferable)
     return this.producer.produce(timeEvent) * value
   }
 }
