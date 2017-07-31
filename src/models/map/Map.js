@@ -76,12 +76,15 @@ export default class MapGrid {
    * @param {TileType} tileType
    */
   addTileWithGridCoordinates (gx, gy, tileType, moisture, fertility) {
+    //
+    let damp = Math.floor(Math.random() * 100)
+    //
     var tile = new ModelTile({
       x: gx,
       y: gy,
       type: tileType,
       structure: null,
-      moisture: moisture,
+      moisture: damp,
       fertility: fertility
     })
     this.grid[gy * this.gridSizeX + gx] = tile

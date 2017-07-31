@@ -9,10 +9,14 @@ export default class ViewTile {
    * @param {number} param.y
    * @param {ModelTile} param.modelTile
    */
-  constructor ({ game, x, y, modelTile }) {
+  constructor({ game, x, y, modelTile, dampness }) {
     this.game = game
     this.modelTile = modelTile
-    this.tileSprite = this.makeTileSprite(x, y)
+    if (dampness) {
+      this.tileSprite = this.makeDampnessSprite(x, y, dampness)
+    } else {
+      this.tileSprite = this.makeTileSprite(x, y)
+    }
     this.structureSprite = null
     // this.update()
   }
@@ -38,6 +42,20 @@ export default class ViewTile {
    */
   makeTileSprite (x, y) {
     return this.game.make.sprite(x, y, this.modelTile.tileType.asset)
+  }
+
+  makeDampnessSprite (x, y, colour) {
+    var assetsprite = this.game.make.sprite(x, y, this.modelTile.tileType.asset)
+    let clr = '0x' + colour
+    var sprite = this.game.make.graphics()
+    sprite.beginFill(clr, 0.6)
+    sprite.drawRoundedRect(32, 32, 64, 64, 20)
+    sprite.endFill()
+    let name = this.modelTile.tileType.name
+    if (name !== 'water' && name !== 'forest' && name !== 'industrial') {
+    assetsprite.addChild(sprite)
+    }
+    return assetsprite
   }
 
   /**

@@ -1,4 +1,5 @@
 import ViewTile from './ViewTile'
+import Rainbow  from 'rainbowvis.js'
 
 /**
  * Handles viewing of the game map
@@ -12,7 +13,7 @@ export default class MapView {
    * @param {number} param.viewWidthPx
    * @param {number} param.viewHeightPx
    */
-  constructor ({ game, map, menuController, viewWidthPx, viewHeightPx }) {
+  constructor({ game, map, menuController, viewWidthPx, viewHeightPx }) {
     this.game = game
     this.map = map
     this.menuController = menuController
@@ -21,6 +22,9 @@ export default class MapView {
     this.tileWidth = map.tileWidth
     this.tileHeight = map.tileHeight
     this.showFlowers = false
+    this.showDampness = true
+    this.rainbow = new Rainbow()
+    this.rainbow.setSpectrum('red', 'green')
     this.initialize()
   }
 
@@ -138,7 +142,11 @@ export default class MapView {
    * @param { ??? } offset - not actually used
    */
   createViewTileForFill (tile, pxCoords, viewArea, offset) {
-    var viewTile = new ViewTile({ game: this.game, x: 0, y: 0, modelTile: tile })
+    if (this.showDampness) {
+      var viewTile = new ViewTile({ game: this.game, x: 0, y: 0, modelTile: tile, dampness: this.rainbow.colourAt(tile.moisture) })
+    } else {
+      var viewTile = new ViewTile({ game: this.game, x: 0, y: 0, modelTile: tile })
+    }
     viewTile.update(this.showFlowers)
     this.addHighlights(viewTile, pxCoords)
     viewTile.tileSprite.width = this.tileWidth
