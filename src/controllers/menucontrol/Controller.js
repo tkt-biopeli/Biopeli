@@ -1,6 +1,7 @@
 import TextComponent from './components/TextComponent'
 import ButtonComponent from './components/ButtonComponent'
 import AnimatedBarComponent from './components/AnimatedBarComponent'
+import RadioButtonsComponent from './components/RadioButtonsComponent'
 import IconComponent from './components/IconComponent'
 import Section from './components/MenuSection'
 import ResetDecorator from './helpers/ResetDecorator'
@@ -58,6 +59,32 @@ export default class Controller {
   section (name) {
     this.currentSection = new Section(name)
     this.sections.push(this.currentSection)
+  }
+
+  /**
+   * Creates a new radio button set
+   */
+  radio (name, activeAsset, inactiveAsset, initActive, ...buttonInfos) {
+    var selectedButton = this.getActiveRadioButton(name, initActive)
+    buttonInfos.forEach((info) => {
+      
+    })
+    this.currentSection.components.push(
+      new RadioButtonsComponent({
+        activeAsset: activeAsset,
+        inactiveAsset: inactiveAsset,
+        selectedButton: selectedButton,
+        buttonInfos: buttonInfos
+      })
+    )
+  }
+  
+  getActiveRadioButton (name, initActive) {
+    if (this.hasStateValue(name)) {
+      return this.stateValue(name)
+    }
+    addState(name, initActive)
+    return initActive
   }
 
   /**
