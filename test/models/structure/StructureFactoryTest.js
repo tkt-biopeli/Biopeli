@@ -6,7 +6,7 @@ import StaticTypes from '../../../src/models/StaticTypes'
 describe('StructureFactory tests', () => {
   var sfactory, gameTimer, player, addStructureSpy, map, eventController, tile, structureType
   var addStructureSpy, buyLandSpy, createPollutionSpy, calcSizeSpy, createProducerSpy, setAssetSpy
-  var purchaseStub, getMapStub
+  var purchaseStub, getMapStub, initializeSpy
   var tileTypes
 
   beforeEach(() => {
@@ -74,7 +74,8 @@ describe('StructureFactory tests', () => {
   })
 
   var mockMethodsForBuildBuildingTests = () => {
-    createProducerSpy = sinon.spy()
+    initializeSpy = sinon.spy()
+    createProducerSpy = () => ({initialize: initializeSpy})
     buyLandSpy = sinon.spy()
     createPollutionSpy = sinon.spy()
     calcSizeSpy = sinon.spy()
@@ -95,7 +96,7 @@ describe('StructureFactory tests', () => {
     assert.equal(tile.structure.size, 0)
     assert.equal(tile.structure.structureType, structureType)
     assert.equal(tile.structure.foundingYear, 7)
-    assert(createProducerSpy.calledWith(structureType, tile))
+    assert.equal(1, initializeSpy.callCount)
 
     assert(addStructureSpy.calledWith(tile.structure))
     assert(buyLandSpy.calledWith(tile.structure))
@@ -111,7 +112,7 @@ describe('StructureFactory tests', () => {
     sfactory.buildBuilding(tile, structureType)
 
     assert.equal(tile.structure, null)
-    assert.equal(createProducerSpy.callCount, 0)
+    assert.equal(initializeSpy.callCount, 0)
     assert.equal(addStructureSpy.callCount, 0)
     assert.equal(buyLandSpy.callCount, 0)
     assert.equal(createPollutionSpy.callCount, 0)
