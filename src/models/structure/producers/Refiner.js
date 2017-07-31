@@ -14,6 +14,8 @@ export default class Refiner {
     this.findProducers()
   }
 
+  initialize (structure) {}
+
   produce (timeEvent) {
     var productionSum = 0
     let size = this.producerHolders.length

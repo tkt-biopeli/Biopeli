@@ -6,6 +6,8 @@ export default class ContinuousProducer {
     this.turnipYield = turnipYield
   }
 
+  initialize (structure) {}
+
   produce () {
     return this.turnipYield
   }
