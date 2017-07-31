@@ -56,7 +56,7 @@ export default class SideMenuContent extends Content {
     this.text('"' + structure.structureName + '"')
     this.text('Structure: ' + structure.structureType.name)
     this.text('Founding year: ' + structure.foundingYear)
-    if (structure.producer.refinery !== null) {
+    if (structure.structureType.refinery) {
       structure.size = structure.producer.producer.producerHolders.length
     }
     this.text('Size: ' + structure.size)
