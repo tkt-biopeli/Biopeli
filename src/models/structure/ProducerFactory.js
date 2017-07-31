@@ -77,7 +77,7 @@ export default class ProducerFactory {
    * If the structure type is undefined, create a new one.
    */
   checkStructureType (structureType) {
-    return structureType == null
+    return structureType === null
       ? {
         refinery: false,
         harvestingWeeks: new Set(),

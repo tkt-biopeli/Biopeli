@@ -29,25 +29,23 @@ export default class AnimatedBar {
   }
 
   draw () {
-    let bitmapBg = this.game.add.bitmapData(this.width, this.height)
-    bitmapBg.ctx.fillStyle = this.colors.background
-    bitmapBg.ctx.beginPath()
-    bitmapBg.ctx.rect(0, 0, this.width, this.height)
-    bitmapBg.ctx.fill()
-    this.background = this.group.create(this.x, this.y, bitmapBg, null, this.group)
-
-    let bitmapBar = this.game.add.bitmapData(this.width, this.height)
-    bitmapBar.ctx.fillStyle = this.colors.bar
-    bitmapBar.ctx.beginPath()
-    bitmapBar.ctx.rect(0, 0, this.width, this.height)
-    bitmapBar.ctx.fill()
-    this.bar = this.group.create(this.x, this.y, bitmapBar, null, this.group)
+    this.background = this.constructBitmapAndAddToGroup(this.colors.background)
+    this.bar = this.constructBitmapAndAddToGroup(this.colors.bar)
 
     if (this.vertical) {
       this.bar.height = this.height * this.percent
     } else {
       this.bar.width = this.width * this.percent
     }
+  }
+
+  constructBitmapAndAddToGroup (fillStyle) {
+    let bitmapElement = this.game.add.bitmapData(this.width, this.height)
+    bitmapElement.ctx.fillStyle = fillStyle
+    bitmapElement.ctx.beginPath()
+    bitmapElement.ctx.rect(0, 0, this.width, this.height)
+    bitmapElement.ctx.fill()
+    return this.group.create(this.x, this.y, bitmapElement, null, this.group)
   }
 
   /**

@@ -100,6 +100,7 @@ export default class GameStub {
       graphics: this.mockers.createOneValueMocker('make.graphics', {
         beginFill: function () { },
         drawRoundedRect: function () { },
+        drawRect: function () { },
         endFill: function () { }
       }),
 
