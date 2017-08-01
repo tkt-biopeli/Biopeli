@@ -38,15 +38,15 @@ export default class Layout {
       coords = {
         x: this.menuRect.x + (this.perpendicularSize - component.width) / 2,
         y: this.menuRect.y + this.currentDrawLocation(),
-        width: menuRect.width,
-        height: menuRect.height
+        width: this.menuRect.width,
+        height: this.menuRect.height
       }
     } else {
       coords = {
         x: this.menuRect.x + this.currentDrawLocation(),
         y: this.menuRect.y + (this.perpendicularSize - component.height) / 2,
-        width: menuRect.width,
-        height: menuRect.height
+        width: this.menuRect.width,
+        height: this.menuRect.height
       }
     }
 
