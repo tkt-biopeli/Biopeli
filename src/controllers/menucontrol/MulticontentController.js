@@ -25,24 +25,17 @@ export default class MulticontentController extends Controller {
    */
   createSections () {
     this.contents[this.index].createSections()
-    this.section('option')
-    this.button('Valikko', this.getOptions, this)
-    
-    // bugi
-    // kaksi bugia
 
+    if (this.index !== 3) {
+      this.section('option')
+      this.button('Valikko', this.getOptions, this)
+    }
 
-    //
-
-    if (this.getStack.length > 0 ) {
+    if (this.index !== 0 && this.index !== 1) {
       this.section('back')
       this.button('Takaisin', this.previousContent, this)
     }
-    /**
-    if (this.getStack.length > 1) {
-      this.getStack.pop()
-    }
-     */
+         
   }
 
   getOptions() {
