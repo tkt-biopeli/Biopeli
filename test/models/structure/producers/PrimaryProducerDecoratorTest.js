@@ -29,6 +29,14 @@ describe('Primary producer decorator tests', () => {
     assert.equal(ip, p.producer)
   })
 
+  it('Produce test', () => {
+    p.getMoistureMultiplier = () => {return 0.5}
+    p.getFertilityMultiplier = () => {return 0.5}
+    p.producer.produce = (te) => {return 20}
+    p.ownedFarmLand = [{flowers: 10}]
+    assert(p.produce() == 5)
+  })
+
   it('moisture multiplier test', () => {
     var min = p.structure.structureType.moisture_min, 
         max = p.structure.structureType.moisture_max,
