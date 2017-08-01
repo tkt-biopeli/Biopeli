@@ -4,13 +4,14 @@ import { createLine } from '../../logic/Functions'
  * Refiner takes production from given type buildingsnear it and enchancts their production
  */
 export default class Refiner {
-  constructor ({ zone, inputTypes, multiplier, radius }) {
+  constructor ({ zone, inputTypes, multiplier, radius, tile }) {
     this.zone = zone
     this.inputTypes = inputTypes
     this.multiplier = multiplier
     this.radius = radius
     this.distancefunction = createLine(1, 1, radius, 1 / multiplier)
     this.producerHolders = []
+    this.tile = tile
     this.findProducers()
   }
 
@@ -42,7 +43,6 @@ export default class Refiner {
         let structure = capsule.tile.structure
         let producer = structure.producer
         let distance = capsule.distance
-
         if (this.canRefineOutputOf(structure) && this.isCloser(producer, distance)) {
           this.producerHolders.push({ distance: distance, producer: producer })
         }
