@@ -26,8 +26,8 @@ export default {
 
   // configurations for map
   mapSize: {
-    width: 18, // NOTE TO CHANGER! VALUES UNDER 12 BUG THE MAP!
-    height: 18 // THIS TOO
+    width: 64, // NOTE TO CHANGER! VALUES UNDER 12 BUG THE MAP!
+    height: 64 // THIS TOO
   },
   noise: {
     freqs: {

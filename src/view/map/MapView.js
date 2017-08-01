@@ -23,8 +23,8 @@ export default class MapView {
     this.tileWidth = map.tileWidth
     this.tileHeight = map.tileHeight
     this.showFlowers = false
-    this.showDampness = false
-    this.showFertility = true
+    this.showDampness = true
+    this.showFertility = false
     this.tilesToRedraw = []
     this.highlighter = new Highlighter({ game: game, tileWidth: this.tileWidth, tileHeight: this.tileHeight })
     this.viewTileFactory = new ViewTileFactory({ game: game })

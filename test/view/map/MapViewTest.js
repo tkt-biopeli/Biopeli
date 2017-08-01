@@ -107,12 +107,7 @@ describe('MapView tests', () => {
     assert.equal(pxCoord.y, 146)
   })
 
-  it('Selection highlight is functioning correctly', () => {
-    var highlight = mapView.highlight(0.2, true, 'black')
-    assert(highlight.beginFill.calledWith(0x000000, 0.2))
-    assert(highlight.drawRoundedRect.calledWith(0, 0, 74, 34, 15)) // 15 is the standard edge rounding
-    assert.equal(highlight.endFill.callCount, 1)
-  })
+
 
 /*  it('Selection highlight visible if tile is selected', () => {
     var pxCoords = { x: 0, y: 0 }
