@@ -10,6 +10,12 @@ export default class AllDecorator {
     this.producer.initialize(structure)
   }
 
+  /**
+   * Calculates produce generated
+   * @param {TimeEvent} timeEvent 
+   * @param {*} ownerCall 
+   * @return {number}
+   */
   produce (timeEvent, ownerCall) {
     if (this.refinery != null && !ownerCall) {
       return 0

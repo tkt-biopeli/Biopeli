@@ -4,9 +4,10 @@
 export default class PerlinGenerator {
   /**
    * @param {object} param
-   * @param {number} param.height - map height
-   * @param {number} param.width - map width
-   * @param {number} param.seed - seed for forest generation, optional
+   * @param {} param.Noise
+   * @param {number} param.noiseHeight
+   * @param {number} param.noiseWidth
+   * @param {{groundfreq: number, forestfreq: number, fertilityfreq: number}} param.freqs
    */
   constructor ({ Noise, noiseHeight, noiseWidth, freqs }) {
     this.fertilitynoise = new Noise(Math.random())
@@ -21,6 +22,12 @@ export default class PerlinGenerator {
     this.fertilityfreq = freqs.fertilityfreq
   }
 
+  /**
+   * Calculates the noises at the given coordinate
+   * @param {number} x - x coordinate
+   * @param {number} y - y coordinate
+   * @return {{ground: number, forest: number, fertility: number}}
+   */
   noisesAt (x, y) {
     var c = this.coordinateChange(x, y)
 
@@ -31,6 +38,13 @@ export default class PerlinGenerator {
     }
   }
 
+  /**
+   * Calculates a specific noise at the given coordinate
+   * @param {number} x - x coordinate
+   * @param {number} y - y coordinate
+   * @param {string} noiseName - type of noise, for example ground
+   * @return {number}
+   */
   noiseValueAt (x, y, noiseName) {
     var c = this.coordinateChange(x, y)
 
@@ -39,6 +53,11 @@ export default class PerlinGenerator {
     return noise.perlin2(freq * c.x, freq * c.y)
   }
 
+  /**
+   * @param {number} x - x coordinate 
+   * @param {number} y - y coordinate
+   * @return {{x: number, y: number}}
+   */
   coordinateChange (x, y) {
     return {x: x / this.width - 0.5, y: y / this.height - 0.5}
   }

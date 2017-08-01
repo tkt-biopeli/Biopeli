@@ -55,6 +55,7 @@ export default class PrimaryProducerDecorator {
   }
 
   /**
+   * Calculates produce generated
    * @param {TimeEvent} timeEvent
    * @return {number}
    */
