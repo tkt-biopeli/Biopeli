@@ -87,17 +87,17 @@ describe('Tile content tests', ()=>{
     hasCashStub.returns(true)
 
     content.structureRuining(structure)
-    assert.equal(buttonSpy.lastCall.args[0], 'Repair')
+    assert.equal(buttonSpy.lastCall.args[0], 'Korjaa')
     // the first 'if' is false; the second 'if' is true
     hasCashStub.returns(false)
 
     content.structureRuining(structure)
-    assert.equal(buttonSpy.lastCall.args[0], 'Not enough money')
+    assert.equal(buttonSpy.lastCall.args[0], 'Rahat eivät riitä')
     // both 'ifs' are false
     healthPctStub.returns(1.0001)
     hasCashStub.returns(true)
 
     content.structureRuining(structure)
-    assert.equal(buttonSpy.lastCall.args[0], 'Perfect condition')
+    assert.equal(buttonSpy.lastCall.args[0], 'Täydellisessä kunnossa')
   })
 })

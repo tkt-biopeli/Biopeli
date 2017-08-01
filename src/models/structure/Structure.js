@@ -35,17 +35,19 @@ export default class Structure {
 
   /**
    * checks whether this structure owns the tile at the given coordinates
-   * 
-   * @param {number} x 
-   * @param {number} y 
+   *
+   * @param {number} x
+   * @param {number} y
    * @return {boolean}
    */
   ownsTileAt (x, y) {
-    var i, tile, len = this.ownedTiles.length
+    var i, tile
+    var len = this.ownedTiles.length
     for (i = 0; i < len; i++) {
       tile = this.ownedTiles[i]
-      if (x == tile.x && y == tile.y) 
+      if (x === tile.x && y === tile.y) {
         return true
+      }
     }
     return false
   }
