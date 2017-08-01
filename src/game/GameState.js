@@ -210,8 +210,7 @@ export default class GameState {
     })
 
     this.optionsContent = new OptionsContent({
-      music: this.music,
-      gameEvents: this.gameEvents
+      game: this
     })
 
     this.cityContent = new CityContent({
@@ -264,7 +263,9 @@ export default class GameState {
    */
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
-    this.gameTimer.update(this.currentTime())
+    if(this.state.paused) {
+      this.gameTimer.update(this.currentTime())
+    }
   }
 
   currentTime () {
