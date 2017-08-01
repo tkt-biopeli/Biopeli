@@ -23,7 +23,7 @@ export default class MapView {
     this.tileWidth = map.tileWidth
     this.tileHeight = map.tileHeight
     this.showFlowers = false
-    this.showDampness = false 
+    this.showDampness = false
     this.showFertility = true
     this.tilesToRedraw = []
     this.highlighter = new Highlighter({ game: game, tileWidth: this.tileWidth, tileHeight: this.tileHeight })
@@ -83,7 +83,7 @@ export default class MapView {
    * @param {number} cameraX
    * @param {number} cameraY
    * @param {number} startCol
-   * @param {number} startRow
+   * @param {number} startRowtile
    */
   offset (cameraX, cameraY, startCol, startRow) {
     return {
@@ -124,6 +124,7 @@ export default class MapView {
     }
 
     this.viewTileFactory.stop()
+    this.tilesToRedraw = undefined
   }
 
   /**
@@ -138,7 +139,6 @@ export default class MapView {
     viewTile.tileSprite.width = this.tileWidth
     viewTile.tileSprite.height = this.tileHeight
     this.addHighlights(viewTile)
-    // console.log(pxCoords.x)
     this.addToViewTexture(viewTile.tileSprite, pxCoords.x, pxCoords.y)
   }
 

@@ -7,6 +7,7 @@ export default class ViewTile {
     this.dampnessCol = dampnessCol
     this.fertilityCol = fertilityCol
     this.intialize()
+    // this.lived = 0
   }
 
   intialize () {
@@ -38,8 +39,11 @@ export default class ViewTile {
     }
 
     this.highlights.removeChildren()
+    this.hammerFrameUpdate()
+    this.flowerFrameUpdate()
 
     this.visibility(dampness, fertility, flowers)
+    // this.lived++
   }
 
   visibility (dampness, fertility, flowers) {
@@ -100,7 +104,7 @@ export default class ViewTile {
   makeColourSprite (colour) {
     let clr = colour
     var sprite = this.game.make.graphics()
-    sprite.beginFill(clr, 0.5)
+    sprite.beginFill(clr, 1)
     sprite.drawRoundedRect(32, 32, 64, 64, 20)
     // sprite.anchor.set(0.5, 0.5)
     sprite.endFill()
@@ -131,6 +135,11 @@ export default class ViewTile {
     return this.tileSprite.addChild(hammers)
   }
 
+  hammerFrameUpdate () {
+    if (this.hammerSprite === null) return
+    this.hammerSprite.frame = Math.max(Math.min(3, 4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)), 0)
+  }
+
   /**
    * Adds flowers according to amount in modeltile
    * @param {string} toAdd
@@ -139,6 +148,11 @@ export default class ViewTile {
     let daisies = this.game.make.sprite(0, 0, 'daisy')
     daisies.frame = 10 - this.modelTile.flowers
     return this.tileSprite.addChild(daisies)
+  }
+
+  flowerFrameUpdate () {
+    if (this.flowerSprite === null) return
+    this.flowerSprite.frame = 10 - this.modelTile.flowers
   }
 
   addHighlight (toAdd) {
@@ -150,5 +164,6 @@ export default class ViewTile {
   destroy () {
     this.tileSprite.removeChildren()
     this.tileSprite.destroy()
+    // console.log("i lived for " + this.lived + " frames")
   }
 }
