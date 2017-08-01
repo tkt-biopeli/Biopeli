@@ -1,9 +1,13 @@
 export default class AllDecorator {
   constructor ({producer, tile}) {
     this.producer = producer
-    this.tile = tile
     this.refinery = null
     this.refineryDistance = null
+  }
+
+  initialize (structure) {
+    this.structure = structure
+    this.producer.initialize(structure)
   }
 
   produce (timeEvent, ownerCall) {
@@ -11,10 +15,6 @@ export default class AllDecorator {
       return 0
     }
 
-    if (this.health == null) {
-      this.health = this.tile.structure.health
-    }
-
-    return this.producer.produce(timeEvent) * this.health.percent()
+    return this.producer.produce(timeEvent) * this.structure.health.percent()
   }
 }

@@ -3,19 +3,21 @@ const sinon = require("sinon")
 import AllDecorator from '../../../../src/models/structure/producers/decorators/AllDecorator'
 
 describe('AllDecorator tests', () => {
-  var producer, p, health, tile
+  var producer, p, health, structure
 
   beforeEach(()=>{
-    p = {produce: () => 7}
+    p = {produce: () => 7, initialize: sinon.spy()}
     health = {percent: () => 1}
-    tile = {structure: {health: health}}
+    structure = {health: health}
 
-    producer = new AllDecorator({producer: p, tile: tile})
+    producer = new AllDecorator({producer: p})
+    producer.initialize(structure)
   })
 
-  it('Constructor test', ()=>{
+  it('Constructor and initialization test', ()=>{
     assert.equal(p, producer.producer)
-    assert.equal(tile, producer.tile)
+    assert.equal(structure, producer.structure)
+    assert(p.initialize.calledWith(structure))
   })
 
   it('Producer calls only when meant to', ()=>{
@@ -34,20 +36,6 @@ describe('AllDecorator tests', () => {
     producer.produce()
 
     assert.equal(2, p.produce.callCount)
-  })
-
-  it('Health is set at first produce', ()=>{
-    assert(producer.health == null)
-
-    producer.produce()
-
-    assert.equal(health, producer.health)
-
-    producer.tile = null
-
-    producer.produce()
-
-    assert.equal(health, producer.health)
   })
 
   it('Production is based on the health percentage', ()=>{
