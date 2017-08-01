@@ -40,13 +40,13 @@ export default class SideMenuContent extends Content {
 
   tileInformation (tile) {
     this.sectionName('tile')
-    this.text('Ground type: ' + tile.tileType.name)
+    this.text('Maatyyppi: ' + tile.tileType.nameWithLanguage)
     this.text('X: ' + tile.x + ', Y: ' + tile.y)
-    this.text('Flowers: ' + tile.flowers)
-    this.text('Moisture: ' + this.format(tile.moisture) + '%')
-    this.text('Fertility: ' + this.format(tile.fertility) + '%')
+    this.text('Kukkia: ' + tile.flowers)
+    this.text('Kosteus: ' + this.format(tile.moisture) + '%')
+    this.text('Ravinteikkuus: ' + this.format(tile.fertility) + '%')
     if (tile.owner != null) {
-      this.text('Land owner: ' + tile.owner.ownerName)
+      this.text('Maanomistaja: ' + tile.owner.ownerName)
     }
   }
 
@@ -54,33 +54,34 @@ export default class SideMenuContent extends Content {
     this.section('structure')
     this.text('"' + structure.ownerName + '"')
     this.text('"' + structure.structureName + '"')
-    this.text('Structure: ' + structure.structureType.name)
-    this.text('Founding year: ' + structure.foundingYear)
+    this.text('Rakennus: ' + structure.structureType.nameWithLanguage)
+    this.text('Perustamisvuosi: ' + structure.foundingYear)
     if (structure.structureType.refinery) {
       structure.size = structure.producer.producer.producerHolders.length
     }
-    this.text('Size: ' + structure.size)
+    this.text('Koko: ' + structure.size)
+
     var turnipProduction = structure.turnipProduction()
-    this.text('Production per time: ' + this.format(turnipProduction, 2))
-    this.text('Money per time: ' + this.format(this.demandFunction.pay(turnipProduction), 2))
+    this.text('Tuotanto (nauriita/vko): ' + this.format(turnipProduction, 2))
+    this.text('Tuotto (€/vko): ' + this.format(this.demandFunction.pay(turnipProduction), 2))
   }
 
   structureRuining (structure) {
     this.section('ruin')
-    this.text('Structure health: ' + structure.health.toString())
+    this.text('Rakennuksen kunto: ' + structure.health.toString())
     this.animatedBar(200, 50, false, structure.health.percent())
-    this.text('Fix cost: ' + structure.healthManager.fixPrice())
+    this.text('Korjauskustannus: ' + structure.healthManager.fixPrice())
     if (structure.health.percent() < 1 && this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
       var fix = (structure => () => {
         structure.healthManager.fix()
         this.owner.redraw()
         this.topBarController.redraw()
       })(structure)
-      this.button('Repair', fix, this, 'emptyButton')
+      this.button('Korjaa', fix, this, 'emptyButton')
     } else if (structure.health.percent() < 1 && !this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
-      this.button('Not enough money', this.emptyFunction, null, 'unusableButton')
+      this.button('Rahat eivät riitä', this.emptyFunction, null, 'unusableButton')
     } else {
-      this.button('Perfect condition', this.emptyFunction, null, 'unusableButton')
+      this.button('Täydellisessä kunnossa', this.emptyFunction, null, 'unusableButton')
     }
   }
 
@@ -91,7 +92,7 @@ export default class SideMenuContent extends Content {
 
     for (let structureType of allowedStructures) {
       this.owner.changeButton(
-        structureType.name,
+        structureType.nameWithLanguage,
         2,
         this.owner.wrapFunction(this.owner.addState, this.owner, 'structureType', structureType),
         this

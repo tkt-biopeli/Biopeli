@@ -14,6 +14,7 @@
 const structureTypes = {
   wheat_farm: {
     name: 'wheat farm',
+    nameWithLanguage: 'viljatila',
     asset: 'wheat_farm',
     health: 12,
     harvestingWeeks: new Set(['8.1']),
@@ -29,6 +30,7 @@ const structureTypes = {
   },
   dairy_farm: {
     name: 'dairy farm',
+    nameWithLanguage: 'maitotila',
     asset: 'dairy_farm',
     health: 15,
     harvestingWeeks: new Set(),
@@ -44,6 +46,7 @@ const structureTypes = {
   },
   berry_farm: {
     name: 'berry farm',
+    nameWithLanguage: 'marjatila',
     asset: 'berry_farm',
     health: 8,
     harvestingWeeks: new Set(),
@@ -59,6 +62,7 @@ const structureTypes = {
   },
   mill: {
     name: 'mill',
+    nameWithLanguage: 'mylly',
     asset: 'mill',
     health: 20,
     refinery: true,
@@ -81,30 +85,35 @@ const structureTypes = {
 const tileTypes = {
   forest: {
     name: 'forest',
+    nameWithLanguage: 'metsä',
     asset: 'forest',
     flowers: 10,
     allowedStructures: []
   },
   grass: {
     name: 'grass',
+    nameWithLanguage: 'ruohikko',
     asset: 'grass',
     flowers: 10,
     allowedStructures: []
   },
   water: {
     name: 'water',
+    nameWithLanguage: 'vesi',
     asset: 'water',
     flowers: 10,
     allowedStructures: []
   },
   field: {
     name: 'field',
+    nameWithLanguage: 'pelto',
     asset: 'field',
     flowers: 10,
     allowedStructures: []
   },
   industrial: {
     name: 'industrial',
+    nameWithLanguage: 'teollisuusalue',
     asset: 'industrial',
     flowers: 10,
     allowedStructures: []
