@@ -5,36 +5,59 @@ import {createLine} from '../../../logic/Functions'
  * turnips a structure produces at given week
  */
 export default class PrimaryProducerDecorator {
+  /**
+   * @param {object} param
+   * @param {ModelTile} param.tile
+   * @param {} param.producer
+   */
   constructor ({ tile, producer }) {
     this.tile = tile
     this.producer = producer
     this.ownedFarmLand = []
   }
 
+  /**
+   * @param {Structure} structure
+   */
   initialize (structure) {
     this.structure = structure
     this.producer.initialize(structure)
-    
-    this.underFunction = createLine(
-      structure.structureType.moisture_min - 10,
-      0,
-      structure.structureType.moisture_min,
-      1
-    )
-    this.preferFunction = createLine(
-      structure.structureType.moisture_min,
-      1,
-      structure.structureType.moisture_max,
-      1
-    )
-    this.overFunction = createLine(
-      structure.structureType.moisture_max,
-      1,
-      structure.structureType.moisture_max + 10,
-      0
-    )
+
+    this.moisture = {
+      under: createLine(
+        structure.structureType.moisture_min - 10, 0,
+        structure.structureType.moisture_min, 1
+      ),
+      prefer: createLine(
+        structure.structureType.moisture_min, 1,
+        structure.structureType.moisture_max, 1
+      ),
+      over: createLine(
+        structure.structureType.moisture_max, 1,
+        structure.structureType.moisture_max + 10, 0
+      )
+    }
+
+    this.fertility = {
+      under: createLine(
+        structure.structureType.fertility_min - 10, 0,
+        structure.structureType.fertility_min, 1
+      ),
+      prefer: createLine(
+        structure.structureType.fertility_min, 1,
+        structure.structureType.fertility_max, 1
+      ),
+      over: createLine(
+        structure.structureType.fertility_max, 1,
+        structure.structureType.fertility_max + 10, 0
+      )
+    }
   }
 
+  /**
+   * @param {TimeEvent} timeEvent
+   * @return {number}
+   */
   produce (timeEvent) {
     var value = 0
     this.ownedFarmLand.forEach(function (tile) {
@@ -57,11 +80,11 @@ export default class PrimaryProducerDecorator {
     } else if (this.tile.moisture > this.structure.structureType.moisture_max + 10) {
       return 0
     } else if (this.tile.moisture < this.structure.structureType.moisture_min) {
-      return this.underFunction(this.tile.moisture)
-    } else if (this.structure.structureType.moisture_max <  this.tile.moisture) {
-      return this.overFunction(this.tile.moisture)
-    } else  {
-      return this.preferFunction(this.tile.moisture)
+      return this.moisture.under(this.tile.moisture)
+    } else if (this.structure.structureType.moisture_max < this.tile.moisture) {
+      return this.moisture.over(this.tile.moisture)
+    } else {
+      return this.moisture.prefer(this.tile.moisture)
     }
   }
   /**
@@ -74,11 +97,11 @@ export default class PrimaryProducerDecorator {
     } else if (this.tile.fertility > this.structure.structureType.fertility_max + 10) {
       return 0
     } else if (this.tile.fertility < this.structure.structureType.fertility_min) {
-      return this.underFunction(this.tile.fertility)
-    } else if (this.structure.structureType.fertility_max <  this.tile.fertility) {
-      return this.overFunction(this.tile.fertility)
-    } else  {
-      return this.preferFunction(this.tile.fertility)
+      return this.fertility.under(this.tile.fertility)
+    } else if (this.structure.structureType.fertility_max < this.tile.fertility) {
+      return this.fertility.over(this.tile.fertility)
+    } else {
+      return this.fertility.prefer(this.tile.fertility)
     }
   }
 }
