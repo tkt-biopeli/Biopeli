@@ -40,7 +40,8 @@ export default [
     'Thaimaalainen',
     'Munkki',
     'Professori',
-    'Luukkaisen'
+    'Luukkainen',
+    'Nokelainen'
   ],
   [
     'Olli',
@@ -63,6 +64,7 @@ export default [
     'Jarkko',
     'Miia',
     'Juha',
+    'Iina',
     'vaari',
     'mummo',
     'mummi',

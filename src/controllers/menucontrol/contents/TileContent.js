@@ -15,7 +15,7 @@ export default class SideMenuContent extends Content {
     this.purchaseManager = purchaseManager
     this.topBarController = topBarController
 
-    this.emptyFunction = () => {}
+    this.emptyFunction = () => { }
   }
 
   /**
@@ -56,6 +56,9 @@ export default class SideMenuContent extends Content {
     this.text('"' + structure.structureName + '"')
     this.text('Rakennus: ' + structure.structureType.nameWithLanguage)
     this.text('Perustamisvuosi: ' + structure.foundingYear)
+    if (structure.structureType.refinery) {
+      structure.size = structure.producer.producer.producerHolders.length
+    }
     this.text('Koko: ' + structure.size)
 
     var turnipProduction = structure.turnipProduction()

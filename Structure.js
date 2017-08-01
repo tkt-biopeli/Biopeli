@@ -18,30 +18,19 @@ export default class Structure {
    */
   constructor ({ tile, health, healthManager, ownerName, structureName, size, structureType, foundingYear, producer }) {
     this.tile = tile
+
     this.health = health
     this.healthManager = healthManager
     this.producer = producer
+
     this.ownerName = ownerName
     this.structureName = structureName
     this.size = size
     this.structureType = structureType
     this.foundingYear = foundingYear
+
     this.ownedTiles = []
     this.radiusForTileOwnership = structureType.radiusForTileOwnership
-  }
-
-  /**
-   * checks whether this structure owns the tile at the given coordinates
-   * @param {number} x
-   * @param {number} y
-   * @return {boolean}
-   */
-  ownsTileAt (x, y) {
-    for (var i = 0; i < this.ownedTiles.length; i++) {
-      let tile = this.ownedTiles[i]
-      if (x === tile.x && y === tile.y) { return true }
-    }
-    return false
   }
 
   /**

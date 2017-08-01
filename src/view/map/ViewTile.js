@@ -33,7 +33,6 @@ export default class ViewTile {
 
   /**
    * creates border graphics based on the surrounding tiles
-   *
    * @return {Phaser.Graphics}
    */
   makeBorderSprite () {
