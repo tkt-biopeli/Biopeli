@@ -25,10 +25,21 @@ export default class MulticontentController extends Controller {
    */
   createSections () {
     this.contents[this.index].createSections()
+  
+    // bugi
+    //
 
-    if (this.getStack.length > 0) {
+
+    //
+
+    
+    console.log(this.getStack)
+    if (this.getStack.length > 0 ) {
       this.section('back')
       this.button('Takaisin', this.previousContent, this)
+    }
+    if (this.getStack.length > 1) {
+      this.getStack.pop()
     }
   }
 
