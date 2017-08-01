@@ -138,6 +138,7 @@ export default class MapView {
     viewTile.tileSprite.width = this.tileWidth
     viewTile.tileSprite.height = this.tileHeight
     this.addHighlights(viewTile)
+    // console.log(pxCoords.x)
     this.addToViewTexture(viewTile.tileSprite, pxCoords.x, pxCoords.y)
   }
 
@@ -146,6 +147,7 @@ export default class MapView {
    * @param {ViewTile} viewTile
    */
   addHighlights (viewTile) {
+    if (this.selectedTile === undefined) return
     this.highlighter.addHighlights(viewTile, this.selectedTile)
   }
 

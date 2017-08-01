@@ -5,8 +5,8 @@ export default class ViewTileFactory {
 
   constructor({ game }) {
     this.game = game
-    this.viewtileStorage = new Map()
-    this.secondaryStorage = new Map()
+/*    this.viewtileStorage = new Map()
+    this.secondaryStorage = new Map()*/    
     this.palette = new Palette()
     this.dampness = false
     this.fertility = false
@@ -18,32 +18,33 @@ export default class ViewTileFactory {
     this.fertility = fertility
     this.flowers = flowers
     this.redrawTiles = redrawTiles
-    this.secondaryStorage.clear()
+    // this.secondaryStorage.clear()
   }
 
   stop () {
-    for (var viewTile of this.viewtileStorage.values()) {
+/*    for (var viewTile of this.viewtileStorage.values()) {
       viewTile.destroy()
     }
     this.viewtileStorage.clear()
-    this.viewtileStorage = this.secondaryStorage
+    this.viewtileStorage = this.secondaryStorage*/
   }
 
   getViewTile (modeltile) {
-    let vt = this.loadVt(modeltile)
+    // let vt = this.loadVt(modeltile)
+    let vt = this.createVt(modeltile)
     this.updateVt(vt, modeltile)
-    this.secondaryStorage.set(modeltile, vt)
+    // this.secondaryStorage.set(modeltile, vt)
     return vt
   }
 
-  loadVt (modelTile) {
+/*  loadVt (modelTile) {
     let vt = this.viewtileStorage.get(modelTile)
     if (vt) {
       this.viewtileStorage.delete(modelTile)
     }
     if (vt === undefined) vt = this.createVt(modelTile)
     return vt
-  }
+  }*/
 
   createVt (modelTile) {
     let vt = new ViewTile({ game: this.game, modelTile: modelTile, dampnessCol: this.palette.getDampnessColour(modelTile.moisture), fertilityCol: this.palette.getFertilityColour(modelTile.fertility) })

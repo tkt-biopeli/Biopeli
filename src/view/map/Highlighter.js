@@ -1,6 +1,6 @@
 export default class Highlighter {
 
-  constructor({game, tileWidth, tileHeight}) {
+  constructor({ game, tileWidth, tileHeight }) {
     this.game = game
     this.tileWidth = tileWidth
     this.tileHeight = tileHeight
@@ -30,16 +30,18 @@ export default class Highlighter {
     if (tile === selectedTile) {
       sprites.push(this.highlight(0.2, true))
     }
-    if (this.landHighlights.includes(tile)) {
-      sprites.push(this.highlightBackground())
-      sprites.push(this.highlight(0.2, false, 'blue'))
+    if (selectedTile.structure !== null && selectedTile.structure.structureType.refinery) {
+      if (this.landHighlights.includes(tile)) {
+        sprites.push(this.highlightBackground())
+        sprites.push(this.highlight(0.2, false, 'blue'))
+      }
+      if (this.buildingHighlights.includes(tile)) {
+        sprites.push(this.highlightBackground())
+        sprites.push(this.highlight(0.5, true, 'green'))
+      }
     }
-    if (this.buildingHighlights.includes(tile)) {
-      sprites.push(this.highlightBackground())
-      sprites.push(this.highlight(0.5, true, 'green'))
-    }
-    sprites.forEach((sprite) => viewTile.addHighlight(sprite))
 
+    sprites.forEach((sprite) => viewTile.addHighlight(sprite))
   }
 
   /**
