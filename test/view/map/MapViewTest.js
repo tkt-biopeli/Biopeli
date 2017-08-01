@@ -62,7 +62,7 @@ describe('MapView tests', () => {
     mapView = new MapView({ game: game, map: map, menuController: menu, viewWidthPx: 277, viewHeightPx: 653 })
   })
 
-  it('MapView costructor works', () => {
+  it('MapView constructor works', () => {
     assert.equal(mapView.viewWidthPx, 277)
     assert.equal(mapView.viewHeightPx, 653)
     assert.equal(mapView.tileWidth, 74)

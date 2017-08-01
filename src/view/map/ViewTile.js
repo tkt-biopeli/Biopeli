@@ -162,8 +162,10 @@ export default class ViewTile {
   }
 
   destroy () {
-    this.tileSprite.removeChildren()
-    this.tileSprite.destroy()
+    if (this.tileSprite !== undefined) {
+      this.tileSprite.removeChildren()
+      this.tileSprite.destroy()
+    }
     // console.log("i lived for " + this.lived + " frames")
   }
 }

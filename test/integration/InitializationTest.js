@@ -62,26 +62,32 @@ describe('Integration test: The game is initialized properly when started', () =
     assert(gameState.menuController.selectedTile == null)
   })
 
-  it('Updating the game draws the tiles again', () => {
+  it('Updating the game uses same the tiles again, renders multiple times', () => {
     var mockerHandler = game.mockers
     var drawAmount = mockerHandler.callCount('make.sprite')
     var clearAmount = mockerHandler.callCount('render.clear')
+    var renderAmount = mockerHandler.callCount('renderXY')
+
 
     assert.equal(0, clearAmount)
     assert.equal(0, drawAmount)
+    assert.equal(0, renderAmount)
 
     gameState.update()
 
     clearAmount = mockerHandler.callCount('render.clear')
     drawAmount = mockerHandler.callCount('make.sprite')
+    renderAmount = mockerHandler.callCount('renderXY')
 
     assert.equal(1, clearAmount)
 
     gameState.update()
 
     var newDrawAmount = mockerHandler.callCount('make.sprite')
+    var newRenderAmount = mockerHandler.callCount('renderXY')
 
-    assert.equal(2 * drawAmount, newDrawAmount)
+    assert.equal(drawAmount, newDrawAmount)
+    assert.equal(2 * renderAmount, newRenderAmount)
   })
 
   it('Game starts in left upper corner', () => {

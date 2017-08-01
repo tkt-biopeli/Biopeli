@@ -3,7 +3,7 @@ import Rainbow  from 'rainbowvis.js'
 export default class Palette {
   constructor() {
     this.dampnessRainbow = new Rainbow()
-    // this.dampnessRainbow.setSpectrum('sienna', 'sandybrown', 'aqua') 
+    this.dampnessRainbow.setSpectrum('sienna', 'sandybrown', 'aqua') 
     this.fertilityRainbow = new Rainbow()
     this.fertilityRainbow.setSpectrum('red', 'dimgray', 'lime')
   }
