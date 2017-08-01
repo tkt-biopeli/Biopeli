@@ -6,6 +6,7 @@ export default class ViewTileFactory {
   constructor({ game }) {
     this.game = game
     this.viewtileStorage = new Map()
+    this.secondaryStorage = new Map()
     this.palette = new Palette()
     this.dampness = false
     this.fertility = false
@@ -17,7 +18,7 @@ export default class ViewTileFactory {
     this.fertility = fertility
     this.flowers = flowers
     this.redrawTiles = redrawTiles
-    this.secondaryStorage = new Map()
+    this.secondaryStorage.clear()
   }
 
   stop () {

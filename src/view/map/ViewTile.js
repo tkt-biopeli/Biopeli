@@ -148,6 +148,7 @@ export default class ViewTile {
   }
 
   destroy () {
+    this.tileSprite.removeChildren()
     this.tileSprite.destroy()
   }
 }
