@@ -14,13 +14,10 @@ export default class MenuView {
     this.game = game
     this.layout = layout
     this.backgroundInTheMiddle = backgroundInTheMiddle
-
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
     this.game.world.bringToTop(this.menuViewGroup)
-
     this.activeMenuitems = new Map()
-
     this.createBackground(background)
   }
 
@@ -63,10 +60,8 @@ export default class MenuView {
   draw (sections) {
     this.active = new Set()
     this.activeSections = []
-
     this.activeButtons = []
     this.activeTexts = []
-
     this.layout.init(sections)
     this.updateMenu(sections)
     this.game.world.bringToTop(this.background)

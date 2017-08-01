@@ -19,6 +19,7 @@ import GameTimerListener from '../controllers/events/time/GameTimerListener'
 import Timer from '../controllers/events/time/Timer'
 
 import TopBarContent from '../controllers/menucontrol/contents/TopBarContent'
+import OptionsContent from '../controllers/menucontrol/contents/OptionsContent'
 import TileContent from '../controllers/menucontrol/contents/TileContent'
 import CityContent from '../controllers/menucontrol/contents/CityContent'
 import BottomContent from '../controllers/menucontrol/contents/BottomContent'
@@ -46,6 +47,10 @@ export default class GameState {
     this.state = state
 
     state.world.setBounds(0, 0, mapSize.width * tileSize.width + menuWidth, mapSize.height * tileSize.height)
+
+    this.music = this.state.add.audio('music')
+    this.music.play()
+    this.music.loopFull()
 
     this.initializeModel(cityName, perlinNoise, gameLength, startMoney, mapSize, tileSize)
     this.initializeView()
@@ -132,10 +137,6 @@ export default class GameState {
       gameState: this,
       gameLength: gameLength
     })
-
-    this.music = this.state.add.audio('music')
-    this.music.play()
-    this.music.loopFull()
   }
 
   initializeView () {
@@ -208,9 +209,13 @@ export default class GameState {
       })
     })
 
-    this.cityContent = new CityContent({
-      city: this.city,
+    this.optionsContent = new OptionsContent({
+      music: this.music,
       gameEvents: this.gameEvents
+    })
+
+    this.cityContent = new CityContent({
+      city: this.city
     })
 
     this.tileContent = new TileContent({
@@ -219,7 +224,7 @@ export default class GameState {
       demandFunction: this.city.turnipDemand
     })
 
-    var buildStructureController = new BuildStructureContent({
+    this.buildStructureController = new BuildStructureContent({
       purchaseManager: this.purchaseManager,
       structureFactory: this.structureFactory
     })
@@ -233,7 +238,7 @@ export default class GameState {
         buttonHeight: config.menuButtonHeight,
         buttonWidth: config.menuButtonWidth
       }),
-      contents: [this.cityContent, this.tileContent, buildStructureController]
+      contents: [this.cityContent, this.tileContent, this.buildStructureController, this.optionsContent]
     })
 
     this.bottomController = new SingleController({

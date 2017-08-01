@@ -3,9 +3,7 @@ import ButtonComponent from './components/ButtonComponent'
 import AnimatedBarComponent from './components/AnimatedBarComponent'
 import IconComponent from './components/IconComponent'
 import MenuComponent from './components/MenuComponent'
-
 import Section from './components/MenuSection'
-
 import ResetDecorator from './helpers/ResetDecorator'
 import StateSetDecorator from './helpers/StateSetDecorator'
 
@@ -18,7 +16,6 @@ export default class Controller {
     this.game = game
     this.style = style
     this.menuView = menuView
-
     this.state = new Map()
   }
 
@@ -35,9 +32,7 @@ export default class Controller {
    */
   buildSections () {
     this.initialize()
-
     this.createSections()
-
     return this.sections
   }
 
@@ -83,10 +78,9 @@ export default class Controller {
       vertical: menuVertical != perpindicular,
       sections: sections
     })
+
     this.currentSection.components.push(menu)
-
     var controller = new Controller(this.game, this.style)
-
     controller.sections = sections
     controller.section()
 
@@ -98,7 +92,6 @@ export default class Controller {
    */
   radio (name, perpindicular, activeAsset, inactiveAsset, initActive, ...buttonInfos) {
     var selectedButton = this.getActiveRadioButton(name, initActive)
-
     var submenuController = this.submenu('static', perpindicular, 0)
 
     for(let i = 0 ; i < buttonInfos.length ; i++) {
@@ -112,7 +105,7 @@ export default class Controller {
       })
 
       let asset = inactiveAsset
-      if(selectedButton == i) asset = activeAsset
+      if(selectedButton == i) { asset = activeAsset }
 
       submenuController.button(i.name, radioDecorator.act, radioDecorator, asset)
     }

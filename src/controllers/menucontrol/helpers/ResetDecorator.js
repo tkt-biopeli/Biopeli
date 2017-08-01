@@ -4,9 +4,7 @@
 export default class ResetDecorator {
   /**
    * Description goes here
-   *
    * @param {object} param
-   *
    * @param { ??? } param.action
    * @param {Menu} param.menu
    */
