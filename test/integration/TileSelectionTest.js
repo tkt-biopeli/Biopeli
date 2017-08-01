@@ -18,7 +18,7 @@ describe('Integration test: Tile selection shows correctly in Menu', () => {
     gameAdvancer.click(0, 0)
     gameStateChecker.checkSelectedTile(0, 0)
     gameStateChecker.checkButtonAmountInMenu(4)
-    gameStateChecker.checkIfTextsExist('Ground type: grass', 'X: 0, Y: 0')
+    gameStateChecker.checkIfTextsExist('Maatyyppi: ruohikko', 'X: 0, Y: 0')
   })
 
   it('Selecting tile with built structure shows correct options in Menu', () => {
@@ -26,7 +26,7 @@ describe('Integration test: Tile selection shows correctly in Menu', () => {
     gameAdvancer.click(0, 0)
     gameStateChecker.checkSelectedTile(0, 0)
     gameStateChecker.checkButtonAmountInMenu(1)
-    gameStateChecker.checkIfTextsExist('Ground type: field', 'X: 0, Y: 0', 'Structure: wheat farm')
+    gameStateChecker.checkIfTextsExist('Maatyyppi: pelto', 'X: 0, Y: 0', 'Rakennus: viljatila')
   })
 
   it('Selecting chosen tile again empties the selection', () => {

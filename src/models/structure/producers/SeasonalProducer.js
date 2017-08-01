@@ -8,6 +8,13 @@ export default class SeasonalProducer {
     this.produced = 0
   }
 
+  initialize (structure) { }
+
+  /**
+   * Calculates the produce generated
+   * @param {TimeEvent} timeEvent
+   * @return {number}
+   */
   produce (timeEvent) {
     this.produced += this.turnipYield
     if (this.harvestWeeks.has(timeEvent.month + '.' + timeEvent.week)) {

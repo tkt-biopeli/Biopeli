@@ -62,17 +62,21 @@ export default class ViewTile {
     return sprite
   }
 
+  /**
+   * creates border graphics based on the surrounding tiles
+   * @return {Phaser.Graphics}
+   */
   makeBorderSprite () {
     if (this.modelTile.owner === null) return null
 
     var border = this.game.make.graphics()
     border.beginFill(0x000000, 1)
 
-    var tile = this.modelTile,
-      structure = this.modelTile.owner
-    var width = config.tileSize.width * 2,
-      height = config.tileSize.height * 2,
-      thickness = 3
+    var tile = this.modelTile
+    var structure = this.modelTile.owner
+    var width = config.tileSize.width * 2
+    var height = config.tileSize.height * 2
+    var thickness = 3
 
     if (!structure.ownsTileAt(tile.x + 1, tile.y)) {
       border.drawRect(width - thickness, 0, thickness, height)

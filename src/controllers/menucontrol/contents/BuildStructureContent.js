@@ -13,27 +13,27 @@ export default class BuildStructureController extends Content {
     this.sectionName('info')
     var stype = this.owner.stateValue('structureType')
     var tile = this.owner.stateValue('selectedTile')
-    this.text('Type: ' + stype.name)
+    this.text('Tyyppi: ' + stype.nameWithLanguage)
     if (!stype.refinery) {
       if (stype.continuousProduction) {
-        this.text('Continuous production')
+        this.text('Tuotanto jatkuvaa')
       } else {
-        var text = 'Harvests: '
+        var text = 'Sadonkorjuu: '
         for (let harvest of stype.harvestingWeeks) {
           text += harvest
         }
         this.text(text)
       }
 
-      this.text('Yield: ' + stype.turnipYield)
+      this.text('Tuotto: ' + stype.turnipYield)
     }
-    this.text('Price: ' + stype.cost, 'large')
+    this.text('Hinta: ' + stype.cost, 'large')
 
     this.section('build')
     if (this.purchaseManager.hasCash(stype.cost)) {
-      this.owner.resetDecoratedButton('Build', null, this.structureFactory.buildBuilding, this.structureFactory, tile, stype)
+      this.owner.resetDecoratedButton('Rakenna', null, this.structureFactory.buildBuilding, this.structureFactory, tile, stype)
     } else {
-      this.button('Not enough money', this.emptyFunction, null, 'unusableButton')
+      this.button('Rahat eivät riitä', this.emptyFunction, null, 'unusableButton')
     }
   }
 }

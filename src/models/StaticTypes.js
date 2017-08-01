@@ -14,6 +14,7 @@
 const structureTypes = {
   wheat_farm: {
     name: 'wheat farm',
+    nameWithLanguage: 'viljatila',
     asset: 'wheat_farm',
     health: 12,
     harvestingWeeks: new Set(['8.1']),
@@ -21,10 +22,15 @@ const structureTypes = {
     turnipYield: 4,
     cost: 10000,
     pollution: 4,
-    radiusForTileOwnership: 2
+    radiusForTileOwnership: 2,
+    moisture_min: 40,
+    moisture_max: 70,
+    fertility_min: 40,
+    fertility_max: 70
   },
   dairy_farm: {
     name: 'dairy farm',
+    nameWithLanguage: 'maitotila',
     asset: 'dairy_farm',
     health: 15,
     harvestingWeeks: new Set(),
@@ -32,10 +38,15 @@ const structureTypes = {
     turnipYield: 6,
     cost: 15000,
     pollution: 5,
-    radiusForTileOwnership: 2
+    radiusForTileOwnership: 2,
+    moisture_min: 40,
+    moisture_max: 70,
+    fertility_min: 40,
+    fertility_max: 70
   },
   berry_farm: {
     name: 'berry farm',
+    nameWithLanguage: 'marjatila',
     asset: 'berry_farm',
     health: 8,
     harvestingWeeks: new Set(),
@@ -43,10 +54,15 @@ const structureTypes = {
     turnipYield: 3,
     cost: 10000,
     pollution: 3,
-    radiusForTileOwnership: 2
+    radiusForTileOwnership: 2,
+    moisture_min: 40,
+    moisture_max: 70,
+    fertility_min: 40,
+    fertility_max: 70
   },
   mill: {
     name: 'mill',
+    nameWithLanguage: 'mylly',
     asset: 'mill',
     health: 20,
     refinery: true,
@@ -69,30 +85,35 @@ const structureTypes = {
 const tileTypes = {
   forest: {
     name: 'forest',
+    nameWithLanguage: 'metsä',
     asset: 'forest',
     flowers: 10,
     allowedStructures: []
   },
   grass: {
     name: 'grass',
+    nameWithLanguage: 'ruohikko',
     asset: 'grass',
     flowers: 10,
     allowedStructures: []
   },
   water: {
     name: 'water',
+    nameWithLanguage: 'vesi',
     asset: 'water',
     flowers: 10,
     allowedStructures: []
   },
   field: {
     name: 'field',
+    nameWithLanguage: 'pelto',
     asset: 'field',
     flowers: 10,
     allowedStructures: []
   },
   industrial: {
     name: 'industrial',
+    nameWithLanguage: 'teollisuusalue',
     asset: 'industrial',
     flowers: 10,
     allowedStructures: []
