@@ -40,7 +40,7 @@ export default class SideMenuContent extends Content {
 
   tileInformation (tile) {
     this.sectionName('tile')
-    this.text('Maatyyppi: ' + tile.tileType.name)
+    this.text('Maatyyppi: ' + tile.tileType.nameWithLanguage)
     this.text('X: ' + tile.x + ', Y: ' + tile.y)
     this.text('Kukkia: ' + tile.flowers)
     this.text('Kosteus: ' + this.format(tile.moisture) + '%')
@@ -54,7 +54,7 @@ export default class SideMenuContent extends Content {
     this.section('structure')
     this.text('"' + structure.ownerName + '"')
     this.text('"' + structure.structureName + '"')
-    this.text('Rakennus: ' + structure.structureType.name)
+    this.text('Rakennus: ' + structure.structureType.nameWithLanguage)
     this.text('Perustamisvuosi: ' + structure.foundingYear)
     this.text('Koko: ' + structure.size)
 
@@ -89,7 +89,7 @@ export default class SideMenuContent extends Content {
 
     for (let structureType of allowedStructures) {
       this.owner.changeButton(
-        structureType.name,
+        structureType.nameWithLanguage,
         2,
         this.owner.wrapFunction(this.owner.addState, this.owner, 'structureType', structureType),
         this

@@ -13,7 +13,7 @@ export default class BuildStructureController extends Content {
     this.sectionName('info')
     var stype = this.owner.stateValue('structureType')
     var tile = this.owner.stateValue('selectedTile')
-    this.text('Tyyppi: ' + stype.name)
+    this.text('Tyyppi: ' + stype.nameWithLanguage)
     if (!stype.refinery) {
       if (stype.continuousProduction) {
         this.text('Tuotanto jatkuvaa')
