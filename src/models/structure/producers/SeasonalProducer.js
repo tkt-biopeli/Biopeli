@@ -12,7 +12,7 @@ export default class SeasonalProducer {
 
   /**
    * Calculates the produce generated
-   * @param {TimeEvent} timeEvent 
+   * @param {TimeEvent} timeEvent
    * @return {number}
    */
   produce (timeEvent) {

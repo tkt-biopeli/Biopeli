@@ -54,7 +54,7 @@ export default class PerlinGenerator {
   }
 
   /**
-   * @param {number} x - x coordinate 
+   * @param {number} x - x coordinate
    * @param {number} y - y coordinate
    * @return {{x: number, y: number}}
    */

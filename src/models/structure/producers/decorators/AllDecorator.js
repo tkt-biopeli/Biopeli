@@ -12,8 +12,8 @@ export default class AllDecorator {
 
   /**
    * Calculates produce generated
-   * @param {TimeEvent} timeEvent 
-   * @param {*} ownerCall 
+   * @param {TimeEvent} timeEvent
+   * @param {*} ownerCall
    * @return {number}
    */
   produce (timeEvent, ownerCall) {
