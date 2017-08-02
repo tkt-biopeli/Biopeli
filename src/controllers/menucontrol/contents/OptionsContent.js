@@ -34,7 +34,6 @@ export default class OptionsContent extends Content {
 
   createSections () {
     this.sectionName('options')
-    console.log(this.game.state.paused)
     this.button('Pysäytä / Jatka', this.pauseGame, this)
     this.text('Äänen voimakkuus: ' + Math.round(this.game.music.volume * 100) + '%')
     if (this.game.music.mute) {

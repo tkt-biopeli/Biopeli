@@ -20,6 +20,7 @@ import Timer from '../controllers/events/time/Timer'
 
 import TopBarContent from '../controllers/menucontrol/contents/TopBarContent'
 import OptionsContent from '../controllers/menucontrol/contents/OptionsContent'
+import LayersContent from '../controllers/menucontrol/contents/LayersContent'
 import TileContent from '../controllers/menucontrol/contents/TileContent'
 import CityContent from '../controllers/menucontrol/contents/CityContent'
 import BottomContent from '../controllers/menucontrol/contents/BottomContent'
@@ -76,6 +77,7 @@ export default class GameState {
       viewWidthPx: state.game.width - menuWidth,
       viewHeightPx: state.game.height
     })
+
     this.eventController.addListener('structureBuilt', this.mapView.structureCreated, this.mapView)
 
     this.inputHandler = new InputHandler({
@@ -223,6 +225,10 @@ export default class GameState {
       game: this
     })
 
+    this.layersContent = new LayersContent({
+      game: this
+    })
+
     this.cityContent = new CityContent({
       city: this.city
     })
@@ -247,7 +253,7 @@ export default class GameState {
         buttonHeight: config.menuButtonHeight,
         buttonWidth: config.menuButtonWidth
       }),
-      contents: [this.cityContent, this.tileContent, this.buildStructureController, this.optionsContent]
+      contents: [this.cityContent, this.tileContent, this.buildStructureController, this.optionsContent, this.layersContent]
     })
 
     this.bottomController = new SingleController({
