@@ -21,6 +21,7 @@ import Timer from '../controllers/events/time/Timer'
 import TopBarContent from '../controllers/menucontrol/contents/TopBarContent'
 import TileContent from '../controllers/menucontrol/contents/TileContent'
 import CityContent from '../controllers/menucontrol/contents/CityContent'
+import BottomMenuContent from '../controllers/menucontrol/contents/BottomMenuContent'
 import BuildStructureContent from '../controllers/menucontrol/contents/BuildStructureContent'
 import SingleController from '../controllers/menucontrol/SingleController'
 import MulticontentController from '../controllers/menucontrol/MulticontentController'
@@ -65,12 +66,12 @@ export default class GameState {
       menuController: this.menuController
     })
 
-    this.mapView = new MapView({
-      game: state,
+        this.mapView = new MapView({
+      game: this.state,
       map: this.map,
       menuController: this.menuController,
-      viewWidthPx: state.game.width - menuWidth,
-      viewHeightPx: state.game.height
+      viewWidthPx: this.state.game.width - config.menuWidth,
+      viewHeightPx: this.state.game.height
     })
     this.eventController.addListener('structureBuilt', this.mapView.structureCreated, this.mapView)
 
@@ -87,6 +88,16 @@ export default class GameState {
       menuController: this.menuController,
       topBarController: this.topBarController,
       gameEvents: this.gameEvents
+    })
+
+    this.bottomMenuController = new SingleController({
+      game: this.state,
+      style: new Style({
+        buttonWidth: 64,
+        buttonHeight: 64
+      }),
+      menuView: this.bottomMenuView,
+      content: new BottomMenuContent({mapView: this.mapView})
     })
 
     this.gameTimer.addListener(this.gameTimerListener)
@@ -182,6 +193,21 @@ export default class GameState {
       background: null
     })
 
+    this.bottomMenuView = new MenuView({
+      game: this.state,
+      layout: new StaticLayout({
+        menuRect: {
+          x:this.state.camera.width - config.menuWidth,
+          y: this.state.camera.height - 128,
+          width: config.menuWidth,
+          height: 128
+        },
+        linePadding: 5,
+        vertical: false
+      }),
+      background: null
+    })
+
     this.cameraMover = new CameraMover({
       game: this.state,
       xSpeed: config.cameraSpeed,
@@ -239,6 +265,7 @@ export default class GameState {
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
     this.gameTimer.update(this.currentTime())
+    this.bottomMenuController.redraw()
   }
 
   currentTime () {
