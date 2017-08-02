@@ -1,6 +1,5 @@
 export default class Highlighter {
-
-  constructor({ game, tileWidth, tileHeight }) {
+  constructor ({ game, tileWidth, tileHeight }) {
     this.game = game
     this.tileWidth = tileWidth
     this.tileHeight = tileHeight
@@ -14,7 +13,11 @@ export default class Highlighter {
     let st = selectedTile
     if (st.structure !== null && st.structure.structureType.refinery) {
       let producers = st.structure.producer.producer.producerHolders
-      producers.forEach((capsule) => { this.buildingHighlights.push(capsule.producer.producer.tile) })
+      producers.forEach(
+        (capsule) => {
+          this.buildingHighlights.push(capsule.producer.producer.tile) 
+        }
+      )
       let tiles = st.structure.producer.producer.zone
       tiles.forEach((tile) => {
         if (!this.buildingHighlights.includes(tile.tile)) {

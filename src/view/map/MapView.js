@@ -1,4 +1,3 @@
-import ViewTile from './ViewTile'
 import Highlighter from './Highlighter'
 import ViewTileFactory from './ViewTileFactory'
 
@@ -14,7 +13,7 @@ export default class MapView {
    * @param {number} param.viewWidthPx
    * @param {number} param.viewHeightPx
    */
-  constructor({ game, map, menuController, viewWidthPx, viewHeightPx }) {
+  constructor ({ game, map, menuController, viewWidthPx, viewHeightPx }) {
     this.game = game
     this.map = map
     this.menuController = menuController

@@ -74,7 +74,6 @@ export default class GameState {
     })
     this.eventController.addListener('structureBuilt', this.mapView.structureCreated, this.mapView)
 
-
     this.inputHandler = new InputHandler({
       game: state,
       mapListener: this.mapListener,

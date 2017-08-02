@@ -1,7 +1,7 @@
 import config from '../../config'
 
 export default class ViewTile {
-  constructor({ game, modelTile, dampnessCol, fertilityCol }) {
+  constructor ({ game, modelTile, dampnessCol, fertilityCol }) {
     this.game = game
     this.modelTile = modelTile
     this.dampnessCol = dampnessCol
@@ -20,7 +20,6 @@ export default class ViewTile {
     this.flowerSprite = this.makeFlowerSprite()
     this.highlights = this.tileSprite.addChild(this.game.make.sprite(0, 0))
   }
-
 
   update (flowers, dampness, fertility, redrawBorders, redraw) {
     if (this.modelTile.structure != null && this.structureSprite == null) {
@@ -93,7 +92,6 @@ export default class ViewTile {
 
     border.endFill()
 
-
     return this.tileSprite.addChildAt(border, 0)
   }
 
@@ -146,7 +144,11 @@ export default class ViewTile {
 
   hammerFrameUpdate () {
     if (this.hammerSprite === null) return
-    this.hammerSprite.frame = Math.max(Math.min(3, 4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)), 0)
+    this.hammerSprite.frame = Math.max(
+      Math.min(
+        3, 4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)
+      ), 0
+    )
   }
 
   /**
