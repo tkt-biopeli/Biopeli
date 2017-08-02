@@ -41,12 +41,21 @@ export default class GameState {
    * @param {Number} param.tileHeight - Tile height in pixels
    * @param {Number} param.menuWidth - Menu width in pixels
    */
-  constructor ({ cityName, perlinNoise, startMoney, state, mapSize, tileSize, menuWidth, gameLength }) {
+  constructor ({
+        cityName, perlinNoise, startMoney, state, 
+        mapSize, tileSize, menuWidth, gameLength }) {
     this.state = state
 
-    state.world.setBounds(0, 0, mapSize.width * tileSize.width + menuWidth, mapSize.height * tileSize.height)
+    state.world.setBounds(
+      0, 0, 
+      mapSize.width * tileSize.width + menuWidth, 
+      mapSize.height * tileSize.height
+    )
 
-    this.initializeModel(cityName, perlinNoise, gameLength, startMoney, mapSize, tileSize)
+    this.initializeModel(
+      cityName, perlinNoise, gameLength, 
+      startMoney, mapSize, tileSize
+    )
     this.initializeView()
     this.initializeControllers()
 
@@ -86,7 +95,9 @@ export default class GameState {
     this.gameTimer.callListeners()
   }
 
-  initializeModel (cityName, perlinNoise, gameLength, startMoney, mapSize, tileSize) {
+  initializeModel (
+      cityName, perlinNoise, gameLength,
+      startMoney, mapSize, tileSize) {
     this.eventController = new EventController()
 
     this.mapGenerator = new MapGenerator({

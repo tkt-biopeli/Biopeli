@@ -55,11 +55,19 @@ export default class AnimatedBar {
    */
   setPercentage (value) {
     if (!this.vertical) {
-      let inPixels = value * this.width <= this.width ? value * this.width : this.width
-      this.game.add.tween(this.bar).to({ width: inPixels }, this.duration, 'Linear', true)
+      let inPixels = value * this.width <= this.width 
+        ? value * this.width 
+        : this.width
+      this.game.add
+        .tween(this.bar)
+        .to({ width: inPixels }, this.duration, 'Linear', true)
     } else {
-      let inPixels = value * this.height <= this.height ? value * this.height : this.height
-      this.game.add.tween(this.bar).to({ height: inPixels }, this.duration, 'Linear', true)
+      let inPixels = value * this.height <= this.height 
+        ? value * this.height 
+        : this.height
+      this.game.add
+        .tween(this.bar)
+        .to({ height: inPixels }, this.duration, 'Linear', true)
     }
   }
 }

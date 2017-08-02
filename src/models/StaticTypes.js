@@ -121,7 +121,12 @@ const tileTypes = {
 }
 
 const addAllowedStructures = (structureTypes, tileTypes) => {
-  tileTypes.grass.allowedStructures = [structureTypes.wheat_farm, structureTypes.dairy_farm, structureTypes.berry_farm, structureTypes.mill]
+  tileTypes.grass.allowedStructures = [
+    structureTypes.wheat_farm, 
+    structureTypes.dairy_farm, 
+    structureTypes.berry_farm, 
+    structureTypes.mill
+  ]
   tileTypes.water.allowedStructures = []
   tileTypes.field.allowedStructures = [structureTypes.mill]
   tileTypes.industrial.allowedStructures = [structureTypes.mill]

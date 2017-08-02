@@ -7,7 +7,6 @@ export default class PerlinGenerator {
    * @param {} param.Noise
    * @param {number} param.noiseHeight
    * @param {number} param.noiseWidth
-   * @param {{groundfreq: number, forestfreq: number, fertilityfreq: number}} param.freqs
    */
   constructor ({ Noise, noiseHeight, noiseWidth, freqs }) {
     this.fertilitynoise = new Noise(Math.random())
@@ -32,9 +31,15 @@ export default class PerlinGenerator {
     var c = this.coordinateChange(x, y)
 
     return {
-      ground: this.groundnoise.perlin2(this.groundfreq * c.x, this.groundfreq * c.y),
-      forest: this.forestnoise.perlin2(this.forestfreq * c.x, this.forestfreq * c.y),
-      fertility: this.fertilitynoise.perlin2(this.fertilityfreq * c.x, this.fertilityfreq * c.y)
+      ground: this.groundnoise.perlin2(
+        this.groundfreq * c.x, this.groundfreq * c.y
+      ),
+      forest: this.forestnoise.perlin2(
+        this.forestfreq * c.x, this.forestfreq * c.y
+      ),
+      fertility: this.fertilitynoise.perlin2(
+        this.fertilityfreq * c.x, this.fertilityfreq * c.y
+      )
     }
   }
 

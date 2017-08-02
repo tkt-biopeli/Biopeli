@@ -26,13 +26,19 @@ export default class MapView {
     this.showDampness = true
     this.showFertility = false
     this.tilesToRedraw = []
-    this.highlighter = new Highlighter({ game: game, tileWidth: this.tileWidth, tileHeight: this.tileHeight })
+    this.highlighter = new Highlighter({ 
+      game: game, 
+      tileWidth: this.tileWidth, 
+      tileHeight: this.tileHeight 
+    })
     this.viewTileFactory = new ViewTileFactory({ game: game })
     this.initialize()
   }
 
   initialize () {
-    this.viewTexture = this.game.add.renderTexture(this.viewWidthPx, this.viewHeightPx, 'maptexture')
+    this.viewTexture = this.game.add.renderTexture(
+      this.viewWidthPx, this.viewHeightPx, 'maptexture'
+    )
     this.renderS = this.game.add.sprite(0, 0, this.viewTexture)
     this.renderS.fixedToCamera = true
   }
@@ -44,7 +50,9 @@ export default class MapView {
   draw (cameraX, cameraY) {
     this.selectedTile = this.menuController.stateValue('selectedTile')
     this.highlighter.selectedTile = this.selectedTile
-    if (this.selectedTile !== undefined && this.selectedTile !== null) { this.highlighter.calculateHighlights(this.selectedTile) }
+    if (this.selectedTile !== undefined && this.selectedTile !== null) {
+      this.highlighter.calculateHighlights(this.selectedTile)
+    }
 
     this.viewTexture.clear()
     var viewArea = this.viewAreaLimits(cameraX, cameraY)
@@ -118,8 +126,12 @@ export default class MapView {
     for (var c = viewArea.startCol; c <= viewArea.endCol; c++) {
       for (var r = viewArea.startRow; r <= viewArea.endRow; r++) {
         var tile = this.map.getTileWithGridCoordinates(c, r)
-        var pxCoords = this.ColAndRowToPx(c, r, viewArea.startCol, viewArea.startRow, offset)
-        if (typeof tile !== 'undefined') this.createViewTileForFill(tile, pxCoords, viewArea, offset)
+        var pxCoords = this.ColAndRowToPx(
+          c, r, viewArea.startCol, viewArea.startRow, offset
+        )
+        if (typeof tile !== 'undefined') {
+          this.createViewTileForFill(tile, pxCoords, viewArea, offset)
+        }
       }
     }
 
