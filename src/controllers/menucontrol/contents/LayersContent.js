@@ -7,7 +7,7 @@ export default class LayersContent extends Content {
   }
 
   toggleFlowers () {
-    if (!this.game.mapView.showFlowers) {
+    if (this.game.mapView.showFlowers) {
       this.game.mapView.showFlowers = false
     } else {
       this.game.mapView.showFlowers = true
@@ -15,7 +15,7 @@ export default class LayersContent extends Content {
   }
 
   toggleMoisture () {
-    if (!this.game.mapView.showMoisture) {
+    if (this.game.mapView.showMoisture) {
       this.game.mapView.showMoisture = false
     } else {
       this.game.mapView.showMoisture = true
@@ -23,7 +23,7 @@ export default class LayersContent extends Content {
   }
 
   toggleFertility () {
-    if (!this.game.mapView.showFertility) {
+    if (this.game.mapView.showFertility) {
       this.game.mapView.showFertility = false
     } else {
       this.game.mapView.showFertility = true
@@ -34,7 +34,7 @@ export default class LayersContent extends Content {
     this.sectionName('layers')
     var teksti = ''
 
-    if (this.game.mapView.showFlowers) {
+    if (!this.game.mapView.showFlowers) {
       teksti = 'Näytä kukat'
     } else {
       teksti = 'Piilota kukat'
@@ -42,7 +42,7 @@ export default class LayersContent extends Content {
     
     this.button(teksti, this.toggleFlowers, this)
 
-    if (this.game.mapView.showMoisture) {
+    if (!this.game.mapView.showMoisture) {
       teksti = 'Näytä kosteus'
     } else {
       teksti = 'Piilota kosteus'
@@ -50,12 +50,12 @@ export default class LayersContent extends Content {
     
     this.button(teksti, this.toggleMoisture, this)
 
-    if (this.game.mapView.showFertility) {
+    if (!this.game.mapView.showFertility) {
       teksti = 'Näytä ravinteikkuus'
     } else {
       teksti = 'Piilota ravinteikkuus'
     }
     
-    this.button(teksti, this.toggleMoisture, this)    
+    this.button(teksti, this.toggleFertility, this)    
   }
 }
