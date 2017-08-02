@@ -198,9 +198,9 @@ export default class GameState {
       layout: new StaticLayout({
         menuRect: {
           x:this.state.camera.width - config.menuWidth,
-          y: this.state.camera.height - 128,
+          y: this.state.camera.height - 64,
           width: config.menuWidth,
-          height: 128
+          height: 64
         },
         linePadding: 5,
         vertical: false

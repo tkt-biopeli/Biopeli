@@ -6,13 +6,10 @@ export default class BottomMenuContent extends Content {
     this.mapView = mapView
   }
 
-  createSections () {
-        // this.sectionName('fertility')
-
-    this.button('fertility', this.mapView.showFertilityLayer(), this.mapView, 'fertility')
-    this.icon('time')
-
-    this.section('moisture')
-    this.button('moisture', this.mapView.showMoistureLayer(), this.mapView, 'moisture')
+  createSections () {    
+    
+    this.button('', this.mapView.showFlowersLayer, this.mapView, 'daisyb')      
+    this.button('', this.mapView.showFertilityLayer, this.mapView, 'fertility')            
+    this.button('', this.mapView.showMoistureLayer, this.mapView, 'moisture')
   }
 }

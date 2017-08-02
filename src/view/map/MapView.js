@@ -22,7 +22,7 @@ export default class MapView {
     this.tileWidth = map.tileWidth
     this.tileHeight = map.tileHeight
     this.showFlowers = false
-    this.showDampness = true
+    this.showDampness = false
     this.showFertility = false
     this.tilesToRedraw = []
     this.highlighter = new Highlighter({ 
@@ -174,5 +174,9 @@ export default class MapView {
   showMoistureLayer() {
     this.showDampness = !this.showDampness
     this.showFertility = false
+  }
+
+  showFlowersLayer() {
+    this.showFlowers = ! this.showFlowers
   }
 }
