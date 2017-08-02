@@ -97,17 +97,17 @@ export default class PrimaryProducerDecorator {
    * Checks if fertility is preferable for structuretype
    * @return {number} - between 0 and 1
    */
-  getFertilityMultiplier () {
-    if (this.tile.fertility < this.structure.structureType.fertility_min - 10) {
+  getFertilityMultiplier (tile) {
+    if (tile.fertility < this.structure.structureType.fertility_min - 10) {
       return 0
-    } else if (this.tile.fertility > this.structure.structureType.fertility_max + 10) {
+    } else if (tile.fertility > this.structure.structureType.fertility_max + 10) {
       return 0
-    } else if (this.tile.fertility < this.structure.structureType.fertility_min) {
-      return this.fertility.under(this.tile.fertility)
-    } else if (this.structure.structureType.fertility_max < this.tile.fertility) {
-      return this.fertility.over(this.tile.fertility)
+    } else if (tile.fertility < this.structure.structureType.fertility_min) {
+      return this.fertility.under(tile.fertility)
+    } else if (this.structure.structureType.fertility_max < tile.fertility) {
+      return this.fertility.over(tile.fertility)
     } else {
-      return this.fertility.prefer(this.tile.fertility)
+      return this.fertility.prefer(tile.fertility)
     }
   }
 }
