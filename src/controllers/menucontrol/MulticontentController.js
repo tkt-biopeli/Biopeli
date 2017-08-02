@@ -29,7 +29,7 @@ export default class MulticontentController extends Controller {
       this.button('Valikko', this.getOptions, this)
     }
 
-    if (this.index !== 4) {
+    if (this.index === 0 || this.index === 3) {
       this.section('layer')
       this.button('Näkymät', this.getLayers, this)
     }
