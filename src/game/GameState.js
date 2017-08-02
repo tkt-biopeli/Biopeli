@@ -51,6 +51,7 @@ export default class GameState {
     this.music = this.state.add.audio('music')
     this.music.play()
     this.music.loopFull()
+    this.state.paused = false
 
     this.initializeModel(cityName, perlinNoise, gameLength, startMoney, mapSize, tileSize)
     this.initializeView()
@@ -263,7 +264,7 @@ export default class GameState {
    */
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
-    if(this.state.paused) {
+    if (!this.state.paused) {
       this.gameTimer.update(this.currentTime())
     }
   }

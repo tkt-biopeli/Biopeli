@@ -1,7 +1,6 @@
 export default class SetStateDecorator {
   constructor ({ action, controller, name, value }) {
     this.action = action
-
     this.controller = controller
     this.name = name
     this.value = value

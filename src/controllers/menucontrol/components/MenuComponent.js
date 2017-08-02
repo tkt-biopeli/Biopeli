@@ -1,5 +1,5 @@
 export default class MenuComponent {
-  constructor({layoutType, linePadding, sectionPadding, vertical, sections}) {
+  constructor ({layoutType, linePadding, sectionPadding, vertical, sections}) {
     this.type = 'submenu'
     this.layoutType = layoutType
     this.linePadding = linePadding

@@ -67,7 +67,7 @@ export default class GameTimerListener {
    * Redraws top bar and menu controllers
    */
   redrawControllers () {
-    for(let controller of this.controllers) {
+    for (let controller of this.controllers) {
       controller.redraw()
     }
   }

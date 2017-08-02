@@ -62,20 +62,19 @@ export default class Controller {
   /**
    * Creates submenu to the menu. Returns controller that creates components to submenu
    *
-   * @param {*} layoutType 
-   * @param {*} perpindicular 
-   * @param {*} linePadding 
-   * @param {*} sectionPadding 
+   * @param {*} layoutType
+   * @param {*} perpindicular
+   * @param {*} linePadding
+   * @param {*} sectionPadding
    */
   submenu (layoutType, perpindicular, linePadding, sectionPadding) {
     var sections = []
     var menuVertical = this.menuView.layout.vertical
-
     var menu = new MenuComponent({
       layoutType: layoutType,
       sectionPadding: sectionPadding,
       linePadding: linePadding,
-      vertical: menuVertical != perpindicular,
+      vertical: menuVertical !== perpindicular,
       sections: sections
     })
 
@@ -94,23 +93,23 @@ export default class Controller {
     var selectedButton = this.getActiveRadioButton(name, initActive)
     var submenuController = this.submenu('static', perpindicular, 0)
 
-    for(let i = 0 ; i < buttonInfos.length ; i++) {
+    for (let i = 0; i < buttonInfos.length; i++) {
       var info = buttonInfos[i]
-      var action = {function: info.function, context: info.context}
+      var action = { function: info.function, context: info.context }
       var radioDecorator = new StateSetDecorator({
         action: action,
         controller: this,
-        name: name+'Radio',
+        name: name + 'Radio',
         value: i
       })
 
       let asset = inactiveAsset
-      if(selectedButton == i) { asset = activeAsset }
+      if (selectedButton === i) { asset = activeAsset }
 
       submenuController.button(i.name, radioDecorator.act, radioDecorator, asset)
     }
   }
-  
+
   getActiveRadioButton (name, initActive) {
     if (this.hasStateValue(name)) {
       return this.stateValue(name)
