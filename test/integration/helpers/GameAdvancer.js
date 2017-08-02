@@ -214,7 +214,9 @@ export default class GameAdvancer {
    * @param {*} tileTypeName 
    */
   setTile(gridX, gridY, tileTypeName) {
-    var tile = this.gameState.map.addTileWithGridCoordinates(gridX, gridY, this.tileTypes[tileTypeName])
+    let moisture = 55
+    let fertility = 66
+    var tile = this.gameState.map.addTileWithGridCoordinates(gridX, gridY, this.tileTypes[tileTypeName], moisture, fertility)
   }
 
   setStructure(gridX, gridY, owner, name, structureTypeName, size, foundingYear, cost) {

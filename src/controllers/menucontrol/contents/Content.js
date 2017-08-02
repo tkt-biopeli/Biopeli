@@ -1,6 +1,6 @@
 /**
- * A base class for content creators. Content creators use Controller's interface
- * to create the blueprint of the menu for the menuView to draw.
+ * A base class for content creators. Content creators use Controller's
+ * interface to create the blueprint of the menu for the menuView to draw.
  */
 export default class Content {
   setOwner (owner) {

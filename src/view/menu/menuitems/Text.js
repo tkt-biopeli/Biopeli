@@ -18,7 +18,11 @@ export default class Text {
   constructor ({ game, menuSize, viewGroup, text, fontSize, x, y, anchor }) {
     this.type = 'text'
 
-    this.style = { font: fontSize + 'px Arial', fill: '#ffff00', align: 'center' }
+    this.style = {
+      font: fontSize + 'px Arial',
+      fill: '#ffff00',
+      align: 'center'
+    }
     this.text = game.add.text(x, y, text, this.style, viewGroup)
     this.text.anchor.set(anchor.x, anchor.y)
     this.text.wordWrap = true

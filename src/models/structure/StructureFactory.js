@@ -14,7 +14,8 @@ export default class StructureFactory {
    * @param {GameTimer} gameTimer
    * @param {Player} player
    */
-  constructor ({ purchaseManager, gameTimer, eventController, player, map, tileFinder, ruinSettings }) {
+  constructor ({ purchaseManager, gameTimer, eventController, 
+      player, map, tileFinder, ruinSettings }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
@@ -47,6 +48,31 @@ export default class StructureFactory {
   buildBuilding (tile, structureType) {
     if (!this.purchaseManager.purchase(structureType.cost)) return
 
+    var healths = this.createHealth(structureType)
+    var producer = this.producerFactory.createProducer(structureType, tile)
+
+    tile.structure = new Structure({
+      tile: tile,
+      health: healths.health,
+      healthManager: healths.manager,
+      ownerName: this.namer.createOwnerName(),
+      structureName: this.namer.createBuildingName(structureType.name),
+      size: 0,
+      structureType: structureType,
+      foundingYear: this.gameTimer.currentTimeEvent.year,
+      producer: producer
+    })
+
+    this.player.addStructure(tile.structure)
+    producer.initialize(tile.structure)
+
+    this.createInitialPollution(structureType.pollution, tile)
+    this.buyLand(tile.structure)
+    this.calculateSize(tile.structure)
+    this.eventController.event('structureBuilt', tile)
+  }
+
+  createHealth (structureType) {
     var health = new StructureHealth({ maxHealth: structureType.health })
     var manager = new HealthManager({
       health: health,
@@ -58,22 +84,7 @@ export default class StructureFactory {
     })
     manager.calculateNextRuin(this.gameTimer.currentTimeEvent)
 
-    tile.structure = new Structure({
-      tile: tile,
-      health: health,
-      healthManager: manager,
-      ownerName: this.namer.createOwnerName(),
-      structureName: this.namer.createBuildingName(structureType.name),
-      size: 0,
-      structureType: structureType,
-      foundingYear: this.gameTimer.currentTimeEvent.year,
-      producer: this.producerFactory.createProducer(structureType, tile)
-    })
-    this.player.addStructure(tile.structure)
-    this.createInitialPollution(structureType.pollution, tile)
-    this.buyLand(tile.structure)
-    this.calculateSize(tile.structure)
-    this.eventController.event('structureBuilt', tile)
+    return {health: health, manager: manager}
   }
 
   /**
@@ -93,7 +104,9 @@ export default class StructureFactory {
   }
 
   buyLand (structure) {
-    let tiles = this.map.getTilesInRadius(structure.radiusForTileOwnership, structure.tile)
+    let tiles = this.map.getTilesInRadius(
+      structure.radiusForTileOwnership, structure.tile
+    )
     for (var [distance, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
         if (structure.structureType.refinery) {

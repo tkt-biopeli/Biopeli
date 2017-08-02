@@ -4,7 +4,7 @@
 export default class {
   /**
    * Initially the player has 0 points and structures.
-   * @param {number} startMoney - initial amount of money, controlled by state Play
+   * @param {number} startMoney - initial money, controlled by state Play
    */
   constructor ({ startMoney }) {
     this.points = 0

@@ -1,26 +1,27 @@
 import config from '../../config'
-/**
- * Description goes here
- */
+
 export default class ViewTile {
-  /**
-   * @param {Phaser.Game} param.game
-   * @param {number} param.x
-   * @param {number} param.y
-   * @param {ModelTile} param.modelTile
-   */
-  constructor ({ game, x, y, modelTile }) {
+  constructor ({ game, modelTile, dampnessCol, fertilityCol }) {
     this.game = game
     this.modelTile = modelTile
-    this.tileSprite = this.makeTileSprite(x, y)
-    this.structureSprite = null
-    // this.update()
+    this.dampnessCol = dampnessCol
+    this.fertilityCol = fertilityCol
+    this.intialize()
+    // this.lived = 0
   }
 
-  /**
-   * Updates the view for the tile
-   */
-  update (showFlowers) {
+  intialize () {
+    this.tileSprite = this.makeTileSprite()
+    this.borderSprite = this.makeBorderSprite()
+    this.dampnessSprite = this.makeDampnessSprite(this.dampnessCol)
+    this.fertilitySprite = this.makeFertilitySprite(this.fertilityCol)
+    this.structureSprite = this.makeStructureSprite()
+    this.hammerSprite = this.makeHammerSprite()
+    this.flowerSprite = this.makeFlowerSprite()
+    this.highlights = this.tileSprite.addChild(this.game.make.sprite(0, 0))
+  }
+
+  update (flowers, dampness, fertility, redrawBorders, redraw) {
     if (this.modelTile.structure != null && this.structureSprite == null) {
       this.structureSprite = this.makeStructureSprite()
       this.hammerSprite = this.makeHammerSprite()
@@ -28,36 +29,130 @@ export default class ViewTile {
       this.structureSprite.destroy()
       this.structureSprite = null
     }
-    if (showFlowers) this.makeFlowerSprite()
+
+    if (redraw) {
+      this.destroy()
+      this.intialize()
+    } else if (redrawBorders) {
+      this.redrawBorders()
+    }
+
+    this.highlights.removeChildren()
+    this.hammerFrameUpdate()
+    this.flowerFrameUpdate()
+
+    this.visibility(dampness, fertility, flowers)
+    // this.lived++
+  }
+
+  visibility (dampness, fertility, flowers) {
+    if (this.dampnessSprite !== null) this.dampnessSprite.visible = dampness
+    if (this.fertilitySprite !== null) this.fertilitySprite.visible = fertility
+    if (this.flowerSprite !== null) this.flowerSprite.visible = flowers
+  }
+
+  redrawBorders () {
+    if (this.borderSprite !== null) { this.borderSprite.destroy() }
+    this.makeBorderSprite()
+  }
+
+  makeTileSprite () {
+    var sprite = this.game.make.sprite(0, 0, this.modelTile.tileType.asset)
+    return sprite
   }
 
   /**
-   * Creates the view for the using the asset related to modeltile's type
-   * @param {number} x
-   * @param {number} y
+   * creates border graphics based on the surrounding tiles
+   * @return {Phaser.Graphics}
    */
-  makeTileSprite (x, y) {
-    return this.game.make.sprite(x, y, this.modelTile.tileType.asset)
+  makeBorderSprite () {
+    if (this.modelTile.owner === null) return null
+
+    var border = this.game.make.graphics()
+    border.beginFill(0x000000, 1)
+
+    var tile = this.modelTile
+    var structure = this.modelTile.owner
+    var width = config.tileSize.width * 2
+    var height = config.tileSize.height * 2
+    var thickness = 3
+
+    if (!structure.ownsTileAt(tile.x + 1, tile.y)) {
+      border.drawRect(width - thickness, 0, thickness, height)
+    }
+    if (!structure.ownsTileAt(tile.x - 1, tile.y)) {
+      border.drawRect(0, 0, thickness, height)
+    }
+    if (!structure.ownsTileAt(tile.x, tile.y + 1)) {
+      border.drawRect(0, height - thickness, width, thickness)
+    }
+    if (!structure.ownsTileAt(tile.x, tile.y - 1)) {
+      border.drawRect(0, 0, width, thickness)
+    }
+
+    border.endFill()
+
+    return this.tileSprite.addChildAt(border, 0)
+  }
+
+  makeFertilitySprite (colour) {
+    return this.makeColourSprite(colour)
+  }
+
+  makeDampnessSprite (colour) {
+    return this.makeColourSprite(colour)
+  }
+
+  makeColourSprite (colour) {
+    let clr = colour
+    var sprite = this.game.make.graphics()
+    sprite.beginFill(clr, 1)
+    sprite.drawRoundedRect(32, 32, 64, 64, 20)
+    // sprite.anchor.set(0.5, 0.5)
+    sprite.endFill()
+    let name = this.modelTile.tileType.name
+    if (name !== 'water' && name !== 'forest' && name !== 'industrial') {
+      this.tileSprite.addChild(sprite)
+      return sprite
+    } else {
+      return null
+    }
   }
 
   /**
    * Creates a structure to be added as a child for the tile
    */
   makeStructureSprite () {
+    if (this.modelTile.structure === null) { return null }
     let sprite = this.game.make.sprite(0, 0, this.modelTile.structure.asset())
     return this.tileSprite.addChild(sprite)
   }
 
   makeHammerSprite () {
-    let hammers = this.game.make.sprite(config.tileWidth, config.tileHeight, 'hammers')
+    if (this.modelTile.structure === null) { return null }
+    let hammers = this.game.make.sprite(0, 0, 'hammers')
     hammers.anchor.set(0.5, 0.5)
     hammers.scale.setTo(0.7, 0.7)
-    hammers.frame = Math.max(Math.min(3, 4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)), 0)
+    hammers.frame = Math.max(
+      Math.min(
+        3, 
+        4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)
+      ), 0
+    )
     return this.tileSprite.addChild(hammers)
   }
 
+  hammerFrameUpdate () {
+    if (this.hammerSprite === null) return
+    this.hammerSprite.frame = Math.max(
+      Math.min(
+        3, 4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)
+      ), 0
+    )
+  }
+
   /**
-   * Adds a given text as a child for the tile
+   * Adds flowers according to amount in modeltile
    * @param {string} toAdd
    */
   makeFlowerSprite () {
@@ -66,9 +161,22 @@ export default class ViewTile {
     return this.tileSprite.addChild(daisies)
   }
 
+  flowerFrameUpdate () {
+    if (this.flowerSprite === null) return
+    this.flowerSprite.frame = 10 - this.modelTile.flowers
+  }
+
   addHighlight (toAdd) {
-    toAdd.width = this.tileSprite.width
-    toAdd.height = this.tileSprite.height
-    this.tileSprite.addChild(toAdd)
+    this.highlights.width = this.tileSprite.width
+    this.highlights.height = this.tileSprite.height
+    this.highlights.addChild(toAdd)
+  }
+
+  destroy () {
+    if (this.tileSprite !== undefined) {
+      this.tileSprite.removeChildren()
+      this.tileSprite.destroy()
+    }
+    // console.log("i lived for " + this.lived + " frames")
   }
 }

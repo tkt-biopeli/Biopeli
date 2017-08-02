@@ -8,10 +8,16 @@ export default class CityContent extends Content {
 
   createSections () {
     this.sectionName('city')
-    this.text('City: ' + this.city.name)
-    this.text('Population: ' + this.city.population)
-    this.text('Yearly demand: ' + this.city.turnipDemand.yearDemand)
-    this.text('Demand supplied: ' + this.format(this.city.turnipDemand.collectedSupply))
-    this.text('Current turnip price: ' + this.format(this.city.turnipDemand.currentPrice(), 2))
+    this.text('Kaupunki: ' + this.city.name)
+    this.text('Väkiluku: ' + this.city.population)
+    this.text('Vuosittainen kysyntä: ' + this.city.turnipDemand.yearDemand)
+    this.text(
+      'Kysyntään vastattu: ' +
+      this.format(this.city.turnipDemand.collectedSupply)
+    )
+    this.text(
+      'Nauriin hinta: ' +
+      this.format(this.city.turnipDemand.currentPrice(), 2)
+    )
   }
 }
