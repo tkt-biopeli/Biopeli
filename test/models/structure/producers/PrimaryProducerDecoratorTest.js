@@ -38,33 +38,33 @@ describe('Primary producer decorator tests', () => {
   })
 
   it('moisture multiplier test', () => {
-    var min = p.structure.structureType.moisture_min, 
-        max = p.structure.structureType.moisture_max,
-        mid = (min + max) / 2,
-        moisture
+    var min = p.structure.structureType.moisture_min 
+    var max = p.structure.structureType.moisture_max
+    var mid = (min + max) / 2
+    var moisture
 
     //below min
     tile.moisture = min - 1
-    moisture = p.getMoistureMultiplier()
+    moisture = p.getMoistureMultiplier(tile)
     assert(moisture < 1 && moisture > 0, 'below min')
 
     //above max
     tile.moisture = max + 1
-    moisture = p.getMoistureMultiplier()
+    moisture = p.getMoistureMultiplier(tile)
     assert(moisture < 1 && moisture > 0, 'above max')
 
     //optimal
     tile.moisture = mid
-    moisture = p.getMoistureMultiplier()
+    moisture = p.getMoistureMultiplier(tile)
     assert(moisture == 1, 'optimal ' + moisture)
 
     //extremely small/large values return zero
     tile.moisture = -9999999
-    moisture = p.getMoistureMultiplier()
+    moisture = p.getMoistureMultiplier(tile)
     assert(moisture == 0, 'extremely small')
 
     tile.moisture = 9999999
-    moisture = p.getMoistureMultiplier()
+    moisture = p.getMoistureMultiplier(tile)
     assert(moisture == 0, 'extremely large')
   })
 
@@ -76,26 +76,26 @@ describe('Primary producer decorator tests', () => {
 
     //below min
     tile.fertility = min - 1
-    fertility = p.getFertilityMultiplier()
+    fertility = p.getFertilityMultiplier(tile)
     assert(fertility < 1 && fertility > 0, 'below min ' + fertility)
 
     //above max
     tile.fertility = max + 1
-    fertility = p.getFertilityMultiplier()
+    fertility = p.getFertilityMultiplier(tile)
     assert(fertility < 1 && fertility > 0, 'above max')
 
     //optimal
     tile.fertility = mid
-    fertility = p.getFertilityMultiplier()
+    fertility = p.getFertilityMultiplier(tile)
     assert(fertility == 1, 'optimal')
 
     //extremely small/large values return zero
     tile.fertility = -9999999
-    fertility = p.getFertilityMultiplier()
+    fertility = p.getFertilityMultiplier(tile)
     assert(fertility == 0, 'extremely small')
 
     tile.fertility = 9999999
-    fertility = p.getFertilityMultiplier()
+    fertility = p.getFertilityMultiplier(tile)
     assert(fertility == 0, 'extremely large')
   })
 })
