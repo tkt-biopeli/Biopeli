@@ -3,6 +3,9 @@ import Text from './menuitems/Text'
 import AnimatedBar from './menuitems/AnimatedBar'
 import Icon from './menuitems/Icon'
 
+import StaticLayout from './layouts/StaticLayout'
+import StackingLayout from './layouts/StackingLayout'
+
 /**
  * Component that draws menu with given component list and with wanted layout
  */
@@ -11,13 +14,10 @@ export default class MenuView {
     this.game = game
     this.layout = layout
     this.backgroundInTheMiddle = backgroundInTheMiddle
-
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
     this.game.world.bringToTop(this.menuViewGroup)
-
     this.activeMenuitems = new Map()
-
     this.createBackground(background)
   }
 
@@ -62,10 +62,8 @@ export default class MenuView {
   draw (sections) {
     this.active = new Set()
     this.activeSections = []
-
     this.activeButtons = []
     this.activeTexts = []
-
     this.layout.init(sections)
     this.updateMenu(sections)
     this.game.world.bringToTop(this.background)
@@ -215,6 +213,34 @@ export default class MenuView {
     })
   }
 
+  createSubmenu (coords, menuComponent) {
+    var layout
+    if (menuComponent.layoutType === 'static') {
+      layout = new StaticLayout({
+        menuRect: coords,
+        linePadding: menuComponent.linePadding,
+        vertical: menuComponent.vertical
+      })
+    } else {
+      layout = new StackingLayout({
+        menuRect: coords,
+        linePadding: menuComponent.linePadding,
+        sectionPadding: menuComponent.sectionPadding,
+        vertical: menuComponent.vertical
+      })
+    }
+    
+    var menu = new MenuView({
+      game: this.game,
+      layout: layout,
+      background: null
+    })
+
+    menu.draw(menuComponent.sections)
+
+    return menu
+  }
+
   updateSection (section, components) {
     var menuitems = []
 
@@ -280,6 +306,11 @@ export default class MenuView {
     bar.update(coords.x, coords.y, component.percent)
   }
 
+  updateSubmenu (coords, component, menu) {
+    menu.layout.menuRect = coords
+    menu.draw(component.sections)
+  }
+
   removeExtraSections (oldSections, newSections) {
     for (let key of oldSections.keys()) {
       if (!newSections.has(key)) this.destroySection(oldSections.get(key))
@@ -289,6 +320,12 @@ export default class MenuView {
   destroySection (menuitems) {
     for (let menuitem of menuitems) {
       menuitem.destroy()
+    }
+  }
+
+  destroy () {
+    for (let section of this.activeMenuitems.values()) {
+      this.destroySection(section)
     }
   }
 }
