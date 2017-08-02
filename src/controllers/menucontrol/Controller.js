@@ -6,8 +6,8 @@ import Section from './components/MenuSection'
 import ResetDecorator from './helpers/ResetDecorator'
 
 /**
- * The base class for controllers. Takes care of creating components, giving them to menuView,
- * and holding the inner state of the controller
+ * The base class for controllers. Takes care of creating components, giving
+ * them to menuView, and holding the inner state of the controller
  */
 export default class Controller {
   constructor (game, style, menuView) {
@@ -26,8 +26,8 @@ export default class Controller {
   }
 
   /**
-   * Initializes the class for contentcreators and calls the creation function of
-   * non-abstract classes
+   * Initializes the class for contentcreators and calls the creation 
+   * function of non-abstract classes
    */
   buildSections () {
     this.initialize()
@@ -139,7 +139,8 @@ export default class Controller {
   }
 
   /**
-   * Adds a pre-created section to the sections. The section is new the current one
+   * Adds a pre-created section to the sections.
+   * The section is new the current one
    * @param {*} section
    */
   addSection (section) {
@@ -148,7 +149,8 @@ export default class Controller {
   }
 
   /**
-   * Adds several sections to the current section list. Last of them will be the current one
+   * Adds several sections to the current section list.
+   * Last of them will be the current one
    *
    * @param {*} sections
    */
@@ -158,7 +160,8 @@ export default class Controller {
   }
 
   /**
-   * Automatically creates a button with reset decorator on with given parameters
+   * Automatically creates a button with 
+   * reset decorator on with given parameters
    *
    * @param {*} name text in button
    * @param {*} asset
@@ -167,7 +170,9 @@ export default class Controller {
    * @param {*} callValues values the function is called with
    */
   resetDecoratedButton (name, asset, functionToCall, context, ...callValues) {
-    var wrapped = this.wrapFunctionValueArray(functionToCall, context, callValues)
+    var wrapped = this.wrapFunctionValueArray(
+      functionToCall, context, callValues
+    )
     var rd = new ResetDecorator({
       action: {
         function: wrapped,
@@ -188,7 +193,14 @@ export default class Controller {
    * @param {*} callValues the values the function is called with
    */
   wrappedButton (name, asset, functionToCall, context, ...callValues) {
-    this.button(name, this.wrapFunctionValueArray(functionToCall, context, callValues), context, asset)
+    this.button(
+      name, 
+      this.wrapFunctionValueArray(
+        functionToCall, context, callValues
+      ), 
+      context, 
+      asset
+    )
   }
 
   /**
@@ -222,11 +234,13 @@ export default class Controller {
    * @param {*} values
    */
   wrapFunctionValueArray (func, context, values) {
-    return ((func, context, values) => () => func.apply(context, values))(func, context, values)
+    var fn = (func, context, values) => () => func.apply(context, values)
+    return fn(func, context, values)
   }
 
   /**
-   * Adds given value to the state, or updates the value to the given if it already exist
+   * Adds given value to the state,
+   * or updates the value to the given if it already exist
    *
    * @param {*} name
    * @param {*} value

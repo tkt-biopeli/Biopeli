@@ -31,9 +31,16 @@ export default class BuildStructureController extends Content {
 
     this.section('build')
     if (this.purchaseManager.hasCash(stype.cost)) {
-      this.owner.resetDecoratedButton('Rakenna', null, this.structureFactory.buildBuilding, this.structureFactory, tile, stype)
+      this.owner.resetDecoratedButton(
+        'Rakenna', null,
+        this.structureFactory.buildBuilding,
+        this.structureFactory, tile, stype
+      )
     } else {
-      this.button('Rahat eivät riitä', this.emptyFunction, null, 'unusableButton')
+      this.button(
+        'Rahat eivät riitä',
+        this.emptyFunction, null, 'unusableButton'
+      )
     }
   }
 }

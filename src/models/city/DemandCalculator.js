@@ -4,7 +4,8 @@ import {createLine} from '../logic/Functions'
  * Determines how much money the player gets from the produced turnips
  */
 export default class DemandCalculator {
-  constructor ({ city, popularityPct, demandRandomVariance, startConstantPrice }) {
+  constructor ({ city, popularityPct,
+      demandRandomVariance, startConstantPrice }) {
     this.city = city
     this.popularityPct = popularityPct
     this.demandRandomVariance = demandRandomVariance
@@ -22,8 +23,12 @@ export default class DemandCalculator {
     this.yearDemand = this.demandedAmount()
     this.wholeDemand = this.yearDemand * 2
 
-    this.constantFunction = createLine(0, this.constantPrice, this.yearDemand, this.constantPrice)
-    this.decreasingFunction = createLine(this.yearDemand, this.constantPrice, this.wholeDemand, 0)
+    this.constantFunction = createLine(
+      0, this.constantPrice, this.yearDemand, this.constantPrice
+    )
+    this.decreasingFunction = createLine(
+      this.yearDemand, this.constantPrice, this.wholeDemand, 0
+    )
   }
 
   /**
@@ -54,7 +59,11 @@ export default class DemandCalculator {
     var startPrice = this.priceAt(this.collectedSupply)
     var endPrice = this.priceAt(newSupply)
 
-    if ((this.collectedSupply < this.yearDemand && newSupply > this.yearDemand) || (this.collectedSupply < this.wholeDemand && newSupply > this.wholeDemand)) {
+    var year = this.collectedSupply < this.yearDemand && 
+          newSupply > this.yearDemand
+    var whole = this.collectedSupply < this.wholeDemand && 
+          newSupply > this.wholeDemand
+    if (year || whole) {
       var overSupply = (newSupply - this.yearDemand)
       if (newSupply > this.wholeDemand) {
         overSupply = (newSupply - this.wholeDemand)

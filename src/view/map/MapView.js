@@ -25,7 +25,9 @@ export default class MapView {
   }
 
   initialize () {
-    this.viewTexture = this.game.add.renderTexture(this.viewWidthPx, this.viewHeightPx, 'maptexture')
+    this.viewTexture = this.game.add.renderTexture(
+      this.viewWidthPx, this.viewHeightPx, 'maptexture'
+    )
     this.renderS = this.game.add.sprite(0, 0, this.viewTexture)
     this.renderS.fixedToCamera = true
   }
@@ -38,12 +40,16 @@ export default class MapView {
     this.viewTexture.clear()
 
     var viewArea = this.viewAreaLimits(cameraX, cameraY)
-    var offset = this.offset(cameraX, cameraY, viewArea.startCol, viewArea.startRow)
+    var offset = this.offset(
+      cameraX, cameraY, viewArea.startCol, viewArea.startRow
+    )
 
     this.selectedTile = this.menuController.stateValue('selectedTile')
     this.landHighlights = []
     this.buildingHighlights = []
-    if (this.selectedTile !== undefined && this.selectedTile !== null) { this.setRefineryHighlights() }
+    if (this.selectedTile !== undefined && this.selectedTile !== null) {
+      this.setRefineryHighlights()
+    }
     this.fillView(viewArea, offset)
     this.renderS.reset(cameraX, cameraY)
   }
@@ -52,7 +58,11 @@ export default class MapView {
     let st = this.selectedTile
     if (st.structure !== null && st.structure.structureType.refinery) {
       let producers = st.structure.producer.producer.producerHolders
-      producers.forEach((capsule) => { this.buildingHighlights.push(capsule.producer.producer.tile) })
+      producers.forEach(
+        (capsule) => {
+          this.buildingHighlights.push(capsule.producer.producer.tile)
+        }
+      )
       let tiles = st.structure.producer.producer.zone
       tiles.forEach((tile) => {
         if (!this.buildingHighlights.includes(tile.tile)) {
@@ -124,8 +134,12 @@ export default class MapView {
     for (var c = viewArea.startCol; c <= viewArea.endCol; c++) {
       for (var r = viewArea.startRow; r <= viewArea.endRow; r++) {
         var tile = this.map.getTileWithGridCoordinates(c, r)
-        var pxCoords = this.ColAndRowToPx(c, r, viewArea.startCol, viewArea.startRow, offset)
-        if (typeof tile !== 'undefined') this.createViewTileForFill(tile, pxCoords, viewArea, offset)
+        var pxCoords = this.ColAndRowToPx(
+          c, r, viewArea.startCol, viewArea.startRow, offset
+        )
+        if (typeof tile !== 'undefined') {
+          this.createViewTileForFill(tile, pxCoords, viewArea, offset)
+        }
       }
     }
   }
@@ -138,7 +152,12 @@ export default class MapView {
    * @param { ??? } offset - not actually used
    */
   createViewTileForFill (tile, pxCoords, viewArea, offset) {
-    var viewTile = new ViewTile({ game: this.game, x: 0, y: 0, modelTile: tile })
+    var viewTile = new ViewTile({
+      game: this.game,
+      x: 0, 
+      y: 0,
+      modelTile: tile
+    })
     viewTile.update(this.showFlowers)
     this.addHighlights(viewTile, pxCoords)
     viewTile.tileSprite.width = this.tileWidth

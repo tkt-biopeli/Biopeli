@@ -93,7 +93,9 @@ export default class MapGrid {
   addTileWithPixelCoordinates (px, py, tileType, moisture, fertility) {
     var gx = this.pixelsToGridX(px)
     var gy = this.pixelsToGridY(py)
-    return this.addTileWithGridCoordinates(gx, gy, tileType, moisture, fertility)
+    return this.addTileWithGridCoordinates(
+      gx, gy, tileType, moisture, fertility
+    )
   }
 
   /**
@@ -131,7 +133,8 @@ export default class MapGrid {
    * @param {Number} py
    */
   removeTileWithPixelCoordinates (px, py) {
-    this.grid[this.pixelsToGridX(py) * this.gridSizeX + this.pixelsToGridX(px)] = undefined
+    var index = this.pixelsToGridX(py) * this.gridSizeX + this.pixelsToGridX(px)
+    this.grid[index] = undefined
   }
 
   /**

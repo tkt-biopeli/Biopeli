@@ -1,7 +1,8 @@
 import { createLine } from '../../logic/Functions'
 
 /**
- * Refiner takes production from given type buildingsnear it and enchancts their production
+ * Refiner takes production from given type
+ * buildingsnear it and enchancts their production
  */
 export default class Refiner {
   constructor ({ zone, inputTypes, multiplier, radius, tile }) {
@@ -28,7 +29,8 @@ export default class Refiner {
     for (var i = 0; i < size; i++) {
       let producerHolder = this.producerHolders.shift()
       if (this.verifyOwnership(producerHolder)) {
-        productionSum += this.distancefunction(producerHolder.distance) * producerHolder.producer.produce(timeEvent, true)
+        productionSum += this.distancefunction(producerHolder.distance) * 
+          producerHolder.producer.produce(timeEvent, true)
         this.producerHolders.push(producerHolder)
       }
     }
@@ -36,8 +38,8 @@ export default class Refiner {
   }
 
   /**
-   * Helper for produce method: before taking production check if some other refinery has claimed
-   * the ownership of the producer
+   * Helper for produce method: before taking production check if 
+   * some other refinery has claimed the ownership of the producer
    * @param {*} producerHolder
    */
   verifyOwnership (producerHolder) {
@@ -69,7 +71,8 @@ export default class Refiner {
   }
 
   isCloser (producer, distance) {
-    if (producer.refineryDistance === null || producer.refineryDistance > distance) {
+    if (producer.refineryDistance === null || 
+        producer.refineryDistance > distance) {
       producer.refinery = this
       producer.refineryDistance = distance
       return true
@@ -86,7 +89,10 @@ export default class Refiner {
       let match = this.getMatchedCapsule(tile)
       if (match !== null) {
         if (this.isCloser(match.tile.structure.producer, match.distance)) {
-          this.producerHolders.push({ distance: match.distance, producer: match.tile.structure.producer })
+          this.producerHolders.push({
+            distance: match.distance, 
+            producer: match.tile.structure.producer 
+          })
         }
       }
     }

@@ -85,10 +85,17 @@ export default class ViewTile {
   }
 
   makeHammerSprite () {
-    let hammers = this.game.make.sprite(config.tileWidth, config.tileHeight, 'hammers')
+    let hammers = this.game.make.sprite(
+      config.tileWidth, config.tileHeight, 'hammers'
+    )
     hammers.anchor.set(0.5, 0.5)
     hammers.scale.setTo(0.7, 0.7)
-    hammers.frame = Math.max(Math.min(3, 4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)), 0)
+    hammers.frame = Math.max(
+      Math.min(
+        3, 
+        4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)
+      ), 0
+    )
     return this.tileSprite.addChild(hammers)
   }
 

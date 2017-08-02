@@ -17,10 +17,15 @@ export default class LabeledButton {
    * @param {number} param.buttonWidth
    * @param {number} param.buttonHeight
    */
-  constructor ({ game, viewGroup, label, fontSize, asset, x, y, callback, context, buttonWidth, buttonHeight }) {
+  constructor ({ game, viewGroup, label, fontSize, asset, 
+      x, y, callback, context, buttonWidth, buttonHeight }) {
     this.type = 'button'
 
-    this.style = { font: fontSize + 'px Arial', fill: '#ffff00', align: 'center' }
+    this.style = {
+      font: fontSize + 'px Arial',
+      fill: '#ffff00',
+      align: 'center' 
+    }
     this.group = viewGroup
 
     this.button = game.make.button(x, y, asset, callback, context)

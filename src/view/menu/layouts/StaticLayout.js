@@ -30,6 +30,8 @@ export default class StaticLayout extends Layout {
   }
 
   currentDrawLocation () {
-    return this.parallelSize * (this.currentSection / this.sectionAmount) + this.currentLocation
+    return this.parallelSize * 
+      (this.currentSection / this.sectionAmount) + 
+      this.currentLocation
   }
 }

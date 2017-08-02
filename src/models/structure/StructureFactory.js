@@ -14,7 +14,8 @@ export default class StructureFactory {
    * @param {GameTimer} gameTimer
    * @param {Player} player
    */
-  constructor ({ purchaseManager, gameTimer, eventController, player, map, tileFinder, ruinSettings }) {
+  constructor ({ purchaseManager, gameTimer, eventController, 
+      player, map, tileFinder, ruinSettings }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
@@ -103,7 +104,9 @@ export default class StructureFactory {
   }
 
   buyLand (structure) {
-    let tiles = this.map.getTilesInRadius(structure.radiusForTileOwnership, structure.tile)
+    let tiles = this.map.getTilesInRadius(
+      structure.radiusForTileOwnership, structure.tile
+    )
     for (var [distance, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
         if (structure.structureType.refinery) {

@@ -24,6 +24,10 @@ export default class GameEvents {
    */
   finishGame () {
     this.gameState.music.stop()
-    this.gameState.state.state.start('GameOver', true, false, this.gameState.player.points, this.gameState.city.population)
+    this.gameState.state.state.start(
+      'GameOver', true, false,
+      this.gameState.player.points,
+      this.gameState.city.population
+    )
   }
 }

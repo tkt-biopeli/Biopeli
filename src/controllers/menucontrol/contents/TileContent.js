@@ -63,7 +63,10 @@ export default class SideMenuContent extends Content {
 
     var turnipProduction = structure.turnipProduction()
     this.text('Tuotanto (nauriita/vko): ' + this.format(turnipProduction, 2))
-    this.text('Tuotto (€/vko): ' + this.format(this.demandFunction.pay(turnipProduction), 2))
+    this.text(
+      'Tuotto (€/vko): ' +
+      this.format(this.demandFunction.pay(turnipProduction), 2)
+    )
   }
 
   structureRuining (structure) {
@@ -71,17 +74,26 @@ export default class SideMenuContent extends Content {
     this.text('Rakennuksen kunto: ' + structure.health.toString())
     this.animatedBar(200, 50, false, structure.health.percent())
     this.text('Korjauskustannus: ' + structure.healthManager.fixPrice())
-    if (structure.health.percent() < 1 && this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
+
+    if (structure.health.percent() < 1 &&
+        this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
       var fix = (structure => () => {
         structure.healthManager.fix()
         this.owner.redraw()
         this.topBarController.redraw()
       })(structure)
       this.button('Korjaa', fix, this, 'emptyButton')
-    } else if (structure.health.percent() < 1 && !this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
-      this.button('Rahat eivät riitä', this.emptyFunction, null, 'unusableButton')
+    } else if (structure.health.percent() < 1 &&
+        !this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
+      this.button(
+        'Rahat eivät riitä',
+        this.emptyFunction, null, 'unusableButton'
+      )
     } else {
-      this.button('Täydellisessä kunnossa', this.emptyFunction, null, 'unusableButton')
+      this.button(
+        'Täydellisessä kunnossa',
+        this.emptyFunction, null, 'unusableButton'
+      )
     }
   }
 
@@ -92,9 +104,11 @@ export default class SideMenuContent extends Content {
 
     for (let structureType of allowedStructures) {
       this.owner.changeButton(
-        structureType.nameWithLanguage,
-        2,
-        this.owner.wrapFunction(this.owner.addState, this.owner, 'structureType', structureType),
+        structureType.nameWithLanguage, 2,
+        this.owner.wrapFunction(
+          this.owner.addState, this.owner,
+          'structureType', structureType
+        ),
         this
       )
     }
