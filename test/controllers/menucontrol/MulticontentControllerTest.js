@@ -69,15 +69,15 @@ describe('Multicontent controller tests', ()=>{
 
       controller.createSections()
 
-      assert.equal(0, controller.section.callCount)
-      assert.equal(0, controller.button.callCount)
+      assert.equal(1, controller.section.callCount)
+      assert.equal(1, controller.button.callCount)
 
       controller.getStack.push(1)
 
       controller.createSections()
 
-      assert.equal(1, controller.section.callCount)
-      assert.equal(1, controller.button.callCount)
+      assert.equal(2, controller.section.callCount)
+      assert.equal(2, controller.button.callCount)
       assert(controller.button.calledWith('Takaisin', controller.previousContent, controller))
     })
   })
