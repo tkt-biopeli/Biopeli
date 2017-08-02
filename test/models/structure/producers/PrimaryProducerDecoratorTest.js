@@ -38,10 +38,10 @@ describe('Primary producer decorator tests', () => {
   })
 
   it('moisture multiplier test', () => {
-    var min = p.structure.structureType.moisture_min, 
-        max = p.structure.structureType.moisture_max,
-        mid = (min + max) / 2,
-        moisture
+    var min = p.structure.structureType.moisture_min 
+    var max = p.structure.structureType.moisture_max
+    var mid = (min + max) / 2
+    var moisture
 
     //below min
     tile.moisture = min - 1

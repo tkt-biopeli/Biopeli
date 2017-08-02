@@ -64,9 +64,14 @@ export default class PrimaryProducerDecorator {
     this.ownedFarmLand.forEach(function (tile) {
       value += tile.flowers / config.maxFlowers
     }, this)
-    var howPreferableMoisture, howPreferableFertility
-    howPreferableMoisture = this.getMoistureMultiplier()
-    howPreferableFertility = this.getFertilityMultiplier()
+    var howPreferableMoisture = 0
+    var howPreferableFertility = 0
+    this.ownedFarmLand.forEach(function (tile) {
+      howPreferableMoisture += this.getMoistureMultiplier(tile)
+      howPreferableFertility += this.getFertilityMultiplier(tile)
+    }, this)
+    howPreferableMoisture = howPreferableMoisture / this.ownedFarmLand.length
+    howPreferableFertility = howPreferableFertility / this.ownedFarmLand.length
     return this.producer.produce(timeEvent) * value *
       howPreferableMoisture * howPreferableFertility
   }
@@ -75,17 +80,17 @@ export default class PrimaryProducerDecorator {
    * Checks if moisture is preferable for structuretype
    * @return {number} - between 0 and 1
    */
-  getMoistureMultiplier () {
-    if (this.tile.moisture < this.structure.structureType.moisture_min - 10) {
+  getMoistureMultiplier (tile) {
+    if (tile.moisture < this.structure.structureType.moisture_min - 10) {
       return 0
-    } else if (this.tile.moisture > this.structure.structureType.moisture_max + 10) {
+    } else if (tile.moisture > this.structure.structureType.moisture_max + 10) {
       return 0
-    } else if (this.tile.moisture < this.structure.structureType.moisture_min) {
-      return this.moisture.under(this.tile.moisture)
-    } else if (this.structure.structureType.moisture_max < this.tile.moisture) {
-      return this.moisture.over(this.tile.moisture)
+    } else if (tile.moisture < this.structure.structureType.moisture_min) {
+      return this.moisture.under(tile.moisture)
+    } else if (this.structure.structureType.moisture_max < tile.moisture) {
+      return this.moisture.over(tile.moisture)
     } else {
-      return this.moisture.prefer(this.tile.moisture)
+      return this.moisture.prefer(tile.moisture)
     }
   }
   /**
