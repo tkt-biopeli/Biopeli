@@ -24,7 +24,7 @@ export default class MulticontentController extends Controller {
    * created
    */
   createSections () {
-    if (this.index !== 3) {
+    if (this.index !== 3 && this.index !== 4) {
       this.section('option')
       this.button('Valikko', this.getOptions, this)
     }

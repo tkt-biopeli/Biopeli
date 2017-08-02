@@ -19,6 +19,7 @@ export default class LayersContent extends Content {
       this.game.mapView.showMoisture = false
     } else {
       this.game.mapView.showMoisture = true
+      this.game.mapView.showFertility = false
     }
   }
 
@@ -27,6 +28,7 @@ export default class LayersContent extends Content {
       this.game.mapView.showFertility = false
     } else {
       this.game.mapView.showFertility = true
+      this.game.mapView.showMoisture = false
     }
   }
 

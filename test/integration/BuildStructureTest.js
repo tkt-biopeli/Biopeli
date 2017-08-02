@@ -18,7 +18,7 @@ describe('Integration test: Building structures', () => {
     gameAdvancer.clickNthButton(2)
     gameStateChecker.checkButtonAmountInMenu(3)
     gameAdvancer.clickNthButton(2)
-    gameStateChecker.checkButtonAmountInMenu(1)
+    gameStateChecker.checkButtonAmountInMenu(2)
     gameStateChecker.checkSelectedTile()
     gameStateChecker.checkTilesInformation(1, 1, 'field', 'wheat farm', true)
   })
@@ -93,7 +93,7 @@ describe('Integration test: Building structures', () => {
   })
 
   it('Back button returns to structure type selection', () => {
-    gameStateChecker.checkButtonAmountInMenu(1)
+    gameStateChecker.checkButtonAmountInMenu(2)
     gameAdvancer.clickTile(0, 0)
     gameStateChecker.checkButtonAmountInMenu(5)
     gameAdvancer.clickNthButton(2)
@@ -104,7 +104,7 @@ describe('Integration test: Building structures', () => {
 
   it('Back button works when insufficient funds', () => {
     gameAdvancer.setMoney(0)
-    gameStateChecker.checkButtonAmountInMenu(1)
+    gameStateChecker.checkButtonAmountInMenu(2)
     gameAdvancer.clickTile(0, 0)
     gameStateChecker.checkButtonAmountInMenu(5)
     gameAdvancer.clickNthButton(2)
@@ -120,7 +120,7 @@ describe('Integration test: Building structures', () => {
     gameAdvancer.clickNthButton(2)
     gameStateChecker.checkButtonAmountInMenu(3)
     gameAdvancer.clickNthButton(2)
-    gameStateChecker.checkButtonAmountInMenu(1)
+    gameStateChecker.checkButtonAmountInMenu(2)
     gameStateChecker.checkSelectedTile()
     gameStateChecker.checkTilesInformation(0, 0, 'field', 'wheat farm', true)
     gameStateChecker.checkTilesInformation(0, 1, 'field', null, true)
@@ -134,7 +134,7 @@ describe('Integration test: Building structures', () => {
     gameAdvancer.clickNthButton(2)
     gameStateChecker.checkButtonAmountInMenu(3)
     gameAdvancer.clickNthButton(2)
-    gameStateChecker.checkButtonAmountInMenu(1)
+    gameStateChecker.checkButtonAmountInMenu(2)
     gameStateChecker.checkSelectedTile()
     gameStateChecker.checkTilesInformation(0, 0, 'field', 'wheat farm', true)
     gameStateChecker.checkTilesInformation(0, 1, 'industrial', null, true)
@@ -145,6 +145,5 @@ describe('Integration test: Building structures', () => {
     gameStateChecker.checkStructureOwnedTiles(0, 0, 1)
     gameStateChecker.checkStructureOwnedFarmLand(0, 0, 1)
     gameStateChecker.checkStructureSize(0, 0, 1)
-
   })
 })
