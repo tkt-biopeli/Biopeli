@@ -215,13 +215,13 @@ export default class MenuView {
 
   createSubmenu (coords, menuComponent) {
     var layout
-    if(menuComponent.layoutType == 'static'){
+    if (menuComponent.layoutType === 'static') {
       layout = new StaticLayout({
         menuRect: coords,
         linePadding: menuComponent.linePadding,
         vertical: menuComponent.vertical
       })
-    }else{
+    } else {
       layout = new StackingLayout({
         menuRect: coords,
         linePadding: menuComponent.linePadding,

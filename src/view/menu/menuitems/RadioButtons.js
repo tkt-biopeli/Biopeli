@@ -12,10 +12,10 @@ export default class RadioButtons {
       vertical: vertical
     })
 
-    this.draw(x, y, active, buttonInfos)
+//    this.draw(x, y, active, buttonInfos)
   }
 
-  draw(x, y, active, buttonInfos) {
-    
-  }
+//  draw (x, y, active, buttonInfos) {
+//    
+//  }
 }
