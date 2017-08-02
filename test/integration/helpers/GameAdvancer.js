@@ -233,7 +233,7 @@ export default class GameAdvancer {
   }
 
   buildBuilding (x, y, tileType, button, button2) {
-    if(button2 == null) button2 = 1
+    if(button2 == null) button2 = 2
     this.setTile(x, y, tileType)
     this.clickTile(x, y)
     this.clickNthButton(button)

@@ -37,12 +37,16 @@ export default class Layout {
     if (this.vertical) {
       coords = {
         x: this.menuRect.x + (this.perpendicularSize - component.width) / 2,
-        y: this.menuRect.y + this.currentDrawLocation()
+        y: this.menuRect.y + this.currentDrawLocation(),
+        width: this.menuRect.width,
+        height: this.menuRect.height
       }
     } else {
       coords = {
         x: this.menuRect.x + this.currentDrawLocation(),
-        y: this.menuRect.y + (this.perpendicularSize - component.height) / 2
+        y: this.menuRect.y + (this.perpendicularSize - component.height) / 2,
+        width: this.menuRect.width,
+        height: this.menuRect.height
       }
     }
 

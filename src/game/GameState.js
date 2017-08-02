@@ -19,8 +19,11 @@ import GameTimerListener from '../controllers/events/time/GameTimerListener'
 import Timer from '../controllers/events/time/Timer'
 
 import TopBarContent from '../controllers/menucontrol/contents/TopBarContent'
+import OptionsContent from '../controllers/menucontrol/contents/OptionsContent'
+import LayersContent from '../controllers/menucontrol/contents/LayersContent'
 import TileContent from '../controllers/menucontrol/contents/TileContent'
 import CityContent from '../controllers/menucontrol/contents/CityContent'
+import BottomContent from '../controllers/menucontrol/contents/BottomContent'
 import BuildStructureContent from '../controllers/menucontrol/contents/BuildStructureContent'
 import SingleController from '../controllers/menucontrol/SingleController'
 import MulticontentController from '../controllers/menucontrol/MulticontentController'
@@ -52,10 +55,12 @@ export default class GameState {
       mapSize.height * tileSize.height
     )
 
-    this.initializeModel(
-      cityName, perlinNoise, gameLength, 
-      startMoney, mapSize, tileSize
-    )
+    this.music = this.state.add.audio('music')
+    this.music.play()
+    this.music.loopFull()
+    this.state.paused = false
+
+    this.initializeModel(cityName, perlinNoise, gameLength, startMoney, mapSize, tileSize)
     this.initializeView()
     this.initializeControllers()
 
@@ -72,6 +77,7 @@ export default class GameState {
       viewWidthPx: state.game.width - menuWidth,
       viewHeightPx: state.game.height
     })
+
     this.eventController.addListener('structureBuilt', this.mapView.structureCreated, this.mapView)
 
     this.inputHandler = new InputHandler({
@@ -84,8 +90,7 @@ export default class GameState {
     this.gameTimerListener = new GameTimerListener({
       city: this.city,
       player: this.player,
-      menuController: this.menuController,
-      topBarController: this.topBarController,
+      controllers: this.controllers,
       gameEvents: this.gameEvents
     })
 
@@ -144,10 +149,6 @@ export default class GameState {
       gameState: this,
       gameLength: gameLength
     })
-
-    this.music = this.state.add.audio('music')
-    this.music.play()
-    this.music.loopFull()
   }
 
   initializeView () {
@@ -182,6 +183,22 @@ export default class GameState {
       background: null
     })
 
+    this.bottomView = new MenuView({
+      game: this.state,
+      layout: new StackingLayout({
+        menuRect: {
+          x: this.state.camera.width - config.menuWidth,
+          y: 200,
+          width: config.menuWidth,
+          height: this.state.camera.height - 20
+        },
+        linePadding: config.linePadding,
+        sectionPadding: config.sectionPadding,
+        vertical: true
+      }),
+      background: null
+    })
+
     this.cameraMover = new CameraMover({
       game: this.state,
       xSpeed: config.cameraSpeed,
@@ -204,9 +221,16 @@ export default class GameState {
       })
     })
 
+    this.optionsContent = new OptionsContent({
+      game: this
+    })
+
+    this.layersContent = new LayersContent({
+      game: this
+    })
+
     this.cityContent = new CityContent({
-      city: this.city,
-      gameEvents: this.gameEvents
+      city: this.city
     })
 
     this.tileContent = new TileContent({
@@ -215,7 +239,7 @@ export default class GameState {
       demandFunction: this.city.turnipDemand
     })
 
-    var buildStructureController = new BuildStructureContent({
+    this.buildStructureController = new BuildStructureContent({
       purchaseManager: this.purchaseManager,
       structureFactory: this.structureFactory
     })
@@ -229,8 +253,25 @@ export default class GameState {
         buttonHeight: config.menuButtonHeight,
         buttonWidth: config.menuButtonWidth
       }),
-      contents: [this.cityContent, this.tileContent, buildStructureController]
+      contents: [this.cityContent, this.tileContent, this.buildStructureController, this.optionsContent, this.layersContent]
     })
+
+    this.bottomController = new SingleController({
+      game: this.state,
+      style: new Style({
+        buttonHeight: config.menuButtonHeight,
+        buttonWidth: config.menuButtonWidth
+      }),
+      menuView: this.bottomView,
+      content: new BottomContent({
+        mapView: this.mapView
+      })
+    })
+
+    this.controllers = []
+    this.controllers.push(this.menuController)
+    this.controllers.push(this.topBarController)
+    this.controllers.push(this.bottomController)
   }
 
   /**
@@ -238,7 +279,9 @@ export default class GameState {
    */
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
-    this.gameTimer.update(this.currentTime())
+    if (!this.state.paused) {
+      this.gameTimer.update(this.currentTime())
+    }
   }
 
   currentTime () {
