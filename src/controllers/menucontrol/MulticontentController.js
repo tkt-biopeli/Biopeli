@@ -51,6 +51,7 @@ export default class MulticontentController extends Controller {
    * Chooses a new content creator and saves the change
    */
   changeContent (index) {
+    if (index === this.index) return
     this.getStack.push(this.index)
     this.index = index
     this.redraw()
@@ -59,6 +60,15 @@ export default class MulticontentController extends Controller {
   setContent (index) {
     this.index = index
     this.redraw()
+  }
+
+  getContentIndex(name) {
+    for (var i = 0; i < this.contents.length; i++) {
+      if (this.contents[i].name === name) {
+        return i
+      }
+      
+    }
   }
 
   /**

@@ -22,6 +22,7 @@ import TopBarContent from '../controllers/menucontrol/contents/TopBarContent'
 import TileContent from '../controllers/menucontrol/contents/TileContent'
 import CityContent from '../controllers/menucontrol/contents/CityContent'
 import BottomMenuContent from '../controllers/menucontrol/contents/BottomMenuContent'
+import OptionsContent from '../controllers/menucontrol/contents/OptionsContent'
 import BuildStructureContent from '../controllers/menucontrol/contents/BuildStructureContent'
 import SingleController from '../controllers/menucontrol/SingleController'
 import MulticontentController from '../controllers/menucontrol/MulticontentController'
@@ -97,12 +98,13 @@ export default class GameState {
         buttonHeight: 64
       }),
       menuView: this.bottomMenuView,
-      content: new BottomMenuContent({mapView: this.mapView})
+      content: new BottomMenuContent({mapView: this.mapView, menuController: this.menuController})
     })
 
     this.gameTimer.addListener(this.gameTimerListener)
 
-    this.gameTimer.callListeners()
+    this.gameTimer.callListeners()    
+    this.bottomMenuController.redraw()
   }
 
   initializeModel (
@@ -169,7 +171,8 @@ export default class GameState {
           x: this.state.camera.width - config.menuWidth,
           y: 0,
           width: config.menuWidth,
-          height: this.state.camera.height
+          height: this.state.camera.height - 64, // magic number for now
+          cropToSize: true
         },
         linePadding: config.linePadding,
         sectionPadding: config.sectionPadding,
@@ -198,14 +201,14 @@ export default class GameState {
       layout: new StaticLayout({
         menuRect: {
           x:this.state.camera.width - config.menuWidth,
-          y: this.state.camera.height - 64,
+          y: this.state.camera.height - 64, // magic number for now
           width: config.menuWidth,
-          height: 64
+          height: 64 // magic number for now
         },
-        linePadding: 5,
+        linePadding: 1,
         vertical: false
       }),
-      background: null
+      background: 'menuBg'
     })
 
     this.cameraMover = new CameraMover({
@@ -246,6 +249,8 @@ export default class GameState {
       structureFactory: this.structureFactory
     })
 
+    this.optionsContent = new OptionsContent({game: this})
+
     this.menuController = new MulticontentController({
       game: this.state,
       menuView: this.menuView,
@@ -255,8 +260,11 @@ export default class GameState {
         buttonHeight: config.menuButtonHeight,
         buttonWidth: config.menuButtonWidth
       }),
-      contents: [this.cityContent, this.tileContent, buildStructureController]
+      contents: [this.cityContent, this.tileContent, buildStructureController, this.optionsContent]
     })
+
+
+    
   }
 
   /**
@@ -265,7 +273,7 @@ export default class GameState {
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
     this.gameTimer.update(this.currentTime())
-    this.bottomMenuController.redraw()
+    
   }
 
   currentTime () {

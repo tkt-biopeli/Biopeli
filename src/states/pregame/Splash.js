@@ -58,6 +58,7 @@ export default class extends Phaser.State {
     this.load.image('moisture', 'assets/images/buttons/moisture.png')
     this.load.image('fertility', 'assets/images/buttons/fertility.png')
     this.load.image('daisyb', 'assets/images/buttons/daisyb.png')
+    this.load.image('options', 'assets/images/buttons/options.png')
   }
 
   /**
