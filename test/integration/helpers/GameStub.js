@@ -50,7 +50,7 @@ export default class GameStub {
         x: x,
         y: y,
         text: text,
-        destroy: () => {}
+        destroy: () => { }
       }),
 
       renderTexture: renderCreatorFunction,
@@ -58,7 +58,7 @@ export default class GameStub {
       group: this.mockers.createOneValueMocker('add.group', {
         add: function () { },
         removeAll: buttonMarkerFunction,
-        removeChild: () => {},
+        removeChild: () => { },
         create: () => ({})
       }),
 
@@ -67,9 +67,9 @@ export default class GameStub {
       }),
 
       audio: this.mockers.createOneValueMocker('add.audio', {
-        play: () => {},
-        loopFull: () => {},
-        stop: () => {}
+        play: () => { },
+        loopFull: () => { },
+        stop: () => { }
       }),
 
       existing: this.mockers.createOneValueMocker('add.existing', {
@@ -87,28 +87,38 @@ export default class GameStub {
 
     this.make = {
       button: (x, y, asset, callback, context) => {
-      return {
-        type: 'button',
-        x: x,
-        y: y,
-        asset: asset,
-        callback: callback,
-        context: context,
-        destroy: () => {}
-      }},
+        return {
+          type: 'button',
+          x: x,
+          y: y,
+          asset: asset,
+          callback: callback,
+          context: context,
+          destroy: () => { }
+        }
+      },
 
       graphics: this.mockers.createOneValueMocker('make.graphics', {
         beginFill: function () { },
         drawRoundedRect: function () { },
-        drawRect: function () { },
+        drawRect: function () { },
         endFill: function () { }
       }),
 
-      sprite: this.mockers.createOneValueMocker('make.sprite', { 
-        addChild: function () {},
-        scale: { setTo: function () {} },
-        anchor: {set: ()=>{}}
-       })
+      sprite: this.mockers.createOneValueMocker('make.sprite', {
+        addChild: function () {
+          return {
+            removeChildren: function () { },
+            destroy: function () {}
+          }
+        },
+        addChildAt: function () {return {destroy: function() {}} },
+        destroy: function () { },
+        scale: { setTo: function () { } },
+        anchor: { set: () => { } },
+        removeChildren: function () { }
+
+      })
 
     }
 
@@ -148,7 +158,7 @@ export default class GameStub {
 
     this.flowersKey = {
       isDown: false,
-      onDown: { add: function () {} }
+      onDown: { add: function () { } }
     }
 
     this.camera = {
@@ -163,9 +173,9 @@ export default class GameStub {
     }
 
     this.world = {
-      bringToTop: ()=>{},
-      moveDown: ()=>{},
-      setBounds: ()=>{}
+      bringToTop: () => { },
+      moveDown: () => { },
+      setBounds: () => { }
     }
 
     this.state = {
@@ -173,7 +183,7 @@ export default class GameStub {
     }
 
     this.cache = {
-      getImage: () => ({width: 1, height: 1})
+      getImage: () => ({ width: 1, height: 1 })
     }
   }
 
@@ -183,7 +193,7 @@ export default class GameStub {
    * @param {number} x 
    * @param {number} y 
    */
-  setCamera(x, y) {
+  setCamera (x, y) {
     this.camera.x = x
     this.camera.y = y
   }
@@ -194,7 +204,7 @@ export default class GameStub {
    * @param {number} x 
    * @param {number} y 
    */
-  moveCamera(x, y) {
+  moveCamera (x, y) {
     this.camera.x += x
     this.camera.y += y
   }
@@ -204,7 +214,7 @@ export default class GameStub {
    * 
    * @return {x: number, y: number} - Camera coordinates
    */
-  getCamera() {
+  getCamera () {
     return {
       x: this.camera.x,
       y: this.camera.y
@@ -217,7 +227,7 @@ export default class GameStub {
    * @param {number} x 
    * @param {number} y 
    */
-  setPointer(x, y) {
+  setPointer (x, y) {
     this.input.activePointer.position.x = x
     this.input.activePointer.position.y = y
   }
@@ -230,7 +240,7 @@ export default class GameStub {
    * @param {boolean} left 
    * @param {boolean} right 
    */
-  setCursors(up, down, left, right) {
+  setCursors (up, down, left, right) {
     this.cursors.up.isDown = up
     this.cursors.down.isDown = down
     this.cursors.left.isDown = left

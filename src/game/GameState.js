@@ -72,6 +72,8 @@ export default class GameState {
       viewWidthPx: state.game.width - menuWidth,
       viewHeightPx: state.game.height
     })
+    this.eventController.addListener('structureBuilt', this.mapView.structureCreated, this.mapView)
+
 
     this.inputHandler = new InputHandler({
       game: state,
