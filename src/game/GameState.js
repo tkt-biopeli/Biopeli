@@ -261,11 +261,9 @@ export default class GameState {
         buttonHeight: config.menuButtonHeight,
         buttonWidth: config.menuButtonWidth
       }),
-      contents: [this.cityContent, this.tileContent, buildStructureController, this.optionsContent]
+      contents: [this.cityContent, this.tileContent, buildStructureController,
+      this.optionsContent]
     })
-
-
-    
   }
 
   /**
@@ -273,9 +271,7 @@ export default class GameState {
    */
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
-    if (!this.state.paused) {
-      this.gameTimer.update(this.currentTime())
-    }
+    this.gameTimer.update(this.currentTime())
   }
 
   currentTime () {

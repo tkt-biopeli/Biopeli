@@ -20,5 +20,6 @@ export default class CityContent extends Content {
       'Nauriin hinta: ' +
       this.format(this.city.turnipDemand.currentPrice(), 2)
     )
+    this.button('Lopeta', this.gameEvents.finishGame, this.gameEvents)
   }
 }

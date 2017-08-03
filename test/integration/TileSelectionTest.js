@@ -37,7 +37,7 @@ describe('Integration test: Tile selection shows correctly in Menu', () => {
 
     gameAdvancer.click(0, 0)
     gameStateChecker.checkSelectedTile()
-    gameStateChecker.checkButtonAmountInMenu(0)
+    gameStateChecker.checkButtonAmountInMenu(1)
   })
 })
 
