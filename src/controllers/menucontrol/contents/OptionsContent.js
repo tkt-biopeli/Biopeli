@@ -37,6 +37,7 @@ export default class OptionsContent extends Content {
     }
   }
 
+
   createSections () {
     this.sectionName('options')
     this.button('Pysäytä / Jatka', this.togglePause, this)

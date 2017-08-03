@@ -4,7 +4,9 @@
 export default class MapListener {
   /**
    * Description goes here
+   *
    * @param {Object} param - Parameter object
+   *
    * @param {Phaser.Game} param.game
    * @param {Map} param.map
    * @param {MenuOptionCreator} param.menuOptionCreator
@@ -19,6 +21,7 @@ export default class MapListener {
 
   /**
    * Description goes here
+   *
    * @param {{x: number, y: number}} pointerEvent
    */
   update (pointerEvent) {
@@ -31,7 +34,9 @@ export default class MapListener {
 
   /**
    * Description goes here
+   *
    * @param {{x: number, y: number}} pointerEvent
+   *
    * @return {boolean}
    */
   pointerInMapArea (pointerEvent) {
@@ -41,7 +46,9 @@ export default class MapListener {
 
   /**
    * Description goes here
+   *
    * @param {{x: number, y: number}} pointerEvent
+   *
    * @return {ModelTile}
    */
   getTileFromMap (pointerEvent) {
@@ -52,7 +59,9 @@ export default class MapListener {
 
   /**
    * Description goes here
+   *
    * @param {ModelTile} tile
+   *
    * @return {Boolean}
    */
   validTile (tile) {
@@ -60,13 +69,16 @@ export default class MapListener {
       return false
     } else if (tile === this.menuController.stateValue('selectedTile')) {
       this.menuController.reset()
+
       return false
     }
+
     return true
   }
 
   /**
    * Description goes here
+   *
    * @param {ModelTile} tile
    */
   updateMenuOptions (tile) {

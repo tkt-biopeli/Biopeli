@@ -19,8 +19,6 @@ import GameTimerListener from '../controllers/events/time/GameTimerListener'
 import Timer from '../controllers/events/time/Timer'
 
 import TopBarContent from '../controllers/menucontrol/contents/TopBarContent'
-import OptionsContent from '../controllers/menucontrol/contents/OptionsContent'
-import LayersContent from '../controllers/menucontrol/contents/LayersContent'
 import TileContent from '../controllers/menucontrol/contents/TileContent'
 import CityContent from '../controllers/menucontrol/contents/CityContent'
 import BottomMenuContent from '../controllers/menucontrol/contents/BottomMenuContent'
@@ -56,12 +54,10 @@ export default class GameState {
       mapSize.height * tileSize.height
     )
 
-    this.music = this.state.add.audio('music')
-    this.music.play()
-    this.music.loopFull()
-    this.state.paused = false
-
-    this.initializeModel(cityName, perlinNoise, gameLength, startMoney, mapSize, tileSize)
+    this.initializeModel(
+      cityName, perlinNoise, gameLength, 
+      startMoney, mapSize, tileSize
+    )
     this.initializeView()
     this.initializeControllers()
 
@@ -78,7 +74,6 @@ export default class GameState {
       viewWidthPx: this.state.game.width - config.menuWidth,
       viewHeightPx: this.state.game.height
     })
-
     this.eventController.addListener('structureBuilt', this.mapView.structureCreated, this.mapView)
 
     this.inputHandler = new InputHandler({
@@ -91,7 +86,8 @@ export default class GameState {
     this.gameTimerListener = new GameTimerListener({
       city: this.city,
       player: this.player,
-      controllers: this.controllers,
+      menuController: this.menuController,
+      topBarController: this.topBarController,
       gameEvents: this.gameEvents
     })
 
@@ -238,16 +234,9 @@ export default class GameState {
       })
     })
 
-    this.optionsContent = new OptionsContent({
-      game: this
-    })
-
-    this.layersContent = new LayersContent({
-      game: this
-    })
-
     this.cityContent = new CityContent({
-      city: this.city
+      city: this.city,
+      gameEvents: this.gameEvents
     })
 
     this.tileContent = new TileContent({
@@ -256,7 +245,7 @@ export default class GameState {
       demandFunction: this.city.turnipDemand
     })
 
-    this.buildStructureController = new BuildStructureContent({
+    var buildStructureController = new BuildStructureContent({
       purchaseManager: this.purchaseManager,
       structureFactory: this.structureFactory
     })
@@ -275,22 +264,8 @@ export default class GameState {
       contents: [this.cityContent, this.tileContent, buildStructureController, this.optionsContent]
     })
 
-    this.bottomController = new SingleController({
-      game: this.state,
-      style: new Style({
-        buttonHeight: config.menuButtonHeight,
-        buttonWidth: config.menuButtonWidth
-      }),
-      menuView: this.bottomView,
-      content: new BottomContent({
-        mapView: this.mapView
-      })
-    })
 
-    this.controllers = []
-    this.controllers.push(this.menuController)
-    this.controllers.push(this.topBarController)
-    this.controllers.push(this.bottomController)
+    
   }
 
   /**

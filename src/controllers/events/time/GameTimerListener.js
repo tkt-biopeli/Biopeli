@@ -9,10 +9,11 @@ export default class GameTimerListener {
    * @param {TopBarController} topBarController
    * @param {GameEvents} gameEvents
    */
-  constructor ({ city, player, controllers, gameEvents }) {
+  constructor ({ city, player, menuController, topBarController, gameEvents }) {
     this.city = city
     this.player = player
-    this.controllers = controllers
+    this.menuController = menuController
+    this.topBarController = topBarController
     this.gameEvents = gameEvents
   }
 
@@ -67,8 +68,7 @@ export default class GameTimerListener {
    * Redraws top bar and menu controllers
    */
   redrawControllers () {
-    for (let controller of this.controllers) {
-      controller.redraw()
-    }
+    this.topBarController.redraw()
+    this.menuController.redraw()
   }
 }

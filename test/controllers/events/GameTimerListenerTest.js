@@ -4,7 +4,7 @@ import GameTimerListener from '../../../src/controllers/events/time/GameTimerLis
 import TimeEvent from '../../../src/controllers/events/time/TimeEvent'
 
 describe('Game timer listener tests', () => {
-  var gtListener, player, controllers, menuController, topBarController, city, gameEvents
+  var gtListener, player, menuController, topBarController, city, gameEvents
   var isGameOverSpy, tbcRedrawSpy, mcRedrawSpy, countPointsSpy
   
   beforeEach(() => {
@@ -25,8 +25,6 @@ describe('Game timer listener tests', () => {
       isGameOver: isGameOverSpy
     }
 
-    controllers = [menuController, topBarController]
-
     player = {
       structures: 74,
       cash: 788,
@@ -39,16 +37,18 @@ describe('Game timer listener tests', () => {
 
     gtListener = new GameTimerListener({
       player: player,
+      menuController: menuController,
       city: city,
-      controllers: controllers,
+      topBarController: topBarController,
       gameEvents: gameEvents
     })
   })
 
   it('Constructor works', () => {
     assert.equal(player, gtListener.player)
+    assert.equal(menuController, gtListener.menuController)
     assert.equal(city, gtListener.city)
-    assert.equal(controllers, gtListener.controllers)
+    assert.equal(topBarController, gtListener.topBarController)
     assert.equal(gameEvents, gtListener.gameEvents)
   })
 
