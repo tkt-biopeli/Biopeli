@@ -20,11 +20,14 @@ export default class Highlighter {
       )
       let tiles = st.structure.producer.producer.zone
       tiles.forEach((tile) => {
-        if (!this.buildingHighlights.includes(tile.tile)) {
-          this.landHighlights.push(tile.tile)
-        }
+        this.checkIfTileIsLandHighlight(tile.tile)
       })
     }
+  }
+  
+  checkIfTileIsLandHighlight (tile) {
+    if (this.buildingHighlights.includes(tile)) return null
+    this.landHighlights.push(tile)
   }
 
   addHighlights (viewTile, selectedTile) {
@@ -34,17 +37,22 @@ export default class Highlighter {
       sprites.push(this.highlight(0.2, true))
     }
     if (selectedTile.structure !== null && selectedTile.structure.structureType.refinery) {
-      if (this.landHighlights.includes(tile)) {
-        sprites.push(this.highlightBackground())
-        sprites.push(this.highlight(0.2, false, 'blue'))
-      }
-      if (this.buildingHighlights.includes(tile)) {
-        sprites.push(this.highlightBackground())
-        sprites.push(this.highlight(0.5, true, 'green'))
-      }
+      this.pushToSpritesIfHighlightsIncludeTile(
+        sprites, tile, this.landHighlights, {alpha: 0.2, round: false, color: 'blue'}
+        )
+      this.pushToSpritesIfHighlightsIncludeTile(
+        sprites, tile, this.buildingHighlights, {alpha: 0.5, round: true, color: 'green'}
+        )
     }
 
     sprites.forEach((sprite) => viewTile.addHighlight(sprite))
+  }
+  
+  pushToSpritesIfHighlightsIncludeTile (sprites, tile, hlArray, hlValues) {
+    if (hlArray.includes(tile)) {
+      sprites.push(this.highlightBackground())
+      sprites.push(this.highlight(hlValues.alpha, hlValues.round, hlValues.color))
+    }
   }
 
   /**

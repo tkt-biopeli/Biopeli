@@ -3,7 +3,7 @@ const sinon = require('sinon')
 import MulticontentController from '../../../src/controllers/menucontrol/MulticontentController'
 
 describe('Multicontent controller tests', ()=>{
-  var controller, contents, startIndex
+  var controller, contents, startIndex, sectionSpy, buttonSpy
 
   beforeEach(()=>{
     contents = [
@@ -51,8 +51,6 @@ describe('Multicontent controller tests', ()=>{
   })
 
   describe('Section creation', ()=>{
-    var sectionSpy, buttonSpy
-
     var mockSectionAndButtonMethods = () => {
       sectionSpy = sinon.spy()
       buttonSpy = sinon.spy()
@@ -148,10 +146,42 @@ describe('Multicontent controller tests', ()=>{
     assert.equal(startIndex, controller.index)
   })
 
-  it('getLayers test', ()=>{
-    var changeContentSpy = sinon.spy()
+  var changeContentSpy
+  var mockChangeContent = () => {
+    changeContentSpy = sinon.spy()
     controller.changeContent = changeContentSpy
+  }
+
+  it('getLayers test', ()=>{
+    mockChangeContent()
     controller.getLayers()
     assert(changeContentSpy.calledWith(4))
+  })
+
+  it('getOptions test', ()=>{
+    mockChangeContent()
+    controller.getOptions()
+    assert(changeContentSpy.calledWith(3))
+  })
+
+  it('changeButton test', ()=>{
+    var name = 'foo'
+    var idx = 23
+    var extraFunction = () => {}
+    var context = 191
+    buttonSpy = sinon.spy()
+    controller.button = buttonSpy
+    var callSpy = sinon.spy()
+    controller.callExtraFunction = callSpy
+    mockChangeContent()
+    
+    controller.changeButton(name, idx, extraFunction, context)
+    buttonSpy.lastCall.args[1].apply()
+    assert.equal(buttonSpy.lastCall.args[0], 'foo')
+    assert(changeContentSpy.calledWith(23))
+    assert(callSpy.lastCall.calledWith(extraFunction, 191))
+    controller.changeButton(name, idx, null, context)
+    buttonSpy.lastCall.args[1].apply()
+    assert(callSpy.lastCall.calledWith(extraFunction, 191))
   })
 })

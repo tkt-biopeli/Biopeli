@@ -91,10 +91,14 @@ export default class MulticontentController extends Controller {
     this.button(name,
       ((index, extraFunction, context) => () => {
         if (extraFunction != null) {
-          extraFunction.call(context)
+          this.callExtraFunction(extraFunction, context)
         }
         this.changeContent(index)
       })(index, extraFunction, context), this)
+  }
+
+  callExtraFunction (extraFunction, context) {
+    extraFunction.call(context)
   }
 
   /**
