@@ -24,30 +24,12 @@ export default class MulticontentController extends Controller {
    * created
    */
   createSections () {
-    if (this.index !== 3 && this.index !== 4) {
-      this.section('option')
-      this.button('Valikko', this.getOptions, this)
-    }
-
-    if (this.index === 0 || this.index === 3) {
-      this.section('layer')
-      this.button('Näkymät', this.getLayers, this)
-    }
-
     this.contents[this.index].createSections()
 
-    if (this.index > 1) {
+    if (this.getStack.length > 0) {
       this.section('back')
       this.button('Takaisin', this.previousContent, this)
     }
-  }
-
-  getLayers () {
-    this.changeContent(4)
-  }
-
-  getOptions () {
-    this.changeContent(3)
   }
 
   /**
@@ -69,6 +51,7 @@ export default class MulticontentController extends Controller {
    * Chooses a new content creator and saves the change
    */
   changeContent (index) {
+    if (index === this.index) return
     this.getStack.push(this.index)
     this.index = index
     this.redraw()
@@ -77,6 +60,15 @@ export default class MulticontentController extends Controller {
   setContent (index) {
     this.index = index
     this.redraw()
+  }
+
+  getContentIndex(name) {
+    for (var i = 0; i < this.contents.length; i++) {
+      if (this.contents[i].name === name) {
+        return i
+      }
+      
+    }
   }
 
   /**
