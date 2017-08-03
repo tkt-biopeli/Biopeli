@@ -1,10 +1,9 @@
 import Content from './Content'
 
 export default class CityContent extends Content {
-  constructor ({city, gameEvents}) {
+  constructor ({city}) {
     super()
     this.city = city
-    this.gameEvents = gameEvents
   }
 
   createSections () {
