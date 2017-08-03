@@ -67,7 +67,7 @@ export default class GameState {
       menuController: this.menuController
     })
 
-        this.mapView = new MapView({
+    this.mapView = new MapView({
       game: this.state,
       map: this.map,
       menuController: this.menuController,
@@ -161,6 +161,7 @@ export default class GameState {
     this.music = this.state.add.audio('music')
     this.music.play()
     this.music.loopFull()
+    this.state.paused = false
   }
 
   initializeView () {
@@ -272,8 +273,9 @@ export default class GameState {
    */
   update () {
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
-    this.gameTimer.update(this.currentTime())
-    
+    if (!this.state.paused) {
+      this.gameTimer.update(this.currentTime())
+    }
   }
 
   currentTime () {

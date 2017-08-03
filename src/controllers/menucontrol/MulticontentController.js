@@ -26,7 +26,7 @@ export default class MulticontentController extends Controller {
   createSections () {
     this.contents[this.index].createSections()
 
-    if (this.getStack.length > 0) {
+    if (this.index > 1) {
       this.section('back')
       this.button('Takaisin', this.previousContent, this)
     }
