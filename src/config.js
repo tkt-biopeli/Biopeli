@@ -103,5 +103,5 @@ export default {
   fontFill: '#ffff00',
 
   // player
-  playerInitialCash: 20000
+  playerInitialCash: 75000
 }

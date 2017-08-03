@@ -23,7 +23,8 @@ import OptionsContent from '../controllers/menucontrol/contents/OptionsContent'
 import LayersContent from '../controllers/menucontrol/contents/LayersContent'
 import TileContent from '../controllers/menucontrol/contents/TileContent'
 import CityContent from '../controllers/menucontrol/contents/CityContent'
-import BottomContent from '../controllers/menucontrol/contents/BottomContent'
+import BottomMenuContent from '../controllers/menucontrol/contents/BottomMenuContent'
+import OptionsContent from '../controllers/menucontrol/contents/OptionsContent'
 import BuildStructureContent from '../controllers/menucontrol/contents/BuildStructureContent'
 import SingleController from '../controllers/menucontrol/SingleController'
 import MulticontentController from '../controllers/menucontrol/MulticontentController'
@@ -71,11 +72,11 @@ export default class GameState {
     })
 
     this.mapView = new MapView({
-      game: state,
+      game: this.state,
       map: this.map,
       menuController: this.menuController,
-      viewWidthPx: state.game.width - menuWidth,
-      viewHeightPx: state.game.height
+      viewWidthPx: this.state.game.width - config.menuWidth,
+      viewHeightPx: this.state.game.height
     })
 
     this.eventController.addListener('structureBuilt', this.mapView.structureCreated, this.mapView)
@@ -94,9 +95,20 @@ export default class GameState {
       gameEvents: this.gameEvents
     })
 
+    this.bottomMenuController = new SingleController({
+      game: this.state,
+      style: new Style({
+        buttonWidth: 64,
+        buttonHeight: 64
+      }),
+      menuView: this.bottomMenuView,
+      content: new BottomMenuContent({mapView: this.mapView, menuController: this.menuController})
+    })
+
     this.gameTimer.addListener(this.gameTimerListener)
 
-    this.gameTimer.callListeners()
+    this.gameTimer.callListeners()    
+    this.bottomMenuController.redraw()
   }
 
   initializeModel (
@@ -149,6 +161,11 @@ export default class GameState {
       gameState: this,
       gameLength: gameLength
     })
+
+    this.music = this.state.add.audio('music')
+    this.music.play()
+    this.music.loopFull()
+    this.state.paused = false
   }
 
   initializeView () {
@@ -159,7 +176,8 @@ export default class GameState {
           x: this.state.camera.width - config.menuWidth,
           y: 0,
           width: config.menuWidth,
-          height: this.state.camera.height
+          height: this.state.camera.height - 64, // magic number for now
+          cropToSize: true
         },
         linePadding: config.linePadding,
         sectionPadding: config.sectionPadding,
@@ -183,20 +201,19 @@ export default class GameState {
       background: null
     })
 
-    this.bottomView = new MenuView({
+    this.bottomMenuView = new MenuView({
       game: this.state,
-      layout: new StackingLayout({
+      layout: new StaticLayout({
         menuRect: {
-          x: this.state.camera.width - config.menuWidth,
-          y: 200,
+          x:this.state.camera.width - config.menuWidth,
+          y: this.state.camera.height - 64, // magic number for now
           width: config.menuWidth,
-          height: this.state.camera.height - 20
+          height: 64 // magic number for now
         },
-        linePadding: config.linePadding,
-        sectionPadding: config.sectionPadding,
-        vertical: true
+        linePadding: 1,
+        vertical: false
       }),
-      background: null
+      background: 'menuBg'
     })
 
     this.cameraMover = new CameraMover({
@@ -244,6 +261,8 @@ export default class GameState {
       structureFactory: this.structureFactory
     })
 
+    this.optionsContent = new OptionsContent({game: this})
+
     this.menuController = new MulticontentController({
       game: this.state,
       menuView: this.menuView,
@@ -253,7 +272,7 @@ export default class GameState {
         buttonHeight: config.menuButtonHeight,
         buttonWidth: config.menuButtonWidth
       }),
-      contents: [this.cityContent, this.tileContent, this.buildStructureController, this.optionsContent, this.layersContent]
+      contents: [this.cityContent, this.tileContent, buildStructureController, this.optionsContent]
     })
 
     this.bottomController = new SingleController({
