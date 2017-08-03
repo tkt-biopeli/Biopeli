@@ -7,11 +7,14 @@ describe('Multicontent controller tests', ()=>{
 
   beforeEach(()=>{
     contents = [
-      { createSections: sinon.spy(), setOwner: sinon.spy()},
-      { createSections: sinon.spy(), setOwner: sinon.spy()},
-      { createSections: sinon.spy(), setOwner: sinon.spy()},
-      { createSections: sinon.spy(), setOwner: sinon.spy()},
-      { createSections: sinon.spy(), setOwner: sinon.spy()}
+      {
+        createSections: sinon.spy(),
+        setOwner: sinon.spy()
+      },
+      {
+        createSections: sinon.spy(),
+        setOwner: sinon.spy()
+      }
     ]
 
     startIndex = 1
@@ -51,64 +54,31 @@ describe('Multicontent controller tests', ()=>{
   })
 
   describe('Section creation', ()=>{
-    var sectionSpy, buttonSpy
-
-    var mockSectionAndButtonMethods = () => {
-      sectionSpy = sinon.spy()
-      buttonSpy = sinon.spy()
-      controller.section = sectionSpy
-      controller.button = buttonSpy
-      controller.getOptions = {}
-      controller.getLayers = {}
-      controller.previousContent = {}
-    }
-
-    it('createSections calls the content in contents correctly', ()=>{
-      mockSectionAndButtonMethods()
-      controller.index = 1
+    it('Right content creates the content of the menu', ()=>{
       controller.createSections()
-      assert.equal(contents[0].createSections.callCount, 0)
-      assert.equal(contents[1].createSections.callCount, 1)
-      assert.equal(contents[2].createSections.callCount, 0)
-      assert.equal(contents[3].createSections.callCount, 0)
-      assert.equal(contents[4].createSections.callCount, 0)
-    })
-
-    it('createSections adds a back button if index is bigger than one', ()=>{
-      mockSectionAndButtonMethods()
-      controller.index = 2
-      controller.createSections()
-      assert.equal(sectionSpy.lastCall.args[0], 'back')
-      assert.equal(buttonSpy.lastCall.args[0], 'Takaisin')
-    })
-
-    it('createSections does not add an option button if index is 3 or 4', ()=>{
-      mockSectionAndButtonMethods()
-      controller.index = 3
-      controller.createSections()
-      assert.equal(sectionSpy.firstCall.args[0], 'layer')
-      assert.equal(buttonSpy.firstCall.args[0], 'Näkymät')
-      mockSectionAndButtonMethods()
-      controller.index = 4
-      controller.createSections()
-      assert.equal(sectionSpy.firstCall.args[0], 'back')
-      assert.equal(buttonSpy.firstCall.args[0], 'Takaisin')
-    })
-
-    it('createSections adds an Back-button if index is bigger than one', ()=>{
-      mockSectionAndButtonMethods()
-      controller.index = 2
-      controller.createSections()
-      assert.equal(sectionSpy.lastCall.args[0], 'back')
-      assert.equal(buttonSpy.lastCall.args[0], 'Takaisin')
-      controller.index = 1
-      controller.createSections()
-      assert.equal(sectionSpy.lastCall.args[0], 'option')
-      assert.equal(buttonSpy.lastCall.args[0], 'Valikko')
+      assert.equal(1, contents[1].createSections.callCount)
       controller.index = 0
       controller.createSections()
-      assert.equal(sectionSpy.lastCall.args[0], 'layer')
-      assert.equal(buttonSpy.lastCall.args[0], 'Näkymät')
+      assert.equal(1, contents[0].createSections.callCount)
+      assert.equal(1, contents[1].createSections.callCount)
+    })
+
+    it('Return button is created when and only when menu isn\'t in the beginning', ()=>{
+      controller.section = sinon.spy()
+      controller.button = sinon.spy()
+
+      controller.createSections()
+
+      assert.equal(0, controller.section.callCount)
+      assert.equal(0, controller.button.callCount)
+
+      controller.getStack.push(1)
+
+      controller.createSections()
+
+      assert.equal(1, controller.section.callCount)
+      assert.equal(1, controller.button.callCount)
+      assert(controller.button.calledWith('Takaisin', controller.previousContent, controller))
     })
   })
 
@@ -146,12 +116,5 @@ describe('Multicontent controller tests', ()=>{
 
     assert.equal(0, controller.getStack.length)
     assert.equal(startIndex, controller.index)
-  })
-
-  it('getLayers test', ()=>{
-    var changeContentSpy = sinon.spy()
-    controller.changeContent = changeContentSpy
-    controller.getLayers()
-    assert(changeContentSpy.calledWith(4))
   })
 })

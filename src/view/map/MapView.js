@@ -22,7 +22,7 @@ export default class MapView {
     this.tileWidth = map.tileWidth
     this.tileHeight = map.tileHeight
     this.showFlowers = false
-    this.showMoisture = false
+    this.showDampness = true
     this.showFertility = false
     this.tilesToRedraw = []
     this.highlighter = new Highlighter({ 
@@ -119,7 +119,7 @@ export default class MapView {
    * @param { ??? } offset
    */
   fillView (viewArea, offset) {
-    this.viewTileFactory.start(this.showMoisture,
+    this.viewTileFactory.start(this.showDampness,
       this.showFertility, this.showFlowers, this.tilesToRedraw)
 
     for (var c = viewArea.startCol; c <= viewArea.endCol; c++) {
