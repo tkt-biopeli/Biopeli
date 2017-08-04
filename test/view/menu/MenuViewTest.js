@@ -14,7 +14,7 @@ describe('MenuView tests', () =>{
     var stub = sinon.stub()
     groupStub = { add: function () { }, create: function () { }, removeAll: function () { } }
     stub.withArgs().returns(groupStub)
-    gameStub = {add: {group: stub, sprite: ()=>({})}, make: {}, camera: {width: 0, height: 0}, world: {bringToTop: ()=>{}, moveDown: ()=>{}}}
+    gameStub = {add: {group: stub, sprite:function() {return {crop: ()=>{}}} }, make: {}, camera: {width: 0, height: 0}, world: {bringToTop: ()=>{}, moveDown: ()=>{}}}
 
     spyLayout = {
       init: sinon.spy(),

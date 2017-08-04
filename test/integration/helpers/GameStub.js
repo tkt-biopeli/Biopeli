@@ -63,7 +63,8 @@ export default class GameStub {
       }),
 
       sprite: this.mockers.createOneValueMocker('add.sprite', {
-        reset: function () { }
+        reset: function () { },
+        crop: function() {}
       }),
 
       audio: this.mockers.createOneValueMocker('add.audio', {
