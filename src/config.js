@@ -3,6 +3,17 @@
  * Description goes here
  */
 export default {
+  configurationsFile: 'assets/json/configurations.json',
+  assetsFile: 'assets/json/assets.json',
+  tiletypesFile: 'assets/json/game/tile_types.json',
+  structuretypesFile: 'assets/json/game/structure_types.json',
+  textsFile: 'assets/json/texts.json',
+
+  configurationsName: 'configurations',
+  assetsName: 'assets',
+  tiletypesName: 'tileTypes',
+  structuretypesName: 'structureTypes',
+  textsName: 'texts',
 
   // configurations for game
   gameWidth: 1024,
