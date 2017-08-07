@@ -56,7 +56,7 @@ export default class SideMenuContent extends Content {
     this.text('"' + structure.structureName + '"')
     this.text('Rakennus: ' + structure.structureType.nameWithLanguage)
     this.text('Perustamisvuosi: ' + structure.foundingYear)
-    if (structure.structureType.refinery) {
+    if (structure.structureType.type === 'refinery') {
       structure.size = structure.producer.producer.producerHolders.length
     }
     this.text('Koko: ' + structure.size)

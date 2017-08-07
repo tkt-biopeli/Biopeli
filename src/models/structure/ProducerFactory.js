@@ -20,7 +20,7 @@ export default class ProducerFactory {
   createProducer (structureType, tile) {
     var sType = this.checkStructureType(structureType)
 
-    var producer = sType.refinery
+    var producer = sType.type === 'refinery'
       ? this.createRefiner(sType.buysFrom, sType.multiplier, sType.reach, tile)
       : this.createPrimaryProducer(sType, tile)
 
@@ -81,7 +81,7 @@ export default class ProducerFactory {
   checkStructureType (structureType) {
     return structureType === null
       ? {
-        refinery: false,
+        type: 'producer_structure',
         harvestingWeeks: new Set(),
         continuousProduction: false,
         turnipYield: 0
