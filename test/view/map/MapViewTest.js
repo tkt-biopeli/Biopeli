@@ -33,7 +33,7 @@ describe('MapView tests', () => {
     }
 
     mockTile = {
-      structure: { structureType: { refinery: false } }
+      structure: { structureType: { type: 'huuhaa' } }
     }
 
     menu = {

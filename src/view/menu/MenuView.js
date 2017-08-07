@@ -40,6 +40,9 @@ export default class MenuView {
         x = x + (mWidth - aWidth) / 2
       }
       this.background = this.game.add.sprite(x, y, backgroundAsset)
+      if(menuRect.cropToSize) {
+        this.background.crop({x:0, y:0, width:menuRect.width, height: menuRect.height })
+      }
       this.background.fixedToCamera = true
       this.game.world.moveDown(this.background)
     } else {

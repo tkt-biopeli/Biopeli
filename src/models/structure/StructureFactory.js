@@ -109,7 +109,7 @@ export default class StructureFactory {
     )
     for (var [distance, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
-        if (structure.structureType.refinery) {
+        if (structure.structureType.type === 'refinery') {
           this.buyLandForRefinery(structure, distance, tmpTile)
         } else {
           this.buyLandForProducer(structure, tmpTile)
@@ -171,7 +171,7 @@ export default class StructureFactory {
   }
 
   calculateSize (structure) {
-    if (structure.structureType.refinery) {
+    if (structure.structureType.type === 'refinery') {
       this.calculateSizeForRefinery(structure)
     } else {
       this.calculateSizeForProducer(structure)
