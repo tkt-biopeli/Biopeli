@@ -1,6 +1,5 @@
 import Phaser from 'phaser'
 import utils from '../../utils'
-import JSONLoader from '../../game/json/JSONLoader'
 
 /**
  * Description goes here
@@ -9,7 +8,10 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  init () { }
+  init (JSONLoader) { 
+    this.JSONLoader = JSONLoader
+    JSONLoader.game = this
+  }
 
   /**
    * Description goes here
@@ -25,15 +27,13 @@ export default class extends Phaser.State {
 
     this.load.setPreloadSprite(this.loaderBar)
 
-    this.jsonloader = new JSONLoader({game: this})
-    this.jsonloader.loadJSONObjects()
+    this.JSONLoader.loadAssets()
   }
 
   /**
    * Description goes here
    */
   create () {
-    this.jsonloader.initJSONObjects()
-    this.state.start('AssetsLoader', true, false, this.jsonloader)
+    this.state.start('Start')
   }
 }
