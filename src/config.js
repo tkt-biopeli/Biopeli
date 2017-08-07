@@ -114,5 +114,8 @@ export default {
   fontFill: '#ffff00',
 
   // player
-  playerInitialCash: 75000
+  playerInitialCash: 75000,
+
+  // highscore server
+  scoreServer: 'https://biopelihighscores.herokuapp.com/'
 }
