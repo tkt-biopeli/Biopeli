@@ -26,7 +26,6 @@ export default class GameOver extends Phaser.State {
     }
     this.HighScore = highScore;
     localStorage.setItem("biopeliHighScore", this.HighScore)
-    console.log(this.HighScore)
 
     this.menu = new MenuBuilder(this, 'gameover', this.camera.height * 5 / 9)
     this.stage.backgroundColor = 0x000000
