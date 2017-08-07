@@ -18,6 +18,23 @@ export default class JSONLoader {
     this.assets = this.getJSON(config.assetsName)
     this.tileTypes = this.getJSON(config.tiletypesName)
     this.structureTypes = this.getJSON(config.structuretypesName)
+    this.texts = this.getJSON(config.textsName)
+    this.parseJSONObjects()
+  }
+
+  parseJSONObjects () {
+    this.tileTypes = this.parseListToObject(this.tileTypes.tile_types)
+    this.structureTypes = this.parseListToObject(this.structureTypes.structure_types)
+  }
+
+  parseListToObject (list) {
+    var trueObject = {}
+
+    for (let obj of list) {
+      trueObject[obj.name] = obj
+    }
+
+    return trueObject
   }
 
   getJSON (name) {
@@ -32,5 +49,12 @@ export default class JSONLoader {
     }
   }
 
-
+  gameData () {
+    return {
+      config: this.configurations,
+      tileTypes: this.tileTypes,
+      structureTypes: this.structureTypes,
+      texts: this.texts
+    }
+  }
 }

@@ -9,6 +9,10 @@ import utils from '../utils'
  * Screen displayed when the game is started
  */
 export default class Start extends Phaser.State {
+  init (gameData) {
+    this.gameData = gameData
+  }
+
   create () {
     var cityName = new CityNameGenerator({
       cityNames: CityNames,
@@ -25,7 +29,7 @@ export default class Start extends Phaser.State {
     this.menu.createButton(
       'Aloita peli',
       () => { 
-        this.state.start('Game', true, false, cityName, this.menuMusic.stop())
+        this.state.start('Game', true, false, cityName, this.gameData, this.menuMusic.stop())
       }
     )
     this.menu.createButton(

@@ -3,7 +3,7 @@
     {
       "id": "0001",
       "type": "producer_structure",
-      "name": "wheat farm",
+      "name": "wheat_farm",
       "name_with_language": "viljatila",
       "asset": "wheat_farm",
       "health": 12,
@@ -21,7 +21,7 @@
     {
       "id": "0002",
       "type": "producer_structure",
-      "name": "dairy farm",
+      "name": "dairy_farm",
       "name_with_language": "maitotila",
       "asset": "dairy_farm",
       "health": 15,
@@ -39,7 +39,7 @@
     {
       "id": "0003",
       "type": "producer_structure",
-      "name": "berry farm",
+      "name": "berry_farm",
       "name_with_language": "marjatila",
       "asset": "berry_farm",
       "health": 8,

@@ -1,5 +1,3 @@
-import config from '../config'
-
 import MapGenerator from '../models/map/MapGenerator'
 import Player from './Player'
 import City from '../models/city/City'
@@ -45,8 +43,14 @@ export default class GameState {
    */
   constructor ({
         cityName, perlinNoise, startMoney, state, 
-        mapSize, tileSize, menuWidth, gameLength }) {
+        mapSize, tileSize, menuWidth, gameLength,
+      config, structureTypes, tileTypes, texts }) {
     this.state = state
+    
+    this.config = config
+    this.structureTypes = structureTypes
+    this.tileTypes = tileTypes
+    this.texts = texts
 
     state.world.setBounds(
       0, 0, 
@@ -56,10 +60,10 @@ export default class GameState {
 
     this.initializeModel(
       cityName, perlinNoise, gameLength, 
-      startMoney, mapSize, tileSize
+      startMoney, mapSize, tileSize, config
     )
-    this.initializeView()
-    this.initializeControllers()
+    this.initializeView(config)
+    this.initializeControllers(config)
 
     this.mapListener = new MapListener({
       game: state,
@@ -109,7 +113,7 @@ export default class GameState {
 
   initializeModel (
       cityName, perlinNoise, gameLength,
-      startMoney, mapSize, tileSize) {
+      startMoney, mapSize, tileSize, config) {
     this.eventController = new EventController()
 
     this.mapGenerator = new MapGenerator({
@@ -164,7 +168,7 @@ export default class GameState {
     this.state.paused = false
   }
 
-  initializeView () {
+  initializeView (config) {
     this.menuView = new MenuView({
       game: this.state,
       layout: new StackingLayout({
@@ -219,7 +223,7 @@ export default class GameState {
     })
   }
 
-  initializeControllers () {
+  initializeControllers (config) {
     this.topBarController = new SingleController({
       game: this.state,
       style: new Style({

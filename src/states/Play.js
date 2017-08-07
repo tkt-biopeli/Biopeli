@@ -1,7 +1,6 @@
 import { Noise } from 'noisejs'
 import Phaser from 'phaser'
 import GameState from '../game/GameState'
-import config from '../config'
 
 /**
  * Description goes here
@@ -10,8 +9,9 @@ export default class extends Phaser.State {
   /**
    * Description goes here
    */
-  init (cityName) {
+  init (cityName, gameData) {
     this.cityName = cityName
+    this.gameData = gameData
   }
 
   /**
@@ -25,6 +25,8 @@ export default class extends Phaser.State {
     var cityName = this.cityName
     this.cityName = undefined
 
+    var config = this.gameData.config
+
     this.gameState = new GameState({
       cityName: cityName,
       perlinNoise: Noise,
@@ -33,7 +35,11 @@ export default class extends Phaser.State {
       mapSize: config.mapSize,
       tileSize: config.tileSize,
       menuWidth: config.menuWidth,
-      gameLength: config.gameLength
+      gameLength: config.gameLength,
+      config: this.gameData.config,
+      tileTypes: this.gameData.tileTypes,
+      structureTypes: this.gameData.structureTypes,
+      texts: this.gameData.texts
     })
   }
 
