@@ -17,7 +17,7 @@ describe('ProducerFactory tests', () => {
   it('checkStructureType works properly', ()=>{
     assert.equal(factory.checkStructureType('foo'), 'foo')
     var result = factory.checkStructureType(null)
-    assert.equal(result.refinery, false)
+    assert.notEqual(result.type, 'refinery')
     assert.equal(result.continuousProduction, false)
     assert.equal(result.turnipYield, 0)
   })
