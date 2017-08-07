@@ -17,11 +17,22 @@ export default class GameOver extends Phaser.State {
   }
 
   create () {
+
+    // load highscore
+    var highScore = 0;
+    var loadScore = localStorage.getItem("biopeliHighScore");
+    if (loadScore !== null) {
+      highScore = parseInt(loadScore);
+    }
+    this.HighScore = highScore;
+    localStorage.setItem("biopeliHighScore", this.HighScore)
+    console.log(this.HighScore)
+
     this.menu = new MenuBuilder(this, 'gameover', this.camera.height * 5 / 9)
     this.stage.backgroundColor = 0x000000
 
     this.menu.createScore('Loppupisteesi: ' + this.points.toFixed(0) +
-                     '\n' + 'Kaupungin koko: ' + this.population)
+      '\n' + 'Kaupungin koko: ' + this.population)
     this.menu.createButton('Alkuun', () => { this.state.start('Start') })
     this.menu.finishMenu()
   }

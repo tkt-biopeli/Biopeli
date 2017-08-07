@@ -31,9 +31,9 @@ export default class GameEvents {
       this.gameState.player.points,
       this.gameState.city.population
     )
-    var name = prompt('Kerro nimesi tuloksia varten')
-    utils.highscores.submitScore({
-      name: name,
+    var name = prompt('Kirjoita nimesi')
+    utils.submitScore({
+      player: name,
       points: this.gameState.player.points
     })
   }

@@ -106,5 +106,5 @@ export default {
   playerInitialCash: 75000,
 
   // highscore server
-  scoreServer: 'https://biopelihighscores.herokuapp.com'
+  scoreServer: 'https://biopelihighscores.herokuapp.com/'
 }
