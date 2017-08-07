@@ -1,3 +1,4 @@
+import config from './config'
 /**
  * Utility functions
  */
@@ -12,5 +13,19 @@ export default {
   },
   randomWithBounds: (lower, upper) => {
     return Math.floor(Math.random() * upper + lower)
+  },
+
+  highscores: {
+    /**
+     * Submits the score
+     * @param {string} body
+     */
+    submitScore: (body) => {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", config.scoreServer + '/submit_score', true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(body));
+    }
   }
+
 }
