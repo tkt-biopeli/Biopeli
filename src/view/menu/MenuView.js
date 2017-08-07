@@ -40,12 +40,17 @@ export default class MenuView {
         x = x + (mWidth - aWidth) / 2
       }
       this.background = this.game.add.sprite(x, y, backgroundAsset)
+      if(menuRect.cropToSize) {
+        this.background.crop({x:0, y:0, width:menuRect.width, height: menuRect.height })
+      }
       this.background.fixedToCamera = true
       this.game.world.moveDown(this.background)
     } else {
       this.background = this.game.make.graphics()
       this.background.beginFill(0x000000, 0.25)
-      this.background.drawRoundedRect(menuRect.x, menuRect.y, menuRect.width, menuRect.height, 1)
+      this.background.drawRoundedRect(
+        menuRect.x, menuRect.y, menuRect.width, menuRect.height, 1
+      )
       this.background.endFill()
       this.background.fixedToCamera = true
       this.game.add.existing(this.background)
@@ -80,7 +85,7 @@ export default class MenuView {
     for (let i = 0; i < sections.length; i++) {
       var section = sections[i]
 
-      var menuitems = this.activeMenuitems.has(section.name)
+      var menuitems = this.activeMenuitems.has(section.name) 
         ? this.updateSection(this.activeMenuitems.get(section.name), section.components)
         : this.createSection(section.components)
 
@@ -116,7 +121,8 @@ export default class MenuView {
   createComponent (component) {
     var coords = this.layout.nextComponentLocation(component)
 
-    return this.componentFunction(component.type, 'create').call(this, coords, component)
+    return this.componentFunction(component.type, 'create')
+      .call(this, coords, component)
   }
 
   componentFunction (type, prefix) {
@@ -220,8 +226,9 @@ export default class MenuView {
       var component = components[j]
       var menuitem = section[i]
       if (i < section.length && menuitem.type === component.type) {
-        if (component.type === 'button' &&
-          (component.asset !== menuitem.asset || component.function !== menuitem.callback)) {
+        if (component.type === 'button' && 
+            (component.asset !== menuitem.asset || 
+            component.function !== menuitem.callback)) {
           menuitems.push(this.createComponent(component))
           menuitem.destroy()
         } else {
@@ -253,7 +260,8 @@ export default class MenuView {
   updateComponent (menuitem, component) {
     var coords = this.layout.nextComponentLocation(component)
 
-    this.componentFunction(component.type, 'update').call(this, coords, component, menuitem)
+    this.componentFunction(component.type, 'update')
+      .call(this, coords, component, menuitem)
   }
 
   updateButton (coords, component, button) {

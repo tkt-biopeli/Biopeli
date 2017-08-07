@@ -28,6 +28,9 @@ export default class TopBarContent extends Content {
 
     this.section('demand')
     this.icon('turnip')
-    this.animatedBar(100, 40, false, this.city.turnipDemand.percentageSupplied())
+    this.animatedBar(
+      100, 40, false,
+      this.city.turnipDemand.percentageSupplied()
+    )
   }
 }

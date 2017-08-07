@@ -1,5 +1,6 @@
 /**
- * produces turnips all the time and gives the collected turnips at harvest seasons
+ * produces turnips all the time and gives 
+ * the collected turnips at harvest seasons
  */
 export default class SeasonalProducer {
   constructor ({turnipYield, harvestWeeks}) {

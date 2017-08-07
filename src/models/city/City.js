@@ -6,7 +6,10 @@ import {createLine} from '../logic/Functions'
   * @param {String} name
   */
 export default class City {
-  constructor ({ name, startPopulation, popularityPct, demandRandomVariance, startPrice, increaseAtOne, increaseAtTwo }) {
+  constructor ({ 
+      name, startPopulation, popularityPct, 
+      demandRandomVariance, startPrice, 
+      increaseAtOne, increaseAtTwo }) {
     this.name = name
     this.population = startPopulation
     this.turnipDemand = new DemandCalculator({
@@ -21,7 +24,8 @@ export default class City {
   }
 
   /**
-   * Buys produced turnips for the city according to weekly and sometimes yearly demand
+   * Buys produced turnips for the city
+   * according to weekly and sometimes yearly demand
    * @param {number} producedTurnips
    * @param {boolean} buyYearlyHarvest
    */

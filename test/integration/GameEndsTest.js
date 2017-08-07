@@ -24,10 +24,12 @@ describe('Integration test: Game ends when it should', () => {
     gameStateChecker.checkGameEnded(false)
   })
 
+  /** 
   it('Clicking end button ends the game', () =>{
     gameAdvancer.clickNthButton(1)
     gameStateChecker.checkGameEnded(true)
   })
+  */
 
   it('Game doesn\'t end if nothing is done', ()=>{
     gameStateChecker.checkGameEnded(false)

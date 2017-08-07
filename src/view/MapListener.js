@@ -40,7 +40,8 @@ export default class MapListener {
    * @return {boolean}
    */
   pointerInMapArea (pointerEvent) {
-    return (pointerEvent !== undefined && pointerEvent.x <= this.menuView.layout.menuRect.x)
+    return pointerEvent !== undefined && 
+      pointerEvent.x <= this.menuView.layout.menuRect.x
   }
 
   /**

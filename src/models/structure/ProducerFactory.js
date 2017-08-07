@@ -68,7 +68,9 @@ export default class ProducerFactory {
       tile: tile
     })
 
-    this.eventController.addListener('structureBuilt', refiner.structureCreated, refiner)
+    this.eventController.addListener(
+      'structureBuilt', refiner.structureCreated, refiner
+    )
 
     return refiner
   }

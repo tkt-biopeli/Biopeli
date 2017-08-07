@@ -8,7 +8,8 @@ export default class StructureNameGenerator {
   * @param {Object[]} param.endAdjectives - list of adjectives
   * @param {Object[]} param.hyperboles - list of hyperbole words
   */
-  constructor ({ frontAdjectives, names, endAdjectives, hyperboles, random, randomWithBounds }) {
+  constructor ({ frontAdjectives, names, endAdjectives, 
+      hyperboles, random, randomWithBounds }) {
     this.frontAdjectives = frontAdjectives
     this.names = names
     this.endAdjectives = endAdjectives
