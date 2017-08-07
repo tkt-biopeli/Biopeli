@@ -1,0 +1,145 @@
+{
+  "assets": [
+    {
+      "type": "image",
+      "name": "emptyButton", 
+      "file": "assets/images/buttons/empty_button.png"
+    },
+    {
+      "type": "image",
+      "name": "unusableButton",
+      "file": "assets/images/buttons/empty_unbutton.png"
+    },
+    {
+      "type": "image",
+      "name": "forest",
+      "file": "assets/images/tiles/forest.png"
+    },
+    {
+      "type": "image",
+      "name": "water",
+      "file": "assets/images/tiles/water.png"
+    },
+    {
+      "type": "image",
+      "name": "grass",
+      "file": "assets/images/tiles/grass.png"
+    },
+    {
+      "type": "image",
+      "name": "field",
+      "file": "assets/images/tiles/field.png"
+    },
+    {
+      "type": "image",
+      "name": "industrial",
+      "file": "assets/images/tiles/industrial.png"
+    },
+    {
+      "type": "image",
+      "name": "wheat_farm",
+      "file": "assets/images/structures/wheat_farm.png"
+    },
+    {
+      "type": "image",
+      "name": "berry_farm",
+      "file": "assets/images/structures/berry_farm.png"
+    },
+    {
+      "type": "image",
+      "name": "dairy_farm",
+      "file": "assets/images/structures/dairy_farm.png"
+    },
+    {
+      "type": "image",
+      "name": "mill",
+      "file": "assets/images/structures/mill.png"
+    },
+    {
+      "type": "image",
+      "name": "turnip",
+      "file": "assets/images/icons/turnip.png"
+    },
+    {
+      "type": "image",
+      "name": "score",
+      "file": "assets/images/icons/score.png"
+    },
+    {
+      "type": "image",
+      "name": "time",
+      "file": "assets/images/icons/time.png"
+    },
+    {
+      "type": "image",
+      "name": "cash",
+      "file": "assets/images/icons/cash.png"
+    },
+    {
+      "type": "image",
+      "name": "gameover",
+      "file": "assets/images/backgrounds/gameover.png"
+    },
+    {
+      "type": "image",
+      "name": "start",
+      "file": "assets/images/backgrounds/start.png"
+    },
+    {
+      "type": "image",
+      "name": "menuBg",
+      "file": "assets/images/backgrounds/low-poly-bg.png"
+    },
+    {
+      "type": "image",
+      "name": "area",
+      "file": "assets/images/tiles/area.png"
+    },
+    {
+      "type": "image",
+      "name": "moisture",
+      "file": "assets/images/buttons/moisture.png"
+    },
+    {
+      "type": "image",
+      "name": "fertility",
+      "file": "assets/images/buttons/fertility.png"
+    },
+    {
+      "type": "image",
+      "name": "daisyb",
+      "file": "assets/images/buttons/daisyb.png"
+    },
+    {
+      "type": "image",
+      "name": "options",
+      "file": "assets/images/buttons/options.png"
+    },
+    {
+      "type": "audio",
+      "name": "music",
+      "file": "assets/music/music.ogg"
+    },
+    {
+      "type": "audio",
+      "name": "menu",
+      "file": "assets/music/menu.ogg"
+    },
+    {
+      "type": "spritesheet",
+      "name": "daisy",
+      "file": "assets/images/daisy.png",
+      "width": 32,
+      "height": 32,
+      "frames": 10
+    },
+    {
+      "type": "spritesheet",
+      "name": "hammers",
+      "file": "assets/images/hammers.png",
+      "width": 128,
+      "height": 128,
+      "frames": 4
+    }
+  ]
+}
