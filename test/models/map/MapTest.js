@@ -1,8 +1,6 @@
 const assert = require("assert")
 const sinon = require('sinon')
 import Map from '../../../src/models/map/Map'
-import StaticTypes from '../../../src/models/StaticTypes'
-
 
 describe('Map tests', () => {
   var game
@@ -26,13 +24,13 @@ describe('Map tests', () => {
   })
 
   it('Tile is added and returned with grid coordinates', () => {
-    var tileType = StaticTypes.tileTypes.forest
+    var tileType = {}
     map.addTileWithGridCoordinates(1, 1, tileType)
     assert.equal(map.getTileWithGridCoordinates(1, 1).tileType, tileType)
   })
 
   it('Tile is added and returned with pixel coordinates', () => {
-    var tileType = StaticTypes.tileTypes.water
+    var tileType = {}
     map.addTileWithPixelCoordinates(1, 1, tileType)
     assert.equal(map.getTileWithPixelCoordinates(1, 1).tileType, tileType)
   })

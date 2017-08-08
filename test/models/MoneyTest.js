@@ -1,13 +1,12 @@
 const assert = require('assert')
 
 import Money from '../../src/models/Money'
-import config from '../../src/config'
 
 describe('Money tests', () => {
   var currency, money
 
   beforeEach(() => {
-    currency = config.currency
+    currency = 'testCurrency'
     money = new Money()
   })
 

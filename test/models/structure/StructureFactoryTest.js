@@ -1,7 +1,6 @@
 const assert = require("assert")
 const sinon = require("sinon")
 import StructureFactory from '../../../src/models/structure/StructureFactory'
-import StaticTypes from '../../../src/models/StaticTypes'
 
 describe('StructureFactory tests', () => {
   var sfactory, gameTimer, player, addStructureSpy, map, eventController, tile, structureType
@@ -10,7 +9,9 @@ describe('StructureFactory tests', () => {
   var tileTypes
 
   beforeEach(() => {
-    tileTypes = StaticTypes.tileTypes
+    tileTypes = {
+      
+    }
     purchaseStub = sinon.stub()
     addStructureSpy = sinon.spy()
     setAssetSpy = sinon.spy()
