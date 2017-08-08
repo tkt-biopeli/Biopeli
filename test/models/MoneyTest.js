@@ -7,7 +7,7 @@ describe('Money tests', () => {
 
   beforeEach(() => {
     currency = 'testCurrency'
-    money = new Money()
+    money = new Money({currency: currency})
   })
 
   it('Constructor works', () => {

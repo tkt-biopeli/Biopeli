@@ -16,10 +16,11 @@ describe('Primary producer decorator tests', () => {
     })
     p.initialize({
       structureType:{
-        moisture_max: 7,
-        moisture_min: 5,
-        fertility_max: 10, 
-        fertility_min: 8
+        moistureMax: 7,
+        moistureMin
+  : 5,
+        fertilityMax: 10, 
+        fertilityMin: 8
       }
     })
   })
@@ -38,8 +39,8 @@ describe('Primary producer decorator tests', () => {
   })
 
   it('moisture multiplier test', () => {
-    var min = p.structure.structureType.moisture_min 
-    var max = p.structure.structureType.moisture_max
+    var min = p.structure.structureType.moistureMin 
+    var max = p.structure.structureType.moistureMax
     var mid = (min + max) / 2
     var moisture
 
@@ -69,8 +70,8 @@ describe('Primary producer decorator tests', () => {
   })
 
   it('fertility multiplier test', () => {
-    var min = p.structure.structureType.fertility_min, 
-        max = p.structure.structureType.fertility_max,
+    var min = p.structure.structureType.fertilityMin, 
+        max = p.structure.structureType.fertilityMax,
         mid = (min + max) / 2,
         fertility
 
