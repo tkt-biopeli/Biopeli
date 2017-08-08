@@ -81,13 +81,13 @@ export default class PrimaryProducerDecorator {
    * @return {number} - between 0 and 1
    */
   getMoistureMultiplier (tile) {
-    if (tile.moisture < this.structure.structureType.moisture_min - 10) {
+    if (tile.moisture < this.structure.structureType.moistureMin - 10) {
       return 0
-    } else if (tile.moisture > this.structure.structureType.moisture_max + 10) {
+    } else if (tile.moisture > this.structure.structureType.moistureMax + 10) {
       return 0
-    } else if (tile.moisture < this.structure.structureType.moisture_min) {
+    } else if (tile.moisture < this.structure.structureType.moistureMin) {
       return this.moisture.under(tile.moisture)
-    } else if (this.structure.structureType.moisture_max < tile.moisture) {
+    } else if (this.structure.structureType.moistureMax < tile.moisture) {
       return this.moisture.over(tile.moisture)
     } else {
       return this.moisture.prefer(tile.moisture)
@@ -98,13 +98,13 @@ export default class PrimaryProducerDecorator {
    * @return {number} - between 0 and 1
    */
   getFertilityMultiplier (tile) {
-    if (tile.fertility < this.structure.structureType.fertility_min - 10) {
+    if (tile.fertility < this.structure.structureType.fertilityMin - 10) {
       return 0
-    } else if (tile.fertility > this.structure.structureType.fertility_max + 10) {
+    } else if (tile.fertility > this.structure.structureType.fertilityMax + 10) {
       return 0
-    } else if (tile.fertility < this.structure.structureType.fertility_min) {
+    } else if (tile.fertility < this.structure.structureType.fertilityMin) {
       return this.fertility.under(tile.fertility)
-    } else if (this.structure.structureType.fertility_max < tile.fertility) {
+    } else if (this.structure.structureType.fertilityMax < tile.fertility) {
       return this.fertility.over(tile.fertility)
     } else {
       return this.fertility.prefer(tile.fertility)

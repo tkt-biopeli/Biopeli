@@ -12,7 +12,8 @@ describe('Primary producer decorator tests', () => {
     }
     p = new PrimaryProducerDecorator({
       producer: ip,
-      tile: tile
+      tile: tile,
+      maxFlowers: 10
     })
     p.initialize({
       structureType:{
@@ -35,7 +36,7 @@ describe('Primary producer decorator tests', () => {
     p.getFertilityMultiplier = () => {return 0.5}
     p.producer.produce = (te) => {return 20}
     p.ownedFarmLand = [{flowers: 10}]
-    assert(p.produce() == 5)
+    assert.equal(5, p.produce())
   })
 
   it('moisture multiplier test', () => {
