@@ -51,7 +51,13 @@ describe('StructureFactory tests', () => {
       eventController: eventController,
       purchaseManager: {purchase: purchaseStub},
       ruinSettings: settings,
-      tileTypes: tileTypes
+      tileTypes: tileTypes,
+      structureNames: {
+        ownerAdjectives: ['testing'],
+        ownerNames: ['tester'],
+        structureAdjectives: ['testive'],
+        exaggerations: 'testiest'
+      }
     })
 
     sfactory.namer = {

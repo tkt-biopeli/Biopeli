@@ -37,6 +37,17 @@ export default class GameAdvancer {
       }
     }
 
+    var gameData = {
+      names: {
+        structureNames: {
+          ownerAdjectives: ['testing'],
+          ownerNames: ['tester'],
+          structureAdjectives: ['testive'],
+          exaggerations: 'testiest'
+        }
+      }
+    }
+
     this.gameState = new GameState({
       cityName: 'testVille',
       startMoney: 15000,
@@ -48,7 +59,8 @@ export default class GameAdvancer {
       gameLength: gameLength,
       config: config,
       structureTypes: structureTypes,
-      tileTypes: tileTypes
+      tileTypes: tileTypes,
+      gameData: gameData
     })
 
     this.gamestateChecker = new GamestateChecker({gameStub: this.game, gameState: this.gameState, gameAdvancer: this})
