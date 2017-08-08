@@ -13,7 +13,7 @@ export default class MapView {
    * @param {number} param.viewWidthPx
    * @param {number} param.viewHeightPx
    */
-  constructor ({ game, map, menuController, viewWidthPx, viewHeightPx }) {
+  constructor ({ game, map, menuController, viewWidthPx, viewHeightPx, config }) {
     this.game = game
     this.map = map
     this.menuController = menuController
@@ -30,7 +30,7 @@ export default class MapView {
       tileWidth: this.tileWidth, 
       tileHeight: this.tileHeight 
     })
-    this.viewTileFactory = new ViewTileFactory({ game: game })
+    this.viewTileFactory = new ViewTileFactory({ game: game, config: config })
     this.initialize()
   }
 

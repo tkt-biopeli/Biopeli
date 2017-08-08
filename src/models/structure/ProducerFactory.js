@@ -8,9 +8,10 @@ import AllDecorator from './producers/decorators/AllDecorator'
  * Yields turnips during the harvesting period (month.week).
  */
 export default class ProducerFactory {
-  constructor ({tileFinder, eventController}) {
+  constructor ({tileFinder, eventController, maxFlowers}) {
     this.tileFinder = tileFinder
     this.eventController = eventController
+    this.maxFlowers = maxFlowers
   }
 
   /**
@@ -32,7 +33,7 @@ export default class ProducerFactory {
      ? this.createContinuousProducer(sType.turnipYield)
      : this.createSeasonalProducer(sType.harvestingWeeks, sType.turnipYield)
 
-    return new PrimaryProducerDecorator({tile: tile, producer: producer})
+    return new PrimaryProducerDecorator({tile: tile, producer: producer, maxFlowers: this.maxFlowers})
   }
 
   createSeasonalProducer (harvestingWeeks, turnipYield) {

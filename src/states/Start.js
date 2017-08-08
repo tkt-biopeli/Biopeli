@@ -23,7 +23,7 @@ export default class Start extends Phaser.State {
     this.menuMusic.play()
     this.menuMusic.loopFull()
 
-    this.menu = new MenuBuilder(this, 'start', this.camera.height / 4)
+    this.menu = new MenuBuilder(this, 'start', this.camera.height / 4, this.gameData.config)
     this.menu.createTitle('Biopeli')
     this.menu.createDescription('MTechin tilaama peli biotaloudesta ja ruokaketjusta.')
     this.menu.createButton(
@@ -34,7 +34,7 @@ export default class Start extends Phaser.State {
     )
     this.menu.createButton(
       'Ohjeet', () => {
-        this.state.start('Instructions', true, false, this.menuMusic.stop())
+        this.state.start('Instructions', true, false, this.gameData, this.menuMusic.stop())
       }
     )
     this.menu.finishMenu()

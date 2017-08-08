@@ -11,9 +11,10 @@ export default class GameOver extends Phaser.State {
    * @param {*} score, final score
    * @param {*} population, final city population
    */
-  init (score, population) {
+  init (score, population, gameData) {
     this.points = score
     this.population = population
+    this.gameData = gameData
   }
 
   create () {
@@ -27,12 +28,12 @@ export default class GameOver extends Phaser.State {
     this.HighScore = highScore;
     localStorage.setItem("biopeliHighScore", this.HighScore)
 
-    this.menu = new MenuBuilder(this, 'gameover', this.camera.height * 5 / 9)
+    this.menu = new MenuBuilder(this, 'gameover', this.camera.height * 5 / 9, this.gameData.config)
     this.stage.backgroundColor = 0x000000
 
     this.menu.createScore('Loppupisteesi: ' + this.points.toFixed(0) +
       '\n' + 'Kaupungin koko: ' + this.population)
-    this.menu.createButton('Alkuun', () => { this.state.start('Start') })
+    this.menu.createButton('Alkuun', () => { this.state.start('Start', true, false, this.gameData) })
     this.menu.finishMenu()
   }
 }

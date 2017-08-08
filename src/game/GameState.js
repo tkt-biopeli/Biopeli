@@ -44,9 +44,10 @@ export default class GameState {
   constructor ({
         cityName, perlinNoise, startMoney, state, 
         mapSize, tileSize, menuWidth, gameLength,
-      config, structureTypes, tileTypes, texts }) {
+      config, structureTypes, tileTypes, texts, gameData }) {
     this.state = state
     
+    this.gameData = gameData
     this.config = config
     this.structureTypes = structureTypes
     this.tileTypes = tileTypes
@@ -76,7 +77,8 @@ export default class GameState {
       map: this.map,
       menuController: this.menuController,
       viewWidthPx: this.state.game.width - config.menuWidth,
-      viewHeightPx: this.state.game.height
+      viewHeightPx: this.state.game.height,
+      config: config
     })
     this.eventController.addListener('structureBuilt', this.mapView.structureCreated, this.mapView)
 
@@ -154,7 +156,8 @@ export default class GameState {
       eventController: this.eventController,
       purchaseManager: this.purchaseManager,
       map: this.map,
-      ruinSettings: config.ruinSettings
+      ruinSettings: config.ruinSettings,
+      maxFlowers: config.maxFlowers
     })
 
     this.gameEvents = new GameEvents({
@@ -219,7 +222,8 @@ export default class GameState {
     this.cameraMover = new CameraMover({
       game: this.state,
       xSpeed: config.cameraSpeed,
-      ySpeed: config.cameraSpeed
+      ySpeed: config.cameraSpeed,
+      config: config
     })
   }
 

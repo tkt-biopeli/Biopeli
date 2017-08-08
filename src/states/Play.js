@@ -39,7 +39,8 @@ export default class extends Phaser.State {
       config: this.gameData.config,
       tileTypes: this.gameData.tileTypes,
       structureTypes: this.gameData.structureTypes,
-      texts: this.gameData.texts
+      texts: this.gameData.texts,
+      gameData: this.gameData
     })
   }
 

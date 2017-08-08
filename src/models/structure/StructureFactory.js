@@ -15,7 +15,7 @@ export default class StructureFactory {
    * @param {Player} player
    */
   constructor ({ purchaseManager, gameTimer, eventController, 
-      player, map, tileFinder, ruinSettings }) {
+      player, map, tileFinder, ruinSettings, maxFlowers }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
@@ -32,7 +32,8 @@ export default class StructureFactory {
     })
     this.producerFactory = new ProducerFactory({
       tileFinder: tileFinder,
-      eventController: eventController
+      eventController: eventController,
+      maxFlowers: maxFlowers
     })
 
     this.minRuin = ruinSettings.minRuin

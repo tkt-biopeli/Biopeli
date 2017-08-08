@@ -1,4 +1,3 @@
-import config from '../../../../config'
 import {createLine} from '../../../logic/Functions'
 /**
  * Base class for producers. Producers determine what amount of
@@ -10,10 +9,11 @@ export default class PrimaryProducerDecorator {
    * @param {ModelTile} param.tile
    * @param {} param.producer
    */
-  constructor ({ tile, producer }) {
+  constructor ({ tile, producer, maxFlowers }) {
     this.tile = tile
     this.producer = producer
     this.ownedFarmLand = []
+    this.maxFlowers = maxFlowers
   }
 
   /**
@@ -62,7 +62,7 @@ export default class PrimaryProducerDecorator {
   produce (timeEvent) {
     var value = 0
     this.ownedFarmLand.forEach(function (tile) {
-      value += tile.flowers / config.maxFlowers
+      value += tile.flowers / this.maxFlowers
     }, this)
     var howPreferableMoisture = 0
     var howPreferableFertility = 0

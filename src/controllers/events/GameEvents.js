@@ -7,7 +7,7 @@ export default class GameEvents {
   * Constructor
   * @param gameState gameState
   */
-  constructor({ gameState, gameLength }) {
+  constructor({ gameState, gameLength}) {
     this.gameState = gameState
     this.gameLength = gameLength
     this.url
@@ -29,7 +29,8 @@ export default class GameEvents {
     this.gameState.state.state.start(
       'GameOver', true, false,
       this.gameState.player.points,
-      this.gameState.city.population
+      this.gameState.city.population,
+      this.gameState.gameData
     )
     var name = prompt('Kirjoita nimesi')
     utils.submitScore({
