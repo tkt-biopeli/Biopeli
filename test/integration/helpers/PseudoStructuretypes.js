@@ -52,7 +52,7 @@ const structureTypes = {
     nameWithLanguage: 'mylly',
     asset: 'mill',
     health: 20,
-    refinery: true,
+    type: 'refinery',
     buysFrom: ['wheat_farm'],
     cost: 20000,
     multiplier: 2,

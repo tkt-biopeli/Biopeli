@@ -3,8 +3,8 @@ import GamestateChecker from './GamestateChecker'
 import GameState from '../../../src/game/GameState'
 
 import config from './PseudoConfig'
-import TileTypes from './PseudoTiletypes'
-import StructureTypes from './PseudoStructuretypes'
+import tileTypes from './PseudoTiletypes'
+import structureTypes from './PseudoStructuretypes'
 
 import Structure from '../../../src/models/structure/Structure'
 const assert = require("assert")
@@ -47,8 +47,8 @@ export default class GameAdvancer {
       menuWidth: config.menuWidth,
       gameLength: gameLength,
       config: config,
-      structureTypes: StructureTypes,
-      tileTypes: TileTypes
+      structureTypes: structureTypes,
+      tileTypes: tileTypes
     })
 
     this.gamestateChecker = new GamestateChecker({gameStub: this.game, gameState: this.gameState, gameAdvancer: this})
