@@ -113,6 +113,15 @@ export default class GameAdvancer {
   }
 
   /**
+   * Click nth button in bottom menu
+   * @param {*} n 
+   */
+  clickNthBottomMenuButton(n) {
+    var button = this.gameState.bottomMenuView.activeButtons[n - 1]
+    this.clickBottomMenuButton(button.x, button.y)
+  }
+
+  /**
    * Simulates click of a pointer to certain point in camera
    * 
    * @param {number} x 
@@ -138,6 +147,27 @@ export default class GameAdvancer {
    */
   clickButton(x, y) {
     var buttons = this.gameState.menuView.activeButtons
+
+    for (var i = 0; i < buttons.length; i++) {
+      var button = buttons[i]
+
+      if (x == button.x && y == button.y) {
+        button.callback.call(button.context)
+
+        return
+      }
+    }
+
+  }
+
+  /**
+   * Simulates click of a pointer to certain point in camera but only checks buttons
+   * 
+   * @param {number} x 
+   * @param {number} y 
+   */
+  clickBottomMenuButton(x, y) {
+    var buttons = this.gameState.bottomMenuView.activeButtons
 
     for (var i = 0; i < buttons.length; i++) {
       var button = buttons[i]

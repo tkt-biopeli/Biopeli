@@ -212,7 +212,7 @@ export default class GameState {
       game: this.state,
       layout: new StaticLayout({
         menuRect: {
-          x:this.state.camera.width - config.menuWidth,
+          x: this.state.camera.width - config.menuWidth,
           y: this.state.camera.height - 64, // magic number for now
           width: config.menuWidth,
           height: 64 // magic number for now
