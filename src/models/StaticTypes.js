@@ -13,6 +13,7 @@
  */
 const structureTypes = {
   wheat_farm: {
+    type: 'producer_structure',
     name: 'wheat farm',
     nameWithLanguage: 'viljatila',
     asset: 'wheat_farm',
@@ -29,6 +30,7 @@ const structureTypes = {
     fertility_max: 70
   },
   dairy_farm: {
+    type: 'producer_structure',
     name: 'dairy farm',
     nameWithLanguage: 'maitotila',
     asset: 'dairy_farm',
@@ -45,6 +47,7 @@ const structureTypes = {
     fertility_max: 70
   },
   berry_farm: {
+    type: 'producer_structure',
     name: 'berry farm',
     nameWithLanguage: 'marjatila',
     asset: 'berry_farm',
@@ -61,11 +64,12 @@ const structureTypes = {
     fertility_max: 70
   },
   mill: {
+    type: 'refinery',
     name: 'mill',
     nameWithLanguage: 'mylly',
     asset: 'mill',
     health: 20,
-    refinery: true,
+    refinery: true,  // deprecated
     buysFrom: ['wheat farm'],
     cost: 20000,
     multiplier: 2,
