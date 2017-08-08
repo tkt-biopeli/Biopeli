@@ -1,4 +1,4 @@
-import config from '../../config'
+import settings from '../../../assets/json/json-settings.json'
 
 export default class JSONLoader {
   constructor ({ game }) {
@@ -6,19 +6,19 @@ export default class JSONLoader {
   }
 
   loadJSONObjects () {
-    this.game.load.json(config.configurationsName, config.configurationsFile)
-    this.game.load.json(config.assetsName, config.assetsFile)
-    this.game.load.json(config.tiletypesName, config.tiletypesFile)
-    this.game.load.json(config.structuretypesName, config.structuretypesFile)
-    this.game.load.json(config.textsName, config.textsFile)
+    this.game.load.json(settings.configurationsName, settings.configurationsFile)
+    this.game.load.json(settings.assetsName, settings.assetsFile)
+    this.game.load.json(settings.tiletypesName, settings.tiletypesFile)
+    this.game.load.json(settings.structuretypesName, settings.structuretypesFile)
+    this.game.load.json(settings.textsName, settings.textsFile)
   }
 
   initJSONObjects () {
-    this.configurations = this.getJSON(config.configurationsName)
-    this.assets = this.getJSON(config.assetsName)
-    this.tileTypes = this.getJSON(config.tiletypesName)
-    this.structureTypes = this.getJSON(config.structuretypesName)
-    this.texts = this.getJSON(config.textsName)
+    this.configurations = this.getJSON(settings.configurationsName)
+    this.assets = this.getJSON(settings.assetsName)
+    this.tileTypes = this.getJSON(settings.tiletypesName)
+    this.structureTypes = this.getJSON(settings.structuretypesName)
+    this.texts = this.getJSON(settings.textsName)
     this.parseJSONObjects()
   }
 

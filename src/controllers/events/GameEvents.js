@@ -7,9 +7,10 @@ export default class GameEvents {
   * Constructor
   * @param gameState gameState
   */
-  constructor({ gameState, gameLength}) {
+  constructor({ gameState, gameLength, config}) {
     this.gameState = gameState
     this.gameLength = gameLength
+    this.config = config
     this.url
   }
 
@@ -36,6 +37,8 @@ export default class GameEvents {
     utils.submitScore({
       player: name,
       points: this.gameState.player.points
-    })
+    },
+    this.config.scoreServer
+  )
   }
 }

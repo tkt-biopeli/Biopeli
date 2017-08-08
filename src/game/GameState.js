@@ -162,7 +162,8 @@ export default class GameState {
 
     this.gameEvents = new GameEvents({
       gameState: this,
-      gameLength: gameLength
+      gameLength: gameLength,
+      config: config
     })
 
     this.music = this.state.add.audio('music')

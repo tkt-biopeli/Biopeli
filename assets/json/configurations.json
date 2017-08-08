@@ -85,5 +85,7 @@
   "fontWeightBold": "bold",
   "fontFill": "#ffff00",
 
-  "playerInitialCash": 20000
+  "playerInitialCash": 20000,
+
+  "scoreServer": "https://biopelihighscores.herokuapp.com/"
 }
