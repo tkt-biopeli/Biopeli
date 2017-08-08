@@ -166,17 +166,17 @@ export default class MapView {
     this.tilesToRedraw = tile.structure.ownedTiles
   }
 
-  showFertilityLayer() {
-    this.showFertility = ! this.showFertility
+  showFertilityLayer () {
+    this.showFertility = !this.showFertility
     this.showDampness = false
   }
 
-  showMoistureLayer() {
+  showMoistureLayer () {
     this.showDampness = !this.showDampness
     this.showFertility = false
   }
 
-  showFlowersLayer() {
-    this.showFlowers = ! this.showFlowers
+  showFlowersLayer () {
+    this.showFlowers = !this.showFlowers
   }
 }

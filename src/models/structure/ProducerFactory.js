@@ -33,7 +33,11 @@ export default class ProducerFactory {
      ? this.createContinuousProducer(sType.turnipYield)
      : this.createSeasonalProducer(sType.harvestingWeeks, sType.turnipYield)
 
-    return new PrimaryProducerDecorator({tile: tile, producer: producer, maxFlowers: this.maxFlowers})
+    return new PrimaryProducerDecorator({
+      tile: tile, 
+      producer: producer, 
+      maxFlowers: this.maxFlowers
+    })
   }
 
   createSeasonalProducer (harvestingWeeks, turnipYield) {

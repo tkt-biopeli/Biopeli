@@ -7,11 +7,10 @@ export default class GameEvents {
   * Constructor
   * @param gameState gameState
   */
-  constructor({ gameState, gameLength, config}) {
+  constructor ({ gameState, gameLength, config }) {
     this.gameState = gameState
     this.gameLength = gameLength
     this.config = config
-    this.url
   }
 
   /**

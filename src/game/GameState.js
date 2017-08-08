@@ -275,7 +275,7 @@ export default class GameState {
         buttonWidth: config.menuButtonWidth
       }),
       contents: [this.cityContent, this.tileContent, buildStructureController,
-      this.optionsContent]
+        this.optionsContent]
     })
   }
 

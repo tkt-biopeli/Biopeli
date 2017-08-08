@@ -45,7 +45,7 @@ export default class StructureFactory {
 
   buildBuildingNamed (tile, structureTypeName) {
     var structureType = this.structureTypes[structureTypeName]
-    if(structureType == null) return
+    if (structureType == null) return
     return this.buildBuilding(structureType)
   }
 

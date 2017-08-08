@@ -44,7 +44,10 @@ export default class JSONLoader {
   loadAssets () {
     var assetList = this.assets.assets
     for (let asset of assetList) {
-      if(asset.type == 'spritesheet') this.game.load.spritesheet(asset.name, asset.file, asset.width, asset.height, asset.frames)
+      if (asset.type === 'spritesheet') {
+        this.game.load.spritesheet(asset.name, asset.file, asset.width, asset.height, asset.frames)
+        continue
+      }
       this.game.load[asset.type](asset.name, asset.file)
     }
   }

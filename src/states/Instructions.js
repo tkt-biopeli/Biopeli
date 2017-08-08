@@ -17,7 +17,8 @@ export default class extends Phaser.State {
       'Rakenna alku- sekä jatkotuotantorakennuksia.\n' +
       'Vastaa kaupungin kysyntään.'
     )
-    this.menu.createButton('Takaisin', () => { this.state.start('Start', true, false, this.gameData) })
+    this.menu.createButton('Takaisin', 
+      () => { this.state.start('Start', true, false, this.gameData) })
     this.menu.finishMenu()
   }
 }

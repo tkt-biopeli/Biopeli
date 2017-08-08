@@ -15,9 +15,9 @@ export default {
   },
 
   submitScore: (body, server) => {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", server + '/submit_score', true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify(body));
+    var xhr = new XMLHttpRequest()
+    xhr.open('POST', server + '/submit_score', true)
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.send(JSON.stringify(body))
   }
 }
