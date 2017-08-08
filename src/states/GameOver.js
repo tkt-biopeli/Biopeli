@@ -33,6 +33,7 @@ export default class GameOver extends Phaser.State {
     this.menu.createScore('Loppupisteesi: ' + this.points.toFixed(0) +
       '\n' + 'Kaupungin koko: ' + this.population)
     this.menu.createButton('Alkuun', () => { this.state.start('Start') })
+    this.menu.createButton('Tulokset', () => { this.state.start('Highscores') })
     this.menu.finishMenu()
   }
 }
