@@ -10,7 +10,12 @@ describe('StructureFactory tests', () => {
 
   beforeEach(() => {
     tileTypes = {
-      
+      industrial: {
+        name: 'industrial'
+      },
+      field: {
+        name: 'field'
+      }
     }
     purchaseStub = sinon.stub()
     addStructureSpy = sinon.spy()
@@ -45,7 +50,8 @@ describe('StructureFactory tests', () => {
       map: map,
       eventController: eventController,
       purchaseManager: {purchase: purchaseStub},
-      ruinSettings: settings
+      ruinSettings: settings,
+      tileTypes: tileTypes
     })
 
     sfactory.namer = {
