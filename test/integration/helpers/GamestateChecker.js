@@ -72,6 +72,22 @@ export default class GamestateChecker {
     } else {
       assert(tile.structure == null)
     }
+    if (tileType.name === 'grass') {
+      assert.equal(tile.moisture, 55)
+      assert.equal(tile.fertility, 66)
+    }
+  }
+
+  checkIfFlowersShown () {
+    assert(this.gameState.mapView.showFlowers)
+  }
+
+  checkIfFertilityShown () {
+    assert(this.gameState.mapView.showFertility)
+  }
+
+  checkIfMoistureShown () {
+    assert(this.gameState.mapView.showDampness)
   }
 
   checkPollution (x, y, pollution) {
@@ -156,6 +172,16 @@ export default class GamestateChecker {
    */
   checkButtonAmountInMenu (expectedAmount) {
     var buttons = this.gameState.menuView.activeButtons
+    assert.equal(expectedAmount, buttons.length)
+  }
+
+  /**
+   * Checks if there is n buttons in bottom menu
+   * 
+   * @param {int} expectedAmount 
+   */
+  checkButtonAmountInBottomMenu (expectedAmount) {
+    var buttons = this.gameState.bottomMenuView.activeButtons
     assert.equal(expectedAmount, buttons.length)
   }
 
