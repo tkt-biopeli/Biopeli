@@ -11,6 +11,7 @@ export default class JSONLoader {
     this.game.load.json(settings.tiletypesName, settings.tiletypesFile)
     this.game.load.json(settings.structuretypesName, settings.structuretypesFile)
     this.game.load.json(settings.textsName, settings.textsFile)
+    this.game.load.json(settings.namesName, settings.namesFile)
   }
 
   initJSONObjects () {
@@ -19,6 +20,7 @@ export default class JSONLoader {
     this.tileTypes = this.getJSON(settings.tiletypesName)
     this.structureTypes = this.getJSON(settings.structuretypesName)
     this.texts = this.getJSON(settings.textsName)
+    this.names = this.getJSON(settings.namesName)
     this.parseJSONObjects()
   }
 
@@ -57,7 +59,8 @@ export default class JSONLoader {
       config: this.configurations,
       tileTypes: this.tileTypes,
       structureTypes: this.structureTypes,
-      texts: this.texts
+      texts: this.texts,
+      names: this.names
     }
   }
 }

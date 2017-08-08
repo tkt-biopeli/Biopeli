@@ -3,7 +3,6 @@ import StructureHealth from './health/StructureHealth'
 import HealthManager from './health/HealthManager'
 import ProducerFactory from './ProducerFactory'
 import StructureNameGenerator from '../namegeneration/StructureNameGenerator'
-import StructureNameParts from '../namegeneration/StructureNameParts'
 import utils from '../../utils'
 /**
  * Creates a structure for the player
@@ -14,7 +13,8 @@ export default class StructureFactory {
    * @param {Player} player
    */
   constructor ({ purchaseManager, gameTimer, eventController, 
-      player, map, tileFinder, ruinSettings, maxFlowers, tileTypes, structureTypes }) {
+      player, map, tileFinder, ruinSettings, maxFlowers, 
+      tileTypes, structureTypes, structureNames }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
@@ -25,10 +25,10 @@ export default class StructureFactory {
     this.structureTypes = structureTypes
 
     this.namer = new StructureNameGenerator({
-      frontAdjectives: StructureNameParts[0],
-      names: StructureNameParts[1],
-      endAdjectives: StructureNameParts[2],
-      hyperboles: StructureNameParts[3],
+      frontAdjectives: structureNames.ownerAdjectives,
+      names: structureNames.ownerNames,
+      endAdjectives: structureNames.structureAdjectives,
+      hyperboles: structureNames.exaggerations,
       random: utils.randomNoBounds,
       randomWithBounds: utils.randomWithBounds
     })

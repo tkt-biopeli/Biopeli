@@ -4,10 +4,12 @@
   "tiletypesFile": "assets/json/game/tile_types.json",
   "structuretypesFile": "assets/json/game/structure_types.json",
   "textsFile": "assets/json/texts.json",
+  "namesFile": "assets/json/names.json",
 
   "configurationsName": "configurations",
   "assetsName": "assets",
   "tiletypesName": "tileTypes",
   "structuretypesName": "structureTypes",
-  "textsName": "texts"
+  "textsName": "texts",
+  "namesName": "names"
 }

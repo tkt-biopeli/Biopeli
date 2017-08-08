@@ -160,7 +160,8 @@ export default class GameState {
       ruinSettings: config.ruinSettings,
       maxFlowers: config.maxFlowers,
       tileTypes: tileTypes,
-      structureTypes: this.structureTypes
+      structureTypes: this.structureTypes,
+      structureNames: this.gameData.names.structureNames
     })
 
     this.gameEvents = new GameEvents({
