@@ -5,7 +5,6 @@ import ProducerFactory from './ProducerFactory'
 import StructureNameGenerator from '../namegeneration/StructureNameGenerator'
 import StructureNameParts from '../namegeneration/StructureNameParts'
 import utils from '../../utils'
-import StaticTypes from '../StaticTypes'
 /**
  * Creates a structure for the player
  */
@@ -15,12 +14,15 @@ export default class StructureFactory {
    * @param {Player} player
    */
   constructor ({ purchaseManager, gameTimer, eventController, 
-      player, map, tileFinder, ruinSettings, maxFlowers }) {
+      player, map, tileFinder, ruinSettings, maxFlowers, tileTypes, structureTypes }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
     this.eventController = eventController
     this.purchaseManager = purchaseManager
+
+    this.tileTypes = tileTypes
+    this.structureTypes = structureTypes
 
     this.namer = new StructureNameGenerator({
       frontAdjectives: StructureNameParts[0],
@@ -39,6 +41,12 @@ export default class StructureFactory {
     this.minRuin = ruinSettings.minRuin
     this.maxRuin = ruinSettings.maxRuin
     this.priceMultiplier = ruinSettings.fixMultiplier
+  }
+
+  buildBuildingNamed (tile, structureTypeName) {
+    var structureType = this.structureTypes[structureTypeName]
+    if(structureType == null) return
+    return this.buildBuilding(structureType)
   }
 
   /**
@@ -161,13 +169,13 @@ export default class StructureFactory {
 
   setAssetForRefinery (tmpTile) {
     if (tmpTile.tileType.name !== 'water') {
-      tmpTile.tileType = StaticTypes.tileTypes.industrial
+      tmpTile.tileType = this.tileTypes.industrial
     }
   }
 
   setAssetForProducer (tmpTile) {
     if (tmpTile.tileType.name === 'grass') {
-      tmpTile.tileType = StaticTypes.tileTypes.field
+      tmpTile.tileType = this.tileTypes.field
     }
   }
 

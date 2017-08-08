@@ -61,7 +61,7 @@ export default class GameState {
 
     this.initializeModel(
       cityName, perlinNoise, gameLength, 
-      startMoney, mapSize, tileSize, config
+      startMoney, mapSize, tileSize, config, tileTypes
     )
     this.initializeView(config)
     this.initializeControllers(config)
@@ -115,7 +115,7 @@ export default class GameState {
 
   initializeModel (
       cityName, perlinNoise, gameLength,
-      startMoney, mapSize, tileSize, config) {
+      startMoney, mapSize, tileSize, config, tileTypes) {
     this.eventController = new EventController()
 
     this.mapGenerator = new MapGenerator({
@@ -123,7 +123,8 @@ export default class GameState {
       tileSize: tileSize,
       generatingSettings: config.generatingSettings,
       perlinNoise: perlinNoise,
-      noiseSettings: config.noise
+      noiseSettings: config.noise,
+      tileTypes: tileTypes
     })
     this.map = this.mapGenerator.generateMap()
 
@@ -157,7 +158,9 @@ export default class GameState {
       purchaseManager: this.purchaseManager,
       map: this.map,
       ruinSettings: config.ruinSettings,
-      maxFlowers: config.maxFlowers
+      maxFlowers: config.maxFlowers,
+      tileTypes: tileTypes,
+      structureTypes: this.structureTypes
     })
 
     this.gameEvents = new GameEvents({
@@ -251,7 +254,8 @@ export default class GameState {
     this.tileContent = new TileContent({
       topBarController: this.topBarController,
       purchaseManager: this.purchaseManager,
-      demandFunction: this.city.turnipDemand
+      demandFunction: this.city.turnipDemand,
+      structureTypes: this.structureTypes
     })
 
     var buildStructureController = new BuildStructureContent({

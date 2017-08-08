@@ -25,31 +25,31 @@ export default class PrimaryProducerDecorator {
 
     this.moisture = {
       under: createLine(
-        structure.structureType.moisture_min - 10, 0,
-        structure.structureType.moisture_min, 1
+        structure.structureType.moistureMin - 10, 0,
+        structure.structureType.moistureMin, 1
       ),
       prefer: createLine(
-        structure.structureType.moisture_min, 1,
-        structure.structureType.moisture_max, 1
+        structure.structureType.moistureMin, 1,
+        structure.structureType.moistureMax, 1
       ),
       over: createLine(
-        structure.structureType.moisture_max, 1,
-        structure.structureType.moisture_max + 10, 0
+        structure.structureType.moistureMax, 1,
+        structure.structureType.moistureMax + 10, 0
       )
     }
 
     this.fertility = {
       under: createLine(
-        structure.structureType.fertility_min - 10, 0,
-        structure.structureType.fertility_min, 1
+        structure.structureType.fertilityMin - 10, 0,
+        structure.structureType.fertilityMin, 1
       ),
       prefer: createLine(
-        structure.structureType.fertility_min, 1,
-        structure.structureType.fertility_max, 1
+        structure.structureType.fertilityMin, 1,
+        structure.structureType.fertilityMax, 1
       ),
       over: createLine(
-        structure.structureType.fertility_max, 1,
-        structure.structureType.fertility_max + 10, 0
+        structure.structureType.fertilityMax, 1,
+        structure.structureType.fertilityMax + 10, 0
       )
     }
   }
