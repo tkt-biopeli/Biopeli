@@ -165,7 +165,8 @@ export default class GameStub {
     this.camera = {
       x: 0,
       y: 0,
-      width: width
+      width: width,
+      height: height
     }
 
     this.game = {

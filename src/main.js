@@ -11,7 +11,7 @@ import StartState from './states/Start'
 import InstructionsState from './states/Instructions'
 import HighscoresState from './states/Highscores'
 import config from './config'
-
+//
 /**
  * Description goes here
  */
