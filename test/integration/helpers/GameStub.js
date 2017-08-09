@@ -1,5 +1,4 @@
 import MockerHandler from './MockerHandler'
-import config from '../../../src/config'
 const assert = require('assert')
 
 /**

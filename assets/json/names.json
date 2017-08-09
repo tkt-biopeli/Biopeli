@@ -1,0 +1,1158 @@
+{
+  "cityNames": [
+    {
+      "name": "mTechVille", 
+      "point": 5
+    },
+    {
+      "name": "Kumpulan kampus", 
+      "point": 8, 
+      "full": 9
+    },
+
+    {
+      "name": "Helsinki", 
+      "point": 6
+    },
+    {
+      "name": "Turku", 
+      "point": 3
+    },
+    {
+      "name": "Tampere", 
+      "point": 3
+    },
+    {
+      "name": "Oulu", 
+      "point": 2
+    },
+    {
+      "name": "Rovaniemi", 
+      "point": 4
+    },
+    {
+      "name": "Jyväskylä", 
+      "point": 5
+    },
+    {
+      "name": "Pori", 
+      "point": 2
+    },
+    {
+      "name": "Kotka", 
+      "point": 3
+    },
+    {
+      "name": "Espoo", 
+      "point": 2
+    },
+    {
+      "name": "Vantaa", 
+      "point": 3
+    },
+    {
+      "name": "Seinäjoki", 
+      "point": 5
+    },
+    {
+      "name": "Joensuu", 
+      "point": 4
+    },
+    {
+      "name": "Lappeenranta", 
+      "point": 7
+    },
+    {
+      "name": "Savonlinna", 
+      "point": 5
+    },
+    {
+      "name": "Pietarsaari", 
+      "point": 6
+    },
+    {
+      "name": "Utsjoki", 
+      "point": 3
+    },
+    {
+      "name": "Kilpisjärvi", 
+      "point": 6
+    },
+    {
+      "name": "Lahti", 
+      "point": 3
+    },
+    {
+      "name": "Mikkeli", 
+      "point": 3
+    },
+    {
+      "name": "Vaasa", 
+      "point": 3
+    },
+    {
+      "name": "Maarienhamina", 
+      "point": 7
+    },
+    {
+      "name": "Kouvola", 
+      "point": 3
+    },
+    {
+      "name": "Kuopio", 
+      "point": 3
+    },
+    {
+      "name": "Hämeenlinna", 
+      "point": 6
+    },
+    {
+      "name": "Järvenpää", 
+      "point": 6
+    },
+    {
+      "name": "Rauma", 
+      "point": 3
+    },
+    {
+      "name": "Hyvinkää", 
+      "point": 5
+    },
+    {
+      "name": "Kempele", 
+      "point": 3
+    },
+    {
+      "name": "Tornio", 
+      "point": 3
+    },
+    {
+      "name": "Kajaani", 
+      "point": 2
+    },
+    {
+      "name": "Kuusamo", 
+      "point": 3
+    },
+    {
+      "name": "Imatra", 
+      "point": 1
+    },
+
+    {
+      "name": "Tukholma", 
+      "point": 3
+    },
+    {
+      "name": "Göteburg", 
+      "point": 4
+    },
+    {
+      "name": "Malmö", 
+      "point": 3
+    },
+    {
+      "name": "Uppsala", 
+      "point": 3
+    },
+    {
+      "name": "Oslo", 
+      "point": 2
+    },
+    {
+      "name": "Bergen", 
+      "point": 3
+    },
+    {
+      "name": "Trondheim", 
+      "point": 5
+    },
+    {
+      "name": "Tromso", 
+      "point": 4
+    },
+    {
+      "name": "Kööpenhamina", 
+      "point": 6
+    },
+    {
+      "name": "Tallinna", 
+      "point": 3
+    },
+    {
+      "name": "Riika", 
+      "point": 3
+    },
+    {
+      "name": "Vilna", 
+      "point": 3
+    },
+    {
+      "name": "Reykjavik", 
+      "point": 4
+    },
+
+    {
+      "name": "Lontoo", 
+      "point": 3
+    },
+    {
+      "name": "Pariisi", 
+      "point": 2
+    },
+    {
+      "name": "Moskova", 
+      "point": 3
+    },
+    {
+      "name": "Praha", 
+      "point": 3
+    },
+    {
+      "name": "Vienna", 
+      "point": 4
+    },
+    {
+      "name": "Berliini", 
+      "point": 3
+    },
+    {
+      "name": "Varsova", 
+      "point": 3
+    },
+    {
+      "name": "Minsk", 
+      "point": 3
+    },
+    {
+      "name": "Hampuri", 
+      "point": 3
+    },
+    {
+      "name": "Stuttgart", 
+      "point": 5
+    },
+    {
+      "name": "Dresden", 
+      "point": 4
+    },
+    {
+      "name": "Lissabon", 
+      "point": 5
+    },
+    {
+      "name": "Napoli", 
+      "point": 2
+    },
+    {
+      "name": "Amsterdam", 
+      "point": 6
+    },
+    {
+      "name": "Madrid", 
+      "point": 3
+    },
+    {
+      "name": "Rooma", 
+      "point": 3
+    },
+    {
+      "name": "Ateena", 
+      "point": 1
+    },
+    {
+      "name": "Pietari", 
+      "point": 3
+    },
+    {
+      "name": "Venetsia", 
+      "point": 5
+    },
+    {
+      "name": "Milano", 
+      "point": 4
+    },
+    {
+      "name": "Budapest", 
+      "point": 4
+    },
+    {
+      "name": "Bucharest", 
+      "point": 5
+    },
+    {
+      "name": "Manchester", 
+      "point": 3
+    },
+    {
+      "name": "Liverpool", 
+      "point": 5
+    },
+    {
+      "name": "Dublin", 
+      "point": 3
+    },
+    {
+      "name": "Barcelona", 
+      "point": 5
+    },
+    {
+      "name": "Brysseli", 
+      "point": 4
+    },
+    {
+      "name": "Munchen", 
+      "point": 3
+    },
+    {
+      "name": "Frankfurt", 
+      "point": 5
+    },
+    {
+      "name": "Lyon", 
+      "point": 2
+    },
+    {
+      "name": "Marseille", 
+      "point": 3
+    },
+    {
+      "name": "Kiova", 
+      "point": 3
+    },
+    {
+      "name": "Belgrad", 
+      "point": 3
+    },
+
+    {
+      "name": "Kairo", 
+      "point": 3
+    },
+    {
+      "name": "Ouagadougou", 
+      "point": 5
+    },
+    {
+      "name": "Lagos", 
+      "point": 2
+    },
+    {
+      "name": "Kinshasa", 
+      "point": 3
+    },
+    {
+      "name": "Johannesburg", 
+      "point": 8
+    },
+    {
+      "name": "Pretoria", 
+      "point": 3
+    },
+    {
+      "name": "Mombasa", 
+      "point": 3
+    },
+    {
+      "name": "Kampala", 
+      "point": 3
+    },
+    {
+      "name": "Tripoli", 
+      "point": 3
+    },
+    {
+      "name": "Alexandria", 
+      "point": 4
+    },
+    {
+      "name": "Timbuktu", 
+      "point": 3
+    },
+    {
+      "name": "Antananarivo", 
+      "point": 6
+    },
+    {
+      "name": "Accra", 
+      "point": 2
+    },
+    {
+      "name": "Windhoek", 
+      "point": 4
+    },
+    {
+      "name": "Luanda", 
+      "point": 4
+    },
+    {
+      "name": "Tunis", 
+      "point": 2
+    },
+    {
+      "name": "Algiers", 
+      "point": 2
+    },
+    {
+      "name": "Maputo", 
+      "point": 2
+    },
+    {
+      "name": "Yamoussoukro", 
+      "point": 6
+    },
+    {
+      "name": "Yaounde", 
+      "point": 6
+    },
+
+    {
+      "name": "Istanbul", 
+      "point": 5
+    },
+    {
+      "name": "Izmir", 
+      "point": 2
+    },
+    {
+      "name": "Baghdad", 
+      "point": 4
+    },
+    {
+      "name": "Teheran", 
+      "point": 4
+    },
+    {
+      "name": "Kalkutta", 
+      "point": 3
+    },
+    {
+      "name": "Bangkok", 
+      "point": 4
+    },
+    {
+      "name": "Jakarta", 
+      "point": 5
+    },
+    {
+      "name": "Singapore", 
+      "point": 5
+    },
+    {
+      "name": "Vladivostok", 
+      "point": 5
+    },
+    {
+      "name": "Irkutsk", 
+      "point": 2
+    },
+    {
+      "name": "Manila", 
+      "point": 2
+    },
+    {
+      "name": "Ulaanbatar", 
+      "point": 5
+    },
+    {
+      "name": "Dubai", 
+      "point": 2
+    },
+    {
+      "name": "Delhi", 
+      "point": 2
+    },
+    {
+      "name": "Mumbai", 
+      "point": 3
+    },
+    {
+      "name": "Bangalore", 
+      "point": 5
+    },
+    {
+      "name": "Chennai", 
+      "point": 4
+    },
+    {
+      "name": "Ankara", 
+      "point": 2
+    },
+    {
+      "name": "Mekka", 
+      "point": 3
+    },
+    {
+      "name": "Jerusalem", 
+      "point": 4
+    },
+    {
+      "name": "Damascus", 
+      "point": 5
+    },
+    {
+      "name": "Riyadh", 
+      "point": 3
+    },
+    {
+      "name": "Tbilisi", 
+      "point": 3
+    },
+    {
+      "name": "Baku", 
+      "point": 2
+    },
+    {
+      "name": "Kabul", 
+      "point": 2
+    },
+    {
+      "name": "Tashkent", 
+      "point": 4
+    },
+    {
+      "name": "Beirut", 
+      "point": 3
+    },
+    {
+      "name": "Islamabad", 
+      "point": 6
+    },
+    {
+      "name": "Lahore", 
+      "point": 2
+    },
+    {
+      "name": "Dhaka", 
+      "point": 3
+    },
+    {
+      "name": "Kathmandu", 
+      "point": 4
+    },
+    {
+      "name": "Novgorod", 
+      "point": 3
+    },
+    {
+      "name": "Omsk", 
+      "point": 2
+    },
+    {
+      "name": "Novosibirsk", 
+      "point": 6
+    },
+
+    {
+      "name": "Tokio", 
+      "point": 2
+    },
+    {
+      "name": "Kyoto", 
+      "point": 3
+    },
+    {
+      "name": "Hiroshima", 
+      "point": 4
+    },
+    {
+      "name": "Osaka", 
+      "point": 1
+    },
+    {
+      "name": "Fukuoka", 
+      "point": 4
+    },
+    {
+      "name": "Sapporo", 
+      "point": 3
+    },
+    {
+      "name": "Sendai", 
+      "point": 3
+    },
+    {
+      "name": "Nagoya", 
+      "point": 2
+    },
+    {
+      "name": "Seoul", 
+      "point": 3
+    },
+    {
+      "name": "Busan", 
+      "point": 2
+    },
+    {
+      "name": "Pyongjang", 
+      "point": 5
+    },
+    {
+      "name": "Peking", 
+      "point": 2
+    },
+    {
+      "name": "Shanghai", 
+      "point": 5
+    },
+    {
+      "name": "Xi\"an", 
+      "point": 3
+    },
+    {
+      "name": "Chongqing", 
+      "point": 5
+    },
+    {
+      "name": "Wuhan", 
+      "point": 2
+    },
+    {
+      "name": "Guangzhou", 
+      "point": 5
+    },
+    {
+      "name": "Chengdu", 
+      "point": 5
+    },
+    {
+      "name": "Qingdao", 
+      "point": 4
+    },
+    {
+      "name": "Tianjin", 
+      "point": 4
+    },
+    {
+      "name": "Urumqi", 
+      "point": 4
+    },
+    {
+      "name": "Harbin", 
+      "point": 3
+    },
+    {
+      "name": "Shenyang", 
+      "point": 3
+    },
+    {
+      "name": "Nanjing", 
+      "point": 3
+    },
+    {
+      "name": "Lanzhou", 
+      "point": 3
+    },
+    {
+      "name": "Changchun", 
+      "point": 5
+    },
+
+    {
+      "name": "Chicago", 
+      "point": 3
+    },
+    {
+      "name": "Atlanta", 
+      "point": 5
+    },
+    {
+      "name": "Dallas", 
+      "point": 3
+    },
+    {
+      "name": "Houston", 
+      "point": 4
+    },
+    {
+      "name": "Miami", 
+      "point": 3
+    },
+    {
+      "name": "Boston", 
+      "point": 3
+    },
+    {
+      "name": "Seatle", 
+      "point": 4
+    },
+    {
+      "name": "Portland", 
+      "point": 4
+    },
+    {
+      "name": "Detroit", 
+      "point": 3
+    },
+    {
+      "name": "Philadelphia", 
+      "point": 5
+    },
+    {
+      "name": "Indianapolis", 
+      "point": 7
+    },
+    {
+      "name": "Minneapolis", 
+      "point": 6
+    },
+    {
+      "name": "Nashville", 
+      "point": 4
+    },
+    {
+      "name": "Denver", 
+      "point": 3
+    },
+    {
+      "name": "Albuquerque", 
+      "point": 4
+    },
+    {
+      "name": "Montreal", 
+      "point": 4
+    },
+    {
+      "name": "Winnipeg", 
+      "point": 5
+    },
+    {
+      "name": "Ottawa", 
+      "point": 2
+    },
+    {
+      "name": "Vancouver", 
+      "point": 3
+    },
+    {
+      "name": "Toronto", 
+      "point": 2
+    },
+    {
+      "name": "Calgary", 
+      "point": 3
+    },
+
+    {
+      "name": "Sydney", 
+      "point": 3
+    },
+    {
+      "name": "Canberra", 
+      "point": 3
+    },
+    {
+      "name": "Perth", 
+      "point": 3
+    },
+    {
+      "name": "Adelaide", 
+      "point": 3
+    },
+    {
+      "name": "Auckland", 
+      "point": 4
+    },
+    {
+      "name": "Wellington", 
+      "point": 7
+    },
+    {
+      "name": "Nauru", 
+      "point": 3
+    },
+    {
+      "name": "Fiji", 
+      "point": 2
+    },
+    {
+      "name": "Kiribati", 
+      "point": 4
+    },
+    {
+      "name": "Tonga", 
+      "point": 3
+    },
+
+    {
+      "name": "Brasilia", 
+      "point": 5
+    },
+    {
+      "name": "Lima", 
+      "point": 2
+    },
+    {
+      "name": "Santiago", 
+      "point": 3
+    },
+    {
+      "name": "Havanna", 
+      "point": 5
+    },
+    {
+      "name": "Caracaz", 
+      "point": 4
+    },
+    {
+      "name": "Bogota", 
+      "point": 4
+    },
+    {
+      "name": "Georgetown", 
+      "point": 6
+    },
+    {
+      "name": "Manaus", 
+      "point": 2
+    },
+    {
+      "name": "Salvador", 
+      "point": 3
+    },
+    {
+      "name": "Fortaleza", 
+      "point": 5
+    },
+    {
+      "name": "Montevideo", 
+      "point": 5
+    },
+    {
+      "name": "Asuncion", 
+      "point": 4
+    },
+
+    {
+      "name": "Los Angeles", 
+      "point": 6, 
+      "full": 4
+    },
+    {
+      "name": "Las Vegas", 
+      "point": 6, 
+      "full": 4
+    },
+    {
+      "name": "San Fransisco", 
+      "point": 8, 
+      "full": 4
+    },
+    {
+      "name": "San Antonio", 
+      "point": 6, 
+      "full": 4
+    },
+    {
+      "name": "El Paso", 
+      "point": 5, 
+      "full": 3
+    },
+    {
+      "name": "New York", 
+      "point": 5, 
+      "full": 4
+    },
+    {
+      "name": "New Orleans", 
+      "point": 6, 
+      "full": 4
+    },
+    {
+      "name": "Salt Lake City", 
+      "point": 7, 
+      "full": 5
+    },
+    {
+      "name": "St. Louis", 
+      "point": 7, 
+      "full": 4
+    },
+    {
+      "name": "Hong Kong", 
+      "point": 6, 
+      "full": 5
+    },
+    {
+      "name": "Buenos Aires", 
+      "point": 9, 
+      "full": 7
+    },
+    {
+      "name": "Rio de Janeiro", 
+      "point": 9, 
+      "full": 7
+    },
+    {
+      "name": "Sao Paulo", 
+      "point": 8, 
+      "full": 4
+    },
+    {
+      "name": "San Jose", 
+      "point": 6, 
+      "full": 4
+    },
+    {
+      "name": "Porto Alegre", 
+      "point": 7, 
+      "full": 6
+    },
+    {
+      "name": "Belo Horizonte", 
+      "point": 9, 
+      "full": 5
+    },
+    {
+      "name": "Addis Abaha", 
+      "point": 7, 
+      "full": 6
+    },
+    {
+      "name": "Cape Town", 
+      "point": 7, 
+      "full": 5
+    },
+    {
+      "name": "Mexico City", 
+      "point": 6, 
+      "full": 7
+    },
+    {
+      "name": "N\"djamena", 
+      "point": 2, 
+      "full": 2
+    },
+    {
+      "name": "La Paz", 
+      "point": 4, 
+      "full": 3
+    },
+    {
+      "name": "Port-au-Prince", 
+      "point": 9, 
+      "full": 8
+    },
+    {
+      "name": "Old Delhi", 
+      "point": 5, 
+      "full": 4
+    },
+    {
+      "name": "Ha Noi", 
+      "point": 4, 
+      "full": 3
+    },
+    {
+      "name": "Ho Chi Min", 
+      "point": 8, 
+      "full": 7
+    },
+    {
+      "name": "Tel Aviv", 
+      "point": 5, 
+      "full": 4
+    },
+    {
+      "name": "Kuala Lumpur", 
+      "point": 9, 
+      "full": 6
+    },
+    {
+      "name": "Dar es Salaam", 
+      "point": 9, 
+      "full": 7
+    },
+
+    {
+      "name": "Minas Tirith", 
+      "point": 8, 
+      "full": 6
+    },
+    {
+      "name": "Minas Morgul", 
+      "point": 9, 
+      "full": 6
+    },
+    {
+      "name": "South Park", 
+      "point": 8, 
+      "full": 6
+    },
+    {
+      "name": "Shangri-la", 
+      "point": 8, 
+      "full": 7
+    },
+    {
+      "name": "El Dorado", 
+      "point": 3, 
+      "full": 3
+    },
+
+    {
+      "name": "Asdistania", 
+      "point": 3
+    },
+    {
+      "name": "Agrabah", 
+      "point": 2
+    },
+    {
+      "name": "Megacity", 
+      "point": 4
+    },
+    {
+      "name": "Atlantis", 
+      "point": 5
+    },
+    {
+      "name": "Baldur", 
+      "point": 3
+    },
+    {
+      "name": "Gotham", 
+      "point": 3
+    },
+    {
+      "name": "Springfield", 
+      "point": 6
+    },
+    {
+      "name": "Avalon", 
+      "point": 3
+    },
+    {
+      "name": "Tylypahka", 
+      "point": 4}
+  ],
+
+  "structureNames": {
+    "ownerAdjectives": [
+      "Iso",
+      "Hobitti",
+      "Zombie",
+      "Kola",
+      "Pikku",
+      "Rauhanmies",
+      "Piippu",
+      "Vihreä",
+      "Kirkonmies",
+      "Maanviljelijä",
+      "Merimies",
+      "Akateemikko",
+      "Pihi",
+      "Laiha",
+      "Pappi",
+      "Syöppö",
+      "Yösyöppö",
+      "Suurisuu",
+      "Piippolan",
+      "Korhosen",
+      "Virtasen",
+      "Bahmanpourin",
+      "Häkkisen",
+      "Karttusen",
+      "Klintin",
+      "Tainan",
+      "Koskisen",
+      "Rämön",
+      "Kousan",
+      "Karjalainen",
+      "Ruotsalainen",
+      "Tanskalainen",
+      "Suomalainen",
+      "Kiinalainen",
+      "Intialainen",
+      "Amerikkalainen",
+      "Venäläinen",
+      "Thaimaalainen",
+      "Munkki",
+      "Professori",
+      "Luukkainen",
+      "Nokelainen"
+    ],
+    "ownerNames": [
+      "Olli",
+      "Pekka",
+      "Jukka",
+      "Kalle",
+      "Kyösti",
+      "Jaakko",
+      "Matti",
+      "Maija",
+      "Matleena",
+      "Salla",
+      "Reetta",
+      "Martta",
+      "Eeva",
+      "Jon-Erik",
+      "Hossein",
+      "Ilkka",
+      "Ilja",
+      "Jarkko",
+      "Miia",
+      "Juha",
+      "Iina",
+      "vaari",
+      "mummo",
+      "mummi",
+      "setä",
+      "ukki",
+      "pappa",
+      "eno",
+      "täti",
+      "kummisetä"
+    ],
+    "structureAdjectives": [
+      "Pieni",
+      "Hapokas",
+      "Iso",
+      "Suuri",
+      "Kämänen",
+      "Siisti",
+      "Puhdas",
+      "Laadukas",
+      "Kummallinen",
+      "Ainutlaatuinen",
+      "Nuorekas",
+      "Ikivihreä",
+      "Vanhahtava",
+      "Kurja",
+      "Huonon tuurin",
+      "Pahan päivän",
+      "Surkea",
+      "Likainen",
+      "Kallis",
+      "Ylihinnoiteltu",
+      "Aromikas",
+      "Viheliäinen",
+      "Onnekas",
+      "Luksus",
+      "Naurettava",
+      "Luomumainen",
+      "Aito",
+      "Feikki",
+      "Aamuvirkku",
+      "Yöllinen",
+      "Fifty-sixty"
+    ],
+    "exaggerations": [
+      "Todella",
+      "Liian",
+      "Tosi",
+      "Huippu",
+      "Melko",
+      "Suhteellisen",
+      "Äärimmäisen",
+      "Kohtalaisen",
+      "Hieman",
+      "Hivenen",
+      "Just ja just",
+      "Järkyttävän",
+      "Mielettömän",
+      "Ihan järkyttävän",
+      "Jäätävän"
+    ]
+  }
+}

@@ -9,9 +9,9 @@ import GameState from './states/Play'
 import GameOverState from './states/GameOver'
 import StartState from './states/Start'
 import InstructionsState from './states/Instructions'
+import config from '../assets/json/configurations.json'
 import HighscoresState from './states/Highscores'
-import config from './config'
-//
+
 /**
  * Description goes here
  */

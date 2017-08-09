@@ -1,5 +1,3 @@
-import config from '../config'
-
 /**
  * Money is encapsulated in this class.
  */
@@ -8,8 +6,8 @@ export default class Money {
   * The constructor fetches the currency string from the config
   * and sets the amount of money to zero.
   */
-  constructor () {
-    this.currency = config.currency
+  constructor ({currency}) {
+    this.currency = currency
     this.amount = 0
   }
 

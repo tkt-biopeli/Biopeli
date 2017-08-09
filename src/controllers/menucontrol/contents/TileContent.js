@@ -9,11 +9,12 @@ export default class SideMenuContent extends Content {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor ({ demandFunction, purchaseManager, topBarController }) {
+  constructor ({ demandFunction, purchaseManager, topBarController, structureTypes }) {
     super()
     this.demandFunction = demandFunction
     this.purchaseManager = purchaseManager
     this.topBarController = topBarController
+    this.structureTypes = structureTypes
 
     this.emptyFunction = () => { }
   }
@@ -102,7 +103,8 @@ export default class SideMenuContent extends Content {
 
     var allowedStructures = tile.tileType.allowedStructures
 
-    for (let structureType of allowedStructures) {
+    for (let structureTypeName of allowedStructures) {
+      var structureType = this.structureTypes[structureTypeName]
       this.owner.changeButton(
         structureType.nameWithLanguage, 2,
         this.owner.wrapFunction(

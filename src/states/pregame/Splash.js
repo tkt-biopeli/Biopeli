@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import utils from '../../utils'
-import JSONLoader from '../../game/json/JSONLoader'
+import JSONLoader from '../../view/json/JSONLoader'
 
 /**
  * Description goes here

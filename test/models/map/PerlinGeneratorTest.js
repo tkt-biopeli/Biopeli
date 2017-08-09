@@ -1,5 +1,4 @@
 import PerlinGenerator from '../../../src/models/map/PerlinGenerator'
-import StaticTypes from '../../../src/models/StaticTypes'
 const assert = require('assert')
 
 describe('Perlin generation tests', () => {
