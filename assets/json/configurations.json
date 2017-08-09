@@ -28,12 +28,15 @@
     "textStartingPoint": 0.5,
     "linePadding": 8,
     "sectionPadding": 18,
-    "fontSize": 16
+    "mediumFont": 16,
+    "largeFont": 32
   },
 
   "topBarSettings": {
     "height": 64,
-    "linePadding": 5
+    "linePadding": 5,
+    "smallFont": 20,
+    "mediumFont": 30
   },
 
   "bottomMenuSettings": {
@@ -110,7 +113,7 @@
         "fixMultiplier": 2
       }
     },
-    
+
     "tiles": {
       "maxFlowers": 10
     }

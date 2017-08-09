@@ -100,8 +100,8 @@ export default class GameState {
     this.bottomMenuController = new SingleController({
       game: this.state,
       style: new Style({
-        buttonWidth: 64,
-        buttonHeight: 64
+        buttonWidth: config.bottomMenuSettings.buttonWidth,
+        buttonHeight: config.bottomMenuSettings.buttonHeight
       }),
       menuView: this.bottomMenuView,
       content: new BottomMenuContent({mapView: this.mapView, menuController: this.menuController})
@@ -184,7 +184,7 @@ export default class GameState {
           x: this.state.camera.width - config.sideMenuSettings.menuWidth,
           y: 0,
           width: config.sideMenuSettings.menuWidth,
-          height: this.state.camera.height - 64, // magic number for now
+          height: this.state.camera.height - config.bottomMenuSettings.height,
           cropToSize: true
         },
         linePadding: config.sideMenuSettings.linePadding,
@@ -203,7 +203,7 @@ export default class GameState {
           width: this.state.camera.width - config.sideMenuSettings.menuWidth,
           height: config.topBarSettings.height
         },
-        linePadding: 5,
+        linePadding: config.topBarSettings.linePadding,
         vertical: false
       }),
       background: null
@@ -214,11 +214,11 @@ export default class GameState {
       layout: new StaticLayout({
         menuRect: {
           x: this.state.camera.width - config.sideMenuSettings.menuWidth,
-          y: this.state.camera.height - 64, // magic number for now
+          y: this.state.camera.height - config.bottomMenuSettings.height,
           width: config.sideMenuSettings.menuWidth,
-          height: 64 // magic number for now
+          height: config.bottomMenuSettings.height
         },
-        linePadding: 1,
+        linePadding: config.bottomMenuSettings.linePadding,
         vertical: false
       }),
       background: 'menuBg'
@@ -236,8 +236,8 @@ export default class GameState {
     this.topBarController = new SingleController({
       game: this.state,
       style: new Style({
-        smallFont: 20,
-        mediumFont: 30
+        smallFont: config.topBarSettings.smallFont,
+        mediumFont: config.topBarSettings.mediumFont
       }),
       menuView: this.topBarView,
       content: new TopBarContent({
@@ -270,8 +270,8 @@ export default class GameState {
       game: this.state,
       menuView: this.menuView,
       style: new Style({
-        mediumFont: 16,
-        largeFont: 32,
+        mediumFont: config.sideMenuSettings.mediumFont,
+        largeFont: config.sideMenuSettings.largeFont,
         buttonHeight: config.sideMenuSettings.buttonHeight,
         buttonWidth: config.sideMenuSettings.buttonWidth
       }),
