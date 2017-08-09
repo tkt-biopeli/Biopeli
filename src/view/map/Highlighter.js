@@ -33,7 +33,8 @@ export default class Highlighter {
     if (tile === selectedTile) {
       sprites.push(this.highlight(0.2, true))
     }
-    if (selectedTile.structure !== null && selectedTile.structure.structureType.type === 'refinery') {
+    if (selectedTile.structure !== null &&
+      selectedTile.structure.structureType.type === 'refinery') {
       if (this.landHighlights.includes(tile)) {
         sprites.push(this.highlightBackground())
         sprites.push(this.highlight(0.2, false, 'blue'))

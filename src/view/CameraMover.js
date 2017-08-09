@@ -1,5 +1,3 @@
-import config from '../config'
-
 /**
  * Description goes here
  */
@@ -11,10 +9,11 @@ export default class CameraMover {
    * @param {number} param.xSpeed
    * @param {number} param.ySpeed
    */
-  constructor ({ game, xSpeed, ySpeed }) {
+  constructor ({ game, xSpeed, ySpeed, config }) {
     this.game = game
     this.x = xSpeed
     this.y = ySpeed
+    this.config = config
   }
 
   /**
@@ -59,6 +58,6 @@ export default class CameraMover {
     // .to parameters(properties object = new coordinates, duration, type of Easing, autoStart)
     this.game.add
       .tween(this.game.camera)
-      .to({ y: ty, x: tx }, config.tweenCameraDuration, 'Linear', true)
+      .to({ y: ty, x: tx }, this.config.tweenCameraDuration, 'Linear', true)
   }
 }

@@ -62,12 +62,11 @@ export default class MulticontentController extends Controller {
     this.redraw()
   }
 
-  getContentIndex(name) {
+  getContentIndex (name) {
     for (var i = 0; i < this.contents.length; i++) {
       if (this.contents[i].name === name) {
         return i
       }
-      
     }
   }
 

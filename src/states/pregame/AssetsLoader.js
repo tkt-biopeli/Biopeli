@@ -34,6 +34,6 @@ export default class extends Phaser.State {
    * Description goes here
    */
   create () {
-    this.state.start('Start')
+    this.state.start('Start', true, false, this.JSONLoader.gameData())
   }
 }

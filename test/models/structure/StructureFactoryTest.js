@@ -1,7 +1,6 @@
 const assert = require("assert")
 const sinon = require("sinon")
 import StructureFactory from '../../../src/models/structure/StructureFactory'
-import StaticTypes from '../../../src/models/StaticTypes'
 
 describe('StructureFactory tests', () => {
   var sfactory, gameTimer, player, addStructureSpy, map, eventController, tile, structureType
@@ -10,7 +9,14 @@ describe('StructureFactory tests', () => {
   var tileTypes
 
   beforeEach(() => {
-    tileTypes = StaticTypes.tileTypes
+    tileTypes = {
+      industrial: {
+        name: 'industrial'
+      },
+      field: {
+        name: 'field'
+      }
+    }
     purchaseStub = sinon.stub()
     addStructureSpy = sinon.spy()
     setAssetSpy = sinon.spy()
@@ -44,7 +50,14 @@ describe('StructureFactory tests', () => {
       map: map,
       eventController: eventController,
       purchaseManager: {purchase: purchaseStub},
-      ruinSettings: settings
+      ruinSettings: settings,
+      tileTypes: tileTypes,
+      structureNames: {
+        ownerAdjectives: ['testing'],
+        ownerNames: ['tester'],
+        structureAdjectives: ['testive'],
+        exaggerations: 'testiest'
+      }
     })
 
     sfactory.namer = {

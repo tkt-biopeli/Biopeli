@@ -1,11 +1,10 @@
 import Map from './Map'
 import PerlinGenerator from './PerlinGenerator'
-import StaticTypes from '../StaticTypes'
 
 export default class MapGenerator {
   constructor ({mapSize, tileSize, generatingSettings, 
-      perlinNoise, noiseSettings}) {
-    this.types = StaticTypes.tileTypes
+      perlinNoise, noiseSettings, tileTypes}) {
+    this.types = tileTypes
 
     this.width = mapSize.width
     this.height = mapSize.height

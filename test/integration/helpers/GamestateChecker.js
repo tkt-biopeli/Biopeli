@@ -1,5 +1,5 @@
 const assert = require('assert')
-import config from '../../../src/config'
+import config from './PseudoConfig'
 
 /**
  * Provides functions to check if the state of the game is wanted
