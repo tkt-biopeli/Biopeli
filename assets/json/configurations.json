@@ -1,91 +1,118 @@
 {
-  "gameWidth": 1024,
-  "gameHeight": 768,
-  "localStorageName": "biopeli",
-
-  "gameLength": 300,
-
-  "tileSize": {
-    "width": 64,
-    "height": 64
-  },
-
-  "ruinSettings": {
-    "minRuin": 4,
-    "maxRuin": 48, 
-    "fixMultiplier": 2
-  },
-
-  "mapSize": {
-    "width": 64,
-    "height": 64
-  },
-  "noise": {
-    "freqs": {
-      "groundfreq": 10,
-      "forestfreq": 20,
-      "fertilityfreq": 5
+  "gameSettings": {
+    "windowSize": {
+      "maxWidth": 1024,
+      "maxHeight": 768,
+      "minWidth": 0,
+      "minHeight": 0
     },
-    "noiseWidth": 64,
-    "noiseHeight": 64
-  },
-  "generatingSettings": {
-    "groundLimit": -0.2,
-    "forestLimit": -0.1
-  },
-  "moveCosts": {
-    "grass": 1,
-    "water": 5,
-    "forest": 2,
-    "field": 1,
-    "industrial": 1
+
+    "localStorageName": "biopeli",
+
+    "scoreServer": "https://biopelihighscores.herokuapp.com/",
+
+    "fonts": {
+      "fontBig": "64px Arial",
+      "fontNormal": "32px Arial",
+      "fontSmall": "16px Arial",
+      "fontWeightBold": "bold",
+      "fontFill": "#ffff00"
+    }
   },
 
-  "menuWidth": 256,
-  "menuLeftPadding": 35,
-  "menuButtonWidth": 189,
-  "menuButtonHeight": 66,
-  "menuTextStartingPoint": 0.5,
-  "linePadding": 8,
-  "sectionPadding": 18,
-  "menuFontSize": 16,
+  "sideMenuSettings": {
+    "menuWidth": 256,
+    "leftPadding": 35,
+    "buttonWidth": 189,
+    "buttonHeight": 66,
+    "textStartingPoint": 0.5,
+    "linePadding": 8,
+    "sectionPadding": 18,
+    "fontSize": 16
+  },
 
-  "topBarItems": [
-    { "name": "time", "asset": "time", "type": "text", "widthPct": 0.3333 },
-    { "name": "score", "asset": "score", "type": "text", "widthPct": 0.1667 },
-    { "name": "cash", "asset": "cash", "type": "text", "widthPct": 0.1667 },
-    { "name": "turnip", "asset": "turnip", "type": "bar", "widthPct": 0.3333 }],
   "topBarSettings": {
     "height": 64,
-    "paddingWidth": 32,
-    "iconWidth": 64,
-    "iconPadding": 16,
-    "verticalPadding": 16
+    "linePadding": 5
   },
 
-  "cameraSpeed": 200,
-  "tweenCameraDuration": 500,
+  "bottomMenuSettings": {
+    "height": 64,
+    "buttonWidth": 64,
+    "buttonHeight": 64,
+    "linePadding": 1
+  },
 
-  "gameTimerInterval": 1000,
+  "mapSettings": {
+    "mapSize": {
+      "width": 64,
+      "height": 64
+    },
 
-  "cityInitialPopulation": 500,
-  "cityDemandMultiplier": 4,
-  "cityDemandRandomVariance": 0.1,
-  "startTurnipPrice": 6,
-  "populationChangeAt100": 1.5,
-  "populationChangeAt200": 2.5,
+    "tileSize": {
+      "width": 64,
+      "height": 64
+    },
 
-  "maxFlowers": 10,
+    "camera": {
+      "speed": 200,
+      "tweenDuration": 500
+    },
 
-  "currency": "Ag",
+    "noise": {
+      "freqs": {
+        "groundfreq": 10,
+        "forestfreq": 20,
+        "fertilityfreq": 5
+      },
+      "noiseWidth": 64,
+      "noiseHeight": 64
+    },
 
-  "fontBig": "64px Arial",
-  "fontNormal": "32px Arial",
-  "fontSmall": "16px Arial",
-  "fontWeightBold": "bold",
-  "fontFill": "#ffff00",
+    "generatingSettings": {
+      "groundLimit": -0.2,
+      "forestLimit": -0.1
+    }
+  },
 
-  "playerInitialCash": 20000,
+  "gameplaySettings": {
+    "time": {
+      "gameLength": 300,
+      "gameTimerInterval": 1000
+    },
 
-  "scoreServer": "https://biopelihighscores.herokuapp.com/"
+    "player": {
+      "initialCash": 20000,
+      "currency": "Ag"
+    },
+
+    "city": {
+      "initialPopulation": 500,
+      "demandMultiplier": 4,
+      "demandRandomVariance": 0.1,
+      "startTurnipPrice": 6,
+      "populationChangeAt100": 1.5,
+      "populationChangeAt200": 2.5
+    },
+
+    "structures": {
+      "moveCosts": {
+        "grass": 1,
+        "water": 5,
+        "forest": 2,
+        "field": 1,
+        "industrial": 1
+      },
+
+      "ruinSettings": {
+        "minRuin": 4,
+        "maxRuin": 48,
+        "fixMultiplier": 2
+      }
+    },
+    
+    "tiles": {
+      "maxFlowers": 10
+    }
+  }
 }

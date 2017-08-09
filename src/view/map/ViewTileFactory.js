@@ -58,7 +58,7 @@ export default class ViewTileFactory {
       modelTile: modelTile, 
       dampnessCol: this.palette.getDampnessColour(modelTile.moisture), 
       fertilityCol: this.palette.getFertilityColour(modelTile.fertility),
-      tileSize: this.config.tileSize
+      tileSize: this.config.mapSettings.tileSize
     })
     return vt
   }

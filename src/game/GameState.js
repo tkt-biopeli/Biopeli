@@ -76,7 +76,7 @@ export default class GameState {
       game: this.state,
       map: this.map,
       menuController: this.menuController,
-      viewWidthPx: this.state.game.width - config.menuWidth,
+      viewWidthPx: this.state.game.width - config.sideMenuSettings.menuWidth,
       viewHeightPx: this.state.game.height,
       config: config
     })
@@ -121,32 +121,32 @@ export default class GameState {
     this.mapGenerator = new MapGenerator({
       mapSize: mapSize,
       tileSize: tileSize,
-      generatingSettings: config.generatingSettings,
+      generatingSettings: config.mapSettings.generatingSettings,
       perlinNoise: perlinNoise,
-      noiseSettings: config.noise,
+      noiseSettings: config.mapSettings.noise,
       tileTypes: tileTypes
     })
     this.map = this.mapGenerator.generateMap()
 
     this.tileFinder = new TileFinder({
       map: this.map,
-      multipliers: config.moveCosts
+      multipliers: config.gameplaySettings.structures.moveCosts
     })
 
     this.player = new Player({startMoney: startMoney})
     this.purchaseManager = new PurchaseManager({player: this.player})
     this.city = new City({
       name: cityName,
-      startPopulation: config.cityInitialPopulation,
-      popularityPct: config.cityDemandMultiplier,
-      demandRandomVariance: config.cityDemandRandomVariance,
-      startPrice: config.startTurnipPrice,
-      increaseAtOne: config.populationChangeAt100,
-      increaseAtTwo: config.populationChangeAt200
+      startPopulation: config.gameplaySettings.city.initialPopulation,
+      popularityPct: config.gameplaySettings.city.demandMultiplier,
+      demandRandomVariance: config.gameplaySettings.city.demandRandomVariance,
+      startPrice: config.gameplaySettings.city.startTurnipPrice,
+      increaseAtOne: config.gameplaySettings.city.populationChangeAt100,
+      increaseAtTwo: config.gameplaySettings.city.populationChangeAt200
     })
 
     this.gameTimer = new Timer({
-      interval: config.gameTimerInterval,
+      interval: config.gameplaySettings.time.gameTimerInterval,
       currentTime: this.currentTime()
     })
 
@@ -157,8 +157,8 @@ export default class GameState {
       eventController: this.eventController,
       purchaseManager: this.purchaseManager,
       map: this.map,
-      ruinSettings: config.ruinSettings,
-      maxFlowers: config.maxFlowers,
+      ruinSettings: config.gameplaySettings.structures.ruinSettings,
+      maxFlowers: config.gameplaySettings.tiles.maxFlowers,
       tileTypes: tileTypes,
       structureTypes: this.structureTypes,
       structureNames: this.gameData.names.structureNames
@@ -181,14 +181,14 @@ export default class GameState {
       game: this.state,
       layout: new StackingLayout({
         menuRect: {
-          x: this.state.camera.width - config.menuWidth,
+          x: this.state.camera.width - config.sideMenuSettings.menuWidth,
           y: 0,
-          width: config.menuWidth,
+          width: config.sideMenuSettings.menuWidth,
           height: this.state.camera.height - 64, // magic number for now
           cropToSize: true
         },
-        linePadding: config.linePadding,
-        sectionPadding: config.sectionPadding,
+        linePadding: config.sideMenuSettings.linePadding,
+        sectionPadding: config.sideMenuSettings.sectionPadding,
         vertical: true
       }),
       background: 'menuBg'
@@ -200,7 +200,7 @@ export default class GameState {
         menuRect: {
           x: 0,
           y: 0,
-          width: this.state.camera.width - config.menuWidth,
+          width: this.state.camera.width - config.sideMenuSettings.menuWidth,
           height: config.topBarSettings.height
         },
         linePadding: 5,
@@ -213,9 +213,9 @@ export default class GameState {
       game: this.state,
       layout: new StaticLayout({
         menuRect: {
-          x: this.state.camera.width - config.menuWidth,
+          x: this.state.camera.width - config.sideMenuSettings.menuWidth,
           y: this.state.camera.height - 64, // magic number for now
-          width: config.menuWidth,
+          width: config.sideMenuSettings.menuWidth,
           height: 64 // magic number for now
         },
         linePadding: 1,
@@ -226,8 +226,8 @@ export default class GameState {
 
     this.cameraMover = new CameraMover({
       game: this.state,
-      xSpeed: config.cameraSpeed,
-      ySpeed: config.cameraSpeed,
+      xSpeed: config.mapSettings.camera.speed,
+      ySpeed: config.mapSettings.camera.speed,
       config: config
     })
   }
@@ -272,8 +272,8 @@ export default class GameState {
       style: new Style({
         mediumFont: 16,
         largeFont: 32,
-        buttonHeight: config.menuButtonHeight,
-        buttonWidth: config.menuButtonWidth
+        buttonHeight: config.sideMenuSettings.buttonHeight,
+        buttonWidth: config.sideMenuSettings.buttonWidth
       }),
       contents: [this.cityContent, this.tileContent, buildStructureController,
         this.optionsContent]

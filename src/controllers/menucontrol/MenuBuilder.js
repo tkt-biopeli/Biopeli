@@ -31,8 +31,8 @@ export default class MenuBuilder {
       smallFont: 16,
       mediumFont: 32,
       largeFont: 64,
-      buttonHeight: config.menuButtonHeight,
-      buttonWidth: config.menuButtonWidth
+      buttonHeight: config.sideMenuSettings.buttonHeight,
+      buttonWidth: config.sideMenuSettings.buttonWidth
     }), menu)
 
     this.c.initialize()

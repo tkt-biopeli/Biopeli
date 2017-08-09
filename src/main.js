@@ -20,11 +20,11 @@ class Game extends Phaser.Game {
    */
   constructor () {
     const docElement = document.documentElement
-    const width = docElement.clientWidth > config.gameWidth 
-      ? config.gameWidth 
+    const width = docElement.clientWidth > config.gameSettings.windowSize.maxWidth 
+      ? config.gameSettings.windowsSize.maxWidth 
       : docElement.clientWidth
-    const height = docElement.clientHeight > config.gameHeight 
-      ? config.gameHeight 
+    const height = docElement.clientHeight > config.gameSettings.windowSize.maxHeight 
+      ? config.gameSettings.windowSize.maxHeight 
       : docElement.clientHeight
 
     super(width, height, Phaser.CANVAS, 'content', null)
