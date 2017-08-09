@@ -1,0 +1,44 @@
+{
+  "tile_types" : [
+    {
+      "id": "0001",
+      "name": "forest",
+      "nameWithLanguage": "metsä",
+      "asset": "forest",
+      "flowers": 10,
+      "allowedStructures": []
+    },
+    {
+      "id": "0002",
+      "name": "grass",
+      "nameWithLanguage": "ruohikko",
+      "asset": "grass",
+      "flowers": 10,
+      "allowedStructures": ["wheat_farm", "dairy_farm", "berry_farm", "mill"]
+    },
+    {
+      "id": "0003",
+      "name": "water",
+      "nameWithLanguage": "vesi",
+      "asset": "water",
+      "flowers": 10,
+      "allowedStructures": []
+    },
+    {
+      "id": "0004",
+      "name": "field",
+      "nameWithLanguage": "pelto",
+      "asset": "field",
+      "flowers": 10,
+      "allowedStructures": ["mill"]
+    },
+    {
+      "id": "0005",
+      "name": "industrial",
+      "nameWithLanguage": "teollisuusalue",
+      "asset": "industrial",
+      "flowers": 10,
+      "allowedStructures": ["mill"]
+    }
+  ]
+}

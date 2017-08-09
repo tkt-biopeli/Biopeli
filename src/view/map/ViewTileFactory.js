@@ -2,7 +2,7 @@ import ViewTile from './ViewTile'
 import Palette from './Palette'
 
 export default class ViewTileFactory {
-  constructor ({ game }) {
+  constructor ({ game, config }) {
     this.game = game
     this.viewtileStorage = new Map()
     this.secondaryStorage = new Map()
@@ -10,6 +10,7 @@ export default class ViewTileFactory {
     this.dampness = false
     this.fertility = false
     this.flowers = false
+    this.config = config
   }
 
   start (dampness, fertility, flowers, redrawTiles) {
@@ -56,7 +57,8 @@ export default class ViewTileFactory {
       game: this.game, 
       modelTile: modelTile, 
       dampnessCol: this.palette.getDampnessColour(modelTile.moisture), 
-      fertilityCol: this.palette.getFertilityColour(modelTile.fertility) 
+      fertilityCol: this.palette.getFertilityColour(modelTile.fertility),
+      tileSize: this.config.tileSize
     })
     return vt
   }

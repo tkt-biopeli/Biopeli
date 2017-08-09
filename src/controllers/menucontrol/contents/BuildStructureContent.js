@@ -14,7 +14,7 @@ export default class BuildStructureController extends Content {
     var stype = this.owner.stateValue('structureType')
     var tile = this.owner.stateValue('selectedTile')
     this.text('Tyyppi: ' + stype.nameWithLanguage)
-    if (!stype.refinery) {
+    if (stype.type !== 'refinery') {
       if (stype.continuousProduction) {
         this.text('Tuotanto jatkuvaa')
       } else {

@@ -11,7 +11,7 @@ export default class Highlighter {
     this.landHighlights = []
     this.buildingHighlights = []
     let st = selectedTile
-    if (st.structure !== null && st.structure.structureType.refinery) {
+    if (st.structure !== null && st.structure.structureType.type === 'refinery') {
       let producers = st.structure.producer.producer.producerHolders
       producers.forEach(
         (capsule) => {
@@ -33,7 +33,8 @@ export default class Highlighter {
     if (tile === selectedTile) {
       sprites.push(this.highlight(0.2, true))
     }
-    if (selectedTile.structure !== null && selectedTile.structure.structureType.refinery) {
+    if (selectedTile.structure !== null &&
+      selectedTile.structure.structureType.type === 'refinery') {
       if (this.landHighlights.includes(tile)) {
         sprites.push(this.highlightBackground())
         sprites.push(this.highlight(0.2, false, 'blue'))

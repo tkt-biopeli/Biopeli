@@ -1,5 +1,3 @@
-import config from '../config'
-
 import MapGenerator from '../models/map/MapGenerator'
 import Player from './Player'
 import City from '../models/city/City'
@@ -45,8 +43,15 @@ export default class GameState {
    */
   constructor ({
         cityName, perlinNoise, startMoney, state, 
-        mapSize, tileSize, menuWidth, gameLength }) {
+        mapSize, tileSize, menuWidth, gameLength,
+      config, structureTypes, tileTypes, texts, gameData }) {
     this.state = state
+    
+    this.gameData = gameData
+    this.config = config
+    this.structureTypes = structureTypes
+    this.tileTypes = tileTypes
+    this.texts = texts
 
     state.world.setBounds(
       0, 0, 
@@ -56,10 +61,10 @@ export default class GameState {
 
     this.initializeModel(
       cityName, perlinNoise, gameLength, 
-      startMoney, mapSize, tileSize
+      startMoney, mapSize, tileSize, config, tileTypes
     )
-    this.initializeView()
-    this.initializeControllers()
+    this.initializeView(config)
+    this.initializeControllers(config)
 
     this.mapListener = new MapListener({
       game: state,
@@ -72,7 +77,8 @@ export default class GameState {
       map: this.map,
       menuController: this.menuController,
       viewWidthPx: this.state.game.width - config.menuWidth,
-      viewHeightPx: this.state.game.height
+      viewHeightPx: this.state.game.height,
+      config: config
     })
     this.eventController.addListener('structureBuilt', this.mapView.structureCreated, this.mapView)
 
@@ -109,7 +115,7 @@ export default class GameState {
 
   initializeModel (
       cityName, perlinNoise, gameLength,
-      startMoney, mapSize, tileSize) {
+      startMoney, mapSize, tileSize, config, tileTypes) {
     this.eventController = new EventController()
 
     this.mapGenerator = new MapGenerator({
@@ -117,7 +123,8 @@ export default class GameState {
       tileSize: tileSize,
       generatingSettings: config.generatingSettings,
       perlinNoise: perlinNoise,
-      noiseSettings: config.noise
+      noiseSettings: config.noise,
+      tileTypes: tileTypes
     })
     this.map = this.mapGenerator.generateMap()
 
@@ -150,12 +157,17 @@ export default class GameState {
       eventController: this.eventController,
       purchaseManager: this.purchaseManager,
       map: this.map,
-      ruinSettings: config.ruinSettings
+      ruinSettings: config.ruinSettings,
+      maxFlowers: config.maxFlowers,
+      tileTypes: tileTypes,
+      structureTypes: this.structureTypes,
+      structureNames: this.gameData.names.structureNames
     })
 
     this.gameEvents = new GameEvents({
       gameState: this,
-      gameLength: gameLength
+      gameLength: gameLength,
+      config: config
     })
 
     this.music = this.state.add.audio('music')
@@ -164,7 +176,7 @@ export default class GameState {
     this.state.paused = false
   }
 
-  initializeView () {
+  initializeView (config) {
     this.menuView = new MenuView({
       game: this.state,
       layout: new StackingLayout({
@@ -201,7 +213,7 @@ export default class GameState {
       game: this.state,
       layout: new StaticLayout({
         menuRect: {
-          x:this.state.camera.width - config.menuWidth,
+          x: this.state.camera.width - config.menuWidth,
           y: this.state.camera.height - 64, // magic number for now
           width: config.menuWidth,
           height: 64 // magic number for now
@@ -215,11 +227,12 @@ export default class GameState {
     this.cameraMover = new CameraMover({
       game: this.state,
       xSpeed: config.cameraSpeed,
-      ySpeed: config.cameraSpeed
+      ySpeed: config.cameraSpeed,
+      config: config
     })
   }
 
-  initializeControllers () {
+  initializeControllers (config) {
     this.topBarController = new SingleController({
       game: this.state,
       style: new Style({
@@ -242,7 +255,8 @@ export default class GameState {
     this.tileContent = new TileContent({
       topBarController: this.topBarController,
       purchaseManager: this.purchaseManager,
-      demandFunction: this.city.turnipDemand
+      demandFunction: this.city.turnipDemand,
+      structureTypes: this.structureTypes
     })
 
     var buildStructureController = new BuildStructureContent({
@@ -262,7 +276,7 @@ export default class GameState {
         buttonWidth: config.menuButtonWidth
       }),
       contents: [this.cityContent, this.tileContent, buildStructureController,
-      this.optionsContent]
+        this.optionsContent]
     })
   }
 

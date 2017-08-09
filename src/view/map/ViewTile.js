@@ -1,10 +1,9 @@
-import config from '../../config'
-
 export default class ViewTile {
-  constructor ({ game, modelTile, dampnessCol, fertilityCol }) {
+  constructor ({ game, modelTile, dampnessCol, fertilityCol, tileSize }) {
     this.game = game
     this.modelTile = modelTile
     this.dampnessCol = dampnessCol
+    this.tileSize = tileSize
     this.fertilityCol = fertilityCol
     this.intialize()
     // this.lived = 0
@@ -73,8 +72,8 @@ export default class ViewTile {
 
     var tile = this.modelTile
     var structure = this.modelTile.owner
-    var width = config.tileSize.width * 2
-    var height = config.tileSize.height * 2
+    var width = this.tileSize.width * 2
+    var height = this.tileSize.height * 2
     var thickness = 3
 
     if (!structure.ownsTileAt(tile.x + 1, tile.y)) {

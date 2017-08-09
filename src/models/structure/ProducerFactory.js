@@ -8,9 +8,10 @@ import AllDecorator from './producers/decorators/AllDecorator'
  * Yields turnips during the harvesting period (month.week).
  */
 export default class ProducerFactory {
-  constructor ({tileFinder, eventController}) {
+  constructor ({tileFinder, eventController, maxFlowers}) {
     this.tileFinder = tileFinder
     this.eventController = eventController
+    this.maxFlowers = maxFlowers
   }
 
   /**
@@ -20,7 +21,7 @@ export default class ProducerFactory {
   createProducer (structureType, tile) {
     var sType = this.checkStructureType(structureType)
 
-    var producer = sType.refinery
+    var producer = sType.type === 'refinery'
       ? this.createRefiner(sType.buysFrom, sType.multiplier, sType.reach, tile)
       : this.createPrimaryProducer(sType, tile)
 
@@ -32,7 +33,11 @@ export default class ProducerFactory {
      ? this.createContinuousProducer(sType.turnipYield)
      : this.createSeasonalProducer(sType.harvestingWeeks, sType.turnipYield)
 
-    return new PrimaryProducerDecorator({tile: tile, producer: producer})
+    return new PrimaryProducerDecorator({
+      tile: tile, 
+      producer: producer, 
+      maxFlowers: this.maxFlowers
+    })
   }
 
   createSeasonalProducer (harvestingWeeks, turnipYield) {
@@ -81,7 +86,7 @@ export default class ProducerFactory {
   checkStructureType (structureType) {
     return structureType === null
       ? {
-        refinery: false,
+        type: 'producer_structure',
         harvestingWeeks: new Set(),
         continuousProduction: false,
         turnipYield: 0

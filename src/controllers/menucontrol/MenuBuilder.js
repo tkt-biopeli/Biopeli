@@ -1,5 +1,3 @@
-import config from '../../config'
-
 import MenuView from '../../view/menu/MenuView'
 import StackingLayout from '../../view/menu/layouts/StackingLayout'
 import Style from '../../view/menu/Style'
@@ -9,7 +7,7 @@ import Controller from './Controller'
  * Generic menu with title, description and buttons
  */
 export default class MenuBuilder {
-  constructor (game, backgroundAsset, startHeight) {
+  constructor (game, backgroundAsset, startHeight, config) {
     game.stage.backgroundColor = 0x6B8E23
 
     var menu = new MenuView({

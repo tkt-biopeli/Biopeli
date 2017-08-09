@@ -1,0 +1,72 @@
+{
+  "structure_types" : [
+    {
+      "id": "0001",
+      "type": "producer_structure",
+      "name": "wheat_farm",
+      "nameWithLanguage": "viljatila",
+      "asset": "wheat_farm",
+      "health": 12,
+      "pollution": 4,
+      "cost": 10000,
+      "radiusForTileOwnership": 2,
+      "harvestingWeeks": ["8.1"],
+      "continuousProduction": false,
+      "turnipYield": 4,
+      "moistureMin": 40,
+      "moistureMax": 70,
+      "fertilityMin": 40,
+      "fertilityMax": 70
+    },
+    {
+      "id": "0002",
+      "type": "producer_structure",
+      "name": "dairy_farm",
+      "nameWithLanguage": "maitotila",
+      "asset": "dairy_farm",
+      "health": 15,
+      "pollution": 5,
+      "cost": 15000,
+      "radiusForTileOwnership": 2,
+      "harvestingWeeks": [],
+      "continuousProduction": true,
+      "turnipYield": 6,
+      "moistureMin": 40,
+      "moistureMax": 70,
+      "fertilityMin": 40,
+      "fertilityMax": 70
+    },
+    {
+      "id": "0003",
+      "type": "producer_structure",
+      "name": "berry_farm",
+      "nameWithLanguage": "marjatila",
+      "asset": "berry_farm",
+      "health": 8,
+      "pollution": 3,
+      "cost": 10000,
+      "radiusForTileOwnership": 2,
+      "harvestingWeeks": [],
+      "continuousProduction": true,
+      "turnipYield": 3,
+      "moistureMin": 40,
+      "moistureMax": 70,
+      "fertilityMin": 40,
+      "fertilityMax": 70
+    },
+    {
+      "id": "0004",
+      "type": "refinery",
+      "name": "mill",
+      "nameWithLanguage": "mylly",
+      "asset": "mill",
+      "health": 20,
+      "pollution": 2,
+      "cost": 20000,
+      "radiusForTileOwnership": 1,
+      "multiplier": 2,
+      "reach": 5,
+      "buysFrom": ["wheat farm"]
+    }
+  ]
+}

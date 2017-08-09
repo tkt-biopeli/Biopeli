@@ -3,9 +3,7 @@ import StructureHealth from './health/StructureHealth'
 import HealthManager from './health/HealthManager'
 import ProducerFactory from './ProducerFactory'
 import StructureNameGenerator from '../namegeneration/StructureNameGenerator'
-import StructureNameParts from '../namegeneration/StructureNameParts'
 import utils from '../../utils'
-import StaticTypes from '../StaticTypes'
 /**
  * Creates a structure for the player
  */
@@ -15,29 +13,40 @@ export default class StructureFactory {
    * @param {Player} player
    */
   constructor ({ purchaseManager, gameTimer, eventController, 
-      player, map, tileFinder, ruinSettings }) {
+      player, map, tileFinder, ruinSettings, maxFlowers, 
+      tileTypes, structureTypes, structureNames }) {
     this.gameTimer = gameTimer
     this.player = player
     this.map = map
     this.eventController = eventController
     this.purchaseManager = purchaseManager
 
+    this.tileTypes = tileTypes
+    this.structureTypes = structureTypes
+
     this.namer = new StructureNameGenerator({
-      frontAdjectives: StructureNameParts[0],
-      names: StructureNameParts[1],
-      endAdjectives: StructureNameParts[2],
-      hyperboles: StructureNameParts[3],
+      frontAdjectives: structureNames.ownerAdjectives,
+      names: structureNames.ownerNames,
+      endAdjectives: structureNames.structureAdjectives,
+      hyperboles: structureNames.exaggerations,
       random: utils.randomNoBounds,
       randomWithBounds: utils.randomWithBounds
     })
     this.producerFactory = new ProducerFactory({
       tileFinder: tileFinder,
-      eventController: eventController
+      eventController: eventController,
+      maxFlowers: maxFlowers
     })
 
     this.minRuin = ruinSettings.minRuin
     this.maxRuin = ruinSettings.maxRuin
     this.priceMultiplier = ruinSettings.fixMultiplier
+  }
+
+  buildBuildingNamed (tile, structureTypeName) {
+    var structureType = this.structureTypes[structureTypeName]
+    if (structureType == null) return
+    return this.buildBuilding(structureType)
   }
 
   /**
@@ -109,7 +118,7 @@ export default class StructureFactory {
     )
     for (var [distance, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
-        if (structure.structureType.refinery) {
+        if (structure.structureType.type === 'refinery') {
           this.buyLandForRefinery(structure, distance, tmpTile)
         } else {
           this.buyLandForProducer(structure, tmpTile)
@@ -160,18 +169,18 @@ export default class StructureFactory {
 
   setAssetForRefinery (tmpTile) {
     if (tmpTile.tileType.name !== 'water') {
-      tmpTile.tileType = StaticTypes.tileTypes.industrial
+      tmpTile.tileType = this.tileTypes.industrial
     }
   }
 
   setAssetForProducer (tmpTile) {
     if (tmpTile.tileType.name === 'grass') {
-      tmpTile.tileType = StaticTypes.tileTypes.field
+      tmpTile.tileType = this.tileTypes.field
     }
   }
 
   calculateSize (structure) {
-    if (structure.structureType.refinery) {
+    if (structure.structureType.type === 'refinery') {
       this.calculateSizeForRefinery(structure)
     } else {
       this.calculateSizeForProducer(structure)

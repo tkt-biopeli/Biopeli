@@ -65,7 +65,7 @@ describe('View tile tests', () => {
       structure: structureStub,
       owner: structureStub
     }
-    viewTile = new ViewTile({ game: game, x: 6, y: 6, modelTile: modelTile })
+    viewTile = new ViewTile({ game: game, x: 6, y: 6, modelTile: modelTile, tileSize: 1 })
     viewTile.update()
   })
 

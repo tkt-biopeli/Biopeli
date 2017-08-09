@@ -1,7 +1,3 @@
-
-/**
- * Description goes here
- */
 export default {
 
   // configurations for game

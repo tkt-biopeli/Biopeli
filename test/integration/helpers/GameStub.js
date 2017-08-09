@@ -1,5 +1,4 @@
 import MockerHandler from './MockerHandler'
-import config from '../../../src/config'
 const assert = require('assert')
 
 /**
@@ -165,7 +164,8 @@ export default class GameStub {
     this.camera = {
       x: 0,
       y: 0,
-      width: width
+      width: width,
+      height: height
     }
 
     this.game = {

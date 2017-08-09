@@ -2,8 +2,9 @@ import GameStub from './GameStub'
 import GamestateChecker from './GamestateChecker'
 import GameState from '../../../src/game/GameState'
 
-import config from '../../../src/config'
-import StaticTypes from '../../../src/models/StaticTypes'
+import config from './PseudoConfig'
+import tileTypes from './PseudoTiletypes'
+import structureTypes from './PseudoStructuretypes'
 
 import Structure from '../../../src/models/structure/Structure'
 const assert = require("assert")
@@ -36,6 +37,17 @@ export default class GameAdvancer {
       }
     }
 
+    var gameData = {
+      names: {
+        structureNames: {
+          ownerAdjectives: ['testing'],
+          ownerNames: ['tester'],
+          structureAdjectives: ['testive'],
+          exaggerations: 'testiest'
+        }
+      }
+    }
+
     this.gameState = new GameState({
       cityName: 'testVille',
       startMoney: 15000,
@@ -44,7 +56,11 @@ export default class GameAdvancer {
       mapSize: {width: this.mapWidth, height: this.mapHeight},
       tileSize: config.tileSize,
       menuWidth: config.menuWidth,
-      gameLength: gameLength
+      gameLength: gameLength,
+      config: config,
+      structureTypes: structureTypes,
+      tileTypes: tileTypes,
+      gameData: gameData
     })
 
     this.gamestateChecker = new GamestateChecker({gameStub: this.game, gameState: this.gameState, gameAdvancer: this})
@@ -69,8 +85,8 @@ export default class GameAdvancer {
     }(this.timeObject)
     this.gameState.gameTimer.lastTime = 0
 
-    this.tileTypes = StaticTypes.tileTypes
-    this.structureTypes = StaticTypes.structureTypes
+    this.tileTypes = tileTypes
+    this.structureTypes = structureTypes
 
     this.structureFactory = this.gameState.structureFactory
   }
@@ -109,6 +125,15 @@ export default class GameAdvancer {
   }
 
   /**
+   * Click nth button in bottom menu
+   * @param {*} n 
+   */
+  clickNthBottomMenuButton(n) {
+    var button = this.gameState.bottomMenuView.activeButtons[n - 1]
+    this.clickBottomMenuButton(button.x, button.y)
+  }
+
+  /**
    * Simulates click of a pointer to certain point in camera
    * 
    * @param {number} x 
@@ -134,6 +159,27 @@ export default class GameAdvancer {
    */
   clickButton(x, y) {
     var buttons = this.gameState.menuView.activeButtons
+
+    for (var i = 0; i < buttons.length; i++) {
+      var button = buttons[i]
+
+      if (x == button.x && y == button.y) {
+        button.callback.call(button.context)
+
+        return
+      }
+    }
+
+  }
+
+  /**
+   * Simulates click of a pointer to certain point in camera but only checks buttons
+   * 
+   * @param {number} x 
+   * @param {number} y 
+   */
+  clickBottomMenuButton(x, y) {
+    var buttons = this.gameState.bottomMenuView.activeButtons
 
     for (var i = 0; i < buttons.length; i++) {
       var button = buttons[i]

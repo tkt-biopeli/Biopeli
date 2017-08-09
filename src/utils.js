@@ -12,5 +12,12 @@ export default {
   },
   randomWithBounds: (lower, upper) => {
     return Math.floor(Math.random() * upper + lower)
+  },
+
+  submitScore: (body, server) => {
+    var xhr = new XMLHttpRequest()
+    xhr.open('POST', server + '/submit_score', true)
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.send(JSON.stringify(body))
   }
 }
