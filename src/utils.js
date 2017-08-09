@@ -1,3 +1,5 @@
+
+
 /**
  * Utility functions
  */
@@ -21,12 +23,11 @@ export default {
     xhr.send(JSON.stringify(body))
   },
 
-  fetchScores: () => { // apua tänne jotain järkevää
+  fetchScores: (server) => { // apua tänne jotain järkevää
     var xhr = new XMLHttpRequest()
-    xhr.open("GET", config.scoreServer + 'haloo jotain tähän', false)
-    //xhr.setRequestHeader("Content-Type", "application/json")
+    xhr.open("GET", server + '', false)
     xhr.send()
     
-    return xhr.responseText
+    return xhr.responseText // TODO: palauta järkevässä formaatissa
   }
 }
