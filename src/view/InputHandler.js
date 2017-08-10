@@ -32,6 +32,7 @@ export default class InputHandler {
     // let daisiesKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
     let flowersKey = this.game.flowersKey
     flowersKey.onDown.add(this.flowersOnOff, this)
+    this.kineticScrolling()
   }
 
   /**
@@ -66,5 +67,33 @@ export default class InputHandler {
     this.mapView.showFlowers === true
       ? this.mapView.showFlowers = false
       : this.mapView.showFlowers = true
+  }
+
+  kineticScrolling () {
+    // Configuration
+    this.game.game.kineticScrolling.configure({
+      kineticMovement: true,
+      timeConstantScroll: 325, // really mimic iOS
+      horizontalScroll: true,
+      verticalScroll: true,
+      horizontalWheel: false,
+      verticalWheel: false,
+      deltaWheel: 40
+    })
+
+    // Override function so that pointer on menu area does not register as movement
+    let context = this.mapListener
+    this.game.game.kineticScrolling.beginMove = function () {
+      this.startX = this.game.input.x
+      this.startY = this.game.input.y
+      if (context.pointerInMapArea({ x: this.startX, y: this.startY })) {
+        this.pressedDown = true
+      }
+      this.timestamp = Date.now()
+      this.velocityY = this.amplitudeY = this.velocityX = this.amplitudeX = 0
+    }, context;
+
+    // Start scrolling = adds callbacks to game
+    this.game.game.kineticScrolling.start()
   }
 }

@@ -170,7 +170,8 @@ export default class GameStub {
 
     this.game = {
       width: width,
-      height: height
+      height: height,
+      kineticScrolling: {configure: () => {}, start: () =>{}}
     }
 
     this.world = {
@@ -185,7 +186,7 @@ export default class GameStub {
 
     this.cache = {
       getImage: () => ({ width: 1, height: 1 })
-    }
+    }  
   }
 
   /**
