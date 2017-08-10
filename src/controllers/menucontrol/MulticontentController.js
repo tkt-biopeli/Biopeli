@@ -4,7 +4,7 @@ import Controller from './Controller'
  * Controller that has multiple different content creators it can switch between
  */
 export default class MulticontentController extends Controller {
-  constructor ({ game, style, menuView, contents, startIndex }) {
+  constructor({ game, style, menuView, contents, startIndex }) {
     super(game, style, menuView)
 
     this.contents = contents
@@ -25,8 +25,7 @@ export default class MulticontentController extends Controller {
    */
   createSections () {
     this.contents[this.index].createSections()
-
-    if (this.getStack.length > 0) {
+    if (this.index !== 0 && this.index !== 1) {
       this.section('back')
       this.button('Takaisin', this.previousContent, this)
     }

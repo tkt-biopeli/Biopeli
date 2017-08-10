@@ -2,7 +2,7 @@
   "assets": [
     {
       "type": "image",
-      "name": "emptyButton", 
+      "name": "emptyButton",
       "file": "assets/images/buttons/empty_button.png"
     },
     {
@@ -54,6 +54,26 @@
       "type": "image",
       "name": "mill",
       "file": "assets/images/structures/mill.png"
+    },
+    {
+      "type": "image",
+      "name": "dairy",
+      "file": "assets/images/structures/dairy.png"
+    },
+    {
+      "type": "image",
+      "name": "herb_farm",
+      "file": "assets/images/structures/herb_farm.png"
+    },
+    {
+      "type": "image",
+      "name": "mushroom_farm",
+      "file": "assets/images/structures/mushroom_farm.png"
+    },
+    {
+      "type": "image",
+      "name": "lumber_yard",
+      "file": "assets/images/structures/lumber_yard.png"
     },
     {
       "type": "image",

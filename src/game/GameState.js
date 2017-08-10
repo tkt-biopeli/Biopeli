@@ -259,7 +259,7 @@ export default class GameState {
       structureTypes: this.structureTypes
     })
 
-    var buildStructureController = new BuildStructureContent({
+    this.buildStructureContent = new BuildStructureContent({
       purchaseManager: this.purchaseManager,
       structureFactory: this.structureFactory
     })
@@ -275,7 +275,7 @@ export default class GameState {
         buttonHeight: config.sideMenuSettings.buttonHeight,
         buttonWidth: config.sideMenuSettings.buttonWidth
       }),
-      contents: [this.cityContent, this.tileContent, buildStructureController,
+      contents: [this.cityContent, this.tileContent, this.buildStructureContent,
         this.optionsContent]
     })
   }
