@@ -2,7 +2,7 @@ import Content from './Content'
 /**
  * Controller of side menu of the game
  */
-export default class SideMenuContent extends Content {
+export default class TileContent extends Content {
   /**
    * Description goes here
    *
@@ -16,7 +16,6 @@ export default class SideMenuContent extends Content {
     this.topBarController = topBarController
     this.structureTypes = structureTypes
     this.texts = texts.tileContentTexts
-
     this.emptyFunction = () => { }
   }
 
@@ -88,7 +87,7 @@ export default class SideMenuContent extends Content {
       structure.healthManager.fixPrice())
 
     if (structure.health.percent() < 1 &&
-        this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
+      this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
       var fix = (structure => () => {
         structure.healthManager.fix()
         this.owner.redraw()
@@ -96,7 +95,7 @@ export default class SideMenuContent extends Content {
       })(structure)
       this.button(this.texts.structureRuiningTexts.repair, fix, this, 'emptyButton')
     } else if (structure.health.percent() < 1 &&
-        !this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
+      !this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
       this.button(
         this.texts.structureRuiningTexts.insufficientFunds,
         this.emptyFunction, null, 'unusableButton'
@@ -111,19 +110,29 @@ export default class SideMenuContent extends Content {
 
   createBuildingButtons (tile) {
     this.section('actions')
-
-    var allowedStructures = tile.tileType.allowedStructures
-
-    for (let structureTypeName of allowedStructures) {
-      var structureType = this.structureTypes[structureTypeName]
-      this.owner.changeButton(
-        structureType.nameWithLanguage, 2,
-        this.owner.wrapFunction(
-          this.owner.addState, this.owner,
-          'structureType', structureType
-        ),
-        this
-      )
-    }
+    
+    this.owner.changeButton(
+      'Alkutuotanto', 4,
+      this.owner.wrapFunction(
+        this.owner.addState, this.owner, 
+        'whatType', 'buildProducer'),
+      this, 'emptyButton'
+    )
+        
+    this.owner.changeButton(
+      'Jalostamo', 4,
+      this.owner.wrapFunction(
+        this.owner.addState, this.owner, 
+        'whatType', 'buildRefinery'),
+      this, 'emptyButton'
+    )
+        
+    this.owner.changeButton(
+      'Erikoisrakennus', 4,
+      this.owner.wrapFunction(
+        this.owner.addState, this.owner, 
+        'whatType', 'buildSpecial'),
+      this, 'emptyButton'
+    )
   }
 }
