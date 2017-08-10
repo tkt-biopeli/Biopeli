@@ -1,9 +1,10 @@
 import Content from './Content'
 
 export default class OptionsContent extends Content {
-  constructor ({ game }) {
+  constructor ({ game, texts }) {
     super()
     this.game = game
+    this.texts = texts.optionsContentTexts
     this.name = 'options'
   }
 
@@ -39,15 +40,15 @@ export default class OptionsContent extends Content {
 
   createSections () {
     this.sectionName('options')
-    this.button('Pysäytä / Jatka', this.togglePause, this)
-    this.text('Äänen voimakkuus: ' + Math.round(this.game.music.volume * 100) + '%')
+    this.button(this.texts.stopContinue, this.togglePause, this)
+    this.text(this.texts.soundVolume + ': ' + Math.round(this.game.music.volume * 100) + '%')
     if (this.game.music.mute) {
-      this.button('Äänet päälle', this.musicOn, this)
+      this.button(this.texts.soundOn, this.musicOn, this)
     } else {
-      this.button('Äänet pois', this.musicOff, this)
+      this.button(this.texts.soundOff, this.musicOff, this)
     }
-    this.button('Volyymi +', this.incVolume, this)
-    this.button('Volyymi -', this.decVolume, this)
-    this.button('Lopeta peli', this.game.gameEvents.finishGame, this.game.gameEvents)
+    this.button(this.texts.increaseVolume, this.incVolume, this)
+    this.button(this.texts.decreaseVolume, this.decVolume, this)
+    this.button(this.texts.endGame, this.game.gameEvents.finishGame, this.game.gameEvents)
   }
 }

@@ -5,6 +5,12 @@ import StructureFactory from '../models/structure/StructureFactory'
 import PurchaseManager from '../models/PurchaseManager'
 import TileFinder from '../models/map/TileFinder'
 
+import RandomEventCreator from '../controllers/events/random/RandomEventCreator'
+import ConditionCreator from '../controllers/events/random/ConditionCreator'
+import EffectCreator from '../controllers/events/random/EffectCreator'
+import FilterCreator from '../controllers/events/random/FilterCreator'
+import RandomEventHandler from '../controllers/events/random/RandomEventHandler'
+
 import MapView from '../view/map/MapView'
 import MenuView from '../view/menu/MenuView'
 import CameraMover from '../view/CameraMover'
@@ -250,22 +256,25 @@ export default class GameState {
 
     this.cityContent = new CityContent({
       city: this.city,
-      gameEvents: this.gameEvents
+      gameEvents: this.gameEvents,
+      texts: this.texts
     })
 
     this.tileContent = new TileContent({
       topBarController: this.topBarController,
       purchaseManager: this.purchaseManager,
       demandFunction: this.city.turnipDemand,
-      structureTypes: this.structureTypes
+      structureTypes: this.structureTypes,
+      texts: this.texts
     })
 
     this.buildStructureContent = new BuildStructureContent({
       purchaseManager: this.purchaseManager,
-      structureFactory: this.structureFactory
+      structureFactory: this.structureFactory,
+      texts: this.texts
     })
 
-    this.optionsContent = new OptionsContent({game: this})
+    this.optionsContent = new OptionsContent({game: this, texts: this.texts})
 
     this.buildMenuContent = new BuildMenuContent({
       structureTypes: this.structureTypes
@@ -282,6 +291,15 @@ export default class GameState {
       }),
       contents: [this.cityContent, this.tileContent, this.buildStructureContent,
         this.optionsContent, this.buildMenuContent]
+    })
+
+    var randomEventCreator = new RandomEventCreator({
+      conditionCreator: new ConditionCreator(),
+      effectCreator: new EffectCreator(),
+      filterCreator: new FilterCreator()
+    })
+    this.randomEventHandler = new RandomEventHandler({
+      eventList: randomEventCreator.createEvents(this.gameData.gameEvents)
     })
   }
 

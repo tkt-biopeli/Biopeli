@@ -8,6 +8,8 @@ import tileTypes from './PseudoTiletypes'
 import structureTypes from './PseudoStructuretypes'
 
 import Structure from '../../../src/models/structure/Structure'
+import pseudoTexts from './PseudoTexts'
+
 const assert = require("assert")
 
 /**
@@ -46,6 +48,9 @@ export default class GameAdvancer {
           structureAdjectives: ['testive'],
           exaggerations: 'testiest'
         }
+      },
+      gameEvents: {
+        events: []
       }
     }
 
@@ -61,6 +66,7 @@ export default class GameAdvancer {
       config: config,
       structureTypes: structureTypes,
       tileTypes: tileTypes,
+      texts: pseudoTexts,
       gameData: gameData
     })
 

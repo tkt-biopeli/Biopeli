@@ -9,12 +9,13 @@ export default class TileContent extends Content {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor({ demandFunction, purchaseManager, topBarController, structureTypes }) {
+  constructor ({ demandFunction, purchaseManager, topBarController, structureTypes, texts }) {
     super()
     this.demandFunction = demandFunction
     this.purchaseManager = purchaseManager
     this.topBarController = topBarController
     this.structureTypes = structureTypes
+    this.texts = texts.tileContentTexts
     this.emptyFunction = () => { }
   }
 
@@ -40,13 +41,13 @@ export default class TileContent extends Content {
 
   tileInformation (tile) {
     this.sectionName('tile')
-    this.text('Maatyyppi: ' + tile.tileType.nameWithLanguage)
+    this.text(this.texts.tileInformationTexts.groundType + ': ' + tile.tileType.nameWithLanguage)
     this.text('X: ' + tile.x + ', Y: ' + tile.y)
-    this.text('Kukkia: ' + tile.flowers)
-    this.text('Kosteus: ' + this.format(tile.moisture) + '%')
-    this.text('Ravinteikkuus: ' + this.format(tile.fertility) + '%')
+    this.text(this.texts.tileInformationTexts.flowers + ': ' + tile.flowers)
+    this.text(this.texts.tileInformationTexts.moisture + ': ' + this.format(tile.moisture) + '%')
+    this.text(this.texts.tileInformationTexts.fertility + ': ' + this.format(tile.fertility) + '%')
     if (tile.owner != null) {
-      this.text('Maanomistaja: ' + tile.owner.ownerName)
+      this.text(this.texts.tileInformationTexts.owner + ': ' + tile.owner.ownerName)
     }
   }
 
@@ -54,26 +55,36 @@ export default class TileContent extends Content {
     this.section('structure')
     this.text('"' + structure.ownerName + '"')
     this.text('"' + structure.structureName + '"')
-    this.text('Rakennus: ' + structure.structureType.nameWithLanguage)
-    this.text('Perustamisvuosi: ' + structure.foundingYear)
+    this.text(
+      this.texts.structureInformationTexts.structure + ': ' +
+      structure.structureType.nameWithLanguage)
+    this.text(
+      this.texts.structureInformationTexts.foundingYear + ': ' +
+      structure.foundingYear)
     if (structure.structureType.type === 'refinery') {
       structure.size = structure.producer.producer.producerHolders.length
     }
-    this.text('Koko: ' + structure.size)
+    this.text(this.texts.structureInformationTexts.size + ': ' + structure.size)
 
     var turnipProduction = structure.turnipProduction()
-    this.text('Tuotanto (nauriita/vko): ' + this.format(turnipProduction, 2))
     this.text(
-      'Tuotto (€/vko): ' +
+      this.texts.structureInformationTexts.turnipsPerWeek +
+      ': ' + this.format(turnipProduction, 2))
+    this.text(
+      this.texts.structureInformationTexts.moneyPerWeek + ': ' +
       this.format(this.demandFunction.pay(turnipProduction), 2)
     )
   }
 
   structureRuining (structure) {
     this.section('ruin')
-    this.text('Rakennuksen kunto: ' + structure.health.toString())
+    this.text(
+      this.texts.structureRuiningTexts.structureHealth + ': ' +
+      structure.health.toString())
     this.animatedBar(200, 50, false, structure.health.percent())
-    this.text('Korjauskustannus: ' + structure.healthManager.fixPrice())
+    this.text(
+      this.texts.structureRuiningTexts.repairCost + ': ' +
+      structure.healthManager.fixPrice())
 
     if (structure.health.percent() < 1 &&
       this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
@@ -82,16 +93,16 @@ export default class TileContent extends Content {
         this.owner.redraw()
         this.topBarController.redraw()
       })(structure)
-      this.button('Korjaa', fix, this, 'emptyButton')
+      this.button(this.texts.structureRuiningTexts.repair, fix, this, 'emptyButton')
     } else if (structure.health.percent() < 1 &&
       !this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
       this.button(
-        'Rahat eivät riitä',
+        this.texts.structureRuiningTexts.insufficientFunds,
         this.emptyFunction, null, 'unusableButton'
       )
     } else {
       this.button(
-        'Täydellisessä kunnossa',
+        this.texts.structureRuiningTexts.inPerfectCondition,
         this.emptyFunction, null, 'unusableButton'
       )
     }

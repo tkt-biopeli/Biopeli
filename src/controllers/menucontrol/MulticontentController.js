@@ -50,7 +50,7 @@ export default class MulticontentController extends Controller {
    * Chooses a new content creator and saves the change
    */
   changeContent (index) {
-    if (index === this.index) return
+    if (index === this.index) return null
     this.getStack.push(this.index)
     this.index = index
     this.redraw()
@@ -67,6 +67,7 @@ export default class MulticontentController extends Controller {
         return i
       }
     }
+    return -1
   }
 
   /**
@@ -80,11 +81,14 @@ export default class MulticontentController extends Controller {
   changeButton (name, index, extraFunction, context, asset) {  
     this.button(name,
       ((index, extraFunction, context) => () => {
-        if (extraFunction != null) {
-          extraFunction.call(context)
-        }
+        this.callExtraFunction(extraFunction, context)
         this.changeContent(index)
       })(index, extraFunction, context), this, asset)
+  }
+
+  callExtraFunction (extraFunction, context) {
+    if (extraFunction == null) return null
+    extraFunction.call(context)
   }
 
   /**
