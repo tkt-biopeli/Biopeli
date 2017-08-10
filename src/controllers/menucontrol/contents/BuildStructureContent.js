@@ -1,6 +1,6 @@
 import Content from './Content'
 
-export default class BuildStructureController extends Content {
+export default class BuildStructureContent extends Content {
   constructor ({ player, structureFactory, purchaseManager }) {
     super()
     this.structureFactory = structureFactory
