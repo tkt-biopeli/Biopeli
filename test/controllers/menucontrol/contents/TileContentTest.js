@@ -7,6 +7,7 @@ describe('Tile content tests', ()=>{
   var createButtonsSpy, tileInfoSpy, structureInfoSpy, structureRuiningSpy
   var hasCashStub, healthPctStub
   var buttonSpy
+  var mockTexts
 
   beforeEach(()=>{
     buttonSpy = sinon.spy()
@@ -28,10 +29,21 @@ describe('Tile content tests', ()=>{
       structure: null
     }
 
+    mockTexts = {
+      tileContentTexts: {
+        structureRuiningTexts: {
+          repair: 'repair',
+          insufficientFunds: 'insufficient',
+          inPerfectCondition: 'perfetto'
+        }
+      }
+    }
+
     content = new TileContent({
       demandFunction: 2,
       purchaseManager: {hasCash: hasCashStub},
-      topBarController: {redraw: () => {}}
+      topBarController: {redraw: () => {}},
+      texts: mockTexts
     })
     content.button = buttonSpy
   })
@@ -87,17 +99,17 @@ describe('Tile content tests', ()=>{
     hasCashStub.returns(true)
 
     content.structureRuining(structure)
-    assert.equal(buttonSpy.lastCall.args[0], 'Korjaa')
+    assert.equal(buttonSpy.lastCall.args[0], 'repair')
     // the first 'if' is false; the second 'if' is true
     hasCashStub.returns(false)
 
     content.structureRuining(structure)
-    assert.equal(buttonSpy.lastCall.args[0], 'Rahat eivät riitä')
+    assert.equal(buttonSpy.lastCall.args[0], 'insufficient')
     // both 'ifs' are false
     healthPctStub.returns(1.0001)
     hasCashStub.returns(true)
 
     content.structureRuining(structure)
-    assert.equal(buttonSpy.lastCall.args[0], 'Täydellisessä kunnossa')
+    assert.equal(buttonSpy.lastCall.args[0], 'perfetto')
   })
 })
