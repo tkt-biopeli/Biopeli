@@ -5,6 +5,12 @@ import StructureFactory from '../models/structure/StructureFactory'
 import PurchaseManager from '../models/PurchaseManager'
 import TileFinder from '../models/map/TileFinder'
 
+import RandomEventCreator from '../controllers/events/random/RandomEventCreator'
+import ConditionCreator from '../controllers/events/random/ConditionCreator'
+import EffectCreator from '../controllers/events/random/EffectCreator'
+import FilterCreator from '../controllers/events/random/FilterCreator'
+import RandomEventHandler from '../controllers/events/random/RandomEventHandler'
+
 import MapView from '../view/map/MapView'
 import MenuView from '../view/menu/MenuView'
 import CameraMover from '../view/CameraMover'
@@ -280,6 +286,15 @@ export default class GameState {
       }),
       contents: [this.cityContent, this.tileContent, buildStructureController,
         this.optionsContent]
+    })
+
+    var randomEventCreator = new RandomEventCreator({
+      conditionCreator: new ConditionCreator(),
+      effectCreator: new EffectCreator(),
+      filterCreator: new FilterCreator()
+    })
+    this.randomEventHandler = new RandomEventHandler({
+      eventList: randomEventCreator.createEvents(this.gameData.gameEvents)
     })
   }
 
