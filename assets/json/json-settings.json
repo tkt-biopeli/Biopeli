@@ -1,17 +1,17 @@
 {
-  "configurationsFile": "assets/json/configurations.json",
+  "configsFile": "assets/json/configurations.json",
   "assetsFile": "assets/json/assets.json",
-  "tiletypesFile": "assets/json/game/tile_types.json",
-  "structuretypesFile": "assets/json/game/structure_types.json",
+  "tileTypesFile": "assets/json/game/tile_types.json",
+  "structureTypesFile": "assets/json/game/structure_types.json",
   "textsFile": "assets/json/texts.json",
   "namesFile": "assets/json/names.json",
-  "gameEventsFile": "assets/json/game_events.json",
+  "gameEventsFile": "assets/json/events/game_events.json",
 
-  "configurationsName": "configurations",
+  "configsName": "configurations",
   "assetsName": "assets",
-  "tiletypesName": "tileTypes",
-  "structuretypesName": "structureTypes",
+  "tileTypesName": "tileTypes",
+  "structureTypesName": "structureTypes",
   "textsName": "texts",
   "namesName": "names",
-  "gameEvents": "gameEvents"
+  "gameEventsName": "gameEvents"
 }
