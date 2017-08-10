@@ -111,7 +111,7 @@ export default class SideMenuContent extends Content {
           this.owner.addState, this.owner,
           'structureType', structureType
         ),
-        this
+        this, "smallButton"
       )
     }
   }

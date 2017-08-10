@@ -7,6 +7,11 @@
     },
     {
       "type": "image",
+      "name": "smallButton",
+      "file": "assets/images/buttons/small_button.png"
+    },
+    {
+      "type": "image",
       "name": "unusableButton",
       "file": "assets/images/buttons/empty_unbutton.png"
     },

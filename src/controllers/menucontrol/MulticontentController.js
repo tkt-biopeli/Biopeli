@@ -77,14 +77,14 @@ export default class MulticontentController extends Controller {
    * @param {*} extraFunction function that is called before the change
    * @param {*} context context of the extra function
    */
-  changeButton (name, index, extraFunction, context) {
+  changeButton (name, index, extraFunction, context, asset) {  
     this.button(name,
       ((index, extraFunction, context) => () => {
         if (extraFunction != null) {
           extraFunction.call(context)
         }
         this.changeContent(index)
-      })(index, extraFunction, context), this)
+      })(index, extraFunction, context), this, asset)
   }
 
   /**
