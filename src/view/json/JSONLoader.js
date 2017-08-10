@@ -3,24 +3,31 @@ import settings from '../../../assets/json/json-settings.json'
 export default class JSONLoader {
   constructor ({ game }) {
     this.game = game
+    this.initFileNames()
+  }
+
+  initFileNames () {
+    this.files = []
+    this.files.push('config')
+    this.files.push('asset')
+    this.files.push('tileType')
+    this.files.push('structureType')
+    this.files.push('text')
+    this.files.push('name')
+    this.files.push('gameEvent')
   }
 
   loadJSONObjects () {
-    this.game.load.json(settings.configurationsName, settings.configurationsFile)
-    this.game.load.json(settings.assetsName, settings.assetsFile)
-    this.game.load.json(settings.tiletypesName, settings.tiletypesFile)
-    this.game.load.json(settings.structuretypesName, settings.structuretypesFile)
-    this.game.load.json(settings.textsName, settings.textsFile)
-    this.game.load.json(settings.namesName, settings.namesFile)
+    for(let file of this.files){
+      this.game.load.json(settings[file+'sName'], settings[file+'sFile'])
+    }
   }
 
   initJSONObjects () {
-    this.configurations = this.getJSON(settings.configurationsName)
-    this.assets = this.getJSON(settings.assetsName)
-    this.tileTypes = this.getJSON(settings.tiletypesName)
-    this.structureTypes = this.getJSON(settings.structuretypesName)
-    this.texts = this.getJSON(settings.textsName)
-    this.names = this.getJSON(settings.namesName)
+    for(let file of this.files) {
+      this[file+'s'] = this.getJSON(settings[file+'sName'])
+    }
+
     this.parseJSONObjects()
   }
 
@@ -55,12 +62,16 @@ export default class JSONLoader {
   }
 
   gameData () {
-    return {
-      config: this.configurations,
-      tileTypes: this.tileTypes,
-      structureTypes: this.structureTypes,
-      texts: this.texts,
-      names: this.names
+    var gameData = {}
+
+    for(let file of this.files) {
+      if(file === 'config'){
+        gameData.config = this.configs
+        continue
+      }
+      gameData[file+'s'] = this[file+'s']
     }
+
+    return gameData
   }
 }
