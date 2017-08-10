@@ -1,10 +1,11 @@
 import Content from './Content'
 
 export default class BuildStructureController extends Content {
-  constructor ({ player, structureFactory, purchaseManager }) {
+  constructor ({ player, structureFactory, purchaseManager, texts }) {
     super()
     this.structureFactory = structureFactory
     this.purchaseManager = purchaseManager
+    this.texts = texts.buildStructureTexts
 
     this.emptyFunction = () => {}
   }
@@ -13,32 +14,32 @@ export default class BuildStructureController extends Content {
     this.sectionName('info')
     var stype = this.owner.stateValue('structureType')
     var tile = this.owner.stateValue('selectedTile')
-    this.text('Tyyppi: ' + stype.nameWithLanguage)
+    this.text(this.texts.structureType + ': ' + stype.nameWithLanguage)
     if (stype.type !== 'refinery') {
       if (stype.continuousProduction) {
-        this.text('Tuotanto jatkuvaa')
+        this.text(this.texts.continuousProduction)
       } else {
-        var text = 'Sadonkorjuu: '
+        var text = this.texts.harvest + ': '
         for (let harvest of stype.harvestingWeeks) {
           text += harvest
         }
         this.text(text)
       }
 
-      this.text('Tuotto: ' + stype.turnipYield)
+      this.text(this.texts.revenue + ': ' + stype.turnipYield)
     }
-    this.text('Hinta: ' + stype.cost, 'large')
+    this.text(this.texts.cost + ': ' + stype.cost, 'large')
 
     this.section('build')
     if (this.purchaseManager.hasCash(stype.cost)) {
       this.owner.resetDecoratedButton(
-        'Rakenna', null,
+        this.texts.build, null,
         this.structureFactory.buildBuilding,
         this.structureFactory, tile, stype
       )
     } else {
       this.button(
-        'Rahat eivät riitä',
+        this.texts.insufficientFunds,
         this.emptyFunction, null, 'unusableButton'
       )
     }
