@@ -1,5 +1,6 @@
 const assert = require('assert')
-import config from './PseudoConfig'
+// import config from './PseudoConfig'
+import config from '../../../assets/json/configurations'
 
 /**
  * Provides functions to check if the state of the game is wanted
@@ -159,8 +160,8 @@ export default class GamestateChecker {
    * @param {{x: number, y: number}} estimated 
    */
   checkTileUnderCamera (estimated) {
-    var ex = Math.floor(estimated.x / config.tileSize.width)
-    var ey = Math.floor(estimated.y / config.tileSize.height)
+    var ex = Math.floor(estimated.x / config.mapSettings.tileSize.width)
+    var ey = Math.floor(estimated.y / config.mapSettings.tileSize.height)
     var camera = this.gameStub.getCamera()
     this.checkTilesModelCoordinates(camera.x, camera.y, ex, ey)
   }

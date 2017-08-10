@@ -1,3 +1,4 @@
+import config from '../assets/json/configurations'
 import 'pixi'
 import 'p2'
 import Phaser from 'phaser'
@@ -9,7 +10,7 @@ import GameState from './states/Play'
 import GameOverState from './states/GameOver'
 import StartState from './states/Start'
 import InstructionsState from './states/Instructions'
-import config from '../assets/json/configurations.json'
+
 //
 /**
  * Description goes here
@@ -19,12 +20,17 @@ class Game extends Phaser.Game {
    * Description goes here
    */
   constructor () {
+    var size = {
+      maxWidth: config.gameSettings.windowSize.maxWidth,
+      maxHeight: config.gameSettings.windowSize.maxHeight
+    }
+    
     const docElement = document.documentElement
-    const width = docElement.clientWidth > config.gameWidth 
-      ? config.gameWidth 
+    const width = docElement.clientWidth > size.maxWidth 
+      ? size.maxWidth 
       : docElement.clientWidth
-    const height = docElement.clientHeight > config.gameHeight 
-      ? config.gameHeight 
+    const height = docElement.clientHeight > size.maxHeight 
+      ? size.maxHeight 
       : docElement.clientHeight
 
     super(width, height, Phaser.CANVAS, 'content', null)
