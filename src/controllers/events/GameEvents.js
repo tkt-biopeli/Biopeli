@@ -37,7 +37,7 @@ export default class GameEvents {
       player: name,
       points: this.gameState.player.points
     },
-    this.config.scoreServer
+    this.config.gameSettings.scoreServer
   )
   }
 }
