@@ -83,7 +83,7 @@ export default class InputHandler {
 
     // Override function so that pointer on menu area does not register as movement
     let context = this.mapListener
-    this.game.game.kineticScrolling.beginMove = function () {
+    this.game.game.kineticScrolling.beginMove = () => {
       this.startX = this.game.input.x
       this.startY = this.game.input.y
       if (context.pointerInMapArea({ x: this.startX, y: this.startY })) {
@@ -91,7 +91,7 @@ export default class InputHandler {
       }
       this.timestamp = Date.now()
       this.velocityY = this.amplitudeY = this.velocityX = this.amplitudeX = 0
-    }, context;
+    }, context
 
     // Start scrolling = adds callbacks to game
     this.game.game.kineticScrolling.start()

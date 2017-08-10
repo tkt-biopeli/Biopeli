@@ -14,11 +14,12 @@ describe('Integration test: Building structures', () => {
 
   it('Can build a wheat farm on grass', () => {
     gameAdvancer.clickTile(1, 1)
-    gameStateChecker.checkButtonAmountInMenu(4)
+    gameStateChecker.checkButtonAmountInMenu(3)
+    gameAdvancer.clickNthButton(1)
+    gameStateChecker.checkButtonAmountInMenu(7)
     gameAdvancer.clickNthButton(1)
     gameStateChecker.checkButtonAmountInMenu(2)
     gameAdvancer.clickNthButton(1)
-    gameStateChecker.checkButtonAmountInMenu(0)
     gameStateChecker.checkSelectedTile()
     gameStateChecker.checkTilesInformation(1, 1, 'field', 'wheat_farm', true)
   })
