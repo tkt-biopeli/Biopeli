@@ -99,23 +99,29 @@ export default class TileContent extends Content {
 
   createBuildingButtons (tile) {
     this.section('actions')
-        this.owner.changeButton(
-        'Alkutuotanto', 4,
-        this.owner.wrapFunction(
-        this.owner.addState, this.owner, 'tile', tile),
-        this, 'emptyButton'
-        )
-    this.button(
-      'Jalostamo',
-      this.emptyFunction, this, 'emptyButton'
+    
+    this.owner.changeButton(
+      'Alkutuotanto', 4,
+      this.owner.wrapFunction(
+        this.owner.addState, this.owner, 
+        'whatType', 'buildProducer'),
+      this, 'emptyButton'
     )
-    this.button(
-      'Erikoisrakennukset',
-      this.emptyFunction, this, 'emptyButton'
+        
+    this.owner.changeButton(
+      'Jalostamo', 4,
+      this.owner.wrapFunction(
+        this.owner.addState, this.owner, 
+        'whatType', 'buildRefinery'),
+      this, 'emptyButton'
     )
-  }
-
-  goToProducers() {
-    this.owner.addState(name, value)
+        
+    this.owner.changeButton(
+      'Erikoisrakennus', 4,
+      this.owner.wrapFunction(
+        this.owner.addState, this.owner, 
+        'whatType', 'buildSpecial'),
+      this, 'emptyButton'
+    )
   }
 }

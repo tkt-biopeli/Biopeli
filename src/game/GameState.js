@@ -21,7 +21,7 @@ import TileContent from '../controllers/menucontrol/contents/TileContent'
 import CityContent from '../controllers/menucontrol/contents/CityContent'
 import BottomMenuContent from '../controllers/menucontrol/contents/BottomMenuContent'
 import OptionsContent from '../controllers/menucontrol/contents/OptionsContent'
-import BuildProducerContent from '../controllers/menucontrol/contents/BuildProducerContent'
+import BuildMenuContent from '../controllers/menucontrol/contents/BuildMenuContent'
 import BuildStructureContent from '../controllers/menucontrol/contents/BuildStructureContent'
 import SingleController from '../controllers/menucontrol/SingleController'
 import MulticontentController from '../controllers/menucontrol/MulticontentController'
@@ -267,7 +267,7 @@ export default class GameState {
 
     this.optionsContent = new OptionsContent({game: this})
 
-    this.buildProducerContent = new BuildProducerContent({
+    this.buildMenuContent = new BuildMenuContent({
       structureTypes: this.structureTypes
     })
 
@@ -281,7 +281,7 @@ export default class GameState {
         buttonWidth: config.sideMenuSettings.buttonWidth
       }),
       contents: [this.cityContent, this.tileContent, this.buildStructureContent,
-        this.optionsContent, this.buildProducerContent]
+        this.optionsContent, this.buildMenuContent]
     })
   }
 
