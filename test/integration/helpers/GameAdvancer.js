@@ -2,7 +2,8 @@ import GameStub from './GameStub'
 import GamestateChecker from './GamestateChecker'
 import GameState from '../../../src/game/GameState'
 
-import config from './PseudoConfig'
+// import config from './PseudoConfig'
+import config from '../../../assets/json/configurations'
 import tileTypes from './PseudoTiletypes'
 import structureTypes from './PseudoStructuretypes'
 
@@ -25,7 +26,7 @@ export default class GameAdvancer {
     this.mapWidth = 20
     this.mapHeight = 20
 
-    this.game = new GameStub({ width: config.gameWidth, height: config.gameHeight })
+    this.game = new GameStub({ width: config.gameSettings.windowSize.maxWidth, height: config.gameSettings.windowSize.maxHeight })
     this.Noise = class Noise{
       constructor(){
         this.callCount = 0
@@ -54,8 +55,8 @@ export default class GameAdvancer {
       perlinNoise: this.Noise,
       state: this.game,
       mapSize: {width: this.mapWidth, height: this.mapHeight},
-      tileSize: config.tileSize,
-      menuWidth: config.menuWidth,
+      tileSize: config.mapSettings.tileSize,
+      menuWidth: config.sideMenuSettings.menuWidth,
       gameLength: gameLength,
       config: config,
       structureTypes: structureTypes,
