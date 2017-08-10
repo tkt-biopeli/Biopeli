@@ -11,12 +11,15 @@ export default class Highscores extends Phaser.State {
     this.menu = new MenuBuilder(this, 'start', this.camera.height * 5 / 9, this.gameData.config)
     this.menu.createTitle('Tulokset')
     var scores = utils.fetchScores(config.scoreServer)
-    /*var fmt = ''
-    scores.forEach((val, i) => {
-      fmt += (i + 1) + ': ' + val.name + ' - ' + val.score + '\n'
-    })*/
-    this.menu.createDescription(scores)
-    this.menu.createButton('Uusi peli', () => { this.state.start('Start') })
+    var fmt = ''
+    var i, len = scores.length, score
+    for (i = 0; i < 5 && i < len; i++) {
+      score = scores[i]
+      fmt += (i + 1) + ': ' + score.player + ' - ' + score.points + '\n'
+    }
+    this.menu.createDescription(fmt)
+    this.menu.createButton('Uusi peli', 
+      () => { this.state.start('Start', true, false, this.gameData) })
     this.menu.finishMenu()
   }
 }

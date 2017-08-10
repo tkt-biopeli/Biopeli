@@ -23,11 +23,14 @@ export default {
     xhr.send(JSON.stringify(body))
   },
 
-  fetchScores: (server) => { // apua tänne jotain järkevää
+  fetchScores: (server) => { 
     var xhr = new XMLHttpRequest()
-    xhr.open("GET", server + '', false)
+    xhr.open("GET", server + 'scores.json', false)
     xhr.send()
-    
-    return xhr.responseText // TODO: palauta järkevässä formaatissa
+
+    var scores = JSON.parse(xhr.responseText)
+    scores.sort((a, b) => {return b.points - a.points})
+
+    return scores 
   }
 }

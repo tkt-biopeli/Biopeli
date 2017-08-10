@@ -30,7 +30,8 @@ describe('Inputhandler tests', () => {
       },
       flowersKey: {
         onDown: { add: function () { } }
-      }
+      },
+      game: {kineticScrolling: {configure: () => {}, start: () =>{}}}
     }
 
     mapListener = {
