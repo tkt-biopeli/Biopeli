@@ -14,7 +14,7 @@
       "nameWithLanguage": "ruohikko",
       "asset": "grass",
       "flowers": 10,
-      "allowedStructures": ["wheat_farm", "dairy_farm", "berry_farm", "mill"]
+      "allowedStructures": ["wheat_farm", "dairy_farm", "berry_farm", "mill", "fish_refinery"]
     },
     {
       "id": "0003",
@@ -22,7 +22,7 @@
       "nameWithLanguage": "vesi",
       "asset": "water",
       "flowers": 10,
-      "allowedStructures": []
+      "allowedStructures": ["fishery"]
     },
     {
       "id": "0004",
@@ -38,7 +38,15 @@
       "nameWithLanguage": "teollisuusalue",
       "asset": "industrial",
       "flowers": 10,
-      "allowedStructures": ["mill"]
+      "allowedStructures": ["mill", "fish_refinery"]
+    },
+    {
+      "id": "0006",
+      "name": "water_field",
+      "nameWithLanguage": "kalakassi",
+      "asset": "water",
+      "flowers": 10,
+      "allowedStructures": []
     }
   ]
 }

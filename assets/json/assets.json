@@ -57,6 +57,16 @@
     },
     {
       "type": "image",
+      "name": "fishery",
+      "file": "assets/images/structures/fishery.png"
+    },
+    {
+      "type": "image",
+      "name": "fish_refinery",
+      "file": "assets/images/structures/fish_refinery.png"
+    },
+    {
+      "type": "image",
       "name": "turnip",
       "file": "assets/images/icons/turnip.png"
     },

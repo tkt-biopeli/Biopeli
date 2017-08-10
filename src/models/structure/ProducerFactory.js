@@ -22,7 +22,7 @@ export default class ProducerFactory {
     var sType = this.checkStructureType(structureType)
 
     var producer = sType.type === 'refinery'
-      ? this.createRefiner(sType.buysFrom, sType.multiplier, sType.reach, tile)
+      ? this.createRefiner(sType.buysFrom, sType.multiplier, sType.reach, tile, sType.moveCosts)
       : this.createPrimaryProducer(sType, tile)
 
     return new AllDecorator({producer: producer, tile: tile})
@@ -64,10 +64,10 @@ export default class ProducerFactory {
    * @param {*} radius
    * @param {*} tile
    */
-  createRefiner (inputTypes, multiplier, radius, tile) {
+  createRefiner (inputTypes, multiplier, radius, tile, moveCosts) {
     var refiner = new Refiner({
       inputTypes: inputTypes,
-      zone: this.tileFinder.findTilesInDistanceOf(tile, radius),
+      zone: this.tileFinder.findTilesInDistanceOf(tile, radius, moveCosts),
       multiplier: multiplier,
       radius: radius,
       tile: tile

@@ -11,6 +11,7 @@ export default class Refiner {
     this.multiplier = multiplier
     this.radius = radius
     this.distancefunction = createLine(1, 1, radius, 1 / multiplier)
+    this.ownedFarmLand = []
     this.producerHolders = []
     this.tile = tile
     this.findProducers()
