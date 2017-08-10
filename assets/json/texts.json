@@ -1,4 +1,15 @@
 {
+  "prePlayStateTexts": {
+    "gameDescription": "MTechin tilaama peli biotaloudesta ja ruokaketjusta.",
+    "startGame": "Aloita peli",
+    "instructions": "Ohjeet",
+    "instructionsDescription": "Tarkkaile maaperän kosteutta ja ravinteita.\nRakenna alku- sekä jatkotuotantorakennuksia.\nVastaa kaupungin kysyntään.",
+    "endScore": "Loppupisteesi",
+    "endCitySize": "Kaupungin koko",
+    "toStart": "Alkuun",
+    "back": "Takaisin"
+  },
+
   "buildStructureTexts": {
     "structureType": "Tyyppi",
     "continuousProduction": "Tuotanto jatkuvaa",
