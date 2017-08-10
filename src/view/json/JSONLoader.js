@@ -18,14 +18,14 @@ export default class JSONLoader {
   }
 
   loadJSONObjects () {
-    for(let file of this.files){
-      this.game.load.json(settings[file+'sName'], settings[file+'sFile'])
+    for (let file of this.files) {
+      this.game.load.json(settings[file + 'sName'], settings[file + 'sFile'])
     }
   }
 
   initJSONObjects () {
-    for(let file of this.files) {
-      this[file+'s'] = this.getJSON(settings[file+'sName'])
+    for (let file of this.files) {
+      this[file + 's'] = this.getJSON(settings[file + 'sName'])
     }
 
     this.parseJSONObjects()
@@ -64,12 +64,12 @@ export default class JSONLoader {
   gameData () {
     var gameData = {}
 
-    for(let file of this.files) {
-      if(file === 'config'){
+    for (let file of this.files) {
+      if (file === 'config') {
         gameData.config = this.configs
         continue
       }
-      gameData[file+'s'] = this[file+'s']
+      gameData[file + 's'] = this[file + 's']
     }
 
     return gameData

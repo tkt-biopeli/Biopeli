@@ -46,6 +46,9 @@ export default class GameAdvancer {
           structureAdjectives: ['testive'],
           exaggerations: 'testiest'
         }
+      },
+      gameEvents: {
+        events: []
       }
     }
 
