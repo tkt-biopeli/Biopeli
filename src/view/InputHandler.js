@@ -10,7 +10,7 @@ export default class InputHandler {
    * @param {MapListener} param.mapListener - Current map listener
    * @param {CameraMover} param.cameraMover - Current camera mover
    */
-  constructor({ game, mapListener, cameraMover, mapView }) {
+  constructor ({ game, mapListener, cameraMover, mapView }) {
     this.game = game
     this.mapListener = mapListener
     this.cameraMover = cameraMover
@@ -73,7 +73,7 @@ export default class InputHandler {
     // Configuration
     this.game.game.kineticScrolling.configure({
       kineticMovement: true,
-      timeConstantScroll: 325, //really mimic iOS
+      timeConstantScroll: 325, // really mimic iOS
       horizontalScroll: true,
       verticalScroll: true,
       horizontalWheel: false,
@@ -84,16 +84,16 @@ export default class InputHandler {
     // Override function so that pointer on menu area does not register as movement
     let context = this.mapListener
     this.game.game.kineticScrolling.beginMove = function () {
-      this.startX = this.game.input.x;
-      this.startY = this.game.input.y;
+      this.startX = this.game.input.x
+      this.startY = this.game.input.y
       if (context.pointerInMapArea({ x: this.startX, y: this.startY })) {
-        this.pressedDown = true;
+        this.pressedDown = true
       }
-      this.timestamp = Date.now();
-      this.velocityY = this.amplitudeY = this.velocityX = this.amplitudeX = 0;
+      this.timestamp = Date.now()
+      this.velocityY = this.amplitudeY = this.velocityX = this.amplitudeX = 0
     }, context;
 
     // Start scrolling = adds callbacks to game
-    this.game.game.kineticScrolling.start();
+    this.game.game.kineticScrolling.start()
   }
 }
