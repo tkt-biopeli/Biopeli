@@ -3,6 +3,7 @@ import Phaser from 'phaser'
 import MenuBuilder from '../controllers/menucontrol/MenuBuilder'
 import CityNameGenerator from '../models/namegeneration/CityNameGenerator'
 import utils from '../utils'
+import texts from '../../assets/json/texts'
 
 /**
  * Screen displayed when the game is started
@@ -24,15 +25,15 @@ export default class Start extends Phaser.State {
 
     this.menu = new MenuBuilder(this, 'start', this.camera.height / 4, this.gameData.config)
     this.menu.createTitle('Biopeli')
-    this.menu.createDescription('MTechin tilaama peli biotaloudesta ja ruokaketjusta.')
+    this.menu.createDescription(texts.prePlayStateTexts.gameDescription)
     this.menu.createButton(
-      'Aloita peli',
+      texts.prePlayStateTexts.startGame,
       () => { 
         this.state.start('Game', true, false, cityName, this.gameData, this.menuMusic.stop())
       }
     )
     this.menu.createButton(
-      'Ohjeet', () => {
+      texts.prePlayStateTexts.instructions, () => {
         this.state.start('Instructions', true, false, this.gameData, this.menuMusic.stop())
       }
     )

@@ -249,22 +249,25 @@ export default class GameState {
 
     this.cityContent = new CityContent({
       city: this.city,
-      gameEvents: this.gameEvents
+      gameEvents: this.gameEvents,
+      texts: this.texts
     })
 
     this.tileContent = new TileContent({
       topBarController: this.topBarController,
       purchaseManager: this.purchaseManager,
       demandFunction: this.city.turnipDemand,
-      structureTypes: this.structureTypes
+      structureTypes: this.structureTypes,
+      texts: this.texts
     })
 
     var buildStructureController = new BuildStructureContent({
       purchaseManager: this.purchaseManager,
-      structureFactory: this.structureFactory
+      structureFactory: this.structureFactory,
+      texts: this.texts
     })
 
-    this.optionsContent = new OptionsContent({game: this})
+    this.optionsContent = new OptionsContent({game: this, texts: this.texts})
 
     this.menuController = new MulticontentController({
       game: this.state,
