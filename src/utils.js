@@ -1,5 +1,3 @@
-
-
 /**
  * Utility functions
  */
@@ -25,11 +23,11 @@ export default {
 
   fetchScores: (server) => { 
     var xhr = new XMLHttpRequest()
-    xhr.open("GET", server + 'scores.json', false)
+    xhr.open('GET', server + 'scores.json', false)
     xhr.send()
 
     var scores = JSON.parse(xhr.responseText)
-    scores.sort((a, b) => {return b.points - a.points})
+    scores.sort((a, b) => { return b.points - a.points })
 
     return scores 
   }
