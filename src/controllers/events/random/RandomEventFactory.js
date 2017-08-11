@@ -1,10 +1,13 @@
 import RandomEvent from './RandomEvent'
+import ConditionFactory from './ConditionFactory'
+import EffectFactory from './EffectFactory'
+import FilterFactory from './FilterFactory'
 
-export default class RandomEventCreator {
-  constructor ({conditionCreator, effectCreator, filterCreator}) {
-    this.conditionCreator = conditionCreator
-    this.effectCreator = effectCreator
-    this.filterCreator = filterCreator
+export default class RandomEventFactory {
+  constructor ({gameState}) {
+    this.conditionFactory = new ConditionFactory({gameState: gameState})
+    this.effectFactory = new EffectFactory({gameState: gameState})
+    this.filterFactory = new FilterFactory({gameState: gameState})
 
     this.initConditions()
     this.initEffects()
@@ -13,14 +16,17 @@ export default class RandomEventCreator {
 
   initConditions () {
     this.conditionCreators = new Map()
+    this.conditionCreators.set('timeLimiter', this.conditionFactory.createTimeCondition)
   }
 
   initEffects () {
     this.effectCreators = new Map()
+    this.effectCreators.set('tileValueChange', this.effectFactory.createTileValueEffect)
   }
 
   initFilters () {
     this.filterCreators = new Map()
+    this.filterCreators.set('tilesWithTiletype', this.filterFactory.createTiletypeTileFilter)
   }
 
   createEvents (eventJSON) {
@@ -60,18 +66,18 @@ export default class RandomEventCreator {
   }
 
   createFilter (blueprint) {
-    return this.createPart('filter', blueprint, this.filterCreator)
+    return this.createPart('filter', blueprint, this.filterFactory)
   }
 
   createEffect (blueprint) {
-    return this.createPart('effect', blueprint, this.effectCreator)
+    return this.createPart('effect', blueprint, this.effectFactory)
   }
 
   createCondition (blueprint) {
-    return this.createPart('condition', blueprint, this.conditionCreator)
+    return this.createPart('condition', blueprint, this.conditionFactory)
   }
 
-  createPart (name, blueprint, creator) {
-    return this[name + 'Creators'].get(blueprint.name).call(creator, blueprint)
+  createPart (name, blueprint, factory) {
+    return this[name + 'Creators'].get(blueprint.name).call(factory, blueprint)
   }
 }

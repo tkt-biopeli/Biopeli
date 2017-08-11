@@ -1,8 +1,8 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import RandomEventCreator from '../../../../src/controllers/events/random/RandomEventCreator'
+import RandomEventFactory from '../../../../src/controllers/events/random/RandomEventFactory'
 
-describe('Random event creator tests', ()=>{
+describe('Random event factory tests', ()=>{
   var eventCreator, creatorStub
   
   beforeEach(()=>{
@@ -10,11 +10,11 @@ describe('Random event creator tests', ()=>{
       i: 0,
       create: function() { return this.i++ }
     }
-    eventCreator = new RandomEventCreator({
-      conditionCreator: creatorStub,
-      filterCreator: creatorStub,
-      effectCreator: creatorStub
-    })
+    eventCreator = new RandomEventFactory({})
+
+    eventCreator.conditionFactory = creatorStub
+    eventCreator.filterFactory = creatorStub
+    eventCreator.effectFactory = creatorStub
 
     eventCreator.conditionCreators.set('test', creatorStub.create)
     eventCreator.filterCreators.set('test', creatorStub.create)
