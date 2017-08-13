@@ -4,6 +4,9 @@ import EmptyFilter from './filters/EmptyFilter'
 import EmptyEffect from './effects/EmptyEffect'
 import EmptyCondition from './conditions/EmptyCondition'
 
+import And from './filters/And'
+import Or from './filters/Or'
+import Complement from './filters/Complement'
 import TiletypeTileFilter from './filters/TiletypeTileFilter'
 import AllTileFilter from './filters/AllTileFilter'
 import ValuesTileFilter from './filters/ValuesTileFilter'
@@ -30,21 +33,25 @@ export default class RandomEventFactory {
   initConditions () {
     this.conditionCreators.set('empty', EmptyCondition)
 
-    this.conditionCreators.set('timeLimiter', TimeCondition)
+    this.conditionCreators.set('TimeLimiter', TimeCondition)
   }
 
   initEffects () {
     this.effectCreators.set('empty', EmptyEffect)
 
-    this.effectCreators.set('tileValueChange', TileValueEffect)
+    this.effectCreators.set('TileValueChange', TileValueEffect)
   }
 
   initFilters () {
     this.filterCreators.set('empty', EmptyFilter)
 
-    this.filterCreators.set('tilesWithTiletype', TiletypeTileFilter)
-    this.filterCreators.set('tilesWithValues', ValuesTileFilter)
-    this.filterCreators.set('allTiles', AllTileFilter)
+    this.filterCreators.set('And', And)
+    this.filterCreators.set('Or', Or)
+    this.filterCreators.set('Complement', Complement)
+
+    this.filterCreators.set('TilesWithTiletype', TiletypeTileFilter)
+    this.filterCreators.set('TilesWithValues', ValuesTileFilter)
+    this.filterCreators.set('AllTiles', AllTileFilter)
   }
 
   createEvents (eventJSON) {
