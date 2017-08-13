@@ -12,7 +12,8 @@ export default class Highscores extends Phaser.State {
     this.menu.createTitle('Tulokset')
     var scores = utils.fetchScores(config.gameSettings.scoreServer)
     var fmt = ''
-    var i, len = scores.length, score
+    var i, score
+    var len = scores.length
     for (i = 0; i < 5 && i < len; i++) {
       score = scores[i]
       fmt += (i + 1) + ': ' + score.player + ' - ' + score.points + '\n'
