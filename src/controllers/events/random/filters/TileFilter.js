@@ -1,6 +1,6 @@
 export default class TileTiletypeFilter {
-  constructor ({ map }) {
-    this.map = map
+  constructor (gamestate) {
+    this.map = gamestate.map
   }
 
   affected () {

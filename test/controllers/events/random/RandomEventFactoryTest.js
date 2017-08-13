@@ -3,22 +3,22 @@ const sinon = require('sinon')
 import RandomEventFactory from '../../../../src/controllers/events/random/RandomEventFactory'
 
 describe('Random event factory tests', ()=>{
-  var eventCreator, creatorStub
+  var eventCreator, creatorStub, cspy, fspy, espy
   
   beforeEach(()=>{
-    creatorStub = {
-      i: 0,
-      create: function() { return this.i++ }
-    }
+    cspy = sinon.spy()
+    fspy = sinon.spy()
+    espy = sinon.spy()
+
     eventCreator = new RandomEventFactory({})
 
     eventCreator.conditionFactory = creatorStub
     eventCreator.filterFactory = creatorStub
     eventCreator.effectFactory = creatorStub
 
-    eventCreator.conditionCreators.set('test', creatorStub.create)
-    eventCreator.filterCreators.set('test', creatorStub.create)
-    eventCreator.effectCreators.set('test', creatorStub.create)
+    eventCreator.conditionCreators.set('test', cspy)
+    eventCreator.filterCreators.set('test', fspy)
+    eventCreator.effectCreators.set('test', espy)
   })
 
   it('The objects are created correctly', ()=>{
@@ -77,19 +77,12 @@ describe('Random event factory tests', ()=>{
     assert.equal(3, answers.length)
 
     for(let i = 0 ; i < 3 ; i++) {
-      let answer = answers[i]
-      assert.equal(5*i, answer.condition)
-      
-      let efs = answer.effects
-      assert.equal(2, efs.length)
-      for(let j = 0 ; j < 2 ; j++){
-        let ef = efs[j]
-        assert.equal(5*i + j*2 + 1, ef.effect)
-        assert.equal(5*i + j*2 + 2, ef.filter)
-      }
-
       assert.equal('n'+i, answer.name)
       assert.equal('d'+i, answer.description)
     }
+
+    assert.equal(3, espy.callCount)
+    assert.equal(3, fspy.callCount)
+    assert.equal(3, cspy.callCount)
   })
 })

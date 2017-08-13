@@ -1,10 +1,10 @@
 import TileFilter from './TileFilter'
 
 export default class TiletypeTileFilter extends TileFilter {
-  constructor ({ map, tiletypeNames }) {
-    super({ map: map })
+  constructor ({ gameState, json }) {
+    super(gameState)
 
-    this.tiletypeNames = tiletypeNames
+    this.tiletypeNames = json.tileTypes
   }
 
   isValidTile (tile) {
