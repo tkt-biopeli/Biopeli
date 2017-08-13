@@ -17,13 +17,9 @@ describe('Random event handler tests', ()=>{
       {name: 'foo4',  canHappen: () => {return false}}
     ]
 
-    var utils = {
-      randomWithBounds: randomStub
-    }
-
     handler = new RandomEventHandler({
       eventList: eventList,
-      utils: utils
+      randomWithBounds: randomStub
     })
   })
 

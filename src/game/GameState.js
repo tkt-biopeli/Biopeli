@@ -94,10 +94,10 @@ export default class GameState {
       gameEvents: this.gameEvents
     })
 
-    var randomEventFactory = new RandomEventFactory({gameState: this})
+    this.randomEventFactory = new RandomEventFactory({gameState: this})
     this.randomEventHandler = new RandomEventHandler({
-      eventList: randomEventFactory.createEvents(this.gameData.gameEvents),
-      utils: utils
+      eventList: this.randomEventFactory.createEvents(this.gameData.gameEvents),
+      randomWithBounds: utils.randomWithBounds
     })
 
     this.gameTimer.addListener(this.gameTimerListener)

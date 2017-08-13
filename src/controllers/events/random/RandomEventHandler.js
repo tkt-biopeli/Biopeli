@@ -3,11 +3,11 @@ export default class RandomEventHandler {
    * Handles random events.
    * 
    * @param {Object} eventlist - an array of random events
-   * @param {Object} utils - utility functions (randomWithBounds is used)
+   * @param {Object} randomWithBounds - a utility function
    */
-  constructor ({eventList, utils}) {
+  constructor ({eventList, randomWithBounds}) {
     this.eventList = eventList
-    this.utils = utils
+    this.randomWithBounds = randomWithBounds
   }
 
   /**
@@ -39,7 +39,7 @@ export default class RandomEventHandler {
     var numbers = new Set()
     var i = 0
     while (i < amount) {
-      var number = this.utils.randomWithBounds(0, this.eventList.length)
+      var number = this.randomWithBounds(0, this.eventList.length)
       if (!numbers.has(number)) {
         numbers.add(number)
         i++
