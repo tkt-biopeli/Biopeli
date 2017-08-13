@@ -3,10 +3,10 @@ import TileFilter from './TileFilter'
 export default class ValuesTileFilter extends TileFilter {
   constructor ({gameState, json}) {
     super(gameState)
-
-    this.fertilityLimits = this.checkLimits(json.fertilityLimits)
-    this.moistureLimits = this.checkLimits(json.moistureLimits)
-    this.flowerLimits = this.checkLimits(json.flowerLimits)
+    
+    this.fertilityLimits = this.checkLimits(json.fertilityLimits, 100)
+    this.moistureLimits = this.checkLimits(json.moistureLimits, 100)
+    this.flowerLimits = this.checkLimits(json.flowerLimits, gameState.config.gameplaySettings.tiles.maxFlowers)
   }
 
   checkLimits (limits, theoreticalMax) {
