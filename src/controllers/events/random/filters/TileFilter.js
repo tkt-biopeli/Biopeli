@@ -1,4 +1,4 @@
-export default class TileTiletypeFilter {
+export default class TileFilter {
   constructor ({ map }) {
     this.map = map
   }
