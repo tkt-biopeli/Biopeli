@@ -4,15 +4,15 @@
       "name": "Myllytulva",
       "description": "Myllysi tulvivat",
       "condition": {
-        "name": "timeLimiter",
+        "name": "TimeLimiter",
         "notBefore": 96
       },
       "effects": [
         {
-          "name": "tileValueChange",
+          "name": "TileValueChange",
           "moistureChange": 10,
           "filter": {
-            "name": "tilesWithTiletype",
+            "name": "TilesWithTiletype",
             "tileTypes": [
               "mill"
             ]

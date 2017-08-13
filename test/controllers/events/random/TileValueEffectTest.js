@@ -5,9 +5,11 @@ import TileValueEffect from '../../../../src/controllers/events/random/effects/T
 describe('Tile value effect tests', ()=>{
   it('Works', ()=>{
     var effect = new TileValueEffect({
-      fertilityChange: 1,
-      moistureChange: 2,
-      flowerChange: 3
+      json: {
+        fertilityChange: 1,
+        moistureChange: 2,
+        flowerChange: 3
+      }
     })
     var tiles = [
       {fertility: 0, moisture: 0, flowers: 0},
