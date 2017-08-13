@@ -10,7 +10,8 @@ export default class And extends ListLogicFilter {
       return []
     }
 
-    var affected = new Set(this.subfilters[0].affected)
+    
+    var affected = new Set(this.subfilters[0].affected())
     for (let i = 1 ; i < this.subfilters.length ; i++) {
       let notFound = []
       let subaffected = new Set(this.subfilters[i].affected())
