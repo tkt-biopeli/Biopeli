@@ -1,7 +1,7 @@
 import LogicFilter from './LogicFilter'
 
-export default class Complement extends LogicFilter{
-  constructor ({gameState, json}) {
+export default class Complement extends LogicFilter {
+  constructor ({ gameState, json }) {
     super(gameState)
 
     this.from = this.getFilter(json.from)
@@ -13,7 +13,7 @@ export default class Complement extends LogicFilter{
     let removes = this.toRemove.affected()
 
     for (let remove of removes) {
-      if(from.has(remove)) from.delete(remove)
+      if (from.has(remove)) from.delete(remove)
     }
 
     return from.values

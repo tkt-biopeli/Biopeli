@@ -24,7 +24,8 @@ export default class RandomEventFactory {
     this.effectCreators = new Map()
     this.filterCreators = new Map()
 
-    this.defaultValue = 'empty' // if object is not found by name, stub named as this is searched instead
+    // if object is not found by name, stub named as this is searched instead
+    this.defaultValue = 'empty'
 
     this.initConditions()
     this.initEffects()
@@ -105,7 +106,9 @@ export default class RandomEventFactory {
   }
 
   createPart (name, blueprint) {
-    var key = this[name + 'Creators'].has(blueprint.name) ? blueprint.name : this.defaultValue //checks if creator list contains the value. If not, use default value
-    return new (this[name + 'Creators'].get(key))({gameState: this.gameState, json: blueprint}) //Searches constructor with given name from the map and instantiates it
+    // Checks if creator list contains the value. If not, use default value
+    var key = this[name + 'Creators'].has(blueprint.name) ? blueprint.name : this.defaultValue
+    // Searches constructor with given name from the map and instantiates it
+    return new (this[name + 'Creators'].get(key))({gameState: this.gameState, json: blueprint})
   }
 }

@@ -1,7 +1,7 @@
 import ListLogicFilter from './ListLogicFilter'
 
 export default class Or extends ListLogicFilter {
-  constructor ({gameState, json}) {
+  constructor ({ gameState, json }) {
     super(gameState, json)
   }
 
@@ -9,9 +9,9 @@ export default class Or extends ListLogicFilter {
     var affected = new Set()
 
     for (let subfilter of this.subfilters) {
-      let subaffected = this.subfilters.affected()
-      for(let subaf of subaffected) {
-        if(!affected.has(subaf)) affected.add(subaf)
+      let subaffected = subfilter.affected()
+      for (let subaf of subaffected) {
+        if (!affected.has(subaf)) affected.add(subaf)
       }
     }
 

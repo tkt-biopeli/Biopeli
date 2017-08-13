@@ -1,3 +1,3 @@
 export default class EmptyCondition {
-  canHappen () {return true}
+  canHappen () { return true }
 }

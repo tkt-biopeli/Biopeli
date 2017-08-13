@@ -5,5 +5,5 @@ export default class AllTileFilter extends TileFilter {
     super(gameState)
   }
 
-  isValidTile (tile) {return true}
+  isValidTile (tile) { return true }
 }
