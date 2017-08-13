@@ -12,6 +12,7 @@ import AllTileFilter from './filters/AllTileFilter'
 import ValuesTileFilter from './filters/ValuesTileFilter'
 
 import TileValueEffect from './effects/TileValueEffect'
+import MoneyEffect from './effects/MoneyEffect'
 
 import TimeCondition from './conditions/TimeCondition'
 
@@ -39,6 +40,7 @@ export default class RandomEventFactory {
   initEffects () {
     this.effectCreators.set('empty', EmptyEffect)
 
+    this.effectCreators.set('MoneyChange', MoneyEffect)
     this.effectCreators.set('TileValueChange', TileValueEffect)
   }
 
