@@ -10,9 +10,11 @@ describe('tests', ()=>{
     }
 
     var condition = new TimeCondition({
-      timer: timer,
-      notBefore: 0, 
-      notAfter: 3
+      gameState: {gameTimer: timer},
+      json: {
+        notBefore: 0, 
+        notAfter: 3
+      }
     })
 
     assert(condition.canHappen())

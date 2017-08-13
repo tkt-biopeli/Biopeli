@@ -77,12 +77,13 @@ describe('Random event factory tests', ()=>{
     assert.equal(3, answers.length)
 
     for(let i = 0 ; i < 3 ; i++) {
+      var answer = answers[i]
       assert.equal('n'+i, answer.name)
       assert.equal('d'+i, answer.description)
     }
 
-    assert.equal(3, espy.callCount)
-    assert.equal(3, fspy.callCount)
+    assert.equal(6, espy.callCount)
+    assert.equal(6, fspy.callCount)
     assert.equal(3, cspy.callCount)
   })
 })
