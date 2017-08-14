@@ -69,7 +69,8 @@ export default class StructureFactory {
       size: 0,
       structureType: structureType,
       foundingYear: this.gameTimer.currentTimeEvent.year,
-      producer: producer
+      producer: producer,
+      bordercolCode: utils.randomWithBounds(0, 100)
     })
 
     this.player.addStructure(tile.structure)
