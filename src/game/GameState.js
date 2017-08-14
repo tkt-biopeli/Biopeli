@@ -32,6 +32,8 @@ import StackingLayout from '../view/menu/layouts/StackingLayout'
 import StaticLayout from '../view/menu/layouts/StaticLayout'
 import Style from '../view/menu/Style'
 
+import utils from '../utils'
+
 /**
  * Description goes here
  */
@@ -94,7 +96,8 @@ export default class GameState {
 
     this.randomEventFactory = new RandomEventFactory({gameState: this})
     this.randomEventHandler = new RandomEventHandler({
-      eventList: this.randomEventFactory.createEvents(this.gameData.gameEvents)
+      eventList: this.randomEventFactory.createEvents(this.gameData.gameEvents),
+      randomWithBounds: utils.randomWithBounds
     })
 
     this.gameTimer.addListener(this.gameTimerListener)
