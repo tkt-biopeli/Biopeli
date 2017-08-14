@@ -22,9 +22,11 @@ export default class RandomEventHandler {
 
   doEvent () {
     var event = this.eventRandomizer.getRandomEvent(this.maxSearched)
-    event.happen()
-/* Venaa contentia
-    this.menuController.addState('event', event)
-    this.menuController.changeContent(this.eventContentIndex)*/
+    if (event != null) {
+      event.happen()
+      /* Venaa contentia
+      this.menuController.addState('event', event)
+      this.menuController.changeContent(this.eventContentIndex)*/
+    }
   }
 }
