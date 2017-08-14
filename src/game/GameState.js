@@ -6,7 +6,7 @@ import PurchaseManager from '../models/PurchaseManager'
 import TileFinder from '../models/map/TileFinder'
 
 import RandomEventFactory from '../controllers/events/random/RandomEventFactory'
-import RandomEventHandler from '../controllers/events/random/RandomEventHandler'
+import EventRandomizer from '../controllers/events/random/EventRandomizer'
 
 import MapView from '../view/map/MapView'
 import MenuView from '../view/menu/MenuView'
@@ -96,7 +96,7 @@ export default class GameState {
     })
 
     this.randomEventFactory = new RandomEventFactory({gameState: this})
-    this.randomEventHandler = new RandomEventHandler({
+    this.EventRandomizer = new EventRandomizer({
       eventList: this.randomEventFactory.createEvents(this.gameData.gameEvents),
       randomWithBounds: utils.randomWithBounds
     })
