@@ -17,7 +17,7 @@ export default class Structure {
    * @param {function} produceFn
    */
   constructor ({ tile, health, healthManager, ownerName, 
-      structureName, size, structureType, foundingYear, producer }) {
+      structureName, size, structureType, foundingYear, producer, bordercolCode }) {
     this.tile = tile
     this.health = health
     this.healthManager = healthManager
@@ -29,6 +29,7 @@ export default class Structure {
     this.foundingYear = foundingYear
     this.ownedTiles = []
     this.radiusForTileOwnership = structureType.radiusForTileOwnership
+    this.bordercolCode = bordercolCode
   }
 
   /**
