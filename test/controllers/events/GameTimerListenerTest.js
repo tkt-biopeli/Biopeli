@@ -63,12 +63,14 @@ describe('Game timer listener tests', () => {
     gtListener.doTransaction = doTransactionSpy
     gtListener.redrawControllers = redrawControllersSpy
     gtListener.checkBuildingRuining = sinon.spy()
+    gtListener.checkRandomEvent = sinon.spy()
     gtListener.onTimer(timerEvent)
     
     assert(doTransactionSpy.calledWith(37, timerEvent))
     assert(redrawControllersSpy.calledWith())
     assert(isGameOverSpy.calledWith(timerEvent))
     assert(gtListener.checkBuildingRuining.calledWith(timerEvent))
+    assert(gtListener.checkRandomEvent.calledWith(timerEvent))
   })
 
   it('countProductionFromStructures works correctly', () => {

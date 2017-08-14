@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import RandomEventHandler from '../../../../src/controllers/events/random/RandomEventHandler'
+import EventRandomizer from '../../../../src/controllers/events/random/EventRandomizer'
 
 describe('Random event handler tests', ()=>{
   var handler, eventList, randomStub
@@ -17,7 +17,7 @@ describe('Random event handler tests', ()=>{
       {name: 'foo4',  canHappen: () => {return false}}
     ]
 
-    handler = new RandomEventHandler({
+    handler = new EventRandomizer({
       eventList: eventList,
       randomWithBounds: randomStub
     })

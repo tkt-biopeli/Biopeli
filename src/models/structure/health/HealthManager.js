@@ -8,9 +8,9 @@ export default class HealthManager {
 
     this.timeWindow = new TimeWindowRandomizer({
       min: minRuinTime,
-      max: maxRuinTime,
-      currentTime: currentTime
+      max: maxRuinTime
     })
+    this.timeWindow.calculateNext(currentTime)
     this.health = health
 
     this.maxCost = buildingCost * priceMultiplier

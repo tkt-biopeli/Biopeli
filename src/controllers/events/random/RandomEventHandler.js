@@ -1,14 +1,14 @@
 import TimeWindowRandomizer from '../../../models/logic/TimeWindowRandomizer'
 
 export default class RandomEventHandler {
-  constructor ({eventRandomizer, menuController, randomEventSettings}) {
+  constructor ({eventRandomizer, menuController, randomEventSettings, currentTimeEvent}) {
     this.eventRandomizer = eventRandomizer
     this.menuController = menuController
 
     this.timeWindowRandomizer = new TimeWindowRandomizer({
       min: randomEventSettings.minTime,
       max: randomEventSettings.maxTime,
-      currentTime: {serialNumber: 0}
+      currentTime: currentTimeEvent
     })
     this.maxSearched = randomEventSettings.maxSearched
     this.eventContentIndex = randomEventSettings.eventContentIndex

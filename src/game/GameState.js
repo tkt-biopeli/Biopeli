@@ -96,7 +96,8 @@ export default class GameState {
     this.randomEventHandler = new RandomEventHandler({
       eventRandomizer: this.eventRandomizer,
       menuController: this.menuController,
-      randomEventSettings: config.randomEventSettings
+      randomEventSettings: config.randomEventSettings,
+      currentTimeEvent: this.gameTimer.currentTimeEvent
     })
     
     this.gameTimerListener = new GameTimerListener({

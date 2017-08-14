@@ -1,17 +1,20 @@
 export default class TimeWindowRandomizer {
-  constructor ({min, max, currentTime}) {
+  constructor ({min, max}) {
     this.min = min
     this.difference = max - min
-
-    this.calculateNext(currentTime)
   }
 
   isNext (timeEvent) {
-    return timeEvent.serialNumber >= this.nextRuin
+    return timeEvent.serialNumber >= this.next
   }
 
   tryNext (timeEvent) {
-    if (this.isNext(timeEvent)) this.calculateNext(timeEvent)
+    if (this.isNext(timeEvent)) {
+      this.calculateNext(timeEvent)
+      return true
+    }
+
+    return false
   }
 
   calculateNext (timeEvent) {
