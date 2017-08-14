@@ -10,11 +10,14 @@ describe('StructureFactory tests', () => {
 
   beforeEach(() => {
     tileTypes = {
-      industrial: {
+      "industrial": {
         name: 'industrial'
       },
-      field: {
+      "field": {
         name: 'field'
+      },
+      "grass": {
+        name: 'grass'
       }
     }
     purchaseStub = sinon.stub()
@@ -143,24 +146,42 @@ describe('StructureFactory tests', () => {
     return tmpTile
   }
 
-  it('buyLandForRefinery works only if distance is 0 or structure null', () =>{
-    sfactory.setAssetForRefinery = setAssetSpy
-    var tmpTile = createTmpTile(null, {name: 'foo'}, null, 0)
-    sfactory.buyLandForRefinery(tile.structure, 0, tmpTile)
-    assert.equal(setAssetSpy.withArgs(tmpTile).callCount, 1)
-    assert.equal(tmpTile.owner, tile.structure)
-    assert.equal(tile.structure.ownedTiles.length, 1)
-    sfactory.buyLandForRefinery(tile.structure, 1, tmpTile)
-    assert.equal(setAssetSpy.withArgs(tmpTile).callCount, 2)
-    tmpTile.structure = 1
-    sfactory.buyLandForRefinery(tile.structure, 0, tmpTile)
-    assert.equal(setAssetSpy.withArgs(tmpTile).callCount, 3)
-    sfactory.buyLandForRefinery(tile.structure, 1, tmpTile)
-    assert.equal(setAssetSpy.withArgs(tmpTile).callCount, 3)
+  it('LandCanChangeOwnership returns correct booleans with refineries', () => {
+    let newOwnerRefinery = {
+      structureType: { type: 'refinery' },
+      takesOwnershipOf: ['grass']
+    }
+    let wrongTiletype = createTmpTile(null, { name: 'foo' }, null, 0)
+    let alreadyHasStructure = createTmpTile('another_structure', { name: 'grass' }, null, 0)
+    let correctTiletype = createTmpTile(null, { name: 'grass' }, null, 0)
+    let thisIsBuiltOnTile = createTmpTile(newOwnerRefinery, { name: 'anything' }, null, 0)
+
+    assert.equal(sfactory.landCanChangeOwnership(wrongTiletype, newOwnerRefinery), false)
+    assert.equal(sfactory.landCanChangeOwnership(alreadyHasStructure, newOwnerRefinery), false)
+    assert.equal(sfactory.landCanChangeOwnership(correctTiletype, newOwnerRefinery), true)
+    assert.equal(sfactory.landCanChangeOwnership(thisIsBuiltOnTile, newOwnerRefinery), true)
+  })
+
+    it('LandCanChangeOwnership returns correct booleans with producers', () => {
+    let newOwnerProducer = {
+      structureType: { type: 'producer_structure' },
+      takesOwnershipOf: ['grass']
+    }
+    let wrongTiletype = createTmpTile(null, { name: 'foo' }, null, 0)
+    let alreadyHasStructure = createTmpTile('another_structure', { name: 'grass' }, null, 0)
+    let alreadyHasOwner = createTmpTile(null, { name: 'grass' }, 'owner', 0)
+    let correctTiletype = createTmpTile(null, { name: 'grass' }, null, 0)
+    let thisIsBuiltOnTile = createTmpTile(newOwnerProducer, { name: 'anything' }, null, 0)
+
+    assert.equal(sfactory.landCanChangeOwnership(wrongTiletype, newOwnerProducer), false)
+    assert.equal(sfactory.landCanChangeOwnership(alreadyHasStructure, newOwnerProducer), false)
+    assert.equal(sfactory.landCanChangeOwnership(correctTiletype, newOwnerProducer), true)
+    assert.equal(sfactory.landCanChangeOwnership(alreadyHasOwner, newOwnerProducer), false)
+    assert.equal(sfactory.landCanChangeOwnership(thisIsBuiltOnTile, newOwnerProducer), true)
   })
 
   it('buyLandForProducer is functioning properly', () =>{
-    sfactory.setAssetForProducer = setAssetSpy
+/*     sfactory.setAssetForProducer = setAssetSpy
     var tmpTile = createTmpTile(null, {name: 'grass'}, tile.structure, 0)
     sfactory.buyLandForProducer(tile, tmpTile)
     assert.equal(setAssetSpy.withArgs(tmpTile).callCount, 0)
@@ -169,29 +190,21 @@ describe('StructureFactory tests', () => {
     sfactory.buyLandForProducer(tile.structure, tmpTile)
     assert.equal(setAssetSpy.withArgs(tmpTile).callCount, 1)
     assert.equal(tmpTile.owner, tile.structure)
-    assert.equal(tile.structure.ownedTiles.length, 1)
+    assert.equal(tile.structure.ownedTiles.length, 1) */
   })
 
-  it('setAssetForRefinery is functioning properly', () =>{
-    var tileType = {name: 'water'}
+
+  it('setNewTileType is functioning properly', () =>{
+    var tileType = { name: 'foo' }
+    var structure = {farmland: 'field'}
     var tmpTile = createTmpTile(null, tileType, null, 0)
 
-    sfactory.setAssetForRefinery(tmpTile)
-    assert.equal(tmpTile.tileType, tileType)
-    tileType.name = 'foo'
-    sfactory.setAssetForRefinery(tmpTile)
-    assert.equal(tmpTile.tileType, tileTypes.industrial)
-  })
-
-  it('setAssetForProducer is functioning properly', () =>{
-    var tileType = {name: 'foo'}
-    var tmpTile = createTmpTile(null, tileType, null, 0)
-
-    sfactory.setAssetForProducer(tmpTile)
-    assert.equal(tmpTile.tileType, tileType)
-    tileType.name = 'grass'
-    sfactory.setAssetForProducer(tmpTile)
-    assert.equal(tmpTile.tileType, tileTypes.field)
+    assert.equal(tmpTile.tileType.name, 'foo')
+    sfactory.setNewTileType (tmpTile, structure)
+    assert.equal(tmpTile.tileType.name, 'field')
+    structure = {farmland: 'grass'}
+    sfactory.setNewTileType (tmpTile, structure)
+    assert.equal(tmpTile.tileType.name, 'grass')
   })
 
   var helperFunctionForInitPollutionTests = (pollution, distance, tmpTile) => {
@@ -220,20 +233,22 @@ describe('StructureFactory tests', () => {
     sfactory.decreaseOwnedFarmland = spy
     // the first 'if' is true; returns null
     var tmpTile = createTmpTile(null, {name: 'foo'}, null, 0)
-    assert.equal(sfactory.decreaseOwnedTiles(tmpTile), null)
+    assert.equal(sfactory.removeTileFromPreviousOwner(tmpTile), null)
     // the second and third 'ifs' are true
-    tmpTile = createTmpTile(null, {name: 'field'}, tile.structure, 0)
+    let owner = tile.structure
+    owner.farmland = 'field'
+    tmpTile = createTmpTile(null, {name: 'field'}, owner, 0)
     tile.structure.ownedTiles = ['foo', 'foo', tmpTile, 'foo']
-    sfactory.decreaseOwnedTiles(tmpTile)
+    sfactory.removeTileFromPreviousOwner(tmpTile)
     assert.equal(tile.structure.ownedTiles.length, 3)
     assert.equal(tile.structure.ownedTiles[2], 'foo')
     assert(spy.calledWith(tmpTile))
     // only the second 'if' is true
-    sfactory.decreaseOwnedTiles(tmpTile)
+    sfactory.removeTileFromPreviousOwner(tmpTile)
     assert.equal(tile.structure.ownedTiles.length, 3)
     assert(spy.calledWith(tmpTile))
     // the second 'if' is false; the tile type is not 'field'
-    tmpTile = createTmpTile(null, {name: 'foo'}, tile.structure, 0)
+    tmpTile = createTmpTile(null, {name: 'foo'}, owner, 0)
     assert.equal(spy.callCount, 2)
   })
 
