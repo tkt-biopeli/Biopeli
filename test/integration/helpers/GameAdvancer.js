@@ -285,12 +285,13 @@ export default class GameAdvancer {
     str.cost = cost
   }
 
-  buildBuilding (x, y, tileType, button, button2) {
-    if(button2 == null) button2 = 1
+  buildBuilding (x, y, tileType, button, button2, button3) {
+    if(button3 == null) button3 = 1
     this.setTile(x, y, tileType)
     this.clickTile(x, y)
     this.clickNthButton(button)
     this.clickNthButton(button2)
+    this.clickNthButton(button3)
   }
 
   setTileWithStructure(gridX, gridY, tileTypeName, structureType, sowner, sname, ssize, sfoundingYear, scost) {

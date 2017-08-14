@@ -24,6 +24,7 @@ import TileContent from '../controllers/menucontrol/contents/TileContent'
 import CityContent from '../controllers/menucontrol/contents/CityContent'
 import BottomMenuContent from '../controllers/menucontrol/contents/BottomMenuContent'
 import OptionsContent from '../controllers/menucontrol/contents/OptionsContent'
+import BuildMenuContent from '../controllers/menucontrol/contents/BuildMenuContent'
 import BuildStructureContent from '../controllers/menucontrol/contents/BuildStructureContent'
 import SingleController from '../controllers/menucontrol/SingleController'
 import MulticontentController from '../controllers/menucontrol/MulticontentController'
@@ -166,7 +167,6 @@ export default class GameState {
     this.music = this.state.add.audio('music')
     this.music.play()
     this.music.loopFull()
-    this.state.paused = false
   }
 
   initializeView (config) {
@@ -254,13 +254,17 @@ export default class GameState {
       texts: this.texts
     })
 
-    var buildStructureController = new BuildStructureContent({
+    this.buildStructureContent = new BuildStructureContent({
       purchaseManager: this.purchaseManager,
       structureFactory: this.structureFactory,
       texts: this.texts
     })
 
     this.optionsContent = new OptionsContent({game: this, texts: this.texts})
+
+    this.buildMenuContent = new BuildMenuContent({
+      structureTypes: this.structureTypes
+    })
 
     this.menuController = new MulticontentController({
       game: this.state,
@@ -271,8 +275,8 @@ export default class GameState {
         buttonHeight: config.sideMenuSettings.buttonHeight,
         buttonWidth: config.sideMenuSettings.buttonWidth
       }),
-      contents: [this.cityContent, this.tileContent, buildStructureController,
-        this.optionsContent]
+      contents: [this.cityContent, this.tileContent, this.buildStructureContent,
+        this.optionsContent, this.buildMenuContent]
     })
     
     this.mapView = new MapView({

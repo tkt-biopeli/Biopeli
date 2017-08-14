@@ -25,7 +25,6 @@ export default class MulticontentController extends Controller {
    */
   createSections () {
     this.contents[this.index].createSections()
-
     if (this.getStack.length > 0) {
       this.section('back')
       this.button('Takaisin', this.previousContent, this)
@@ -79,12 +78,12 @@ export default class MulticontentController extends Controller {
    * @param {*} extraFunction function that is called before the change
    * @param {*} context context of the extra function
    */
-  changeButton (name, index, extraFunction, context) {
+  changeButton (name, index, extraFunction, context, asset) {  
     this.button(name,
       ((index, extraFunction, context) => () => {
         this.callExtraFunction(extraFunction, context)
         this.changeContent(index)
-      })(index, extraFunction, context), this)
+      })(index, extraFunction, context), this, asset)
   }
 
   callExtraFunction (extraFunction, context) {
