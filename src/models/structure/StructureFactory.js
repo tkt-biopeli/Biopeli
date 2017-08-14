@@ -20,7 +20,7 @@ export default class StructureFactory {
     this.map = map
     this.eventController = eventController
     this.purchaseManager = purchaseManager
-
+    this.tileFinder = tileFinder
     this.tileTypes = tileTypes
     this.structureTypes = structureTypes
 
@@ -103,7 +103,7 @@ export default class StructureFactory {
    * @param {*} map
    */
   createInitialPollution (pollution, tile) {
-    let tiles = this.map.getTilesInRadius(3, tile)
+    let tiles = this.map.getTilesInRadius(3, tile) // need a source other than a magic number 3
     for (var [distance, tilesArray] of tiles) {
       tilesArray.forEach(function (tmpTile) {
         let amount = pollution - distance > 0 ? pollution - distance : 0
@@ -114,33 +114,46 @@ export default class StructureFactory {
   }
 
   buyLand (structure) {
-    let tiles = this.map.getTilesInRadius(
-      structure.radiusForTileOwnership, structure.tile
-    )
-    for (var [distance, tilesArray] of tiles) {
-      tilesArray.forEach(function (tmpTile) {
-        if (structure.structureType.type === 'refinery') {
-          this.buyLandForRefinery(structure, distance, tmpTile)
-        } else {
-          this.buyLandForProducer(structure, tmpTile)
-        }
-      }, this)
+    let tiles = this.tileFinder.getTilesForLandOwnership(structure.tile, structure.radiusForTileOwnership, structure.moveCosts)
+    for (let capsule of tiles) {
+      if (this.landCanChangeOwnership(capsule.tile, structure)) this.changeOwnership(structure, capsule.tile)
     }
   }
 
-  buyLandForRefinery (structure, distance, tmpTile) {
-    if (distance === 0 || tmpTile.structure === null) {
-      this.decreaseOwnedTiles(tmpTile)
-      this.setAssetForRefinery(tmpTile)
-      tmpTile.owner = structure
-      structure.ownedTiles.push(tmpTile)
+  changeOwnership (structure, tmpTile) {
+    this.removeTileFromPreviousOwner(tmpTile)
+    tmpTile.owner = structure
+    structure.ownedTiles.push(tmpTile)
+    if (structure.takesOwnershipOf.includes(tmpTile.tileType.name)) {
+      structure.producer.producer.ownedFarmLand.push(tmpTile)
     }
+    this.setNewTileType(tmpTile, structure)
   }
 
-  decreaseOwnedTiles (tmpTile) {
-    if (tmpTile.owner === null) return null
+  /**
+   * Setup rules for when a change in landownership can happen
+   * @param {*} tmpTile 
+   * @param {*} newStructure 
+   */
+  landCanChangeOwnership (tmpTile, newStructure) {
+    let newStype = newStructure.structureType.type
+    if (newStype === 'refinery') {
+      if (tmpTile.structure === newStructure) return true
+      if (tmpTile.structure === null && newStructure.takesOwnershipOf.includes(tmpTile.tileType.name)) return true
+    }
+    if (newStype === 'producer_structure') {
+      if (tmpTile.structure === newStructure) return true
+      if (tmpTile.structure !== null) return false
+      if (tmpTile.owner === null && newStructure.takesOwnershipOf.includes(tmpTile.tileType.name)) return true
+    }
+    return false
+  }
 
-    if (tmpTile.tileType.name === 'field') {
+  removeTileFromPreviousOwner (tmpTile) {
+    let previousOwner = tmpTile.owner
+    if (previousOwner === null) return
+
+    if (previousOwner.farmland === tmpTile.tileType.name) {
       this.decreaseOwnedFarmland(tmpTile)
     }
     let index = tmpTile.owner.ownedTiles.indexOf(tmpTile)
@@ -157,27 +170,8 @@ export default class StructureFactory {
     }
   }
 
-  buyLandForProducer (structure, tmpTile) {
-    if (tmpTile.owner === null) {
-      this.setAssetForProducer(tmpTile)
-      tmpTile.owner = structure
-      structure.ownedTiles.push(tmpTile)
-      if (tmpTile.tileType.name === 'field') {
-        structure.producer.producer.ownedFarmLand.push(tmpTile)
-      }
-    }
-  }
-
-  setAssetForRefinery (tmpTile) {
-    if (tmpTile.tileType.name !== 'water') {
-      tmpTile.tileType = this.tileTypes.industrial
-    }
-  }
-
-  setAssetForProducer (tmpTile) {
-    if (tmpTile.tileType.name === 'grass') {
-      tmpTile.tileType = this.tileTypes.field
-    }
+  setNewTileType (tmpTile, structure) {
+    tmpTile.tileType = this.tileTypes[structure.farmland]
   }
 
   calculateSize (structure) {

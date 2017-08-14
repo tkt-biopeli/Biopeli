@@ -16,7 +16,9 @@ export default class TileFinder {
    * @param {*} tile from which
    * @param {*} radius in distance
    */
-  findTilesInDistanceOf (tile, radius) {
+  findTilesInDistanceOf (tile, radius, moveCosts) {
+    let multipliers = moveCosts ? moveCosts : this.multipliers
+    
     var heap = new Heap([],
       (a, b) => a.distance === b.distance,
       (a, b) => b.distance - a.distance)
@@ -35,7 +37,7 @@ export default class TileFinder {
       for (let tile of tiles) {
         if (used.has(tile)) continue
 
-        let distanceTo = capsule.distance + this.multipliers[tile.tileType.name]
+        let distanceTo = capsule.distance + multipliers[tile.tileType.name]
         if (distanceTo <= radius) {
           var encapsuled = this.encapsule(tile, distanceTo)
           heap.push(encapsuled)
@@ -81,5 +83,11 @@ export default class TileFinder {
    */
   isInMap (x, y) {
     return x < this.width && x >= 0 && y >= 0 && y < this.height
+  }
+
+  getTilesForLandOwnership (tile, radius, moveCosts) {
+    let tiles = this.findTilesInDistanceOf(tile, radius, moveCosts)
+    tiles.add(this.encapsule(tile, 0))
+    return tiles
   }
 }

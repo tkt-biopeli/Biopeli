@@ -11,14 +11,14 @@ const tileTypes = {
     nameWithLanguage: 'ruohikko',
     asset: 'grass',
     flowers: 10,
-    allowedStructures: ["wheat_farm", "dairy_farm", "berry_farm", "mill"]
+    allowedStructures: ["wheat_farm", "dairy_farm", "berry_farm", "mill", "fish_refinery"]
   },
   water: {
     name: 'water',
     nameWithLanguage: 'vesi',
     asset: 'water',
     flowers: 10,
-    allowedStructures: []
+    allowedStructures: ["fishery"]
   },
   field: {
     name: 'field',
@@ -32,7 +32,14 @@ const tileTypes = {
     nameWithLanguage: 'teollisuusalue',
     asset: 'industrial',
     flowers: 10,
-    allowedStructures: ["mill"]
+    allowedStructures: ["mill", "fish_refinery"]
+  },
+  water_field: {
+    name: 'water_field',
+    nameWithLanguage: 'kalakassi',
+    asset: 'water',
+    flowers: 10,
+    allowedStructures: []
   }
 }
 

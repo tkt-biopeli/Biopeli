@@ -29,6 +29,9 @@ export default class Structure {
     this.foundingYear = foundingYear
     this.ownedTiles = []
     this.radiusForTileOwnership = structureType.radiusForTileOwnership
+    this.moveCosts = structureType.moveCosts
+    this.takesOwnershipOf = structureType.takesOwnershipOf
+    this.farmland = structureType.farmland
     this.bordercolCode = bordercolCode
   }
 
