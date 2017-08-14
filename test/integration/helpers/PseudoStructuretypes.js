@@ -132,7 +132,6 @@ const structureTypes = {
     farmland: "water_field"
   },
   fish_refinery: {
-
     type: "refinery",
     name: "fish_refinery",
     nameWithLanguage: "Kalajalostamo",
