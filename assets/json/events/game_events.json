@@ -4,8 +4,7 @@
       "name": "Myllytulva",
       "description": "Myllysi tulvivat",
       "condition": {
-        "name": "TimeLimiter",
-        "notBefore": 96
+        "name": "empty"
       },
       "effects": [
         {
@@ -14,7 +13,7 @@
           "filter": {
             "name": "TilesWithTiletype",
             "tileTypes": [
-              "mill"
+              "industrial"
             ]
           }
         }
