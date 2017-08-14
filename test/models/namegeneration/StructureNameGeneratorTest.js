@@ -10,7 +10,9 @@ describe('Tests for structure name generation', () => {
     randomStub = sinon.stub()
     randomWithBoundsStub = sinon.stub()
 
-    structureType = 'wheat farm'
+    structureType = {
+      nameWithLanguage: 'viljatila'
+    }
 
     parts = [
       ['f00'],
@@ -32,13 +34,6 @@ describe('Tests for structure name generation', () => {
     namegen.randomWithBounds = randomWithBoundsStub
     randomWithBoundsStub.onCall(0).returns(0)
     randomWithBoundsStub.onCall(1).returns(0)
-  })
-
-  it('findType works', () => {
-    assert.equal(namegen.findType('wheat farm'), 'viljatila')
-    assert.equal(namegen.findType('dairy farm'), 'navetta')
-    assert.equal(namegen.findType('berry farm'), 'marjatila')
-    assert.equal(namegen.findType('foo farm'), '')
   })
 
   it('createBuildingName produces name with hyperbole', () => {

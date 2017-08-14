@@ -65,7 +65,7 @@ export default class StructureFactory {
       health: healths.health,
       healthManager: healths.manager,
       ownerName: this.namer.createOwnerName(),
-      structureName: this.namer.createBuildingName(structureType.name),
+      structureName: this.namer.createBuildingName(structureType),
       size: 0,
       structureType: structureType,
       foundingYear: this.gameTimer.currentTimeEvent.year,
