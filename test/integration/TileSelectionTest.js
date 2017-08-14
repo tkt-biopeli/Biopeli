@@ -17,7 +17,7 @@ describe('Integration test: Tile selection shows correctly in Menu', () => {
     gameAdvancer.setTile(0, 0, 'grass')
     gameAdvancer.click(0, 0)
     gameStateChecker.checkSelectedTile(0, 0)
-    gameStateChecker.checkButtonAmountInMenu(3)
+    gameStateChecker.checkButtonAmountInMenu(5)
     gameStateChecker.checkIfTextsExist('Maatyyppi: ruohikko', 'X: 0, Y: 0')
   })
 
@@ -34,7 +34,6 @@ describe('Integration test: Tile selection shows correctly in Menu', () => {
     gameAdvancer.click(0, 0)
     gameStateChecker.checkSelectedTile(0, 0)
     gameStateChecker.checkButtonAmountInMenu(3)
-
     gameAdvancer.click(0, 0)
     gameStateChecker.checkSelectedTile()
     gameStateChecker.checkButtonAmountInMenu(0)
