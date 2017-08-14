@@ -14,37 +14,38 @@ export default class RandomEventHandler {
    * Finds a suitable event from the event list and returns it.
    * If there is none, it returns null.
    * 
-   * @param {integer} numberOfIndexes - the maximum number of events whose
+   * @param {integer} givenAmount - the maximum number of events whose
    * suitability is checked until null is given can be given as a parameter.
    * If left blank, only one event is checked.
    * 
    * @return {RandomEvent} Returns a suitable event or null if none is found.
    */
-  getRandomEvent (numberOfIndexes) {
-    var amount = numberOfIndexes == null ? 1 : numberOfIndexes 
-    // a set of numbers
-    var indexes = this.pickRandomNumbers(amount)
-    return this.findSuitableEvent(indexes) 
+  getRandomEvent (givenAmount) {
+    var amount = givenAmount == null
+      ? 1
+      : givenAmount > this.eventList.length
+        ? this.eventList.length
+        : givenAmount
+    var shuffledEvents = this.shuffleEvents(this.eventList)
+    return this.findSuitableEvent(shuffledEvents, amount) 
   }
 
-  findSuitableEvent (indexes) {
-    for (let i of indexes) {
-      if (this.eventList[i].canHappen()) return this.eventList[i]
+  findSuitableEvent (shuffledEvents, amount) {
+    for (var i = 0; i < amount; i++) {
+      if (shuffledEvents[i].canHappen()) return shuffledEvents[i]
     }
     return null
   }
 
-  // This can be elsewhere
-  pickRandomNumbers (amount) {
-    var numbers = new Set()
-    var i = 0
-    while (i < amount) {
-      var number = this.randomWithBounds(0, this.eventList.length)
-      if (!numbers.has(number)) {
-        numbers.add(number)
-        i++
-      }
+  // Is there a need to maintain the order in the original event list?
+  shuffleEvents (originalArray) {
+    var shuffledArray = originalArray.slice()
+    for (var i = 0; i < shuffledArray.length - 1; i++) {
+      var j = this.randomWithBounds(i, shuffledArray.length)
+      var tempEvent = shuffledArray[i]
+      shuffledArray[i] = shuffledArray[j]
+      shuffledArray[j] = tempEvent
     }
-    return numbers
+    return shuffledArray
   }
 }
