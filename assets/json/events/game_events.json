@@ -1,7 +1,24 @@
 {
-  "game_events" : [
+  "events" : [
     {
-
+      "name": "Myllytulva",
+      "description": "Myllysi tulvivat",
+      "condition": {
+        "name": "TimeLimiter",
+        "notBefore": 96
+      },
+      "effects": [
+        {
+          "name": "TileValueChange",
+          "moistureChange": 10,
+          "filter": {
+            "name": "TilesWithTiletype",
+            "tileTypes": [
+              "mill"
+            ]
+          }
+        }
+      ]
     }
   ]
 }

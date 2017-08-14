@@ -19,5 +19,16 @@ export default {
     xhr.open('POST', server + '/submit_score', true)
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.send(JSON.stringify(body))
+  },
+
+  fetchScores: (server) => { 
+    var xhr = new XMLHttpRequest()
+    xhr.open('GET', server + 'scores.json', false)
+    xhr.send()
+
+    var scores = JSON.parse(xhr.responseText)
+    scores.sort((a, b) => { return b.points - a.points })
+
+    return scores 
   }
 }
