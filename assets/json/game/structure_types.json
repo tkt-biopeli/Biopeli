@@ -96,7 +96,7 @@
       "radiusForTileOwnership": 1,
       "multiplier": 2,
       "reach": 5,
-      "buysFrom": ["wheat farm"],
+      "buysFrom": ["wheat_farm"],
       "moveCosts": {
         "grass": 1,
         "water": 5,
