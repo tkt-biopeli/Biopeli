@@ -172,7 +172,7 @@ export default class GamestateChecker {
    * @param {int} expectedAmount 
    */
   checkButtonAmountInMenu (expectedAmount) {
-    var buttons = this.gameState.menuView.activeButtons
+    var buttons = this.gameState.menuView.activeMenuitems
     assert.equal(expectedAmount, buttons.length)
   }
 

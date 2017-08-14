@@ -11,13 +11,10 @@ export default class MenuView {
     this.game = game
     this.layout = layout
     this.backgroundInTheMiddle = backgroundInTheMiddle
-
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
     this.game.world.bringToTop(this.menuViewGroup)
-
     this.activeMenuitems = new Map()
-
     this.createBackground(background)
   }
 
