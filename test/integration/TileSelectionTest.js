@@ -26,7 +26,7 @@ describe('Integration test: Tile selection shows correctly in Menu', () => {
     gameAdvancer.click(0, 0)
     gameStateChecker.checkSelectedTile(0, 0)
     gameStateChecker.checkButtonAmountInMenu(1)
-    gameStateChecker.checkIfTextsExist('Maatyyppi: pelto', 'X: 0, Y: 0', 'Rakennus: viljatila')
+    gameStateChecker.checkIfTextsExist('Maatyyppi: pelto', 'X: 0, Y: 0', 'viljatila')
   })
 
   it('Selecting chosen tile again empties the selection', () => {
