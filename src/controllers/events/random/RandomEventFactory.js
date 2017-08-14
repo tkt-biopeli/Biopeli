@@ -13,8 +13,10 @@ import ValuesTileFilter from './filters/ValuesTileFilter'
 
 import TileValueEffect from './effects/TileValueEffect'
 import MoneyEffect from './effects/MoneyEffect'
+import PopulationEffect from './effects/PopulationEffect'
 
 import TimeCondition from './conditions/TimeCondition'
+import PopulationCondition from './conditions/PopulationCondition'
 
 export default class RandomEventFactory {
   constructor ({gameState}) {
@@ -36,12 +38,14 @@ export default class RandomEventFactory {
     this.conditionCreators.set('empty', EmptyCondition)
 
     this.conditionCreators.set('TimeLimiter', TimeCondition)
+    this.conditionCreators.set('PopulationLimiter', PopulationCondition)
   }
 
   initEffects () {
     this.effectCreators.set('empty', EmptyEffect)
 
     this.effectCreators.set('MoneyChange', MoneyEffect)
+    this.effectCreators.set('PopulationChange', PopulationEffect)
     this.effectCreators.set('TileValueChange', TileValueEffect)
   }
 
@@ -107,6 +111,7 @@ export default class RandomEventFactory {
 
   createPart (name, blueprint) {
     // Checks if creator list contains the value. If not, use default value
+    if (!blueprint) { blueprint = { name: this.defaultValue } }
     var key = this[name + 'Creators'].has(blueprint.name) ? blueprint.name : this.defaultValue
     // Searches constructor with given name from the map and instantiates it
     return new (this[name + 'Creators'].get(key))({gameState: this.gameState, json: blueprint})

@@ -19,6 +19,18 @@
           }
         }
       ]
+    },
+    {
+      "name": "Rutto",
+      "description": "Kaupungissa jyllää kulkutauti",
+      "condition": {
+        "name": "PopulationLimiter",
+        "notBefore": 550
+      },
+      "effects": [
+        {"name": "PopulationChange", "changePercentage": 0.5
+        }
+      ]
     }
   ]
 }
