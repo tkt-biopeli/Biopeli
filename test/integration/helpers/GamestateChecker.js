@@ -136,7 +136,7 @@ export default class GamestateChecker {
     var selected = this.menuController.state.get('selectedTile')
 
     if (x == null) {
-      assert(selected == null)
+      assert(selected == null, 'Tile thought to be null but wasn\'t')
     } else {
       assert.equal(x, selected.x)
       assert.equal(y, selected.y)

@@ -121,8 +121,8 @@ export default class Controller {
         name: name,
         functionToCall: functionToCall,
         context: context,
-        height: this.style.buttonHeight,
-        width: this.style.buttonWidth,
+        width: this.game.cache.getImage(asset).width,
+        height: this.game.cache.getImage(asset).height,
         fontSize: this.style.mediumFont,
         asset: asset
       })
