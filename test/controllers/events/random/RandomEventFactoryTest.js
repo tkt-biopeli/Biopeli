@@ -1,24 +1,24 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import RandomEventCreator from '../../../../src/controllers/events/random/RandomEventCreator'
+import RandomEventFactory from '../../../../src/controllers/events/random/RandomEventFactory'
 
-describe('Random event creator tests', ()=>{
-  var eventCreator, creatorStub
+describe('Random event factory tests', ()=>{
+  var eventCreator, creatorStub, cspy, fspy, espy
   
   beforeEach(()=>{
-    creatorStub = {
-      i: 0,
-      create: function() { return this.i++ }
-    }
-    eventCreator = new RandomEventCreator({
-      conditionCreator: creatorStub,
-      filterCreator: creatorStub,
-      effectCreator: creatorStub
-    })
+    cspy = sinon.spy()
+    fspy = sinon.spy()
+    espy = sinon.spy()
 
-    eventCreator.conditionCreators.set('test', creatorStub.create)
-    eventCreator.filterCreators.set('test', creatorStub.create)
-    eventCreator.effectCreators.set('test', creatorStub.create)
+    eventCreator = new RandomEventFactory({})
+
+    eventCreator.conditionFactory = creatorStub
+    eventCreator.filterFactory = creatorStub
+    eventCreator.effectFactory = creatorStub
+
+    eventCreator.conditionCreators.set('test', cspy)
+    eventCreator.filterCreators.set('test', fspy)
+    eventCreator.effectCreators.set('test', espy)
   })
 
   it('The objects are created correctly', ()=>{
@@ -77,19 +77,13 @@ describe('Random event creator tests', ()=>{
     assert.equal(3, answers.length)
 
     for(let i = 0 ; i < 3 ; i++) {
-      let answer = answers[i]
-      assert.equal(5*i, answer.condition)
-      
-      let efs = answer.effects
-      assert.equal(2, efs.length)
-      for(let j = 0 ; j < 2 ; j++){
-        let ef = efs[j]
-        assert.equal(5*i + j*2 + 1, ef.effect)
-        assert.equal(5*i + j*2 + 2, ef.filter)
-      }
-
+      var answer = answers[i]
       assert.equal('n'+i, answer.name)
       assert.equal('d'+i, answer.description)
     }
+
+    assert.equal(6, espy.callCount)
+    assert.equal(6, fspy.callCount)
+    assert.equal(3, cspy.callCount)
   })
 })

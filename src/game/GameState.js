@@ -5,10 +5,7 @@ import StructureFactory from '../models/structure/StructureFactory'
 import PurchaseManager from '../models/PurchaseManager'
 import TileFinder from '../models/map/TileFinder'
 
-import RandomEventCreator from '../controllers/events/random/RandomEventCreator'
-import ConditionCreator from '../controllers/events/random/ConditionCreator'
-import EffectCreator from '../controllers/events/random/EffectCreator'
-import FilterCreator from '../controllers/events/random/FilterCreator'
+import RandomEventFactory from '../controllers/events/random/RandomEventFactory'
 import RandomEventHandler from '../controllers/events/random/RandomEventHandler'
 
 import MapView from '../view/map/MapView'
@@ -35,6 +32,8 @@ import MulticontentController from '../controllers/menucontrol/MulticontentContr
 import StackingLayout from '../view/menu/layouts/StackingLayout'
 import StaticLayout from '../view/menu/layouts/StaticLayout'
 import Style from '../view/menu/Style'
+
+import utils from '../utils'
 
 /**
  * Description goes here
@@ -79,14 +78,6 @@ export default class GameState {
       menuController: this.menuController
     })
 
-    this.mapView = new MapView({
-      game: this.state,
-      map: this.map,
-      menuController: this.menuController,
-      viewWidthPx: this.state.game.width - config.sideMenuSettings.menuWidth,
-      viewHeightPx: this.state.game.height,
-      config: config
-    })
     this.eventController.addListener('structureBuilt', this.mapView.structureCreated, this.mapView)
 
     this.inputHandler = new InputHandler({
@@ -104,14 +95,10 @@ export default class GameState {
       gameEvents: this.gameEvents
     })
 
-    this.bottomMenuController = new SingleController({
-      game: this.state,
-      style: new Style({
-        buttonWidth: config.bottomMenuSettings.buttonWidth,
-        buttonHeight: config.bottomMenuSettings.buttonHeight
-      }),
-      menuView: this.bottomMenuView,
-      content: new BottomMenuContent({mapView: this.mapView, menuController: this.menuController})
+    this.randomEventFactory = new RandomEventFactory({gameState: this})
+    this.randomEventHandler = new RandomEventHandler({
+      eventList: this.randomEventFactory.createEvents(this.gameData.gameEvents),
+      randomWithBounds: utils.randomWithBounds
     })
 
     this.gameTimer.addListener(this.gameTimerListener)
@@ -292,14 +279,24 @@ export default class GameState {
       contents: [this.cityContent, this.tileContent, this.buildStructureContent,
         this.optionsContent, this.buildMenuContent]
     })
-
-    var randomEventCreator = new RandomEventCreator({
-      conditionCreator: new ConditionCreator(),
-      effectCreator: new EffectCreator(),
-      filterCreator: new FilterCreator()
+    
+    this.mapView = new MapView({
+      game: this.state,
+      map: this.map,
+      menuController: this.menuController,
+      viewWidthPx: this.state.game.width - config.sideMenuSettings.menuWidth,
+      viewHeightPx: this.state.game.height,
+      config: config
     })
-    this.randomEventHandler = new RandomEventHandler({
-      eventList: randomEventCreator.createEvents(this.gameData.gameEvents)
+
+    this.bottomMenuController = new SingleController({
+      game: this.state,
+      style: new Style({
+        buttonWidth: config.bottomMenuSettings.buttonWidth,
+        buttonHeight: config.bottomMenuSettings.buttonHeight
+      }),
+      menuView: this.bottomMenuView,
+      content: new BottomMenuContent({mapView: this.mapView, menuController: this.menuController})
     })
   }
 
