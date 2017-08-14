@@ -121,7 +121,7 @@
 
   "randomEventSettings": {
     "minTime": 12,
-    "maxTime": 12,
+    "maxTime": 144,
     "maxSearched": 10,
     "eventContentIndex": -1
   }
