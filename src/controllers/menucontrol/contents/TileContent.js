@@ -9,7 +9,7 @@ export default class TileContent extends Content {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor ({ demandFunction, purchaseManager, topBarController, structureTypes, texts }) {
+  constructor({ demandFunction, purchaseManager, topBarController, structureTypes, texts }) {
     super()
     this.demandFunction = demandFunction
     this.purchaseManager = purchaseManager
@@ -110,29 +110,33 @@ export default class TileContent extends Content {
 
   createBuildingButtons (tile) {
     this.section('actions')
-    
-    this.owner.changeButton(
-      'Alkutuotanto', 4,
-      this.owner.wrapFunction(
-        this.owner.addState, this.owner, 
-        'whatType', 'buildProducer'),
-      this, 'emptyButton'
-    )
-        
-    this.owner.changeButton(
-      'Jalostamo', 4,
-      this.owner.wrapFunction(
-        this.owner.addState, this.owner, 
-        'whatType', 'buildRefinery'),
-      this, 'emptyButton'
-    )
-        
-    this.owner.changeButton(
-      'Erikoisrakennus', 4,
-      this.owner.wrapFunction(
-        this.owner.addState, this.owner, 
-        'whatType', 'buildSpecial'),
-      this, 'emptyButton'
-    )
+
+    var x = tile.tileType.name
+    if (x === 'grass' || x === 'water') {
+      this.owner.changeButton(
+        'Alkutuotanto', 4,
+        this.owner.wrapFunction(
+          this.owner.addState, this.owner,
+          'whatType', 'buildProducer'),
+        this, 'emptyButton'
+      )
+    }
+
+    if (x !== 'water' && x !== 'forest') {
+      this.owner.changeButton(
+        'Jalostamo', 4,
+        this.owner.wrapFunction(
+          this.owner.addState, this.owner,
+          'whatType', 'buildRefinery'),
+        this, 'emptyButton'
+      )
+      this.owner.changeButton(
+        'Erikoisrakennus', 4,
+        this.owner.wrapFunction(
+          this.owner.addState, this.owner,
+          'whatType', 'buildSpecial'),
+        this, 'emptyButton'
+      )
+    }
   }
 }

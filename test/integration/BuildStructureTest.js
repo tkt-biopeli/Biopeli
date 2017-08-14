@@ -95,7 +95,7 @@ describe('Integration test: Building structures', () => {
   it('Can not build producer on tile that is owned', () => {
     gameAdvancer.buildBuilding(1, 1, 'grass', 1, 1)
     gameAdvancer.clickTile(1, 2)
-    gameStateChecker.checkButtonAmountInMenu(0)
+    gameStateChecker.checkButtonAmountInMenu(2)
   })
 
   it('Building a farm reduces the total amount of money', () => {
