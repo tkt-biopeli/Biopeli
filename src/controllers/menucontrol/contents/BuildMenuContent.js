@@ -12,7 +12,7 @@ export default class BuildMenuContent extends Content {
     } else if (this.owner.stateValue('whatType') === 'buildRefinery') {
       this.createBuildRefineryButtons()
     } else if (this.owner.stateValue('whatType') === 'buildSpecial') {
-
+      this.createBuildRefineryButtons()
     }
   }
 
