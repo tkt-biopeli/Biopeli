@@ -9,7 +9,7 @@ export default class TileContent extends Content {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor({ demandFunction, purchaseManager, topBarController, structureTypes, texts }) {
+  constructor ({ demandFunction, purchaseManager, topBarController, structureTypes, texts }) {
     super()
     this.demandFunction = demandFunction
     this.purchaseManager = purchaseManager

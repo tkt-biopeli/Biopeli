@@ -41,8 +41,7 @@ export default class extends Phaser.State {
       structureTypes: this.gameData.structureTypes,
       texts: this.gameData.texts,
       gameData: this.gameData
-    })
-    
+    }) 
   }
 
   /**

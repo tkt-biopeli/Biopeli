@@ -114,9 +114,12 @@ export default class StructureFactory {
   }
 
   buyLand (structure) {
-    let tiles = this.tileFinder.getTilesForLandOwnership(structure.tile, structure.radiusForTileOwnership, structure.moveCosts)
+    let tiles = this.tileFinder.getTilesForLandOwnership(structure.tile, 
+      structure.radiusForTileOwnership, structure.moveCosts)
     for (let capsule of tiles) {
-      if (this.landCanChangeOwnership(capsule.tile, structure)) this.changeOwnership(structure, capsule.tile)
+      if (this.landCanChangeOwnership(capsule.tile, structure)) {
+        this.changeOwnership(structure, capsule.tile)
+      }
     }
   }
 
@@ -139,12 +142,14 @@ export default class StructureFactory {
     let newStype = newStructure.structureType.type
     if (newStype === 'refinery') {
       if (tmpTile.structure === newStructure) return true
-      if (tmpTile.structure === null && newStructure.takesOwnershipOf.includes(tmpTile.tileType.name)) return true
+      if (tmpTile.structure === null && newStructure.takesOwnershipOf.includes(
+        tmpTile.tileType.name)) return true
     }
     if (newStype === 'producer_structure') {
       if (tmpTile.structure === newStructure) return true
       if (tmpTile.structure !== null) return false
-      if (tmpTile.owner === null && newStructure.takesOwnershipOf.includes(tmpTile.tileType.name)) return true
+      if (tmpTile.owner === null && newStructure.takesOwnershipOf.includes(
+        tmpTile.tileType.name)) return true
     }
     return false
   }

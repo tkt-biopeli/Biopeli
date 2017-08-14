@@ -24,9 +24,9 @@ export default class RandomEventHandler {
     var event = this.eventRandomizer.getRandomEvent(this.maxSearched)
     if (event != null) {
       event.happen()
-      /* Venaa contentia
+      /*
       this.menuController.addState('event', event)
-      this.menuController.changeContent(this.eventContentIndex)*/
+      this.menuController.changeContent(this.eventContentIndex) */
     }
   }
 }
