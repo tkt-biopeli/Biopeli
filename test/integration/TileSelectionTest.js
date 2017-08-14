@@ -17,14 +17,14 @@ describe('Integration test: Tile selection shows correctly in Menu', () => {
     gameAdvancer.setTile(0, 0, 'grass')
     gameAdvancer.click(0, 0)
     gameStateChecker.checkSelectedTile(0, 0)
-    gameStateChecker.checkButtonAmountInMenu(5)
+    gameStateChecker.checkButtonAmountInMenu(3)
     gameStateChecker.checkIfTextsExist('Maatyyppi: ruohikko', 'X: 0, Y: 0')
   })
 
   it('Selecting tile with built structure shows correct options in Menu', () => {
-    gameAdvancer.buildBuilding(0, 0, 'grass', 1)
+    gameAdvancer.buildBuilding(0, 0, 'grass', 1, 1)
     gameAdvancer.click(0, 0)
-    gameStateChecker.checkSelectedTile()
+    gameStateChecker.checkSelectedTile(0, 0)
     gameStateChecker.checkButtonAmountInMenu(1)
     gameStateChecker.checkIfTextsExist('Maatyyppi: pelto', 'X: 0, Y: 0', 'Rakennus: viljatila')
   })
