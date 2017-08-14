@@ -1,10 +1,11 @@
 export default class ViewTile {
-  constructor ({ game, modelTile, dampnessCol, fertilityCol, tileSize }) {
+  constructor ({ game, modelTile, dampnessCol, fertilityCol, tileSize, borderColour }) {
     this.game = game
     this.modelTile = modelTile
     this.dampnessCol = dampnessCol
     this.tileSize = tileSize
     this.fertilityCol = fertilityCol
+    this.borderColour = borderColour
     this.intialize()
     // this.lived = 0
   }
@@ -20,7 +21,7 @@ export default class ViewTile {
     this.highlights = this.tileSprite.addChild(this.game.make.sprite(0, 0))
   }
 
-  update (flowers, dampness, fertility, redrawBorders, redraw) {
+  update (flowers, dampness, fertility, redrawBorders, redraw, borderColour) {
     if (this.modelTile.structure != null && this.structureSprite == null) {
       this.structureSprite = this.makeStructureSprite()
       this.hammerSprite = this.makeHammerSprite()
@@ -28,6 +29,8 @@ export default class ViewTile {
       this.structureSprite.destroy()
       this.structureSprite = null
     }
+
+    this.borderColour = borderColour
 
     if (redraw) {
       this.destroy()
@@ -68,13 +71,13 @@ export default class ViewTile {
     if (this.modelTile.owner === null) return null
 
     var border = this.game.make.graphics()
-    border.beginFill(0x000000, 1)
+    border.beginFill(this.borderColour, 1)
 
     var tile = this.modelTile
     var structure = this.modelTile.owner
     var width = this.tileSize.width * 2
     var height = this.tileSize.height * 2
-    var thickness = 3
+    var thickness = 6
 
     if (!structure.ownsTileAt(tile.x + 1, tile.y)) {
       border.drawRect(width - thickness, 0, thickness, height)

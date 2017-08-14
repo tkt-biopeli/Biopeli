@@ -6,6 +6,7 @@ export default class Palette {
     this.dampnessRainbow.setSpectrum('sienna', 'sandybrown', 'aqua') 
     this.fertilityRainbow = new Rainbow()
     this.fertilityRainbow.setSpectrum('red', 'dimgray', 'lime')
+    this.randomRainbow = new Rainbow()
   }
 
   getDampnessColour (moisture) {
@@ -14,5 +15,9 @@ export default class Palette {
 
   getFertilityColour (fertility) {
     return '0x' + this.fertilityRainbow.colourAt(fertility)
+  }
+
+  getBorderColour (borderColour) {
+    return '0x' + this.randomRainbow.colourAt(borderColour)
   }
 }
