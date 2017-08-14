@@ -79,6 +79,7 @@
       "type": "image",
       "name": "lumber_yard",
       "file": "assets/images/structures/lumber_yard.png"
+    },
     {
       "type": "image",
       "name": "fishery",
