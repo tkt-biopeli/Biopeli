@@ -6,6 +6,7 @@ import PurchaseManager from '../models/PurchaseManager'
 import TileFinder from '../models/map/TileFinder'
 
 import RandomEventFactory from '../controllers/events/random/RandomEventFactory'
+import RandomEventHandler from '../controllers/events/random/RandomEventHandler'
 import EventRandomizer from '../controllers/events/random/EventRandomizer'
 
 import MapView from '../view/map/MapView'
@@ -87,18 +88,24 @@ export default class GameState {
       mapView: this.mapView
     })
 
+    this.randomEventFactory = new RandomEventFactory({gameState: this})
+    this.eventRandomizer = new EventRandomizer({
+      eventList: this.randomEventFactory.createEvents(this.gameData.gameEvents),
+      randomWithBounds: utils.randomWithBounds
+    })
+    this.randomEventHandler = new RandomEventHandler({
+      eventRandomizer: this.eventRandomizer,
+      menuController: this.menuController,
+      randomEventSettings: config.randomEventSettings
+    })
+    
     this.gameTimerListener = new GameTimerListener({
       city: this.city,
       player: this.player,
       menuController: this.menuController,
       topBarController: this.topBarController,
-      gameEvents: this.gameEvents
-    })
-
-    this.randomEventFactory = new RandomEventFactory({gameState: this})
-    this.EventRandomizer = new EventRandomizer({
-      eventList: this.randomEventFactory.createEvents(this.gameData.gameEvents),
-      randomWithBounds: utils.randomWithBounds
+      gameEvents: this.gameEvents,
+      randomEventHandler: this.randomEventHandler
     })
 
     this.gameTimer.addListener(this.gameTimerListener)

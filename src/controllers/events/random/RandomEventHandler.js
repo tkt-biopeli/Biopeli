@@ -7,7 +7,8 @@ export default class RandomEventHandler {
 
     this.timeWindowRandomizer = new TimeWindowRandomizer({
       min: randomEventSettings.minTime,
-      max: randomEventSettings.maxTime
+      max: randomEventSettings.maxTime,
+      currentTime: {serialNumber: 0}
     })
     this.maxSearched = randomEventSettings.maxSearched
     this.eventContentIndex = randomEventSettings.eventContentIndex
