@@ -35,12 +35,12 @@ export default class StructureNameGenerator {
    */
   createBuildingName (structureType) {
     var end = this.randomWithBounds(0, this.endAdjectives.length)
-    var type = structureType.nameWithLanguage
+    var typeName = structureType.nameWithLanguage
     var hyper = this.randomWithBounds(0, this.hyperboles.length)
     if (this.random() < 0.25) {
       var tmp = this.endAdjectives[end].toLowerCase()
-      return this.hyperboles[hyper] + '-' + tmp + ' ' + type
+      return this.hyperboles[hyper] + '-' + tmp + ' ' + typeName
     }
-    return this.endAdjectives[end] + ' ' + type
+    return this.endAdjectives[end] + ' ' + typeName
   }
 }
