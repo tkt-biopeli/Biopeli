@@ -1,27 +1,25 @@
 import { createCircle } from '../../logic/Functions'
+import TimeWindowRandomizer from '../../logic/TimeWindowRandomizer'
 
 export default class HealthManager {
   constructor ({ purchaseManager, health, minRuinTime, 
-      maxRuinTime, buildingCost, priceMultiplier }) {
+      maxRuinTime, buildingCost, priceMultiplier, currentTime }) {
     this.purchaseManager = purchaseManager
 
+    this.timeWindow = new TimeWindowRandomizer({
+      min: minRuinTime,
+      max: maxRuinTime,
+      currentTime: currentTime
+    })
     this.health = health
-    this.min = minRuinTime
-    this.difference = maxRuinTime - minRuinTime
 
     this.maxCost = buildingCost * priceMultiplier
     this.priceFunction = createCircle(0, 1, 1, false)
   }
 
-  calculateNextRuin (timeEvent) {
-    this.nextRuin = timeEvent.serialNumber + this.min + 
-      Math.floor(this.rand() * (this.difference + 1))
-  }
-
   checkRuin (timeEvent) {
-    if (timeEvent.serialNumber >= this.nextRuin) {
+    if (this.timeWindow.tryNext(timeEvent)) {
       this.health.loseOne()
-      this.calculateNextRuin(timeEvent)
     }
   }
 
@@ -35,6 +33,4 @@ export default class HealthManager {
       this.priceFunction(1 - this.health.percent()) * this.maxCost
     )
   }
-
-  rand () { return Math.random() }
 }

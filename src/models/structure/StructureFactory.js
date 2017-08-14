@@ -90,9 +90,9 @@ export default class StructureFactory {
       maxRuinTime: this.maxRuin,
       purchaseManager: this.purchaseManager,
       buildingCost: structureType.cost,
-      priceMultiplier: this.priceMultiplier
+      priceMultiplier: this.priceMultiplier,
+      currentTime: this.gameTimer.currentTimeEvent
     })
-    manager.calculateNextRuin(this.gameTimer.currentTimeEvent)
 
     return {health: health, manager: manager}
   }
