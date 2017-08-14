@@ -16,7 +16,7 @@ describe('Integration test: Building structures', () => {
     gameAdvancer.clickTile(1, 1)
     gameStateChecker.checkButtonAmountInMenu(3) // 2
     gameAdvancer.clickNthButton(1)
-    gameStateChecker.checkButtonAmountInMenu(7) // 3
+    gameStateChecker.checkButtonAmountInMenu(3)
     gameAdvancer.clickNthButton(1)
     gameStateChecker.checkButtonAmountInMenu(2)
     gameAdvancer.clickNthButton(1)
