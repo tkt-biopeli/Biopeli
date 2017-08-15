@@ -10,6 +10,12 @@
     "back": "Takaisin"
   },
 
+  "structureCategories": {
+    "production": "Alkutuotanto",
+    "refinery": "Jalostamo",
+    "special": "Erikoisrakennus"
+  },
+
   "buildStructureTexts": {
     "structureType": "Tyyppi",
     "continuousProduction": "Tuotanto jatkuvaa",

@@ -1,7 +1,6 @@
 {
   "structure_types": [
     {
-      "id": "0001",
       "type": "producer_structure",
       "name": "wheat_farm",
       "nameWithLanguage": "viljatila",
@@ -29,7 +28,6 @@
       "farmland": "field"
     },
     {
-      "id": "0002",
       "type": "producer_structure",
       "name": "dairy_farm",
       "nameWithLanguage": "maitotila",
@@ -57,7 +55,6 @@
       "farmland": "field"
     },
     {
-      "id": "0003",
       "type": "producer_structure",
       "name": "berry_farm",
       "nameWithLanguage": "marjatila",
@@ -85,7 +82,6 @@
       "farmland": "field"
     },
     {
-      "id": "0004",
       "type": "refinery",
       "name": "mill",
       "nameWithLanguage": "mylly",
@@ -109,7 +105,6 @@
       "farmland": "industrial"
     },
     {
-      "id": "0005",
       "type": "refinery",
       "name": "dairy",
       "nameWithLanguage": "meijeri",
@@ -133,7 +128,6 @@
       "farmland": "industrial"
     },
     {
-      "id": "0006",
       "type": "producer_structure",
       "name": "herb_farm",
       "nameWithLanguage": "yrttitila",
@@ -161,7 +155,6 @@
       "farmland": "field"
     },
     {
-      "id": "0007",
       "type": "producer_structure",
       "name": "mushroom_farm",
       "nameWithLanguage": "sienitila",
@@ -189,7 +182,6 @@
       "farmland": "forest"
     },
     {
-      "id": "0008",
       "type": "producer_structure",
       "name": "lumber_yard",
       "nameWithLanguage": "saha",
@@ -217,7 +209,6 @@
       "farmland": "forest"
     },
     {
-      "id": "0009",
       "type": "producer_structure",
       "name": "fishery",
       "nameWithLanguage": "Kalanviljelylaitos",
@@ -245,10 +236,9 @@
       "farmland": "water_field"
     },
     {
-      "id": "0010",
       "type": "refinery",
       "name": "fish_refinery",
-      "nameWithLanguage": "Kalajalostamo",
+      "nameWithLanguage": "kalajalostamo",
       "asset": "fish_refinery",
       "health": 20,
       "pollution": 2,
@@ -266,6 +256,28 @@
         "industrial": 1
       },
       "takesOwnershipOf": ["grass"],
+      "farmland": "industrial"
+    },
+    {
+      "type": "special_structure",
+      "name": "junkyard",
+      "nameWithLanguage": "kaatopaikka",
+      "asset": "junkyard",
+      "health": 20,
+      "pollution": 2,
+      "cost": 20000,
+      "radiusForTileOwnership": 1,
+      "multiplier": 2,
+      "reach": 5,
+      "moveCosts": {
+        "grass": 1,
+        "water": 5,
+        "water_field": 5,
+        "forest": 2,
+        "field": 1,
+        "industrial": 1
+      },
+      "takesOwnershipOf": ["grass", "field", "industrial"],
       "farmland": "industrial"
     }
   ]
