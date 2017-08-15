@@ -7,6 +7,7 @@ import EmptyCondition from './conditions/EmptyCondition'
 import And from './filters/common/And'
 import Or from './filters/common/Or'
 import Complement from './filters/common/Complement'
+import RandomFilter from './filters/common/RandomFilter'
 import TiletypeTileFilter from './filters/tile/TiletypeTileFilter'
 import AllTileFilter from './filters/tile/AllTileFilter'
 import ValuesTileFilter from './filters/tile/ValuesTileFilter'
@@ -55,6 +56,7 @@ export default class RandomEventFactory {
     this.filterCreators.set('And', And)
     this.filterCreators.set('Or', Or)
     this.filterCreators.set('Complement', Complement)
+    this.filterCreators.set('Random', RandomFilter)
 
     this.filterCreators.set('TilesWithTiletype', TiletypeTileFilter)
     this.filterCreators.set('TilesWithValues', ValuesTileFilter)

@@ -1,6 +1,6 @@
-import LogicFilter from './LogicFilter'
+import RecursiveFilter from './RecursiveFilter'
 
-export default class ListLogicFilter extends LogicFilter {
+export default class ListLogicFilter extends RecursiveFilter {
   constructor (gameState, json) {
     super(gameState)
 

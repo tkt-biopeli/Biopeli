@@ -1,4 +1,4 @@
-export default class LogicFilter {
+export default class RecursiveFilter {
   constructor (gameState) {
     this.eventFactory = gameState.randomEventFactory
   }
