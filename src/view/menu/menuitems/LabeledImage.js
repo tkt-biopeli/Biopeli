@@ -16,7 +16,7 @@ export default class LabeledImage {
       Math.floor(x + width / 2),
       Math.floor(y + height / 2), label, this.style, viewGroup)
     this.text.anchor.set(0.5, 0.5)
-    this.text.wordWrap
+    this.text.wordWrap = true
     this.text.wordWrapWidth = width
 
     this.x = x

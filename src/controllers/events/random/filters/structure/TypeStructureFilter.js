@@ -1,7 +1,7 @@
 import StructureFilter from './StructureFilter'
 
-export default class TypeStructureFilter extends StructureFilter{
-  constructor ({gameState, json}) {
+export default class TypeStructureFilter extends StructureFilter {
+  constructor ({ gameState, json }) {
     super(gameState)
 
     this.types = json.types
@@ -9,7 +9,7 @@ export default class TypeStructureFilter extends StructureFilter{
 
   isValid (structure) {
     for (let type of this.types) {
-      if(type === structure.structureType.type) return true
+      if (type === structure.structureType.type) return true
     }
 
     return false
