@@ -8,45 +8,31 @@ export default class BuildMenuContent extends Content {
 
   createSections () {
     if (this.owner.stateValue('whatType') === 'buildProducer') {
-      this.createBuildProducerButtons()
+      this.createBuildStructureCategoryButtons('producer_structure')
     } else if (this.owner.stateValue('whatType') === 'buildRefinery') {
-      this.createBuildRefineryButtons()
+      this.createBuildStructureCategoryButtons('refinery')
     } else if (this.owner.stateValue('whatType') === 'buildSpecial') {
-      this.createBuildRefineryButtons()
+      this.createBuildStructureCategoryButtons('special')
     }
   }
 
-  createBuildProducerButtons () {
+  createBuildStructureCategoryButtons (category) {
     this.section('actions')
     var tile = this.owner.stateValue('selectedTile')
     var allowedStructures = tile.tileType.allowedStructures
     for (let structureTypeName of allowedStructures) {
       var structureType = this.structureTypes[structureTypeName]
-      if (structureType.type === 'producer_structure') {
-        this.owner.changeButton(
-          structureType.nameWithLanguage, 2,
-          this.owner.wrapFunction(
-            this.owner.addState, this.owner, 'structureType', structureType),
-          this, 'smallButton'
-        )
-      }
+      this.addStructureTypeButton(structureType, category)
     }
   }
 
-  createBuildRefineryButtons () {
-    this.section('actions')
-    var tile = this.owner.stateValue('selectedTile')
-    var allowedStructures = tile.tileType.allowedStructures
-    for (let structureTypeName of allowedStructures) {
-      var structureType = this.structureTypes[structureTypeName]
-      if (structureType.type === 'refinery') {
-        this.owner.changeButton(
-          structureType.nameWithLanguage, 2,
-          this.owner.wrapFunction(
-            this.owner.addState, this.owner, 'structureType', structureType),
-          this, 'smallButton'
-        )
-      }
-    }
+  addStructureTypeButton (structureType, category) {
+    if (structureType.type !== category) return null
+    this.owner.changeButton(
+      structureType.nameWithLanguage, 2,
+      this.owner.wrapFunction(
+        this.owner.addState, this.owner, 'structureType', structureType),
+      this, 'smallButton'
+    )
   }
 }

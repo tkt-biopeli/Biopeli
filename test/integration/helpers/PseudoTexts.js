@@ -39,6 +39,12 @@ export default {
   },
 
   tileContentTexts: {
+    structureCategories: {
+      production: "Alkutuotanto",
+      refinery: "Jalostamo",
+      special: "Erikoisrakennus"
+    },
+
     tileInformationTexts: {
       groundType: "Maatyyppi",
       flowers: "Kukat",

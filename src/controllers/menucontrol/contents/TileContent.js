@@ -112,7 +112,7 @@ export default class TileContent extends Content {
     var x = tile.tileType.name
     if (x === 'grass' || x === 'water') {
       this.owner.changeButton(
-        'Alkutuotanto', 4,
+        this.texts.structureCategories.production, 4,
         this.owner.wrapFunction(
           this.owner.addState, this.owner,
           'whatType', 'buildProducer'),
@@ -122,14 +122,14 @@ export default class TileContent extends Content {
 
     if (x !== 'water' && x !== 'forest') {
       this.owner.changeButton(
-        'Jalostamo', 4,
+        this.texts.structureCategories.refinery, 4,
         this.owner.wrapFunction(
           this.owner.addState, this.owner,
           'whatType', 'buildRefinery'),
         this, 'emptyButton'
       )
       this.owner.changeButton(
-        'Erikoisrakennus', 4,
+        this.texts.structureCategories.special, 4,
         this.owner.wrapFunction(
           this.owner.addState, this.owner,
           'whatType', 'buildSpecial'),
