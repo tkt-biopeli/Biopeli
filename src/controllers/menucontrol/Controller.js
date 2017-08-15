@@ -2,6 +2,7 @@ import TextComponent from './components/TextComponent'
 import ButtonComponent from './components/ButtonComponent'
 import AnimatedBarComponent from './components/AnimatedBarComponent'
 import IconComponent from './components/IconComponent'
+import LabeledImageComponent from './components/LabeledImageComponent'
 import Section from './components/MenuSection'
 import ResetDecorator from './helpers/ResetDecorator'
 
@@ -100,6 +101,16 @@ export default class Controller {
       height: height,
       vertical: vertical,
       percent: percent
+    }))
+  }
+
+  labeledImage (text, asset) {
+    this.currentSection.components.push(new LabeledImageComponent({
+      text: text,
+      fontSize: this.style.mediumFont,
+      asset: asset,
+      assetHeight: this.game.cache.getImage(asset).height,
+      assetWidth: this.game.cache.getImage(asset).width
     }))
   }
 

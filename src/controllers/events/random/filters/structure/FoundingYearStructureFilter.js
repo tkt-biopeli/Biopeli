@@ -1,7 +1,7 @@
 import StructureFilter from './StructureFilter'
 
-export default class FoundingYearStructureFilter extends StructureFilter{
-  constructor ({gameState, json}) {
+export default class FoundingYearStructureFilter extends StructureFilter {
+  constructor ({ gameState, json }) {
     super(gameState)
 
     this.min = json.min
@@ -12,11 +12,11 @@ export default class FoundingYearStructureFilter extends StructureFilter{
     let year = structure.foundingYear
 
     if (this.min != null) {
-      if(year < this.min) return false
+      if (year < this.min) return false
     }
 
-    if(this.max != null) {
-      if(year > this.max) return false
+    if (this.max != null) {
+      if (year > this.max) return false
     }
 
     return true

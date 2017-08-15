@@ -6,7 +6,7 @@ export default class StructureFilter {
   affected () {
     var affected = []
     for (let structure of this.player.structures.values) {
-      if(this.isValid(structure)) affected.push(structure)
+      if (this.isValid(structure)) affected.push(structure)
     }
 
     return affected
