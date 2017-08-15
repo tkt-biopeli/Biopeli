@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import ValuesTileFilter from '../../../../src/controllers/events/random/filters/ValuesTileFilter'
+import ValuesTileFilter from '../../../../src/controllers/events/random/filters/tile/ValuesTileFilter'
 
 describe('Value tile filter and tile tile filter tests', ()=>{
   var cmt = (fertility, moisture, flowers) => ({
