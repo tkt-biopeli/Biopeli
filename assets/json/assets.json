@@ -22,6 +22,11 @@
     },
     {
       "type": "image",
+      "name": "windmill",
+      "file": "assets/images/structures/windmill.png"
+    },
+    {
+      "type": "image",
       "name": "smallButton",
       "file": "assets/images/buttons/small_button.png"
     },
