@@ -53,17 +53,21 @@ export default class TileContent extends Content {
 
   structureInformation (structure) {
     this.section('structure')
-    this.text(
-      this.texts.structureInformationTexts.structure + ': ' +
+    this.text(this.texts.structureInformationTexts.structure + ': ' +
       structure.structureName)
-    this.text(
-      this.texts.structureInformationTexts.foundingYear + ': ' +
+    this.text(this.texts.structureInformationTexts.foundingYear + ': ' +
       structure.foundingYear)
+
+    // this is in a wrong place!
     if (structure.structureType.type === 'refinery') {
       structure.size = structure.producer.producer.producerHolders.length
     }
+    
     this.text(this.texts.structureInformationTexts.size + ': ' + structure.size)
+    if (structure.structureType.type === 'producer_structure') this.showProductionInformation(structure)
+  }
 
+  showProductionInformation (structure) {
     var turnipProduction = structure.turnipProduction()
     this.text(
       this.texts.structureInformationTexts.turnipsPerWeek +

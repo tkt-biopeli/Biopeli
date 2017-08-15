@@ -344,7 +344,7 @@
       "nameWithLanguage": "kaatopaikka",
       "asset": "junkyard",
       "health": 20,
-      "pollution": 100,
+      "pollution": 50,
       "cost": 100000,
       "radiusForTileOwnership": 2,
       "multiplier": 2,

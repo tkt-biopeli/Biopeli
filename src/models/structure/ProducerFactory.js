@@ -1,6 +1,7 @@
 import ContinuousProducer from './producers/ContinuousProducer'
 import SeasonalProducer from './producers/SeasonalProducer'
 import Refiner from './producers/Refiner'
+import SpecialStructure from './producers/SpecialStructure'
 
 import PrimaryProducerDecorator from './producers/decorators/PrimaryProducerDecorator'
 import AllDecorator from './producers/decorators/AllDecorator'
@@ -21,10 +22,22 @@ export default class ProducerFactory {
   createProducer (structureType, tile) {
     var sType = this.checkStructureType(structureType)
 
-    var producer = sType.type === 'refinery'
-      ? this.createRefiner(sType.buysFrom, sType.multiplier, sType.reach, tile, sType.moveCosts)
-      : this.createPrimaryProducer(sType, tile)
-
+    var producer
+    switch (sType.type) {
+      case 'refinery':
+        producer = this.createRefiner(sType.buysFrom, sType.multiplier, sType.reach, tile, sType.moveCosts)
+        break
+      case 'producer_structure':
+        producer = this.createPrimaryProducer(sType, tile)
+        break
+      default:
+        producer = new SpecialStructure({
+          zone: this.tileFinder.findTilesInDistanceOf(tile, sType.reach, sType.moveCosts),
+          multiplier: sType.multiplier,
+          radius: sType.reach,
+          tile: tile
+        })
+    }
     return new AllDecorator({producer: producer, tile: tile})
   }
 
