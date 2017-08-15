@@ -1,15 +1,19 @@
 import RandomEvent from './RandomEvent'
 
-import EmptyFilter from './filters/EmptyFilter'
+import EmptyFilter from './filters/common/EmptyFilter'
 import EmptyEffect from './effects/EmptyEffect'
 import EmptyCondition from './conditions/EmptyCondition'
 
-import And from './filters/And'
-import Or from './filters/Or'
-import Complement from './filters/Complement'
-import TiletypeTileFilter from './filters/TiletypeTileFilter'
-import AllTileFilter from './filters/AllTileFilter'
-import ValuesTileFilter from './filters/ValuesTileFilter'
+import And from './filters/common/And'
+import Or from './filters/common/Or'
+import Complement from './filters/common/Complement'
+import TiletypeTileFilter from './filters/tile/TiletypeTileFilter'
+import AllTileFilter from './filters/tile/AllTileFilter'
+import ValuesTileFilter from './filters/tile/ValuesTileFilter'
+import AllStructureFilter from './filters/structure/AllStructureFilter'
+import StructureTypeStructureFilter from './filters/structure/StructureTypeStructureFilter'
+import FoundingYearStructureFilter from './filters/structure/FoundingYearStructureFilter'
+import TypeStructureFilter from './filters/structure/TypeStructureFilter'
 
 import TileValueEffect from './effects/TileValueEffect'
 import MoneyEffect from './effects/MoneyEffect'
@@ -55,6 +59,11 @@ export default class RandomEventFactory {
     this.filterCreators.set('TilesWithTiletype', TiletypeTileFilter)
     this.filterCreators.set('TilesWithValues', ValuesTileFilter)
     this.filterCreators.set('AllTiles', AllTileFilter)
+
+    this.filterCreators.set('AllStructures', AllStructureFilter)
+    this.filterCreators.set('StructuresWithStructureType', StructureTypeStructureFilter)
+    this.filterCreators.set('StructuresOfType', TypeStructureFilter)
+    this.filterCreators.set('StructuresWithFoundingYear', FoundingYearStructureFilter)
   }
 
   createEvents (eventJSON) {
