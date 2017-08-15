@@ -99,6 +99,30 @@
       "buysFrom": ["wheat farm"]
     },
     {
+      "id": "0005",
+      "type": "refinery",
+      "name": "dairy",
+      "nameWithLanguage": "meijeri",
+      "asset": "dairy",
+      "health": 20,
+      "pollution": 2,
+      "cost": 30000,
+      "radiusForTileOwnership": 1,
+      "multiplier": 2,
+      "reach": 5,
+      "buysFrom": ["dairy_farm"],
+      "moveCosts": {
+        "grass": 1,
+        "water": 5,
+        "water_field": 5,
+        "forest": 2,
+        "field": 1,
+        "industrial": 1
+      },
+      "takesOwnershipOf": ["grass", "field", "industrial"],
+      "farmland": "industrial"
+    },
+    {
       "id": "0006",
       "type": "producer_structure",
       "name": "herb_farm",
@@ -234,10 +258,8 @@
       "takesOwnershipOf": ["grass"],
       "farmland": "industrial"
     },
-
-
     {
-      "id": "0009",
+      "id": "0011",
       "type": "refinery",
       "name": "biofuel_refinery",
       "nameWithLanguage": "biopolttoaineen jalostamo",
@@ -251,7 +273,7 @@
       "buysFrom": []
     },
     {
-      "id": "0010",
+      "id": "0012",
       "type": "???",
       "name": "ditch",
       "nameWithLanguage": "oja",
@@ -259,7 +281,7 @@
       "cost": 500
     },
     {
-      "id": "0011",
+      "id": "0013",
       "type": "refinery",
       "name": "fertilizer_factory",
       "nameWithLanguage": "lannoitetehdas",
@@ -270,32 +292,7 @@
       "radiusForTileOwnership": 1,
       "multiplier": 2,
       "reach": 5,
-      "buysFrom": ["dairy farm"]
       "buysFrom": ["wheat_farm"],
-      "moveCosts": {
-        "grass": 1,
-        "water": 5,
-        "water_field": 5,
-        "forest": 2,
-        "field": 1,
-        "industrial": 1
-      },
-      "takesOwnershipOf": ["grass", "field", "industrial"],
-      "farmland": "industrial"
-    },
-    {
-      "id": "0005",
-      "type": "refinery",
-      "name": "dairy",
-      "nameWithLanguage": "meijeri",
-      "asset": "dairy",
-      "health": 20,
-      "pollution": 2,
-      "cost": 30000,
-      "radiusForTileOwnership": 1,
-      "multiplier": 2,
-      "reach": 5,
-      "buysFrom": ["dairy_farm"],
       "moveCosts": {
         "grass": 1,
         "water": 5,
