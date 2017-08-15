@@ -1,6 +1,5 @@
 import Content from './Content'
 
-
 export default class BuildStructureContent extends Content {
   constructor ({ player, structureFactory, purchaseManager, texts }) {
     super()

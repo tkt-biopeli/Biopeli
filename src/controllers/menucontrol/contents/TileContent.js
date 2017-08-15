@@ -9,7 +9,7 @@ export default class TileContent extends Content {
    * @param {object} param - Parameter object
    * @param {MenuView} param.menuView
    */
-  constructor({ demandFunction, purchaseManager, topBarController, structureTypes, texts }) {
+  constructor ({ demandFunction, purchaseManager, topBarController, structureTypes, texts }) {
     super()
     this.demandFunction = demandFunction
     this.purchaseManager = purchaseManager
@@ -53,11 +53,9 @@ export default class TileContent extends Content {
 
   structureInformation (structure) {
     this.section('structure')
-    this.text('"' + structure.ownerName + '"')
-    this.text('"' + structure.structureName + '"')
     this.text(
       this.texts.structureInformationTexts.structure + ': ' +
-      structure.structureType.nameWithLanguage)
+      structure.structureName)
     this.text(
       this.texts.structureInformationTexts.foundingYear + ': ' +
       structure.foundingYear)

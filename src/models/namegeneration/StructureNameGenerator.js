@@ -35,35 +35,12 @@ export default class StructureNameGenerator {
    */
   createBuildingName (structureType) {
     var end = this.randomWithBounds(0, this.endAdjectives.length)
-    var type = this.findType(structureType)
+    var typeName = structureType.nameWithLanguage
     var hyper = this.randomWithBounds(0, this.hyperboles.length)
     if (this.random() < 0.25) {
       var tmp = this.endAdjectives[end].toLowerCase()
-      return this.hyperboles[hyper] + '-' + tmp + ' ' + type
+      return this.hyperboles[hyper] + '-' + tmp + ' ' + typeName
     }
-    return this.endAdjectives[end] + ' ' + type
-  }
-
-  /**
-   * Helper to find the type of the structure
-   *
-   * @param {StructureType} structureType - type to be examined
-   * @returns {String} - the typeof the structure
-   */
-  findType (structureType) {
-    var type = ''
-    if (structureType === 'wheat farm') {
-      type = 'viljatila'
-    }
-    if (structureType === 'dairy farm') {
-      type = 'navetta'
-    }
-    if (structureType === 'berry farm') {
-      type = 'marjatila'
-    }
-    if (structureType === 'mill') {
-      type = 'mylly'
-    }
-    return type
+    return this.endAdjectives[end] + ' ' + typeName
   }
 }

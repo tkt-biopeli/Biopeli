@@ -9,12 +9,13 @@ export default class GameTimerListener {
    * @param {TopBarController} topBarController
    * @param {GameEvents} gameEvents
    */
-  constructor ({ city, player, menuController, topBarController, gameEvents }) {
+  constructor ({ city, player, menuController, topBarController, gameEvents, randomEventHandler }) {
     this.city = city
     this.player = player
     this.menuController = menuController
     this.topBarController = topBarController
     this.gameEvents = gameEvents
+    this.randomEventHandler = randomEventHandler
   }
 
   /**
@@ -26,6 +27,8 @@ export default class GameTimerListener {
     this.doTransaction(producedTurnips, timerEvent)
 
     this.checkBuildingRuining(timerEvent)
+
+    this.checkRandomEvent(timerEvent)
 
     this.redrawControllers()
     // is game over?
@@ -62,6 +65,10 @@ export default class GameTimerListener {
     let money = this.city.buyTurnips(producedTurnips, timerEvent.endOfYear)
     this.player.addPoints(money)
     this.player.cash += money
+  }
+
+  checkRandomEvent (timerEvent) {
+    this.randomEventHandler.randomEventCheck(timerEvent)
   }
 
   /**
