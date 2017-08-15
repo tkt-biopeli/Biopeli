@@ -47,6 +47,21 @@
     },
     {
       "type": "image",
+      "name": "biofuel_refinery",
+      "file": "assets/images/structures/biofuel_refinery.png"
+    },
+    {
+      "type": "image",
+      "name": "fertilizer_factory",
+      "file": "assets/images/structures/fertilizer_factory.png"
+    },
+    {
+      "type": "image",
+      "name": "ditch",
+      "file": "assets/images/structures/ditch.png"
+    },
+    {
+      "type": "image",
       "name": "dairy_farm",
       "file": "assets/images/structures/dairy_farm.png"
     },

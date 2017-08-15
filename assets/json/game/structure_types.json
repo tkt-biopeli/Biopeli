@@ -67,6 +67,44 @@
       "multiplier": 2,
       "reach": 5,
       "buysFrom": ["wheat farm"]
+    },
+
+
+    {
+      "id": "0009",
+      "type": "refinery",
+      "name": "biofuel_refinery",
+      "nameWithLanguage": "biopolttoaineen jalostamo",
+      "asset": "biofuel_refinery",
+      "health": 20,
+      "pollution": 3,
+      "cost": 4500,
+      "radiusForTileOwnership": 1,
+      "multiplier": 2,
+      "reach": 5,
+      "buysFrom": []
+    },
+    {
+      "id": "0010",
+      "type": "???",
+      "name": "ditch",
+      "nameWithLanguage": "oja",
+      "asset": "ditch",
+      "cost": 500
+    },
+    {
+      "id": "0011",
+      "type": "refinery",
+      "name": "fertilizer_factory",
+      "nameWithLanguage": "lannoitetehdas",
+      "asset": "fertilizer_factory",
+      "health": 20,
+      "pollution": 3,
+      "cost": 30000,
+      "radiusForTileOwnership": 1,
+      "multiplier": 2,
+      "reach": 5,
+      "buysFrom": ["dairy farm"]
     }
   ]
 }
