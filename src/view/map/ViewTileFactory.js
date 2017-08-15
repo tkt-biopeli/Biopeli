@@ -58,7 +58,8 @@ export default class ViewTileFactory {
       modelTile: modelTile, 
       dampnessCol: this.palette.getDampnessColour(modelTile.moisture), 
       fertilityCol: this.palette.getFertilityColour(modelTile.fertility),
-      tileSize: this.config.mapSettings.tileSize
+      tileSize: this.config.mapSettings.tileSize,
+      borderColour: modelTile.owner !== null ? this.palette.getBorderColour(modelTile.owner.bordercolCode) : 0x000000
     })
     return vt
   }
@@ -66,6 +67,11 @@ export default class ViewTileFactory {
   updateVt (viewtile, modeltile) {
     let redrawBorders = this.redrawTiles !== undefined
     let redraw = redrawBorders ? this.redrawTiles.includes(modeltile) : undefined
-    viewtile.update(this.flowers, this.dampness, this.fertility, redrawBorders, redraw)
+    viewtile.update(this.flowers,
+      this.dampness,
+      this.fertility,
+      redrawBorders,
+      redraw,
+      modeltile.owner !== null ? this.palette.getBorderColour(modeltile.owner.bordercolCode) : 0x000000)
   }
 }

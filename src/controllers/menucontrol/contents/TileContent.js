@@ -2,7 +2,7 @@ import Content from './Content'
 /**
  * Controller of side menu of the game
  */
-export default class SideMenuContent extends Content {
+export default class TileContent extends Content {
   /**
    * Description goes here
    *
@@ -16,7 +16,6 @@ export default class SideMenuContent extends Content {
     this.topBarController = topBarController
     this.structureTypes = structureTypes
     this.texts = texts.tileContentTexts
-
     this.emptyFunction = () => { }
   }
 
@@ -54,11 +53,9 @@ export default class SideMenuContent extends Content {
 
   structureInformation (structure) {
     this.section('structure')
-    this.text('"' + structure.ownerName + '"')
-    this.text('"' + structure.structureName + '"')
     this.text(
       this.texts.structureInformationTexts.structure + ': ' +
-      structure.structureType.nameWithLanguage)
+      structure.structureName)
     this.text(
       this.texts.structureInformationTexts.foundingYear + ': ' +
       structure.foundingYear)
@@ -88,7 +85,7 @@ export default class SideMenuContent extends Content {
       structure.healthManager.fixPrice())
 
     if (structure.health.percent() < 1 &&
-        this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
+      this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
       var fix = (structure => () => {
         structure.healthManager.fix()
         this.owner.redraw()
@@ -96,7 +93,7 @@ export default class SideMenuContent extends Content {
       })(structure)
       this.button(this.texts.structureRuiningTexts.repair, fix, this, 'emptyButton')
     } else if (structure.health.percent() < 1 &&
-        !this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
+      !this.purchaseManager.hasCash(structure.healthManager.fixPrice())) {
       this.button(
         this.texts.structureRuiningTexts.insufficientFunds,
         this.emptyFunction, null, 'unusableButton'
@@ -112,17 +109,31 @@ export default class SideMenuContent extends Content {
   createBuildingButtons (tile) {
     this.section('actions')
 
-    var allowedStructures = tile.tileType.allowedStructures
-
-    for (let structureTypeName of allowedStructures) {
-      var structureType = this.structureTypes[structureTypeName]
+    var x = tile.tileType.name
+    if (x === 'grass' || x === 'water') {
       this.owner.changeButton(
-        structureType.nameWithLanguage, 2,
+        'Alkutuotanto', 4,
         this.owner.wrapFunction(
           this.owner.addState, this.owner,
-          'structureType', structureType
-        ),
-        this
+          'whatType', 'buildProducer'),
+        this, 'emptyButton'
+      )
+    }
+
+    if (x !== 'water' && x !== 'forest') {
+      this.owner.changeButton(
+        'Jalostamo', 4,
+        this.owner.wrapFunction(
+          this.owner.addState, this.owner,
+          'whatType', 'buildRefinery'),
+        this, 'emptyButton'
+      )
+      this.owner.changeButton(
+        'Erikoisrakennus', 4,
+        this.owner.wrapFunction(
+          this.owner.addState, this.owner,
+          'whatType', 'buildSpecial'),
+        this, 'emptyButton'
       )
     }
   }

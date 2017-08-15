@@ -16,7 +16,8 @@
       "flowers": 10,
       "allowedStructures": [
         "wheat_farm", "dairy_farm", "berry_farm", 
-        "mill", "biofuel_refinery", "fertilizer_factory"
+        "mill", "biofuel_refinery", "fertilizer_factory", 
+        "dairy", "herb_farm", "mushroom_farm", "lumber_yard", "fish_refinery"
       ]
     },
     {
@@ -25,7 +26,7 @@
       "nameWithLanguage": "vesi",
       "asset": "water",
       "flowers": 10,
-      "allowedStructures": []
+      "allowedStructures": ["fishery"]
     },
     {
       "id": "0004",
@@ -33,7 +34,7 @@
       "nameWithLanguage": "pelto",
       "asset": "field",
       "flowers": 10,
-      "allowedStructures": ["mill", "biofuel_refinery", "ditch"]
+      "allowedStructures": ["mill", "biofuel_refinery", "ditch", "dairy"]
     },
     {
       "id": "0005",
@@ -41,7 +42,15 @@
       "nameWithLanguage": "teollisuusalue",
       "asset": "industrial",
       "flowers": 10,
-      "allowedStructures": ["mill", "biofuel_refinery", "fertilizer_factory"]
+      "allowedStructures": ["mill", "biofuel_refinery", "fish_refinery"]
+    },
+    {
+      "id": "0006",
+      "name": "water_field",
+      "nameWithLanguage": "kalakassi",
+      "asset": "water",
+      "flowers": 10,
+      "allowedStructures": []
     }
   ]
 }

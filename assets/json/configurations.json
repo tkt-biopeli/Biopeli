@@ -85,7 +85,7 @@
     },
 
     "player": {
-      "initialCash": 20000,
+      "initialCash": 200000,
       "currency": "Ag"
     },
 
@@ -117,5 +117,12 @@
     "tiles": {
       "maxFlowers": 10
     }
+  },
+
+  "randomEventSettings": {
+    "minTime": 12,
+    "maxTime": 144,
+    "maxSearched": 10,
+    "eventContentIndex": -1
   }
 }

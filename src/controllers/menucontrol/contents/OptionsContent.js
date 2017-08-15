@@ -30,17 +30,8 @@ export default class OptionsContent extends Content {
     this.owner.redraw()
   }
 
-  togglePause () {
-    if (this.game.state.paused) {
-      this.game.state.paused = false
-    } else {
-      this.game.state.paused = true
-    }
-  }
-
   createSections () {
     this.sectionName('options')
-    this.button(this.texts.stopContinue, this.togglePause, this)
     this.text(this.texts.soundVolume + ': ' + Math.round(this.game.music.volume * 100) + '%')
     if (this.game.music.mute) {
       this.button(this.texts.soundOn, this.musicOn, this)
