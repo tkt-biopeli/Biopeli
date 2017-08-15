@@ -7,5 +7,7 @@ export default class TileValueEffect extends Effect {
 
   happenForOne (structure) {
     var actualAmount = structure.health.maxHealth * this.percentage
+
+    structure.healthManager.changeHealth(actualAmount)
   }
 }

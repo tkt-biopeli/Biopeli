@@ -22,13 +22,19 @@ describe('Structure health tests', () => {
   })
 
   it('Removing works', ()=>{
-    health.loseHealth(2)
+    health.changeHealth(-2)
     assert.equal(3, health.currentHealth)
 
     health.loseOne()
     assert.equal(2, health.currentHealth)
 
-    health.loseHealth(4)
+    health.changeHealth(-4)
     assert.equal(0, health.currentHealth)
+
+    health.changeHealth(1)
+    assert.equal(1, health.currentHealth)
+
+    health.changeHealth(67)
+    assert.equal(5, health.currentHealth)
   })
 })

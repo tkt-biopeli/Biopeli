@@ -1,4 +1,4 @@
-import TileEffect from './Effect'
+import Effect from './Effect'
 
 export default class TileValueEffect extends Effect {
   constructor ({json}) {
