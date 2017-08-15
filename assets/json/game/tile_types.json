@@ -26,7 +26,7 @@
       "nameWithLanguage": "vesi",
       "asset": "water",
       "flowers": 10,
-      "allowedStructures": ["fishery", "windmill"]
+      "allowedStructures": ["fishery"]
     },
     {
       "id": "0004",
