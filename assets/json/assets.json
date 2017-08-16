@@ -2,8 +2,33 @@
   "assets": [
     {
       "type": "image",
-      "name": "emptyButton", 
+      "name": "emptyButton",
       "file": "assets/images/buttons/empty_button.png"
+    },
+    {
+      "type": "image",
+      "name": "biofuel_refinery",
+      "file": "assets/images/structures/biofuel_refinery.png"
+    },
+    {
+      "type": "image",
+      "name": "ditch",
+      "file": "assets/images/structures/ditch.png"
+    },
+    {
+      "type": "image",
+      "name": "fertilizer_factory",
+      "file": "assets/images/structures/fertilizer_factory.png"
+    },
+    {
+      "type": "image",
+      "name": "windmill",
+      "file": "assets/images/structures/windmill.png"
+    },
+    {
+      "type": "image",
+      "name": "smallButton",
+      "file": "assets/images/buttons/small_button.png"
     },
     {
       "type": "image",
@@ -54,6 +79,26 @@
       "type": "image",
       "name": "mill",
       "file": "assets/images/structures/mill.png"
+    },
+    {
+      "type": "image",
+      "name": "dairy",
+      "file": "assets/images/structures/dairy.png"
+    },
+    {
+      "type": "image",
+      "name": "herb_farm",
+      "file": "assets/images/structures/herb_farm.png"
+    },
+    {
+      "type": "image",
+      "name": "mushroom_farm",
+      "file": "assets/images/structures/mushroom_farm.png"
+    },
+    {
+      "type": "image",
+      "name": "lumber_yard",
+      "file": "assets/images/structures/lumber_yard.png"
     },
     {
       "type": "image",

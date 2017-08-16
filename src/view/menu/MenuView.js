@@ -2,6 +2,7 @@ import LabeledButton from './menuitems/LabeledButton'
 import Text from './menuitems/Text'
 import AnimatedBar from './menuitems/AnimatedBar'
 import Icon from './menuitems/Icon'
+import LabeledImage from './menuitems/LabeledImage'
 
 /**
  * Component that draws menu with given component list and with wanted layout
@@ -11,13 +12,10 @@ export default class MenuView {
     this.game = game
     this.layout = layout
     this.backgroundInTheMiddle = backgroundInTheMiddle
-
     this.menuViewGroup = game.add.group()
     this.menuViewGroup.fixedToCamera = true
     this.game.world.bringToTop(this.menuViewGroup)
-
     this.activeMenuitems = new Map()
-
     this.createBackground(background)
   }
 
@@ -151,6 +149,20 @@ export default class MenuView {
     return button
   }
 
+  createLabeledImage (coords, component) {
+    return new LabeledImage({
+      game: this.game,
+      viewGroup: this.menuViewGroup,
+      label: component.text,
+      fontSize: component.fontSize,
+      asset: component.asset,
+      x: coords.x,
+      y: coords.y,
+      width: component.width,
+      height: component.height
+    })
+  }
+
   /**
    * Creates a visible text with given text and font size
    * @param {*} text
@@ -226,7 +238,7 @@ export default class MenuView {
       var component = components[j]
       var menuitem = section[i]
       if (i < section.length && menuitem.type === component.type) {
-        if (component.type === 'button' && 
+        if ((component.type === 'button') && 
             (component.asset !== menuitem.asset || 
             component.function !== menuitem.callback)) {
           menuitems.push(this.createComponent(component))
@@ -281,6 +293,10 @@ export default class MenuView {
 
   updateBar (coords, component, bar) {
     bar.update(coords.x, coords.y, component.percent)
+  }
+
+  updateLabeledImage (coords, component, labeledImage) {
+    labeledImage.update(component.text, component.fontSize, coords.x, coords.y)
   }
 
   removeExtraSections (oldSections, newSections) {

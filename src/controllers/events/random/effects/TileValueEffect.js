@@ -1,6 +1,6 @@
-import TileEffect from './TileEffect'
+import Effect from './Effect'
 
-export default class TileValueEffect extends TileEffect {
+export default class TileValueEffect extends Effect {
   constructor ({json}) {
     super()
     this.fertility = json.fertilityChange != null ? json.fertilityChange : 0

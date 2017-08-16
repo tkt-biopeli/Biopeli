@@ -1,11 +1,10 @@
 {
-  "events" : [
+  "events": [
     {
       "name": "Myllytulva",
       "description": "Myllysi tulvivat",
       "condition": {
-        "name": "TimeLimiter",
-        "notBefore": 96
+        "name": "empty"
       },
       "effects": [
         {
@@ -14,7 +13,7 @@
           "filter": {
             "name": "TilesWithTiletype",
             "tileTypes": [
-              "mill"
+              "industrial"
             ]
           }
         }
@@ -22,13 +21,47 @@
     },
     {
       "name": "Rutto",
-      "description": "Kaupungissa jyllää kulkutauti",
+      "description": "Kaupungissa jyllää hirvittävä kulkutauti, puolet väestöstä RIP!",
       "condition": {
         "name": "PopulationLimiter",
         "notBefore": 550
       },
       "effects": [
-        {"name": "PopulationChange", "changePercentage": 0.5
+        {
+          "name": "PopulationChange",
+          "changePercentage": 0.5
+        }
+      ]
+    },
+    {
+      "name": "Pakolaiskriisi",
+      "description": "Maailmassa on pakolaiskriisi, kaupungin koko kasvaa",
+      "condition": {
+        "name": "empty"
+      },
+      "effects": [
+        {
+          "name": "CityChange",
+          "populationChange": 1.2,
+          "filter": {
+            "name": "empty"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Epidemia",
+      "description": "Kansalaiset sairastuvat tuntemattomaan virukseen, kaupungin koko kutistuu",
+      "condition": {
+        "name": "empty"
+      },
+      "effects": [
+        {
+          "name": "CityChange",
+          "populationChange": 0.8,
+          "filter": {
+            "name": "empty"
+          }
         }
       ]
     }

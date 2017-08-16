@@ -1,19 +1,26 @@
 import RandomEvent from './RandomEvent'
 
-import EmptyFilter from './filters/EmptyFilter'
+import EmptyFilter from './filters/common/EmptyFilter'
 import EmptyEffect from './effects/EmptyEffect'
 import EmptyCondition from './conditions/EmptyCondition'
 
-import And from './filters/And'
-import Or from './filters/Or'
-import Complement from './filters/Complement'
-import TiletypeTileFilter from './filters/TiletypeTileFilter'
-import AllTileFilter from './filters/AllTileFilter'
-import ValuesTileFilter from './filters/ValuesTileFilter'
+import And from './filters/common/And'
+import Or from './filters/common/Or'
+import Complement from './filters/common/Complement'
+import RandomFilter from './filters/common/RandomFilter'
+import TiletypeTileFilter from './filters/tile/TiletypeTileFilter'
+import ProductionAreaTileFilter from './filters/tile/ProductionAreaTileFilter'
+import AllTileFilter from './filters/tile/AllTileFilter'
+import ValuesTileFilter from './filters/tile/ValuesTileFilter'
+import AllStructureFilter from './filters/structure/AllStructureFilter'
+import StructureTypeStructureFilter from './filters/structure/StructureTypeStructureFilter'
+import FoundingYearStructureFilter from './filters/structure/FoundingYearStructureFilter'
+import TypeStructureFilter from './filters/structure/TypeStructureFilter'
 
 import TileValueEffect from './effects/TileValueEffect'
 import MoneyEffect from './effects/MoneyEffect'
 import PopulationEffect from './effects/PopulationEffect'
+import CityEffect from './effects/CityEffect'
 
 import TimeCondition from './conditions/TimeCondition'
 import PopulationCondition from './conditions/PopulationCondition'
@@ -47,6 +54,7 @@ export default class RandomEventFactory {
     this.effectCreators.set('MoneyChange', MoneyEffect)
     this.effectCreators.set('PopulationChange', PopulationEffect)
     this.effectCreators.set('TileValueChange', TileValueEffect)
+    this.effectCreators.set('CityChange', CityEffect)
   }
 
   initFilters () {
@@ -55,10 +63,18 @@ export default class RandomEventFactory {
     this.filterCreators.set('And', And)
     this.filterCreators.set('Or', Or)
     this.filterCreators.set('Complement', Complement)
+    this.filterCreators.set('Random', RandomFilter)
 
     this.filterCreators.set('TilesWithTiletype', TiletypeTileFilter)
     this.filterCreators.set('TilesWithValues', ValuesTileFilter)
     this.filterCreators.set('AllTiles', AllTileFilter)
+    this.filterCreators.set('ProductionAreaTile', ProductionAreaTileFilter)
+
+    this.filterCreators.set('AllStructures', AllStructureFilter)
+    this.filterCreators.set('StructuresWithStructureType', StructureTypeStructureFilter)
+    this.filterCreators.set('StructuresOfType', TypeStructureFilter)
+    this.filterCreators.set('StructuresWithFoundingYear', FoundingYearStructureFilter)
+
   }
 
   createEvents (eventJSON) {

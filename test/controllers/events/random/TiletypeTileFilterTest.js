@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import TiletypeTileFilter from '../../../../src/controllers/events/random/filters/TiletypeTileFilter'
+import TiletypeTileFilter from '../../../../src/controllers/events/random/filters/tile/TiletypeTileFilter'
 
 describe('Tiletype tile filter and tile tile filter tests', ()=>{
   it('Filter works', ()=>{

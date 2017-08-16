@@ -14,7 +14,7 @@ describe('Integration test: Structures ruin by time', () => {
   it('Buildings ruin when they should ruin', ()=>{
     gameAdvancer.setMoney(9999999)
     gameAdvancer.update(1000)
-    gameAdvancer.buildBuilding(0, 0, 'grass', 3)
+    gameAdvancer.buildBuilding(0, 0, 'grass', 1, 3)
     gameStateChecker.checkStructureRuinAmount(0, 0, 8)
 
     gameAdvancer.update(1000)
@@ -33,9 +33,9 @@ describe('Integration test: Structures ruin by time', () => {
   it('Several buildings ruin independently', ()=>{
     gameAdvancer.setMoney(9999999)
     gameAdvancer.update(1000)
-    gameAdvancer.buildBuilding(0, 0, 'grass', 3)
+    gameAdvancer.buildBuilding(0, 0, 'grass', 1, 3)
     gameAdvancer.update(1000)
-    gameAdvancer.buildBuilding(0, 5, 'grass', 3)
+    gameAdvancer.buildBuilding(0, 5, 'grass', 1, 3)
     gameAdvancer.update(1000)
 
     gameStateChecker.checkStructureRuinAmount(0, 0, 7)
@@ -48,7 +48,7 @@ describe('Integration test: Structures ruin by time', () => {
   })
 
   it('Fixing buildings is possible and costs money', ()=>{
-    gameAdvancer.buildBuilding(0, 0, 'grass', 3)
+    gameAdvancer.buildBuilding(0, 0, 'grass', 1, 3)
 
     gameAdvancer.updateSeveralTimes(2, 1000)
 
@@ -62,7 +62,7 @@ describe('Integration test: Structures ruin by time', () => {
   })
 
   it('Trying to fix non-ruidner building doesn\'t cost money', ()=>{
-    gameAdvancer.buildBuilding(0, 0, 'grass', 3)
+    gameAdvancer.buildBuilding(0, 0, 'grass', 1, 3)
     gameAdvancer.setMoney(10000)
     gameAdvancer.click(1, 1)
     gameAdvancer.clickNthButton(1)

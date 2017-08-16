@@ -8,12 +8,12 @@ export default class StructureHealth {
     this.currentHealth = this.maxHealth
   }
 
-  loseHealth (amount) {
-    this.currentHealth = Math.max(0, this.currentHealth - amount)
+  changeHealth (amount) {
+    this.currentHealth = Math.min(Math.max(0, this.currentHealth + amount), this.maxHealth)
   }
 
   loseOne () {
-    this.loseHealth(1)
+    this.changeHealth(-1)
   }
 
   toString () {
