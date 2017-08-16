@@ -1,5 +1,5 @@
 {
-  "events" : [
+  "events": [
     {
       "name": "Myllytulva",
       "description": "Myllysi tulvivat",
@@ -15,6 +15,22 @@
             "tileTypes": [
               "industrial"
             ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pakolaiskriisi",
+      "description": "Kaupungin koko kasvaa",
+      "condition": {
+        "name": "empty"
+      },
+      "effects": [
+        {
+          "name": "CityValueChange",
+          "populationChange": 100,
+          "filter": {
+            "name": "City"
           }
         }
       ]
