@@ -147,6 +147,11 @@
     },
     {
       "type": "image",
+      "name": "telegram",
+      "file": "assets/images/backgrounds/telegram.png"
+    },
+    {
+      "type": "image",
       "name": "area",
       "file": "assets/images/tiles/area.png"
     },
