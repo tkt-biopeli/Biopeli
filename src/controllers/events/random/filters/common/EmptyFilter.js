@@ -1,3 +1,3 @@
 export default class EmptyFilter {
-  affects () { return [] }
+  affected () { return [] }
 }
