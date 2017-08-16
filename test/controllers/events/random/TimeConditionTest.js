@@ -2,7 +2,7 @@ const assert = require('assert')
 const sinon = require('sinon')
 import TimeCondition from '../../../../src/controllers/events/random/conditions/TimeCondition'
 
-describe('tests', ()=>{
+describe('Time condition tests', ()=>{
   it('Time condition test', ()=>{
     var c = {serialNumber: 0}
     var timer = {
