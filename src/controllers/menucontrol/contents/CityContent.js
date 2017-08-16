@@ -54,7 +54,7 @@ export default class CityContent extends Content {
 
   telegramMessage () {
     let telegram = this.telegramStorage.getTelegram(this.telegramIndex)
-    let text = telegram.date + "\n" + telegram.topic + "\n" + telegram.text
+    let text = telegram.date + '\n' + telegram.topic + '\n' + telegram.text
     this.labeledImage(text, 'telegram')
   }
 

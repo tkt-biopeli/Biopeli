@@ -1,5 +1,5 @@
 export default class TelegramStorage {
-  constructor ({ }) {
+  constructor () {
     this.telegrams = []
     this.unread = 0
   }
@@ -32,5 +32,4 @@ export default class TelegramStorage {
   notEmpty () {
     return this.telegrams.length > 0
   }
-
 }

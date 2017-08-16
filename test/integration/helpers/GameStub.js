@@ -58,7 +58,7 @@ export default class GameStub {
         add: function () { },
         removeAll: buttonMarkerFunction,
         removeChild: () => { },
-        create: () => ({})
+        create: () => ({destroy: function () {}})
       }),
 
       sprite: this.mockers.createOneValueMocker('add.sprite', {

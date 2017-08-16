@@ -9,7 +9,8 @@ export default class GameTimerListener {
    * @param {TopBarController} topBarController
    * @param {GameEvents} gameEvents
    */
-  constructor ({ city, player, menuController, topBarController, bottomMenuController, gameEvents, randomEventHandler, telegramStorage }) {
+  constructor ({ city, player, menuController, topBarController,
+    bottomMenuController, gameEvents, randomEventHandler, telegramStorage }) {
     this.city = city
     this.player = player
     this.menuController = menuController
@@ -74,7 +75,6 @@ export default class GameTimerListener {
     if (eventHappened) {
       this.telegramStorage.addRandomEvent(timerEvent, eventHappened)
     }
-
   }
 
   /**

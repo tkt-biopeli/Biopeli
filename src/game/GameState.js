@@ -310,7 +310,11 @@ export default class GameState {
         buttonHeight: config.bottomMenuSettings.buttonHeight
       }),
       menuView: this.bottomMenuView,
-      content: new BottomMenuContent({mapView: this.mapView, menuController: this.menuController, telegramStorage: this.telegramStorage})
+      content: new BottomMenuContent({
+        mapView: this.mapView,
+        menuController: this.menuController,
+        telegramStorage: this.telegramStorage
+      })
     })
   }
 
