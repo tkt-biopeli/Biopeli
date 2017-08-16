@@ -176,6 +176,36 @@
       "file": "assets/images/buttons/options.png"
     },
     {
+      "type": "image",
+      "name": "info",
+      "file": "assets/images/buttons/info.png"
+    },
+    {
+      "type": "image",
+      "name": "info_unread",
+      "file": "assets/images/buttons/info_unread.png"
+    },
+    {
+      "type": "image",
+      "name": "arrow_up",
+      "file": "assets/images/buttons/arrow_up.png"
+    },
+    {
+      "type": "image",
+      "name": "arrow_unup",
+      "file": "assets/images/buttons/arrow_unup.png"
+    },
+    {
+      "type": "image",
+      "name": "arrow_down",
+      "file": "assets/images/buttons/arrow_down.png"
+    },
+    {
+      "type": "image",
+      "name": "arrow_undown",
+      "file": "assets/images/buttons/arrow_undown.png"
+    },
+    {
       "type": "audio",
       "name": "music",
       "file": "assets/music/music.ogg"

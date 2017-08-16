@@ -1,24 +1,19 @@
 import Content from './Content'
 
 export default class CityContent extends Content {
-  constructor ({city, gameEvents, texts}) {
+  constructor ({ city, gameEvents, texts, telegramStorage }) {
     super()
+    this.name = 'city'
     this.city = city
     this.gameEvents = gameEvents
     this.texts = texts.cityContentTexts
-
+    this.telegramStorage = telegramStorage
+    this.telegramIndex = 0
     
-    // viite listaan jossa kaikki pelaajalle halutut viestit tapahtumista
-    this.eventTelegrams = [
-      {date: '1.1.1999', topic: 'rutto', asset: 'telegram', text: 'kaupungissa rutto'},
-      {date: '2.1.1999', topic: 'paiserutto', asset: 'telegram', text: 'kaupungissa paiserutto'},
-      {date: '3.1.1999', topic: 'metsäpalo', asset: 'telegram', text: 'maastopalo tuhosi metsät'}
-    ]
-    // näytettävä eventti, uusi saapunut viesti pitäisi siirtää osoittimen listan loppuun
-    this.currentTelegram = 0
+    this.telegramStorage.addTelegram('', this.texts.welcomeTelegram, '')    
   }
 
-  createSections () {
+  createSections () {    
     this.sectionName('city')
     this.text(this.texts.city + ': ' + this.city.name)
     this.text(this.texts.population + ': ' + this.city.population)
@@ -32,36 +27,44 @@ export default class CityContent extends Content {
       this.format(this.city.turnipDemand.currentPrice(), 2)
     )
 
-    this.eventSection()
+    if (this.telegramStorage.notEmpty()) this.telegramSection()
   }
 
-  eventSection() {    
-    this.section('events')
-    this.text('Uutissähkeet')
-    this.button('ylös', this.eventsUp, this)
-    this.eventToDraw()
-    this.button('alas', this.eventsDown, this)
-    
-    this.eventTelegrams[0].call
+  telegramSection () {
+    this.section('telegrams')
+    this.text(this.texts.telegramServiceName)
+    this.upButton()
+    this.telegramMessage()
+    this.downButton()
   }
 
-  // voisi näyttää myös useamman kuin yhden kerrallaan
-  eventToDraw() {
-    let event = this.eventTelegrams[this.currentTelegram]
-    // rivitys ratkaistava jossain
-    let text = event.date + "\n" + event.topic + "\n" + event.text
-    this.labeledImage(text, event.asset)    
+  upButton () {
+    let i = this.telegramIndex
+    let lenght = this.telegramStorage.telegrams.length - 1
+    let asset = i < lenght ? 'arrow_up' : 'arrow_unup'
+    let call = i < lenght ? this.nextTelegram : () => { }
+    this.button('', call, this, asset)
   }
 
-  eventsUp() {
-    this.currentTelegram--
-    if (this.currentTelegram < 0) this.currentTelegram = 0    
-    this.owner.redraw()    
+  downButton () {
+    let asset = this.telegramIndex > 0 ? 'arrow_down' : 'arrow_undown'
+    let call = this.telegramIndex > 0 ? this.previousTelegram : () => { }
+    this.button('', call, this, asset)
   }
 
-  eventsDown() {
-    this.currentTelegram++
-    if (this.currentTelegram >= this.eventTelegrams.length) this.currentTelegram = this.eventTelegrams.length - 1
-    this.owner.redraw()    
+  telegramMessage () {
+    let telegram = this.telegramStorage.getTelegram(this.telegramIndex)
+    let text = telegram.date + "\n" + telegram.topic + "\n" + telegram.text
+    this.labeledImage(text, 'telegram')
+  }
+
+  previousTelegram () {
+    this.telegramIndex--
+    this.owner.redraw()
+  }
+
+  nextTelegram () {
+    this.telegramIndex++
+    this.owner.redraw()
   }
 }
