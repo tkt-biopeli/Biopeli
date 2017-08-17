@@ -30,6 +30,10 @@ export default class Content {
     this.owner.button(name, functionToCall, context, asset)
   }
 
+  labeledImage (text, asset) {
+    this.owner.labeledImage(text, asset)
+  }
+
   add (component) {
     this.owner.add(component)
   }

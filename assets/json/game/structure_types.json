@@ -1,7 +1,6 @@
 {
   "structure_types": [
     {
-      "id": "0001",
       "type": "producer_structure",
       "name": "wheat_farm",
       "nameWithLanguage": "viljatila",
@@ -29,7 +28,6 @@
       "farmland": "field"
     },
     {
-      "id": "0002",
       "type": "producer_structure",
       "name": "dairy_farm",
       "nameWithLanguage": "maitotila",
@@ -57,7 +55,6 @@
       "farmland": "field"
     },
     {
-      "id": "0003",
       "type": "producer_structure",
       "name": "berry_farm",
       "nameWithLanguage": "marjatila",
@@ -85,7 +82,6 @@
       "farmland": "field"
     },
     {
-      "id": "0004",
       "type": "refinery",
       "name": "mill",
       "nameWithLanguage": "mylly",
@@ -109,7 +105,6 @@
       "farmland": "industrial"
     },
     {
-      "id": "0005",
       "type": "refinery",
       "name": "dairy",
       "nameWithLanguage": "meijeri",
@@ -133,7 +128,6 @@
       "farmland": "industrial"
     },
     {
-      "id": "0006",
       "type": "producer_structure",
       "name": "herb_farm",
       "nameWithLanguage": "yrttitila",
@@ -161,7 +155,6 @@
       "farmland": "field"
     },
     {
-      "id": "0007",
       "type": "producer_structure",
       "name": "mushroom_farm",
       "nameWithLanguage": "sienitila",
@@ -189,7 +182,6 @@
       "farmland": "forest"
     },
     {
-      "id": "0008",
       "type": "producer_structure",
       "name": "lumber_yard",
       "nameWithLanguage": "saha",
@@ -217,10 +209,9 @@
       "farmland": "forest"
     },
     {
-      "id": "0009",
       "type": "producer_structure",
       "name": "fishery",
-      "nameWithLanguage": "Kalanviljelylaitos",
+      "nameWithLanguage": "kalanviljelylaitos",
       "asset": "fishery",
       "health": 15,
       "pollution": 5,
@@ -245,10 +236,9 @@
       "farmland": "water_field"
     },
     {
-      "id": "0010",
       "type": "refinery",
       "name": "fish_refinery",
-      "nameWithLanguage": "Kalajalostamo",
+      "nameWithLanguage": "kalajalostamo",
       "asset": "fish_refinery",
       "health": 20,
       "pollution": 2,
@@ -269,7 +259,6 @@
       "farmland": "industrial"
     },
     {
-      "id": "0011",
       "type": "refinery",
       "name": "biofuel_refinery",
       "nameWithLanguage": "biopolttoaineen jalostamo",
@@ -293,15 +282,13 @@
       "farmland": "industrial"
     },
     {
-      "id": "0012",
-      "type": "???",
+      "type": "special",
       "name": "ditch",
       "nameWithLanguage": "oja",
       "asset": "ditch",
       "cost": 500
     },
     {
-      "id": "0013",
       "type": "refinery",
       "name": "fertilizer_factory",
       "nameWithLanguage": "lannoitetehdas",
@@ -325,7 +312,6 @@
       "farmland": "industrial"
     },
     {
-      "id": "0014",
       "type": "producer_structure",
       "name": "windmill",
       "nameWithLanguage": "tuulimylly",
@@ -351,6 +337,32 @@
       },
       "takesOwnershipOf": ["grass", "field", "industrial"],
       "farmland": "grass"
+    },
+    {
+      "type": "special",
+      "name": "junkyard",
+      "nameWithLanguage": "kaatopaikka",
+      "asset": "junkyard",
+      "health": 20,
+      "pollution": 50,
+      "cost": 50000,
+      "radiusForTileOwnership": 2,
+      "changeValues": {
+        "flowers": 1,
+        "fertility": 0,
+        "moisture": 0
+      },
+      "reach": 50,
+      "moveCosts": {
+        "grass": 2,
+        "water": 1,
+        "water_field": 1,
+        "forest": 2,
+        "field": 2,
+        "industrial": 1
+      },
+      "takesOwnershipOf": ["grass", "field", "industrial"],
+      "farmland": "industrial"
     }
   ]
 }

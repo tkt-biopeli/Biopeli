@@ -1,3 +1,4 @@
+import {between} from '../../../../../models/logic/Between'
 import StructureFilter from './StructureFilter'
 
 export default class FoundingYearStructureFilter extends StructureFilter {
@@ -9,16 +10,6 @@ export default class FoundingYearStructureFilter extends StructureFilter {
   }
 
   isValid (structure) {
-    let year = structure.foundingYear
-
-    if (this.min != null) {
-      if (year < this.min) return false
-    }
-
-    if (this.max != null) {
-      if (year > this.max) return false
-    }
-
-    return true
+    return between(this.min, this.max, structure.foundingYear)
   }
 }

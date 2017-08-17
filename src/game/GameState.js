@@ -19,6 +19,7 @@ import EventController from '../controllers/events/EventController'
 import GameEvents from '../controllers/events/GameEvents'
 import GameTimerListener from '../controllers/events/time/GameTimerListener'
 import Timer from '../controllers/events/time/Timer'
+import TelegramStorage from '../controllers/events/time/TelegramStorage'
 
 import TopBarContent from '../controllers/menucontrol/contents/TopBarContent'
 import TileContent from '../controllers/menucontrol/contents/TileContent'
@@ -104,8 +105,10 @@ export default class GameState {
       player: this.player,
       menuController: this.menuController,
       topBarController: this.topBarController,
+      bottomMenuController: this.bottomMenuController,
       gameEvents: this.gameEvents,
-      randomEventHandler: this.randomEventHandler
+      randomEventHandler: this.randomEventHandler,
+      telegramStorage: this.telegramStorage
     })
 
     this.gameTimer.addListener(this.gameTimerListener)
@@ -169,6 +172,10 @@ export default class GameState {
       gameState: this,
       gameLength: gameLength,
       config: config
+    })
+
+    this.telegramStorage = new TelegramStorage({
+
     })
 
     this.music = this.state.add.audio('music')
@@ -250,7 +257,8 @@ export default class GameState {
     this.cityContent = new CityContent({
       city: this.city,
       gameEvents: this.gameEvents,
-      texts: this.texts
+      texts: this.texts,
+      telegramStorage: this.telegramStorage
     })
 
     this.tileContent = new TileContent({
@@ -302,7 +310,11 @@ export default class GameState {
         buttonHeight: config.bottomMenuSettings.buttonHeight
       }),
       menuView: this.bottomMenuView,
-      content: new BottomMenuContent({mapView: this.mapView, menuController: this.menuController})
+      content: new BottomMenuContent({
+        mapView: this.mapView,
+        menuController: this.menuController,
+        telegramStorage: this.telegramStorage
+      })
     })
   }
 

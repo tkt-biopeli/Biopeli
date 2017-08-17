@@ -1,7 +1,6 @@
 {
   "tile_types" : [
     {
-      "id": "0001",
       "name": "forest",
       "nameWithLanguage": "metsä",
       "asset": "forest",
@@ -9,7 +8,6 @@
       "allowedStructures": []
     },
     {
-      "id": "0002",
       "name": "grass",
       "nameWithLanguage": "ruohikko",
       "asset": "grass",
@@ -17,11 +15,11 @@
       "allowedStructures": [
         "wheat_farm", "dairy_farm", "berry_farm", "windmill",
         "mill", "biofuel_refinery", "fertilizer_factory", 
-        "dairy", "herb_farm", "mushroom_farm", "lumber_yard", "fish_refinery"
+        "dairy", "herb_farm", "mushroom_farm", "lumber_yard", "fish_refinery",
+        "junkyard"
       ]
     },
     {
-      "id": "0003",
       "name": "water",
       "nameWithLanguage": "vesi",
       "asset": "water",
@@ -29,7 +27,6 @@
       "allowedStructures": ["fishery"]
     },
     {
-      "id": "0004",
       "name": "field",
       "nameWithLanguage": "pelto",
       "asset": "field",
@@ -37,7 +34,6 @@
       "allowedStructures": ["mill", "biofuel_refinery", "ditch", "dairy", "windmill"]
     },
     {
-      "id": "0005",
       "name": "industrial",
       "nameWithLanguage": "teollisuusalue",
       "asset": "industrial",
@@ -45,7 +41,6 @@
       "allowedStructures": ["mill", "biofuel_refinery", "fish_refinery", "windmill"]
     },
     {
-      "id": "0006",
       "name": "water_field",
       "nameWithLanguage": "kalakassi",
       "asset": "water",

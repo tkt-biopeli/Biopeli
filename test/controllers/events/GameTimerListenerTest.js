@@ -4,13 +4,14 @@ import GameTimerListener from '../../../src/controllers/events/time/GameTimerLis
 import TimeEvent from '../../../src/controllers/events/time/TimeEvent'
 
 describe('Game timer listener tests', () => {
-  var gtListener, player, menuController, topBarController, city, gameEvents
-  var isGameOverSpy, tbcRedrawSpy, mcRedrawSpy, countPointsSpy
+  var gtListener, player, menuController, topBarController, city, gameEvents, bottomMenuController
+  var isGameOverSpy, tbcRedrawSpy, mcRedrawSpy, countPointsSpy, bottomRedrawSpy
   
   beforeEach(() => {
     isGameOverSpy = sinon.spy()
     tbcRedrawSpy = sinon.spy()
     mcRedrawSpy = sinon.spy()
+    bottomRedrawSpy = sinon.spy()
     countPointsSpy = sinon.spy()
 
     menuController = {
@@ -19,6 +20,10 @@ describe('Game timer listener tests', () => {
     
     topBarController = {
       redraw: tbcRedrawSpy
+    }
+
+    bottomMenuController = {
+      redraw: bottomRedrawSpy
     }
     
     gameEvents = {
@@ -40,6 +45,7 @@ describe('Game timer listener tests', () => {
       menuController: menuController,
       city: city,
       topBarController: topBarController,
+      bottomMenuController: bottomMenuController,
       gameEvents: gameEvents
     })
   })
@@ -102,5 +108,6 @@ describe('Game timer listener tests', () => {
     gtListener.redrawControllers()
     assert(mcRedrawSpy.calledWith())
     assert(tbcRedrawSpy.calledWith())
+    assert(bottomRedrawSpy.calledWith())
   })
 })

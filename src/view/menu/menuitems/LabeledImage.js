@@ -5,7 +5,7 @@ export default class LabeledImage {
 
     this.style = {
       font: fontSize + 'px Arial',
-      fill: '#ffff00',
+      fill: '#000000',
       align: 'center' 
     }
     this.group = viewGroup

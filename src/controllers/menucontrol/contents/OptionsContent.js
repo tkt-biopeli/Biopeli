@@ -30,7 +30,7 @@ export default class OptionsContent extends Content {
     this.owner.redraw()
   }
 
-  createSections () {
+  createSections () {    
     this.sectionName('options')
     this.text(this.texts.soundVolume + ': ' + Math.round(this.game.music.volume * 100) + '%')
     if (this.game.music.mute) {
