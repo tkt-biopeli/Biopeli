@@ -14,10 +14,27 @@ export default class {
     this.y = y
     this.tileType = type
     this.structure = structure
+
     this.flowers = type.flowers
-    // tuotetaan näille arvo kartan generoinnin yhteydessä
     this.moisture = moisture
     this.fertility = fertility
+
     this.owner = null
+  }
+
+  getFlowers () {
+    return this.setInLimits(this.flowers, 0, 10)
+  }
+
+  getFertility () {
+    return this.setInLimits(this.fertility, 0, 100)
+  }
+
+  getMoisture () {
+    return this.setInLimits(this.moisture, 0, 100)
+  }
+
+  setInLimits (value, min, max) {
+    return value < min ? min : value > max ? max : value
   }
 }
