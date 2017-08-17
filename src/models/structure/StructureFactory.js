@@ -113,7 +113,6 @@ export default class StructureFactory {
         let pollute = constantPollution ? amount : amount - distance
         if (pollute < 0) pollute = 0
         tmpTile.flowers -= pollute
-        if (tmpTile.flowers < 1) { tmpTile.flowers = 1 }
       })
     }
   }
