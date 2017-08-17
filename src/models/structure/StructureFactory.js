@@ -182,8 +182,10 @@ export default class StructureFactory {
   calculateSize (structure) {
     if (structure.structureType.type === 'refinery') {
       this.calculateSizeForRefinery(structure)
-    } else {
+    } else if (structure.structureType.type === 'producer_structure') {
       this.calculateSizeForProducer(structure)
+    } else {
+      structure.size = structure.producer.producer.zone.length
     }
   }
 

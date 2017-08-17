@@ -112,6 +112,11 @@
     },
     {
       "type": "image",
+      "name": "junkyard",
+      "file": "assets/images/structures/junkyard.png"
+    },
+    {
+      "type": "image",
       "name": "turnip",
       "file": "assets/images/icons/turnip.png"
     },
