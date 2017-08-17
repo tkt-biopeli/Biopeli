@@ -12,10 +12,10 @@ describe('Seasonal producer tests', () => {
     }
 
     var harvestingWeeks = new Set(['7.1', '8.3'])
-    var turnipYield = 1
+    var sT = {turnipYield: 1}
 
     var producer = new SeasonalProducer({
-      turnipYield: turnipYield,
+      structureType: sT,
       tile: tile,
       harvestWeeks: harvestingWeeks
     })

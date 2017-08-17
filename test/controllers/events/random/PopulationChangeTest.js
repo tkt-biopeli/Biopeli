@@ -1,13 +1,13 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import CityEffect from '../../../../src/controllers/events/random/effects/CityEffect'
+import PopulationEffect from '../../../../src/controllers/events/random/effects/PopulationEffect'
 
-describe('City effect tests', ()=>{
+describe('Population effect tests', ()=>{
   it('Effect works', ()=>{
     var city = {population: 100}
-    var effect = new CityEffect({
+    var effect = new PopulationEffect({
       gameState: {city: city},
-      json: {populationChange: 2}
+      json: {changePercentage: 2}
     })
 
     effect.happen()

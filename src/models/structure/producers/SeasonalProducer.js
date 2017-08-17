@@ -3,8 +3,8 @@
  * the collected turnips at harvest seasons
  */
 export default class SeasonalProducer {
-  constructor ({turnipYield, harvestWeeks}) {
-    this.turnipYield = turnipYield
+  constructor ({structureType, harvestWeeks}) {
+    this.turnipYield = structureType.turnipYield
     this.harvestWeeks = harvestWeeks
     this.produced = 0
   }
