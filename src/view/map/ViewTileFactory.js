@@ -56,8 +56,8 @@ export default class ViewTileFactory {
     let vt = new ViewTile({ 
       game: this.game, 
       modelTile: modelTile, 
-      dampnessCol: this.palette.getDampnessColour(modelTile.moisture), 
-      fertilityCol: this.palette.getFertilityColour(modelTile.fertility),
+      dampnessCol: this.palette.getDampnessColour(modelTile.getMoisture()), 
+      fertilityCol: this.palette.getFertilityColour(modelTile.getFertility()),
       tileSize: this.config.mapSettings.tileSize,
       borderColour: modelTile.owner !== null ? this.palette.getBorderColour(modelTile.owner.bordercolCode) : 0x000000
     })
