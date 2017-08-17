@@ -345,9 +345,13 @@
       "asset": "junkyard",
       "health": 20,
       "pollution": 50,
-      "cost": 100000,
+      "cost": 50000,
       "radiusForTileOwnership": 2,
-      "multiplier": 2,
+      "changeValues": {
+        "flowers": 1,
+        "fertility": 0,
+        "moisture": 0
+      },
       "reach": 50,
       "moveCosts": {
         "grass": 2,

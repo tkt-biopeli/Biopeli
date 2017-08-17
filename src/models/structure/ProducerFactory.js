@@ -33,8 +33,7 @@ export default class ProducerFactory {
       default:
         producer = new SpecialStructure({
           zone: this.tileFinder.findTilesInDistanceOf(tile, sType.reach, sType.moveCosts),
-          multiplier: sType.multiplier,
-          radius: sType.reach,
+          changeValues: structureType.changeValues,
           tile: tile
         })
     }
