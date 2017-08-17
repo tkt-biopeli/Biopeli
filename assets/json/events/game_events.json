@@ -1,5 +1,5 @@
 {
-  "events" : [
+  "events": [
     {
       "name": "Myllytulva",
       "description": "Myllysi tulvivat",
@@ -15,6 +15,38 @@
             "tileTypes": [
               "industrial"
             ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pakolaiskriisi",
+      "description": "Maailmassa on pakolaiskriisi, kaupungin koko kasvaa",
+      "condition": {
+        "name": "empty"
+      },
+      "effects": [
+        {
+          "name": "CityChange",
+          "populationChange": 1.2,
+          "filter": {
+            "name": "empty"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Epidemia",
+      "description": "Kansalaiset sairastuvat tuntemattomaan virukseen, kapungin koko kutistuu",
+      "condition": {
+        "name": "empty"
+      },
+      "effects": [
+        {
+          "name": "CityChange",
+          "populationChange": 0.8,
+          "filter": {
+            "name": "empty"
           }
         }
       ]
