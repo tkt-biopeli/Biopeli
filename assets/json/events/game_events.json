@@ -64,6 +64,22 @@
           }
         }
       ]
+    },
+    {
+      "name": "Verokevennys",
+      "description": "Veroja on kevennetty, rakentaminen on halvempaa!",
+      "condition": {
+        "name": "empty"
+      },
+      "effects": [
+        {
+          "name": "StructureTypeChange",
+          "costChange": 0.8,
+          "filter": {
+            "name": "empty"
+          }
+        }
+      ]
     }
   ]
 }
