@@ -53,7 +53,7 @@ export default class RandomEventFactory {
     this.effectCreators.set('MoneyChange', MoneyEffect)
     this.effectCreators.set('TileValueChange', TileValueEffect)
     this.effectCreators.set('CityChange', CityEffect)
-    this.effectCreaters.set('StructureTypeChange', StructureTypeEffect)
+    this.effectCreators.set('StructureTypeChange', StructureTypeEffect)
   }
 
   initFilters () {
@@ -73,7 +73,7 @@ export default class RandomEventFactory {
     this.filterCreators.set('StructuresOfType', TypeStructureFilter)
     this.filterCreators.set('StructuresWithFoundingYear', FoundingYearStructureFilter)
 
-    this.filterCreators.set('StructureTypes', StructureTypeFilter)
+    this.filterCreators.set('StructureType', StructureTypeFilter)
   }
 
   createEvents (eventJSON) {

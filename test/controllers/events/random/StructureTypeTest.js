@@ -5,12 +5,13 @@ import structureTypes from '../../../integration/helpers/PseudoStructuretypes'
 
 describe('Structure type effect tests', ()=>{
   it('Effect works', ()=>{
-    var structureType = structureTypes[0]
     var effect = new StructureTypeEffect({
       json: {costChange: 2}
     })
-
-    effect.happenForOne(structureType)
-    assert.equal(20000, structureType.cost)
+    var structureTypes = [{cost: 10000}, {cost: 10000}]
+    effect.happen(structureTypes)
+    for(let i = 0 ; i < 1 ; i++){
+      assert.equal(20000, structureTypes[i].cost)
+    }
   })
 })
