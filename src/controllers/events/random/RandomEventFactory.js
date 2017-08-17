@@ -9,6 +9,7 @@ import Or from './filters/common/Or'
 import Complement from './filters/common/Complement'
 import RandomFilter from './filters/common/RandomFilter'
 import TiletypeTileFilter from './filters/tile/TiletypeTileFilter'
+import ProductionAreaTileFilter from './filters/tile/ProductionAreaTileFilter'
 import AllTileFilter from './filters/tile/AllTileFilter'
 import ValuesTileFilter from './filters/tile/ValuesTileFilter'
 import AllStructureFilter from './filters/structure/AllStructureFilter'
@@ -18,6 +19,7 @@ import TypeStructureFilter from './filters/structure/TypeStructureFilter'
 
 import TileValueEffect from './effects/TileValueEffect'
 import MoneyEffect from './effects/MoneyEffect'
+import CityEffect from './effects/CityEffect'
 
 import TimeCondition from './conditions/TimeCondition'
 
@@ -48,6 +50,7 @@ export default class RandomEventFactory {
 
     this.effectCreators.set('MoneyChange', MoneyEffect)
     this.effectCreators.set('TileValueChange', TileValueEffect)
+    this.effectCreators.set('CityChange', CityEffect)
   }
 
   initFilters () {
@@ -61,11 +64,13 @@ export default class RandomEventFactory {
     this.filterCreators.set('TilesWithTiletype', TiletypeTileFilter)
     this.filterCreators.set('TilesWithValues', ValuesTileFilter)
     this.filterCreators.set('AllTiles', AllTileFilter)
+    this.filterCreators.set('ProductionAreaTile', ProductionAreaTileFilter)
 
     this.filterCreators.set('AllStructures', AllStructureFilter)
     this.filterCreators.set('StructuresWithStructureType', StructureTypeStructureFilter)
     this.filterCreators.set('StructuresOfType', TypeStructureFilter)
     this.filterCreators.set('StructuresWithFoundingYear', FoundingYearStructureFilter)
+
   }
 
   createEvents (eventJSON) {
