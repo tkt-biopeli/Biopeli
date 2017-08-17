@@ -9,6 +9,7 @@
   },
 
   "gameOverState": {
+    "enterName": "Syötä nimesi",
     "endScore": "Loppupisteesi",
     "endCitySize": "Kaupungin koko",
     "highscores": "Tulokset",

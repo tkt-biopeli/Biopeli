@@ -23,10 +23,17 @@ export default class GameOver extends Phaser.State {
 
   create () {
     this.loadHighscore()
+    var input = this.game.game.add.inputField(10, 90, {
+    width: 150,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: '#000000',
+    borderRadius: 6,
+    placeHolder: this.texts.gameOverState.enterName
+})
 
     this.menu = new MenuBuilder(this, 'gameover', this.camera.height * 5 / 9, this.gameData.config)
     this.stage.backgroundColor = 0x000000
-//    var input = this.game.game.add.inputField(10, 90)
 
     this.menu.createScore(
       this.texts.gameOverState.endScore + ': ' + this.points.toFixed(0) +

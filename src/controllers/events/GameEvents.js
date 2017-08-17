@@ -27,7 +27,6 @@ export default class GameEvents {
    * Finish the game
    */
   finishGame () {
-//    console.log(this.game.game.phaserInput)
     this.gameState.music.stop()
     this.gameState.state.state.start(
       'GameOver', true, false,

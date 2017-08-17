@@ -15,9 +15,11 @@ export default class extends Phaser.State {
     this.stage.backgroundColor = '#EDEEC9'
     this.fontsReady = false
     this.fontsLoaded = this.fontsLoaded.bind(this)
+
     this.game.kineticScrolling = this.game.plugins.add(Phaser.Plugin.KineticScrolling)
-    this.game.phaserInput = this.game.plugins.add(PhaserInput.PhaserInput)
-    console.log(this.game.phaserInput)
+
+    let plugin = new PhaserInput.PhaserInput.Plugin(this.game, this.game.plugins)
+    this.game.add.plugin(plugin)
   }
 
   /**
