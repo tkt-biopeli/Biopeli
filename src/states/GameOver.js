@@ -12,10 +12,11 @@ export default class GameOver extends Phaser.State {
    * @param {*} score, final score
    * @param {*} population, final city population
    */
-  init (score, population, gameData, utils, texts) {
+  init (score, population, gameData, game, utils, texts) {
     this.points = score
     this.population = population
     this.gameData = gameData
+    this.game = game
     this.utils = utils
     this.texts = texts
   }
@@ -25,6 +26,7 @@ export default class GameOver extends Phaser.State {
 
     this.menu = new MenuBuilder(this, 'gameover', this.camera.height * 5 / 9, this.gameData.config)
     this.stage.backgroundColor = 0x000000
+//    var input = this.game.game.add.inputField(10, 90)
 
     this.menu.createScore(
       this.texts.gameOverState.endScore + ': ' + this.points.toFixed(0) +

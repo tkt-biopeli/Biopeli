@@ -28,6 +28,7 @@
     "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "exports-loader": "^0.6.4",
     "expose-loader": "^0.7.3",
     "jasmine": "^2.6.0",
     "mocha": "^3.4.1",
@@ -42,6 +43,7 @@
   "dependencies": {
     "collections": "^5.0.6",
     "phaser-ce": "^2.7.9",
+    "@orange-games/phaser-input": "^2.0.5",
     "phaser-kinetic-scrolling-plugin": "^1.0.4",
     "webfontloader": "^1.6.27"
   }

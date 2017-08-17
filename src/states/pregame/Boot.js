@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 import WebFont from 'webfontloader'
 // do not remove this import!
 import KineticScrolling from 'phaser-kinetic-scrolling-plugin'
+import PhaserInput from 'phaser-input'
 
 /**
  * Description goes here
@@ -15,6 +16,8 @@ export default class extends Phaser.State {
     this.fontsReady = false
     this.fontsLoaded = this.fontsLoaded.bind(this)
     this.game.kineticScrolling = this.game.plugins.add(Phaser.Plugin.KineticScrolling)
+    this.game.phaserInput = this.game.plugins.add(PhaserInput.PhaserInput)
+    console.log(this.game.phaserInput)
   }
 
   /**

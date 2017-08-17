@@ -169,6 +169,7 @@ export default class GameState {
       gameState: this,
       gameLength: gameLength,
       config: config,
+      game: this.state,
       utils: utils,
       texts: this.texts
     })
