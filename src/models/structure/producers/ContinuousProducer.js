@@ -2,8 +2,8 @@
  * Produces turnips every week
  */
 export default class ContinuousProducer {
-  constructor ({turnipYield}) {
-    this.turnipYield = turnipYield
+  constructor ({structureType}) {
+    this.turnipYield = structureType.turnipYield
   }
 
   initialize (structure) {}

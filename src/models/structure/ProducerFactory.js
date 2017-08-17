@@ -33,7 +33,7 @@ export default class ProducerFactory {
       default:
         producer = new SpecialStructure({
           zone: this.tileFinder.findTilesInDistanceOf(tile, sType.reach, sType.moveCosts),
-          changeValues: structureType.changeValues,
+          changeValues: sType.changeValues,
           tile: tile
         })
     }
@@ -42,8 +42,8 @@ export default class ProducerFactory {
 
   createPrimaryProducer (sType, tile) {
     var producer = sType.continuousProduction
-     ? this.createContinuousProducer(sType.turnipYield)
-     : this.createSeasonalProducer(sType.harvestingWeeks, sType.turnipYield)
+     ? this.createContinuousProducer(sType)
+     : this.createSeasonalProducer(sType.harvestingWeeks, sType)
 
     return new PrimaryProducerDecorator({
       tile: tile, 
@@ -52,9 +52,9 @@ export default class ProducerFactory {
     })
   }
 
-  createSeasonalProducer (harvestingWeeks, turnipYield) {
+  createSeasonalProducer (harvestingWeeks, sType) {
     return new SeasonalProducer({
-      turnipYield: turnipYield,
+      structureType: sType,
       harvestWeeks: harvestingWeeks
     })
   }
@@ -62,9 +62,9 @@ export default class ProducerFactory {
   /**
    * Yields the same amount of turnips per week.
    */
-  createContinuousProducer (turnipYield) {
+  createContinuousProducer (sType) {
     return new ContinuousProducer({
-      turnipYield: turnipYield
+      structureType: sType
     })
   }
 
