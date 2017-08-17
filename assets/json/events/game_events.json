@@ -41,8 +41,8 @@
       },
       "effects": [
         {
-          "name": "CityChange",
-          "populationChange": 1.2,
+          "name": "PopulationChange",
+          "changePercentage": 1.2,
           "filter": {
             "name": "empty"
           }
@@ -57,8 +57,8 @@
       },
       "effects": [
         {
-          "name": "CityChange",
-          "populationChange": 0.8,
+          "name": "PopulationChange",
+          "changePercentage": 0.8,
           "filter": {
             "name": "empty"
           }
@@ -77,6 +77,35 @@
           "costChange": 0.8,
           "filter": {
             "name": "empty"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hipit",
+      "description": "Kaupunkiin muutti hippejä, ja yrttien hinnat nousivat!",
+      "condition": {
+        "name": "empty"
+      },
+      "effects": [
+        {
+          "name": "StructureYieldChange",
+          "yieldChange": 2,
+          "filter": {
+            "name": "StructureType",
+            "structureTypes": [
+              "herb_farm"
+            ]
+          }
+        },
+        {
+          "name": "PopulationChange",
+          "changePercentage": 1.2,
+          "filter": {
+            "name": "StructureType",
+            "structureTypes": [
+              "herb_farm"
+            ]
           }
         }
       ]

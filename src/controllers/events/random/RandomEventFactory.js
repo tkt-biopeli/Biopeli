@@ -22,7 +22,8 @@ import StructureTypeFilter from './filters/structuretype/StructureTypeFilter'
 import TileValueEffect from './effects/TileValueEffect'
 import MoneyEffect from './effects/MoneyEffect'
 import PopulationEffect from './effects/PopulationEffect'
-import CityEffect from './effects/CityEffect'
+
+import StructureYieldEffect from './effects/StructureYieldEffect'
 import StructureCostEffect from './effects/StructureCostEffect'
 
 import TimeCondition from './conditions/TimeCondition'
@@ -57,8 +58,8 @@ export default class RandomEventFactory {
     this.effectCreators.set('MoneyChange', MoneyEffect)
     this.effectCreators.set('PopulationChange', PopulationEffect)
     this.effectCreators.set('TileValueChange', TileValueEffect)
-    this.effectCreators.set('CityChange', CityEffect)
     this.effectCreators.set('StructureCostChange', StructureCostEffect)
+    this.effectCreators.set('StructureYieldChange', StructureYieldEffect)
   }
 
   initFilters () {
