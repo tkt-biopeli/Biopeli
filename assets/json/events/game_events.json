@@ -100,7 +100,7 @@
         },
         {
           "name": "PopulationChange",
-          "changePercentage": 1.2,
+          "changePercentage": 1.05,
           "filter": {
             "name": "StructureType",
             "structureTypes": [
