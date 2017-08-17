@@ -103,13 +103,17 @@ export default class StructureFactory {
    * @param {*} map
    */
   createInitialPollution (pollution, tile) {
-    let tiles = this.map.getTilesInRadius(3, tile) // need a source other than a magic number 3
+    let constantPollution = pollution.constant
+    let radius = pollution.distance
+    let amount = pollution.amount
+
+    let tiles = this.map.getTilesInRadius(radius, tile)
     for (var [distance, tilesArray] of tiles) {
-      tilesArray.forEach(function (tmpTile) {
-        let amount = pollution - distance > 0 ? pollution - distance : 0
-        tmpTile.flowers -= amount
-        if (tmpTile.flowers < 1) { tmpTile.flowers = 1 }
-      }, this)
+      tilesArray.forEach((tmpTile) => {
+        let pollute = constantPollution ? amount : amount - distance
+        if (pollute < 0) pollute = 0
+        tmpTile.flowers -= pollute
+      })
     }
   }
 

@@ -9,7 +9,6 @@ const structureTypes = {
     continuousProduction: false,
     turnipYield: 4,
     cost: 10000,
-    pollution: 4,
     radiusForTileOwnership: 2,
     moistureMin: 40,
     moistureMax: 70,
@@ -24,7 +23,12 @@ const structureTypes = {
       "industrial": 1
     },
     takesOwnershipOf: ["grass"],
-    farmland: "field"
+    farmland: "field",
+    pollution: {
+      "constant": true,
+      "distance": 4,
+      "amount": 2
+    }
   },
   dairy_farm: {
     type: "producer_structure",
@@ -36,7 +40,6 @@ const structureTypes = {
     continuousProduction: true,
     turnipYield: 6,
     cost: 15000,
-    pollution: 5,
     radiusForTileOwnership: 2,
     moistureMin: 40,
     moistureMax: 70,
@@ -51,7 +54,12 @@ const structureTypes = {
       "industrial": 1
     },
     takesOwnershipOf: ["grass"],
-    farmland: "field"
+    farmland: "field",
+    pollution: {
+      "constant": true,
+      "distance": 3,
+      "amount": 3
+    }
   },
   berry_farm: {
     type: "producer_structure",
@@ -63,7 +71,6 @@ const structureTypes = {
     continuousProduction: true,
     turnipYield: 3,
     cost: 10000,
-    pollution: 3,
     radiusForTileOwnership: 2,
     moistureMin: 40,
     moistureMax: 70,
@@ -78,7 +85,12 @@ const structureTypes = {
       "industrial": 1
     },
     takesOwnershipOf: ["grass"],
-    farmland: "field"
+    farmland: "field",
+    pollution: {
+      "constant": true,
+      "distance": 3,
+      "amount": 1
+    }
   },
   mill: {
     type: "refinery",
@@ -90,7 +102,6 @@ const structureTypes = {
     buysFrom: ['wheat_farm'],
     cost: 20000,
     multiplier: 2,
-    pollution: 2,
     radiusForTileOwnership: 1,
     reach: 5,
     moveCosts: {
@@ -102,7 +113,12 @@ const structureTypes = {
       "industrial": 1
     },
     takesOwnershipOf: ["grass", "field", "industrial", "forest"],
-    farmland: "industrial"
+    farmland: "industrial",
+    pollution: {
+      "constant": false,
+      "distance": 3,
+      "amount": 4
+    }
   },
   fishery: {
     type: "producer_structure",
@@ -110,7 +126,6 @@ const structureTypes = {
     nameWithLanguage: "Kalanviljelylaitos",
     asset: "fishery",
     health: 15,
-    pollution: 5,
     cost: 15000,
     radiusForTileOwnership: 2,
     harvestingWeeks: [],
@@ -129,7 +144,12 @@ const structureTypes = {
       "industrial": 10
     },
     takesOwnershipOf: ["water"],
-    farmland: "water_field"
+    farmland: "water_field",
+    pollution: {
+      "constant": false,
+      "distance": 3,
+      "amount": 4
+    }
   },
   fish_refinery: {
     type: "refinery",
@@ -137,7 +157,6 @@ const structureTypes = {
     nameWithLanguage: "Kalajalostamo",
     asset: "fish_refinery",
     health: 20,
-    pollution: 2,
     cost: 20000,
     radiusForTileOwnership: 1,
     multiplier: 2,
@@ -154,7 +173,12 @@ const structureTypes = {
       "industrial": 1
     },
     takesOwnershipOf: ["grass"],
-    farmland: "industrial"
+    farmland: "industrial",
+    pollution: {
+      "constant": false,
+      "distance": 2,
+      "amount": 4
+    }
   }
   
 }

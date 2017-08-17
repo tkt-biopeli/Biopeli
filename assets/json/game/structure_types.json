@@ -6,7 +6,6 @@
       "nameWithLanguage": "viljatila",
       "asset": "wheat_farm",
       "health": 12,
-      "pollution": 4,
       "cost": 10000,
       "radiusForTileOwnership": 3,
       "harvestingWeeks": ["8.1"],
@@ -25,7 +24,12 @@
         "industrial": 1
       },
       "takesOwnershipOf": ["grass"],
-      "farmland": "field"
+      "farmland": "field",
+      "pollution": {
+        "constant": true,
+        "distance": 4,
+        "amount": 2
+      }
     },
     {
       "type": "producer_structure",
@@ -33,7 +37,6 @@
       "nameWithLanguage": "maitotila",
       "asset": "dairy_farm",
       "health": 15,
-      "pollution": 5,
       "cost": 15000,
       "radiusForTileOwnership": 2,
       "harvestingWeeks": [],
@@ -52,7 +55,12 @@
         "industrial": 1
       },
       "takesOwnershipOf": ["grass"],
-      "farmland": "field"
+      "farmland": "field",
+      "pollution": {
+        "constant": true,
+        "distance": 3,
+        "amount": 3
+      }
     },
     {
       "type": "producer_structure",
@@ -60,7 +68,6 @@
       "nameWithLanguage": "marjatila",
       "asset": "berry_farm",
       "health": 8,
-      "pollution": 3,
       "cost": 10000,
       "radiusForTileOwnership": 2,
       "harvestingWeeks": [],
@@ -79,7 +86,12 @@
         "industrial": 1
       },
       "takesOwnershipOf": ["grass"],
-      "farmland": "field"
+      "farmland": "field",
+      "pollution": {
+        "constant": true,
+        "distance": 3,
+        "amount": 1
+      }
     },
     {
       "type": "refinery",
@@ -87,7 +99,6 @@
       "nameWithLanguage": "mylly",
       "asset": "mill",
       "health": 20,
-      "pollution": 2,
       "cost": 20000,
       "radiusForTileOwnership": 1,
       "multiplier": 2,
@@ -102,7 +113,12 @@
         "industrial": 1
       },
       "takesOwnershipOf": ["grass", "field", "industrial"],
-      "farmland": "industrial"
+      "farmland": "industrial",
+      "pollution": {
+        "constant": false,
+        "distance": 3,
+        "amount": 4
+      }
     },
     {
       "type": "refinery",
@@ -110,7 +126,6 @@
       "nameWithLanguage": "meijeri",
       "asset": "dairy",
       "health": 20,
-      "pollution": 2,
       "cost": 30000,
       "radiusForTileOwnership": 1,
       "multiplier": 2,
@@ -125,7 +140,12 @@
         "industrial": 1
       },
       "takesOwnershipOf": ["grass", "field", "industrial"],
-      "farmland": "industrial"
+      "farmland": "industrial",
+      "pollution": {
+        "constant": false,
+        "distance": 3,
+        "amount": 5
+      }
     },
     {
       "type": "producer_structure",
@@ -133,7 +153,6 @@
       "nameWithLanguage": "yrttitila",
       "asset": "herb_farm",
       "health": 10,
-      "pollution": 4,
       "cost": 12500,
       "radiusForTileOwnership": 2,
       "harvestingWeeks": [],
@@ -152,7 +171,12 @@
         "industrial": 1
       },
       "takesOwnershipOf": ["grass"],
-      "farmland": "field"
+      "farmland": "field",
+      "pollution": {
+        "constant": true,
+        "distance": 4,
+        "amount": 1
+      }
     },
     {
       "type": "producer_structure",
@@ -160,7 +184,6 @@
       "nameWithLanguage": "sienitila",
       "asset": "mushroom_farm",
       "health": 12,
-      "pollution": 4,
       "cost": 10000,
       "radiusForTileOwnership": 3,
       "harvestingWeeks": [],
@@ -179,7 +202,12 @@
         "industrial": 5
       },
       "takesOwnershipOf": ["forest", "grass"],
-      "farmland": "forest"
+      "farmland": "forest",
+      "pollution": {
+        "constant": true,
+        "distance": 1,
+        "amount": 4
+      }
     },
     {
       "type": "producer_structure",
@@ -187,7 +215,6 @@
       "nameWithLanguage": "saha",
       "asset": "lumber_yard",
       "health": 20,
-      "pollution": 6,
       "cost": 20000,
       "radiusForTileOwnership": 3,
       "harvestingWeeks": [],
@@ -206,7 +233,12 @@
         "industrial": 5
       },
       "takesOwnershipOf": ["forest", "grass"],
-      "farmland": "forest"
+      "farmland": "forest",
+      "pollution": {
+        "constant": false,
+        "distance": 3,
+        "amount": 4
+      }
     },
     {
       "type": "producer_structure",
@@ -214,7 +246,6 @@
       "nameWithLanguage": "kalanviljelylaitos",
       "asset": "fishery",
       "health": 15,
-      "pollution": 5,
       "cost": 15000,
       "radiusForTileOwnership": 2,
       "harvestingWeeks": [],
@@ -233,7 +264,12 @@
         "industrial": 10
       },
       "takesOwnershipOf": ["water"],
-      "farmland": "water_field"
+      "farmland": "water_field",
+      "pollution": {
+        "constant": false,
+        "distance": 3,
+        "amount": 4
+      }
     },
     {
       "type": "refinery",
@@ -241,7 +277,6 @@
       "nameWithLanguage": "kalajalostamo",
       "asset": "fish_refinery",
       "health": 20,
-      "pollution": 2,
       "cost": 20000,
       "radiusForTileOwnership": 1,
       "multiplier": 2,
@@ -256,7 +291,12 @@
         "industrial": 1
       },
       "takesOwnershipOf": ["grass"],
-      "farmland": "industrial"
+      "farmland": "industrial",
+      "pollution": {
+        "constant": false,
+        "distance": 2,
+        "amount": 4
+      }
     },
     {
       "type": "refinery",
@@ -264,7 +304,6 @@
       "nameWithLanguage": "biopolttoaineen jalostamo",
       "asset": "biofuel_refinery",
       "health": 20,
-      "pollution": 3,
       "cost": 45000,
       "radiusForTileOwnership": 1,
       "multiplier": 2,
@@ -279,7 +318,12 @@
         "field": 1,
         "industrial": 1
       },
-      "farmland": "industrial"
+      "farmland": "industrial",
+      "pollution": {
+        "constant": false,
+        "distance": 3,
+        "amount": 4
+      }
     },
     {
       "type": "special",
@@ -294,7 +338,6 @@
       "nameWithLanguage": "lannoitetehdas",
       "asset": "fertilizer_factory",
       "health": 20,
-      "pollution": 7,
       "cost": 30000,
       "radiusForTileOwnership": 1,
       "multiplier": 2,
@@ -309,7 +352,12 @@
         "industrial": 1
       },
       "takesOwnershipOf": ["grass", "field", "industrial"],
-      "farmland": "industrial"
+      "farmland": "industrial",
+      "pollution": {
+        "constant": false,
+        "distance": 3,
+        "amount": 5
+      }
     },
     {
       "type": "producer_structure",
@@ -317,7 +365,6 @@
       "nameWithLanguage": "tuulimylly",
       "asset": "windmill",
       "health": 15,
-      "pollution": 0,
       "cost": 5000,
       "radiusForTileOwnership": 0,
       "harvestingWeeks": [],
@@ -336,7 +383,12 @@
         "industrial": 1
       },
       "takesOwnershipOf": ["grass", "field", "industrial"],
-      "farmland": "grass"
+      "farmland": "grass",
+      "pollution": {
+        "constant": false,
+        "distance": 0,
+        "amount": 0
+      }
     },
     {
       "type": "special",
@@ -344,7 +396,6 @@
       "nameWithLanguage": "kaatopaikka",
       "asset": "junkyard",
       "health": 20,
-      "pollution": 50,
       "cost": 50000,
       "radiusForTileOwnership": 2,
       "changeValues": {
@@ -362,7 +413,12 @@
         "industrial": 1
       },
       "takesOwnershipOf": ["grass", "field", "industrial"],
-      "farmland": "industrial"
+      "farmland": "industrial",
+      "pollution": {
+        "constant": false,
+        "distance": 3,
+        "amount": 50
+      }
     }
   ]
 }
