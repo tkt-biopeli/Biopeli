@@ -4,8 +4,14 @@
     "startGame": "Aloita peli",
     "instructions": "Ohjeet",
     "instructionsDescription": "Tarkkaile maaperän kosteutta ja ravinteita.\nRakenna alku- sekä jatkotuotantorakennuksia.\nVastaa kaupungin kysyntään.",
+    "toStart": "Alkuun",
+    "back": "Takaisin"
+  },
+
+  "gameOverState": {
     "endScore": "Loppupisteesi",
     "endCitySize": "Kaupungin koko",
+    "highscores": "Tulokset",
     "toStart": "Alkuun",
     "back": "Takaisin"
   },
