@@ -17,10 +17,13 @@ import StructureTypeStructureFilter from './filters/structure/StructureTypeStruc
 import FoundingYearStructureFilter from './filters/structure/FoundingYearStructureFilter'
 import TypeStructureFilter from './filters/structure/TypeStructureFilter'
 
+import StructureTypeFilter from './filters/structuretype/StructureTypeFilter'
+
 import TileValueEffect from './effects/TileValueEffect'
 import MoneyEffect from './effects/MoneyEffect'
 import PopulationEffect from './effects/PopulationEffect'
 import CityEffect from './effects/CityEffect'
+import StructureCostEffect from './effects/StructureCostEffect'
 
 import TimeCondition from './conditions/TimeCondition'
 import PopulationCondition from './conditions/PopulationCondition'
@@ -55,6 +58,7 @@ export default class RandomEventFactory {
     this.effectCreators.set('PopulationChange', PopulationEffect)
     this.effectCreators.set('TileValueChange', TileValueEffect)
     this.effectCreators.set('CityChange', CityEffect)
+    this.effectCreators.set('StructureCostChange', StructureCostEffect)
   }
 
   initFilters () {
@@ -75,6 +79,7 @@ export default class RandomEventFactory {
     this.filterCreators.set('StructuresOfType', TypeStructureFilter)
     this.filterCreators.set('StructuresWithFoundingYear', FoundingYearStructureFilter)
 
+    this.filterCreators.set('StructureType', StructureTypeFilter)
   }
 
   createEvents (eventJSON) {
