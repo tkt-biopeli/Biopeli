@@ -95,7 +95,7 @@ export default class MulticontentController extends Controller {
    * Resets the content change stack and also resets the whole controller
    */
   reset () {
-    this.index = this.startIndex
+    this.index = this.startIndex    
     this.getStack = []
 
     super.reset()

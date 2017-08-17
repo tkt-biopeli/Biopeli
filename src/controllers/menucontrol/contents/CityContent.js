@@ -1,14 +1,19 @@
 import Content from './Content'
 
 export default class CityContent extends Content {
-  constructor ({city, gameEvents, texts}) {
+  constructor ({ city, gameEvents, texts, telegramStorage }) {
     super()
+    this.name = 'city'
     this.city = city
     this.gameEvents = gameEvents
     this.texts = texts.cityContentTexts
+    this.telegramStorage = telegramStorage
+    this.telegramIndex = 0
+    
+    this.telegramStorage.addTelegram('', this.texts.welcomeTelegram, '')    
   }
 
-  createSections () {
+  createSections () {    
     this.sectionName('city')
     this.text(this.texts.city + ': ' + this.city.name)
     this.text(this.texts.population + ': ' + this.city.population)
@@ -21,5 +26,45 @@ export default class CityContent extends Content {
       this.texts.turnipPrice + ': ' +
       this.format(this.city.turnipDemand.currentPrice(), 2)
     )
+
+    if (this.telegramStorage.notEmpty()) this.telegramSection()
+  }
+
+  telegramSection () {
+    this.section('telegrams')
+    this.text(this.texts.telegramServiceName)
+    this.upButton()
+    this.telegramMessage()
+    this.downButton()
+  }
+
+  upButton () {
+    let i = this.telegramIndex
+    let lenght = this.telegramStorage.telegrams.length - 1
+    let asset = i < lenght ? 'arrow_up' : 'arrow_unup'
+    let call = i < lenght ? this.nextTelegram : () => { }
+    this.button('', call, this, asset)
+  }
+
+  downButton () {
+    let asset = this.telegramIndex > 0 ? 'arrow_down' : 'arrow_undown'
+    let call = this.telegramIndex > 0 ? this.previousTelegram : () => { }
+    this.button('', call, this, asset)
+  }
+
+  telegramMessage () {
+    let telegram = this.telegramStorage.getTelegram(this.telegramIndex)
+    let text = telegram.date + '\n' + telegram.topic + '\n' + telegram.text
+    this.labeledImage(text, 'telegram')
+  }
+
+  previousTelegram () {
+    this.telegramIndex--
+    this.owner.redraw()
+  }
+
+  nextTelegram () {
+    this.telegramIndex++
+    this.owner.redraw()
   }
 }

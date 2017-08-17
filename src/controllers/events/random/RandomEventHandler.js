@@ -16,7 +16,8 @@ export default class RandomEventHandler {
 
   randomEventCheck (timeEvent) {
     if (this.timeWindowRandomizer.tryNext(timeEvent)) {
-      this.doEvent()
+      let happened = this.doEvent()
+      if (happened) return happened
     }
   }
 
@@ -24,6 +25,7 @@ export default class RandomEventHandler {
     var event = this.eventRandomizer.getRandomEvent(this.maxSearched)
     if (event != null) {
       event.happen()
+      return event
       /*
       this.menuController.addState('event', event)
       this.menuController.changeContent(this.eventContentIndex) */

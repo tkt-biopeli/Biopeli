@@ -9,13 +9,16 @@ export default class GameTimerListener {
    * @param {TopBarController} topBarController
    * @param {GameEvents} gameEvents
    */
-  constructor ({ city, player, menuController, topBarController, gameEvents, randomEventHandler }) {
+  constructor ({ city, player, menuController, topBarController,
+    bottomMenuController, gameEvents, randomEventHandler, telegramStorage }) {
     this.city = city
     this.player = player
     this.menuController = menuController
     this.topBarController = topBarController
+    this.bottomMenuController = bottomMenuController
     this.gameEvents = gameEvents
     this.randomEventHandler = randomEventHandler
+    this.telegramStorage = telegramStorage
   }
 
   /**
@@ -68,7 +71,10 @@ export default class GameTimerListener {
   }
 
   checkRandomEvent (timerEvent) {
-    this.randomEventHandler.randomEventCheck(timerEvent)
+    let eventHappened = this.randomEventHandler.randomEventCheck(timerEvent)
+    if (eventHappened) {
+      this.telegramStorage.addRandomEvent(timerEvent, eventHappened)
+    }
   }
 
   /**
@@ -77,5 +83,6 @@ export default class GameTimerListener {
   redrawControllers () {
     this.topBarController.redraw()
     this.menuController.redraw()
+    this.bottomMenuController.redraw()
   }
 }
