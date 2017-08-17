@@ -53,17 +53,21 @@ export default class TileContent extends Content {
 
   structureInformation (structure) {
     this.section('structure')
-    this.text(
-      this.texts.structureInformationTexts.structure + ': ' +
+    this.text(this.texts.structureInformationTexts.structure + ': ' +
       structure.structureName)
-    this.text(
-      this.texts.structureInformationTexts.foundingYear + ': ' +
+    this.text(this.texts.structureInformationTexts.foundingYear + ': ' +
       structure.foundingYear)
+
+    // this is in a wrong place!
     if (structure.structureType.type === 'refinery') {
       structure.size = structure.producer.producer.producerHolders.length
     }
+    
     this.text(this.texts.structureInformationTexts.size + ': ' + structure.size)
+    if (structure.structureType.type === 'producer_structure') this.showProductionInformation(structure)
+  }
 
+  showProductionInformation (structure) {
     var turnipProduction = structure.turnipProduction()
     this.text(
       this.texts.structureInformationTexts.turnipsPerWeek +
@@ -112,7 +116,7 @@ export default class TileContent extends Content {
     var x = tile.tileType.name
     if (x === 'grass' || x === 'water') {
       this.owner.changeButton(
-        'Alkutuotanto', 4,
+        this.texts.structureCategories.production, 4,
         this.owner.wrapFunction(
           this.owner.addState, this.owner,
           'whatType', 'buildProducer'),
@@ -122,14 +126,14 @@ export default class TileContent extends Content {
 
     if (x !== 'water' && x !== 'forest') {
       this.owner.changeButton(
-        'Jalostamo', 4,
+        this.texts.structureCategories.refinery, 4,
         this.owner.wrapFunction(
           this.owner.addState, this.owner,
           'whatType', 'buildRefinery'),
         this, 'emptyButton'
       )
       this.owner.changeButton(
-        'Erikoisrakennus', 4,
+        this.texts.structureCategories.special, 4,
         this.owner.wrapFunction(
           this.owner.addState, this.owner,
           'whatType', 'buildSpecial'),

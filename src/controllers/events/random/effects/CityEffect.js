@@ -8,6 +8,6 @@ export default class CityEffect extends Effect {
   }
 
   happen () {
-     this.city.population = this.populationChange * this.city.population
+    this.city.population = this.populationChange * this.city.population
   }
 }

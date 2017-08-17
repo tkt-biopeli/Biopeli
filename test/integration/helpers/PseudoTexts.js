@@ -25,7 +25,9 @@ export default {
     population: "Väkiluku",
     yearlyDemand: "Vuosittainen kysyntä",
     demandFulfilled: "Kysyntään vastattu",
-    turnipPrice: "Nauriin hinta"
+    turnipPrice: "Nauriin hinta",
+    telegramServiceName: "Uutissähkeet",
+    welcomeTelegram: "Kaupungin asukkailla on nälkä, äkkiä turnipseja!"
   },
 
   optionsContentTexts: {
@@ -39,6 +41,12 @@ export default {
   },
 
   tileContentTexts: {
+    structureCategories: {
+      production: "Alkutuotanto",
+      refinery: "Jalostamo",
+      special: "Erikoisrakennus"
+    },
+
     tileInformationTexts: {
       groundType: "Maatyyppi",
       flowers: "Kukat",
