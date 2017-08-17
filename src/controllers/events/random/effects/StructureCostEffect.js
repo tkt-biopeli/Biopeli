@@ -1,6 +1,6 @@
 import Effect from './Effect'
 
-export default class StructureTypeEffect extends Effect {
+export default class StructureCostEffect extends Effect {
   constructor ({json}) {
     super()
     this.costChange = json.costChange != null ? json.costChange : 0
