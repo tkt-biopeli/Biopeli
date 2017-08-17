@@ -20,6 +20,20 @@
       ]
     },
     {
+      "name": "Rutto",
+      "description": "Kaupungissa jyllää hirvittävä kulkutauti, puolet väestöstä RIP!",
+      "condition": {
+        "name": "PopulationLimiter",
+        "notBefore": 550
+      },
+      "effects": [
+        {
+          "name": "PopulationChange",
+          "changePercentage": 0.5
+        }
+      ]
+    },
+    {
       "name": "Pakolaiskriisi",
       "description": "Maailmassa on pakolaiskriisi, kaupungin koko kasvaa",
       "condition": {
@@ -37,7 +51,7 @@
     },
     {
       "name": "Epidemia",
-      "description": "Kansalaiset sairastuvat tuntemattomaan virukseen, kapungin koko kutistuu",
+      "description": "Kansalaiset sairastuvat tuntemattomaan virukseen, kaupungin koko kutistuu",
       "condition": {
         "name": "empty"
       },
