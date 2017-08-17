@@ -12,21 +12,21 @@ var gameAdvancer, gameState, gameStateChecker, grass, forest
   })
 
   it('Bottom menu has right amount of buttons', () => {
-    gameStateChecker.checkButtonAmountInBottomMenu(4)
+    gameStateChecker.checkButtonAmountInBottomMenu(5)
   })
 
   it('Flowers are shown when the first button is clicked', () => {
-    gameAdvancer.clickNthBottomMenuButton(1)
+    gameAdvancer.clickNthBottomMenuButton(2)
     gameStateChecker.checkIfFlowersShown()
   })
 
   it('Fertility is shown when the second button is clicked', () => {
-    gameAdvancer.clickNthBottomMenuButton(2)
+    gameAdvancer.clickNthBottomMenuButton(3)
     gameStateChecker.checkIfFertilityShown()
   })
 
   it('Moisture is shown when the third button is clicked', () => {
-    gameAdvancer.clickNthBottomMenuButton(3)
+    gameAdvancer.clickNthBottomMenuButton(4)
     gameStateChecker.checkIfMoistureShown()
   })
   
