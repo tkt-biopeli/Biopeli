@@ -22,35 +22,19 @@ export default class PrimaryProducerDecorator {
   initialize (structure) {
     this.structure = structure
     this.producer.initialize(structure)
+    var stype = structure.structureType
 
-    this.moisture = {
-      under: createLine(
-        structure.structureType.moistureMin - 10, 0,
-        structure.structureType.moistureMin, 1
-      ),
-      prefer: createLine(
-        structure.structureType.moistureMin, 1,
-        structure.structureType.moistureMax, 1
-      ),
-      over: createLine(
-        structure.structureType.moistureMax, 1,
-        structure.structureType.moistureMax + 10, 0
-      )
-    }
+    this.moistureFunctions = this.createFunctions(stype.moistureMin, 
+      stype.moistureMax, 10)
+    this.fertilityFunctions = this.createFunctions(stype.fertilityMin, 
+      stype.fertilityMax, 10)
+  }
 
-    this.fertility = {
-      under: createLine(
-        structure.structureType.fertilityMin - 10, 0,
-        structure.structureType.fertilityMin, 1
-      ),
-      prefer: createLine(
-        structure.structureType.fertilityMin, 1,
-        structure.structureType.fertilityMax, 1
-      ),
-      over: createLine(
-        structure.structureType.fertilityMax, 1,
-        structure.structureType.fertilityMax + 10, 0
-      )
+  createFunctions (min, max, difference) {
+    return {
+      under: createLine(min - difference, 0, min, 1),
+      prefer: createLine(min, 1, max, 1),
+      over: createLine(max, 1, max + difference, 0)
     }
   }
 
@@ -60,54 +44,60 @@ export default class PrimaryProducerDecorator {
    * @return {number}
    */
   produce (timeEvent) {
-    var value = 0
-    this.ownedFarmLand.forEach(function (tile) {
-      value += tile.flowers / this.maxFlowers
-    }, this)
-    var howPreferableMoisture = 0
-    var howPreferableFertility = 0
-    this.ownedFarmLand.forEach(function (tile) {
-      howPreferableMoisture += this.getMoistureMultiplier(tile)
-      howPreferableFertility += this.getFertilityMultiplier(tile)
-    }, this)
-    howPreferableMoisture = howPreferableMoisture / this.ownedFarmLand.length
-    howPreferableFertility = howPreferableFertility / this.ownedFarmLand.length
-    return this.producer.produce(timeEvent) * value *
-      howPreferableMoisture * howPreferableFertility
+    var flowersMultiplier = this.averageMultiplier('flowers')
+    var moistureMultiplier = this.averageMultiplier('moisture')
+    var fertilityMultiplier = this.averageMultiplier('fertility')
+
+    console.log(flowersMultiplier *
+      moistureMultiplier * fertilityMultiplier)
+
+    return this.producer.produce(timeEvent) * this.ownedFarmLand.length * 
+      flowersMultiplier * moistureMultiplier * fertilityMultiplier
+  }
+
+  averageMultiplier (name) {
+    var sum = 0
+    for(let tile of this.ownedFarmLand) {
+      sum += this[name+'Multiplier'](tile)
+    }
+
+    return sum / this.ownedFarmLand.length
   }
 
   /**
    * Checks if moisture is preferable for structuretype
    * @return {number} - between 0 and 1
    */
-  getMoistureMultiplier (tile) {
-    if (tile.moisture < this.structure.structureType.moistureMin - 10) {
-      return 0
-    } else if (tile.moisture > this.structure.structureType.moistureMax + 10) {
-      return 0
-    } else if (tile.moisture < this.structure.structureType.moistureMin) {
-      return this.moisture.under(tile.moisture)
-    } else if (this.structure.structureType.moistureMax < tile.moisture) {
-      return this.moisture.over(tile.moisture)
-    } else {
-      return this.moisture.prefer(tile.moisture)
-    }
+  moistureMultiplier (tile) {
+    var stype = this.structure.structureType
+
+    return this.getValueInFunctions(tile.getMoisture(), this.moistureFunctions, 
+      stype.moistureMin, stype.moistureMax, 10)
   }
+
   /**
    * Checks if fertility is preferable for structuretype
    * @return {number} - between 0 and 1
    */
-  getFertilityMultiplier (tile) {
-    if (tile.fertility < this.structure.structureType.fertilityMin - 10) {
+  fertilityMultiplier (tile) {
+    var stype = this.structure.structureType
+
+    return this.getValueInFunctions(tile.getFertility(), this.fertilityFunctions, 
+      stype.fertilityMin, stype.fertilityMax, 10)
+  }
+
+  flowersMultiplier (tile) {
+    return tile.getFlowers() / 10
+  }
+
+  getValueInFunctions (value, functions, min, max, difference) {
+    if (value < min - difference || value > max + difference) {
       return 0
-    } else if (tile.fertility > this.structure.structureType.fertilityMax + 10) {
-      return 0
-    } else if (tile.fertility < this.structure.structureType.fertilityMin) {
-      return this.fertility.under(tile.fertility)
-    } else if (this.structure.structureType.fertilityMax < tile.fertility) {
-      return this.fertility.over(tile.fertility)
-    } else {
-      return this.fertility.prefer(tile.fertility)
+    }else if(value < min) {
+      return functions.under(value)
+    }else if (value < max) {
+      return functions.prefer(value)
     }
+    return functions.over(value)
   }
 }
