@@ -40,12 +40,15 @@ export default class EventRandomizer {
   // Is there a need to maintain the order in the original event list?
   shuffleEvents (originalArray) {
     var shuffledArray = originalArray.slice()
-    for (var i = 0; i < shuffledArray.length - 1; i++) {
-      var j = this.randomWithBounds(i, shuffledArray.length)
+    let length = shuffledArray.length
+
+    for (var i = 0; i <= length - 2; i++) {
+      var j = this.randomWithBounds(i, length - 1)
       var tempEvent = shuffledArray[i]
       shuffledArray[i] = shuffledArray[j]
       shuffledArray[j] = tempEvent
     }
+
     return shuffledArray
   }
 }
