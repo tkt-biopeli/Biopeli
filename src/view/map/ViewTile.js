@@ -159,13 +159,13 @@ export default class ViewTile {
    */
   makeFlowerSprite () {
     let daisies = this.game.make.sprite(0, 0, 'daisy')
-    daisies.frame = 10 - this.modelTile.flowers
+    daisies.frame = 10 - this.modelTile.getFlowers()
     return this.tileSprite.addChild(daisies)
   }
 
   flowerFrameUpdate () {
     if (this.flowerSprite === null) return
-    this.flowerSprite.frame = 10 - this.modelTile.flowers
+    this.flowerSprite.frame = 10 - this.modelTile.getFlowers()
   }
 
   addHighlight (toAdd) {
