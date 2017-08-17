@@ -47,10 +47,7 @@ export default class PrimaryProducerDecorator {
     var flowersMultiplier = this.averageMultiplier('flowers')
     var moistureMultiplier = this.averageMultiplier('moisture')
     var fertilityMultiplier = this.averageMultiplier('fertility')
-
-    console.log(flowersMultiplier *
-      moistureMultiplier * fertilityMultiplier)
-
+    
     return this.producer.produce(timeEvent) * this.ownedFarmLand.length * 
       flowersMultiplier * moistureMultiplier * fertilityMultiplier
   }
@@ -60,7 +57,7 @@ export default class PrimaryProducerDecorator {
     for(let tile of this.ownedFarmLand) {
       sum += this[name+'Multiplier'](tile)
     }
-
+    
     return sum / this.ownedFarmLand.length
   }
 
