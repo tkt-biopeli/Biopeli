@@ -43,9 +43,9 @@ export default class TileContent extends Content {
     this.sectionName('tile')
     this.text(this.texts.tileInformationTexts.groundType + ': ' + tile.tileType.nameWithLanguage)
     this.text('X: ' + tile.x + ', Y: ' + tile.y)
-    this.text(this.texts.tileInformationTexts.flowers + ': ' + tile.flowers)
-    this.text(this.texts.tileInformationTexts.moisture + ': ' + this.format(tile.moisture) + '%')
-    this.text(this.texts.tileInformationTexts.fertility + ': ' + this.format(tile.fertility) + '%')
+    this.text(this.texts.tileInformationTexts.flowers + ': ' + tile.getFlowers())
+    this.text(this.texts.tileInformationTexts.moisture + ': ' + this.format(tile.getMoisture()) + '%')
+    this.text(this.texts.tileInformationTexts.fertility + ': ' + this.format(tile.getFertility()) + '%')
     if (tile.owner != null) {
       this.text(this.texts.tileInformationTexts.owner + ': ' + tile.owner.ownerName)
     }

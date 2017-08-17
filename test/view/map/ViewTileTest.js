@@ -58,9 +58,9 @@ describe('View tile tests', () => {
     }
 
     modelTile = {
+      getFlowers: () => 4,
       tileType: {
-        asset: "test",
-        flowers: 4
+        asset: "test"
       },
       structure: structureStub,
       owner: structureStub
