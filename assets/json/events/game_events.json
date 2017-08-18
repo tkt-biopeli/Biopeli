@@ -41,16 +41,6 @@
       ]
     },
     {
-      "name": "Epidemia",
-      "description": "Kansalaiset sairastuvat tuntemattomaan virukseen, kaupungin koko kutistuu",
-      "effects": [
-        {
-          "name": "PopulationChange",
-          "changePercentage": 0.8
-        }
-      ]
-    },
-    {
       "name": "Verokevennys",
       "description": "Veroja on kevennetty, rakentaminen on halvempaa!",
       "effects": [
@@ -58,7 +48,7 @@
           "name": "StructureCostChange",
           "costChange": 0.8,
           "filter": {
-            "name": "AllStructures"
+            "name": "AllStructureTypes"
           }
         }
       ]
