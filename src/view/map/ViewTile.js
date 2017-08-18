@@ -116,70 +116,69 @@ export default class ViewTile {
     this.tileSprite.addChild(sprite)
     return sprite
   }
-}
 
-/**
- * Creates a structure to be added as a child for the tile
- */
-makeStructureSprite() {
-  if (this.modelTile.structure === null) { return null }
-  let sprite = this.game.make.sprite(0, 0, this.modelTile.structure.asset())
-  return this.tileSprite.addChild(sprite)
-}
-
-makeHammerSprite() {
-  if (this.modelTile.structure === null) { return null }
-  let hammers = this.game.make.sprite(0, 0, 'hammers')
-  hammers.anchor.set(0.5, 0.5)
-  hammers.scale.setTo(0.7, 0.7)
-  hammers.frame = Math.max(
-    Math.min(
-      3,
-      4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)
-    ), 0
-  )
-  return this.tileSprite.addChild(hammers)
-}
-
-hammerFrameUpdate() {
-  if (this.hammerSprite === null) return
-  this.hammerSprite.frame = Math.max(
-    Math.min(
-      3, 4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)
-    ), 0
-  )
-}
-
-/**
- * Adds flowers according to amount in modeltile
- * @param {string} toAdd
- */
-makeFlowerSprite() {
-  let daisies = this.game.make.sprite(0, 0, 'daisy')
-  let frame = 10 - this.modelTile.getFlowers()
-  if (frame === 10) frame = 9
-  daisies.frame = frame
-  return this.tileSprite.addChild(daisies)
-}
-
-flowerFrameUpdate() {
-  if (this.flowerSprite === null) return
-  let frame = 10 - this.modelTile.getFlowers()
-  if (frame === 10) frame = 9
-  this.flowerSprite.frame = frame
-}
-
-addHighlight(toAdd) {
-  this.highlights.width = this.tileSprite.width
-  this.highlights.height = this.tileSprite.height
-  this.highlights.addChild(toAdd)
-}
-
-destroy() {
-  if (this.tileSprite !== undefined) {
-    this.tileSprite.removeChildren()
-    this.tileSprite.destroy()
+  /**
+   * Creates a structure to be added as a child for the tile
+   */
+  makeStructureSprite () {
+    if (this.modelTile.structure === null) { return null }
+    let sprite = this.game.make.sprite(0, 0, this.modelTile.structure.asset())
+    return this.tileSprite.addChild(sprite)
   }
-  // console.log("i lived for " + this.lived + " frames")
-}
+
+  makeHammerSprite () {
+    if (this.modelTile.structure === null) { return null }
+    let hammers = this.game.make.sprite(0, 0, 'hammers')
+    hammers.anchor.set(0.5, 0.5)
+    hammers.scale.setTo(0.7, 0.7)
+    hammers.frame = Math.max(
+      Math.min(
+        3,
+        4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)
+      ), 0
+    )
+    return this.tileSprite.addChild(hammers)
+  }
+
+  hammerFrameUpdate () {
+    if (this.hammerSprite === null) return
+    this.hammerSprite.frame = Math.max(
+      Math.min(
+        3, 4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)
+      ), 0
+    )
+  }
+
+  /**
+   * Adds flowers according to amount in modeltile
+   * @param {string} toAdd
+   */
+  makeFlowerSprite () {
+    let daisies = this.game.make.sprite(0, 0, 'daisy')
+    let frame = 10 - this.modelTile.getFlowers()
+    if (frame === 10) frame = 9
+    daisies.frame = frame
+    return this.tileSprite.addChild(daisies)
+  }
+
+  flowerFrameUpdate () {
+    if (this.flowerSprite === null) return
+    let frame = 10 - this.modelTile.getFlowers()
+    if (frame === 10) frame = 9
+    this.flowerSprite.frame = frame
+  }
+
+  addHighlight (toAdd) {
+    this.highlights.width = this.tileSprite.width
+    this.highlights.height = this.tileSprite.height
+    this.highlights.addChild(toAdd)
+  }
+
+  destroy () {
+    if (this.tileSprite !== undefined) {
+      this.tileSprite.removeChildren()
+      this.tileSprite.destroy()
+    }
+    // console.log("i lived for " + this.lived + " frames")
+  }
 }
