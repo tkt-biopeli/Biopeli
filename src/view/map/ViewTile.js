@@ -113,7 +113,7 @@ export default class ViewTile {
     // sprite.anchor.set(0.5, 0.5)
     sprite.endFill()
     let name = this.modelTile.tileType.name
-    if (name !== 'water' && name !== 'forest' && name !== 'industrial') {
+    if (name !== 'industrial') {
       this.tileSprite.addChild(sprite)
       return sprite
     } else {

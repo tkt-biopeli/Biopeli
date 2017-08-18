@@ -32,7 +32,6 @@ export default class CityContent extends Content {
 
   telegramSection () {
     this.section('telegrams')
-    this.text(this.texts.telegramServiceName)
     this.upButton()
     this.telegramMessage()
     this.downButton()
