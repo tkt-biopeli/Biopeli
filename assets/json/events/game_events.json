@@ -3,6 +3,16 @@
     {
       "name": "Myllytulva",
       "description": "Myllysi tulvivat",
+      "condition": [
+        {
+          "name": "PopulationLimiter",
+          "notBefore": 550
+        },
+        {
+          "name": "StructureLimiter",
+          "min": 5
+        }
+      ],
       "effects": [
         {
           "name": "TileValueChange",
@@ -19,14 +29,20 @@
     {
       "name": "Rutto",
       "description": "Kaupungissa jyllää hirvittävä kulkutauti, puolet väestöstä RIP!",
-      "condition": {
-        "name": "PopulationLimiter",
-        "notBefore": 550
-      },
+      "condition": [
+        {
+          "name": "PopulationLimiter",
+          "notBefore": 550
+        },
+        {
+          "name": "StructureLimiter",
+          "min": 5
+        }
+      ],
       "effects": [
         {
           "name": "PopulationChange",
-          "changePercentage": 0.5
+          "changePercentage": 0.8
         }
       ]
     },

@@ -113,12 +113,8 @@ export default class ViewTile {
     // sprite.anchor.set(0.5, 0.5)
     sprite.endFill()
     let name = this.modelTile.tileType.name
-    if (name !== 'water' && name !== 'forest' && name !== 'industrial') {
-      this.tileSprite.addChild(sprite)
-      return sprite
-    } else {
-      return null
-    }
+    this.tileSprite.addChild(sprite)
+    return sprite
   }
 
   /**
@@ -137,7 +133,7 @@ export default class ViewTile {
     hammers.scale.setTo(0.7, 0.7)
     hammers.frame = Math.max(
       Math.min(
-        3, 
+        3,
         4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)
       ), 0
     )
