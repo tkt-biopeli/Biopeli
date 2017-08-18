@@ -73,10 +73,10 @@
       },
       "effects": [
         {
-          "name": "StructureTypeChange",
+          "name": "StructureCostChange",
           "costChange": 0.8,
           "filter": {
-            "name": "empty"
+            "name": "AllStructures"
           }
         }
       ]

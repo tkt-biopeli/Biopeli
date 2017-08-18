@@ -57,7 +57,9 @@ export default class RandomEventFactory {
 
     this.effectCreators.set('MoneyChange', MoneyEffect)
     this.effectCreators.set('PopulationChange', PopulationEffect)
+    
     this.effectCreators.set('TileValueChange', TileValueEffect)
+
     this.effectCreators.set('StructureCostChange', StructureCostEffect)
     this.effectCreators.set('StructureYieldChange', StructureYieldEffect)
   }
