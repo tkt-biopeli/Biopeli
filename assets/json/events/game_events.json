@@ -3,9 +3,6 @@
     {
       "name": "Myllytulva",
       "description": "Myllysi tulvivat",
-      "condition": {
-        "name": "empty"
-      },
       "effects": [
         {
           "name": "TileValueChange",
@@ -36,41 +33,26 @@
     {
       "name": "Pakolaiskriisi",
       "description": "Maailmassa on pakolaiskriisi, kaupungin koko kasvaa",
-      "condition": {
-        "name": "empty"
-      },
       "effects": [
         {
           "name": "PopulationChange",
-          "changePercentage": 1.2,
-          "filter": {
-            "name": "empty"
-          }
+          "changePercentage": 1.2
         }
       ]
     },
     {
       "name": "Epidemia",
       "description": "Kansalaiset sairastuvat tuntemattomaan virukseen, kaupungin koko kutistuu",
-      "condition": {
-        "name": "empty"
-      },
       "effects": [
         {
           "name": "PopulationChange",
-          "changePercentage": 0.8,
-          "filter": {
-            "name": "empty"
-          }
+          "changePercentage": 0.8
         }
       ]
     },
     {
       "name": "Verokevennys",
       "description": "Veroja on kevennetty, rakentaminen on halvempaa!",
-      "condition": {
-        "name": "empty"
-      },
       "effects": [
         {
           "name": "StructureCostChange",
@@ -84,9 +66,6 @@
     {
       "name": "Hipit",
       "description": "Kaupunkiin muutti hippejä, ja yrttien hinnat nousivat!",
-      "condition": {
-        "name": "empty"
-      },
       "effects": [
         {
           "name": "StructureYieldChange",
@@ -100,13 +79,7 @@
         },
         {
           "name": "PopulationChange",
-          "changePercentage": 1.05,
-          "filter": {
-            "name": "StructureType",
-            "structureTypes": [
-              "herb_farm"
-            ]
-          }
+          "changePercentage": 1.05
         }
       ]
     }

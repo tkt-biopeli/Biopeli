@@ -17,6 +17,7 @@ import StructureTypeStructureFilter from './filters/structure/StructureTypeStruc
 import FoundingYearStructureFilter from './filters/structure/FoundingYearStructureFilter'
 import TypeStructureFilter from './filters/structure/TypeStructureFilter'
 
+import NameStructureTypeFilter from './filters/structuretype/NameStructureTypeFilter'
 import StructureTypeFilter from './filters/structuretype/StructureTypeFilter'
 
 import TileValueEffect from './effects/TileValueEffect'
@@ -82,7 +83,8 @@ export default class RandomEventFactory {
     this.filterCreators.set('StructuresOfType', TypeStructureFilter)
     this.filterCreators.set('StructuresWithFoundingYear', FoundingYearStructureFilter)
 
-    this.filterCreators.set('StructureType', StructureTypeFilter)
+    this.filterCreators.set('AllStructureTypes', StructureTypeFilter)
+    this.filterCreators.set('StructureTypes', NameStructureTypeFilter)
   }
 
   createEvents (eventJSON) {

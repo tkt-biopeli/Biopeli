@@ -1,5 +1,5 @@
 export default class StructureTypeFilter {
-  constructor ({ gameState, json }) {
+  constructor ({ gameState }) {
     this.structureTypes = gameState.structureTypes
   }
 
