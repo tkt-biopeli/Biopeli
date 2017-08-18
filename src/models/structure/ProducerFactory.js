@@ -25,7 +25,7 @@ export default class ProducerFactory {
     var producer
     switch (sType.type) {
       case 'refinery':
-        producer = this.createRefiner(sType.buysFrom, sType.multiplier, sType.reach, tile, sType.moveCosts)
+        producer = this.createRefiner(sType, tile)
         break
       case 'producer_structure':
         producer = this.createPrimaryProducer(sType, tile)
@@ -76,13 +76,12 @@ export default class ProducerFactory {
    * @param {*} radius
    * @param {*} tile
    */
-  createRefiner (inputTypes, multiplier, radius, tile, moveCosts) {
+  createRefiner (stype, tile) {
     var refiner = new Refiner({
-      inputTypes: inputTypes,
-      zone: this.tileFinder.findTilesInDistanceOf(tile, radius, moveCosts),
-      multiplier: multiplier,
-      radius: radius,
-      tile: tile
+      inputTypes: stype.buysFrom,
+      zone: this.tileFinder.findTilesInDistanceOf(tile, stype.radius, stype.moveCosts),
+      multiplier: stype.multiplier,
+      takesOwnership: stype.takesOwnership
     })
 
     this.eventController.addListener(

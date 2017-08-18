@@ -16,11 +16,15 @@ export default class AllDecorator {
    * @param {*} ownerCall
    * @return {number}
    */
-  produce (timeEvent, ownerCall) {
-    if (this.refinery != null && !ownerCall) {
-      return 0
+  produce (timeEvent) {
+    this.producer.produce(timeEvent)
+  }
+
+  producedAmount (ownerCall) {
+    if(ownerCall || this.owner == null) {
+      return this.producer.producedAmount() * this.structure.health.percent()
     }
 
-    return this.producer.produce(timeEvent) * this.structure.health.percent()
+    return 0
   }
 }

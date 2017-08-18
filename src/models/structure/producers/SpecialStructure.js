@@ -21,7 +21,6 @@ export default class SpecialStructure {
 
   initialize (structure) {}
 
-  produce (timeEvent) {
-    return 0
-  }
+  produce (timeEvent) {}
+  producedAmount () {return 0}
 }

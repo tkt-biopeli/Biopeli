@@ -12,7 +12,6 @@ export default class PrimaryProducerDecorator {
   constructor ({ tile, producer, maxFlowers }) {
     this.tile = tile
     this.producer = producer
-    this.ownedFarmLand = []
     this.maxFlowers = maxFlowers
   }
 
@@ -44,21 +43,25 @@ export default class PrimaryProducerDecorator {
    * @return {number}
    */
   produce (timeEvent) {
+    this.producer.produce(timeEvent)
+  }
+
+  producedAmount () {
     var flowersMultiplier = this.averageMultiplier('flowers')
     var moistureMultiplier = this.averageMultiplier('moisture')
     var fertilityMultiplier = this.averageMultiplier('fertility')
     
-    return this.producer.produce(timeEvent) * this.ownedFarmLand.length * 
+    return this.producer.producedAmount() * this.structure.ownedTiles.length * 
       flowersMultiplier * moistureMultiplier * fertilityMultiplier
   }
 
   averageMultiplier (name) {
     var sum = 0
-    for(let tile of this.ownedFarmLand) {
+    for(let tile of this.structure.ownedTiles) {
       sum += this[name+'Multiplier'](tile)
     }
     
-    return sum / this.ownedFarmLand.length
+    return sum / this.structure.ownedTiles.length
   }
 
   /**

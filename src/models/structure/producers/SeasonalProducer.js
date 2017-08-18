@@ -6,7 +6,9 @@ export default class SeasonalProducer {
   constructor ({structureType, harvestWeeks}) {
     this.turnipYield = structureType.turnipYield
     this.harvestWeeks = harvestWeeks
+    
     this.produced = 0
+    this.wasHarvest = false
   }
 
   initialize (structure) { }
@@ -17,12 +19,21 @@ export default class SeasonalProducer {
    * @return {number}
    */
   produce (timeEvent) {
-    this.produced += this.turnipYield
-    if (this.harvestWeeks.has(timeEvent.month + '.' + timeEvent.week)) {
-      var harvest = this.produced
+    if(this.wasHarvest) {
       this.produced = 0
-      return harvest
+      this.wasHarvest = false
     }
+
+    this.produced += this.turnipYield
+    if (this.isHarvest(timeEvent)) this.wasHarvest = true
+  }
+
+  isHarvest (timeEvent) {
+    return this.harvestWeeks.has(timeEvent.month + '.' + timeEvent.week)
+  }
+
+  producedAmount () {
+    if(this.wasHarvest) return this.produced
     return 0
   }
 }
