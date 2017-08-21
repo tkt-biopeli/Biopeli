@@ -3,7 +3,7 @@ const sinon = require("sinon")
 import GameEvents from '../../../src/controllers/events/GameEvents'
 
 describe('GameEvents tests', () => {
-  var gameState, gEvents, startSpy, config
+  var gameState, gEvents, startSpy, config, utils, texts
   var gameLength = 1
 
   beforeEach(() => {
@@ -37,13 +37,15 @@ describe('GameEvents tests', () => {
         scoreServer: 23
       }
     }
+    utils = {}
+    texts = {}
 
     gEvents = new GameEvents({
       gameState: gameState,
       gameLength: gameLength,
       config: config,
-      utils: {},
-      texts: {}
+      utils: utils,
+      texts: texts
     })
   })
 
@@ -64,6 +66,10 @@ describe('GameEvents tests', () => {
   it('Game is finished correctly', () => {
     gEvents.finishGame()
     assert.equal(gameState.music.stop.callCount, 1)
-    assert(startSpy.calledWith('GameOver', true, false, gameState.player.points, gameState.city.population, gameState.gameData))
+    assert(startSpy.calledWith(
+      'BeforeGameOver', true, false,
+      gameState.player.points, gameState.city.population, gameState.gameData,
+      gameState.state, config, utils, texts
+    ))
   })
 })

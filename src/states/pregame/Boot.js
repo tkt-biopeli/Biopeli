@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import WebFont from 'webfontloader'
-// do not remove this import!
+// do not remove these imports!
 import KineticScrolling from 'phaser-kinetic-scrolling-plugin'
 import PhaserInput from 'phaser-input'
 

@@ -6,10 +6,10 @@ export default class GameEvents {
   * Constructor
   * @param gameState gameState
   */
-  constructor ({ gameState, gameLength, game, config, utils, texts }) {
+  constructor ({ gameState, gameLength, config, utils, texts }) {
     this.gameState = gameState
     this.gameLength = gameLength
-    this.game = game
+    this.game = gameState.state
     this.config = config
     this.utils = utils
     this.texts = texts
@@ -29,11 +29,12 @@ export default class GameEvents {
   finishGame () {
     this.gameState.music.stop()
     this.gameState.state.state.start(
-      'GameOver', true, false,
+      'BeforeGameOver', true, false,
       this.gameState.player.points,
       this.gameState.city.population,
       this.gameState.gameData,
       this.game,
+      this.config,
       this.utils,
       this.texts
     )
