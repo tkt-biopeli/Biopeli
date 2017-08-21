@@ -3,9 +3,16 @@
     {
       "name": "Myllytulva",
       "description": "Myllysi tulvivat",
-      "condition": {
-        "name": "empty"
-      },
+      "condition": [
+        {
+          "name": "PopulationLimiter",
+          "notBefore": 550
+        },
+        {
+          "name": "StructureLimiter",
+          "min": 5
+        }
+      ],
       "effects": [
         {
           "name": "TileValueChange",
@@ -20,34 +27,65 @@
       ]
     },
     {
-      "name": "Pakolaiskriisi",
-      "description": "Maailmassa on pakolaiskriisi, kaupungin koko kasvaa",
-      "condition": {
-        "name": "empty"
-      },
+      "name": "Rutto",
+      "description": "Kaupungissa jyllää hirvittävä kulkutauti, puolet väestöstä RIP!",
+      "condition": [
+        {
+          "name": "PopulationLimiter",
+          "notBefore": 550
+        },
+        {
+          "name": "StructureLimiter",
+          "min": 5
+        }
+      ],
       "effects": [
         {
-          "name": "CityChange",
-          "populationChange": 1.2,
+          "name": "PopulationChange",
+          "changePercentage": 0.8
+        }
+      ]
+    },
+    {
+      "name": "Pakolaiskriisi",
+      "description": "Maailmassa on pakolaiskriisi, kaupungin koko kasvaa",
+      "effects": [
+        {
+          "name": "PopulationChange",
+          "changePercentage": 1.2
+        }
+      ]
+    },
+    {
+      "name": "Verokevennys",
+      "description": "Veroja on kevennetty, rakentaminen on halvempaa!",
+      "effects": [
+        {
+          "name": "StructureCostChange",
+          "costChange": 0.8,
           "filter": {
-            "name": "empty"
+            "name": "AllStructureTypes"
           }
         }
       ]
     },
     {
-      "name": "Epidemia",
-      "description": "Kansalaiset sairastuvat tuntemattomaan virukseen, kapungin koko kutistuu",
-      "condition": {
-        "name": "empty"
-      },
+      "name": "Hipit",
+      "description": "Kaupunkiin muutti hippejä, ja yrttien hinnat nousivat!",
       "effects": [
         {
-          "name": "CityChange",
-          "populationChange": 0.8,
+          "name": "StructureYieldChange",
+          "yieldChange": 2,
           "filter": {
-            "name": "empty"
+            "name": "StructureType",
+            "structureTypes": [
+              "herb_farm"
+            ]
           }
+        },
+        {
+          "name": "PopulationChange",
+          "changePercentage": 1.05
         }
       ]
     }

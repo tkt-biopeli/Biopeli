@@ -25,7 +25,7 @@ describe('Integration test: Building structures', () => {
     gameAdvancer.clickNthButton(1)
     gameAdvancer.clickNthButton(1)
     gameAdvancer.clickNthButton(1)
-    gameStateChecker.checkPollution(1, 1, 6)
+    gameStateChecker.checkPollution(1, 1, 8)
   })
 
   it('Pollution created correctly around farm', () => {
@@ -37,10 +37,10 @@ describe('Integration test: Building structures', () => {
     gameAdvancer.clickNthButton(1)
     gameAdvancer.clickNthButton(1)
     gameAdvancer.clickNthButton(1)
-    gameStateChecker.checkPollution(0, 0, 6)
-    gameStateChecker.checkPollution(0, 1, 7)
+    gameStateChecker.checkPollution(0, 0, 8)
+    gameStateChecker.checkPollution(0, 1, 8)
     gameStateChecker.checkPollution(0, 2, 8)
-    gameStateChecker.checkPollution(0, 3, 9)
+    gameStateChecker.checkPollution(0, 3, 8)
   })
 
   it('Multiple structures create cumulative pollution', () => {
@@ -49,6 +49,6 @@ describe('Integration test: Building structures', () => {
     gameAdvancer.setTile(0, 3, 'grass')
     gameAdvancer.buildBuilding(0, 0, 'grass', 1, 1)
     gameAdvancer.buildBuilding(0, 3, 'grass', 1, 1)
-    gameStateChecker.checkPollution(0, 1, 5)
+    gameStateChecker.checkPollution(0, 1, 6)
   })
 })

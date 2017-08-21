@@ -27,7 +27,7 @@ export default class MulticontentController extends Controller {
     this.contents[this.index].createSections()
     if (this.getStack.length > 0) {
       this.section('back')
-      this.button('Takaisin', this.previousContent, this)
+      this.button('Takaisin', this.previousContent, this, 'smallButton')
     }
   }
 
@@ -95,7 +95,7 @@ export default class MulticontentController extends Controller {
    * Resets the content change stack and also resets the whole controller
    */
   reset () {
-    this.index = this.startIndex
+    this.index = this.startIndex    
     this.getStack = []
 
     super.reset()

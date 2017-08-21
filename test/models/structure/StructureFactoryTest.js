@@ -5,7 +5,7 @@ import StructureFactory from '../../../src/models/structure/StructureFactory'
 describe('StructureFactory tests', () => {
   var sfactory, gameTimer, player, addStructureSpy, map, eventController, tile, structureType
   var addStructureSpy, buyLandSpy, createPollutionSpy, calcSizeSpy, createProducerSpy, setAssetSpy
-  var purchaseStub, getMapStub, initializeSpy
+  var purchaseStub, getMapStub, initializeSpy, pollutionStub
   var tileTypes
 
   beforeEach(() => {
@@ -24,6 +24,11 @@ describe('StructureFactory tests', () => {
     addStructureSpy = sinon.spy()
     setAssetSpy = sinon.spy()
     getMapStub = sinon.stub()
+    pollutionStub = {
+      constant: true,
+      distance: 5,
+      amount: 4
+    }
 
     map = {
       getTilesInRadius: () => new Map()
@@ -80,7 +85,7 @@ describe('StructureFactory tests', () => {
       },
       flowers: 0
     }
-    structureType = { cost: 888, pollution: 564 }
+    structureType = { cost: 888, pollution: pollutionStub }
   })
 
   it('Constructor works', () => {
@@ -207,25 +212,36 @@ describe('StructureFactory tests', () => {
     assert.equal(tmpTile.tileType.name, 'grass')
   })
 
-  var helperFunctionForInitPollutionTests = (pollution, distance, tmpTile) => {
+  var helperFunctionForInitPollutionTests = (pollutionvalues, tmpTile) => {
+    let pollution = {
+      constant: pollutionvalues[0],
+      distance: pollutionvalues[1],
+      amount: pollutionvalues[2]
+    }
     var newMap = new Map()
-    newMap.set(distance, [tmpTile])
+    newMap.set(pollution.distance, [tmpTile])
     sfactory.map.getTilesInRadius = getMapStub
-    getMapStub.withArgs(3, tile).returns(newMap)
+    getMapStub.withArgs(pollution.distance, tile).returns(newMap)
 
     sfactory.createInitialPollution(pollution, tile)
   }
 
   it('createInitialPollution is functioning properly', () =>{
-    var tmpTile = createTmpTile(null, {name: 'foo'}, null, 10)
-    helperFunctionForInitPollutionTests(3, 2, tmpTile)
-    assert.equal(tmpTile.flowers, 9)
-    helperFunctionForInitPollutionTests(5, 5, tmpTile)
-    assert.equal(tmpTile.flowers, 9)
-    helperFunctionForInitPollutionTests(1, 2, tmpTile)
-    assert.equal(tmpTile.flowers, 9)
-    helperFunctionForInitPollutionTests(9, 0, tmpTile)
-    assert.equal(tmpTile.flowers, 1)
+    let stubs = new Map()
+    // constant, distance, amount
+    stubs.set([true, 5, 4], 6)
+    stubs.set([true, 5, 10], 0)
+    stubs.set([true, 5, 0], 10)
+    stubs.set([false, 5, 4], 10)
+    stubs.set([false, 4, 4], 10)
+    stubs.set([false, 3, 4], 9)
+    stubs.set([false, 7, 50], -33)
+
+    for (var [pollutionvalues, flowers] of stubs) {
+      var tmpTile = createTmpTile(null, { name: 'foo' }, null, 10)
+      helperFunctionForInitPollutionTests(pollutionvalues, tmpTile)
+      assert.equal(tmpTile.flowers, flowers)
+    }
   })
 
   it('decreaseOwnedTiles is functioning properly', () =>{

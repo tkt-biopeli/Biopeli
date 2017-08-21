@@ -1,6 +1,7 @@
 import ContinuousProducer from './producers/ContinuousProducer'
 import SeasonalProducer from './producers/SeasonalProducer'
 import Refiner from './producers/Refiner'
+import SpecialStructure from './producers/SpecialStructure'
 
 import PrimaryProducerDecorator from './producers/decorators/PrimaryProducerDecorator'
 import AllDecorator from './producers/decorators/AllDecorator'
@@ -21,17 +22,30 @@ export default class ProducerFactory {
   createProducer (structureType, tile) {
     var sType = this.checkStructureType(structureType)
 
-    var producer = sType.type === 'refinery'
-      ? this.createRefiner(sType.buysFrom, sType.multiplier, sType.reach, tile, sType.moveCosts)
-      : this.createPrimaryProducer(sType, tile)
-
+    var producer
+    switch (sType.type) {
+      case 'refinery':
+        producer = this.createRefiner(sType.buysFrom, sType.multiplier, sType.reach, tile, sType.moveCosts)
+        break
+      case 'producer_structure':
+        producer = this.createPrimaryProducer(sType, tile)
+        break
+      default:
+        tile.moisture -= 25
+        console.log(tile.moisture)
+        producer = new SpecialStructure({
+          zone: this.tileFinder.findTilesInDistanceOf(tile, sType.reach, sType.moveCosts),
+          changeValues: sType.changeValues,
+          tile: tile
+        })
+    }
     return new AllDecorator({producer: producer, tile: tile})
   }
 
   createPrimaryProducer (sType, tile) {
     var producer = sType.continuousProduction
-     ? this.createContinuousProducer(sType.turnipYield)
-     : this.createSeasonalProducer(sType.harvestingWeeks, sType.turnipYield)
+     ? this.createContinuousProducer(sType)
+     : this.createSeasonalProducer(sType.harvestingWeeks, sType)
 
     return new PrimaryProducerDecorator({
       tile: tile, 
@@ -40,9 +54,9 @@ export default class ProducerFactory {
     })
   }
 
-  createSeasonalProducer (harvestingWeeks, turnipYield) {
+  createSeasonalProducer (harvestingWeeks, sType) {
     return new SeasonalProducer({
-      turnipYield: turnipYield,
+      structureType: sType,
       harvestWeeks: harvestingWeeks
     })
   }
@@ -50,9 +64,9 @@ export default class ProducerFactory {
   /**
    * Yields the same amount of turnips per week.
    */
-  createContinuousProducer (turnipYield) {
+  createContinuousProducer (sType) {
     return new ContinuousProducer({
-      turnipYield: turnipYield
+      structureType: sType
     })
   }
 

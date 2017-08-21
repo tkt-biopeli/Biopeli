@@ -17,11 +17,19 @@ import StructureTypeStructureFilter from './filters/structure/StructureTypeStruc
 import FoundingYearStructureFilter from './filters/structure/FoundingYearStructureFilter'
 import TypeStructureFilter from './filters/structure/TypeStructureFilter'
 
+import NameStructureTypeFilter from './filters/structuretype/NameStructureTypeFilter'
+import StructureTypeFilter from './filters/structuretype/StructureTypeFilter'
+
 import TileValueEffect from './effects/TileValueEffect'
 import MoneyEffect from './effects/MoneyEffect'
-import CityEffect from './effects/CityEffect'
+import PopulationEffect from './effects/PopulationEffect'
+
+import StructureYieldEffect from './effects/StructureYieldEffect'
+import StructureCostEffect from './effects/StructureCostEffect'
 
 import TimeCondition from './conditions/TimeCondition'
+import PopulationCondition from './conditions/PopulationCondition'
+import StructureAmountCondition from './conditions/StructureAmountCondition'
 
 export default class RandomEventFactory {
   constructor ({gameState}) {
@@ -43,14 +51,20 @@ export default class RandomEventFactory {
     this.conditionCreators.set('empty', EmptyCondition)
 
     this.conditionCreators.set('TimeLimiter', TimeCondition)
+    this.conditionCreators.set('PopulationLimiter', PopulationCondition)
+    this.conditionCreators.set('StructureLimiter', StructureAmountCondition)
   }
 
   initEffects () {
     this.effectCreators.set('empty', EmptyEffect)
 
     this.effectCreators.set('MoneyChange', MoneyEffect)
+    this.effectCreators.set('PopulationChange', PopulationEffect)
+    
     this.effectCreators.set('TileValueChange', TileValueEffect)
-    this.effectCreators.set('CityChange', CityEffect)
+
+    this.effectCreators.set('StructureCostChange', StructureCostEffect)
+    this.effectCreators.set('StructureYieldChange', StructureYieldEffect)
   }
 
   initFilters () {
@@ -71,6 +85,8 @@ export default class RandomEventFactory {
     this.filterCreators.set('StructuresOfType', TypeStructureFilter)
     this.filterCreators.set('StructuresWithFoundingYear', FoundingYearStructureFilter)
 
+    this.filterCreators.set('AllStructureTypes', StructureTypeFilter)
+    this.filterCreators.set('StructureTypes', NameStructureTypeFilter)
   }
 
   createEvents (eventJSON) {
@@ -123,6 +139,7 @@ export default class RandomEventFactory {
 
   createPart (name, blueprint) {
     // Checks if creator list contains the value. If not, use default value
+    if (!blueprint) { blueprint = { name: this.defaultValue } }
     var key = this[name + 'Creators'].has(blueprint.name) ? blueprint.name : this.defaultValue
     // Searches constructor with given name from the map and instantiates it
     return new (this[name + 'Creators'].get(key))({gameState: this.gameState, json: blueprint})

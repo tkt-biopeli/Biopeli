@@ -133,7 +133,7 @@ describe('Integration test: Building structures', () => {
     gameStateChecker.checkStructureOwnedTiles(0, 0, 6)
     gameStateChecker.checkStructureOwnedFarmLand(0, 0, 6)
     gameStateChecker.checkStructureSize(0, 0, 6)
-    gameAdvancer.buildBuilding(1, 1, 'field', 2, 1)
+     gameAdvancer.buildBuilding(1, 1, 'field', 1, 1)
     gameStateChecker.checkSelectedTile()
     gameStateChecker.checkTilesInformation(0, 0, 'field', 'wheat_farm', true)
     gameStateChecker.checkTilesInformation(0, 1, 'industrial', null, true)

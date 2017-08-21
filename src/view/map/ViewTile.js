@@ -113,12 +113,8 @@ export default class ViewTile {
     // sprite.anchor.set(0.5, 0.5)
     sprite.endFill()
     let name = this.modelTile.tileType.name
-    if (name !== 'water' && name !== 'forest' && name !== 'industrial') {
-      this.tileSprite.addChild(sprite)
-      return sprite
-    } else {
-      return null
-    }
+    this.tileSprite.addChild(sprite)
+    return sprite
   }
 
   /**
@@ -137,7 +133,7 @@ export default class ViewTile {
     hammers.scale.setTo(0.7, 0.7)
     hammers.frame = Math.max(
       Math.min(
-        3, 
+        3,
         4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)
       ), 0
     )
@@ -159,13 +155,17 @@ export default class ViewTile {
    */
   makeFlowerSprite () {
     let daisies = this.game.make.sprite(0, 0, 'daisy')
-    daisies.frame = 10 - this.modelTile.flowers
+    let frame = 10 - this.modelTile.getFlowers()
+    if (frame === 10) frame = 9
+    daisies.frame = frame
     return this.tileSprite.addChild(daisies)
   }
 
   flowerFrameUpdate () {
     if (this.flowerSprite === null) return
-    this.flowerSprite.frame = 10 - this.modelTile.flowers
+    let frame = 10 - this.modelTile.getFlowers()
+    if (frame === 10) frame = 9
+    this.flowerSprite.frame = frame
   }
 
   addHighlight (toAdd) {

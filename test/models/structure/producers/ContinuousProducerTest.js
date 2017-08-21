@@ -7,9 +7,10 @@ describe('Continuous producer tests', () => {
     var turnipYield = 17
 
     var tile = 4
+    var sT = {turnipYield: 3}
 
     var producer = new ContinuousProducer({
-      turnipYield: turnipYield,
+      structureType: sT,
       tile: tile
     })
 
@@ -18,10 +19,10 @@ describe('Continuous producer tests', () => {
       week: 1
     }
 
-    assert.equal(17, producer.produce(timeEvent))
+    assert.equal(3, producer.produce(timeEvent))
     timeEvent.month = 7
-    assert.equal(17, producer.produce(timeEvent))
+    assert.equal(3, producer.produce(timeEvent))
     timeEvent.week = 3
-    assert.equal(17, producer.produce(timeEvent))
+    assert.equal(3, producer.produce(timeEvent))
   })
 })
