@@ -171,7 +171,9 @@ export default class GameState {
     this.gameEvents = new GameEvents({
       gameState: this,
       gameLength: gameLength,
-      config: config
+      config: config,
+      utils: utils,
+      texts: this.texts
     })
 
     this.telegramStorage = new TelegramStorage({

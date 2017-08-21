@@ -1,4 +1,3 @@
-import utils from '../../utils'
 /**
  * Game events class, finishes the game etc
  */
@@ -7,10 +6,13 @@ export default class GameEvents {
   * Constructor
   * @param gameState gameState
   */
-  constructor ({ gameState, gameLength, config }) {
+  constructor ({ gameState, gameLength, config, utils, texts }) {
     this.gameState = gameState
     this.gameLength = gameLength
+    this.game = gameState.state
     this.config = config
+    this.utils = utils
+    this.texts = texts
   }
 
   /**
@@ -27,17 +29,14 @@ export default class GameEvents {
   finishGame () {
     this.gameState.music.stop()
     this.gameState.state.state.start(
-      'GameOver', true, false,
+      'BeforeGameOver', true, false,
       this.gameState.player.points,
       this.gameState.city.population,
-      this.gameState.gameData
+      this.gameState.gameData,
+      this.game,
+      this.config,
+      this.utils,
+      this.texts
     )
-    var name = prompt('Kirjoita nimesi')
-    utils.submitScore({
-      player: name,
-      points: this.gameState.player.points
-    },
-    this.config.gameSettings.scoreServer
-  )
   }
 }

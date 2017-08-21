@@ -71,6 +71,10 @@ export default class MenuBuilder {
     this.c.button(text, call, this)
   }
 
+  createInputField (parameters) {
+    this.c.inputField(parameters)
+  }
+
   finishMenu () {
     this.c.finish()
   }

@@ -3,7 +3,7 @@ const sinon = require("sinon")
 import GameEvents from '../../../src/controllers/events/GameEvents'
 
 describe('GameEvents tests', () => {
-  var gameState, gEvents, startSpy
+  var gameState, gEvents, startSpy, config, utils, texts
   var gameLength = 1
 
   beforeEach(() => {
@@ -15,6 +15,7 @@ describe('GameEvents tests', () => {
       city: {
         population: 563282
       },
+      gameData: 13,
       state: {
         state: {
           start: startSpy
@@ -28,15 +29,24 @@ describe('GameEvents tests', () => {
         }
       },
       music: {
-        stop: () => {}
+        stop: sinon.spy()
       }
     }
+    config = {
+      gameSettings: {
+        scoreServer: 23
+      }
+    }
+    utils = {}
+    texts = {}
 
-    gEvents = new GameEvents({ gameState: gameState, gameLength: gameLength})
-  })
-
-  it('Constructor works', () => {
-    assert.equal(gameState, gEvents.gameState)
+    gEvents = new GameEvents({
+      gameState: gameState,
+      gameLength: gameLength,
+      config: config,
+      utils: utils,
+      texts: texts
+    })
   })
 
   it('Game over checker works', () => {
@@ -53,10 +63,13 @@ describe('GameEvents tests', () => {
     assert.equal(2, finishSpy.callCount)
   })
 
-  /**
   it('Game is finished correctly', () => {
     gEvents.finishGame()
-    assert(startSpy.calledWith('GameOver', true, false, gameState.player.points, gameState.city.population))
+    assert.equal(gameState.music.stop.callCount, 1)
+    assert(startSpy.calledWith(
+      'BeforeGameOver', true, false,
+      gameState.player.points, gameState.city.population, gameState.gameData,
+      gameState.state, config, utils, texts
+    ))
   })
-  */
 })
