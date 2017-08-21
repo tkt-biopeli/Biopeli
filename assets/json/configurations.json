@@ -11,6 +11,8 @@
 
     "scoreServer": "https://biopelihighscores.herokuapp.com/",
 
+    "mailToAddress": "mailto:biotalouspeli@mtech.fi",
+
     "fonts": {
       "fontBig": "64px Arial",
       "fontNormal": "32px Arial",

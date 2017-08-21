@@ -14,7 +14,8 @@
     "endCitySize": "Kaupungin koko",
     "highscores": "Tulokset",
     "toStart": "Alkuun",
-    "back": "Takaisin"
+    "back": "Takaisin",
+    "mailTo": "Palaute"
   },
 
   "buildStructureTexts": {
