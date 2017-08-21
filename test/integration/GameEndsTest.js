@@ -13,29 +13,25 @@ describe('Integration test: Game ends when it should', () => {
     gameState = gameAdvancer.gameState
     gameStateChecker = gameAdvancer.gamestateChecker
   })
-  
-  /**
+
   it('Game ends when time runs out', () =>{
     gameAdvancer.updateSeveralTimes(10, 1000)
     gameStateChecker.checkGameEnded(true)
   })
-  */
 
   it('Game doesn\'t end before right time', ()=>{
     gameAdvancer.updateSeveralTimes(9, 1000)
     gameStateChecker.checkGameEnded(false)
   })
 
-  /**
   it('Clicking end button ends the game', () =>{
-    gameAdvancer.clickNthBottomMenuButton(4)
-    gameAdvancer.clickNthButton(5)
+    gameAdvancer.clickNthBottomMenuButton(5)
+    gameAdvancer.clickNthButton(4)
     gameStateChecker.checkGameEnded(true)
   })
 
   it('Game doesn\'t end if nothing is done', ()=>{
     gameStateChecker.checkGameEnded(false)
   })
-  */
 
 })
