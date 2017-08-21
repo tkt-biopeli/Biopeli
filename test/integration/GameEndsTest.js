@@ -25,7 +25,7 @@ describe('Integration test: Game ends when it should', () => {
   })
 
   it('Clicking end button ends the game', () =>{
-    gameAdvancer.clickNthBottomMenuButton(4)
+    gameAdvancer.clickNthBottomMenuButton(5)
     gameAdvancer.clickNthButton(4)
     gameStateChecker.checkGameEnded(true)
   })
