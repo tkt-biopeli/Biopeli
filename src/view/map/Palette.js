@@ -5,7 +5,7 @@ export default class Palette {
     this.dampnessRainbow = new Rainbow()
     this.dampnessRainbow.setSpectrum('sienna', 'sandybrown', 'aqua') 
     this.fertilityRainbow = new Rainbow()
-    this.fertilityRainbow.setSpectrum('red', 'dimgray', 'lime')
+    this.fertilityRainbow.setSpectrum('darkgreen','olive', 'navajowhite')
     this.randomRainbow = new Rainbow()
   }
 
