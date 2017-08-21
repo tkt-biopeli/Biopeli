@@ -43,6 +43,7 @@
     "soundOff": "Äänet pois",
     "increaseVolume": "Volyymi +",
     "decreaseVolume": "Volyymi -",
+    "pause": "pause",
     "endGame": "Lopeta peli"
   },
 

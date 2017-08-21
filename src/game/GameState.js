@@ -86,7 +86,8 @@ export default class GameState {
       game: state,
       mapListener: this.mapListener,
       cameraMover: this.cameraMover,
-      mapView: this.mapView
+      mapView: this.mapView,
+      timer: this.gameTimer
     })
 
     this.randomEventFactory = new RandomEventFactory({gameState: this})
@@ -277,7 +278,9 @@ export default class GameState {
       texts: this.texts
     })
 
-    this.optionsContent = new OptionsContent({game: this, texts: this.texts})
+    this.optionsContent = new OptionsContent({
+      game: this, timer: this.gameTimer, texts: this.texts
+    })
 
     this.buildMenuContent = new BuildMenuContent({
       structureTypes: this.structureTypes

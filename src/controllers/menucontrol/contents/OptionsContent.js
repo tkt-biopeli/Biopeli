@@ -1,8 +1,9 @@
 import Content from './Content'
 
 export default class OptionsContent extends Content {
-  constructor ({ game, texts }) {
+  constructor ({ game, timer, texts }) {
     super()
+    this.timer = timer
     this.game = game
     this.texts = texts.optionsContentTexts
     this.name = 'options'
@@ -30,6 +31,10 @@ export default class OptionsContent extends Content {
     this.owner.redraw()
   }
 
+  pause () {
+    this.timer.togglePause()
+  }
+
   createSections () {    
     this.sectionName('options')
     this.text(this.texts.soundVolume + ': ' + Math.round(this.game.music.volume * 100) + '%')
@@ -41,5 +46,6 @@ export default class OptionsContent extends Content {
     this.button(this.texts.increaseVolume, this.incVolume, this)
     this.button(this.texts.decreaseVolume, this.decVolume, this)
     this.button(this.texts.endGame, this.game.gameEvents.finishGame, this.game.gameEvents)
+    this.button(this.texts.pause, this.pause, this)
   }
 }

@@ -12,6 +12,7 @@ export default class Timer {
       this.name = name
     }
 
+    this.paused = false
     this.interval = interval
     this.lastTime = currentTime
     this.callTime = 0
@@ -43,11 +44,18 @@ export default class Timer {
    * @param {number} currentTime
    */
   update (currentTime) {
+    if(this.paused)
+      return
+
     if (currentTime - this.lastTime >= this.interval) {
       this.callTime++
       this.callListeners()
       this.lastTime = currentTime
     }
+  }
+
+  togglePause () {
+    this.paused = !this.paused
   }
 
   /**
