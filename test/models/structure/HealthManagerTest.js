@@ -12,7 +12,8 @@ describe('Health manager tests', () => {
     health = {
       fill: sinon.spy(),
       loseOne: sinon.spy(),
-      percent: () => 1
+      percent: () => 1,
+      warn: () => false
     }
 
     purchaseManager = {
@@ -50,8 +51,9 @@ describe('Health manager tests', () => {
     manager.checkRuin({serialNumber: 5})
     assert.equal(1, health.loseOne.callCount)
 
-    manager.checkRuin({serialNumber: 24234})
+    let warn = manager.checkRuin({serialNumber: 24234})
     assert.equal(2, health.loseOne.callCount)
+    assert.equal(false, warn)
   })
 
   it('Fix works', ()=>{
