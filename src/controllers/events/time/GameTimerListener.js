@@ -77,6 +77,7 @@ export default class GameTimerListener {
     }
   }
 
+
   /**
    * Redraws top bar and menu controllers
    */

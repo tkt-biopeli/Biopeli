@@ -15,6 +15,7 @@ export default class JSONLoader {
     this.files.push('text')
     this.files.push('name')
     this.files.push('gameEvent')
+    this.files.push('structureHint')
   }
 
   loadJSONObjects () {
