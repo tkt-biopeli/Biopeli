@@ -152,8 +152,18 @@
     },
     {
       "type": "image",
-      "name": "telegram",
-      "file": "assets/images/backgrounds/telegram.png"
+      "name": "telegram_revent",
+      "file": "assets/images/backgrounds/telegram_random_event.png"
+    },
+    {
+      "type": "image",
+      "name": "telegram_fact",
+      "file": "assets/images/backgrounds/telegram_fact.png"
+    },
+    {
+      "type": "image",
+      "name": "telegram_hint",
+      "file": "assets/images/backgrounds/telegram_hint.png"
     },
     {
       "type": "image",
