@@ -8,11 +8,11 @@ export default class TelegramStorage {
     let date = timeEvent.toString()
     let topic = randomEvent.name
     let text = randomEvent.description
-    this.addTelegram(date, topic, text)
+    this.addTelegram(date, topic, text, 'telegram_revent')
   }
 
-  addTelegram (date, topic, text) {
-    this.telegrams.push({ date: date, topic: topic, text: text, new: true })
+  addTelegram (date, topic, text, asset) {
+    this.telegrams.push({ date: date, topic: topic, text: text, new: true, asset: asset})
     this.unread++
   }
 

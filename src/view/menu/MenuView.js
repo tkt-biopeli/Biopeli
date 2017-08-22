@@ -256,7 +256,7 @@ export default class MenuView {
       var component = components[j]
       var menuitem = section[i]
       if (i < section.length && menuitem.type === component.type) {
-        if ((component.type === 'button') && 
+        if ((component.type === 'button' || component.type === 'labeledImage') && 
             (component.asset !== menuitem.asset || 
             component.function !== menuitem.callback)) {
           menuitems.push(this.createComponent(component))
