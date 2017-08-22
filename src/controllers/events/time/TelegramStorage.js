@@ -15,6 +15,13 @@ export default class TelegramStorage {
     this.addTelegram('Tiesithän?', '', hint, 'telegram_hint')
   }
 
+  addRuinWarning(timeEvent, structure) {
+    let date = timeEvent.toString()
+    let topic = structure.ownerName + ' hädässä!'
+    let text = structure.structureName + ' on puolikuntoinen!'
+    this.addTelegram(date, topic, text, 'telegram_revent')    
+  }
+
   addTelegram (date, topic, text, asset) {
     this.telegrams.push({ date: date, topic: topic, text: text, new: true, asset: asset})
     this.unread++
