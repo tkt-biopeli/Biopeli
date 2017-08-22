@@ -1,7 +1,7 @@
 export default class StructureHintGenerator {
   constructor ({telegramStorage, structureHints, randomWithBounds}) {
     this.telegramStorage = telegramStorage
-    this.structureHints = structureHints
+    this.structureHints = structureHints ? structureHints : []
     this.randomWithBounds = randomWithBounds
     this.builtSctructureTypes = new Set()    
   }
