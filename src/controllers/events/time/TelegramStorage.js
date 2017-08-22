@@ -1,5 +1,6 @@
 export default class TelegramStorage {
-  constructor () {
+  constructor ({telegramTexts}) {
+    this.texts = telegramTexts
     this.telegrams = []
     this.unread = 0
   }
@@ -12,13 +13,13 @@ export default class TelegramStorage {
   }
 
   addStructureHint(hint) {
-    this.addTelegram('Tiesithän?', '', hint, 'telegram_hint')
+    this.addTelegram('', this.texts.hintTopic, hint, 'telegram_hint')
   }
 
   addRuinWarning(timeEvent, structure) {
     let date = timeEvent.toString()
-    let topic = structure.ownerName + ' hädässä!'
-    let text = structure.structureName + ' on puolikuntoinen!'
+    let topic = structure.ownerName + this.texts.ruinTopic
+    let text = structure.structureName + this.texts.ruinText
     this.addTelegram(date, topic, text, 'telegram_revent')    
   }
 

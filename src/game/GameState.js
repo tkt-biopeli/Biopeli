@@ -178,6 +178,7 @@ export default class GameState {
     })
 
     this.telegramStorage = new TelegramStorage({
+      telegramTexts: this.texts.telegramTexts
     })
 
     this.structureHintGenerator = new StructureHintGenerator({

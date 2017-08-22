@@ -38,6 +38,12 @@
     "welcomeTelegram": "Kaupungin asukkailla on nälkä, äkkiä turnipseja!"
   },
 
+  "telegramTexts": {
+    "hintTopic": "Tiesithän..?",
+    "ruinTopic": " hädässä!",
+    "ruinText": " on puolikuntoinen!"
+  },
+
   "optionsContentTexts": {
     "soundVolume": "Äänen voimakkuus",
     "soundOn": "Äänet päälle",
