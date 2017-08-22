@@ -21,7 +21,7 @@ export default class StructureHintGenerator {
   }
 
   sendTelegram(hint) {
-    console.log(hint)
+    this.telegramStorage.addStructureHint(hint)
   }
 
 }

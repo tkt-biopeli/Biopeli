@@ -11,6 +11,10 @@ export default class TelegramStorage {
     this.addTelegram(date, topic, text, 'telegram_revent')
   }
 
+  addStructureHint(hint) {
+    this.addTelegram('Tiesithän?', '', hint, 'telegram_hint')
+  }
+
   addTelegram (date, topic, text, asset) {
     this.telegrams.push({ date: date, topic: topic, text: text, new: true, asset: asset})
     this.unread++
