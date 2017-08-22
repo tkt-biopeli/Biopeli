@@ -18,7 +18,7 @@ import FoundingYearStructureFilter from './filters/structure/FoundingYearStructu
 import TypeStructureFilter from './filters/structure/TypeStructureFilter'
 
 import NameStructureTypeFilter from './filters/structuretype/NameStructureTypeFilter'
-import StructureTypeFilter from './filters/structuretype/StructureTypeFilter'
+import AllStructureTypeFilter from './filters/structuretype/AllStructureTypeFilter'
 
 import TileValueEffect from './effects/TileValueEffect'
 import MoneyEffect from './effects/MoneyEffect'
@@ -85,7 +85,7 @@ export default class RandomEventFactory {
     this.filterCreators.set('StructuresOfType', TypeStructureFilter)
     this.filterCreators.set('StructuresWithFoundingYear', FoundingYearStructureFilter)
 
-    this.filterCreators.set('AllStructureTypes', StructureTypeFilter)
+    this.filterCreators.set('AllStructureTypes', AllStructureTypeFilter)
     this.filterCreators.set('StructureTypes', NameStructureTypeFilter)
   }
 

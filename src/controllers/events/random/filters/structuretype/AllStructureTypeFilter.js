@@ -6,12 +6,7 @@ export default class NameStructureTypeFilter {
     this.names = json.structureTypes
   }
 
-  isValid (structureType) {
-    for (let name of this.names) {
-      if(name === structureType.name) return true
-    }
-    return false
-  }
+  isValid (structureType) { return true }
 
   affected () {
     const isValidFn = (structureType) => { return this.isValid(structureType) }

@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import AllStructureFilter from '../../../../src/controllers/events/random/filters/structure/AllStructureFilter'
+import AllStructureFilter from '../../../../../../src/controllers/events/random/filters/structure/AllStructureFilter'
 
 describe('All structure filter and tile tile filter tests', ()=>{
   it('Filter works', ()=>{
