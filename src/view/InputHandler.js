@@ -10,12 +10,11 @@ export default class InputHandler {
    * @param {MapListener} param.mapListener - Current map listener
    * @param {CameraMover} param.cameraMover - Current camera mover
    */
-  constructor ({ game, mapListener, cameraMover, mapView, timer }) {
+  constructor ({ game, mapListener, cameraMover, mapView}) {
     this.game = game
     this.mapListener = mapListener
     this.cameraMover = cameraMover
     this.mapView = mapView
-    this.timer = timer
 
     this.initialize()
   }
@@ -34,11 +33,7 @@ export default class InputHandler {
     let flowersKey = this.game.flowersKey
     flowersKey.onDown.add(this.flowersOnOff, this)
     this.kineticScrolling()
-    this.game.input.keyboard.addKey(Phaser.KeyCode.P).onDown.add(() => {
-      this.timer.togglePause()
-    }, this)
   }
-
   /**
    * Description goes here
    */

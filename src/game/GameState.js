@@ -86,8 +86,7 @@ export default class GameState {
       game: state,
       mapListener: this.mapListener,
       cameraMover: this.cameraMover,
-      mapView: this.mapView,
-      timer: this.gameTimer
+      mapView: this.mapView
     })
 
     this.randomEventFactory = new RandomEventFactory({gameState: this})

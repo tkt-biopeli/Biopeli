@@ -55,7 +55,9 @@ export default class Timer {
   }
 
   togglePause () {
-    this.paused = !this.paused
+    var next = !this.paused
+    this.paused = next
+    return next
   }
 
   /**
