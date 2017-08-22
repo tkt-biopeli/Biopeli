@@ -1,4 +1,4 @@
-import Phaser from 'phaser'
+
 /**
  * Description goes here
  */
