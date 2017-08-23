@@ -1,0 +1,107 @@
+{
+  "wheat_farm": {
+    "hints": [
+      "vinkki 1",
+      "vinkki 2",
+      "vinkki 3"
+    ]
+  },
+  "dairy_farm": {
+    "hints": [
+      "vinkki 1",
+      "vinkki 2",
+      "vinkki 3"
+    ]
+  },
+  "berry_farm": {
+    "hints": [
+      "vinkki 1",
+      "vinkki 2",
+      "vinkki 3"
+    ]
+  },
+  "mill": {
+    "hints": [
+      "vinkki 1",
+      "vinkki 2",
+      "vinkki 3"
+    ]
+  },
+  "dairy": {
+    "hints": [
+      "vinkki 1",
+      "vinkki 2",
+      "vinkki 3"
+    ]
+  },
+  "herb_farm": {
+    "hints": [
+      "vinkki 1",
+      "vinkki 2",
+      "vinkki 3"
+    ]
+  },
+  "mushroom_farm": {
+    "hints": [
+      "vinkki 1",
+      "vinkki 2",
+      "vinkki 3"
+    ]
+  },
+  "lumber_yard": {
+    "hints": [
+      "vinkki 1",
+      "vinkki 2",
+      "vinkki 3"
+    ]
+  },
+  "fishery": {
+    "hints": [
+      "vinkki 1",
+      "vinkki 2",
+      "vinkki 3"
+    ]
+  },
+  "fish_refinery": {
+    "hints": [
+      "vinkki 1",
+      "vinkki 2",
+      "vinkki 3"
+    ]
+  },
+  "biofuel_refinery": {
+    "hints": [
+      "vinkki 1",
+      "vinkki 2",
+      "vinkki 3"
+    ]
+  },
+  "fertilizer_factory": {
+    "hints": [
+      "vinkki 1",
+      "vinkki 2",
+      "vinkki 3"
+    ]
+  },
+  "windmill": {
+    "hints": [
+      "vinkki 1",
+      "vinkki 2",
+      "vinkki 3"
+    ]
+  },
+  "junkyard": {
+    "hints": [
+      "vinkki 1",
+      "vinkki 2",
+      "vinkki 3"
+    ]
+  },
+  "ditch": {
+    "hints": [
+      "vinkki 1",
+      "vinkki 2",
+      "vinkki 3"
+    ]
+  }
+}

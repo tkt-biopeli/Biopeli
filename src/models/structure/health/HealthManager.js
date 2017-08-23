@@ -20,7 +20,9 @@ export default class HealthManager {
   checkRuin (timeEvent) {
     if (this.timeWindow.tryNext(timeEvent)) {
       this.health.loseOne()
+      return this.health.warn()
     }
+    return false
   }
 
   fix () {
