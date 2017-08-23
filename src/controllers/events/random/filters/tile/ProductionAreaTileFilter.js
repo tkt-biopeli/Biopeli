@@ -1,18 +1,21 @@
-import TileFilter from './TileFilter'
+import * as FilterComponents from '../FilterComponents'
 import RecursiveFilter from '../common/RecursiveFilter'
 
-export default class ProductionAreaTileFilter extends TileFilter {
+export default class ProductionAreaTileFilter {
   constructor ({ gameState, json }) {
-    super(gameState)
-    var recHelp = new RecursiveFilter(gameState)
+    this.map = gameState.map
+    this.structures = []
 
+    var recHelp = new RecursiveFilter(gameState)
     this.subFilter = recHelp.getFilter(json.structureFilter)
+
     this.includeNotOwned = json.includeNotOwned
   }
 
   affected () {
     this.structures = this.subFilter.affected()
-    return super.affected()
+    const isValidFn = (tile) => { return this.isValidTile(tile) }
+    return FilterComponents.tileTypesAffected(this.map, isValidFn)
   }
 
   isValidTile (tile) {
@@ -22,7 +25,6 @@ export default class ProductionAreaTileFilter extends TileFilter {
     for (let structure of this.structures) {
       if (tile.owner === structure) return true
     }
-
     return false
   }
 }

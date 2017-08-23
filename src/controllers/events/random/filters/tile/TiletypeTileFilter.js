@@ -1,9 +1,8 @@
-import TileFilter from './TileFilter'
+import * as FilterComponents from '../FilterComponents'
 
-export default class TiletypeTileFilter extends TileFilter {
+export default class TiletypeTileFilter {
   constructor ({ gameState, json }) {
-    super(gameState)
-
+    this.map = gameState.map
     this.tiletypeNames = json.tileTypes
   }
 
@@ -11,7 +10,11 @@ export default class TiletypeTileFilter extends TileFilter {
     for (let tiletypeName of this.tiletypeNames) {
       if (tiletypeName === tile.tileType.name) return true
     }
-
     return false
+  }
+
+  affected () {
+    const isValidFn = (tile) => { return this.isValidTile(tile) }
+    return FilterComponents.tileTypesAffected(this.map, isValidFn)
   }
 }

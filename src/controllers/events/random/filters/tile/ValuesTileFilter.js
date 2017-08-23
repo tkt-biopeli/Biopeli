@@ -1,8 +1,8 @@
-import TileFilter from './TileFilter'
+import * as FilterComponents from '../FilterComponents'
 
-export default class ValuesTileFilter extends TileFilter {
+export default class ValuesTileFilter {
   constructor ({ gameState, json }) {
-    super(gameState)
+    this.map = gameState.map
 
     this.fertilityLimits = this.checkLimits(json.fertilityLimits, 100)
     this.moistureLimits = this.checkLimits(json.moistureLimits, 100)
@@ -27,5 +27,10 @@ export default class ValuesTileFilter extends TileFilter {
 
   isInRange (value, limits) {
     return value >= limits.min && value <= limits.max
+  }
+
+  affected () {
+    const isValidFn = (tile) => { return this.isValidTile(tile) }
+    return FilterComponents.tileTypesAffected(this.map, isValidFn)
   }
 }

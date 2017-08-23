@@ -8,7 +8,7 @@ export default class NameStructureTypeFilter {
 
   isValid (structureType) {
     for (let name of this.names) {
-      if(name === structureType.name) return true
+      if (name === structureType.name) return true
     }
     return false
   }

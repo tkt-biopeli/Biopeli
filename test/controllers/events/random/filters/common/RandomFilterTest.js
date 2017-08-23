@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import RandomFilter from '../../../../src/controllers/events/random/filters/common/RandomFilter'
+import RandomFilter from '../../../../../../src/controllers/events/random/filters/common/RandomFilter'
 
 describe('And filter tests', ()=>{
   it('filter works', ()=>{

@@ -19,4 +19,18 @@ function strucTypesAffected (structureTypes, isValid) {
   return types
 }
 
-export { structuresAffected, strucTypesAffected }
+function tileTypesAffected (map, isValid) {
+  let affected = []
+
+  for (let i = 0; i < map.gridSizeX; i++) {
+    for (let j = 0; j < map.gridSizeY; j++) {
+      let tile = map.getTileWithGridCoordinates(i, j)
+      if (isValid(tile)) {
+        affected.push(tile)
+      }
+    }
+  }
+  return affected
+}
+
+export { structuresAffected, strucTypesAffected, tileTypesAffected }
