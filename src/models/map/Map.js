@@ -68,14 +68,58 @@ export default class MapGrid {
   }
 
   /**
+   * Returns binary identifier of neighbouring tiles
+   * Used to select correct beach overlay when rendered
+   * 
+   * @param {any} modelTile 
+   * @returns 
+   * @memberof MapGrid
+   */
+  getTileBeachId (modelTile) {
+    let x = modelTile.x
+    let y = modelTile.y
+    let id = ''
+    let neighbours = this.getNeighbours(modelTile)
+
+    for (var i = 0; i < neighbours.length; i++) {
+      let neighbour = neighbours[i]
+      if (neighbour && neighbour.tileType.asset === modelTile.tileType.asset) {
+        id = '1' + id
+      } else {
+        id = '0' + id
+      }
+    }
+
+    return id
+  }
+
+  /**
+   * Helper for getTileBeachId
+   * Returns neighbours in order top, right, down, left
+   * 
+   * @param {any} modelTile 
+   * @returns {ModelTile}
+   * @memberof MapGrid
+   */
+  getNeighbours (modelTile) {
+    let x = modelTile.x
+    let y = modelTile.y
+    return [
+      this.getTileWithGridCoordinates(x, y - 1),
+      this.getTileWithGridCoordinates(x + 1, y),
+      this.getTileWithGridCoordinates(x, y + 1),
+      this.getTileWithGridCoordinates(x - 1, y)
+    ]
+  }
+
+
+
+  /**
    * @param {Number} gx
    * @param {Number} gy
    * @param {TileType} tileType
    */
   addTileWithGridCoordinates (gx, gy, tileType, moisture, fertility) {
-    // //
-    // let damp = Math.floor(Math.random() * 100)
-    // //
     var tile = new ModelTile({
       x: gx,
       y: gy,

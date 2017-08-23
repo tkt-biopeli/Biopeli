@@ -42,6 +42,11 @@
     },
     {
       "type": "image",
+      "name": "trees",
+      "file": "assets/images/tiles/trees.png"
+    },
+    {
+      "type": "image",
       "name": "water",
       "file": "assets/images/tiles/water.png"
     },
@@ -245,6 +250,86 @@
       "width": 128,
       "height": 128,
       "frames": 4
+    },
+    {
+      "type": "image",
+      "name": "0000",
+      "file": "assets/images/tiles/masks/0000.png"
+    },
+    {
+      "type": "image",
+      "name": "0001",
+      "file": "assets/images/tiles/masks/0001.png"
+    },
+    {
+      "type": "image",
+      "name": "0010",
+      "file": "assets/images/tiles/masks/0010.png"
+    },
+    {
+      "type": "image",
+      "name": "0011",
+      "file": "assets/images/tiles/masks/0011.png"
+    },
+    {
+      "type": "image",
+      "name": "0100",
+      "file": "assets/images/tiles/masks/0100.png"
+    },
+    {
+      "type": "image",
+      "name": "0101",
+      "file": "assets/images/tiles/masks/0101.png"
+    },
+    {
+      "type": "image",
+      "name": "0110",
+      "file": "assets/images/tiles/masks/0110.png"
+    },
+    {
+      "type": "image",
+      "name": "0111",
+      "file": "assets/images/tiles/masks/0111.png"
+    },
+    {
+      "type": "image",
+      "name": "1000",
+      "file": "assets/images/tiles/masks/1000.png"
+    },
+    {
+      "type": "image",
+      "name": "1001",
+      "file": "assets/images/tiles/masks/1001.png"
+    },
+    {
+      "type": "image",
+      "name": "1010",
+      "file": "assets/images/tiles/masks/1010.png"
+    },
+    {
+      "type": "image",
+      "name": "1011",
+      "file": "assets/images/tiles/masks/1011.png"
+    },
+    {
+      "type": "image",
+      "name": "1100",
+      "file": "assets/images/tiles/masks/1100.png"
+    },
+    {
+      "type": "image",
+      "name": "1101",
+      "file": "assets/images/tiles/masks/1101.png"
+    },
+    {
+      "type": "image",
+      "name": "1110",
+      "file": "assets/images/tiles/masks/1110.png"
+    },
+    {
+      "type": "image",
+      "name": "1111",
+      "file": "assets/images/tiles/masks/1111.png"
     }
   ]
 }
