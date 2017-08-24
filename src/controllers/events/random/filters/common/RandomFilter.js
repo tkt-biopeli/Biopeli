@@ -1,11 +1,14 @@
-import RecursiveFilter from './RecursiveFilter'
+import FilterGetterComponent from '../components/FilterGetterComponent'
+import Random from '../../../../../utils'
 
-export default class RandomFilter extends RecursiveFilter {
+export default class RandomFilter {
   constructor ({ gameState, json }) {
-    super(gameState)
-
-    this.filter = this.getFilter(json.filter)
+    this.filterGetterComponent = new FilterGetterComponent({
+      gameState: gameState
+    })
+    this.filter = this.filterGetterComponent.getFilter(json.filter)
     this.amount = json.amount
+    this.getRandom = Random.randomWithBounds
   }
 
   affected () {
@@ -13,16 +16,11 @@ export default class RandomFilter extends RecursiveFilter {
 
     var affected = []
     while (innerAffected.length > 0 && affected.length < this.amount) {
-      var random = Math.floor(this.rand() * innerAffected.length)
+      var random = this.getRandom(0, innerAffected.length)
 
       affected.push(innerAffected[random])
       innerAffected.splice(random, 1)
     }
-
     return affected
-  }
-
-  rand () {
-    return Math.random()
   }
 }

@@ -2,7 +2,7 @@ const assert = require('assert')
 const sinon = require('sinon')
 import RandomFilter from '../../../../../../src/controllers/events/random/filters/common/RandomFilter'
 
-describe('And filter tests', ()=>{
+describe('Random filter tests', ()=>{
   it('filter works', ()=>{
     var firstFilter = {
       affected: ()=> {
@@ -20,7 +20,7 @@ describe('And filter tests', ()=>{
       json: {filter: {}, amount: 3}
     })
 
-    filter.rand = () => 0
+    filter.getRandom = () => {return 0}
 
     var a = filter.affected()
     assert.equal(3, a.length)

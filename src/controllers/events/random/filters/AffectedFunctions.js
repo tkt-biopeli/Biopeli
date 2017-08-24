@@ -9,14 +9,14 @@ function structuresAffected (array, isValid) {
 }
 
 function strucTypesAffected (structureTypes, isValid) {
-  var types = []
+  var affected = []
   for (let structureTypeKey of Object.keys(structureTypes)) {
     let structureType = structureTypes[structureTypeKey]
     if (isValid(structureType)) {
-      types.push(structureType)
+      affected.push(structureType)
     }
   }
-  return types
+  return affected
 }
 
 function tileTypesAffected (map, isValid) {

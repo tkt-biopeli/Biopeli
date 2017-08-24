@@ -1,4 +1,4 @@
-import * as FilterComponents from '../FilterComponents'
+import * as AffectedFunctions from '../AffectedFunctions'
 
 export default class AllStructureFilter {
   constructor ({gameState, json}) {
@@ -9,6 +9,6 @@ export default class AllStructureFilter {
 
   affected () {
     const isValidFn = (structure) => { return this.isValid(structure) }
-    return FilterComponents.structuresAffected(this.player.structures.values, isValidFn)
+    return AffectedFunctions.structuresAffected(this.player.structures.values, isValidFn)
   }
 }

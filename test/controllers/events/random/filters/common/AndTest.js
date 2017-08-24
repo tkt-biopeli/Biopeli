@@ -3,41 +3,41 @@ const sinon = require('sinon')
 import And from '../../../../../../src/controllers/events/random/filters/common/And'
 
 describe('And filter and tile tile filter tests', ()=>{
-  it('Filter works', ()=>{
-    var firstFilter = {
-      affected: ()=> {
-        return [1, 2, 3]
-      }
-    }
-    var secondFilter = {
-      affected: ()=> {
-        return [1, 2, 5]
-      }
-    }
-    var thirdFilter = {
-      affected: ()=> {
-        return [1, 2, 3, 5]
-      }
-    }
+  var filter
 
-    var gs = {randomEventFactory: {
-      i: 0,
-      filters: [firstFilter, secondFilter, thirdFilter],
-      createFilter: function () {return this.filters[this.i]}
+  beforeEach(()=>{
+    var firstFilter = {affected: ()=> {return [1, 2, 3]}}
+    var secondFilter = {affected: ()=> {return [1, 2, 5]}}
+    var thirdFilter = {affected: ()=> {return [1, 2, 3, 5]}}
+
+    var createFilterStub = sinon.stub()
+    createFilterStub.onCall(0).returns(firstFilter)
+    createFilterStub.onCall(1).returns(secondFilter)
+    createFilterStub.onCall(2).returns(thirdFilter)
+
+    var gameState = {randomEventFactory: {
+      createFilter: createFilterStub
     }}
 
-    var filter = new And({
-      gameState: gs,
+    filter = new And({
+      gameState: gameState,
       json: {filters: [{}, {}, {}]}
     })
+  })
 
-    var affected = filter.affected()
-    var array = []
-    for(let a of affected) array.push(a)
+  it('affected functioning as expected', ()=>{
+    var array = filter.affected()
     array.sort()
-    assert(2, array.length)
+    assert.equal(array.length, 2)
 
-    assert(1, array[0])
-    assert(2, array[1])
+    assert.equal(array[0], 1)
+    assert.equal(array[1], 2)
+  })
+
+  it('affected returns an empty array if there are no subfilters', ()=>{
+    filter.subFilterComponent.subfilters = []
+    var array = filter.affected()
+    assert(array.constructor === Array)
+    assert.equal(array.length, 0)
   })
 })

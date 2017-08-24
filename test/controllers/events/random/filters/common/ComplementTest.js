@@ -1,9 +1,8 @@
-// this is fixed in another branch (integration-and-unit-tests)
 const assert = require('assert')
 const sinon = require('sinon')
-import And from '../../../../../../src/controllers/events/random/filters/common/And'
+import Complement from '../../../../../../src/controllers/events/random/filters/common/Complement'
 
-describe('And filter and tile tile filter tests', ()=>{
+describe('Complement filter and tile tile filter tests', ()=>{
   var firstFilter = {
     affected: ()=> {
       return [1, 2, 3]
@@ -15,24 +14,25 @@ describe('And filter and tile tile filter tests', ()=>{
     }
   }
 
-  var gs = {randomEventFactory: {
-    i: 0,
-    filters: [firstFilter, secondFilter],
-    createFilter: function () {return this.filters[this.i]}
+  var createFilterStub = sinon.stub()
+  createFilterStub.onCall(0).returns(firstFilter)
+  createFilterStub.onCall(1).returns(secondFilter)
+
+  var gameState = {randomEventFactory: {
+    createFilter: createFilterStub
   }}
 
-  var filter = new And({
-    gameState: gs,
+  var filter = new Complement({
+    gameState: gameState,
     json: {filters: [{}, {}, {}]}
   })
-
-  var affected = filter.affected()
-  var array = []
-  for(let a of affected) array.push(a)
-  array.sort()
-  assert(2, array.length)
-  assert(array.sort())
-
-  assert(2, array[0])
-  assert(3, array[1])
+  
+  it('Filter works', ()=>{
+    var affected = filter.affected()
+    var resultArray = []
+    for(let a of affected) resultArray.push(a)
+    assert.equal(resultArray.length, 2)
+    assert.equal(resultArray[0], 2)
+    assert.equal(resultArray[1], 3)
+  })
 })

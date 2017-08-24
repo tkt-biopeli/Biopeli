@@ -1,21 +1,23 @@
-import RecursiveFilter from './RecursiveFilter'
+import FilterGetterComponent from '../components/FilterGetterComponent'
 
-export default class Complement extends RecursiveFilter {
+export default class Complement {
   constructor ({ gameState, json }) {
-    super(gameState)
-
-    this.from = this.getFilter(json.from)
-    this.toRemove = this.getFilter(json.remove)
+    this.filterGetterComponent = new FilterGetterComponent({
+      gameState: gameState
+    })
+    this.from = this.filterGetterComponent.getFilter(json.from)
+    this.toRemove = this.filterGetterComponent.getFilter(json.remove)
   }
 
   affected () {
-    let from = new Set(this.from.affected())
-    let removes = this.toRemove.affected()
+    let affectedSet = new Set(this.from.affected())
+    let excludedElementSet = this.toRemove.affected()
 
-    for (let remove of removes) {
-      if (from.has(remove)) from.delete(remove)
+    for (let excludedElement of excludedElementSet) {
+      if (affectedSet.has(excludedElement)) {
+        affectedSet.delete(excludedElement)
+      }
     }
-
-    return from.values
+    return Array.from(affectedSet)
   }
 }

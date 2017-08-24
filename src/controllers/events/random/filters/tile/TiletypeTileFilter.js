@@ -1,4 +1,4 @@
-import * as FilterComponents from '../FilterComponents'
+import * as AffectedFunctions from '../AffectedFunctions'
 
 export default class TiletypeTileFilter {
   constructor ({ gameState, json }) {
@@ -15,6 +15,6 @@ export default class TiletypeTileFilter {
 
   affected () {
     const isValidFn = (tile) => { return this.isValidTile(tile) }
-    return FilterComponents.tileTypesAffected(this.map, isValidFn)
+    return AffectedFunctions.tileTypesAffected(this.map, isValidFn)
   }
 }

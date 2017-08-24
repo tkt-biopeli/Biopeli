@@ -1,29 +1,22 @@
-import ListLogicFilter from './ListLogicFilter'
+import SubFilterComponent from '../components/SubFilterComponent'
 
-export default class And extends ListLogicFilter {
+export default class And {
   constructor ({ gameState, json }) {
-    super(gameState, json)
+    this.subFilterComponent = new SubFilterComponent({
+      gameState: gameState,
+      json: json
+    })
   }
 
   affected () {
-    if (this.subfilters.length < 1) {
-      return []
-    }
+    var subfilters = this.subFilterComponent.subfilters
+    if (subfilters.length < 1) return []
 
-    var affected = new Set(this.subfilters[0].affected())
-    for (let i = 1; i < this.subfilters.length; i++) {
-      let notFound = []
-      let subaffected = new Set(this.subfilters[i].affected())
-
-      for (let af of affected) {
-        if (!subaffected.has(af)) notFound.push(af)
-      }
-
-      for (let toRemove of notFound) {
-        affected.delete(toRemove)
-      }
-    }
-
-    return affected.values()
+    var affected = subfilters[0].affected()
+    subfilters.forEach(subfilter => {
+      var subAffected = new Set(subfilter.affected())
+      affected = affected.filter(x => subAffected.has(x))
+    })
+    return affected
   }
 }

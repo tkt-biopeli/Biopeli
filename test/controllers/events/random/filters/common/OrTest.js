@@ -1,46 +1,34 @@
-// this is fixed in another branch (integration-and-unit-tests)
 const assert = require('assert')
 const sinon = require('sinon')
-import And from '../../../../../../src/controllers/events/random/filters/common/And'
+import Or from '../../../../../../src/controllers/events/random/filters/common/Or'
 
-describe('And filter and tile tile filter tests', ()=>{
-  var firstFilter = {
-    affected: ()=> {
-      return [1, 2]
-    }
-  }
-  var secondFilter = {
-    affected: ()=> {
-      return [1, 2, 5]
-    }
-  }
-  var thirdFilter = {
-    affected: ()=> {
-      return [4, -1]
-    }
-  }
+describe('Or filter and tile filter tests', ()=>{
+  var firstFilter = {affected: ()=> {return [1, 2]}}
+  var secondFilter = {affected: ()=> {return [1, 2, 5]}}
+  var thirdFilter = {affected: ()=> {return [4, -1]}}
 
-  var gs = {randomEventFactory: {
-    i: 0,
-    filters: [firstFilter, secondFilter, thirdFilter],
-    createFilter: function () {return this.filters[this.i]}
+  var createFilterStub = sinon.stub()
+  createFilterStub.onCall(0).returns(firstFilter)
+  createFilterStub.onCall(1).returns(secondFilter)
+  createFilterStub.onCall(2).returns(thirdFilter)
+
+  var gameState = {randomEventFactory: {
+    createFilter: createFilterStub
   }}
 
-  var filter = new And({
-    gameState: gs,
+  var filter = new Or({
+    gameState: gameState,
     json: {filters: [{}, {}, {}]}
   })
 
-  var affected = filter.affected()
-  var array = []
-  for(let a of affected) array.push(a)
-  array.sort()
-  assert(5, array.length)
-  assert(array.sort())
-
-  assert(-1, array[0])
-  assert(1, array[1])
-  assert(2, array[2])
-  assert(4, array[3])
-  assert(5, array[4])
+  it('Filter works', ()=>{
+    var array = filter.affected()
+    assert.equal(array.length, 5)
+    array.sort()
+    assert.equal(array[0], -1)
+    assert.equal(array[1], 1)
+    assert.equal(array[2], 2)
+    assert.equal(array[3], 4)
+    assert.equal(array[4], 5)
+  })
 })

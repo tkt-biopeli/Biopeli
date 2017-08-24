@@ -1,5 +1,5 @@
-export default class RecursiveFilter {
-  constructor (gameState) {
+export default class FilterGetterComponent {
+  constructor ({ gameState }) {
     this.eventFactory = gameState.randomEventFactory
   }
 

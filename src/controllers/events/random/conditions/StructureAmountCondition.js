@@ -1,10 +1,10 @@
 import {between} from '../../../../models/logic/Between'
-import RecursiveHelper from '../filters/common/RecursiveFilter'
+import FilterGetterComponent from '../filters/components/FilterGetterComponent'
 
 export default class StructureAmountCondition {
   constructor ({gameState, json}) {
-    var rec = new RecursiveHelper(gameState)
-    this.filter = rec.getFilter(json.structureFilter)
+    var filterGetter = new FilterGetterComponent({gameState: gameState})
+    this.filter = filterGetter.getFilter(json.structureFilter)
     this.min = json.min
     this.max = json.max
   }
