@@ -19,6 +19,14 @@ export default class InputHandler {
     this.initialize()
   }
 
+  pause () {
+    this.paused = true
+  }
+
+  unpause () {
+    this.paused = false
+  }
+
   /**
    * add callbacks to controls -> Phaser takes care of update in game loop
    */
@@ -33,11 +41,18 @@ export default class InputHandler {
     let flowersKey = this.game.flowersKey
     flowersKey.onDown.add(this.flowersOnOff, this)
     this.kineticScrolling()
+    
+    this.paused = false
   }
+  
   /**
    * Description goes here
    */
   onPointerDown () {
+    if (this.paused){
+      return
+    }
+
     var ptr = this.game.input.activePointer
     var pointerEvent = {
       x: ptr.position.x,
@@ -51,6 +66,10 @@ export default class InputHandler {
    * Description goes here
    */
   onCursorDown () {
+    if (this.paused){
+      return
+    }
+
     var cursors = this.game.cursors
     var cursorEvent = {
       up: cursors.up.isDown,

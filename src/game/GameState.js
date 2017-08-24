@@ -349,6 +349,7 @@ export default class GameState {
     this.state.input.onDown.add(this.unpause, this)
     this.state.paused = true
     this.paused = true
+    this.inputHandler.pause()
     return true
   }
 
@@ -357,6 +358,7 @@ export default class GameState {
     this.pauseInitiated = false
     this.paused = false
     this.pauseTxt.destroy()
+    this.inputHandler.unpause()
   }
 
   /**
