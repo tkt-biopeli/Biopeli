@@ -331,13 +331,6 @@
     },
     {
       "type": "special",
-      "name": "ditch",
-      "nameWithLanguage": "oja",
-      "asset": "ditch",
-      "cost": 500
-    },
-    {
-      "type": "special",
       "name": "fertilizer_factory",
       "nameWithLanguage": "lannoitetehdas",
       "asset": "fertilizer_factory",
@@ -424,7 +417,37 @@
       "pollution": {
         "constant": false,
         "distance": 3,
-        "amount": 50
+        "amount": 10
+      }
+    },
+    {
+      "type": "special",
+      "name": "ditch",
+      "nameWithLanguage": "oja",
+      "asset": "ditch",
+      "health": 20,
+      "cost": 500,
+      "radiusForTileOwnership": 1,
+      "changeValues": {
+        "flowers": 0,
+        "moisture": -25,
+        "fertility": 0
+      },
+      "reach": 1,
+      "moveCosts": {
+        "grass": 1,
+        "water": 5,
+        "water_field": 5,
+        "forest": 1,
+        "field": 1,
+        "industrial": 1
+      },
+      "takesOwnershipOf": ["grass", "field", "industrial"],
+      "farmland": "industrial",
+      "pollution": {
+        "constant": false,
+        "distance": 0,
+        "amount": 0
       }
     }
   ]

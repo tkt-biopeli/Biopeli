@@ -31,6 +31,8 @@ export default class ProducerFactory {
         producer = this.createPrimaryProducer(sType, tile)
         break
       default:
+        tile.moisture -= 25
+        console.log(tile.moisture)
         producer = new SpecialStructure({
           zone: this.tileFinder.findTilesInDistanceOf(tile, sType.reach, sType.moveCosts),
           changeValues: sType.changeValues,

@@ -38,5 +38,7 @@ export default class Start extends Phaser.State {
       }
     )
     this.menu.finishMenu()
+
+    utils.wakeHeroku(this.gameData.config.gameSettings.scoreServer)
   }
 }

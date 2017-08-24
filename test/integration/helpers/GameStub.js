@@ -185,7 +185,8 @@ export default class GameStub {
     }
 
     this.cache = {
-      getImage: () => ({ width: 1, height: 1 })
+      getImage: () => ({ width: 1, height: 1 }),
+      getBitmapData: () => {}
     }  
   }
 

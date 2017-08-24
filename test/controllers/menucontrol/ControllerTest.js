@@ -117,6 +117,20 @@ describe('Controller tests', ()=>{
       assert.equal(1, bar.percent)
     })
 
+    it('Adding labeled image works', ()=>{
+      controller.labeledImage(13, 79)
+
+      var image = cs()
+      assert.equal(image.type, 'labeledImage')
+    })
+
+    it('Adding input field works', ()=>{
+      controller.inputField(13)
+
+      var inputField = cs()
+      assert.equal(inputField.type, 'inputField')
+    })
+
     it('Adding button works', ()=>{
       controller.button('test', 1, 2)
 

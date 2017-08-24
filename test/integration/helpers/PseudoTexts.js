@@ -4,8 +4,14 @@ export default {
     startGame: "Aloita peli",
     instructions: "Ohjeet",
     instructionsDescription: "Tarkkaile maaperän kosteutta ja ravinteita.\nRakenna alku- sekä jatkotuotantorakennuksia.\nVastaa kaupungin kysyntään.",
+    toStart: "Alkuun",
+    back: "Takaisin"
+  },
+
+  gameOverState: {
     endScore: "Loppupisteesi",
     endCitySize: "Kaupungin koko",
+    highscores: "Tulokset",
     toStart: "Alkuun",
     back: "Takaisin"
   },
@@ -28,6 +34,12 @@ export default {
     turnipPrice: "Nauriin hinta",
     telegramServiceName: "Uutissähkeet",
     welcomeTelegram: "Kaupungin asukkailla on nälkä, äkkiä turnipseja!"
+  },
+
+  telegramTexts: {
+    hintTopic: "Tiesithän..?",
+    ruinTopic: " hädässä!",
+    ruinText: " on puolikuntoinen!"
   },
 
   optionsContentTexts: {

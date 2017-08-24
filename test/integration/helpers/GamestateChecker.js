@@ -88,7 +88,7 @@ export default class GamestateChecker {
   }
 
   checkIfMoistureShown () {
-    assert(this.gameState.mapView.showDampness)
+    assert(this.gameState.mapView.showMoisture)
   }
 
   checkPollution (x, y, pollution) {

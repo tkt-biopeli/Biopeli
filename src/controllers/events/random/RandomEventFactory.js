@@ -29,6 +29,7 @@ import StructureCostEffect from './effects/StructureCostEffect'
 
 import TimeCondition from './conditions/TimeCondition'
 import PopulationCondition from './conditions/PopulationCondition'
+import StructureAmountCondition from './conditions/StructureAmountCondition'
 
 export default class RandomEventFactory {
   constructor ({gameState}) {
@@ -51,6 +52,7 @@ export default class RandomEventFactory {
 
     this.conditionCreators.set('TimeLimiter', TimeCondition)
     this.conditionCreators.set('PopulationLimiter', PopulationCondition)
+    this.conditionCreators.set('StructureLimiter', StructureAmountCondition)
   }
 
   initEffects () {

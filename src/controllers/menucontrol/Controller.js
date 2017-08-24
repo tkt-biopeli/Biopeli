@@ -1,5 +1,6 @@
 import TextComponent from './components/TextComponent'
 import ButtonComponent from './components/ButtonComponent'
+import InputFieldComponent from './components/InputFieldComponent'
 import AnimatedBarComponent from './components/AnimatedBarComponent'
 import IconComponent from './components/IconComponent'
 import LabeledImageComponent from './components/LabeledImageComponent'
@@ -137,6 +138,19 @@ export default class Controller {
         fontSize: this.style.mediumFont,
         asset: asset
       })
+    )
+  }
+
+  /**
+   * Creates a new input field
+   *
+   * @param {number} x - coordinates
+   * @param {number} y - coordinates
+   * @param {Object} parameters - optional parameters
+   */
+  inputField (parameters) {
+    this.currentSection.components.push(
+      new InputFieldComponent(parameters)
     )
   }
 

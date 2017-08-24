@@ -1,7 +1,8 @@
 import Phaser from 'phaser'
 import WebFont from 'webfontloader'
-// do not remove this import!
+// do not remove these imports!
 import KineticScrolling from 'phaser-kinetic-scrolling-plugin'
+import PhaserInput from 'phaser-input'
 
 /**
  * Description goes here
@@ -14,7 +15,11 @@ export default class extends Phaser.State {
     this.stage.backgroundColor = '#EDEEC9'
     this.fontsReady = false
     this.fontsLoaded = this.fontsLoaded.bind(this)
+
     this.game.kineticScrolling = this.game.plugins.add(Phaser.Plugin.KineticScrolling)
+
+    let plugin = new PhaserInput.PhaserInput.Plugin(this.game, this.game.plugins)
+    this.game.add.plugin(plugin)
   }
 
   /**

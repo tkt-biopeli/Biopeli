@@ -1,66 +1,70 @@
 export default class ViewTile {
-  constructor ({ game, modelTile, dampnessCol, fertilityCol, tileSize, borderColour }) {
+  constructor ({ game, modelTile, tileSize, borderColour, beachId }) {
     this.game = game
-    this.modelTile = modelTile
-    this.dampnessCol = dampnessCol
-    this.tileSize = tileSize
-    this.fertilityCol = fertilityCol
+    this.modelTile = modelTile    
+    this.tileSize = tileSize    
     this.borderColour = borderColour
+    this.beachId = beachId    
     this.intialize()
     // this.lived = 0
   }
 
   intialize () {
-    this.tileSprite = this.makeTileSprite()
+    this.tileSprite = this.makeTileSprite()        
+    this.beachSprite = this.makeBeachSprite()
     this.borderSprite = this.makeBorderSprite()
-    this.dampnessSprite = this.makeDampnessSprite(this.dampnessCol)
-    this.fertilitySprite = this.makeFertilitySprite(this.fertilityCol)
+    this.moistureSprite = this.makeMoistureSprite()
+    this.fertilitySprite = this.makeFertilitySprite()
     this.structureSprite = this.makeStructureSprite()
     this.hammerSprite = this.makeHammerSprite()
     this.flowerSprite = this.makeFlowerSprite()
     this.highlights = this.tileSprite.addChild(this.game.make.sprite(0, 0))
   }
 
-  update (flowers, dampness, fertility, redrawBorders, redraw, borderColour) {
-    if (this.modelTile.structure != null && this.structureSprite == null) {
-      this.structureSprite = this.makeStructureSprite()
-      this.hammerSprite = this.makeHammerSprite()
-    } else if (this.modelTile.structure == null && this.structureSprite != null) {
-      this.structureSprite.destroy()
-      this.structureSprite = null
-    }
-
+  update ({showFlowers, showMoisture, showFertility, redraw, borderColour, beachId}) {
     this.borderColour = borderColour
-
-    if (redraw) {
+    
+    if (redraw) {      
       this.destroy()
+      this.beachId = beachId
       this.intialize()
-    } else if (redrawBorders) {
-      this.redrawBorders()
     }
-
-    this.highlights.removeChildren()
+    
     this.hammerFrameUpdate()
-    this.flowerFrameUpdate()
-
-    this.visibility(dampness, fertility, flowers)
+    if (showMoisture) this.moistureFrameUpdate()
+    if (showFertility) this.fertilityFrameUpdate()
+    if (showFlowers) this.flowerFrameUpdate()
+        
+    this.highlights.removeChildren()
     // this.lived++
   }
 
-  visibility (dampness, fertility, flowers) {
-    if (this.dampnessSprite !== null) this.dampnessSprite.visible = dampness
-    if (this.fertilitySprite !== null) this.fertilitySprite.visible = fertility
-    if (this.flowerSprite !== null) this.flowerSprite.visible = flowers
-  }
-
-  redrawBorders () {
-    if (this.borderSprite !== null) { this.borderSprite.destroy() }
-    this.makeBorderSprite()
-  }
-
   makeTileSprite () {
-    var sprite = this.game.make.sprite(0, 0, this.modelTile.tileType.asset)
+    if (this.modelTile.tileType.asset === 'forest') {return this.makeForestTile()}    
+    let sprite = this.game.make.sprite(0, 0, this.modelTile.tileType.asset)
+    sprite.width = this.tileSize.width
+    sprite.height = this.tileSize.height
     return sprite
+  }
+
+  makeForestTile() {
+    let sprite = this.game.make.sprite(0, 0, 'forest')
+    sprite.width = this.tileSize.width
+    sprite.height = this.tileSize.height
+    if (this.modelTile.structure === null) {
+      this.treeSprite = this.game.make.sprite(0, 0, 'trees')
+      this.treeSprite.width = this.tileSize.width
+      this.treeSprite.height = this.tileSize.height
+    }
+    return sprite
+  }
+
+  makeBeachSprite () {
+    if (this.modelTile.tileType.name !== 'grass' && this.beachId !== '1111') {
+      let asset = 'beach' + this.beachId
+      let sprite = this.game.make.sprite(0, 0, this.game.cache.getBitmapData(asset))                
+      return this.tileSprite.addChild(sprite)
+    }      
   }
 
   /**
@@ -91,43 +95,46 @@ export default class ViewTile {
     if (!structure.ownsTileAt(tile.x, tile.y - 1)) {
       border.drawRect(0, 0, width, thickness)
     }
-
     border.endFill()
-
-    return this.tileSprite.addChildAt(border, 0)
+    
+    return this.tileSprite.addChild(border)
   }
 
-  makeFertilitySprite (colour) {
-    return this.makeColourSprite(colour)
+  makeFertilitySprite () {
+    let value = Math.round(this.modelTile.getFertility())    
+    let sprite = this.game.make.sprite(0, 0, 'fertilitysheet', 0)
+    sprite.anchor.set(-0.1667, -0.1667)
+    return sprite    
   }
 
-  makeDampnessSprite (colour) {
-    return this.makeColourSprite(colour)
+  fertilityFrameUpdate() {    
+    let value = Math.round(this.modelTile.getFertility())
+    if (value === this.fertilitySprite.frame) return
+    this.fertilitySprite.frame = value
   }
 
-  makeColourSprite (colour) {
-    let clr = colour
-    var sprite = this.game.make.graphics()
-    sprite.beginFill(clr, 1)
-    sprite.drawRoundedRect(32, 32, 64, 64, 20)
-    // sprite.anchor.set(0.5, 0.5)
-    sprite.endFill()
-    let name = this.modelTile.tileType.name
-    if (name !== 'water' && name !== 'forest' && name !== 'industrial') {
-      this.tileSprite.addChild(sprite)
-      return sprite
-    } else {
-      return null
-    }
+  makeMoistureSprite () {
+    let value = Math.round(this.modelTile.getMoisture())        
+    let sprite = this.game.make.sprite(0, 0, 'moisturesheet', value)
+    sprite.anchor.set(-0.1667, -0.1667)
+    return sprite    
+  }
+
+  moistureFrameUpdate() {
+    let value = Math.round(this.modelTile.getMoisture()) 
+    if (value === this.moistureSprite.frame) return
+    this.moistureSprite.frame = value
   }
 
   /**
    * Creates a structure to be added as a child for the tile
    */
   makeStructureSprite () {
-    if (this.modelTile.structure === null) { return null }
+    if (this.modelTile.structure === null) return null
     let sprite = this.game.make.sprite(0, 0, this.modelTile.structure.asset())
-    return this.tileSprite.addChild(sprite)
+    sprite.width = this.tileSize.width
+    sprite.height = this.tileSize.height
+    return sprite    
   }
 
   makeHammerSprite () {
@@ -137,11 +144,11 @@ export default class ViewTile {
     hammers.scale.setTo(0.7, 0.7)
     hammers.frame = Math.max(
       Math.min(
-        3, 
+        3,
         4 - Math.ceil(this.modelTile.structure.health.percent() * 4 + 0.01)
       ), 0
     )
-    return this.tileSprite.addChild(hammers)
+    return this.structureSprite.addChild(hammers)
   }
 
   hammerFrameUpdate () {
@@ -159,10 +166,11 @@ export default class ViewTile {
    */
   makeFlowerSprite () {
     let daisies = this.game.make.sprite(0, 0, 'daisy')
+    daisies.anchor.set(-0.5, -0.5)
     let frame = 10 - this.modelTile.getFlowers()
-    if (frame === 10) frame = 9
+    if (frame === 10) frame = 9      
     daisies.frame = frame
-    return this.tileSprite.addChild(daisies)
+    return daisies    
   }
 
   flowerFrameUpdate () {
@@ -179,9 +187,10 @@ export default class ViewTile {
   }
 
   destroy () {
-    if (this.tileSprite !== undefined) {
-      this.tileSprite.removeChildren()
-      this.tileSprite.destroy()
+    let array = [this.tileSprite, this.structureSprite, this.flowerSprite, this.fertilitySprite, this.moistureSprite, this.treeSprite]
+    for (var i = 0; i < array.length; i++) {
+      let sprite = array[i]
+      if (sprite !== null && sprite !== undefined) {sprite.destroy()}      
     }
     // console.log("i lived for " + this.lived + " frames")
   }

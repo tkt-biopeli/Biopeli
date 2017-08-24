@@ -3,6 +3,7 @@ import Text from './menuitems/Text'
 import AnimatedBar from './menuitems/AnimatedBar'
 import Icon from './menuitems/Icon'
 import LabeledImage from './menuitems/LabeledImage'
+import InputField from './menuitems/InputField'
 
 /**
  * Component that draws menu with given component list and with wanted layout
@@ -66,6 +67,7 @@ export default class MenuView {
 
     this.activeButtons = []
     this.activeTexts = []
+    this.activeInputFields = []
 
     this.layout.init(sections)
     this.updateMenu(sections)
@@ -230,6 +232,22 @@ export default class MenuView {
     })
   }
 
+  /**
+   * Creates a new input field to the menu
+   * @param {Object} inputFieldComponent - contains the input component values.
+   */
+  createInputField (coords, inputFieldComponent) {
+    var infield = new InputField({
+      game: this.game,
+      viewGroup: this.menuViewGroup,
+      x: coords.x,
+      y: coords.y,
+      parameters: inputFieldComponent.parameters
+    })
+    this.activeInputFields.push(infield)
+    return infield
+  }
+
   updateSection (section, components) {
     var menuitems = []
 
@@ -238,7 +256,7 @@ export default class MenuView {
       var component = components[j]
       var menuitem = section[i]
       if (i < section.length && menuitem.type === component.type) {
-        if ((component.type === 'button') && 
+        if ((component.type === 'button' || component.type === 'labeledImage') && 
             (component.asset !== menuitem.asset || 
             component.function !== menuitem.callback)) {
           menuitems.push(this.createComponent(component))
@@ -297,6 +315,11 @@ export default class MenuView {
 
   updateLabeledImage (coords, component, labeledImage) {
     labeledImage.update(component.text, component.fontSize, coords.x, coords.y)
+  }
+
+  updateInputField (coords, component, inputField) {
+    inputField.update(coords.x, coords.y)
+    this.activeInputFields.push(inputField)
   }
 
   removeExtraSections (oldSections, newSections) {

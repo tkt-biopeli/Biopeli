@@ -4,10 +4,18 @@
     "startGame": "Aloita peli",
     "instructions": "Ohjeet",
     "instructionsDescription": "Tarkkaile maaperän kosteutta ja ravinteita.\nRakenna alku- sekä jatkotuotantorakennuksia.\nVastaa kaupungin kysyntään.",
-    "endScore": "Loppupisteesi",
-    "endCitySize": "Kaupungin koko",
     "toStart": "Alkuun",
     "back": "Takaisin"
+  },
+
+  "gameOverState": {
+    "enterName": "Syötä nimesi",
+    "endScore": "Loppupisteesi",
+    "endCitySize": "Kaupungin koko",
+    "highscores": "Tulokset",
+    "toStart": "Alkuun",
+    "back": "Takaisin",
+    "mailTo": "Palaute"
   },
 
   "buildStructureTexts": {
@@ -30,13 +38,21 @@
     "welcomeTelegram": "Kaupungin asukkailla on nälkä, äkkiä turnipseja!"
   },
 
+  "telegramTexts": {
+    "hintTopic": "Tiesithän..?",
+    "ruinTopic": " hädässä!",
+    "ruinText": " on puolikuntoinen!"
+  },
+
   "optionsContentTexts": {
     "soundVolume": "Äänen voimakkuus",
     "soundOn": "Äänet päälle",
     "soundOff": "Äänet pois",
     "increaseVolume": "Volyymi +",
     "decreaseVolume": "Volyymi -",
-    "endGame": "Lopeta peli"
+    "endGame": "Lopeta peli",
+    "hintsOn": "Vinkit päälle",
+    "hintsOff": "Vinkit pois"
   },
 
   "tileContentTexts" : {

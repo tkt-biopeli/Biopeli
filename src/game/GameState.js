@@ -20,6 +20,7 @@ import GameEvents from '../controllers/events/GameEvents'
 import GameTimerListener from '../controllers/events/time/GameTimerListener'
 import Timer from '../controllers/events/time/Timer'
 import TelegramStorage from '../controllers/events/time/TelegramStorage'
+import StructureHintGenerator from '../models/telegram/StructureHintGenerator'
 
 import TopBarContent from '../controllers/menucontrol/contents/TopBarContent'
 import TileContent from '../controllers/menucontrol/contents/TileContent'
@@ -54,7 +55,6 @@ export default class GameState {
         mapSize, tileSize, menuWidth, gameLength,
       config, structureTypes, tileTypes, texts, gameData }) {
     this.state = state
-    
     this.gameData = gameData
     this.config = config
     this.structureTypes = structureTypes
@@ -171,12 +171,21 @@ export default class GameState {
     this.gameEvents = new GameEvents({
       gameState: this,
       gameLength: gameLength,
-      config: config
+      config: config,
+      utils: utils,
+      texts: this.texts
     })
 
     this.telegramStorage = new TelegramStorage({
-
+      telegramTexts: this.texts.telegramTexts
     })
+
+    this.structureHintGenerator = new StructureHintGenerator({
+      telegramStorage: this.telegramStorage,
+      structureHints: this.gameData.structureHints,
+      randomWithBounds: utils.randomWithBounds
+    })
+    this.eventController.addListener('structureBuilt', this.structureHintGenerator.structureBuilt, this.structureHintGenerator)
 
     this.music = this.state.add.audio('music')
     this.music.play()
@@ -275,7 +284,11 @@ export default class GameState {
       texts: this.texts
     })
 
-    this.optionsContent = new OptionsContent({game: this, texts: this.texts})
+    this.optionsContent = new OptionsContent({
+      game: this, 
+      texts: this.texts,
+      telegramStorage: this.telegramStorage
+    })
 
     this.buildMenuContent = new BuildMenuContent({
       structureTypes: this.structureTypes

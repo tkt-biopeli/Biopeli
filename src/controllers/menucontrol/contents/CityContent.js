@@ -10,7 +10,7 @@ export default class CityContent extends Content {
     this.telegramStorage = telegramStorage
     this.telegramIndex = 0
     
-    this.telegramStorage.addTelegram('', this.texts.welcomeTelegram, '')    
+    this.telegramStorage.addTelegram('', this.texts.welcomeTelegram, '', 'telegram_fact')    
   }
 
   createSections () {    
@@ -32,7 +32,6 @@ export default class CityContent extends Content {
 
   telegramSection () {
     this.section('telegrams')
-    this.text(this.texts.telegramServiceName)
     this.upButton()
     this.telegramMessage()
     this.downButton()
@@ -55,7 +54,7 @@ export default class CityContent extends Content {
   telegramMessage () {
     let telegram = this.telegramStorage.getTelegram(this.telegramIndex)
     let text = telegram.date + '\n' + telegram.topic + '\n' + telegram.text
-    this.labeledImage(text, 'telegram')
+    this.labeledImage(text, telegram.asset)    
   }
 
   previousTelegram () {
