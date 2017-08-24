@@ -103,12 +103,12 @@ export default class GamestateChecker {
 
   checkStructureOwnedFarmLand (x, y, expectedValue) {
     var s = this.getTileModel(x, y).structure
-    assert.equal(expectedValue, s.producer.producer.ownedFarmLand.length)
+    assert.equal(expectedValue, s.ownedTiles.length)
   }
 
   checkStructureSize (x, y, expectedValue) {
     var s = this.getTileModel(x, y).structure
-    assert.equal(expectedValue, s.size)
+    assert.equal(expectedValue, s.size())
   }
 
   /**
