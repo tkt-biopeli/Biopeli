@@ -309,7 +309,7 @@
       "health": 20,
       "cost": 45000,
       "radiusForTileOwnership": 1,
-      "multiplier": 2,
+      "multiplier": 0.5,
       "reach": 5,
       "buysFrom": "all",
       "takesOwnershipOf": ["grass", "field", "industrial"],
