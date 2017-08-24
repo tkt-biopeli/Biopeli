@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import RuiningEffect from '../../../../src/controllers/events/random/effects/RuiningEffect'
+import RuiningEffect from '../../../../../../src/controllers/events/random/effects/withmultipletargets/RuiningEffect'
 
 describe('Ruining effect tests', ()=>{
   it('Effect works', ()=>{
@@ -15,7 +15,7 @@ describe('Ruining effect tests', ()=>{
       healthManager: { changeHealth: sinon.spy() }
     }
 
-    effect.happenForOne(struct)
+    effect.realizeEventForOneElement(struct)
 
     assert(struct.healthManager.changeHealth.calledWith(2))
   })

@@ -1,5 +1,5 @@
 const assert = require('assert')
-import EmptyFilter from '../../../../../../src/controllers/events/random/filters/common/EmptyFilter'
+import EmptyFilter from '../../../../../../src/controllers/events/random/filters/other/EmptyFilter'
 
 describe('Empty filter tests', ()=>{
   it('filter works', ()=>{

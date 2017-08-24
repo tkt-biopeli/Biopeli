@@ -6,7 +6,7 @@ export default class RuiningEffect extends Effect {
     this.percentage = json.percentage
   }
 
-  happenForOne (structure) {
+  realizeEventForOneElement (structure) {
     var actualAmount = structure.health.maxHealth * this.percentage
     structure.healthManager.changeHealth(actualAmount)
   }

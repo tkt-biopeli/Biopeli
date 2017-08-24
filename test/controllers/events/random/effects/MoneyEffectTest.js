@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import MoneyEffect from '../../../../src/controllers/events/random/effects/MoneyEffect'
+import MoneyEffect from '../../../../../src/controllers/events/random/effects/MoneyEffect'
 
 describe('Money effect tests', ()=>{
   it('Effect works', ()=>{
@@ -10,10 +10,10 @@ describe('Money effect tests', ()=>{
       json: {change: 10}
     })
 
-    effect.happen()
+    effect.realizeEvent()
     assert.equal(10, player.cash)
 
-    effect.happen()
+    effect.realizeEvent()
     assert.equal(20, player.cash)
   })
 })

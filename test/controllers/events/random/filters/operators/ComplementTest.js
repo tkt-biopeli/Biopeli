@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import Complement from '../../../../../../src/controllers/events/random/filters/common/Complement'
+import Complement from '../../../../../../src/controllers/events/random/filters/operators/Complement'
 
 describe('Complement filter and tile tile filter tests', ()=>{
   var firstFilter = {

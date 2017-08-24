@@ -4,7 +4,7 @@ export default class PopulationEffect {
     this.changeAmount = json.changePercentage
   }
 
-  happen () {
+  realizeEvent () {
     this.city.population = Math.floor(this.city.population * this.changeAmount)
   }
 }

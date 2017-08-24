@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import PopulationEffect from '../../../../src/controllers/events/random/effects/PopulationEffect'
+import PopulationEffect from '../../../../../src/controllers/events/random/effects/PopulationEffect'
 
 describe('Population effect tests', ()=>{
   it('Effect works', ()=>{
@@ -10,10 +10,10 @@ describe('Population effect tests', ()=>{
       json: {changePercentage: 2}
     })
 
-    effect.happen()
+    effect.realizeEvent()
     assert.equal(200, city.population)
 
-    effect.happen()
+    effect.realizeEvent()
     assert.equal(400, city.population)
   })
 })

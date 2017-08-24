@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import TileValueEffect from '../../../../src/controllers/events/random/effects/TileValueEffect'
+import TileValueEffect from '../../../../../../src/controllers/events/random/effects/withmultipletargets/TileValueEffect'
 
 describe('Tile value effect tests', ()=>{
   it('Works', ()=>{
@@ -16,7 +16,7 @@ describe('Tile value effect tests', ()=>{
       {fertility: 1, moisture: 1, flowers: 1}
     ]
 
-    effect.happen(tiles)
+    effect.realizeEvent(tiles)
     for(let i = 0 ; i < 2 ; i++){
       assert.equal(i+1, tiles[i].fertility)
       assert.equal(i+2, tiles[i].moisture)

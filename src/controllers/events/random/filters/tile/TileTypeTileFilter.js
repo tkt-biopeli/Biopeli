@@ -1,4 +1,4 @@
-import TileFilter from './TileFilter'
+import TileFilter from '../baseclasses/TileFilter'
 
 export default class TileTypeTileFilter extends TileFilter {
   constructor ({ gameState, json }) {

@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import Or from '../../../../../../src/controllers/events/random/filters/common/Or'
+import Or from '../../../../../../src/controllers/events/random/filters/operators/Or'
 
 describe('Or filter and tile filter tests', ()=>{
   var firstFilter = {affected: ()=> {return [1, 2]}}

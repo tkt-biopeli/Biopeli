@@ -1,4 +1,4 @@
-import TileFilter from './TileFilter'
+import TileFilter from '../baseclasses/TileFilter'
 import FilterGetterComponent from '../components/FilterGetterComponent'
 
 export default class ProductionAreaTileFilter extends TileFilter {

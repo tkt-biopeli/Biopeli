@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import StructureYieldEffect from '../../../../src/controllers/events/random/effects/StructureYieldEffect'
+import StructureYieldEffect from '../../../../../../src/controllers/events/random/effects/withmultipletargets/StructureYieldEffect'
 
 describe('Structure Yield effect tests', ()=>{
   it('Effect works', ()=>{
@@ -10,10 +10,10 @@ describe('Structure Yield effect tests', ()=>{
       json: {yieldChange: 2}
     })
 
-    effect.happenForOne(structureType)
+    effect.realizeEventForOneElement(structureType)
     assert.equal(3, structure.structureType.turnipYield)
 
-    effect.happenForOne(structureType)
+    effect.realizeEventForOneElement(structureType)
     assert.equal(5, structure.structureType.turnipYield)
   })
 })

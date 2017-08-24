@@ -9,11 +9,11 @@ describe('Random event tests', ()=>{
     effectsStub = [
       {
         filter: {affected: () => 0},
-        effect: {happen: sinon.spy()}
+        effect: {realizeEvent: sinon.spy()}
       },
       {
         filter: {affected: () => 1},
-        effect: {happen: sinon.spy()}
+        effect: {realizeEvent: sinon.spy()}
       }
     ]
 
@@ -34,10 +34,10 @@ describe('Random event tests', ()=>{
   })
 
   it('All effects are called correctly when event happens', ()=>{
-    event.happen()
+    event.realizeEvent()
     for(let i = 0 ; i < 2 ; i++) {
-      assert(effectsStub[i].effect.happen.calledWith(i))
-      assert.equal(1, effectsStub[i].effect.happen.callCount)
+      assert(effectsStub[i].effect.realizeEvent.calledWith(i))
+      assert.equal(1, effectsStub[i].effect.realizeEvent.callCount)
     }
   })
 })

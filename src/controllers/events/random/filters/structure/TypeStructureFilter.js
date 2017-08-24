@@ -1,4 +1,4 @@
-import StructureFilter from './StructureFilter'
+import StructureFilter from '../baseclasses/StructureFilter'
 
 export default class TypeStructureFilter extends StructureFilter {
   constructor ({ gameState, json }) {

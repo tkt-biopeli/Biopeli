@@ -8,7 +8,7 @@ export default class TileValueEffect extends Effect {
     this.flowers = json.flowerChange != null ? json.flowerChange : 0
   }
 
-  happenForOne (tile) {
+  realizeEventForOneElement (tile) {
     tile.flowers += this.flowers
     tile.moisture += this.moisture
     tile.fertility += this.fertility

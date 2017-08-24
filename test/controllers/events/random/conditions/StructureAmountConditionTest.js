@@ -1,6 +1,6 @@
 const assert = require('assert')
 const sinon = require('sinon')
-import StructureAmountCondition from '../../../../src/controllers/events/random/conditions/StructureAmountCondition'
+import StructureAmountCondition from '../../../../../src/controllers/events/random/conditions/StructureAmountCondition'
 
 describe('Structure amount condition tests', ()=>{
   it('Condition works', ()=>{
