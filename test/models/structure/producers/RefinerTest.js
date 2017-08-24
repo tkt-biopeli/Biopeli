@@ -4,13 +4,14 @@ import Refiner from '../../../../src/models/structure/producers/Refiner'
 import { createLine } from '../../../../src/models/logic/Functions'
 
 describe('Refiner tests', () => {
-  var inputTypes, multiplier, radius, refiner, zone
+  var inputTypes, multiplier, radius, refiner, zone, takesOwnership
 
   var create = () => refiner = new Refiner({
     inputTypes: inputTypes,
     multiplier: multiplier,
     radius: radius,
-    zone: zone
+    zone: zone,
+    takesOwnership: takesOwnership
   })
 
   beforeEach(() => {
@@ -27,42 +28,23 @@ describe('Refiner tests', () => {
       },
       distance: ''
     })
-
+    takesOwnership = true
 
     create()
   })
 
   it('Constructor works', () => {
     assert.equal(refiner.multiplier, multiplier)
-    assert.equal(refiner.radius, radius)
     assert.equal(refiner.inputTypes, inputTypes)
     assert.equal(refiner.zone, zone)
-    var func = createLine(1, 1, radius, 1 / multiplier)
-    assert.equal(refiner.distancefunction(5), func(5))
   })
 
-  it('verifyOwnership works', () => {
-    var prodHolder = {producer: {refinery: null}}
-    assert.equal(refiner.verifyOwnership(prodHolder), false)
-    prodHolder.producer.refinery = refiner
-    assert.equal(refiner.verifyOwnership(prodHolder), true)
-  })
-
-  it('canRefineOutputOf works', () => {
+  it('canRefineOutputOf works', () => { 
     var structure = {structureType: {name: 'foo'}}
     var spy = sinon.spy()
     refiner.inputTypes.includes = spy
     refiner.canRefineOutputOf(structure)
     assert(spy.calledWith('foo'))
-  })
-
-  it('getMatchedCapsule works', () => {
-    var tile = {}
-    var capsule = {tile: tile}
-    refiner.zone.add(capsule)
-    assert.equal(refiner.getMatchedCapsule(tile), capsule)
-    refiner.zone.delete(capsule)
-    assert.equal(refiner.getMatchedCapsule(tile), null)
   })
 
   it('isCloser works', () => {
@@ -71,21 +53,13 @@ describe('Refiner tests', () => {
       refinery: null
     }
     assert.equal(refiner.isCloser(producer, 3), false)
-    assert.equal(producer.refineryDistance, 3)
-    assert.equal(producer.refinery, null)
     assert.equal(refiner.isCloser(producer, 4), false)
-    assert.equal(producer.refineryDistance, 3)
-    assert.equal(producer.refinery, null)
     assert.equal(refiner.isCloser(producer, 2), true)
-    assert.equal(producer.refineryDistance, 2)
-    assert.equal(producer.refinery, refiner)
     producer.refineryDistance = null
     assert.equal(refiner.isCloser(producer, 111), true)
-    assert.equal(producer.refineryDistance, 111)
-    assert.equal(producer.refinery, refiner)
   })
 
-  var helpersForStructureCreated = (tile, match) => {
+  var helpersForStructureCreated = (tile, match, isCloser) => {
     refiner.producerHolders = []
     var canRefineOutputOfStub = sinon.stub()
     var matchedStub = sinon.stub()
@@ -93,56 +67,48 @@ describe('Refiner tests', () => {
 
     canRefineOutputOfStub.withArgs(tile.structure).returns(true)
     matchedStub.withArgs(tile).returns(match)
-    isCloserStub.withArgs(678, 75).returns(true)
-    isCloserStub.withArgs(678, 44).returns(false)
+    isCloserStub.returns(isCloser)
 
     refiner.canRefineOutputOf = canRefineOutputOfStub
-    refiner.getMatchedCapsule = matchedStub
+    refiner.findTileInZone = matchedStub
     refiner.isCloser = isCloserStub   
   }
 
   it('structureCreated adds to producerHolders', () => {
-    var tile = {structure: {producer: 678}}
+    var tile = {structure: {producer: {refiner: null}}}
     var match = {tile: tile, distance: 75}
-    helpersForStructureCreated(tile, match)
+    helpersForStructureCreated(tile, match, true)
     refiner.structureCreated(tile)
     assert.equal(refiner.producerHolders.length, 1)
     assert.equal(refiner.producerHolders[0].distance, 75)
-    assert.equal(refiner.producerHolders[0].producer, 678)
+    assert.equal(refiner.producerHolders[0].producer, tile.structure.producer)
   })
   
   it('structureCreated does not add to producerHolders if no match or not closer', () => {
     var tile = {structure: {producer: 678}}
     var match = null
-    helpersForStructureCreated(tile, match)
+    helpersForStructureCreated(tile, match, false)
     refiner.structureCreated(tile)
     assert.equal(refiner.producerHolders.length, 0)
     match = {tile: tile, distance: 44}
-    helpersForStructureCreated(tile, match)
+    helpersForStructureCreated(tile, match, false)
     refiner.structureCreated(tile)
     assert.equal(refiner.producerHolders.length, 0)
   })
 
   it('produce works', () => {
-    var verifyOwnershipStub = sinon.stub()
     var prodStub = sinon.stub()
     var distanceStub = sinon.stub()
     var producerHolder = {
       distance: 7,
       producer: {
-        produce: prodStub
+        producedAmount: prodStub
       }
     }
-    refiner.producerHolders = [producerHolder, 'huuhaa', producerHolder]
-    prodStub.withArgs(11, true).returns(3)
-    distanceStub.withArgs(7).returns(12)
+    refiner.producerHolders = [producerHolder, producerHolder]
+    prodStub.withArgs(true).returns(3)
 
-    verifyOwnershipStub.withArgs(producerHolder).returns(true)
-    refiner.verifyOwnership = verifyOwnershipStub
-    refiner.distancefunction = distanceStub
-
-    var result = refiner.produce(11)
-    assert.equal(result, 144)
-    assert.equal(refiner.producerHolders.length, 2)
+    var result = refiner.producedAmount()
+    assert.equal(result, 12)
   })
 })

@@ -21,7 +21,7 @@ export default class AllDecorator {
   }
 
   producedAmount (ownerCall) {
-    if(ownerCall || this.owner == null) {
+    if(ownerCall || this.refinery == null) {
       return this.producer.producedAmount() * this.structure.health.percent()
     }
 
