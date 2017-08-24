@@ -1,8 +1,9 @@
 export default class TelegramStorage {
-  constructor ({telegramTexts}) {
+  constructor ({ telegramTexts }) {
     this.texts = telegramTexts
     this.telegrams = []
     this.unread = 0
+    this.hints = true
   }
 
   addRandomEvent (timeEvent, randomEvent) {
@@ -12,19 +13,21 @@ export default class TelegramStorage {
     this.addTelegram(date, topic, text, 'telegram_revent')
   }
 
-  addStructureHint(hint) {
-    this.addTelegram('', this.texts.hintTopic, hint, 'telegram_hint')
+  addStructureHint (hint) {
+    if (this.hints) {
+      this.addTelegram('', this.texts.hintTopic, hint, 'telegram_hint')
+    }
   }
 
-  addRuinWarning(timeEvent, structure) {
+  addRuinWarning (timeEvent, structure) {
     let date = timeEvent.toString()
     let topic = structure.ownerName + this.texts.ruinTopic
     let text = structure.structureName + this.texts.ruinText
-    this.addTelegram(date, topic, text, 'telegram_revent')    
+    this.addTelegram(date, topic, text, 'telegram_revent')
   }
 
   addTelegram (date, topic, text, asset) {
-    this.telegrams.push({ date: date, topic: topic, text: text, new: true, asset: asset})
+    this.telegrams.push({ date: date, topic: topic, text: text, new: true, asset: asset })
     this.unread++
   }
 
