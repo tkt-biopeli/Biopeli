@@ -57,5 +57,6 @@ export default class OptionsContent extends Content {
     this.button(this.texts.increaseVolume, this.incVolume, this)
     this.button(this.texts.decreaseVolume, this.decVolume, this)
     this.button(this.texts.endGame, this.game.gameEvents.finishGame, this.game.gameEvents)
+    this.button(this.texts.pause, () => {this.game.paused = true}, this)
   }
 }

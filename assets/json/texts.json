@@ -51,6 +51,8 @@
     "soundOff": "Äänet pois",
     "increaseVolume": "Volyymi +",
     "decreaseVolume": "Volyymi -",
+    "pause": "Pause",
+    "unpause": "Paina mistä tahansa jatkaaksesi peliä",
     "endGame": "Lopeta peli",
     "hintsOn": "Vinkit päälle",
     "hintsOff": "Vinkit pois"

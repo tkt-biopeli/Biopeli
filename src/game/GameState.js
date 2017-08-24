@@ -340,10 +340,45 @@ export default class GameState {
     })
   }
 
+  checkPause () {
+    if(!this.paused)
+      return false
+
+    if (!this.pauseInitiated)
+      this.pauseInitiated = true
+    else
+      return true
+    
+    this.pauseTxt = this.state.add.text(
+      this.state.camera.x + (this.mapView.viewWidthPx) / 2, 
+      this.state.camera.y + this.mapView.viewHeightPx / 2,
+      this.texts.optionsContentTexts.unpause,
+      {font: '32px arial', fill: '#FFFFFF', backgroundColor: '#000000'}
+    )
+    this.pauseTxt.anchor.setTo(0.5)
+    this.state.input.onDown.add(this.unpause, this)
+    this.state.paused = true
+    this.paused = true
+    this.inputHandler.pause()
+    return true
+  }
+
+  unpause () {
+    this.state.paused = false
+    this.pauseInitiated = false
+    this.paused = false
+    this.pauseTxt.destroy()
+    this.inputHandler.unpause()
+  }
+
   /**
    * Description goes here
    */
   update () {
+    if (this.checkPause()) {
+      return
+    }
+
     this.mapView.draw(this.state.camera.x, this.state.camera.y)
     this.gameTimer.update(this.currentTime())
   }

@@ -10,13 +10,21 @@ export default class InputHandler {
    * @param {MapListener} param.mapListener - Current map listener
    * @param {CameraMover} param.cameraMover - Current camera mover
    */
-  constructor ({ game, mapListener, cameraMover, mapView }) {
+  constructor ({ game, mapListener, cameraMover, mapView}) {
     this.game = game
     this.mapListener = mapListener
     this.cameraMover = cameraMover
     this.mapView = mapView
 
     this.initialize()
+  }
+
+  pause () {
+    this.paused = true
+  }
+
+  unpause () {
+    this.paused = false
   }
 
   /**
@@ -33,12 +41,18 @@ export default class InputHandler {
     let flowersKey = this.game.flowersKey
     flowersKey.onDown.add(this.flowersOnOff, this)
     this.kineticScrolling()
+    
+    this.paused = false
   }
-
+  
   /**
    * Description goes here
    */
   onPointerDown () {
+    if (this.paused){
+      return
+    }
+
     var ptr = this.game.input.activePointer
     var pointerEvent = {
       x: ptr.position.x,
@@ -52,6 +66,10 @@ export default class InputHandler {
    * Description goes here
    */
   onCursorDown () {
+    if (this.paused){
+      return
+    }
+
     var cursors = this.game.cursors
     var cursorEvent = {
       up: cursors.up.isDown,
