@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import utils from '../../utils'
+import GraphicsLoader from '../../view/json/GraphicsLoader'
 
 /**
  * Description goes here
@@ -11,6 +12,7 @@ export default class extends Phaser.State {
   init (JSONLoader) { 
     this.JSONLoader = JSONLoader
     JSONLoader.game = this
+    this.graphicsLoader = new GraphicsLoader({game: this})
   }
 
   /**
@@ -34,6 +36,9 @@ export default class extends Phaser.State {
    * Description goes here
    */
   create () {
+    // this.JSONLoader.loadBeaches()
+    this.graphicsLoader.loadBeaches()
+    this.graphicsLoader.loadMoistureAndFertility()
     this.state.start('Start', true, false, this.JSONLoader.gameData())
   }
 }

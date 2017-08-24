@@ -2,22 +2,23 @@ import ViewTile from './ViewTile'
 import Palette from './Palette'
 
 export default class ViewTileFactory {
-  constructor ({ game, config }) {
+  constructor ({ game, map, config }) {
     this.game = game
+    this.map = map
     this.viewtileStorage = new Map()
     this.secondaryStorage = new Map()
     this.palette = new Palette()
-    this.dampness = false
-    this.fertility = false
-    this.flowers = false
+    this.showMoisture = false
+    this.showFertility = false
+    this.showFlowers = false
     this.config = config
   }
 
-  start (dampness, fertility, flowers, redrawTiles) {
-    this.dampness = dampness
-    this.fertility = fertility
-    this.flowers = flowers
-    this.redrawTiles = redrawTiles
+  start (dampness, fertility, flowers, redraw) {
+    this.showMoisture = dampness
+    this.showFertility = fertility
+    this.showFlowers = flowers
+    this.redraw = redraw
     this.secondaryStorage.clear()
   }
 
@@ -30,11 +31,11 @@ export default class ViewTileFactory {
     for (var [mt, vt] of this.secondaryStorage.entries()) {
       this.viewtileStorage.set(mt, vt)
     }
+    this.redraw = false
   }
 
   getViewTile (modeltile) {
-    let vt = this.loadVt(modeltile)
-    // let vt = this.createVt(modeltile)
+    let vt = this.loadVt(modeltile)    
     this.updateVt(vt, modeltile)
     this.secondaryStorage.set(modeltile, vt)
     return vt
@@ -52,26 +53,25 @@ export default class ViewTileFactory {
     return vt
   }
 
-  createVt (modelTile) {
+  createVt (modelTile) {    
     let vt = new ViewTile({ 
       game: this.game, 
-      modelTile: modelTile, 
-      dampnessCol: this.palette.getDampnessColour(modelTile.getMoisture()), 
-      fertilityCol: this.palette.getFertilityColour(modelTile.getFertility()),
-      tileSize: this.config.mapSettings.tileSize,
-      borderColour: modelTile.owner !== null ? this.palette.getBorderColour(modelTile.owner.bordercolCode) : 0x000000
+      modelTile: modelTile,             
+      tileSize: this.config.mapSettings.tileSize,      
+      borderColour:modelTile.owner !== null ? this.palette.getBorderColour(modelTile.owner.bordercolCode) : 0x000000,
+      beachId: this.map.getTileBeachId(modelTile)
     })
     return vt
   }
 
-  updateVt (viewtile, modeltile) {
-    let redrawBorders = this.redrawTiles !== undefined
-    let redraw = redrawBorders ? this.redrawTiles.includes(modeltile) : undefined
-    viewtile.update(this.flowers,
-      this.dampness,
-      this.fertility,
-      redrawBorders,
-      redraw,
-      modeltile.owner !== null ? this.palette.getBorderColour(modeltile.owner.bordercolCode) : 0x000000)
+  updateVt (viewtile, modelTile) {                
+    viewtile.update({
+      showFlowers: this.showFlowers,
+      showMoisture: this.showMoisture,
+      showFertility: this.showFertility,
+      redraw: this.redraw,
+      borderColour:modelTile.owner !== null ? this.palette.getBorderColour(modelTile.owner.bordercolCode) : 0x000000,
+      beachId: this.map.getTileBeachId(modelTile)
+    })
   }
 }

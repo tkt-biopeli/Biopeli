@@ -22,7 +22,9 @@ describe('View tile tests', () => {
       addChildAt: addChildSpy,
       anchor: { set: function () { } },
       scale: { setTo: function () { } },
-      removeChildren: function () { }
+      removeChildren: function () { },
+      width: 5,
+      height: 6
     })
     mockGraphics = {
       beginFill: beginFillSpy,
@@ -48,7 +50,8 @@ describe('View tile tests', () => {
       },
       add: {
         text: addTextStub
-      }
+      },
+      cache: {getBitmapData: () => {}}
     }
 
     structureStub = {
@@ -59,6 +62,8 @@ describe('View tile tests', () => {
 
     modelTile = {
       getFlowers: () => 4,
+      getMoisture: () => 5,
+      getFertility: () => 6,
       tileType: {
         asset: "test"
       },
@@ -66,7 +71,7 @@ describe('View tile tests', () => {
       owner: structureStub
     }
     viewTile = new ViewTile({ game: game, x: 6, y: 6, modelTile: modelTile, tileSize: 1 })
-    viewTile.update()
+    viewTile.update({})
   })
 
   it('ViewTile constructor works', () => {
@@ -76,31 +81,33 @@ describe('View tile tests', () => {
   })
 
   it('makeTileSprite calls game.make.sprite with correct parameters', () => {
-    game.make.sprite = makeSpriteSpy
-    viewTile.makeTileSprite()
-    assert(makeSpriteSpy.calledOnce)
+    // game.make.sprite = makeSpriteSpy
+    let sprite = viewTile.makeTileSprite()
+    assert.equal(makeTileSpriteStub.width, sprite.width)
+    // assert(makeSpriteSpy.calledOnce)
   })
 
-  it('makeStructureSprite adds child to tileSprite correctly', () => {
-    // var addChildSpy = sinon.spy()
-    viewTile.tileSprite = { addChild: addChildSpy }
+  // outdated
+  // it('makeStructureSprite adds child to tileSprite correctly', () => {
+  //   // var addChildSpy = sinon.spy()
+  //   viewTile.tileSprite = { addChild: addChildSpy }
 
-    // var makeTileSpriteStub = sinon.stub()
-    // makeTileSpriteStub.withArgs(0, 0).returns("huuhaa")
-    viewTile.makeTileSprite = makeTileSpriteStub
+  //   // var makeTileSpriteStub = sinon.stub()
+  //   // makeTileSpriteStub.withArgs(0, 0).returns("huuhaa")
+  //   viewTile.makeTileSprite = makeTileSpriteStub
 
-    var structure = {
-      asset: function () { return "building" }
-    }
-    modelTile.structure = structure
+  //   var structure = {
+  //     asset: function () { return "building" }
+  //   }
+  //   modelTile.structure = structure
 
-    let makeSpriteStub = sinon.stub()
-    makeSpriteStub.withArgs(0, 0, "building").returns("buildingSprite")
-    game.make.sprite = makeSpriteStub
+  //   let makeSpriteStub = sinon.stub()
+  //   makeSpriteStub.withArgs(0, 0, "building").returns("buildingSprite")
+  //   game.make.sprite = makeSpriteStub
 
-    viewTile.makeStructureSprite()
-    assert(addChildSpy.calledWith("buildingSprite"))
-  })
+  //   viewTile.makeStructureSprite()
+  //   assert(addChildSpy.calledWith("buildingSprite"))
+  // })
 
 /*  it('update functions properly', () => {
     // modelTile.structure = null, structureSprite = null
