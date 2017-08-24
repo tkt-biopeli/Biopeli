@@ -37,4 +37,8 @@ export default class {
   setInLimits (value, min, max) {
     return value < min ? min : value > max ? max : value
   }
+
+  equals (tile) {
+    return this.x === tile.x && this.y === tile.y
+  }
 }
