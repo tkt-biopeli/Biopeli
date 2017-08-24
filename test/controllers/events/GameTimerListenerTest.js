@@ -70,6 +70,7 @@ describe('Game timer listener tests', () => {
     gtListener.redrawControllers = redrawControllersSpy
     gtListener.checkBuildingRuining = sinon.spy()
     gtListener.checkRandomEvent = sinon.spy()
+    gtListener.checkBioFactEvent = sinon.spy()
     gtListener.onTimer(timerEvent)
     
     assert(doTransactionSpy.calledWith(37, timerEvent))
@@ -81,7 +82,13 @@ describe('Game timer listener tests', () => {
 
   it('countProductionFromStructures works correctly', () => {
     var timerEvent = 4
-    var str = { produce: function (timerEvent) {return 3 + timerEvent}, structureType : {name: "not a farm"}}
+    var str = { 
+      producer: {
+        producedAmount: function () {return 3 + this.timerEvent}, 
+        produce: function (timerEvent) {this.timerEvent = timerEvent}
+      },
+      structureType : {name: "not a farm"}
+    }
     var structures = [str, str, str]
     player.structures = structures
     

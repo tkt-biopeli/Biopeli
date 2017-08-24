@@ -22,24 +22,30 @@ export default class MapView {
     this.tileWidth = map.tileWidth
     this.tileHeight = map.tileHeight
     this.showFlowers = false
-    this.showDampness = false
+    this.showMoisture = false
     this.showFertility = false
-    this.tilesToRedraw = []
+    
     this.highlighter = new Highlighter({ 
       game: game, 
       tileWidth: this.tileWidth, 
       tileHeight: this.tileHeight 
     })
-    this.viewTileFactory = new ViewTileFactory({ game: game, config: config })
+    this.viewTileFactory = new ViewTileFactory({ game: game, map: map, config: config })
     this.initialize()
   }
 
   initialize () {
-    this.viewTexture = this.game.add.renderTexture(
-      this.viewWidthPx, this.viewHeightPx, 'maptexture'
-    )
-    this.renderS = this.game.add.sprite(0, 0, this.viewTexture)
-    this.renderS.fixedToCamera = true
+    this.redraw = true
+
+    this.layers = new Map()
+    let layerNames = ['ground', 'visuals', 'structure']    
+    for (var i = 0; i < layerNames.length; i++) {
+      let name = layerNames[i]
+      let texture = this.game.add.renderTexture(this.viewWidthPx, this.viewHeightPx, name)
+      let renderS = this.game.add.sprite(0, 0, texture)
+      renderS.fixedToCamera = true
+      this.layers.set(name, {texture: texture, renderS: renderS})
+    }
   }
 
   /**
@@ -53,23 +59,23 @@ export default class MapView {
       this.highlighter.calculateHighlights(this.selectedTile)
     }
 
-    this.viewTexture.clear()
+    for (var layer of this.layers.values()) {
+      layer.texture.clear()
+      layer.renderS.reset(cameraX, cameraY)
+    }      
+
     var viewArea = this.viewAreaLimits(cameraX, cameraY)
     var offset = this.offset(cameraX, cameraY, viewArea.startCol, viewArea.startRow)
     this.fillView(viewArea, offset)
-    this.renderS.reset(cameraX, cameraY)
+  }
+
+  addToTexture(textureName, sprite, x, y,) {
+    let layer = this.layers.get(textureName)
+    layer.texture.renderXY(sprite, Math.round(x), Math.round(y))
   }
 
   /**
-   * @param {Phaser.Sprite} sprite
-   * @param {number} x
-   * @param {number} y
-   */
-  addToViewTexture (sprite, x, y) {
-    this.viewTexture.renderXY(sprite, Math.round(x), Math.round(y))
-  }
-
-  /**
+   * Converts camera location to area of MapGrid coordinates
    * @param {number} cameraX
    * @param {number} cameraY
    */
@@ -100,6 +106,8 @@ export default class MapView {
   }
 
   /**
+   * Converts MapGrid coordinates in viewArea into pixel coordinates on screen
+   * 
    * @param {number} col
    * @param {number} row
    * @param {number} startCol
@@ -114,13 +122,13 @@ export default class MapView {
   }
 
   /**
-   * Fills the shown area
+   * Fills the viewArea with ViewTiles
    * @param { ??? } viewArea
    * @param { ??? } offset
    */
   fillView (viewArea, offset) {
-    this.viewTileFactory.start(this.showDampness,
-      this.showFertility, this.showFlowers, this.tilesToRedraw)
+    this.viewTileFactory.start(this.showMoisture,
+      this.showFertility, this.showFlowers, this.redraw)
 
     for (var c = viewArea.startCol; c <= viewArea.endCol; c++) {
       for (var r = viewArea.startRow; r <= viewArea.endRow; r++) {
@@ -134,8 +142,9 @@ export default class MapView {
       }
     }
 
-    this.viewTileFactory.stop()
-    this.tilesToRedraw = undefined
+    this.viewTileFactory.stop()        
+    this.redraw = false
+    
   }
 
   /**
@@ -147,10 +156,15 @@ export default class MapView {
    */
   createViewTileForFill (tile, pxCoords, viewArea, offset) {
     let viewTile = this.viewTileFactory.getViewTile(tile)
-    viewTile.tileSprite.width = this.tileWidth
-    viewTile.tileSprite.height = this.tileHeight
-    this.addHighlights(viewTile)
-    this.addToViewTexture(viewTile.tileSprite, pxCoords.x, pxCoords.y)
+    // viewTile.tileSprite.width = this.tileWidth
+    // viewTile.tileSprite.height = this.tileHeight
+    this.addHighlights(viewTile)    
+    this.addToTexture('ground',viewTile.tileSprite, pxCoords.x, pxCoords.y)
+    if (this.showFertility) this.addToTexture('visuals',viewTile.fertilitySprite, pxCoords.x, pxCoords.y)
+    if (this.showMoisture) this.addToTexture('visuals',viewTile.moistureSprite, pxCoords.x, pxCoords.y)
+    if (viewTile.treeSprite) this.addToTexture('visuals', viewTile.treeSprite, pxCoords.x, pxCoords.y)      
+    if (this.showFlowers) this.addToTexture('visuals', viewTile.flowerSprite, pxCoords.x, pxCoords.y)    
+    if (viewTile.structureSprite) this.addToTexture('structure', viewTile.structureSprite, pxCoords.x, pxCoords.y)    
   }
 
   /**
@@ -163,16 +177,16 @@ export default class MapView {
   }
 
   structureCreated (tile) {
-    this.tilesToRedraw = tile.structure.ownedTiles
+    this.redraw = true    
   }
 
   showFertilityLayer () {
     this.showFertility = !this.showFertility
-    this.showDampness = false
+    this.showMoisture = false
   }
 
   showMoistureLayer () {
-    this.showDampness = !this.showDampness
+    this.showMoisture = !this.showMoisture
     this.showFertility = false
   }
 

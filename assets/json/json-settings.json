@@ -6,6 +6,8 @@
   "textsFile": "assets/json/texts.json",
   "namesFile": "assets/json/names.json",
   "gameEventsFile": "assets/json/events/game_events.json",
+  "structureHintsFile": "assets/json/events/structure_hints.json",
+  "bioFactsFile": "assets/json/events/bio_facts.json",
 
   "configsName": "configurations",
   "assetsName": "assets",
@@ -13,5 +15,7 @@
   "structureTypesName": "structureTypes",
   "textsName": "texts",
   "namesName": "names",
-  "gameEventsName": "gameEvents"
+  "gameEventsName": "gameEvents",
+  "structureHintsName": "structureHints",
+  "bioFactsName": "bioFacts"
 }

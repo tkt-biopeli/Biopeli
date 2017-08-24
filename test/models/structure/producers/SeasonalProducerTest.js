@@ -20,13 +20,18 @@ describe('Seasonal producer tests', () => {
       harvestWeeks: harvestingWeeks
     })
 
-    assert.equal(0, producer.produce(timeEvent))
-    assert.equal(0, producer.produce(timeEvent))
-    assert.equal(0, producer.produce(timeEvent))
+    producer.produce(timeEvent)
+    assert.equal(0, producer.producedAmount())
+    producer.produce(timeEvent)
+    assert.equal(0, producer.producedAmount())
+    producer.produce(timeEvent)
+    assert.equal(0, producer.producedAmount())
     timeEvent.month = 7
-    assert.equal(4, producer.produce(timeEvent))
+    producer.produce(timeEvent)
+    assert.equal(4, producer.producedAmount())
     timeEvent.week = 3
     timeEvent.month = 8
-    assert.equal(1, producer.produce(timeEvent))
+    producer.produce(timeEvent)
+    assert.equal(1, producer.producedAmount())
   })
 })

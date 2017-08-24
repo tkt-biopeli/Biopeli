@@ -2,10 +2,12 @@ export default class StructureHealth {
   constructor ({ maxHealth }) {
     this.maxHealth = maxHealth
     this.currentHealth = maxHealth
+    this.warned = false
   }
 
   fill () {
     this.currentHealth = this.maxHealth
+    this.warned = false
   }
 
   changeHealth (amount) {
@@ -22,5 +24,11 @@ export default class StructureHealth {
 
   percent () {
     return this.currentHealth / this.maxHealth
+  }
+
+  warn () {
+    if (this.percent() > 0.5 || this.warned) return false
+    this.warned = true
+    return true
   }
 }

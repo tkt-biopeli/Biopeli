@@ -16,22 +16,21 @@ export default class Structure {
    * @param {integer} foundingYear
    * @param {function} produceFn
    */
-  constructor ({ tile, health, healthManager, ownerName, 
-      structureName, size, structureType, foundingYear, producer, bordercolCode }) {
+  constructor ({ tile, health, healthManager, ownerName,
+    structureName, structureType, foundingYear, producer, bordercolCode }) {
     this.tile = tile
+    this.structureType = structureType
+
     this.health = health
     this.healthManager = healthManager
+
     this.producer = producer
+
     this.ownerName = ownerName
     this.structureName = structureName
-    this.size = size
-    this.structureType = structureType
     this.foundingYear = foundingYear
+
     this.ownedTiles = []
-    this.radiusForTileOwnership = structureType.radiusForTileOwnership
-    this.moveCosts = structureType.moveCosts
-    this.takesOwnershipOf = structureType.takesOwnershipOf
-    this.farmland = structureType.farmland
     this.bordercolCode = bordercolCode
   }
 
@@ -49,12 +48,15 @@ export default class Structure {
     return false
   }
 
-  /**
-   * Returns true if the structure produces throughout the year and false if
-   * only during harvesting periods.
-   */
-  hasContinuousProduction () {
-    return this.structureType.continuousProduction
+  size () {
+    let type = this.structureType.type
+    if (type === 'refinery') {
+      return this.producer.producer.producerHolders.length
+    } else if (type === 'producer_structure') {
+      return this.ownedTiles.length
+    } else {
+      return this.producer.producer.zone.values.length
+    }
   }
 
   /**
@@ -62,21 +64,5 @@ export default class Structure {
    */
   asset () {
     return this.structureType.asset
-  }
-
-  turnipProduction () {
-    return this.lastProduce
-  }
-
-  /**
-   * Returns the amount of turnips produced by this structure
-   * @param {TimeEvent} timeEvent - Current ingame date
-   * @return {number} - Turnips produced
-   */
-  produce (timeEvent) {
-    this.lastProduce = this.producer === undefined 
-      ? 0 
-      : this.producer.produce(timeEvent)
-    return this.lastProduce
   }
 }

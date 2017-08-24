@@ -36,6 +36,12 @@ export default {
     welcomeTelegram: "Kaupungin asukkailla on nälkä, äkkiä turnipseja!"
   },
 
+  telegramTexts: {
+    hintTopic: "Tiesithän..?",
+    ruinTopic: " hädässä!",
+    ruinText: " on puolikuntoinen!"
+  },
+
   optionsContentTexts: {
     stopContinue: "Pysäytä / Jatka",
     soundVolume: "Äänen voimakkuus",

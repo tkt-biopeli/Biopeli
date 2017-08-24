@@ -88,7 +88,7 @@ export default class GamestateChecker {
   }
 
   checkIfMoistureShown () {
-    assert(this.gameState.mapView.showDampness)
+    assert(this.gameState.mapView.showMoisture)
   }
 
   checkPollution (x, y, pollution) {
@@ -103,12 +103,12 @@ export default class GamestateChecker {
 
   checkStructureOwnedFarmLand (x, y, expectedValue) {
     var s = this.getTileModel(x, y).structure
-    assert.equal(expectedValue, s.producer.producer.ownedFarmLand.length)
+    assert.equal(expectedValue, s.ownedTiles.length)
   }
 
   checkStructureSize (x, y, expectedValue) {
     var s = this.getTileModel(x, y).structure
-    assert.equal(expectedValue, s.size)
+    assert.equal(expectedValue, s.size())
   }
 
   /**

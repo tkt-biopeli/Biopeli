@@ -38,13 +38,22 @@
     "welcomeTelegram": "Kaupungin asukkailla on nälkä, äkkiä turnipseja!"
   },
 
+  "telegramTexts": {
+    "factTopic": "Faktaa biotaloudesta:",
+    "hintTopic": "Tiesithän..?",
+    "ruinTopic": " hädässä!",
+    "ruinText": " on puolikuntoinen!"
+  },
+
   "optionsContentTexts": {
     "soundVolume": "Äänen voimakkuus",
     "soundOn": "Äänet päälle",
     "soundOff": "Äänet pois",
     "increaseVolume": "Volyymi +",
     "decreaseVolume": "Volyymi -",
-    "endGame": "Lopeta peli"
+    "endGame": "Lopeta peli",
+    "hintsOn": "Vinkit päälle",
+    "hintsOff": "Vinkit pois"
   },
 
   "tileContentTexts" : {

@@ -15,7 +15,7 @@ export default class Highlighter {
       let producers = st.structure.producer.producer.producerHolders
       producers.forEach(
         (capsule) => {
-          this.buildingHighlights.push(capsule.producer.producer.tile) 
+          this.buildingHighlights.push(capsule.producer.tile) 
         }
       )
       let tiles = st.structure.producer.producer.zone

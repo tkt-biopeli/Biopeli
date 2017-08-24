@@ -26,9 +26,6 @@ export default class RandomEventHandler {
     if (event != null) {
       event.realizeEvent()
       return event
-      /*
-      this.menuController.addState('event', event)
-      this.menuController.changeContent(this.eventContentIndex) */
     }
   }
 }
