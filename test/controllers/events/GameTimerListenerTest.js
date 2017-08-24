@@ -70,6 +70,7 @@ describe('Game timer listener tests', () => {
     gtListener.redrawControllers = redrawControllersSpy
     gtListener.checkBuildingRuining = sinon.spy()
     gtListener.checkRandomEvent = sinon.spy()
+    gtListener.checkBioFactEvent = sinon.spy()
     gtListener.onTimer(timerEvent)
     
     assert(doTransactionSpy.calledWith(37, timerEvent))
