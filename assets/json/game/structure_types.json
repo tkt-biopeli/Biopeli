@@ -311,12 +311,12 @@
       "radiusForTileOwnership": 1,
       "multiplier": 2,
       "reach": 5,
-      "buysFrom": ["lumber_yard"],
+      "buysFrom": "all",
       "takesOwnershipOf": ["grass", "field", "industrial"],
       "moveCosts": {
         "grass": 1,
-        "water": 5,
-        "water_field": 5,
+        "water": 1,
+        "water_field": 1,
         "forest": 1,
         "field": 1,
         "industrial": 1
@@ -337,21 +337,24 @@
       "cost": 500
     },
     {
-      "type": "refinery",
+      "type": "special",
       "name": "fertilizer_factory",
       "nameWithLanguage": "lannoitetehdas",
       "asset": "fertilizer_factory",
       "health": 20,
       "cost": 30000,
-      "radiusForTileOwnership": 1,
-      "multiplier": 2,
-      "reach": 5,
-      "buysFrom": ["dairy_farm"],
+      "radiusForTileOwnership": 2,
+      "changeValues": {
+        "flowers": 0,
+        "fertility": 10,
+        "moisture": 0
+      },
+      "reach": 10,
       "moveCosts": {
         "grass": 1,
-        "water": 5,
-        "water_field": 5,
-        "forest": 2,
+        "water": 1,
+        "water_field": 1,
+        "forest": 1,
         "field": 1,
         "industrial": 1
       },
@@ -359,10 +362,9 @@
       "farmland": "industrial",
       "pollution": {
         "constant": false,
-        "distance": 3,
+        "distance": 2,
         "amount": 5
-      },
-      "takesOwnership": false
+      }
     },
     {
       "type": "producer_structure",

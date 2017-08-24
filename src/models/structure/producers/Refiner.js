@@ -14,7 +14,7 @@ export default class Refiner {
     this.findProducers()
   }
 
-  produce (timeEvent) { }
+  produce (timeEvent) {}
   producedAmount () {
     var productionSum = 0
     for (let producerHolder of this.producerHolders) {
@@ -41,7 +41,15 @@ export default class Refiner {
   }
 
   canRefineOutputOf (structure) {
-    return this.inputTypes.includes(structure.structureType.name)
+    var stype = structure.structureType
+    if(this.inputTypes === 'all') {
+      if(stype.type === 'refinery' && (stype.buysFrom === 'all' || 
+        stype.buysFrom.includes(this.structure.structureType.name))){
+        return false //So that no infinite loops form
+      }
+      return true
+    }
+    return this.inputTypes.includes(stype.name)
   }
 
   findTileInZone (tile) {
@@ -52,6 +60,7 @@ export default class Refiner {
   }
 
   isCloser (producer, distance) {
+    if(!this.takesOwnership) return true
     return producer.refineryDistance === null ||
       producer.refineryDistance > distance
   }

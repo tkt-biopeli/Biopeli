@@ -1,6 +1,7 @@
 export default class AllDecorator {
   constructor ({producer, tile}) {
     this.producer = producer
+    this.tile = tile
     this.refinery = null
     this.refineryDistance = null
   }

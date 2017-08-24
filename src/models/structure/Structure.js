@@ -50,7 +50,7 @@ export default class Structure {
 
   size () {
     let type = this.structureType.type
-    if (type === 'refiner') {
+    if (type === 'refinery') {
       return this.producer.producer.producerHolders.length
     } else if (type === 'producer_structure') {
       return this.ownedTiles.length
