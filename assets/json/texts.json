@@ -53,7 +53,8 @@
     "decreaseVolume": "Volyymi -",
     "endGame": "Lopeta peli",
     "hintsOn": "Vinkit päälle",
-    "hintsOff": "Vinkit pois"
+    "hintsOff": "Vinkit pois",
+    "pause": "Pause"
   },
 
   "tileContentTexts" : {

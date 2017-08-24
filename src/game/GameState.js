@@ -14,6 +14,7 @@ import MenuView from '../view/menu/MenuView'
 import CameraMover from '../view/CameraMover'
 import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
+import Pause from '../view/Pause'
 
 import EventController from '../controllers/events/EventController'
 import GameEvents from '../controllers/events/GameEvents'
@@ -83,11 +84,14 @@ export default class GameState {
 
     this.eventController.addListener('structureBuilt', this.mapView.structureCreated, this.mapView)
 
+    this.pause = new Pause({ game: this.state })
+
     this.inputHandler = new InputHandler({
       game: state,
       mapListener: this.mapListener,
       cameraMover: this.cameraMover,
-      mapView: this.mapView
+      mapView: this.mapView,
+      pause: this.pause
     })
 
     this.randomEventFactory = new RandomEventFactory({gameState: this})
