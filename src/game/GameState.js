@@ -55,7 +55,6 @@ export default class GameState {
         mapSize, tileSize, menuWidth, gameLength,
       config, structureTypes, tileTypes, texts, gameData }) {
     this.state = state
-    
     this.gameData = gameData
     this.config = config
     this.structureTypes = structureTypes

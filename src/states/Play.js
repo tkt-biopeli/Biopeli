@@ -1,6 +1,7 @@
 import { Noise } from 'noisejs'
 import Phaser from 'phaser'
 import GameState from '../game/GameState'
+import utils from '../utils'
 
 /**
  * Description goes here
@@ -42,6 +43,7 @@ export default class extends Phaser.State {
       texts: this.gameData.texts,
       gameData: this.gameData
     }) 
+    utils.wakeHeroku(config.gameSettings.scoreServer)
   }
 
   /**
