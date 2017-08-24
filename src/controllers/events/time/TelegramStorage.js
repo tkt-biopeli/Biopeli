@@ -19,6 +19,11 @@ export default class TelegramStorage {
     }
   }
 
+  addBioFact (fact) {
+    this.addTelegram('', this.texts.factTopic, fact, 'telegram_hint')
+
+  }
+
   addRuinWarning (timeEvent, structure) {
     let date = timeEvent.toString()
     let topic = structure.ownerName + this.texts.ruinTopic
