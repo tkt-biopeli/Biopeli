@@ -2,7 +2,7 @@
  * A temporary solution...
  */
 export default class SpecialStructure {
-  constructor ({ zone, tile, changeValues}) {
+  constructor ({ zone, tile, changeValues }) {
     this.zone = zone
     this.tile = tile
     this.changeValues = changeValues
@@ -12,16 +12,15 @@ export default class SpecialStructure {
   influence () {
     for (let capsule of this.zone) {
       let tile = capsule.tile
-      
+
       tile.fertility += this.changeValues.fertility
       tile.moisture += this.changeValues.moisture
       tile.flowers += this.changeValues.flowers
     }
   }
 
-  initialize (structure) {}
+  initialize (structure) { }
 
-  produce (timeEvent) {
-    return 0
-  }
+  produce (timeEvent) { }
+  producedAmount () { return 0 }
 }
