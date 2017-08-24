@@ -1,35 +1,32 @@
 import RandomEvent from './RandomEvent'
-
-import EmptyFilter from './filters/other/EmptyFilter'
-import EmptyEffect from './effects/EmptyEffect'
+// conditions
 import EmptyCondition from './conditions/EmptyCondition'
-
-import And from './filters/operators/And'
-import Or from './filters/operators/Or'
-import Complement from './filters/operators/Complement'
-import RandomFilter from './filters/other/RandomFilter'
-import TileTypeTileFilter from './filters/tile/TileTypeTileFilter'
-import ProductionAreaTileFilter from './filters/tile/ProductionAreaTileFilter'
-import AllTileFilter from './filters/tile/AllTileFilter'
-import ValuesTileFilter from './filters/tile/ValuesTileFilter'
-import AllStructureFilter from './filters/structure/AllStructureFilter'
-import StructureTypeStructureFilter from './filters/structure/StructureTypeStructureFilter'
-import FoundingYearStructureFilter from './filters/structure/FoundingYearStructureFilter'
-import TypeStructureFilter from './filters/structure/TypeStructureFilter'
-
-import NameStructureTypeFilter from './filters/structuretype/NameStructureTypeFilter'
-import AllStructureTypeFilter from './filters/structuretype/AllStructureTypeFilter'
-
-import TileValueEffect from './effects/withmultipletargets/TileValueEffect'
-import MoneyEffect from './effects/MoneyEffect'
-import PopulationEffect from './effects/PopulationEffect'
-
-import StructureYieldEffect from './effects/withmultipletargets/StructureYieldEffect'
-import StructureCostEffect from './effects/withmultipletargets/StructureCostEffect'
-
-import TimeCondition from './conditions/TimeCondition'
 import PopulationCondition from './conditions/PopulationCondition'
 import StructureAmountCondition from './conditions/StructureAmountCondition'
+import TimeCondition from './conditions/TimeCondition'
+// effects
+import EmptyEffect from './effects/EmptyEffect'
+import MoneyEffect from './effects/MoneyEffect'
+import PopulationEffect from './effects/PopulationEffect'
+import StructureCostEffect from './effects/withmultipletargets/StructureCostEffect'
+import StructureYieldEffect from './effects/withmultipletargets/StructureYieldEffect'
+import TileValueEffect from './effects/withmultipletargets/TileValueEffect'
+// filters
+import And from './filters/operators/And'
+import Complement from './filters/operators/Complement'
+import Or from './filters/operators/Or'
+import EmptyFilter from './filters/other/EmptyFilter'
+import RandomFilter from './filters/other/RandomFilter'
+import AllStructureFilter from './filters/structure/AllStructureFilter'
+import FoundingYearStructureFilter from './filters/structure/FoundingYearStructureFilter'
+import StructureTypeStructureFilter from './filters/structure/StructureTypeStructureFilter'
+import TypeStructureFilter from './filters/structure/TypeStructureFilter'
+import AllStructureTypeFilter from './filters/structuretype/AllStructureTypeFilter'
+import NameStructureTypeFilter from './filters/structuretype/NameStructureTypeFilter'
+import AllTileFilter from './filters/tile/AllTileFilter'
+import ProductionAreaTileFilter from './filters/tile/ProductionAreaTileFilter'
+import TileTypeTileFilter from './filters/tile/TileTypeTileFilter'
+import ValuesTileFilter from './filters/tile/ValuesTileFilter'
 
 export default class RandomEventFactory {
   constructor ({gameState}) {

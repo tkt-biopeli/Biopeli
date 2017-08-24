@@ -6,7 +6,7 @@ export default class StructureYieldEffect extends Effect {
     this.yieldChange = json.yieldChange != null ? json.yieldChange : 0
   }
 
-  realizeEventForOneElement(structureType) {
-     structureType.turnipYield += this.yieldChange
+  realizeEventForOneElement (structureType) {
+    structureType.turnipYield += this.yieldChange
   }
 }

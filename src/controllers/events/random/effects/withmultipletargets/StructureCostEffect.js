@@ -6,7 +6,7 @@ export default class StructureCostEffect extends Effect {
     this.costChange = json.costChange != null ? json.costChange : 0
   }
 
-  realizeEventForOneElement(structureType) {
-     structureType.cost = structureType.cost * this.costChange
+  realizeEventForOneElement (structureType) {
+    structureType.cost = structureType.cost * this.costChange
   }
 }
