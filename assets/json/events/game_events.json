@@ -3,16 +3,11 @@
     {
       "name": "Myllytulva",
       "description": "Myllysi tulvivat",
-      "condition": [
-        {
-          "name": "PopulationLimiter",
-          "notBefore": 550
-        },
-        {
-          "name": "StructureLimiter",
-          "min": 5
-        }
-      ],
+      "condition": 
+      {
+        "name": "StructureLimiter",
+        "min": 5
+      },
       "effects": [
         {
           "name": "TileValueChange",
@@ -29,16 +24,11 @@
     {
       "name": "Rutto",
       "description": "Kaupungissa jyllää hirvittävä kulkutauti, puolet väestöstä RIP!",
-      "condition": [
-        {
-          "name": "PopulationLimiter",
-          "notBefore": 550
-        },
-        {
-          "name": "StructureLimiter",
-          "min": 5
-        }
-      ],
+      "condition": 
+      {
+        "name": "PopulationLimiter",
+        "notBefore": 550
+      },
       "effects": [
         {
           "name": "PopulationChange",
@@ -105,15 +95,16 @@
     {
       "name": "Tuholaiset",
       "description": "Tuholaiset iskivät. Kalakasvattamot säästyivät tuhoilta.",
-      "condition": {
-          "name": "StructureLimiter",
-          "filter": {
-            "name": "StructureType",
-            "structureTypes": [
-              "fishery"
-            ]
-          },
-          "min": 2
+      "condition": 
+      {
+        "name": "StructureLimiter",
+        "filter": {
+          "name": "StructuresWithStructureType",
+          "structureTypes": [
+            "fishery"
+          ]
+        },
+        "min": 2
       },
       "effects": [
         {
@@ -125,7 +116,7 @@
               "name": "AllStructureTypes"
             },
             "toRemove": {
-              "name": "StructureType",
+              "name": "StructureTypes",
               "structureTypes": [
                 "fishery"
               ]

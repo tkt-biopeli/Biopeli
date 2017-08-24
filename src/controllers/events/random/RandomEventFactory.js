@@ -138,10 +138,6 @@ export default class RandomEventFactory {
   }
 
   createPart (name, blueprint) {
-    console.log(name)
-    console.log(blueprint)
-    console.log(blueprint.name)
-    console.log(this[name + 'Creators'].has(blueprint.name))
     // Checks if creator list contains the value. If not, use default value
     if (!blueprint) { blueprint = { name: this.defaultValue } }
     var key = this[name + 'Creators'].has(blueprint.name) ? blueprint.name : this.defaultValue
