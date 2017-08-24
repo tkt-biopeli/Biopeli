@@ -19,10 +19,15 @@ describe('Continuous producer tests', () => {
       week: 1
     }
 
-    assert.equal(3, producer.produce(timeEvent))
+    producer.produce(timeEvent)
+    assert.equal(3, producer.producedAmount())
+    
     timeEvent.month = 7
-    assert.equal(3, producer.produce(timeEvent))
+    producer.produce(timeEvent)
+    assert.equal(3, producer.producedAmount())
+
     timeEvent.week = 3
-    assert.equal(3, producer.produce(timeEvent))
+    producer.produce(timeEvent)
+    assert.equal(3, producer.producedAmount())
   })
 })

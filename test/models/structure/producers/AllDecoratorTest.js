@@ -6,7 +6,7 @@ describe('AllDecorator tests', () => {
   var producer, p, health, structure
 
   beforeEach(()=>{
-    p = {produce: () => 7, initialize: sinon.spy()}
+    p = {producedAmount: () => 7, produce: () => sinon.spy(), initialize: sinon.spy()}
     health = {percent: () => 1}
     structure = {health: health}
 
@@ -21,28 +21,28 @@ describe('AllDecorator tests', () => {
   })
 
   it('Producer calls only when meant to', ()=>{
-    p.produce = sinon.spy()
+    p.producedAmount = sinon.spy()
 
-    producer.produce()
+    producer.producedAmount()
 
-    assert.equal(1, p.produce.callCount)
+    assert.equal(1, p.producedAmount.callCount)
 
     producer.refinery = 4
-    producer.produce()
+    producer.producedAmount()
 
-    assert.equal(1, p.produce.callCount)
+    assert.equal(1, p.producedAmount.callCount)
 
-    producer.produce(0, true)
-    producer.produce()
+    producer.producedAmount(true)
+    producer.producedAmount()
 
-    assert.equal(2, p.produce.callCount)
+    assert.equal(2, p.producedAmount.callCount)
   })
 
   it('Production is based on the health percentage', ()=>{
-    assert.equal(7, producer.produce())
+    assert.equal(7, producer.producedAmount())
     
     health.percent = () => 0.5
 
-    assert.equal(3.5, producer.produce())
+    assert.equal(3.5, producer.producedAmount())
   })
 })

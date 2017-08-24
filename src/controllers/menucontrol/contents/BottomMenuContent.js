@@ -21,9 +21,13 @@ export default class BottomMenuContent extends Content {
 
     let cityAsset = this.telegramStorage.notificate() ? 'info_unread' : 'info'
     this.button('', cityCall, this, cityAsset)
+    this.section('b')
     this.button('', this.mapView.showFlowersLayer, this.mapView, 'daisyb')
+    this.section('c')
     this.button('', this.mapView.showFertilityLayer, this.mapView, 'fertility')
+    this.section('d')
     this.button('', this.mapView.showMoistureLayer, this.mapView, 'moisture')
+    this.section('e')
     this.button('', optionsCall, this, 'options')
   }
 }

@@ -1,11 +1,12 @@
 import Content from './Content'
 
 export default class OptionsContent extends Content {
-  constructor ({ game, texts }) {
+  constructor ({ game, texts, telegramStorage }) {
     super()
     this.game = game
     this.texts = texts.optionsContentTexts
     this.name = 'options'
+    this.telegramStorage = telegramStorage
   }
 
   musicOn () {
@@ -30,6 +31,16 @@ export default class OptionsContent extends Content {
     this.owner.redraw()
   }
 
+  hintsOn () {
+    this.telegramStorage.hints = true
+    this.owner.redraw()
+  }
+
+  hintsOff () {
+    this.telegramStorage.hints = false
+    this.owner.redraw()
+  }
+
   createSections () {    
     this.sectionName('options')
     this.text(this.texts.soundVolume + ': ' + Math.round(this.game.music.volume * 100) + '%')
@@ -38,6 +49,11 @@ export default class OptionsContent extends Content {
     } else {
       this.button(this.texts.soundOff, this.musicOff, this)
     }
+    if (!this.telegramStorage.hints) {
+      this.button(this.texts.hintsOn, this.hintsOn, this)
+    } else {
+      this.button(this.texts.hintsOff, this.hintsOff, this)
+    }    
     this.button(this.texts.increaseVolume, this.incVolume, this)
     this.button(this.texts.decreaseVolume, this.decVolume, this)
     this.button(this.texts.endGame, this.game.gameEvents.finishGame, this.game.gameEvents)

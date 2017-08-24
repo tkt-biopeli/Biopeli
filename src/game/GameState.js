@@ -55,7 +55,6 @@ export default class GameState {
         mapSize, tileSize, menuWidth, gameLength,
       config, structureTypes, tileTypes, texts, gameData }) {
     this.state = state
-    
     this.gameData = gameData
     this.config = config
     this.structureTypes = structureTypes
@@ -286,7 +285,9 @@ export default class GameState {
     })
 
     this.optionsContent = new OptionsContent({
-      game: this, texts: this.texts
+      game: this, 
+      texts: this.texts,
+      telegramStorage: this.telegramStorage
     })
 
     this.buildMenuContent = new BuildMenuContent({
