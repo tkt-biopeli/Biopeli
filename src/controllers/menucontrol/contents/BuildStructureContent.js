@@ -2,7 +2,7 @@ import Content from './Content'
 
 export default class BuildStructureContent extends Content {
   constructor ({ player, structureFactory, purchaseManager, texts }) {
-    super()
+    super() /* istanbul ignore next */
     this.structureFactory = structureFactory
     this.purchaseManager = purchaseManager
     this.texts = texts.buildStructureTexts

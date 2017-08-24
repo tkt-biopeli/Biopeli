@@ -2,7 +2,7 @@ import Content from './Content'
 
 export default class OptionsContent extends Content {
   constructor ({ game, texts, telegramStorage }) {
-    super()
+    super() /* istanbul ignore next */
     this.game = game
     this.texts = texts.optionsContentTexts
     this.name = 'options'

@@ -5,7 +5,7 @@ import Layout from './Layout'
  */
 export default class StaticLayout extends Layout {
   constructor ({ menuRect, vertical, linePadding }) {
-    super(menuRect, vertical)
+    super(menuRect, vertical) /* istanbul ignore next */
 
     this.linePadding = linePadding
   }
