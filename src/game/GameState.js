@@ -284,7 +284,11 @@ export default class GameState {
       texts: this.texts
     })
 
-    this.optionsContent = new OptionsContent({game: this, texts: this.texts})
+    this.optionsContent = new OptionsContent({
+      game: this, 
+      texts: this.texts,
+      telegramStorage: this.telegramStorage
+    })
 
     this.buildMenuContent = new BuildMenuContent({
       structureTypes: this.structureTypes

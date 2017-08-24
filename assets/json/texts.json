@@ -50,7 +50,9 @@
     "soundOff": "Äänet pois",
     "increaseVolume": "Volyymi +",
     "decreaseVolume": "Volyymi -",
-    "endGame": "Lopeta peli"
+    "endGame": "Lopeta peli",
+    "hintsOn": "Vinkit päälle",
+    "hintsOff": "Vinkit pois"
   },
 
   "tileContentTexts" : {
