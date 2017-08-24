@@ -15,7 +15,6 @@ export default class Complement extends RecursiveFilter {
     for (let remove of removes) {
       if (from.has(remove)) from.delete(remove)
     }
-
-    return from.values
+    return from.values()
   }
 }

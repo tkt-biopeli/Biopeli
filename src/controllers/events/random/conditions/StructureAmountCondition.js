@@ -10,6 +10,7 @@ export default class StructureAmountCondition {
   }
 
   canHappen () {
+    console.log(this.filter.affected())
     return between(this.min, this.max, this.filter.affected().length)
   }
 }
