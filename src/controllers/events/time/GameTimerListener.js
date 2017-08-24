@@ -55,7 +55,8 @@ export default class GameTimerListener {
 
   checkBuildingRuining (timerEvent) {
     for (let structure of this.player.structures) {
-      structure.healthManager.checkRuin(timerEvent)
+      let warning = structure.healthManager.checkRuin(timerEvent)
+      if (warning) {this.telegramStorage.addRuinWarning(timerEvent, structure)}
     }
   }
 
@@ -76,6 +77,7 @@ export default class GameTimerListener {
       this.telegramStorage.addRandomEvent(timerEvent, eventHappened)
     }
   }
+
 
   /**
    * Redraws top bar and menu controllers

@@ -63,23 +63,24 @@ describe('MapView tests', () => {
   })
 
   it('MapView constructor works', () => {
+    let layer = mapView.layers.get('ground')
     assert.equal(mapView.viewWidthPx, 277)
     assert.equal(mapView.viewHeightPx, 653)
     assert.equal(mapView.tileWidth, 74)
     assert.equal(mapView.tileHeight, 34)
-    assert.equal(mapView.viewTexture, mockRenderTexture)
-    assert.equal(mapView.renderS, mockRenderSprite)
-    assert.equal(mapView.renderS.fixedToCamera, true)
+    assert.equal(layer.texture, mockRenderTexture)
+    assert.equal(layer.renderS, mockRenderSprite)
+    assert.equal(layer.renderS.fixedToCamera, true)
   })
 
   it('Draw function clears the view', () => {
     mapView.draw(5, 87)
     assert(spriteResetSpy.calledWith(5, 87))
-    assert.equal(textureClearSpy.callCount, 1)
+    assert.equal(textureClearSpy.callCount, mapView.layers.size)
   })
 
   it('Adding to ViewTexture is successful', () => {
-    mapView.addToViewTexture("sprite", 14.5, 17.4)
+    mapView.addToTexture("ground","sprite", 14.5, 17.4)
     assert(textureRenderXYSpy.calledWith("sprite", 15, 17))
   })
 
