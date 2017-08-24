@@ -30,5 +30,11 @@ export default {
     scores.sort((a, b) => { return b.points - a.points })
 
     return scores 
+  },
+
+  wakeHeroku: (server) => { 
+    var xhr = new XMLHttpRequest()
+    xhr.open('GET', server + 'scores.json', true)
+    xhr.send()
   }
 }
