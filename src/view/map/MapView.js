@@ -75,15 +75,6 @@ export default class MapView {
   }
 
   /**
-   * @param {Phaser.Sprite} sprite
-   * @param {number} x
-   * @param {number} y
-   */
-  addToViewTexture (sprite, x, y) {
-    this.viewTexture.renderXY(sprite, Math.round(x), Math.round(y))
-  }
-
-  /**
    * Converts camera location to area of MapGrid coordinates
    * @param {number} cameraX
    * @param {number} cameraY
