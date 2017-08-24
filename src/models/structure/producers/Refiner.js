@@ -10,6 +10,7 @@ export default class Refiner {
   }
 
   initialize (structure) {
+    this.structure = structure
     this.findProducers()
   }
 
@@ -45,7 +46,7 @@ export default class Refiner {
 
   findTileInZone (tile) {
     for (let capsule of this.zone) {
-      if (tile === capsule.tile) { return capsule }
+      if (tile.equals(capsule.tile)) return capsule
     }
     return null
   }

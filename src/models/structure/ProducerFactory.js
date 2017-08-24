@@ -79,7 +79,8 @@ export default class ProducerFactory {
   createRefiner (stype, tile) {
     var refiner = new Refiner({
       inputTypes: stype.buysFrom,
-      zone: this.tileFinder.findTilesInDistanceOf(tile, stype.radius, stype.moveCosts),
+      zone: this.tileFinder.findTilesInDistanceOf(
+        tile, stype.reach, stype.moveCosts),
       multiplier: stype.multiplier,
       takesOwnership: stype.takesOwnership
     })
