@@ -286,7 +286,7 @@ export default class GameState {
     })
 
     this.optionsContent = new OptionsContent({
-      game: this, timer: this.gameTimer, texts: this.texts
+      game: this, texts: this.texts
     })
 
     this.buildMenuContent = new BuildMenuContent({
@@ -336,7 +336,7 @@ export default class GameState {
 
     if (!this.pauseInitiated)
       this.pauseInitiated = true
-    else 
+    else
       return true
     
     this.pauseTxt = this.state.add.text(

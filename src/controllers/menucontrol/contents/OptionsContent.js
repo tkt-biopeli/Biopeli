@@ -1,9 +1,8 @@
 import Content from './Content'
 
 export default class OptionsContent extends Content {
-  constructor ({ game, timer, texts }) {
+  constructor ({ game, texts }) {
     super()
-    this.timer = timer
     this.game = game
     this.texts = texts.optionsContentTexts
     this.name = 'options'

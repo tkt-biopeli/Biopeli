@@ -12,7 +12,6 @@ export default class Timer {
       this.name = name
     }
 
-    this.paused = false
     this.interval = interval
     this.lastTime = currentTime
     this.callTime = 0
