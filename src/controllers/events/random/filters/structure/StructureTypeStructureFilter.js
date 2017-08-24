@@ -1,8 +1,8 @@
-import * as AffectedFunctions from '../AffectedFunctions'
+import StructureFilter from './StructureFilter'
 
-export default class StructureTypeStructureFilter {
+export default class StructureTypeStructureFilter extends StructureFilter {
   constructor ({ gameState, json }) {
-    this.player = gameState.player
+    super(gameState)
     this.structureTypeNames = json.structureTypes
   }
 
@@ -11,10 +11,5 @@ export default class StructureTypeStructureFilter {
       if (name === structure.structureType.name) return true
     }
     return false
-  }
-
-  affected () {
-    const isValidFn = (structure) => { return this.isValid(structure) }
-    return AffectedFunctions.structuresAffected(this.player.structures.values, isValidFn)
   }
 }

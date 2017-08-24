@@ -43,23 +43,23 @@ describe('All tile filter tests', ()=>{
     assert.equal(affected.length, 3)
   })
 
-  it('isValidTile is functioning correctly', ()=>{
+  it('isValid is functioning correctly', ()=>{
     var tile = {
       owner: 'foo'
     }
     // validTile returns true
     allTileFilter.includeNotOwned = false
     allTileFilter.structures = ['bar', 'huuhaa']
-    assert(allTileFilter.isValidTile(tile))
+    assert(allTileFilter.isValid(tile))
 
     allTileFilter.structures = ['bar', 'foo', 'huuhaa']
-    assert(allTileFilter.isValidTile(tile))
+    assert(allTileFilter.isValid(tile))
 
     allTileFilter.structures = []
-    assert(allTileFilter.isValidTile(tile))
+    assert(allTileFilter.isValid(tile))
 
     allTileFilter.includeNotOwned = true
-    assert(allTileFilter.isValidTile(tile))
-    assert(allTileFilter.isValidTile({}))
+    assert(allTileFilter.isValid(tile))
+    assert(allTileFilter.isValid({}))
   })
 })

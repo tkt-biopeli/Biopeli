@@ -49,23 +49,23 @@ describe('Production area tile filter tests', ()=>{
     assert.equal(tiles[1], affected[1])
   })
 
-  it('isValidTile is functioning correctly', ()=>{
+  it('isValid is functioning correctly', ()=>{
     var tile = {
       owner: 'foo'
     }
     // all if-returns ignored
     prodFilter.includeNotOwned = false
     prodFilter.structures = ['bar', 'huuhaa']
-    assert(!prodFilter.isValidTile(tile))
+    assert(!prodFilter.isValid(tile))
     // last if returns true
     prodFilter.structures = ['bar', 'foo', 'huuhaa']
-    assert(prodFilter.isValidTile(tile))
+    assert(prodFilter.isValid(tile))
     // second if returns false
     prodFilter.structures = []
-    assert(!prodFilter.isValidTile(tile))
+    assert(!prodFilter.isValid(tile))
     // first if returns true
     prodFilter.includeNotOwned = true
-    assert(!prodFilter.isValidTile(tile))
-    assert(prodFilter.isValidTile({}))
+    assert(!prodFilter.isValid(tile))
+    assert(prodFilter.isValid({}))
   })
 })

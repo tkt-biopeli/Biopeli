@@ -1,10 +1,9 @@
-import * as AffectedFunctions from '../AffectedFunctions'
+import TileFilter from './TileFilter'
 import FilterGetterComponent from '../components/FilterGetterComponent'
 
-export default class ProductionAreaTileFilter {
+export default class ProductionAreaTileFilter extends TileFilter {
   constructor ({ gameState, json }) {
-    this.map = gameState.map
-    this.structures = []
+    super(gameState)
 
     var filterGetter = new FilterGetterComponent({gameState: gameState})
     this.subFilter = filterGetter.getFilter(json.structureFilter)
@@ -12,13 +11,7 @@ export default class ProductionAreaTileFilter {
     this.includeNotOwned = json.includeNotOwned
   }
 
-  affected () {
-    this.structures = this.subFilter.affected()
-    const isValidFn = (tile) => { return this.isValidTile(tile) }
-    return AffectedFunctions.tileTypesAffected(this.map, isValidFn)
-  }
-
-  isValidTile (tile) {
+  isValid (tile) {
     if (this.includeNotOwned && tile.owner == null) return true
     if (this.structures.length === 0) return false
 
@@ -26,5 +19,10 @@ export default class ProductionAreaTileFilter {
       if (tile.owner === structure) return true
     }
     return false
+  }
+
+  affected () {
+    this.structures = this.subFilter.affected()
+    return super.affected()
   }
 }

@@ -19,7 +19,7 @@ function strucTypesAffected (structureTypes, isValid) {
   return affected
 }
 
-function tileTypesAffected (map, isValid) {
+function tilesAffected (map, isValid) {
   let affected = []
 
   for (let i = 0; i < map.gridSizeX; i++) {
@@ -33,4 +33,4 @@ function tileTypesAffected (map, isValid) {
   return affected
 }
 
-export { structuresAffected, strucTypesAffected, tileTypesAffected }
+export { structuresAffected, strucTypesAffected, tilesAffected }

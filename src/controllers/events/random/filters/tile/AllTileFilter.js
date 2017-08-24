@@ -1,14 +1,9 @@
-import * as AffectedFunctions from '../AffectedFunctions'
+import TileFilter from './TileFilter'
 
-export default class AllTileFilter {
+export default class AllTileFilter extends TileFilter {
   constructor ({gameState}) {
-    this.map = gameState.map
+    super(gameState)
   }
 
-  isValidTile (tile) { return true }
-
-  affected () {
-    const isValidFn = (tile) => { return this.isValidTile(tile) }
-    return AffectedFunctions.tileTypesAffected(this.map, isValidFn)
-  }
+  isValid (tile) { return true }
 }
