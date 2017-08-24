@@ -45,7 +45,7 @@ export default class GameTimerListener {
    */
   countProductionFromStructures (timerEvent) {
     for (let structure of this.player.structures) {
-      let amount = structure.producer.produce(timerEvent)
+      structure.producer.produce(timerEvent)
     }
 
     var sum = 0

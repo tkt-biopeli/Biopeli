@@ -3,10 +3,10 @@
  * the collected turnips at harvest seasons
  */
 export default class SeasonalProducer {
-  constructor ({structureType, harvestWeeks}) {
+  constructor ({ structureType, harvestWeeks }) {
     this.turnipYield = structureType.turnipYield
     this.harvestWeeks = harvestWeeks
-    
+
     this.produced = 0
     this.wasHarvest = false
   }
@@ -19,7 +19,7 @@ export default class SeasonalProducer {
    * @return {number}
    */
   produce (timeEvent) {
-    if(this.wasHarvest) {
+    if (this.wasHarvest) {
       this.produced = 0
       this.wasHarvest = false
     }
@@ -33,7 +33,7 @@ export default class SeasonalProducer {
   }
 
   producedAmount () {
-    if(this.wasHarvest) return this.produced
+    if (this.wasHarvest) return this.produced
     return 0
   }
 }

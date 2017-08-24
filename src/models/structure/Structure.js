@@ -16,8 +16,8 @@ export default class Structure {
    * @param {integer} foundingYear
    * @param {function} produceFn
    */
-  constructor ({ tile, health, healthManager, ownerName, 
-      structureName, structureType, foundingYear, producer, bordercolCode }) {
+  constructor ({ tile, health, healthManager, ownerName,
+    structureName, structureType, foundingYear, producer, bordercolCode }) {
     this.tile = tile
     this.structureType = structureType
 
@@ -50,11 +50,11 @@ export default class Structure {
 
   size () {
     let type = this.structureType.type
-    if(type === 'refiner') {
+    if (type === 'refiner') {
       return this.producer.producer.producerHolders.length
-    }else if(type === 'producer_structure') {
+    } else if (type === 'producer_structure') {
       return this.ownedTiles.length
-    }else {
+    } else {
       return this.producer.producer.zone.values.length
     }
   }

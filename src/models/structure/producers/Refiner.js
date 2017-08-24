@@ -14,7 +14,7 @@ export default class Refiner {
     this.findProducers()
   }
 
-  produce (timeEvent) {}
+  produce (timeEvent) { }
   producedAmount () {
     var productionSum = 0
     for (let producerHolder of this.producerHolders) {
@@ -52,7 +52,7 @@ export default class Refiner {
   }
 
   isCloser (producer, distance) {
-    return producer.refineryDistance === null || 
+    return producer.refineryDistance === null ||
       producer.refineryDistance > distance
   }
 
@@ -75,11 +75,11 @@ export default class Refiner {
 
   takeControlOf (producer, distance) {
     this.producerHolders.push({
-      distance: distance, 
-      producer: producer 
+      distance: distance,
+      producer: producer
     })
 
-    if(!this.takesOwnership) return
+    if (!this.takesOwnership) return
 
     if (producer.refinery != null) {
       let another = producer.refinery
@@ -91,7 +91,7 @@ export default class Refiner {
   }
 
   loseControlOf (producer) {
-    for(let i = 0 ; i < this.producerHolders.length ; i++) {
+    for (let i = 0; i < this.producerHolders.length; i++) {
       let capsule = this.producerHolders[i]
       if (capsule.producer == producer) {
         this.producerHolders.splice(i, 1)

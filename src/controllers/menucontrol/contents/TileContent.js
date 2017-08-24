@@ -44,8 +44,10 @@ export default class TileContent extends Content {
     this.text(this.texts.tileInformationTexts.groundType + ': ' + tile.tileType.nameWithLanguage)
     this.text('X: ' + tile.x + ', Y: ' + tile.y)
     this.text(this.texts.tileInformationTexts.flowers + ': ' + tile.getFlowers())
-    this.text(this.texts.tileInformationTexts.moisture + ': ' + this.format(tile.getMoisture()) + '%')
-    this.text(this.texts.tileInformationTexts.fertility + ': ' + this.format(tile.getFertility()) + '%')
+    this.text(this.texts.tileInformationTexts.moisture + ': ' + 
+      this.format(tile.getMoisture()) + '%')
+    this.text(this.texts.tileInformationTexts.fertility + ': ' + 
+      this.format(tile.getFertility()) + '%')
     if (tile.owner != null) {
       this.text(this.texts.tileInformationTexts.owner + ': ' + tile.owner.ownerName)
     }
@@ -59,7 +61,9 @@ export default class TileContent extends Content {
       structure.foundingYear)
     
     this.text(this.texts.structureInformationTexts.size + ': ' + structure.size())
-    if (structure.structureType.type === 'producer_structure') this.showProductionInformation(structure)
+    if (structure.structureType.type === 'producer_structure') {
+      this.showProductionInformation(structure)
+    }
   }
 
   showProductionInformation (structure) {
