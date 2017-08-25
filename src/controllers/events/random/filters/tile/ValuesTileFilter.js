@@ -1,9 +1,12 @@
-import TileFilter from './TileFilter'
+import TileFilter from '../baseclasses/TileFilter'
 
 export default class ValuesTileFilter extends TileFilter {
   constructor ({ gameState, json }) {
     super(gameState)
+    this.constructLimits(gameState, json)
+  }
 
+  constructLimits (gameState, json) {
     this.fertilityLimits = this.checkLimits(json.fertilityLimits, 100)
     this.moistureLimits = this.checkLimits(json.moistureLimits, 100)
     this.flowerLimits = this.checkLimits(json.flowerLimits, 
@@ -14,12 +17,14 @@ export default class ValuesTileFilter extends TileFilter {
     if (limits == null) return { min: 0, max: theoreticalMax }
 
     if (limits.min == null) limits.min = 0
-    else if (limits.max == null) limits.max = theoreticalMax
+    if (limits.max == null) limits.max = theoreticalMax
 
+    limits.min = Math.max(limits.min, 0)
+    limits.max = Math.min(limits.max, theoreticalMax)
     return limits
   }
 
-  isValidTile (tile) {
+  isValid (tile) {
     return this.isInRange(tile.fertility, this.fertilityLimits) &&
       this.isInRange(tile.moisture, this.moistureLimits) &&
       this.isInRange(tile.flowers, this.flowerLimits)

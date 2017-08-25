@@ -1,9 +1,9 @@
-import TileFilter from './TileFilter'
+import TileFilter from '../baseclasses/TileFilter'
 
 export default class AllTileFilter extends TileFilter {
   constructor ({gameState}) {
     super(gameState)
   }
 
-  isValidTile (tile) { return true }
+  isValid (tile) { return true }
 }

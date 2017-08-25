@@ -5,7 +5,7 @@ import RandomEventHandler from '../../../../src/controllers/events/random/Random
 describe('Random event handler tests', ()=>{
   it('Choosing random event works and happens only when meant', ()=>{
     var spy = sinon.spy()
-    var eventRandomizer = {getRandomEvent: (spy => () => ({happen: spy}))(spy)}
+    var eventRandomizer = {getRandomEvent: (spy => () => ({realizeEvent: spy}))(spy)}
     var handler = new RandomEventHandler({
       eventRandomizer: eventRandomizer,
       menuController: {},

@@ -6,10 +6,5 @@ export default class NameStructureTypeFilter extends StructureTypeFilter {
     this.names = json.structureTypes
   }
 
-  isValid (structureType) {
-    for (let name of this.names) {
-      if (name === structureType.name) return true
-    }
-    return false
-  }
+  isValid (structureType) { return true }
 }
