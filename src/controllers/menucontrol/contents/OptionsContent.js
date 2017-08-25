@@ -41,6 +41,10 @@ export default class OptionsContent extends Content {
     this.owner.redraw()
   }
 
+  pause() {
+    this.game.inputHandler.setPause()
+  }
+
   createSections () {    
     this.sectionName('options')
     this.text(this.texts.soundVolume + ': ' + Math.round(this.game.music.volume * 100) + '%')
@@ -57,5 +61,6 @@ export default class OptionsContent extends Content {
     this.button(this.texts.increaseVolume, this.incVolume, this)
     this.button(this.texts.decreaseVolume, this.decVolume, this)
     this.button(this.texts.endGame, this.game.gameEvents.finishGame, this.game.gameEvents)
+    this.button(this.texts.pause, this.pause, this)   
   }
 }

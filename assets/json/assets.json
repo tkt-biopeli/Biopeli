@@ -157,6 +157,11 @@
     },
     {
       "type": "image",
+      "name": "pause_info",
+      "file": "assets/images/backgrounds/pause.png"
+    },
+    {
+      "type": "image",
       "name": "telegram_revent",
       "file": "assets/images/backgrounds/telegram_random_event.png"
     },
