@@ -1,11 +1,12 @@
 import Content from './Content'
 
 export default class BuildStructureContent extends Content {
-  constructor ({ player, structureFactory, purchaseManager, texts }) {
+  constructor ({ structureFactory, purchaseManager, texts, structureTypes }) {
     super()
     this.structureFactory = structureFactory
     this.purchaseManager = purchaseManager
     this.texts = texts.buildStructureTexts
+    this.structureTypes = structureTypes
 
     this.emptyFunction = () => {}
   }
@@ -86,11 +87,39 @@ export default class BuildStructureContent extends Content {
   }
 
   refineryInfo (stype) {
+    this.text(this.texts.multiplier + ': ' + stype.multiplier)
+    this.text(this.texts.refineryReach + ': ' +stype.reach)
+    
+    let buysFrom = this.texts.buysFrom + ': '
+    if(stype.buysFrom === 'all') {
+      buysFrom += this.texts.refineryBuysFromAll
+    } else {
+      for (let i = 0 ; i < stype.buysFrom.length ; i++) {
+        buysFrom += this.structureTypes[stype.buysFrom[i]].nameWithLanguage
+        if(i != stype.buysFrom.length -1) buysFrom += ', '
+      }
+    }
 
+    this.text(buysFrom)
+
+    let takesOwnership = ''
+    if (stype.takesOwnership) {
+      takesOwnership += this.texts.refineryTakes
+    } else {
+      takesOwnership += this.texts.refineryNotTakes
+    }
+
+    this.text(takesOwnership)
   }
 
   specialInfo (stype) {
+    this.text(this.texts.environmentEffect + ':')
 
+    this.text(this.texts.eReach + ': ' + stype.reach)
+    let effect = stype.changeValues
+    this.text(this.texts.eFlowers + ': ' + effect.flowers)
+    this.text(this.texts.eFertility + ': ' + effect.fertility)
+    this.text(this.texts.eMoisture + ': ' + effect.moisture)
   }
 
   errorInfo (stype) {

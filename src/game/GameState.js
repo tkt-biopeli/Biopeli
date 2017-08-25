@@ -294,7 +294,8 @@ export default class GameState {
     this.buildStructureContent = new BuildStructureContent({
       purchaseManager: this.purchaseManager,
       structureFactory: this.structureFactory,
-      texts: this.texts
+      texts: this.texts,
+      structureTypes: this.structureTypes
     })
 
     this.optionsContent = new OptionsContent({
