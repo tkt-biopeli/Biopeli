@@ -34,6 +34,8 @@
     "revenue": "Tuotto",
     "fertility": "Ihanneravinteikkuus",
     "moisture": "Ihannekosteus",
+    "tileMoisture": "Ruudun kosteus",
+    "tileFertility": "Ruudun ravinteikkuus",
 
     "multiplier": "Kerroin",
     "refineryReach": "Hakuetäisyys",
