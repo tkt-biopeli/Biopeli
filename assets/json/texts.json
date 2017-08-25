@@ -20,9 +20,36 @@
 
   "buildStructureTexts": {
     "structureType": "Tyyppi",
+    "health": "Kestävyys",
+    "owningRadius": "Omistusetäisyys",
+
+    "constantPollution": "Saastutus vakio koko alueella",
+    "pilePollution": "Saastutus alkuarvo keskellä ja pienenee ulospäin",
+    "pollutionRadius": "Saastutusetäisyys",
+    "pollutionAmount": "Saastutusmäärä",
+
     "continuousProduction": "Tuotanto jatkuvaa",
     "harvest": "Sadonkorjuu",
+    "takesOwnership": "Käyttömaa",
     "revenue": "Tuotto",
+    "fertility": "Ihanneravinteikkuus",
+    "moisture": "Ihannekosteus",
+
+    "multiplier": "Kerroin",
+    "refineryReach": "Hakuetäisyys",
+    "buysFrom": "Käyttää rakennuksia",
+    "refineryBuysFromAll": "kaikki",
+    "refineryTakes": "Kuluttaa omistamiensa tuotannon",
+    "refineryNotTakes": "Ei kuluta omistamiensa tuotantoa",
+
+    "environmentEffect": "Ympäristövaikutus",
+    "eReach": "Vaikutusalue",
+    "eFertility": "Ravinteikkuus",
+    "eMoisture": "Kosteus",
+    "eFlowers": "Puhtaus",
+
+    "errorType": "Virheellinen rakennustyyppi. Lähetä vihainen kirje pelin tekijöille.",
+    
     "cost": "Hinta",
     "build": "Rakenna",
     "insufficientFunds": "Rahat eivät riitä"

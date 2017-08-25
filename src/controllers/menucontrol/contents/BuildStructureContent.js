@@ -1,11 +1,12 @@
 import Content from './Content'
 
 export default class BuildStructureContent extends Content {
-  constructor ({ player, structureFactory, purchaseManager, texts }) {
+  constructor ({ structureFactory, purchaseManager, texts, structureTypes }) {
     super()
     this.structureFactory = structureFactory
     this.purchaseManager = purchaseManager
     this.texts = texts.buildStructureTexts
+    this.structureTypes = structureTypes
 
     this.emptyFunction = () => {}
   }
@@ -22,31 +23,107 @@ export default class BuildStructureContent extends Content {
 
   createPreBuildInfoContent (stype) {
     this.text(this.texts.structureType + ': ' + stype.nameWithLanguage)
+    this.text(this.texts.health + ': ' + stype.health)
+    this.text(this.texts.owningRadius + ': ' + stype.radiusForTileOwnership)
+    
+    this.addPollutionInfo(stype)
     this.addCategorySpecificInfo(stype)
+    
     this.text(this.texts.cost + ': ' + stype.cost, 'large')
+  }
+  
+  addPollutionInfo (stype) {
+    var pollution = stype.pollution
+
+    let pollutionInfo = ''
+    if (pollution.constant) {
+      pollutionInfo += this.texts.constantPollution
+    }else {
+      pollutionInfo += this.texts.pilePollution
+    }
+
+    this.text(pollutionInfo)
+    this.text(this.texts.pollutionRadius + ': ' + pollution.distance)
+    this.text(this.texts.pollutionAmount + ': ' + pollution.amount)
   }
 
   addCategorySpecificInfo (stype) {
     switch (stype.type) {
       case 'producer_structure':
-        if (stype.continuousProduction) {
-          this.text(this.texts.continuousProduction)
-        } else {
-          var text = this.texts.harvest + ': '
-          for (let harvest of stype.harvestingWeeks) {
-            text += harvest
-          }
-          this.text(text)
-        }
-
-        this.text(this.texts.revenue + ': ' + stype.turnipYield)
+        this.primaryProducerInfo(stype)
         break
       case 'refinery':
-        //
+        this.refineryInfo(stype)
+        break
+      case 'special':
+        this.specialInfo(stype)
         break
       default:
-        return null
+        this.errorInfo(stype)
     }
+  }
+
+  primaryProducerInfo (stype) {
+    if (stype.continuousProduction) {
+      this.text(this.texts.continuousProduction)
+    } else {
+      var harvests = this.texts.harvest + ': '
+      for (let harvest of stype.harvestingWeeks) {
+        harvests += harvest
+      }
+      this.text(harvests)
+    }
+
+    let ownershipText = this.texts.takesOwnership + ': '
+    for (let i = 0 ; i < stype.takesOwnershipOf.length ; i++) {
+      ownershipText += stype.takesOwnershipOf[i]
+      if(i != stype.takesOwnershipOf.length -1) ownershipText += ', '
+    }
+
+    this.text(ownershipText)
+    this.text(this.texts.revenue + ': ' + stype.turnipYield)
+    this.text(this.texts.fertility + ': ' + stype.fertilityMin + '->' + stype.fertilityMax)
+    this.text(this.texts.moisture + ': ' + stype.moistureMin + '->' + stype.moistureMax)
+  }
+
+  refineryInfo (stype) {
+    this.text(this.texts.multiplier + ': ' + stype.multiplier)
+    this.text(this.texts.refineryReach + ': ' +stype.reach)
+    
+    let buysFrom = this.texts.buysFrom + ': '
+    if(stype.buysFrom === 'all') {
+      buysFrom += this.texts.refineryBuysFromAll
+    } else {
+      for (let i = 0 ; i < stype.buysFrom.length ; i++) {
+        buysFrom += this.structureTypes[stype.buysFrom[i]].nameWithLanguage
+        if(i != stype.buysFrom.length -1) buysFrom += ', '
+      }
+    }
+
+    this.text(buysFrom)
+
+    let takesOwnership = ''
+    if (stype.takesOwnership) {
+      takesOwnership += this.texts.refineryTakes
+    } else {
+      takesOwnership += this.texts.refineryNotTakes
+    }
+
+    this.text(takesOwnership)
+  }
+
+  specialInfo (stype) {
+    this.text(this.texts.environmentEffect + ':')
+
+    this.text(this.texts.eReach + ': ' + stype.reach)
+    let effect = stype.changeValues
+    this.text(this.texts.eFlowers + ': ' + effect.flowers)
+    this.text(this.texts.eFertility + ': ' + effect.fertility)
+    this.text(this.texts.eMoisture + ': ' + effect.moisture)
+  }
+
+  errorInfo (stype) {
+    this.text(this.texts.errorType)
   }
 
   createBuildContent (stype, tile) {
