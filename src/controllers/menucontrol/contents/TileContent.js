@@ -60,7 +60,7 @@ export default class TileContent extends Content {
       structure.foundingYear)
     
     this.text(this.texts.structureInformationTexts.size + ': ' + structure.size())
-    if (structure.structureType.type === 'producer_structure') {
+    if (structure.structureType.type !== 'special') {
       this.showProductionInformation(structure)
     }
   }
@@ -74,6 +74,7 @@ export default class TileContent extends Content {
       this.texts.structureInformationTexts.moneyPerWeek + ': ' +
       this.format(this.demandFunction.pay(turnipProduction), 2)
     )
+    this.owner.changeButton(this.texts.moreInfo, 5)
   }
 
   structureRuining (structure) {

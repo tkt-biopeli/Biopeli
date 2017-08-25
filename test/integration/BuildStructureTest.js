@@ -89,7 +89,7 @@ describe('Integration test: Building structures', () => {
   it('Can not build on tile with structure', () => {
     gameAdvancer.buildBuilding(1, 1, 'grass', 1, 1)
     gameAdvancer.clickTile(1, 1)
-    gameStateChecker.checkButtonAmountInMenu(1)
+    gameStateChecker.checkButtonAmountInMenu(2)
   })
 
   it('Can not build producer on tile that is owned', () => {

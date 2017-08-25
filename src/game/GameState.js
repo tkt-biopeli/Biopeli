@@ -31,6 +31,7 @@ import BottomMenuContent from '../controllers/menucontrol/contents/BottomMenuCon
 import OptionsContent from '../controllers/menucontrol/contents/OptionsContent'
 import BuildMenuContent from '../controllers/menucontrol/contents/BuildMenuContent'
 import BuildStructureContent from '../controllers/menucontrol/contents/BuildStructureContent'
+import StructureInfoContent from '../controllers/menucontrol/contents/StructureInfoContent'
 import SingleController from '../controllers/menucontrol/SingleController'
 import MulticontentController from '../controllers/menucontrol/MulticontentController'
 
@@ -308,6 +309,11 @@ export default class GameState {
       structureTypes: this.structureTypes
     })
 
+    this.structureInfoContent = new StructureInfoContent({
+      demandFunction: this.city.turnipDemand,
+      texts: this.texts
+    })
+
     this.menuController = new MulticontentController({
       game: this.state,
       menuView: this.menuView,
@@ -318,7 +324,7 @@ export default class GameState {
         buttonWidth: config.sideMenuSettings.buttonWidth
       }),
       contents: [this.cityContent, this.tileContent, this.buildStructureContent,
-        this.optionsContent, this.buildMenuContent]
+        this.optionsContent, this.buildMenuContent, this.structureInfoContent]
     })
     
     this.mapView = new MapView({
