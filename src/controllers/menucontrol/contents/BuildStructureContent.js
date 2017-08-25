@@ -84,6 +84,10 @@ export default class BuildStructureContent extends Content {
     this.text(this.texts.revenue + ': ' + stype.turnipYield)
     this.text(this.texts.fertility + ': ' + stype.fertilityMin + '->' + stype.fertilityMax)
     this.text(this.texts.moisture + ': ' + stype.moistureMin + '->' + stype.moistureMax)
+    
+    let tile = this.owner.stateValue('selectedTile')
+    this.text(this.texts.tileFertility + ': ' + this.format(tile.getFertility()))
+    this.text(this.texts.tileMoisture + ': ' + this.format(tile.getMoisture()))
   }
 
   refineryInfo (stype) {
