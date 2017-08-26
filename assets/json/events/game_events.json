@@ -3,16 +3,11 @@
     {
       "name": "Myllytulva",
       "description": "Myllysi tulvivat",
-      "condition": [
-        {
-          "name": "PopulationLimiter",
-          "notBefore": 550
-        },
-        {
-          "name": "StructureLimiter",
-          "min": 5
-        }
-      ],
+      "condition": {
+        "name": "StructureLimiter",
+        "min": 6,
+        "max": 999999
+      },
       "effects": [
         {
           "name": "TileValueChange",
@@ -27,18 +22,31 @@
       ]
     },
     {
-      "name": "Rutto",
-      "description": "Kaupungissa jyllää hirvittävä kulkutauti, puolet väestöstä RIP!",
-      "condition": [
+      "name": "Verokiristys",
+      "description": "Rakentamisesta on tullut kalliimpaa!",
+      "condition": {
+        "name": "StructureLimiter",
+        "min": 7,
+        "max": 999999
+      },
+      "effects": [
         {
-          "name": "PopulationLimiter",
-          "notBefore": 550
-        },
-        {
-          "name": "StructureLimiter",
-          "min": 5
+          "name": "StructureCostChange",
+          "costChange": 1.2,
+          "filter": {
+            "name": "AllStructureTypes"
+          }
         }
-      ],
+      ]
+    },
+    {
+      "name": "Rutto",
+      "description": "Kaupungissa jyllää hirvittävä kulkutauti, ihmisiä kuolee!",
+      "condition": {
+        "name": "PopulationLimiter",
+        "notBefore": 700,
+        "notAfter": 999999
+      },
       "effects": [
         {
           "name": "PopulationChange",
@@ -86,6 +94,102 @@
         {
           "name": "PopulationChange",
           "changePercentage": 1.05
+        }
+      ]
+    },
+    {
+      "name": "UFOJA!",
+      "description": "Alienit polttavat viljatilohin outoja merkkejä, kaupungin koko kasvaa turisteilla",
+      "condition": {
+        "name": "StructureLimiter",
+        "min": 5,
+        "max": 999999
+      },
+      "effects": [
+        {
+          "name": "PopulationChange",
+          "changePercentage": 1.05
+        }
+      ]
+    },
+    {
+      "name": "UFOJA!",
+      "description": "Ufot kidnappaavat lehmiä! Ihmiset eivät uskalla juoda maitoa!",
+      "condition": {
+        "name": "StructureLimiter",
+        "min": 5,
+        "max": 999999
+      },
+      "effects": [
+        {
+          "name": "StructureYieldChange",
+          "yieldChange": -1,
+          "filter": {
+            "name": "StructureType",
+            "structureTypes": [
+              "dairy_farm"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "RagemonSTOP",
+      "description": "RagemonSTOP pelaajat tallovat viljapellot etsiessään harvinaisia ragemoneja",
+      "condition": {
+        "name": "StructureLimiter",
+        "min": 5,
+        "max": 999999
+      },
+      "effects": [
+        {
+          "name": "StructureYieldChange",
+          "yieldChange": -1,
+          "filter": {
+            "name": "StructureType",
+            "structureTypes": [
+              "wheat_farm"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lypsyrobotti",
+      "description": "Kaupungin hullut tiedemiehet kehittivät parempia lypsyrobotteja, maitotuotanto parantuu!",
+      "condition": {
+        "name": "TimeLimiter",
+        "notBefore": 20,
+        "notAfter": 50
+      },
+      "effects": [
+        {
+          "name": "StructureYieldChange",
+          "yieldChange": 1,
+          "filter": {
+            "name": "StructureType",
+            "structureTypes": [
+              "dairy_farm"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inflaatio",
+      "description": "Kaikkien tuotteiden hinnat kallistuvat! Nyt tahkotaan rahaa!!!",
+      "condition": {
+        "name": "TimeLimiter",
+        "notBefore": 10,
+        "notAfter": 50
+      },
+      "effects": [
+        {
+          "name": "StructureYieldChange",
+          "yieldChange": 1,
+          "filter": {
+            "name": "AllStructureTypes"
+          }
         }
       ]
     }

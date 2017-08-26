@@ -190,7 +190,8 @@ export default class GameState {
     this.bioFactsGenerator = new BioFactsGenerator({
       telegramStorage: this.telegramStorage,
       bioFacts: this.gameData.bioFacts,
-      randomWithBounds: utils.randomWithBounds
+      randomWithBounds: utils.randomWithBounds,
+      randomEventSettings: config.randomEventSettings
     })
 
     this.structureHintGenerator = new StructureHintGenerator({
