@@ -50,8 +50,8 @@
 
   "mapSettings": {
     "mapSize": {
-      "width": 64,
-      "height": 64
+      "width": 20,
+      "height": 20
     },
 
     "tileSize": {
@@ -68,15 +68,15 @@
       "freqs": {
         "groundfreq": 10,
         "forestfreq": 20,
-        "fertilityfreq": 5
+        "fertilityfreq": 6
       },
       "noiseWidth": 64,
       "noiseHeight": 64
     },
 
     "generatingSettings": {
-      "groundLimit": -0.2,
-      "forestLimit": -0.1
+      "groundLimit": -0.3,
+      "forestLimit": -0.2
     }
   },
 

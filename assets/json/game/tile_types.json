@@ -16,7 +16,7 @@
         "wheat_farm", "dairy_farm", "berry_farm", "windmill",
         "mill", "biofuel_refinery", "fertilizer_factory", 
         "dairy", "herb_farm", "mushroom_farm", "lumber_yard", "fish_refinery",
-        "junkyard"
+        "junkyard", "recycling_center"
       ]
     },
     {
