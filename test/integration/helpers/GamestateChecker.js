@@ -278,6 +278,14 @@ export default class GamestateChecker {
     this.checkTelegramShown(name, expectedValue, 'telegram_revent')
   }
 
+  checkBioFactShown (name, expectedValue) {
+    this.checkTelegramShown(name, expectedValue, 'telegram_fact')
+  }
+
+  checkStructureHintShown (expectedValue) {
+    this.checkTelegramShown('Tiesithän..?', expectedValue, 'telegram_hint')
+  }
+
   checkTelegramShown (name, expectedValue, type) {
     var telegrams = this.gameState.telegramStorage.telegrams
     var found = false

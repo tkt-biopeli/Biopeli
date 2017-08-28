@@ -37,6 +37,7 @@ export default {
   },
 
   telegramTexts: {
+    factTopic: "Faktaa biotaloudesta:",
     hintTopic: "Tiesithän..?",
     ruinTopic: " hädässä!",
     ruinText: " on puolikuntoinen!"

@@ -10,6 +10,7 @@ import structureTypes from './PseudoStructuretypes'
 import Structure from '../../../src/models/structure/Structure'
 import pseudoTexts from './PseudoTexts'
 import pseudoEvents from './PseudoEvents'
+import pseudoStructureHints from './PseudoStructureHints'
 
 const assert = require("assert")
 
@@ -52,7 +53,8 @@ export default class GameAdvancer {
       },
       gameEvents: {
         events: pseudoEvents
-      }
+      },
+      structureHints: pseudoStructureHints
     }
 
     this.gameState = new GameState({
