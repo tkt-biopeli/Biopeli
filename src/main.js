@@ -22,17 +22,25 @@ class Game extends Phaser.Game {
    */
   constructor () {
     var size = {
+      minWidth: config.gameSettings.windowSize.minWidth,
+      minHeight: config.gameSettings.windowSize.minHeight,
       maxWidth: config.gameSettings.windowSize.maxWidth,
       maxHeight: config.gameSettings.windowSize.maxHeight
     }
     
     const docElement = document.documentElement
-    const width = docElement.clientWidth > size.maxWidth 
-      ? size.maxWidth 
-      : docElement.clientWidth
-    const height = docElement.clientHeight > size.maxHeight 
-      ? size.maxHeight 
-      : docElement.clientHeight
+    let height = 0
+    let width = 0
+
+    if ((docElement.clientHeight / 9) < (docElement.clientWidth / 16)) {
+      height = docElement.clientHeight < size.minHeight ? size.minHeight : docElement.clientHeight
+      height = height <= size.maxHeight ? height : size.maxHeight
+      width = Math.round((16 / 9) * height)
+    } else {
+      width = docElement.clientWidth < size.minWidth ? size.minWidth : docElement.clientWidth
+      width = width <= size.maxWidth ? width : size.maxWidth
+      height = Math.round((9 / 16) * width)
+    }
 
     super(width, height, Phaser.CANVAS, 'content', null)
 
