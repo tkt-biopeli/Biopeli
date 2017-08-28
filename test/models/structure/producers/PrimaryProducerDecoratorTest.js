@@ -40,9 +40,9 @@ describe('Primary producer decorator tests', () => {
     p.moistureMultiplier = () => 0.5
     p.fertilityMultiplier = () => 0.5
     p.flowersMultiplier = () => 1
-    p.producer.produce = (te) => 20
-    p.ownedFarmLand = [{}]
-    assert.equal(5, p.produce())
+    p.producer.producedAmount = (te) => 20
+    p.structure.ownedTiles = [{}]
+    assert.equal(5, p.producedAmount())
   })
 
   it('moisture multiplier test', () => {

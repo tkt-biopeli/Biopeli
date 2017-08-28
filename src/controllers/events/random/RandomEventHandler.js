@@ -24,7 +24,7 @@ export default class RandomEventHandler {
   doEvent () {
     var event = this.eventRandomizer.getRandomEvent(this.maxSearched)
     if (event != null) {
-      event.happen()
+      event.realizeEvent()
       return event
     }
   }

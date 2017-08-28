@@ -10,7 +10,7 @@ export default class GameTimerListener {
    * @param {GameEvents} gameEvents
    */
   constructor ({ city, player, menuController, topBarController,
-    bottomMenuController, gameEvents, randomEventHandler, telegramStorage }) {
+    bottomMenuController, gameEvents, randomEventHandler, telegramStorage, bioFactsGenerator }) {
     this.city = city
     this.player = player
     this.menuController = menuController
@@ -19,6 +19,7 @@ export default class GameTimerListener {
     this.gameEvents = gameEvents
     this.randomEventHandler = randomEventHandler
     this.telegramStorage = telegramStorage
+    this.bioFactsGenerator = bioFactsGenerator
   }
 
   /**
@@ -33,6 +34,8 @@ export default class GameTimerListener {
 
     this.checkRandomEvent(timerEvent)
 
+    this.checkBioFactEvent(timerEvent)
+
     this.redrawControllers()
     // is game over?
     this.gameEvents.isGameOver(timerEvent)
@@ -44,10 +47,13 @@ export default class GameTimerListener {
    * @param {TimerEvent} timerEvent
    */
   countProductionFromStructures (timerEvent) {
+    for (let structure of this.player.structures) {
+      structure.producer.produce(timerEvent)
+    }
+
     var sum = 0
     for (let structure of this.player.structures) {
-      let amount = structure.produce(timerEvent)
-      // console.log(structure.structureName + ' ' + amount)
+      let amount = structure.producer.producedAmount()
       sum += amount
     }
     return sum
@@ -56,7 +62,7 @@ export default class GameTimerListener {
   checkBuildingRuining (timerEvent) {
     for (let structure of this.player.structures) {
       let warning = structure.healthManager.checkRuin(timerEvent)
-      if (warning) {this.telegramStorage.addRuinWarning(timerEvent, structure)}
+      if (warning) { this.telegramStorage.addRuinWarning(timerEvent, structure) }
     }
   }
 
@@ -78,6 +84,11 @@ export default class GameTimerListener {
     }
   }
 
+  checkBioFactEvent (timerEvent) {
+    if (this.bioFactsGenerator.timer.tryNext(timerEvent)) {
+      this.bioFactsGenerator.sendTelegram()
+    }
+  }
 
   /**
    * Redraws top bar and menu controllers

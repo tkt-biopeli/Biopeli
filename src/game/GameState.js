@@ -14,6 +14,7 @@ import MenuView from '../view/menu/MenuView'
 import CameraMover from '../view/CameraMover'
 import MapListener from '../view/MapListener'
 import InputHandler from '../view/InputHandler'
+import Pause from '../view/Pause'
 
 import EventController from '../controllers/events/EventController'
 import GameEvents from '../controllers/events/GameEvents'
@@ -21,6 +22,7 @@ import GameTimerListener from '../controllers/events/time/GameTimerListener'
 import Timer from '../controllers/events/time/Timer'
 import TelegramStorage from '../controllers/events/time/TelegramStorage'
 import StructureHintGenerator from '../models/telegram/StructureHintGenerator'
+import BioFactsGenerator from '../controllers/events/BioFactsGenerator'
 
 import TopBarContent from '../controllers/menucontrol/contents/TopBarContent'
 import TileContent from '../controllers/menucontrol/contents/TileContent'
@@ -29,6 +31,7 @@ import BottomMenuContent from '../controllers/menucontrol/contents/BottomMenuCon
 import OptionsContent from '../controllers/menucontrol/contents/OptionsContent'
 import BuildMenuContent from '../controllers/menucontrol/contents/BuildMenuContent'
 import BuildStructureContent from '../controllers/menucontrol/contents/BuildStructureContent'
+import StructureInfoContent from '../controllers/menucontrol/contents/StructureInfoContent'
 import SingleController from '../controllers/menucontrol/SingleController'
 import MulticontentController from '../controllers/menucontrol/MulticontentController'
 
@@ -82,11 +85,14 @@ export default class GameState {
 
     this.eventController.addListener('structureBuilt', this.mapView.structureCreated, this.mapView)
 
+    this.pause = new Pause({ game: this.state })
+
     this.inputHandler = new InputHandler({
       game: state,
       mapListener: this.mapListener,
       cameraMover: this.cameraMover,
-      mapView: this.mapView
+      mapView: this.mapView,
+      pause: this.pause
     })
 
     this.randomEventFactory = new RandomEventFactory({gameState: this})
@@ -108,7 +114,8 @@ export default class GameState {
       bottomMenuController: this.bottomMenuController,
       gameEvents: this.gameEvents,
       randomEventHandler: this.randomEventHandler,
-      telegramStorage: this.telegramStorage
+      telegramStorage: this.telegramStorage,
+      bioFactsGenerator: this.bioFactsGenerator
     })
 
     this.gameTimer.addListener(this.gameTimerListener)
@@ -180,11 +187,19 @@ export default class GameState {
       telegramTexts: this.texts.telegramTexts
     })
 
+    this.bioFactsGenerator = new BioFactsGenerator({
+      telegramStorage: this.telegramStorage,
+      bioFacts: this.gameData.bioFacts,
+      randomWithBounds: utils.randomWithBounds,
+      randomEventSettings: config.randomEventSettings
+    })
+
     this.structureHintGenerator = new StructureHintGenerator({
       telegramStorage: this.telegramStorage,
       structureHints: this.gameData.structureHints,
       randomWithBounds: utils.randomWithBounds
     })
+
     this.eventController.addListener('structureBuilt', this.structureHintGenerator.structureBuilt, this.structureHintGenerator)
 
     this.music = this.state.add.audio('music')
@@ -281,13 +296,23 @@ export default class GameState {
     this.buildStructureContent = new BuildStructureContent({
       purchaseManager: this.purchaseManager,
       structureFactory: this.structureFactory,
-      texts: this.texts
+      texts: this.texts,
+      structureTypes: this.structureTypes
     })
 
-    this.optionsContent = new OptionsContent({game: this, texts: this.texts})
+    this.optionsContent = new OptionsContent({
+      game: this, 
+      texts: this.texts,
+      telegramStorage: this.telegramStorage
+    })
 
     this.buildMenuContent = new BuildMenuContent({
       structureTypes: this.structureTypes
+    })
+
+    this.structureInfoContent = new StructureInfoContent({
+      demandFunction: this.city.turnipDemand,
+      texts: this.texts
     })
 
     this.menuController = new MulticontentController({
@@ -300,7 +325,7 @@ export default class GameState {
         buttonWidth: config.sideMenuSettings.buttonWidth
       }),
       contents: [this.cityContent, this.tileContent, this.buildStructureContent,
-        this.optionsContent, this.buildMenuContent]
+        this.optionsContent, this.buildMenuContent, this.structureInfoContent]
     })
     
     this.mapView = new MapView({

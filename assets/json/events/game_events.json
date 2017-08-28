@@ -3,10 +3,17 @@
     {
       "name": "Myllytulva",
       "description": "Myllysi tulvivat",
+<<<<<<< HEAD
       "condition": 
       {
         "name": "StructureLimiter",
         "min": 5
+=======
+      "condition": {
+        "name": "StructureLimiter",
+        "min": 6,
+        "max": 999999
+>>>>>>> 44bb173eed8deed10450381c540b558f93e8a1a4
       },
       "effects": [
         {
@@ -22,12 +29,39 @@
       ]
     },
     {
+<<<<<<< HEAD
       "name": "Rutto",
       "description": "Kaupungissa jyllää hirvittävä kulkutauti, puolet väestöstä RIP!",
       "condition": 
       {
         "name": "PopulationLimiter",
         "notBefore": 550
+=======
+      "name": "Verokiristys",
+      "description": "Rakentamisesta on tullut kalliimpaa!",
+      "condition": {
+        "name": "StructureLimiter",
+        "min": 7,
+        "max": 999999
+      },
+      "effects": [
+        {
+          "name": "StructureCostChange",
+          "costChange": 1.2,
+          "filter": {
+            "name": "AllStructureTypes"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rutto",
+      "description": "Kaupungissa jyllää hirvittävä kulkutauti, ihmisiä kuolee!",
+      "condition": {
+        "name": "PopulationLimiter",
+        "notBefore": 700,
+        "notAfter": 999999
+>>>>>>> 44bb173eed8deed10450381c540b558f93e8a1a4
       },
       "effects": [
         {
@@ -80,7 +114,7 @@
           "name": "StructureYieldChange",
           "yieldChange": 2,
           "filter": {
-            "name": "StructureType",
+            "name": "StructureTypes",
             "structureTypes": [
               "herb_farm"
             ]
@@ -93,6 +127,7 @@
       ]
     },
     {
+<<<<<<< HEAD
       "name": "Tuholaiset",
       "description": "Tuholaiset iskivät. Kalakasvattamot säästyivät tuhoilta.",
       "condition": 
@@ -105,10 +140,97 @@
           ]
         },
         "min": 2
+=======
+      "name": "UFOJA!",
+      "description": "Alienit polttavat viljatilohin outoja merkkejä, kaupungin koko kasvaa turisteilla",
+      "condition": {
+        "name": "StructureLimiter",
+        "min": 5,
+        "max": 999999
+      },
+      "effects": [
+        {
+          "name": "PopulationChange",
+          "changePercentage": 1.05
+        }
+      ]
+    },
+    {
+      "name": "UFOJA!",
+      "description": "Ufot kidnappaavat lehmiä! Ihmiset eivät uskalla juoda maitoa!",
+      "condition": {
+        "name": "StructureLimiter",
+        "min": 5,
+        "max": 999999
       },
       "effects": [
         {
           "name": "StructureYieldChange",
+          "yieldChange": -1,
+          "filter": {
+            "name": "StructureTypes",
+            "structureTypes": [
+              "dairy_farm"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "RagemonSTOP",
+      "description": "RagemonSTOP pelaajat tallovat viljapellot etsiessään harvinaisia ragemoneja",
+      "condition": {
+        "name": "StructureLimiter",
+        "min": 5,
+        "max": 999999
+      },
+      "effects": [
+        {
+          "name": "StructureYieldChange",
+          "yieldChange": -1,
+          "filter": {
+            "name": "StructureTypes",
+            "structureTypes": [
+              "wheat_farm"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lypsyrobotti",
+      "description": "Kaupungin hullut tiedemiehet kehittivät parempia lypsyrobotteja, maitotuotanto parantuu!",
+      "condition": {
+        "name": "TimeLimiter",
+        "notBefore": 20,
+        "notAfter": 50
+      },
+      "effects": [
+        {
+          "name": "StructureYieldChange",
+          "yieldChange": 1,
+          "filter": {
+            "name": "StructureTypes",
+            "structureTypes": [
+              "dairy_farm"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inflaatio",
+      "description": "Kaikkien tuotteiden hinnat kallistuvat! Nyt tahkotaan rahaa!!!",
+      "condition": {
+        "name": "TimeLimiter",
+        "notBefore": 10,
+        "notAfter": 50
+>>>>>>> 44bb173eed8deed10450381c540b558f93e8a1a4
+      },
+      "effects": [
+        {
+          "name": "StructureYieldChange",
+<<<<<<< HEAD
           "yieldChange": 4,
           "filter": {
             "name": "Complement",
@@ -121,6 +243,11 @@
                 "fishery"
               ]
             }
+=======
+          "yieldChange": 1,
+          "filter": {
+            "name": "AllStructureTypes"
+>>>>>>> 44bb173eed8deed10450381c540b558f93e8a1a4
           }
         }
       ]

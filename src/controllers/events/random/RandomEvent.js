@@ -10,10 +10,10 @@ export default class RandomEvent {
     return this.condition.canHappen()
   }
 
-  happen () {
+  realizeEvent () {
     for (let effect of this.effects) {
       let affected = effect.filter.affected()
-      effect.effect.happen(affected)
+      effect.effect.realizeEvent(affected)
     }
   }
 }

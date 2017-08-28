@@ -26,6 +26,13 @@ Pelin ajaminen paikallisesti:
 
 Pelin pitäisi nyt näkyä selaimellasi; mikäli näin ei käy, kirjoita selaimeesi osoite: http://localhost:3000/ .
 
+Pelin upottaminen olemassa olevalle sivulle:
+- lisää seuraava rivi haluamaasi paikkaan sivullasi
+```
+<iframe src="https://tkt-biopeli.github.io/Biopeli/" height="700" width="1000">game not available</iframe>
+```
+- teksti "game not available" näytetään, mikäli upottaminen epäonnistui
+
 ### Käyttöohjeet
 Kontrollit:
 - liiku kartalla nuolinäppämillä

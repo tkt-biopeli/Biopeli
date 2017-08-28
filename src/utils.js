@@ -11,7 +11,7 @@ export default {
     return Math.random()
   },
   randomWithBounds: (lower, upper) => {
-    return Math.floor(Math.random() * upper + lower)
+    return Math.floor(Math.random() * (upper - lower)) + lower
   },
 
   submitScore: (body, server) => {

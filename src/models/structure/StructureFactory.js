@@ -78,7 +78,6 @@ export default class StructureFactory {
 
     this.createInitialPollution(structureType.pollution, tile)
     this.buyLand(tile.structure)
-    this.calculateSize(tile.structure)
     this.eventController.event('structureBuilt', tile)
   }
 
@@ -119,7 +118,8 @@ export default class StructureFactory {
 
   buyLand (structure) {
     let tiles = this.tileFinder.getTilesForLandOwnership(structure.tile, 
-      structure.radiusForTileOwnership, structure.moveCosts)
+      structure.structureType.radiusForTileOwnership, 
+      structure.structureType.moveCosts)
     for (let capsule of tiles) {
       if (this.landCanChangeOwnership(capsule.tile, structure)) {
         this.changeOwnership(structure, capsule.tile)
@@ -130,9 +130,8 @@ export default class StructureFactory {
   changeOwnership (structure, tmpTile) {
     this.removeTileFromPreviousOwner(tmpTile)
     tmpTile.owner = structure
-    structure.ownedTiles.push(tmpTile)
-    if (structure.takesOwnershipOf.includes(tmpTile.tileType.name)) {
-      structure.producer.producer.ownedFarmLand.push(tmpTile)
+    if (structure.structureType.takesOwnershipOf.includes(tmpTile.tileType.name)) {
+      structure.ownedTiles.push(tmpTile)
     }
     this.setNewTileType(tmpTile, structure)
   }
@@ -143,16 +142,16 @@ export default class StructureFactory {
    * @param {*} newStructure 
    */
   landCanChangeOwnership (tmpTile, newStructure) {
-    let newStype = newStructure.structureType.type
-    if (newStype === 'refinery') {
+    let newType = newStructure.structureType.type
+    if (newType === 'refinery') {
       if (tmpTile.structure === newStructure) return true
-      if (tmpTile.structure === null && newStructure.takesOwnershipOf.includes(
+      if (tmpTile.structure === null && newStructure.structureType.takesOwnershipOf.includes(
         tmpTile.tileType.name)) return true
     }
-    if (newStype === 'producer_structure') {
+    if (newType === 'producer_structure') {
       if (tmpTile.structure === newStructure) return true
       if (tmpTile.structure !== null) return false
-      if (tmpTile.owner === null && newStructure.takesOwnershipOf.includes(
+      if (tmpTile.owner === null && newStructure.structureType.takesOwnershipOf.includes(
         tmpTile.tileType.name)) return true
     }
     return false
@@ -180,24 +179,6 @@ export default class StructureFactory {
   }
 
   setNewTileType (tmpTile, structure) {
-    tmpTile.tileType = this.tileTypes[structure.farmland]
-  }
-
-  calculateSize (structure) {
-    if (structure.structureType.type === 'refinery') {
-      this.calculateSizeForRefinery(structure)
-    } else if (structure.structureType.type === 'producer_structure') {
-      this.calculateSizeForProducer(structure)
-    } else {
-      structure.size = structure.producer.producer.zone.length
-    }
-  }
-
-  calculateSizeForProducer (structure) {
-    structure.size = structure.producer.producer.ownedFarmLand.length
-  }
-
-  calculateSizeForRefinery (structure) {
-    structure.size = structure.producer.producer.producerHolders.length
+    tmpTile.tileType = this.tileTypes[structure.structureType.farmland]
   }
 }

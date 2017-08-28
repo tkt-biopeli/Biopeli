@@ -3,12 +3,14 @@
  */
 export default class ContinuousProducer {
   constructor ({structureType}) {
-    this.turnipYield = structureType.turnipYield
+    this.structureType = structureType
   }
 
   initialize (structure) {}
 
-  produce () {
-    return this.turnipYield
+  produce () { }
+
+  producedAmount () {
+    return this.structureType.turnipYield
   }
 }
