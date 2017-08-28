@@ -29,9 +29,10 @@ export default class GameOver extends Phaser.State {
       () => { this.state.start('Start', true, false, this.gameData) })
     this.menu.createButton(this.texts.gameOverState.highscores,
       () => { this.state.start('Highscores', true, false, this.gameData) })
-    this.menu.createButton(this.texts.gameOverState.mailTo,
-      () => { window.location.href = "mailto:" + 
-      this.gameData.config.gameSettings.mailToAddress })
+    this.menu.createButton(this.texts.gameOverState.mailTo, () => {
+      window.location.href = 'mailto:' + 
+      this.gameData.config.gameSettings.mailToAddress
+    })
     this.menu.finishMenu()
   }
 }

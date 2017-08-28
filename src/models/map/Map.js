@@ -76,8 +76,6 @@ export default class MapGrid {
    * @memberof MapGrid
    */
   getTileBeachId (modelTile) {
-    let x = modelTile.x
-    let y = modelTile.y
     let id = ''
     let neighbours = this.getNeighbours(modelTile)
 
@@ -111,8 +109,6 @@ export default class MapGrid {
       this.getTileWithGridCoordinates(x - 1, y)
     ]
   }
-
-
 
   /**
    * @param {Number} gx

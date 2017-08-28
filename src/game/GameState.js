@@ -200,7 +200,8 @@ export default class GameState {
       randomWithBounds: utils.randomWithBounds
     })
 
-    this.eventController.addListener('structureBuilt', this.structureHintGenerator.structureBuilt, this.structureHintGenerator)
+    this.eventController.addListener('structureBuilt',
+      this.structureHintGenerator.structureBuilt, this.structureHintGenerator)
 
     this.music = this.state.add.audio('music')
     this.music.play()

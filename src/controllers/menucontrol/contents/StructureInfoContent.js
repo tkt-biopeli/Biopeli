@@ -40,7 +40,7 @@ export default class StructureInfoContent extends Content {
     
     if (structure.structureType.continuousProduction) {
       this.continuousProducerInfo(structure)
-    }else {
+    } else {
       this.seasonalProducerInfo(structure)
     }
 

@@ -41,7 +41,7 @@ export default class OptionsContent extends Content {
     this.owner.redraw()
   }
 
-  pause() {
+  pause () {
     this.game.inputHandler.setPause()
   }
 

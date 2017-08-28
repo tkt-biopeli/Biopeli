@@ -42,10 +42,10 @@ export default class Refiner {
 
   canRefineOutputOf (structure) {
     var stype = structure.structureType
-    if(this.inputTypes === 'all') {
-      if(stype.type === 'refinery' && (stype.buysFrom === 'all' || 
-        stype.buysFrom.includes(this.structure.structureType.name))){
-        return false //So that no infinite loops form
+    if (this.inputTypes === 'all') {
+      if (stype.type === 'refinery' && (stype.buysFrom === 'all' || 
+        stype.buysFrom.includes(this.structure.structureType.name))) {
+        return false // So that no infinite loops form
       }
       return true
     }
@@ -60,7 +60,7 @@ export default class Refiner {
   }
 
   isCloser (producer, distance) {
-    if(!this.takesOwnership) return true
+    if (!this.takesOwnership) return true
     return producer.refineryDistance === null ||
       producer.refineryDistance > distance
   }
@@ -102,7 +102,7 @@ export default class Refiner {
   loseControlOf (producer) {
     for (let i = 0; i < this.producerHolders.length; i++) {
       let capsule = this.producerHolders[i]
-      if (capsule.producer == producer) {
+      if (capsule.producer === producer) {
         this.producerHolders.splice(i, 1)
         break
       }

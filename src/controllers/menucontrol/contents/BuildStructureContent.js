@@ -38,7 +38,7 @@ export default class BuildStructureContent extends Content {
     let pollutionInfo = ''
     if (pollution.constant) {
       pollutionInfo += this.texts.constantPollution
-    }else {
+    } else {
       pollutionInfo += this.texts.pilePollution
     }
 
@@ -75,9 +75,9 @@ export default class BuildStructureContent extends Content {
     }
 
     let ownershipText = this.texts.takesOwnership + ': '
-    for (let i = 0 ; i < stype.takesOwnershipOf.length ; i++) {
+    for (let i = 0; i < stype.takesOwnershipOf.length; i++) {
       ownershipText += stype.takesOwnershipOf[i]
-      if(i != stype.takesOwnershipOf.length -1) ownershipText += ', '
+      if (i !== stype.takesOwnershipOf.length - 1) ownershipText += ', '
     }
 
     this.text(ownershipText)
@@ -92,15 +92,15 @@ export default class BuildStructureContent extends Content {
 
   refineryInfo (stype) {
     this.text(this.texts.multiplier + ': ' + stype.multiplier)
-    this.text(this.texts.refineryReach + ': ' +stype.reach)
+    this.text(this.texts.refineryReach + ': ' + stype.reach)
     
     let buysFrom = this.texts.buysFrom + ': '
-    if(stype.buysFrom === 'all') {
+    if (stype.buysFrom === 'all') {
       buysFrom += this.texts.refineryBuysFromAll
     } else {
-      for (let i = 0 ; i < stype.buysFrom.length ; i++) {
+      for (let i = 0; i < stype.buysFrom.length; i++) {
         buysFrom += this.structureTypes[stype.buysFrom[i]].nameWithLanguage
-        if(i != stype.buysFrom.length -1) buysFrom += ', '
+        if (i !== stype.buysFrom.length - 1) buysFrom += ', '
       }
     }
 
