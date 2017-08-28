@@ -87,17 +87,17 @@
     },
 
     "player": {
-      "initialCash": 200000,
+      "initialCash": 20000,
       "currency": "Ag"
     },
 
     "city": {
-      "initialPopulation": 500,
-      "demandMultiplier": 4,
+      "initialPopulation": 10000,
+      "demandMultiplier": 1,
       "demandRandomVariance": 0.1,
-      "startTurnipPrice": 6,
+      "startTurnipPrice": 1,
       "populationChangeAt100": 1.5,
-      "populationChangeAt200": 2.5
+      "populationChangeAt200": 2
     },
 
     "structures": {
@@ -122,8 +122,8 @@
   },
 
   "randomEventSettings": {
-    "minTime": 1,
-    "maxTime": 1,
+    "minTime": 12,
+    "maxTime": 144,
     "maxSearched": 10,
     "eventContentIndex": -1,
     "bioFactFrequencyMinMax": 48
