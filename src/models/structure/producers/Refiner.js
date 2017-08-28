@@ -29,7 +29,7 @@ export default class Refiner {
 
   findProducers () {
     for (let capsule of this.zone) {
-      if (capsule.tile.structure !== null) {
+      if (capsule.tile.structure != null) {
         let structure = capsule.tile.structure
         let producer = structure.producer
         let distance = capsule.distance
@@ -88,7 +88,7 @@ export default class Refiner {
       producer: producer
     })
 
-    if (!this.takesOwnership) return
+    if (!this.takesOwnership) return null
 
     if (producer.refinery != null) {
       let another = producer.refinery
