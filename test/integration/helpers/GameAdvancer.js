@@ -9,6 +9,7 @@ import structureTypes from './PseudoStructuretypes'
 
 import Structure from '../../../src/models/structure/Structure'
 import pseudoTexts from './PseudoTexts'
+import pseudoEvents from './PseudoEvents'
 
 const assert = require("assert")
 
@@ -50,7 +51,7 @@ export default class GameAdvancer {
         }
       },
       gameEvents: {
-        events: []
+        events: pseudoEvents
       }
     }
 
@@ -96,6 +97,9 @@ export default class GameAdvancer {
     this.structureTypes = structureTypes
 
     this.structureFactory = this.gameState.structureFactory
+
+    // The events are not shuffled
+    this.gameState.eventRandomizer.shuffleEvents = (array) => {return array}
   }
 
   /**
@@ -307,5 +311,17 @@ export default class GameAdvancer {
     var sf = this.gameState.structureFactory
     sf.minRuin = value
     sf.maxRuin = value
+  }
+
+  activateRandomEvents() {
+    this.gameState.randomEventHandler.timeWindowRandomizer.tryNext = () => {return true}
+  }
+
+  deactivateRandomEvents() {
+    this.gameState.randomEventHandler.timeWindowRandomizer.tryNext = () => {return false}
+  }
+
+  setPopulation(value) {
+    this.gameState.city.population = value
   }
 }

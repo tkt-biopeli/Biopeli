@@ -237,6 +237,10 @@ export default class GamestateChecker {
     assert(under > this.gameState.player.cash, "Excpected under: " + under + " Found: " + this.gameState.player.cash)
   }
 
+  checkPopulation (expected) {
+    assert.equal(this.gameState.city.population, expected)
+  }
+
   /**
    * Checks if the game has ended
    *
@@ -268,5 +272,21 @@ export default class GamestateChecker {
     var health = tile.structure.health
 
     assert.equal(wantedHealth, health.currentHealth)
+  }
+
+  checkRandomEventOccurred (name, expectedValue) {
+    this.checkTelegramShown(name, expectedValue, 'telegram_revent')
+  }
+
+  checkTelegramShown (name, expectedValue, type) {
+    var telegrams = this.gameState.telegramStorage.telegrams
+    var found = false
+    for (let telegram of telegrams) {
+      if (telegram.topic === name && telegram.asset === type) {
+        found = true
+        break
+      }
+    }
+    assert.equal(found, expectedValue)
   }
 }
