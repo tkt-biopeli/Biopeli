@@ -85,7 +85,7 @@
           "name": "StructureYieldChange",
           "yieldChange": 2,
           "filter": {
-            "name": "StructureType",
+            "name": "StructureTypes",
             "structureTypes": [
               "herb_farm"
             ]
@@ -125,7 +125,7 @@
           "name": "StructureYieldChange",
           "yieldChange": -1,
           "filter": {
-            "name": "StructureType",
+            "name": "StructureTypes",
             "structureTypes": [
               "dairy_farm"
             ]
@@ -146,7 +146,7 @@
           "name": "StructureYieldChange",
           "yieldChange": -1,
           "filter": {
-            "name": "StructureType",
+            "name": "StructureTypes",
             "structureTypes": [
               "wheat_farm"
             ]
@@ -167,7 +167,7 @@
           "name": "StructureYieldChange",
           "yieldChange": 1,
           "filter": {
-            "name": "StructureType",
+            "name": "StructureTypes",
             "structureTypes": [
               "dairy_farm"
             ]
