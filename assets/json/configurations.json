@@ -122,8 +122,8 @@
   },
 
   "randomEventSettings": {
-    "minTime": 12,
-    "maxTime": 144,
+    "minTime": 1,
+    "maxTime": 1,
     "maxSearched": 10,
     "eventContentIndex": -1,
     "bioFactFrequencyMinMax": 48
