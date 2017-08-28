@@ -1,14 +1,14 @@
 {
   "wheat_farm": {
     "hints": [
-      "vinkki 1",
+      "Viljatilan läheisyyteen kannattaa rakentaa mylly.",
       "vinkki 2",
       "vinkki 3"
     ]
   },
   "dairy_farm": {
     "hints": [
-      "vinkki 1",
+      "Maitotilan läheisyyteen kannattaa rakentaa meijeri.",
       "vinkki 2",
       "vinkki 3"
     ]
@@ -22,42 +22,42 @@
   },
   "mill": {
     "hints": [
-      "vinkki 1",
+      "Klikkaamalla myllyä, näät sen vaikutusalueen.",
       "vinkki 2",
       "vinkki 3"
     ]
   },
   "dairy": {
     "hints": [
-      "vinkki 1",
+      "Klikkaamalla meijeriä, näät sen vaikutusalueen.",
       "vinkki 2",
       "vinkki 3"
     ]
   },
   "herb_farm": {
     "hints": [
-      "vinkki 1",
+      "Yrttitila saastuttaa ympäristöään varsin vähän.",
       "vinkki 2",
       "vinkki 3"
     ]
   },
   "mushroom_farm": {
     "hints": [
-      "vinkki 1",
+      "Sienitila kannattaa sijoittaa metsän välittömään läheisyyteen.",
       "vinkki 2",
       "vinkki 3"
     ]
   },
   "lumber_yard": {
     "hints": [
-      "vinkki 1",
+      "Saha kannattaa sijoittaa metsän välitömään läheisyyteen.",
       "vinkki 2",
       "vinkki 3"
     ]
   },
   "fishery": {
     "hints": [
-      "vinkki 1",
+      "Kalastus varmistaa tuotannon jatkuvuuden kasvitautien iskiessä.",
       "vinkki 2",
       "vinkki 3"
     ]
@@ -71,35 +71,35 @@
   },
   "biofuel_refinery": {
     "hints": [
-      "vinkki 1",
+      "Biopolttoaineen jalostamo parantaa kaikkien vaikutusalueensa rakennuksien tuottoa.",
       "vinkki 2",
       "vinkki 3"
     ]
   },
   "fertilizer_factory": {
     "hints": [
-      "vinkki 1",
+      "Rakentamalla lannoitetehtaan, voit parantaa maaperän ravinteikuutta.",
       "vinkki 2",
       "vinkki 3"
     ]
   },
   "windmill": {
     "hints": [
-      "vinkki 1",
+      "Tuulimylly ei välitä maaperän viljavuudesta.",
       "vinkki 2",
       "vinkki 3"
     ]
   },
   "junkyard": {
     "hints": [
-      "vinkki 1",
+      "Kaatopaikka saastuttaa välitöntä ympäristöään rajusti.",
       "vinkki 2",
       "vinkki 3"
     ]
   },
   "ditch": {
     "hints": [
-      "vinkki 1",
+      "Ojittamalla voit vaikuttaa ympäristön kosteuteen.",
       "vinkki 2",
       "vinkki 3"
     ]

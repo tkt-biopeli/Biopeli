@@ -3,17 +3,10 @@
     {
       "name": "Myllytulva",
       "description": "Myllysi tulvivat",
-<<<<<<< HEAD
-      "condition": 
-      {
-        "name": "StructureLimiter",
-        "min": 5
-=======
       "condition": {
         "name": "StructureLimiter",
         "min": 6,
         "max": 999999
->>>>>>> 44bb173eed8deed10450381c540b558f93e8a1a4
       },
       "effects": [
         {
@@ -29,14 +22,6 @@
       ]
     },
     {
-<<<<<<< HEAD
-      "name": "Rutto",
-      "description": "Kaupungissa jyllää hirvittävä kulkutauti, puolet väestöstä RIP!",
-      "condition": 
-      {
-        "name": "PopulationLimiter",
-        "notBefore": 550
-=======
       "name": "Verokiristys",
       "description": "Rakentamisesta on tullut kalliimpaa!",
       "condition": {
@@ -61,7 +46,6 @@
         "name": "PopulationLimiter",
         "notBefore": 700,
         "notAfter": 999999
->>>>>>> 44bb173eed8deed10450381c540b558f93e8a1a4
       },
       "effects": [
         {
@@ -127,20 +111,6 @@
       ]
     },
     {
-<<<<<<< HEAD
-      "name": "Tuholaiset",
-      "description": "Tuholaiset iskivät. Kalakasvattamot säästyivät tuhoilta.",
-      "condition": 
-      {
-        "name": "StructureLimiter",
-        "filter": {
-          "name": "StructuresWithStructureType",
-          "structureTypes": [
-            "fishery"
-          ]
-        },
-        "min": 2
-=======
       "name": "UFOJA!",
       "description": "Alienit polttavat viljatilohin outoja merkkejä, kaupungin koko kasvaa turisteilla",
       "condition": {
@@ -225,12 +195,34 @@
         "name": "TimeLimiter",
         "notBefore": 10,
         "notAfter": 50
->>>>>>> 44bb173eed8deed10450381c540b558f93e8a1a4
       },
       "effects": [
         {
           "name": "StructureYieldChange",
-<<<<<<< HEAD
+          "yieldChange": 1,
+          "filter": {
+            "name": "AllStructureTypes"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tuholaiset",
+      "description": "Tuholaiset iskivät. Kalakasvattamot säästyivät tuhoilta.",
+      "condition": 
+      {
+        "name": "StructureLimiter",
+        "filter": {
+          "name": "StructuresWithStructureType",
+          "structureTypes": [
+            "fishery"
+          ]
+        },
+        "min": 2
+      },
+      "effects": [
+        {
+          "name": "StructureYieldChange",
           "yieldChange": 4,
           "filter": {
             "name": "Complement",
@@ -243,11 +235,6 @@
                 "fishery"
               ]
             }
-=======
-          "yieldChange": 1,
-          "filter": {
-            "name": "AllStructureTypes"
->>>>>>> 44bb173eed8deed10450381c540b558f93e8a1a4
           }
         }
       ]
