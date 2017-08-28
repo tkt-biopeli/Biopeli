@@ -278,8 +278,8 @@ export default class GamestateChecker {
     this.checkTelegramShown(name, expectedValue, 'telegram_revent')
   }
 
-  checkBioFactShown (name, expectedValue) {
-    this.checkTelegramShown(name, expectedValue, 'telegram_fact')
+  checkBioFactShown (expectedValue) {
+    this.checkTelegramShown('Faktaa biotaloudesta:', expectedValue, 'telegram_fact')
   }
 
   checkStructureHintShown (expectedValue) {
