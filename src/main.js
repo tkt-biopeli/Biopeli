@@ -11,7 +11,9 @@ import BeforeGameOverState from './states/BeforeGameOver'
 import GameOverState from './states/GameOver'
 import StartState from './states/Start'
 import InstructionsState from './states/Instructions'
-import HighscoresState from './states/Highscores'
+import HighscoresTop10State from './states/scores/HighscoresTop10'
+import HighscoresLoadState from './states/scores/HighscoresLoad'
+import HighscoresLocalState from './states/scores/HighscoresLocal'
 
 /**
  * Description goes here
@@ -44,7 +46,9 @@ class Game extends Phaser.Game {
     this.state.add('Instructions', InstructionsState, false)    
     this.state.add('BeforeGameOver', BeforeGameOverState, false)
     this.state.add('GameOver', GameOverState, false)
-    this.state.add('Highscores', HighscoresState, false)
+    this.state.add('HighscoresTop10', HighscoresTop10State, false)
+    this.state.add('HighscoresLoad', HighscoresLoadState, false)
+    this.state.add('HighscoresLocal', HighscoresLocalState, false)
 
     this.state.start('Boot')
   }
