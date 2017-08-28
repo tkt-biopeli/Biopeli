@@ -82,7 +82,8 @@
 
   "gameplaySettings": {
     "time": {
-      "gameLength": 300,
+      "startYear": 2000,
+      "gameLength": 960,
       "gameTimerInterval": 1000
     },
 
