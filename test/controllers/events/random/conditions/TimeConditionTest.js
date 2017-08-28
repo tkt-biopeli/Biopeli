@@ -19,23 +19,23 @@ describe('Time condition tests', ()=>{
 
     assert(condition.canHappen())
 
-    c.serialNumber = 3
+    c.serialNumber = 3 * 48
     assert(condition.canHappen())
 
-    c.serialNumber = 6
+    c.serialNumber = 6 * 48
     assert(!condition.canHappen())
 
-    c.serialNumber = -1
+    c.serialNumber = -1 * 48
     assert(!condition.canHappen())
 
     condition.notBefore = null
     assert(condition.canHappen())
 
     condition.notAfter = null
-    c.serialNumber = 6
+    c.serialNumber = 6 * 48
     assert(condition.canHappen())
 
-    c.serialNumber = -34.7
+    c.serialNumber = -34.7 * 48
     assert(condition.canHappen())
   })
 })

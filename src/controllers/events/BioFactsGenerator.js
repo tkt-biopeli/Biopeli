@@ -1,12 +1,12 @@
 import TimeWindowRandomizer from '../../models/logic/TimeWindowRandomizer'
 export default class BioFactsGenerator {
-  constructor ({telegramStorage, bioFacts, randomWithBounds}) {
+  constructor ({telegramStorage, bioFacts, randomWithBounds, randomEventSettings}) {
     this.telegramStorage = telegramStorage
     this.bioFacts = bioFacts ? bioFacts : []
     this.randomWithBounds = randomWithBounds  
     this.timer = new TimeWindowRandomizer({
-      min: 48,
-      max: 48
+      min: randomEventSettings.bioFactFrequencyMinMax,
+      max: randomEventSettings.bioFactFrequencyMinMax
     })
     this.timer.calculateNext({serialNumber: 0})
   }

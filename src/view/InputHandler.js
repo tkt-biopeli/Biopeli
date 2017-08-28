@@ -10,11 +10,12 @@ export default class InputHandler {
    * @param {MapListener} param.mapListener - Current map listener
    * @param {CameraMover} param.cameraMover - Current camera mover
    */
-  constructor ({ game, mapListener, cameraMover, mapView }) {
+  constructor ({ game, mapListener, cameraMover, mapView, pause }) {
     this.game = game
     this.mapListener = mapListener
     this.cameraMover = cameraMover
     this.mapView = mapView
+    this.pause = pause
 
     this.initialize()
   }
@@ -23,6 +24,7 @@ export default class InputHandler {
    * add callbacks to controls -> Phaser takes care of update in game loop
    */
   initialize () {
+    this.game.input.onDown.add(this.unpause, this)
     this.game.input.onDown.add(this.onPointerDown, this)
     var cursors = this.game.cursors
     cursors.up.onDown.add(this.onCursorDown, this)
@@ -38,7 +40,7 @@ export default class InputHandler {
   /**
    * Description goes here
    */
-  onPointerDown () {
+  onPointerDown () {    
     var ptr = this.game.input.activePointer
     var pointerEvent = {
       x: ptr.position.x,
@@ -67,6 +69,16 @@ export default class InputHandler {
     this.mapView.showFlowers === true
       ? this.mapView.showFlowers = false
       : this.mapView.showFlowers = true
+  }
+
+  setPause () {
+    this.pause.pause()    
+  }
+
+  unpause () {
+    if (this.pause.paused) {
+      this.pause.unpause()
+    }
   }
 
   kineticScrolling () {

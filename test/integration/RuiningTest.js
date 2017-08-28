@@ -54,7 +54,7 @@ describe('Integration test: Structures ruin by time', () => {
 
     gameAdvancer.setMoney(10000)
     gameAdvancer.click(1, 1)
-    gameAdvancer.clickNthButton(1)
+    gameAdvancer.clickNthButton(2)
 
     gameStateChecker.checkMoneyUnder(10000)
     gameStateChecker.checkSelectedTile(0, 0)
@@ -65,7 +65,7 @@ describe('Integration test: Structures ruin by time', () => {
     gameAdvancer.buildBuilding(0, 0, 'grass', 1, 3)
     gameAdvancer.setMoney(10000)
     gameAdvancer.click(1, 1)
-    gameAdvancer.clickNthButton(1)
+    gameAdvancer.clickNthButton(2)
     gameStateChecker.checkMoney(10000)
   })
 })
