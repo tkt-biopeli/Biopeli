@@ -3,17 +3,27 @@ const sinon = require('sinon')
 import StructureYieldEffect from '../../../../../../src/controllers/events/random/effects/withmultipletargets/StructureYieldEffect'
 
 describe('Structure Yield effect tests', ()=>{
-  it('Effect works', ()=>{
-    var structureType = {turnipYield: 1}
-    var structure = {structureType: structureType}
-    var effect = new StructureYieldEffect({
-      json: {yieldChange: 2}
+  var effect
+
+  var createEffect = (jsonValues) => {
+    effect = new StructureYieldEffect({
+      json: {
+        yieldChange: jsonValues[0]
+      }
     })
+  }
 
-    effect.realizeEventForOneElement(structureType)
-    assert.equal(3, structure.structureType.turnipYield)
+  it('Constructor test', ()=>{
+    createEffect([23])
+    assert.equal(effect.yieldChange, 23)
+    effect = new StructureYieldEffect({json: {}})
+    assert.equal(effect.yieldChange, 0)
+  })
 
+  it('realizeEventForOneElement method functioning', ()=>{
+    createEffect([23])
+    var structureType = {turnipYield: 79}
     effect.realizeEventForOneElement(structureType)
-    assert.equal(5, structure.structureType.turnipYield)
+    assert.equal(structureType.turnipYield, 102)
   })
 })

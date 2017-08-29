@@ -2,7 +2,7 @@ import Effect from './Effect'
 
 export default class StructureCostEffect extends Effect {
   constructor ({json}) {
-    super()
+    super() /* istanbul ignore next */
     this.costChange = json.costChange != null ? json.costChange : 0
   }
 

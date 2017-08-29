@@ -4,7 +4,7 @@ import Content from './Content'
  */
 export default class TopBarContent extends Content {
   constructor ({ player, city, timer }) {
-    super()
+    super() /* istanbul ignore next */
     this.player = player
     this.city = city
     this.timer = timer
