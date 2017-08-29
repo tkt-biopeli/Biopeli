@@ -274,4 +274,29 @@ describe('StructureFactory tests', () => {
     assert.equal(tile.structure.size, 66)
     assert.equal(tile.structure.producer.producer.ownedFarmLand.length, 3)
   })
+
+  it('buildBuildingNamed is functioning properly', () =>{
+    sfactory.buildBuilding = sinon.stub().returns('bla')
+    sfactory.structureTypes = {foo: {}, bar: {}}
+    assert.equal(sfactory.buildBuildingNamed({}, 'huu'), undefined)
+    assert.equal(sfactory.buildBuildingNamed({}, 'foo'), 'bla')
+  })
+
+  it('changeOwnership is functioning properly', () =>{
+    sfactory.removeTileFromPreviousOwner = sinon.spy()
+    sfactory.setNewTileType = sinon.spy()
+    // if is false
+    var structure = {ownedTiles: [], structureType: {takesOwnershipOf: 'foo'}}
+    var tmpTile = {tileType: {name: 'bar'}}
+    sfactory.changeOwnership(structure, tmpTile)
+    assert.equal(sfactory.removeTileFromPreviousOwner.callCount, 1)
+    assert.equal(sfactory.setNewTileType.callCount, 1)
+    assert.equal(structure.ownedTiles.length, 0)
+    // if is true
+    structure.structureType.takesOwnershipOf = 'foobar'
+    sfactory.changeOwnership(structure, tmpTile)
+    assert.equal(sfactory.removeTileFromPreviousOwner.callCount, 2)
+    assert.equal(sfactory.setNewTileType.callCount, 2)
+    assert.equal(structure.ownedTiles.length, 1)
+  })
 })
