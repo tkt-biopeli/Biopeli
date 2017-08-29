@@ -28,7 +28,7 @@ export default class Highscores extends Phaser.State {
       this.state.start('Start', true, false, this.gameData) 
     })
 
-    this.menu.createButton('Lähimmät tulokset', () => {
+    this.menu.createButton('Lähimmät', () => {
       this.state.start('HighscoresLocal', true, false, this.gameData, this.scores)
     })
 

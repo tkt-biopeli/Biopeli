@@ -11,7 +11,7 @@ export default class HighscoresLocal extends Phaser.State {
 
   binSearch (val) {
     var min = 0, 
-        max = this.scores.length--,
+        max = this.scores.length - 1,
         mid
 
     while (min < max) {
@@ -32,7 +32,7 @@ export default class HighscoresLocal extends Phaser.State {
   addScores () {
     var i = this.binSearch(this.scores)
     var start = (i >= 5) ? i - 5 : 0
-    var end = (start + 5 < this.scores.length) ? start + 5 : this.scores.length
+    var end = (start + 10 < this.scores.length) ? start + 10 : this.scores.length
     for (i = start; i < end; i++) {
       this.menu.createDescription(
         '' + (i + 1) + ': ' + 
@@ -44,7 +44,7 @@ export default class HighscoresLocal extends Phaser.State {
 
   create () {
     this.menu = new MenuBuilder(this, 'start', this.camera.height * 1 / 10, this.gameData.config)
-    this.menu.createTitle('Tulokset')
+    this.menu.createTitle('Lähimmät tulokset')
 
     this.addScores()
 
