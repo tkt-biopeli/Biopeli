@@ -1,5 +1,5 @@
-import Timer from '../../../src/controllers/events/time/Timer'
-import TimeEvent from '../../../src/controllers/events/time/TimeEvent'
+import Timer from '../../../../src/controllers/events/time/Timer'
+import TimeEvent from '../../../../src/controllers/events/time/TimeEvent'
 
 const assert = require("assert")
 

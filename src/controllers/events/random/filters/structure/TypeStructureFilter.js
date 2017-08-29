@@ -2,7 +2,7 @@ import StructureFilter from '../baseclasses/StructureFilter'
 
 export default class TypeStructureFilter extends StructureFilter {
   constructor ({ gameState, json }) {
-    super(gameState)
+    super(gameState) /* istanbul ignore next */
     this.types = json.types
   }
 

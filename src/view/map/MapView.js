@@ -69,7 +69,7 @@ export default class MapView {
     this.fillView(viewArea, offset)
   }
 
-  addToTexture(textureName, sprite, x, y,) {
+  addToTexture (textureName, sprite, x, y) {
     let layer = this.layers.get(textureName)
     layer.texture.renderXY(sprite, Math.round(x), Math.round(y))
   }
@@ -144,7 +144,6 @@ export default class MapView {
 
     this.viewTileFactory.stop()        
     this.redraw = false
-    
   }
 
   /**
@@ -159,12 +158,22 @@ export default class MapView {
     // viewTile.tileSprite.width = this.tileWidth
     // viewTile.tileSprite.height = this.tileHeight
     this.addHighlights(viewTile)    
-    this.addToTexture('ground',viewTile.tileSprite, pxCoords.x, pxCoords.y)
-    if (this.showFertility) this.addToTexture('visuals',viewTile.fertilitySprite, pxCoords.x, pxCoords.y)
-    if (this.showMoisture) this.addToTexture('visuals',viewTile.moistureSprite, pxCoords.x, pxCoords.y)
-    if (viewTile.treeSprite) this.addToTexture('visuals', viewTile.treeSprite, pxCoords.x, pxCoords.y)      
-    if (this.showFlowers) this.addToTexture('visuals', viewTile.flowerSprite, pxCoords.x, pxCoords.y)    
-    if (viewTile.structureSprite) this.addToTexture('structure', viewTile.structureSprite, pxCoords.x, pxCoords.y)    
+    this.addToTexture('ground', viewTile.tileSprite, pxCoords.x, pxCoords.y)
+    if (this.showFertility) {
+      this.addToTexture('visuals', viewTile.fertilitySprite, pxCoords.x, pxCoords.y)
+    }
+    if (this.showMoisture) {
+      this.addToTexture('visuals', viewTile.moistureSprite, pxCoords.x, pxCoords.y)
+    }
+    if (viewTile.treeSprite) {
+      this.addToTexture('visuals', viewTile.treeSprite, pxCoords.x, pxCoords.y)
+    }
+    if (this.showFlowers) {
+      this.addToTexture('visuals', viewTile.flowerSprite, pxCoords.x, pxCoords.y)
+    }
+    if (viewTile.structureSprite) {
+      this.addToTexture('structure', viewTile.structureSprite, pxCoords.x, pxCoords.y)
+    }
   }
 
   /**

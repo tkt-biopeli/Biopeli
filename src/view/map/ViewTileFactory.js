@@ -58,7 +58,9 @@ export default class ViewTileFactory {
       game: this.game, 
       modelTile: modelTile,             
       tileSize: this.config.mapSettings.tileSize,      
-      borderColour:modelTile.owner !== null ? this.palette.getBorderColour(modelTile.owner.bordercolCode) : 0x000000,
+      borderColour: modelTile.owner !== null
+        ? this.palette.getBorderColour(modelTile.owner.bordercolCode)
+        : 0x000000,
       beachId: this.map.getTileBeachId(modelTile)
     })
     return vt
@@ -70,7 +72,9 @@ export default class ViewTileFactory {
       showMoisture: this.showMoisture,
       showFertility: this.showFertility,
       redraw: this.redraw,
-      borderColour:modelTile.owner !== null ? this.palette.getBorderColour(modelTile.owner.bordercolCode) : 0x000000,
+      borderColour: modelTile.owner !== null
+        ? this.palette.getBorderColour(modelTile.owner.bordercolCode)
+        : 0x000000,
       beachId: this.map.getTileBeachId(modelTile)
     })
   }

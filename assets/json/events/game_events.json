@@ -78,6 +78,19 @@
       ]
     },
     {
+      "name": "Verokiristys",
+      "description": "Veroja on kiristetty, rakentaminen on kalliimpaa!",
+      "effects": [
+        {
+          "name": "StructureCostChange",
+          "costChange": 1.8,
+          "filter": {
+            "name": "AllStructureTypes"
+          }
+        }
+      ]
+    },
+    {
       "name": "Hipit",
       "description": "Kaupunkiin muutti hippejä, ja yrttien hinnat nousivat!",
       "effects": [
@@ -187,6 +200,39 @@
           "yieldChange": 1,
           "filter": {
             "name": "AllStructureTypes"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tuholaiset",
+      "description": "Tuholaiset iskivät. Kalakasvattamot säästyivät tuhoilta.",
+      "condition": 
+      {
+        "name": "StructureLimiter",
+        "filter": {
+          "name": "StructuresWithStructureType",
+          "structureTypes": [
+            "fishery"
+          ]
+        },
+        "min": 2
+      },
+      "effects": [
+        {
+          "name": "StructureYieldChange",
+          "yieldChange": 4,
+          "filter": {
+            "name": "Complement",
+            "from": {
+              "name": "AllStructureTypes"
+            },
+            "toRemove": {
+              "name": "StructureTypes",
+              "structureTypes": [
+                "fishery"
+              ]
+            }
           }
         }
       ]

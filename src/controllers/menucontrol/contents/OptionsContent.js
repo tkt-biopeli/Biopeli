@@ -2,7 +2,7 @@ import Content from './Content'
 
 export default class OptionsContent extends Content {
   constructor ({ game, texts, telegramStorage }) {
-    super()
+    super() /* istanbul ignore next */
     this.game = game
     this.texts = texts.optionsContentTexts
     this.name = 'options'
@@ -41,8 +41,17 @@ export default class OptionsContent extends Content {
     this.owner.redraw()
   }
 
-  pause() {
+  pause () {
     this.game.inputHandler.setPause()
+  }
+
+  fullscreen () {
+    if (this.game.state.scale.isFullScreen) {
+      this.game.state.scale.stopFullScreen()
+    } else {
+      this.game.state.scale.startFullScreen(true)
+    }
+    this.owner.redraw()
   }
 
   createSections () {    
@@ -61,6 +70,11 @@ export default class OptionsContent extends Content {
     this.button(this.texts.increaseVolume, this.incVolume, this)
     this.button(this.texts.decreaseVolume, this.decVolume, this)
     this.button(this.texts.endGame, this.game.gameEvents.finishGame, this.game.gameEvents)
-    this.button(this.texts.pause, this.pause, this)   
+    this.button(this.texts.pause, this.pause, this)
+    if (!this.game.state.scale.isFullScreen) {
+      this.button(this.texts.fullscreenOn, this.fullscreen, this)
+    } else {
+      this.button(this.texts.fullscreenOff, this.fullscreen, this)
+    }
   }
 }

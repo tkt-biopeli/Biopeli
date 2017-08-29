@@ -2,7 +2,7 @@ import TileFilter from '../baseclasses/TileFilter'
 
 export default class TileTypeTileFilter extends TileFilter {
   constructor ({ gameState, json }) {
-    super(gameState)
+    super(gameState) /* istanbul ignore next */
     this.tiletypeNames = json.tileTypes
   }
 

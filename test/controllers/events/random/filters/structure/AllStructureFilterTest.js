@@ -13,5 +13,6 @@ describe('All structure filter and tile tile filter tests', ()=>{
 
     var affected = filter.affected()
     assert.equal(3, affected.length)
+    assert.equal(filter.player, player)
   })
 })
