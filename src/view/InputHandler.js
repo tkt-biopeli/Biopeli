@@ -84,7 +84,7 @@ export default class InputHandler {
   kineticScrolling () {
     // Configuration
     this.game.game.kineticScrolling.configure({
-      kineticMovement: true,
+      kineticMovement: false,
       timeConstantScroll: 325, // really mimic iOS
       horizontalScroll: true,
       verticalScroll: true,
