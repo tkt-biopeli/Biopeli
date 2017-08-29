@@ -20,6 +20,7 @@ export default class Start extends Phaser.State {
     }).generateName()
 
     this.menuMusic = this.add.audio('menu')
+    this.menuMusic.volume = 0.7
     this.menuMusic.play()
     this.menuMusic.loopFull()
 

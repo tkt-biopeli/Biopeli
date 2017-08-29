@@ -205,6 +205,7 @@ export default class GameState {
       this.structureHintGenerator.structureBuilt, this.structureHintGenerator)
 
     this.music = this.state.add.audio('music')
+    this.music.volume = 0.7
     this.music.play()
     this.music.loopFull()
   }
