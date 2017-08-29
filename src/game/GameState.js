@@ -158,6 +158,7 @@ export default class GameState {
 
     this.gameTimer = new Timer({
       interval: config.gameplaySettings.time.gameTimerInterval,
+      startYear: config.gameplaySettings.time.startYear,
       currentTime: this.currentTime()
     })
 

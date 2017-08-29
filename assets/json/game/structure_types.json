@@ -5,20 +5,20 @@
       "name": "wheat_farm",
       "nameWithLanguage": "viljatila",
       "asset": "wheat_farm",
-      "health": 12,
-      "cost": 10000,
+      "health": 15,
+      "cost": 6000,
       "radiusForTileOwnership": 3,
-      "harvestingWeeks": ["8.1"],
+      "harvestingWeeks": ["4.1","8.1","12.1"],
       "continuousProduction": false,
-      "turnipYield": 4,
-      "moistureMin": 40,
-      "moistureMax": 70,
-      "fertilityMin": 40,
-      "fertilityMax": 70,
+      "turnipYield": 7,
+      "moistureMin": 50,
+      "moistureMax": 100,
+      "fertilityMin": 0,
+      "fertilityMax": 100,
       "moveCosts": {
         "grass": 1,
-        "water": 5,
-        "water_field": 5,
+        "water": 3,
+        "water_field": 3,
         "forest": 2,
         "field": 1,
         "industrial": 1
@@ -28,7 +28,7 @@
       "pollution": {
         "constant": true,
         "distance": 4,
-        "amount": 2
+        "amount": 1
       }
     },
     {
@@ -36,51 +36,20 @@
       "name": "dairy_farm",
       "nameWithLanguage": "maitotila",
       "asset": "dairy_farm",
-      "health": 15,
-      "cost": 15000,
+      "health": 18,
+      "cost": 8000,
       "radiusForTileOwnership": 2,
       "harvestingWeeks": [],
       "continuousProduction": true,
-      "turnipYield": 6,
-      "moistureMin": 40,
+      "turnipYield": 15,
+      "moistureMin": 0,
       "moistureMax": 70,
-      "fertilityMin": 40,
+      "fertilityMin": 0,
       "fertilityMax": 70,
       "moveCosts": {
         "grass": 1,
-        "water": 5,
-        "water_field": 5,
-        "forest": 2,
-        "field": 1,
-        "industrial": 1
-      },
-      "takesOwnershipOf": ["grass"],
-      "farmland": "field",
-      "pollution": {
-        "constant": true,
-        "distance": 3,
-        "amount": 3
-      }
-    },
-    {
-      "type": "producer_structure",
-      "name": "berry_farm",
-      "nameWithLanguage": "marjatila",
-      "asset": "berry_farm",
-      "health": 8,
-      "cost": 10000,
-      "radiusForTileOwnership": 2,
-      "harvestingWeeks": [],
-      "continuousProduction": true,
-      "turnipYield": 3,
-      "moistureMin": 40,
-      "moistureMax": 70,
-      "fertilityMin": 40,
-      "fertilityMax": 70,
-      "moveCosts": {
-        "grass": 1,
-        "water": 5,
-        "water_field": 5,
+        "water": 3,
+        "water_field": 3,
         "forest": 2,
         "field": 1,
         "industrial": 1
@@ -94,80 +63,24 @@
       }
     },
     {
-      "type": "refinery",
-      "name": "mill",
-      "nameWithLanguage": "mylly",
-      "asset": "mill",
-      "health": 20,
-      "cost": 20000,
-      "radiusForTileOwnership": 1,
-      "multiplier": 2,
-      "reach": 5,
-      "buysFrom": ["wheat_farm"],
-      "moveCosts": {
-        "grass": 1,
-        "water": 5,
-        "water_field": 5,
-        "forest": 2,
-        "field": 1,
-        "industrial": 1
-      },
-      "takesOwnershipOf": ["grass", "field", "industrial"],
-      "farmland": "industrial",
-      "pollution": {
-        "constant": false,
-        "distance": 3,
-        "amount": 4
-      },
-      "takesOwnership": true
-    },
-    {
-      "type": "refinery",
-      "name": "dairy",
-      "nameWithLanguage": "meijeri",
-      "asset": "dairy",
-      "health": 20,
-      "cost": 30000,
-      "radiusForTileOwnership": 1,
-      "multiplier": 2,
-      "reach": 5,
-      "buysFrom": ["dairy_farm"],
-      "moveCosts": {
-        "grass": 1,
-        "water": 5,
-        "water_field": 5,
-        "forest": 2,
-        "field": 1,
-        "industrial": 1
-      },
-      "takesOwnershipOf": ["grass", "field", "industrial"],
-      "farmland": "industrial",
-      "pollution": {
-        "constant": false,
-        "distance": 3,
-        "amount": 5
-      },
-      "takesOwnership": true
-    },
-    {
       "type": "producer_structure",
-      "name": "herb_farm",
-      "nameWithLanguage": "yrttitila",
-      "asset": "herb_farm",
-      "health": 10,
-      "cost": 12500,
-      "radiusForTileOwnership": 2,
+      "name": "berry_farm",
+      "nameWithLanguage": "marjatila",
+      "asset": "berry_farm",
+      "health": 15,
+      "cost": 6000,
+      "radiusForTileOwnership": 1,
       "harvestingWeeks": [],
       "continuousProduction": true,
-      "turnipYield": 4,
-      "moistureMin": 40,
-      "moistureMax": 70,
-      "fertilityMin": 40,
-      "fertilityMax": 70,
+      "turnipYield": 25,
+      "moistureMin": 0,
+      "moistureMax": 100,
+      "fertilityMin": 50,
+      "fertilityMax": 100,
       "moveCosts": {
         "grass": 1,
-        "water": 5,
-        "water_field": 5,
+        "water": 3,
+        "water_field": 3,
         "forest": 2,
         "field": 1,
         "industrial": 1
@@ -176,7 +89,69 @@
       "farmland": "field",
       "pollution": {
         "constant": true,
-        "distance": 4,
+        "distance": 2,
+        "amount": 1
+      }
+    },
+    {
+      "type": "producer_structure",
+      "name": "windmill",
+      "nameWithLanguage": "tuulimylly",
+      "asset": "windmill",
+      "health": 40,
+      "cost": 4000,
+      "radiusForTileOwnership": 0,
+      "harvestingWeeks": [],
+      "continuousProduction": true,
+      "turnipYield": 10,
+      "moistureMin": 0,
+      "moistureMax": 100,
+      "fertilityMin": 0,
+      "fertilityMax": 100,
+      "moveCosts": {
+        "grass": 1,
+        "water": 1,
+        "water_field": 1,
+        "forest": 1,
+        "field": 1,
+        "industrial": 1
+      },
+      "takesOwnershipOf": ["grass", "field", "industrial"],
+      "farmland": "grass",
+      "pollution": {
+        "constant": true,
+        "distance": 0,
+        "amount": 1
+      }
+    },
+    {
+      "type": "producer_structure",
+      "name": "herb_farm",
+      "nameWithLanguage": "yrttitila",
+      "asset": "herb_farm",
+      "health": 20,
+      "cost": 12000,
+      "radiusForTileOwnership": 1,
+      "harvestingWeeks": [],
+      "continuousProduction": true,
+      "turnipYield": 100,
+      "moistureMin": 0,
+      "moistureMax": 40,
+      "fertilityMin": 60,
+      "fertilityMax": 100,
+      "moveCosts": {
+        "grass": 1,
+        "water": 3,
+        "water_field": 3,
+        "forest": 2,
+        "field": 1,
+        "industrial": 1
+      },
+      "takesOwnershipOf": ["grass"],
+      "farmland": "field",
+      "pollution": {
+        "constant": true,
+        "distance": 1,
         "amount": 1
       }
     },
@@ -185,16 +160,16 @@
       "name": "mushroom_farm",
       "nameWithLanguage": "sienitila",
       "asset": "mushroom_farm",
-      "health": 12,
-      "cost": 10000,
+      "health": 10,
+      "cost": 4000,
       "radiusForTileOwnership": 3,
-      "harvestingWeeks": [],
-      "continuousProduction": true,
-      "turnipYield": 3,
-      "moistureMin": 40,
-      "moistureMax": 70,
-      "fertilityMin": 40,
-      "fertilityMax": 70,
+      "harvestingWeeks": ["10.1","4.1"],
+      "continuousProduction": false,
+      "turnipYield": 30,
+      "moistureMin": 70,
+      "moistureMax": 100,
+      "fertilityMin": 25,
+      "fertilityMax": 75,
       "moveCosts": {
         "grass": 5,
         "water": 5,
@@ -208,7 +183,7 @@
       "pollution": {
         "constant": true,
         "distance": 1,
-        "amount": 4
+        "amount": 1
       }
     },
     {
@@ -216,16 +191,16 @@
       "name": "lumber_yard",
       "nameWithLanguage": "saha",
       "asset": "lumber_yard",
-      "health": 20,
-      "cost": 20000,
-      "radiusForTileOwnership": 3,
+      "health": 25,
+      "cost": 10000,
+      "radiusForTileOwnership": 2,
       "harvestingWeeks": [],
       "continuousProduction": true,
-      "turnipYield": 7,
-      "moistureMin": 40,
-      "moistureMax": 70,
-      "fertilityMin": 40,
-      "fertilityMax": 70,
+      "turnipYield": 35,
+      "moistureMin": 0,
+      "moistureMax": 60,
+      "fertilityMin": 0,
+      "fertilityMax": 100,
       "moveCosts": {
         "grass": 5,
         "water": 5,
@@ -238,8 +213,8 @@
       "farmland": "forest",
       "pollution": {
         "constant": false,
-        "distance": 3,
-        "amount": 4
+        "distance": 1,
+        "amount": 3
       }
     },
     {
@@ -247,20 +222,20 @@
       "name": "fishery",
       "nameWithLanguage": "kalanviljelylaitos",
       "asset": "fishery",
-      "health": 15,
-      "cost": 15000,
+      "health": 14,
+      "cost": 12000,
       "radiusForTileOwnership": 2,
       "harvestingWeeks": [],
       "continuousProduction": true,
-      "turnipYield": 6,
-      "moistureMin": 75,
+      "turnipYield": 15,
+      "moistureMin": 0,
       "moistureMax": 100,
-      "fertilityMin": 40,
-      "fertilityMax": 90,
+      "fertilityMin": 0,
+      "fertilityMax":100,
       "moveCosts": {
         "grass": 10,
         "water": 1,
-        "water_field": 2,
+        "water_field": 1,
         "forest": 10,
         "field": 10,
         "industrial": 10
@@ -268,24 +243,80 @@
       "takesOwnershipOf": ["water"],
       "farmland": "water_field",
       "pollution": {
-        "constant": false,
+        "constant": true,
         "distance": 3,
-        "amount": 4
+        "amount": 2
       }
+    },
+    {
+      "type": "refinery",
+      "name": "mill",
+      "nameWithLanguage": "mylly",
+      "asset": "mill",
+      "health": 21,
+      "cost": 12000,
+      "radiusForTileOwnership": 1,
+      "multiplier": 2.5,
+      "reach": 10,
+      "buysFrom": ["wheat_farm"],
+      "moveCosts": {
+        "grass": 1,
+        "water": 5,
+        "water_field": 5,
+        "forest": 2,
+        "field": 1,
+        "industrial": 1
+      },
+      "takesOwnershipOf": ["grass", "field", "industrial"],
+      "farmland": "industrial",
+      "pollution": {
+        "constant": false,
+        "distance": 2,
+        "amount": 2
+      },
+      "takesOwnership": true
+    },
+    {
+      "type": "refinery",
+      "name": "dairy",
+      "nameWithLanguage": "meijeri",
+      "asset": "dairy",
+      "health": 21,
+      "cost": 8000,
+      "radiusForTileOwnership": 1,
+      "multiplier": 1.5,
+      "reach": 8,
+      "buysFrom": ["dairy_farm"],
+      "moveCosts": {
+        "grass": 1,
+        "water": 3,
+        "water_field": 3,
+        "forest": 2,
+        "field": 1,
+        "industrial": 1
+      },
+      "takesOwnershipOf": ["grass", "field", "industrial"],
+      "farmland": "industrial",
+      "pollution": {
+        "constant": false,
+        "distance": 1,
+        "amount": 3
+      },
+      "takesOwnership": true
     },
     {
       "type": "refinery",
       "name": "fish_refinery",
       "nameWithLanguage": "kalajalostamo",
       "asset": "fish_refinery",
-      "health": 20,
+      "health": 21,
       "cost": 20000,
       "radiusForTileOwnership": 1,
-      "multiplier": 2,
-      "reach": 7,
+      "multiplier": 1.5,
+      "reach": 12,
       "buysFrom": ["fishery"],
       "moveCosts": {
-        "grass": 5,
+        "grass": 10,
         "water": 1,
         "water_field": 1,
         "forest": 10,
@@ -297,7 +328,7 @@
       "pollution": {
         "constant": false,
         "distance": 2,
-        "amount": 4
+        "amount": 3
       },
       "takesOwnership": true
     },
@@ -306,8 +337,8 @@
       "name": "biofuel_refinery",
       "nameWithLanguage": "biopolttoaineen jalostamo",
       "asset": "biofuel_refinery",
-      "health": 20,
-      "cost": 45000,
+      "health": 30,
+      "cost": 15000,
       "radiusForTileOwnership": 1,
       "multiplier": 0.2,
       "reach": 10,
@@ -324,7 +355,7 @@
       "farmland": "industrial",
       "pollution": {
         "constant": false,
-        "distance": 3,
+        "distance": 1,
         "amount": 4
       },
       "takesOwnership": false
@@ -334,15 +365,15 @@
       "name": "fertilizer_factory",
       "nameWithLanguage": "lannoitetehdas",
       "asset": "fertilizer_factory",
-      "health": 20,
-      "cost": 30000,
+      "health": 100,
+      "cost": 10000,
       "radiusForTileOwnership": 2,
       "changeValues": {
         "flowers": 0,
-        "fertility": 10,
+        "fertility": 20,
         "moisture": 0
       },
-      "reach": 10,
+      "reach": 6,
       "moveCosts": {
         "grass": 1,
         "water": 1,
@@ -355,39 +386,8 @@
       "farmland": "industrial",
       "pollution": {
         "constant": false,
-        "distance": 2,
-        "amount": 5
-      }
-    },
-    {
-      "type": "producer_structure",
-      "name": "windmill",
-      "nameWithLanguage": "tuulimylly",
-      "asset": "windmill",
-      "health": 15,
-      "cost": 5000,
-      "radiusForTileOwnership": 0,
-      "harvestingWeeks": [],
-      "continuousProduction": true,
-      "turnipYield": 5,
-      "moistureMin": 0,
-      "moistureMax": 100,
-      "fertilityMin": 0,
-      "fertilityMax": 100,
-      "moveCosts": {
-        "grass": 1,
-        "water": 1,
-        "water_field": 1,
-        "forest": 1,
-        "field": 1,
-        "industrial": 1
-      },
-      "takesOwnershipOf": ["grass", "field", "industrial"],
-      "farmland": "grass",
-      "pollution": {
-        "constant": false,
-        "distance": 0,
-        "amount": 0
+        "distance": 1,
+        "amount": 3
       }
     },
     {
@@ -395,15 +395,15 @@
       "name": "junkyard",
       "nameWithLanguage": "kaatopaikka",
       "asset": "junkyard",
-      "health": 20,
-      "cost": 50000,
+      "health": 100,
+      "cost": 16000,
       "radiusForTileOwnership": 2,
       "changeValues": {
         "flowers": 1,
         "fertility": 0,
         "moisture": 0
       },
-      "reach": 50,
+      "reach": 20,
       "moveCosts": {
         "grass": 2,
         "water": 1,
@@ -415,9 +415,39 @@
       "takesOwnershipOf": ["grass", "field", "industrial"],
       "farmland": "industrial",
       "pollution": {
-        "constant": false,
-        "distance": 3,
-        "amount": 10
+        "constant": true,
+        "distance": 2,
+        "amount": 6
+      }
+    },
+    {
+      "type": "special",
+      "name": "recycling_center",
+      "nameWithLanguage": "jätteidenkäsittelylaitos",
+      "asset": "junkyard",
+      "health": 100,
+      "cost": 30000,
+      "radiusForTileOwnership": 2,
+      "changeValues": {
+        "flowers": 3,
+        "fertility": 0,
+        "moisture": 0
+      },
+      "reach": 12,
+      "moveCosts": {
+        "grass": 1,
+        "water": 1,
+        "water_field": 1,
+        "forest": 1,
+        "field": 1,
+        "industrial": 1
+      },
+      "takesOwnershipOf": ["grass", "field", "industrial"],
+      "farmland": "industrial",
+      "pollution": {
+        "constant": true,
+        "distance": 1,
+        "amount": 4
       }
     },
     {
@@ -425,15 +455,15 @@
       "name": "ditch",
       "nameWithLanguage": "oja",
       "asset": "ditch",
-      "health": 20,
-      "cost": 500,
+      "health": 100,
+      "cost": 4000,
       "radiusForTileOwnership": 1,
       "changeValues": {
         "flowers": 0,
-        "moisture": -25,
+        "moisture": -20,
         "fertility": 0
       },
-      "reach": 1,
+      "reach": 3,
       "moveCosts": {
         "grass": 1,
         "water": 5,

@@ -44,8 +44,8 @@
       "description": "Kaupungissa jyllää hirvittävä kulkutauti, ihmisiä kuolee!",
       "condition": {
         "name": "PopulationLimiter",
-        "notBefore": 700,
-        "notAfter": 999999
+        "notBefore": 15000,
+        "notAfter": 1000000
       },
       "effects": [
         {
@@ -172,8 +172,7 @@
       "description": "Kaupungin hullut tiedemiehet kehittivät parempia lypsyrobotteja, maitotuotanto parantuu!",
       "condition": {
         "name": "TimeLimiter",
-        "notBefore": 20,
-        "notAfter": 50
+        "notBefore": 20
       },
       "effects": [
         {
@@ -193,8 +192,7 @@
       "description": "Kaikkien tuotteiden hinnat kallistuvat! Nyt tahkotaan rahaa!!!",
       "condition": {
         "name": "TimeLimiter",
-        "notBefore": 10,
-        "notAfter": 50
+        "notBefore": 10
       },
       "effects": [
         {
