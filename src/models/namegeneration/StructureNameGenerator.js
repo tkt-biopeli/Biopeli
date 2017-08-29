@@ -39,7 +39,7 @@ export default class StructureNameGenerator {
     var hyper = this.randomWithBounds(0, this.hyperboles.length)
     if (this.random() < 0.25) {
       var tmp = this.endAdjectives[end].toLowerCase()
-      return this.hyperboles[hyper] + '-' + tmp + ' ' + typeName
+      return this.hyperboles[hyper] + ' ' + tmp + ' ' + typeName
     }
     return this.endAdjectives[end] + ' ' + typeName
   }
