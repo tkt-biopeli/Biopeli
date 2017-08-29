@@ -48,8 +48,7 @@ export default class OptionsContent extends Content {
   fullscreen () {
     if (this.game.state.scale.isFullScreen) {
       this.game.state.scale.stopFullScreen()
-    }
-    else {
+    } else {
       this.game.state.scale.startFullScreen(true)
     }
     this.owner.redraw()
