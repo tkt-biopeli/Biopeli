@@ -111,7 +111,7 @@
       },
 
       "ruinSettings": {
-        "minRuin": 4,
+        "minRuin": 12,
         "maxRuin": 48,
         "fixMultiplier": 2
       }
@@ -123,10 +123,10 @@
   },
 
   "randomEventSettings": {
-    "minTime": 12,
-    "maxTime": 144,
+    "minTime": 48,
+    "maxTime": 240,
     "maxSearched": 10,
     "eventContentIndex": -1,
-    "bioFactFrequencyMinMax": 48
+    "bioFactFrequencyMinMax": 96
   }
 }
