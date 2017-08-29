@@ -2,7 +2,7 @@ import Content from './Content'
 
 export default class StructureInfoContent extends Content {
   constructor ({demandFunction, texts}) {
-    super()
+    super() /* istanbul ignore next */
 
     this.demandFunction = demandFunction
     this.texts = texts.structureInfoContent
@@ -40,7 +40,7 @@ export default class StructureInfoContent extends Content {
     
     if (structure.structureType.continuousProduction) {
       this.continuousProducerInfo(structure)
-    }else {
+    } else {
       this.seasonalProducerInfo(structure)
     }
 
@@ -91,7 +91,7 @@ export default class StructureInfoContent extends Content {
       this.demandFunction.pay(structure.producer.producedAmount(true)))
   }
 
-  specialInfo (sructure) {
+  specialInfo (structure) {
 
   }
 

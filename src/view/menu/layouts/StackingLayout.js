@@ -5,7 +5,7 @@ import Layout from './Layout'
  */
 export default class StackingLayout extends Layout {
   constructor ({ menuRect, linePadding, sectionPadding, vertical }) {
-    super(menuRect, vertical)
+    super(menuRect, vertical) /* istanbul ignore next */
 
     this.linePadding = linePadding
     this.sectionPadding = sectionPadding

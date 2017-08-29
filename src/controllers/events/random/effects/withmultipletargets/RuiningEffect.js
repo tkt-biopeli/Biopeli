@@ -2,7 +2,7 @@ import Effect from './Effect'
 
 export default class RuiningEffect extends Effect {
   constructor ({json}) {
-    super()
+    super() /* istanbul ignore next */
     this.percentage = json.percentage
   }
 

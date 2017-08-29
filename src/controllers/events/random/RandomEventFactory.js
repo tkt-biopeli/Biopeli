@@ -135,8 +135,9 @@ export default class RandomEventFactory {
   }
 
   createPart (name, blueprint) {
+    // If blueprint is not given, return the default blueprint
+    if (blueprint == null) return new (this[name + 'Creators'].get(this.defaultValue))()
     // Checks if creator list contains the value. If not, use default value
-    if (!blueprint) { blueprint = { name: this.defaultValue } }
     var key = this[name + 'Creators'].has(blueprint.name) ? blueprint.name : this.defaultValue
     // Searches constructor with given name from the map and instantiates it
     return new (this[name + 'Creators'].get(key))({gameState: this.gameState, json: blueprint})

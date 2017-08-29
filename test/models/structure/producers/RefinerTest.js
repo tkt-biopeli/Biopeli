@@ -111,4 +111,113 @@ describe('Refiner tests', () => {
     var result = refiner.producedAmount()
     assert.equal(result, 12)
   })
+
+  it('findProducers works', () => {
+    var takeControlSpy = sinon.spy()
+    var structure = {}
+    var capsule = {tile: {structure: structure}, distance: 13}
+    refiner.zone = [capsule]
+    refiner.takeControlOf = takeControlSpy
+    // both sides of conjunction are false
+    refiner.canRefineOutputOf = sinon.stub().returns(false)
+    refiner.isCloser = sinon.stub().returns(false)
+    refiner.findProducers()
+    assert.equal(takeControlSpy.callCount, 0)
+    // left side true, right side false
+    refiner.canRefineOutputOf = sinon.stub().returns(true)
+    refiner.isCloser = sinon.stub().returns(false)
+    refiner.findProducers()
+    assert.equal(takeControlSpy.callCount, 0)
+    // left side false, right side true
+    refiner.canRefineOutputOf = sinon.stub().returns(false)
+    refiner.isCloser = sinon.stub().returns(true)
+    refiner.findProducers()
+    assert.equal(takeControlSpy.callCount, 0)
+    // both sides true
+    refiner.canRefineOutputOf = sinon.stub().returns(true)
+    refiner.isCloser = sinon.stub().returns(true)
+    refiner.findProducers()
+    assert.equal(takeControlSpy.callCount, 1)
+  })
+
+  it('canRefineOutputOf works', () => {
+    var structure = {
+      structureType: {
+        buysFrom: 'huuhaa',
+        type: 'huuhaa',
+        name: 'nimi'
+      }
+    }
+    refiner.inputTypes = 'foo'
+    // first if is false
+    assert(!refiner.canRefineOutputOf(structure))
+    refiner.inputTypes = 'pöönimi'
+    assert(refiner.canRefineOutputOf(structure))
+    // first if is true; second is false
+    // both sides of the conjunction are false
+    refiner.inputTypes = 'all'
+    refiner.structure = {structureType: {name: 'pöö'}}
+    assert(refiner.canRefineOutputOf(structure))
+    // left side is true, right side false
+    structure.structureType.type = 'refinery'
+    structure.structureType.buysFrom = 'foobar'
+    assert(refiner.canRefineOutputOf(structure))
+    // left side is false, right side true
+    structure.structureType.type = 'bla'
+    structure.structureType.buysFrom = 'huu'
+    assert(refiner.canRefineOutputOf(structure))
+    structure.structureType.buysFrom = 'allfoo'
+    assert(refiner.canRefineOutputOf(structure))
+    structure.structureType.buysFrom = 'foopöö'
+    assert(refiner.canRefineOutputOf(structure))
+    // both sides are true
+    structure.structureType.type = 'refinery'
+    assert(!refiner.canRefineOutputOf(structure))
+  })
+
+  it('findTileInZone works', () => {
+    var tile = {equals: (value) => {return 13 === value}}
+    var capsule = {tile: 7}
+    refiner.zone = [capsule]
+    assert.equal(refiner.findTileInZone(tile), null)
+    capsule.tile = 13
+    assert.equal(refiner.findTileInZone(tile), capsule)
+  })
+
+  it('takeControlOf works', () => {
+    var producer = {refinery: null, refineryDistance: null}
+    var distance = 17
+    refiner.producerHolders = []
+    // first if returns null
+    refiner.takesOwnership = false
+    assert.equal(refiner.takeControlOf(producer, distance), null)
+    assert.equal(refiner.producerHolders[0].distance, 17)
+    assert.equal(producer.refinery, null)
+    assert.equal(producer.refineryDistance, null)
+    // second if ok
+    refiner.takesOwnership = true
+    var loseControlSpy = sinon.spy()
+    var refiner2 = new Refiner({
+      inputTypes: inputTypes,
+      multiplier: multiplier,
+      radius: radius,
+      zone: zone,
+      takesOwnership: takesOwnership
+    })
+    refiner2.loseControlOf = loseControlSpy
+    producer = {refinery: refiner2, refineryDistance: null}
+    refiner.takeControlOf(producer, distance)
+    assert(loseControlSpy.calledWith(producer))
+    assert.equal(producer.refinery, refiner)
+  })
+
+  it('loseControlOf works', () => {
+    var fooProducer = {producer: 'foo'}
+    var removableProducer = {producer: 'removable'}
+    refiner.producerHolders = [fooProducer, fooProducer, removableProducer, fooProducer, removableProducer]
+    refiner.loseControlOf('removable')
+    assert.equal(refiner.producerHolders.length, 4)
+    assert.equal(refiner.producerHolders[2], fooProducer)
+    assert.equal(refiner.producerHolders[3], removableProducer)
+  })
 })

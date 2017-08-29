@@ -53,4 +53,15 @@ describe('Map tests', () => {
     assert.equal(map.gridToPixelsX(2), 256)
     assert.equal(map.gridToPixelsY(2), 256)
   })
+
+  it('ensureCoordsInGrid works correctly', () => {
+    map.gridSizeX = 400
+    map.gridSizeY = 250
+    var result = map.ensureCoordsInGrid(-1, -1)
+    assert.equal(result.x, 0)
+    assert.equal(result.y, 0)
+    var result = map.ensureCoordsInGrid(450, 260)
+    assert.equal(result.x, 399)
+    assert.equal(result.y, 249)
+  })
 })
