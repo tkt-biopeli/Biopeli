@@ -40,14 +40,14 @@ export default class ViewTile {
   }
 
   makeTileSprite () {
-    if (this.modelTile.tileType.asset === 'forest') {return this.makeForestTile()}    
+    if (this.modelTile.tileType.asset === 'forest') return this.makeForestTile()
     let sprite = this.game.make.sprite(0, 0, this.modelTile.tileType.asset)
     sprite.width = this.tileSize.width
     sprite.height = this.tileSize.height
     return sprite
   }
 
-  makeForestTile() {
+  makeForestTile () {
     let sprite = this.game.make.sprite(0, 0, 'forest')
     sprite.width = this.tileSize.width
     sprite.height = this.tileSize.height
@@ -107,7 +107,7 @@ export default class ViewTile {
     return sprite    
   }
 
-  fertilityFrameUpdate() {    
+  fertilityFrameUpdate () {    
     let value = Math.round(this.modelTile.getFertility())
     if (value === this.fertilitySprite.frame) return
     this.fertilitySprite.frame = value
@@ -120,7 +120,7 @@ export default class ViewTile {
     return sprite    
   }
 
-  moistureFrameUpdate() {
+  moistureFrameUpdate () {
     let value = Math.round(this.modelTile.getMoisture()) 
     if (value === this.moistureSprite.frame) return
     this.moistureSprite.frame = value
@@ -187,10 +187,13 @@ export default class ViewTile {
   }
 
   destroy () {
-    let array = [this.tileSprite, this.structureSprite, this.flowerSprite, this.fertilitySprite, this.moistureSprite, this.treeSprite]
+    let array = [
+      this.tileSprite, this.structureSprite, this.flowerSprite,
+      this.fertilitySprite, this.moistureSprite, this.treeSprite
+    ]
     for (var i = 0; i < array.length; i++) {
       let sprite = array[i]
-      if (sprite !== null && sprite !== undefined) {sprite.destroy()}      
+      if (sprite != null) sprite.destroy()
     }
     // console.log("i lived for " + this.lived + " frames")
   }

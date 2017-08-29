@@ -3,17 +3,21 @@ const sinon = require('sinon')
 import PopulationEffect from '../../../../../src/controllers/events/random/effects/PopulationEffect'
 
 describe('Population effect tests', ()=>{
-  it('Effect works', ()=>{
-    var city = {population: 100}
-    var effect = new PopulationEffect({
+  var city, effect
+
+  beforeEach(() => {
+    city = {population: 4000}
+    effect = new PopulationEffect({
       gameState: {city: city},
-      json: {changePercentage: 2}
+      json: {changePercentage: 0.125}
     })
+  })
+
+  it('realizeEvent functioning', ()=>{
+    effect.realizeEvent()
+    assert.equal(city.population, 500)
 
     effect.realizeEvent()
-    assert.equal(200, city.population)
-
-    effect.realizeEvent()
-    assert.equal(400, city.population)
+    assert.equal(city.population, 62)
   })
 })

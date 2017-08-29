@@ -2,27 +2,44 @@ const assert = require("assert")
 import ModelTile from '../../../src/models/map/ModelTile'
 
 describe('Model tile tests', () => {
+  var modelTile, tileType
 
-  it('Constructor works', () => {
-    var tileType = {
+  beforeEach(()=>{
+    tileType = {
       type: 0,
       flowers: 5
     }
-    var tile = new ModelTile({
-      x: 1,
-      y: 2,
+
+    modelTile = new ModelTile({
+      x: 13,
+      y: 23,
       type: tileType,
       structure: -1,
       moisture: 3,
       fertility: 3
     })
+  })
 
-    assert.equal(1, tile.x)
-    assert.equal(2, tile.y)
-    assert.equal(tileType, tile.tileType)
-    assert.equal(-1, tile.structure)
-    assert.equal(5, tile.flowers)
-    assert.equal(3, tile.moisture)
-    assert.equal(3, tile.fertility)
+  it('setInLimits method works', () => {
+    // value, min, max
+    assert.equal(modelTile.setInLimits(7, 13, 79), 13)
+    assert.equal(modelTile.setInLimits(91, 13, 79), 79)
+    assert.equal(modelTile.setInLimits(61, 13, 79), 61)
+  })
+
+  it('equals method works', () => {
+    var otherTile = {
+      x: 0,
+      y: 0
+    }
+    assert(!modelTile.equals(otherTile))
+    otherTile.x = 13
+    assert(!modelTile.equals(otherTile))
+    otherTile.x = 0
+    otherTile.y = 23
+    assert(!modelTile.equals(otherTile))
+    otherTile.x = 13
+    otherTile.y = 23
+    assert(modelTile.equals(otherTile))
   })
 })

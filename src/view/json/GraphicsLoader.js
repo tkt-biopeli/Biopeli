@@ -54,8 +54,10 @@ export default class GraphicsLoader {
     let moistureTexture = moisture.generateTexture()
     let fertilityTexture = fertility.generateTexture()
 
-    this.game.cache.addSpriteSheet('moisturesheet', null, moistureTexture.baseTexture.source, size, size, 101, 0, padding)
-    this.game.cache.addSpriteSheet('fertilitysheet', null, fertilityTexture.baseTexture.source, size, size, 101, 0, padding)
+    this.game.cache.addSpriteSheet('moisturesheet', null,
+      moistureTexture.baseTexture.source, size, size, 101, 0, padding)
+    this.game.cache.addSpriteSheet('fertilitysheet', null,
+      fertilityTexture.baseTexture.source, size, size, 101, 0, padding)
 
     moisture.destroy()
     fertility.destroy()

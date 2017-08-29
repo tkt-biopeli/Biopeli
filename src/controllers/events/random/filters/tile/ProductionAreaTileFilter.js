@@ -3,7 +3,7 @@ import FilterGetterComponent from '../components/FilterGetterComponent'
 
 export default class ProductionAreaTileFilter extends TileFilter {
   constructor ({ gameState, json }) {
-    super(gameState)
+    super(gameState) /* istanbul ignore next */
 
     var filterGetter = new FilterGetterComponent({gameState: gameState})
     this.subFilter = filterGetter.getFilter(json.structureFilter)
@@ -23,6 +23,6 @@ export default class ProductionAreaTileFilter extends TileFilter {
 
   affected () {
     this.structures = this.subFilter.affected()
-    return super.affected()
+    return super.affected() /* istanbul ignore next */
   }
 }
