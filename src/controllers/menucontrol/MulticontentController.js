@@ -5,7 +5,7 @@ import Controller from './Controller'
  */
 export default class MulticontentController extends Controller {
   constructor ({ game, style, menuView, contents, startIndex }) {
-    super(game, style, menuView)
+    super(game, style, menuView) /* istanbul ignore next */
 
     this.contents = contents
     for (let content of this.contents) {
@@ -98,6 +98,6 @@ export default class MulticontentController extends Controller {
     this.index = this.startIndex    
     this.getStack = []
 
-    super.reset()
+    super.reset() /* istanbul ignore next */
   }
 }

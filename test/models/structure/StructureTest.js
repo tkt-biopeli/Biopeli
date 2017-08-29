@@ -8,7 +8,11 @@ describe('Structure tests', () => {
 
   beforeEach(() => {
     producer = {
-      produce: sinon.spy()
+      produce: sinon.spy(),
+      producer: {
+        producerHolders: [1, 2, 3, 4, 5],
+        zone: {values: [1, 2, 3]}
+      }
     }
 
     timeEvent = {
@@ -21,7 +25,8 @@ describe('Structure tests', () => {
       continuousProduction: false,
       asset: 'sd',
       turnipYield: 100,
-      cost: 100
+      cost: 100,
+      type: 'foo'
     }
 
     tile = { potential: 10 }
@@ -63,5 +68,14 @@ describe('Structure tests', () => {
 
   it('asset function returns correct value', () => {
     assert.equal('sd', structure.asset())
+  })
+
+  it('size method works correctly', () => {
+    structure.ownedTiles = [1, 2, 3, 4, 5, 6, 7]
+    assert.equal(structure.size(), 3)
+    stype.type = 'producer_structure'
+    assert.equal(structure.size(), 7)
+    stype.type = 'refinery'
+    assert.equal(structure.size(), 5)
   })
 })

@@ -2,7 +2,7 @@ import Content from './Content'
 
 export default class CityContent extends Content {
   constructor ({ city, gameEvents, texts, telegramStorage }) {
-    super()
+    super() /* istanbul ignore next */
     this.name = 'city'
     this.city = city
     this.gameEvents = gameEvents

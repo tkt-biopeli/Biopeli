@@ -5,7 +5,7 @@ import Controller from './Controller'
  */
 export default class SingleController extends Controller {
   constructor ({ game, style, menuView, content }) {
-    super(game, style, menuView)
+    super(game, style, menuView) /* istanbul ignore next */
 
     this.content = content
     this.content.setOwner(this)

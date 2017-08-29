@@ -2,7 +2,7 @@ import Content from './Content'
 
 export default class BottomMenuContent extends Content {
   constructor ({ mapView, menuController, telegramStorage }) {
-    super()
+    super() /* istanbul ignore next */
     this.mapView = mapView
     this.menuController = menuController
     this.telegramStorage = telegramStorage
