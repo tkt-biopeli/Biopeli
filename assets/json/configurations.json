@@ -1,10 +1,10 @@
 {
   "gameSettings": {
     "windowSize": {
-      "maxWidth": 1024,
-      "maxHeight": 768,
-      "minWidth": 0,
-      "minHeight": 0
+      "maxWidth": 1600,
+      "maxHeight": 900,
+      "minWidth": 1280,
+      "minHeight": 720
     },
 
     "localStorageName": "biopeli",
@@ -122,8 +122,8 @@
   },
 
   "randomEventSettings": {
-    "minTime": 1,
-    "maxTime": 1,
+    "minTime": 12,
+    "maxTime": 144,
     "maxSearched": 10,
     "eventContentIndex": -1,
     "bioFactFrequencyMinMax": 48

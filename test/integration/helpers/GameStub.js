@@ -174,6 +174,10 @@ export default class GameStub {
       kineticScrolling: {configure: () => {}, start: () =>{}}
     }
 
+    this.scale = {
+      isFullScreen: () => { return false }
+    }
+
     this.world = {
       bringToTop: () => { },
       moveDown: () => { },

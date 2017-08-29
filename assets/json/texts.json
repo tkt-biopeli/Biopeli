@@ -83,7 +83,9 @@
     "endGame": "Lopeta peli",
     "hintsOn": "Vinkit päälle",
     "hintsOff": "Vinkit pois",
-    "pause": "Pause"
+    "pause": "Pause",
+    "fullscreenOn": "Fullscreen On",
+    "fullscreenOff": "Fullscreen Off"
   },
 
   "tileContentTexts" : {
