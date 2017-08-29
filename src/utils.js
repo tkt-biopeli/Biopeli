@@ -24,7 +24,12 @@ export default {
   fetchScores: (server) => { 
     var xhr = new XMLHttpRequest()
     xhr.open('GET', server + 'scores.json', false)
+    
+    try {
     xhr.send()
+    } catch(err) {
+      return []
+    }
 
     var scores = JSON.parse(xhr.responseText)
     scores.sort((a, b) => { return b.points - a.points })
