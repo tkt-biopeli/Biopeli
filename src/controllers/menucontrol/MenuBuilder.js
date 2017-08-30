@@ -61,7 +61,10 @@ export default class MenuBuilder {
    * @param {string} text - Description that is displayed in the menu
    */
   createDescription (text) {
-    this.c.text(text, 'small')
+    let rows = text.split('\n')
+    for (var i = 0; i < rows.length; i++) {
+      this.c.text(rows[i], 'small')
+    }
   }
 
   /**
