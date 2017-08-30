@@ -11,17 +11,16 @@ describe('Integration test: Production tests', () => {
   })
 
   it('Demand fulfilled increases after building a continuously-producing structure', () => {
+    var production = 0
     gameAdvancer.update(1000)
-    gameStateChecker.checkDemandFulfilled(0)
+    gameStateChecker.checkDemandFulfilled(production)
     // build a dairy farm
     gameAdvancer.buildBuilding(1, 1, 'grass', 1, 2)
-
-    gameAdvancer.update(1000)
-    var productionPerUpdate = gameAdvancer.getStructureProductionInTile(1, 1)
-    gameStateChecker.checkDemandFulfilled(productionPerUpdate)
-    //
-    gameAdvancer.update(1000)
-    productionPerUpdate += gameAdvancer.getStructureProductionInTile(1, 1)
-    gameStateChecker.checkDemandFulfilled(productionPerUpdate)
+    // check that demandFulfilled has increased
+    for (var i = 0; i < 2; i++) {
+      gameAdvancer.update(1000)
+      production += gameAdvancer.getStructureProductionInTile(1, 1)
+      gameStateChecker.checkDemandFulfilled(production)
+    }
   })
 })
