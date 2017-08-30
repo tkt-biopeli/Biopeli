@@ -88,13 +88,30 @@ describe('Integration test: Building structures', () => {
 
   it('Can build a special structure (fertilizer factory) on grass', () => {
     gameAdvancer.setMoney(999999)
-    gameAdvancer.setTile(1, 1, 'grass')
-    gameStateChecker.checkButtonAmountInMenu(2)
-    gameAdvancer.clickTile(1, 1)
-    gameStateChecker.checkButtonAmountInMenu(3)
-    gameAdvancer.clickNthButton(3)
-    // miksi ei näytä special structurea?
-    gameStateChecker.checkButtonAmountInMenu(1)
+    gameAdvancer.buildBuilding(1, 1, 'grass', 3, 1)
+    gameStateChecker.checkSelectedTile()
+    gameStateChecker.checkTilesInformation(1, 1, 'grass', 'fertilizer_factory', true)
+    gameStateChecker.checkStructureSize(1, 1, 0)
+  })
+
+  it('Building a fertilizer factory increases fertility nearby', () => {
+    gameAdvancer.setTile(0, 1, 'grass')
+    gameAdvancer.setTile(2, 1, 'grass')
+    gameAdvancer.setTile(1, 0, 'grass')
+    gameAdvancer.setTile(1, 2, 'grass')
+    // prior to building
+    gameStateChecker.checkFertility(0, 1, 66)
+    gameStateChecker.checkFertility(2, 1, 66)
+    gameStateChecker.checkFertility(1, 0, 66)
+    gameStateChecker.checkFertility(1, 2, 66)
+    
+    gameAdvancer.setMoney(999999)
+    gameAdvancer.buildBuilding(1, 1, 'grass', 3, 1)
+    // after building
+    gameStateChecker.checkFertility(0, 1, 86)
+    gameStateChecker.checkFertility(2, 1, 86)
+    gameStateChecker.checkFertility(1, 0, 86)
+    gameStateChecker.checkFertility(1, 2, 86)
   })
 
   it('Can not build on tile with structure', () => {
@@ -123,13 +140,13 @@ describe('Integration test: Building structures', () => {
   })
 
   it('Back button returns to structure type selection', () => {
-    gameAdvancer.buildBuilding(1, 1, 'grass', 3, 1, 2)
+    gameAdvancer.buildBuilding(1, 1, 'grass', 2, 1, 2)
     gameStateChecker.checkButtonAmountInMenu(3)
   })
 
   it('Back button works when insufficient funds', () => {
     gameAdvancer.setMoney(0)
-    gameAdvancer.buildBuilding(1, 1, 'grass', 3, 1, 2)
+    gameAdvancer.buildBuilding(1, 1, 'grass', 2, 1, 2)
     gameStateChecker.checkButtonAmountInMenu(3)
   })
 

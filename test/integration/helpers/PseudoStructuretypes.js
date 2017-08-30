@@ -1,6 +1,6 @@
 const structureTypes = {
   wheat_farm: {
-    type: "producer_structure",
+    type: 'producer_structure',
     name: 'wheat_farm',
     nameWithLanguage: 'viljatila',
     asset: 'wheat_farm',
@@ -15,23 +15,23 @@ const structureTypes = {
     fertilityMin: 40,
     fertilityMax: 70,
     moveCosts: {
-      "grass": 1,
-      "water": 5,
-      "water_field": 5,
-      "forest": 1,
-      "field": 1,
-      "industrial": 1
+      grass: 1,
+      water: 5,
+      water_field: 5,
+      forest: 1,
+      field: 1,
+      industrial: 1
     },
-    takesOwnershipOf: ["grass"],
-    farmland: "field",
+    takesOwnershipOf: ['grass'],
+    farmland: 'field',
     pollution: {
-      "constant": true,
-      "distance": 4,
-      "amount": 2
+      constant: true,
+      distance: 4,
+      amount: 2
     }
   },
   dairy_farm: {
-    type: "producer_structure",
+    type: 'producer_structure',
     name: 'dairy_farm',
     nameWithLanguage: 'maitotila',
     asset: 'dairy_farm',
@@ -46,23 +46,23 @@ const structureTypes = {
     fertilityMin: 40,
     fertilityMax: 70,
     moveCosts: {
-      "grass": 1,
-      "water": 5,
-      "water_field": 5,
-      "forest": 2,
-      "field": 1,
-      "industrial": 1
+      grass: 1,
+      water: 5,
+      water_field: 5,
+      forest: 2,
+      field: 1,
+      industrial: 1
     },
-    takesOwnershipOf: ["grass"],
-    farmland: "field",
+    takesOwnershipOf: ['grass'],
+    farmland: 'field',
     pollution: {
-      "constant": true,
-      "distance": 3,
-      "amount": 3
+      constant: true,
+      distance: 3,
+      amount: 3
     }
   },
   berry_farm: {
-    type: "producer_structure",
+    type: 'producer_structure',
     name: 'berry_farm',
     nameWithLanguage: 'marjatila',
     asset: 'berry_farm',
@@ -77,23 +77,23 @@ const structureTypes = {
     fertilityMin: 40,
     fertilityMax: 70,
     moveCosts: {
-      "grass": 1,
-      "water": 5,
-      "water_field": 5,
-      "forest": 2,
-      "field": 1,
-      "industrial": 1
+      grass: 1,
+      water: 5,
+      water_field: 5,
+      forest: 2,
+      field: 1,
+      industrial: 1
     },
-    takesOwnershipOf: ["grass"],
-    farmland: "field",
+    takesOwnershipOf: ['grass'],
+    farmland: 'field',
     pollution: {
-      "constant": true,
-      "distance": 3,
-      "amount": 1
+      constant: true,
+      distance: 3,
+      amount: 1
     }
   },
   mill: {
-    type: "refinery",
+    type: 'refinery',
     name: 'mill',
     nameWithLanguage: 'mylly',
     asset: 'mill',
@@ -105,26 +105,26 @@ const structureTypes = {
     radiusForTileOwnership: 1,
     reach: 5,
     moveCosts: {
-      "grass": 1,
-      "water": 5,
-      "water_field": 5,
-      "forest": 2,
-      "field": 1,
-      "industrial": 1
+      grass: 1,
+      water: 5,
+      water_field: 5,
+      forest: 2,
+      field: 1,
+      industrial: 1
     },
-    takesOwnershipOf: ["grass", "field", "industrial", "forest"],
-    farmland: "industrial",
+    takesOwnershipOf: ['grass', 'field', 'industrial', 'forest'],
+    farmland: 'industrial',
     pollution: {
-      "constant": false,
-      "distance": 3,
-      "amount": 4
+      constant: false,
+      distance: 3,
+      amount: 4
     }
   },
   fishery: {
-    type: "producer_structure",
-    name: "fishery",
-    nameWithLanguage: "Kalanviljelylaitos",
-    asset: "fishery",
+    type: 'producer_structure',
+    name: 'fishery',
+    nameWithLanguage: 'Kalanviljelylaitos',
+    asset: 'fishery',
     health: 15,
     cost: 15000,
     radiusForTileOwnership: 2,
@@ -136,78 +136,48 @@ const structureTypes = {
     fertilityMin: 40,
     fertilityMax: 90,
     moveCosts: {
-      "grass": 10,
-      "water": 1,
-      "water_field": 2,
-      "forest": 10,
-      "field": 10,
-      "industrial": 10
+      grass: 10,
+      water: 1,
+      water_field: 2,
+      forest: 10,
+      field: 10,
+      industrial: 10
     },
-    takesOwnershipOf: ["water"],
-    farmland: "water_field",
+    takesOwnershipOf: ['water'],
+    farmland: 'water_field',
     pollution: {
-      "constant": false,
-      "distance": 3,
-      "amount": 4
+      constant: false,
+      distance: 3,
+      amount: 4
     }
   },
   fish_refinery: {
-    type: "refinery",
-    name: "fish_refinery",
-    nameWithLanguage: "Kalajalostamo",
-    asset: "fish_refinery",
+    type: 'refinery',
+    name: 'fish_refinery',
+    nameWithLanguage: 'Kalajalostamo',
+    asset: 'fish_refinery',
     health: 20,
     cost: 20000,
     radiusForTileOwnership: 1,
     multiplier: 2,
     reach: 7,
     buysFrom: [
-      "fishery"
+      'fishery'
     ],
     moveCosts: {
-      "grass": 5,
-      "water": 1,
-      "water_field": 1,
-      "forest": 10,
-      "field": 10,
-      "industrial": 1
+      grass: 5,
+      water: 1,
+      water_field: 1,
+      forest: 10,
+      field: 10,
+      industrial: 1
     },
-    takesOwnershipOf: ["grass"],
-    farmland: "industrial",
+    takesOwnershipOf: ['grass'],
+    farmland: 'industrial',
     pollution: {
-      "constant": false,
-      "distance": 2,
-      "amount": 4
-    }
-  },
-  // näistä ei nappeja menussa
-  foo_refinery: {
-    type: "refinery",
-    name: "foo_refinery",
-    nameWithLanguage: "Foojalostamo",
-    asset: "foo_refinery",
-    health: 20,
-    cost: 20000,
-    radiusForTileOwnership: 1,
-    multiplier: 2,
-    reach: 7,
-    buysFrom: [
-      "fishery"
-    ],
-    moveCosts: {
-      "grass": 5,
-      "water": 1,
-      "water_field": 1,
-      "forest": 10,
-      "field": 10,
-      "industrial": 1
-    },
-    takesOwnershipOf: ["grass"],
-    farmland: "industrial",
-    pollution: {
-      "constant": false,
-      "distance": 2,
-      "amount": 4
+      constant: false,
+      distance: 2,
+      amount: 4
     }
   },
   fertilizer_factory: {
