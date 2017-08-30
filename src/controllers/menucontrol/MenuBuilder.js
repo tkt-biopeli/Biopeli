@@ -50,8 +50,10 @@ export default class MenuBuilder {
    * Creates final score
    * @param {string} text - score text
    */
-  createScore (text) {
-    this.c.text(text, 'medium')
+  createScore (fields) {
+    for (var i = 0; i < fields.length; i++) {
+      this.c.text(fields[i], 'medium')
+    }
   }
 
   /**
