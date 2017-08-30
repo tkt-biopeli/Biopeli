@@ -179,8 +179,67 @@ const structureTypes = {
       "distance": 2,
       "amount": 4
     }
+  },
+  // näistä ei nappeja menussa
+  foo_refinery: {
+    type: "refinery",
+    name: "foo_refinery",
+    nameWithLanguage: "Foojalostamo",
+    asset: "foo_refinery",
+    health: 20,
+    cost: 20000,
+    radiusForTileOwnership: 1,
+    multiplier: 2,
+    reach: 7,
+    buysFrom: [
+      "fishery"
+    ],
+    moveCosts: {
+      "grass": 5,
+      "water": 1,
+      "water_field": 1,
+      "forest": 10,
+      "field": 10,
+      "industrial": 1
+    },
+    takesOwnershipOf: ["grass"],
+    farmland: "industrial",
+    pollution: {
+      "constant": false,
+      "distance": 2,
+      "amount": 4
+    }
+  },
+  fertilizer_factory: {
+    type: 'special',
+    name: 'fertilizer_factory',
+    nameWithLanguage: 'lannoitetehdas',
+    asset: 'fertilizer_factory',
+    health: 100,
+    cost: 10000,
+    radiusForTileOwnership: 2,
+    changeValues: {
+      flowers: 0,
+      fertility: 20,
+      moisture: 0
+    },
+    reach: 6,
+    moveCosts: {
+      grass: 1,
+      water: 1,
+      water_field: 1,
+      forest: 1,
+      field: 1,
+      industrial: 1
+    },
+    takesOwnershipOf: ['grass', 'field', 'industrial'],
+    farmland: 'industrial',
+    pollution: {
+      constant: false,
+      distance: 1,
+      amount: 3
+    }
   }
-  
 }
 
 export default structureTypes

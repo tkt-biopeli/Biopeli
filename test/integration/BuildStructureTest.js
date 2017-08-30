@@ -86,6 +86,17 @@ describe('Integration test: Building structures', () => {
     gameStateChecker.checkStructureSize(1, 1, 1)
   })
 
+  it('Can build a special structure (fertilizer factory) on grass', () => {
+    gameAdvancer.setMoney(999999)
+    gameAdvancer.setTile(1, 1, 'grass')
+    gameStateChecker.checkButtonAmountInMenu(2)
+    gameAdvancer.clickTile(1, 1)
+    gameStateChecker.checkButtonAmountInMenu(3)
+    gameAdvancer.clickNthButton(3)
+    // miksi ei näytä special structurea?
+    gameStateChecker.checkButtonAmountInMenu(1)
+  })
+
   it('Can not build on tile with structure', () => {
     gameAdvancer.buildBuilding(1, 1, 'grass', 1, 1)
     gameAdvancer.clickTile(1, 1)
@@ -144,6 +155,5 @@ describe('Integration test: Building structures', () => {
     gameStateChecker.checkStructureOwnedTiles(0, 0, 4)
     gameStateChecker.checkStructureOwnedFarmLand(0, 0, 4)
     gameStateChecker.checkStructureSize(0, 0, 4)
-
-  })
+  })  
 })
