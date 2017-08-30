@@ -3,8 +3,6 @@ import MenuBuilder from '../../controllers/menucontrol/MenuBuilder'
 import utils from '../../utils'
 import config from '../../../assets/json/configurations'
 
-
-
 export default class HighscoresLoad extends Phaser.State {
   init (gameData, score) {
     this.gameData = gameData
@@ -16,7 +14,7 @@ export default class HighscoresLoad extends Phaser.State {
     this.menu.createTitle('Ladataan tuloksia...')
     this.menu.finishMenu()
 
-    var scores = utils.fetchScores(config.gameSettings.scoreServer)
+    var scores = utils.fetchScores(config.gameSettings.scoreServer, new XMLHttpRequest())
     this.state.start('HighscoresTop10', true, false, this.gameData, scores)
   }
 }

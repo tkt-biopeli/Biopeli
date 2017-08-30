@@ -336,4 +336,24 @@ export default class GameAdvancer {
   setPopulation(value) {
     this.gameState.city.population = value
   }
+
+  getStructureProductionInTile(x, y) {
+    this.clickTile(x, y)
+    var productionString = this.findActiveText('Tuotto')
+    // deselect the tile
+    this.clickTile(x, y)
+    // format (from PseudoTexts): "Tuotto (€/vko): ##"
+    return JSON.parse(productionString.slice(16))
+  }
+
+  findActiveText(textLabel) {
+    var activeTexts = this.gameState.menuView.activeTexts
+    for (var i = 0; i < activeTexts.length; i++) {
+      var activeText = activeTexts[i].text.text  
+      if (activeText.includes(textLabel)) {
+        return activeText
+      }
+    }
+    return null
+  }
 }

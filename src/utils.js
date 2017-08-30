@@ -14,20 +14,18 @@ export default {
     return Math.floor(Math.random() * (upper - lower)) + lower
   },
 
-  submitScore: (body, server) => {
-    var xhr = new XMLHttpRequest()
+  submitScore: (body, server, xhr) => {
     xhr.open('POST', server + '/submit_score', true)
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.send(JSON.stringify(body))
   },
 
-  fetchScores: (server) => { 
-    var xhr = new XMLHttpRequest()
+  fetchScores: (server, xhr) => { 
     xhr.open('GET', server + 'scores.json', false)
     
     try {
-    xhr.send()
-    } catch(err) {
+      xhr.send()
+    } catch (err) {
       return []
     }
 
@@ -37,8 +35,7 @@ export default {
     return scores 
   },
 
-  wakeHeroku: (server) => { 
-    var xhr = new XMLHttpRequest()
+  wakeHeroku: (server, xhr) => { 
     xhr.open('GET', server + 'scores.json', true)
     xhr.send()
   }
