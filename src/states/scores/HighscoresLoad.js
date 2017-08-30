@@ -14,7 +14,7 @@ export default class HighscoresLoad extends Phaser.State {
     this.menu.createTitle('Ladataan tuloksia...')
     this.menu.finishMenu()
 
-    var scores = utils.fetchScores(config.gameSettings.scoreServer)
+    var scores = utils.fetchScores(config.gameSettings.scoreServer, new XMLHttpRequest())
     this.state.start('HighscoresTop10', true, false, this.gameData, scores)
   }
 }
