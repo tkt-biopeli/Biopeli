@@ -56,7 +56,8 @@ export default class BeforeGameOver extends Phaser.State {
     var sendScore = (name) => {
       this.utils.submitScore(
         {player: name, points: this.points},
-        this.config.gameSettings.scoreServer
+        this.config.gameSettings.scoreServer,
+        new XMLHttpRequest()
       )
     }
 
