@@ -297,4 +297,10 @@ export default class GamestateChecker {
     }
     assert.equal(found, expectedValue)
   }
+
+  checkDemandFulfilled (expected) {
+    // keep two decimals
+    var turnipDemand = this.gameState.city.turnipDemand.collectedSupply.toFixed(2)
+    assert.equal(turnipDemand, expected)
+  }
 }
