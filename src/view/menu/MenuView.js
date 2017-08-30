@@ -258,8 +258,7 @@ export default class MenuView {
       var menuitem = section[i]
       if (i < section.length && menuitem.type === component.type) {
         if ((component.type === 'button' || component.type === 'labeledImage') && 
-            (component.asset !== menuitem.asset || 
-            component.function !== menuitem.callback)) {
+            (component.asset !== menuitem.asset)) {
           menuitems.push(this.createComponent(component))
           menuitem.destroy()
         } else {
