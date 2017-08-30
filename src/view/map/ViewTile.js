@@ -1,3 +1,10 @@
+/**
+ * Container for all the sprites that are neede to draw
+ * one ModelTile from game's map to display.
+ * 
+ * @export
+ * @class ViewTile
+ */
 export default class ViewTile {
   constructor ({ game, modelTile, tileSize, borderColour, beachId }) {
     this.game = game
@@ -9,6 +16,12 @@ export default class ViewTile {
     // this.lived = 0
   }
 
+  /**
+   * Called upon creation or reset of a ViewTile
+   * Creates all the possible sprites tha ModelTile needs
+   * 
+   * @memberof ViewTile
+   */
   intialize () {
     this.tileSprite = this.makeTileSprite()        
     this.beachSprite = this.makeBeachSprite()
@@ -21,6 +34,14 @@ export default class ViewTile {
     this.highlights = this.tileSprite.addChild(this.game.make.sprite(0, 0))
   }
 
+  /**
+   * Called when game updates a frame and this ViewTile was still alive in the screen
+   * (= not off-screen)
+   * Ensures the ViewTile represents the ModelTile's current state correctly.
+   * 
+   * @param {any} {showFlowers, showMoisture, showFertility, redraw, borderColour, beachId} 
+   * @memberof ViewTile
+   */
   update ({showFlowers, showMoisture, showFertility, redraw, borderColour, beachId}) {
     this.borderColour = borderColour
     
@@ -186,6 +207,11 @@ export default class ViewTile {
     this.highlights.addChild(toAdd)
   }
 
+  /**
+   * Called when this ViewTile goes off-screen or otherwise needs a total overhaul
+   * 
+   * @memberof ViewTile
+   */
   destroy () {
     let array = [
       this.tileSprite, this.structureSprite, this.flowerSprite,

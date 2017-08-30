@@ -1,5 +1,12 @@
 import Rainbow from 'rainbowvis.js'
 
+/**
+ * Generates palettes of 100 different hues to be used in different visuals in the game
+ * setSpectrum is used to choose base colours the "rainbow of 100 hues" is based on
+ * 
+ * @export
+ * @class Palette
+ */
 export default class Palette {
   constructor () {
     this.dampnessRainbow = new Rainbow()

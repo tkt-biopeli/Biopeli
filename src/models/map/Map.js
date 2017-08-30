@@ -44,6 +44,7 @@ export default class MapGrid {
     return tiles
   }
 
+  // helper for getTilesInRadius
   boundsForRadius (tx, ty, n) {
     let start = this.ensureCoordsInGrid(tx - n, ty - n)
     let end = this.ensureCoordsInGrid(tx + n, ty + n)
@@ -55,6 +56,7 @@ export default class MapGrid {
     }
   }
 
+  // helper for getTilesInRadius
   ensureCoordsInGrid (x, y) {
     x = x >= 0 ? x : 0
     x = x <= this.gridSizeX - 1 ? x : this.gridSizeX - 1
@@ -63,6 +65,7 @@ export default class MapGrid {
     return { x, y }
   }
 
+  // helper for getTilesInRadius
   radiusFunction (hori, veri) {
     return Math.floor(Math.sqrt(Math.pow(hori, 2) + Math.pow(veri, 2)) * 1.2)
   }
@@ -111,6 +114,8 @@ export default class MapGrid {
   }
 
   /**
+   * Store a tile in the map in the index formed from grid coordinates
+   * 
    * @param {Number} gx
    * @param {Number} gy
    * @param {TileType} tileType
@@ -129,6 +134,8 @@ export default class MapGrid {
   }
 
   /**
+   * Convenience function to store a tile with pixel coordinates
+   * 
    * @param {Number} px
    * @param {Number} py
    * @param {TileType} tileType
