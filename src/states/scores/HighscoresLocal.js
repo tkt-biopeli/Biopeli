@@ -1,7 +1,5 @@
 import Phaser from 'phaser'
 import MenuBuilder from '../../controllers/menucontrol/MenuBuilder'
-import utils from '../../utils'
-import config from '../../../assets/json/configurations'
 
 export default class HighscoresLocal extends Phaser.State {
   init (gameData, scores) {
@@ -10,14 +8,14 @@ export default class HighscoresLocal extends Phaser.State {
   }
 
   binSearch (val) {
-    var min = 0, 
-        max = this.scores.length - 1,
-        mid
+    var min = 0
+    var max = this.scores.length - 1
+    var mid
 
     while (min < max) {
       mid = (min + max) >> 1
       var diff = this.scores[mid] - val
-      if(diff < 0) {
+      if (diff < 0) {
         max = mid--
       } else if (diff > 0) {
         min = mid++
@@ -53,7 +51,7 @@ export default class HighscoresLocal extends Phaser.State {
     })
 
     this.menu.createButton('Top 10', () => {
-        this.state.start('HighscoresTop10', true, false, this.gameData, this.scores)
+      this.state.start('HighscoresTop10', true, false, this.gameData, this.scores)
     })
 
     this.menu.finishMenu()

@@ -24,8 +24,8 @@ export default {
     xhr.open('GET', server + 'scores.json', false)
     
     try {
-    xhr.send()
-    } catch(err) {
+      xhr.send()
+    } catch (err) {
       return []
     }
 
