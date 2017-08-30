@@ -3,7 +3,7 @@
     "gameDescription": "MTechin tilaama peli biotaloudesta ja ruokaketjusta.",
     "startGame": "Aloita peli",
     "instructions": "Ohjeet",
-    "instructionsDescription": "Tarkkaile maaperän kosteutta ja ravinteita.\nRakenna alku- sekä jatkotuotantorakennuksia.\nVastaa kaupungin kysyntään.",
+    "instructionsDescription": "\nRakenna alku- sekä jatkotuotantorakennuksia.\nOptimoi rakentamista tarkkailemalla maaperän kosteutta ja ravinteita.\nVastaa kaupungin kysyntään.\nMuista myös varoa ylituotantoa.",
     "toStart": "Alkuun",
     "back": "Takaisin"
   },
