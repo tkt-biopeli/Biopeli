@@ -50,8 +50,10 @@ export default class MenuBuilder {
    * Creates final score
    * @param {string} text - score text
    */
-  createScore (text) {
-    this.c.text(text, 'medium')
+  createScore (fields) {
+    for (var i = 0; i < fields.length; i++) {
+      this.c.text(fields[i], 'medium')
+    }
   }
 
   /**
@@ -59,7 +61,10 @@ export default class MenuBuilder {
    * @param {string} text - Description that is displayed in the menu
    */
   createDescription (text) {
-    this.c.text(text, 'small')
+    let rows = text.split('\n')
+    for (var i = 0; i < rows.length; i++) {
+      this.c.text(rows[i], 'small')
+    }
   }
 
   /**
