@@ -1,4 +1,8 @@
 import TimeWindowRandomizer from '../../models/logic/TimeWindowRandomizer'
+
+/**
+ * Chooses random facts for the game to show.
+ */
 export default class BioFactsGenerator {
   constructor ({telegramStorage, bioFacts, randomWithBounds, randomEventSettings}) {
     this.telegramStorage = telegramStorage
