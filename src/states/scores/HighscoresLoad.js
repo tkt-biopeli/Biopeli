@@ -3,8 +3,6 @@ import MenuBuilder from '../../controllers/menucontrol/MenuBuilder'
 import utils from '../../utils'
 import config from '../../../assets/json/configurations'
 
-
-
 export default class HighscoresLoad extends Phaser.State {
   init (gameData, score) {
     this.gameData = gameData

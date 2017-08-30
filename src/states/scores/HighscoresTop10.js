@@ -1,7 +1,5 @@
 import Phaser from 'phaser'
 import MenuBuilder from '../../controllers/menucontrol/MenuBuilder'
-import utils from '../../utils'
-import config from '../../../assets/json/configurations'
 
 export default class Highscores extends Phaser.State {
   init (gameData, scores) {
