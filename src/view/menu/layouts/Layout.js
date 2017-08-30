@@ -18,14 +18,44 @@ export default class Layout {
     this.vertical = vertical
   }
 
+  init (components) {
+    this.callbackComponent = null
+    this.initialize(components)
+  }
+
+  afterLine () {
+    if(!this.checkCallbackComponent()) this.line()
+  }
+
+  afterSection () {
+    this.checkCallbackComponent()
+    this.section()
+  }
+
   /**
    * Gives the location of the next element
    * @param {*} component
    */
   nextComponentLocation (component) {
+    this.checkCallbackComponent()
+
     var coordinates = this.coordinates(component)
-    this.addComponentPadding(component)
+    if(component.type !== 'text') {
+      this.addComponentPadding(component)
+    }else{
+      this.callbackComponent = component
+    }
     return coordinates
+  }
+
+  checkCallbackComponent () {
+    if(this.callbackComponent != null) {
+      this.addComponentPadding(this.callbackComponent)
+      this.callbackComponent = null
+      return true
+    }
+
+    return false
   }
 
   /**
@@ -34,6 +64,7 @@ export default class Layout {
    */
   coordinates (component) {
     var coords
+
     if (this.vertical) {
       coords = {
         x: this.menuRect.x + (this.perpendicularSize - component.width) / 2,
@@ -63,15 +94,6 @@ export default class Layout {
    */
   componentParallelSize (component) {
     if (this.vertical) {
-      if (component.type === 'text') {
-        return component.height * (Math.ceil(
-            component.fontSize * 
-            component.text.length / 
-            this.menuRect.width * 
-            9 / 16
-          )
-        )
-      }
       return component.height
     } else {
       return component.width

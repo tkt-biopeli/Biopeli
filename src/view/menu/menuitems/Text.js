@@ -15,8 +15,9 @@ export default class Text {
    * @param {number} param.x
    * @param {number} param.y
    */
-  constructor ({ game, menuSize, viewGroup, text, fontSize, x, y, anchor }) {
+  constructor ({ game, component, menuSize, viewGroup, text, fontSize, x, y, anchor }) {
     this.type = 'text'
+    this.component = component
 
     this.style = {
       font: fontSize + 'px Arial',
@@ -27,14 +28,23 @@ export default class Text {
     this.text.anchor.set(anchor.x, anchor.y)
     this.text.wordWrap = true
     this.text.wordWrapWidth = menuSize
+    this.setComponentSize()
   }
 
-  update (text, fontSize, x, y) {
+  update (component, text, fontSize, x, y) {
+    this.component = component
     this.style.font = fontSize + 'px Arial'
 
     this.text.text = text
     this.text.x = x
     this.text.y = y
+
+    this.setComponentSize()
+  }
+
+  setComponentSize () {
+    this.component.height = this.text.height
+    this.component.width = this.text.width
   }
 
   destroy () {

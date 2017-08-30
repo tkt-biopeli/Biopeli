@@ -188,6 +188,7 @@ export default class MenuView {
 
     var tex = new Text({
       game: this.game,
+      component: textComponent,
       menuSize: this.layout.menuRect.width,
       viewGroup: this.menuViewGroup,
       text: textComponent.text,
@@ -301,7 +302,7 @@ export default class MenuView {
   }
 
   updateText (coords, component, text) {
-    text.update(component.text, component.fontSize, coords.x, coords.y)
+    text.update(component, component.text, component.fontSize, coords.x, coords.y)
     this.activeTexts.push(text)
   }
 
