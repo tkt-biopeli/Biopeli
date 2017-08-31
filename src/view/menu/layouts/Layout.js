@@ -48,6 +48,12 @@ export default class Layout {
     return coordinates
   }
 
+  /**
+   * Used for checking components size after it is created. Phaser's
+   * add text function makes the text automatically fit to certain width,
+   * and we can't know its height in advance. So, instead we create it 
+   * first and check the size after its creation in this fuction.
+   */
   checkCallbackComponent () {
     if (this.callbackComponent != null) {
       this.addComponentPadding(this.callbackComponent)
