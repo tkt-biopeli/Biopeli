@@ -88,7 +88,7 @@
     },
 
     "player": {
-      "initialCash": 100000,
+      "initialCash": 20000,
       "currency": "Ag"
     },
 
