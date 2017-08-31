@@ -38,7 +38,7 @@ describe('Tests for structure name generation', () => {
 
   it('createBuildingName produces name with hyperbole', () => {
     randomStub.onCall(0).returns(0.24)
-    assert.equal(namegen.createBuildingName(structureType), 'foo-bar viljatila')
+    assert.equal(namegen.createBuildingName(structureType), 'foo bar viljatila')
   })
 
   it('createBuildingName produces name without hyperbole', () => {

@@ -33,10 +33,6 @@ export default class GamestateChecker {
     return this.map.getTileWithPixelCoordinates(x, y)
   }
 
-  getTileModel (x, y) {
-    return this.map.getTileWithGridCoordinates(x, y)
-  }
-
   /**
    * Checks if tile in the part of the screen has wanted grid coordinates
    * 
@@ -62,7 +58,7 @@ export default class GamestateChecker {
   checkTilesInformation (x, y, tileType, structureType, modelCoords) {
     var tile
     if (modelCoords) {
-      tile = this.getTileModel(x, y)
+      tile = this.gameAdvancer.getTile(x, y)
     } else {
       tile = this.getTilePixel(x, y)
     }
@@ -92,22 +88,32 @@ export default class GamestateChecker {
   }
 
   checkPollution (x, y, pollution) {
-    var tile = this.getTileModel(x, y)
+    var tile = this.gameAdvancer.getTile(x, y)
     assert.equal(pollution, tile.flowers)
   }
 
+  checkFertility (x, y, fertility) {
+    var tile = this.gameAdvancer.getTile(x, y)
+    assert.equal(fertility, tile.fertility)
+  }
+
+  checkMoisture (x, y, moisture) {
+    var tile = this.gameAdvancer.getTile(x, y)
+    assert.equal(moisture, tile.moisture)
+  }
+
   checkStructureOwnedTiles (x, y, expectedValue) {
-    var s = this.getTileModel(x, y).structure
+    var s = this.gameAdvancer.getTile(x, y).structure
     assert.equal(expectedValue, s.ownedTiles.length)
   }
 
   checkStructureOwnedFarmLand (x, y, expectedValue) {
-    var s = this.getTileModel(x, y).structure
+    var s = this.gameAdvancer.getTile(x, y).structure
     assert.equal(expectedValue, s.ownedTiles.length)
   }
 
   checkStructureSize (x, y, expectedValue) {
-    var s = this.getTileModel(x, y).structure
+    var s = this.gameAdvancer.getTile(x, y).structure
     assert.equal(expectedValue, s.size())
   }
 
@@ -266,7 +272,7 @@ export default class GamestateChecker {
   }
 
   checkStructureRuinAmount (x, y, wantedHealth) {
-    var tile = this.getTileModel(x, y)
+    var tile = this.gameAdvancer.getTile(x, y)
     assert(tile.structure != null)
 
     var health = tile.structure.health
@@ -296,5 +302,11 @@ export default class GamestateChecker {
       }
     }
     assert.equal(found, expectedValue)
+  }
+
+  checkDemandFulfilled (expected) {
+    // keep two decimals
+    var turnipDemand = this.gameState.city.turnipDemand.collectedSupply.toFixed(2)
+    assert.equal(turnipDemand, expected)
   }
 }
