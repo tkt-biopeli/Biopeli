@@ -8,7 +8,11 @@ describe('Structure tests', () => {
 
   beforeEach(() => {
     producer = {
-      produce: sinon.spy()
+      produce: sinon.spy(),
+      producer: {
+        producerHolders: [1, 2, 3, 4, 5],
+        zone: {values: [1, 2, 3]}
+      }
     }
 
     timeEvent = {
@@ -21,7 +25,8 @@ describe('Structure tests', () => {
       continuousProduction: false,
       asset: 'sd',
       turnipYield: 100,
-      cost: 100
+      cost: 100,
+      type: 'foo'
     }
 
     tile = { potential: 10 }
@@ -57,34 +62,20 @@ describe('Structure tests', () => {
     assert.equal(stype, structure.structureType)
     assert.equal('Risto', structure.ownerName)
     assert.equal('Rustholli', structure.structureName)
-    assert.equal(10, structure.size)
     assert.equal(1999, structure.foundingYear)
     assert.equal(producer, structure.producer)
-  })
-
-  it('hasContinuousProduction returns correct value', () => {
-    assert.equal(false, structure.hasContinuousProduction())
-    stype.continuousProduction = true
-    assert.equal(true, structure.hasContinuousProduction())
   })
 
   it('asset function returns correct value', () => {
     assert.equal('sd', structure.asset())
   })
-  
-  it('produce returns zero if there is no produce function', () => {
-    var structure2 = new Structure({
-      tile: tile,
-      ownerName: 'Riston rustholli',
-      size: 10,
-      structureType: stype,
-      foundingYear: 1999
-    })
-    assert.equal(0, structure2.produce(timeEvent))
-  })
-  
-  it('produce calls production function with correct parameter', () => {
-    structure.produce(timeEvent)
-    assert(producer.produce.calledWith(timeEvent))
+
+  it('size method works correctly', () => {
+    structure.ownedTiles = [1, 2, 3, 4, 5, 6, 7]
+    assert.equal(structure.size(), 3)
+    stype.type = 'producer_structure'
+    assert.equal(structure.size(), 7)
+    stype.type = 'refinery'
+    assert.equal(structure.size(), 5)
   })
 })

@@ -1,3 +1,10 @@
+/**
+ * Helper class to manage different tile highlight visuals,
+ * -> no changes in the model
+ * 
+ * @export
+ * @class Highlighter
+ */
 export default class Highlighter {
   constructor ({ game, tileWidth, tileHeight }) {
     this.game = game
@@ -7,6 +14,14 @@ export default class Highlighter {
     this.buildingHighlights = []
   }
 
+  /**
+   * Calculates needewd highlights
+   * If selectedTile is any other than refinery -> only highlight selectedTile
+   * In case of refinery, all tiles and structures it reaches get highlighted too   
+   * 
+   * @param {any} selectedTile 
+   * @memberof Highlighter
+   */
   calculateHighlights (selectedTile) {
     this.landHighlights = []
     this.buildingHighlights = []
@@ -15,7 +30,7 @@ export default class Highlighter {
       let producers = st.structure.producer.producer.producerHolders
       producers.forEach(
         (capsule) => {
-          this.buildingHighlights.push(capsule.producer.producer.tile) 
+          this.buildingHighlights.push(capsule.producer.tile) 
         }
       )
       let tiles = st.structure.producer.producer.zone
@@ -25,11 +40,13 @@ export default class Highlighter {
     }
   }
 
+  // Land highlights are in refinerysphere of influence
   checkIfTileIsLandHighlight (tile) {
     if (this.buildingHighlights.includes(tile)) return null
     this.landHighlights.push(tile)
   }
 
+  // actual adding of visuals to display object that will be drawn to screen
   addHighlights (viewTile, selectedTile) {
     let tile = viewTile.modelTile
     let sprites = []
@@ -49,6 +66,7 @@ export default class Highlighter {
     sprites.forEach((sprite) => viewTile.addHighlight(sprite))
   }
 
+  // helper for addHighlights
   pushToSpritesIfHighlightsIncludeTile (sprites, tile, hlArray, hlValues) {
     if (hlArray.includes(tile)) {
       sprites.push(this.highlightBackground())

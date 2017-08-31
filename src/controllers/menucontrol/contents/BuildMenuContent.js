@@ -2,7 +2,7 @@ import Content from './Content'
 
 export default class BuildMenuContent extends Content {
   constructor ({ structureTypes }) {
-    super()
+    super() /* istanbul ignore next */
     this.structureTypes = structureTypes
   }
 

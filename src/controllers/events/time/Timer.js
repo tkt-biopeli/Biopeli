@@ -5,7 +5,7 @@ export default class Timer {
    * @param {number} interval in millis
    * @param {number} currentTime in millis
    */
-  constructor ({ name, interval, currentTime }) {
+  constructor ({ name, startYear, interval, currentTime }) {
     if (name == null) {
       this.name = ''
     } else {
@@ -16,6 +16,7 @@ export default class Timer {
     this.lastTime = currentTime
     this.callTime = 0
     this.currentTimeEvent = null
+    this.startYear = startYear
     this.listeners = new Set()
   }
 
@@ -68,6 +69,6 @@ export default class Timer {
    * @return {{time: number, year: number}}
    */
   createTimeEvent () {
-    return new TimeEvent({ callTime: this.callTime })
+    return new TimeEvent({ callTime: this.callTime, startYear: this.startYear })
   }
 }

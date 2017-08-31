@@ -49,7 +49,9 @@ export default class GameStub {
         x: x,
         y: y,
         text: text,
-        destroy: () => { }
+        destroy: () => { },
+        height: 1,
+        width: 1
       }),
 
       renderTexture: renderCreatorFunction,
@@ -108,6 +110,7 @@ export default class GameStub {
       sprite: this.mockers.createOneValueMocker('make.sprite', {
         addChild: function () {
           return {
+            addChild: function () {},
             removeChildren: function () { },
             destroy: function () {}
           }
@@ -172,6 +175,10 @@ export default class GameStub {
       width: width,
       height: height,
       kineticScrolling: {configure: () => {}, start: () =>{}}
+    }
+
+    this.scale = {
+      isFullScreen: () => { return false }
     }
 
     this.world = {

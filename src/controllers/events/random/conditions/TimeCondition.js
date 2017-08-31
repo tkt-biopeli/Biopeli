@@ -1,8 +1,8 @@
 export default class TimeCondition {
   constructor ({ gameState, json }) {
     this.gameTimer = gameState.gameTimer
-    this.notAfter = json.notAfter
-    this.notBefore = json.notBefore
+    this.notAfter = json.notAfter * 48
+    this.notBefore = json.notBefore * 48
   }
 
   canHappen () {

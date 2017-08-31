@@ -1,35 +1,32 @@
 import RandomEvent from './RandomEvent'
-
-import EmptyFilter from './filters/common/EmptyFilter'
-import EmptyEffect from './effects/EmptyEffect'
+// conditions
 import EmptyCondition from './conditions/EmptyCondition'
-
-import And from './filters/common/And'
-import Or from './filters/common/Or'
-import Complement from './filters/common/Complement'
-import RandomFilter from './filters/common/RandomFilter'
-import TiletypeTileFilter from './filters/tile/TiletypeTileFilter'
-import ProductionAreaTileFilter from './filters/tile/ProductionAreaTileFilter'
-import AllTileFilter from './filters/tile/AllTileFilter'
-import ValuesTileFilter from './filters/tile/ValuesTileFilter'
-import AllStructureFilter from './filters/structure/AllStructureFilter'
-import StructureTypeStructureFilter from './filters/structure/StructureTypeStructureFilter'
-import FoundingYearStructureFilter from './filters/structure/FoundingYearStructureFilter'
-import TypeStructureFilter from './filters/structure/TypeStructureFilter'
-
-import NameStructureTypeFilter from './filters/structuretype/NameStructureTypeFilter'
-import StructureTypeFilter from './filters/structuretype/StructureTypeFilter'
-
-import TileValueEffect from './effects/TileValueEffect'
-import MoneyEffect from './effects/MoneyEffect'
-import PopulationEffect from './effects/PopulationEffect'
-
-import StructureYieldEffect from './effects/StructureYieldEffect'
-import StructureCostEffect from './effects/StructureCostEffect'
-
-import TimeCondition from './conditions/TimeCondition'
 import PopulationCondition from './conditions/PopulationCondition'
 import StructureAmountCondition from './conditions/StructureAmountCondition'
+import TimeCondition from './conditions/TimeCondition'
+// effects
+import EmptyEffect from './effects/EmptyEffect'
+import MoneyEffect from './effects/MoneyEffect'
+import PopulationEffect from './effects/PopulationEffect'
+import StructureCostEffect from './effects/withmultipletargets/StructureCostEffect'
+import StructureYieldEffect from './effects/withmultipletargets/StructureYieldEffect'
+import TileValueEffect from './effects/withmultipletargets/TileValueEffect'
+// filters
+import And from './filters/operators/And'
+import Complement from './filters/operators/Complement'
+import Or from './filters/operators/Or'
+import EmptyFilter from './filters/other/EmptyFilter'
+import RandomFilter from './filters/other/RandomFilter'
+import AllStructureFilter from './filters/structure/AllStructureFilter'
+import FoundingYearStructureFilter from './filters/structure/FoundingYearStructureFilter'
+import StructureTypeStructureFilter from './filters/structure/StructureTypeStructureFilter'
+import TypeStructureFilter from './filters/structure/TypeStructureFilter'
+import AllStructureTypeFilter from './filters/structuretype/AllStructureTypeFilter'
+import NameStructureTypeFilter from './filters/structuretype/NameStructureTypeFilter'
+import AllTileFilter from './filters/tile/AllTileFilter'
+import ProductionAreaTileFilter from './filters/tile/ProductionAreaTileFilter'
+import TileTypeTileFilter from './filters/tile/TileTypeTileFilter'
+import ValuesTileFilter from './filters/tile/ValuesTileFilter'
 
 export default class RandomEventFactory {
   constructor ({gameState}) {
@@ -75,7 +72,7 @@ export default class RandomEventFactory {
     this.filterCreators.set('Complement', Complement)
     this.filterCreators.set('Random', RandomFilter)
 
-    this.filterCreators.set('TilesWithTiletype', TiletypeTileFilter)
+    this.filterCreators.set('TilesWithTiletype', TileTypeTileFilter)
     this.filterCreators.set('TilesWithValues', ValuesTileFilter)
     this.filterCreators.set('AllTiles', AllTileFilter)
     this.filterCreators.set('ProductionAreaTile', ProductionAreaTileFilter)
@@ -85,7 +82,7 @@ export default class RandomEventFactory {
     this.filterCreators.set('StructuresOfType', TypeStructureFilter)
     this.filterCreators.set('StructuresWithFoundingYear', FoundingYearStructureFilter)
 
-    this.filterCreators.set('AllStructureTypes', StructureTypeFilter)
+    this.filterCreators.set('AllStructureTypes', AllStructureTypeFilter)
     this.filterCreators.set('StructureTypes', NameStructureTypeFilter)
   }
 
@@ -138,8 +135,9 @@ export default class RandomEventFactory {
   }
 
   createPart (name, blueprint) {
+    // If blueprint is not given, return the default blueprint
+    if (blueprint == null) return new (this[name + 'Creators'].get(this.defaultValue))()
     // Checks if creator list contains the value. If not, use default value
-    if (!blueprint) { blueprint = { name: this.defaultValue } }
     var key = this[name + 'Creators'].has(blueprint.name) ? blueprint.name : this.defaultValue
     // Searches constructor with given name from the map and instantiates it
     return new (this[name + 'Creators'].get(key))({gameState: this.gameState, json: blueprint})

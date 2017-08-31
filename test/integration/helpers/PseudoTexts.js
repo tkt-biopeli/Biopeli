@@ -37,6 +37,7 @@ export default {
   },
 
   telegramTexts: {
+    factTopic: "Faktaa biotaloudesta:",
     hintTopic: "Tiesithän..?",
     ruinTopic: " hädässä!",
     ruinText: " on puolikuntoinen!"
@@ -82,5 +83,22 @@ export default {
       insufficientFunds: "Rahat eivät riitä",
       inPerfectCondition: "Täydellisessä kunnossa"
     }
+  },
+  
+  structureInfoContent: {
+    structureInfo: "Rakennuksen tiedot",
+    soldTo: "Myy turnipsit",
+    city: "kaupunki",
+    theoreticalProduction: "Ideaali tuotanto",
+    fertilityMultiplier: "Ravinteikkuuskerroin",
+    moistureMultiplier: "Kosteuskerroin",
+    flowersMultiplier: "Saastekerroin",
+    ruiningMultiplier: "Eheyskerroin",
+    turnipsPerWeek: "Turnipseja viikossa",
+    estimatedProfit: "Odotettu tuotto",
+    accumulatedProduction: "Kerääntynyt tuotto",
+    harvest: "Sadonkorjuu",
+    refinerySize: "Omistusmäärä",
+    refineryMultiplier: "Tuotantokerroin"
   }
 }

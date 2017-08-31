@@ -1,7 +1,9 @@
 import Phaser from 'phaser'
 import WebFont from 'webfontloader'
-// do not remove these imports!
+// do not remove these two imports!
+// eslint-disable-next-line no-unused-vars
 import KineticScrolling from 'phaser-kinetic-scrolling-plugin'
+// eslint-disable-next-line import/no-unresolved
 import PhaserInput from 'phaser-input'
 
 /**
@@ -12,6 +14,12 @@ export default class extends Phaser.State {
    * Description goes here
    */
   init () {
+    this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
+    this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL
+    this.game.scale.parentIsWindow = true
+    this.game.scale.pageAlignHorizontally = true
+    this.game.scale.pageAlignVertically = true
+    
     this.stage.backgroundColor = '#EDEEC9'
     this.fontsReady = false
     this.fontsLoaded = this.fontsLoaded.bind(this)

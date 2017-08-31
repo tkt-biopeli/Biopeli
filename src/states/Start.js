@@ -20,6 +20,7 @@ export default class Start extends Phaser.State {
     }).generateName()
 
     this.menuMusic = this.add.audio('menu')
+    this.menuMusic.volume = 0.7
     this.menuMusic.play()
     this.menuMusic.loopFull()
 
@@ -38,5 +39,7 @@ export default class Start extends Phaser.State {
       }
     )
     this.menu.finishMenu()
+
+    utils.wakeHeroku(this.gameData.config.gameSettings.scoreServer, new XMLHttpRequest())
   }
 }

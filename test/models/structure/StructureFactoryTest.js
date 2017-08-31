@@ -103,7 +103,6 @@ describe('StructureFactory tests', () => {
     sfactory.producerFactory.createProducer = createProducerSpy
     sfactory.buyLand = buyLandSpy
     sfactory.createInitialPollution = createPollutionSpy
-    sfactory.calculateSize = calcSizeSpy
   }
 
   it('Build building works', () => {
@@ -114,7 +113,6 @@ describe('StructureFactory tests', () => {
     assert.equal(tile.structure.tile, tile)
     assert.equal(tile.structure.ownerName, 'joku omistaja')
     assert.equal(tile.structure.structureName, 'joku rakennus')
-    assert.equal(tile.structure.size, 0)
     assert.equal(tile.structure.structureType, structureType)
     assert.equal(tile.structure.foundingYear, 7)
     assert.equal(1, initializeSpy.callCount)
@@ -122,7 +120,6 @@ describe('StructureFactory tests', () => {
     assert(addStructureSpy.calledWith(tile.structure))
     assert(buyLandSpy.calledWith(tile.structure))
     assert(createPollutionSpy.calledWith(structureType.pollution, tile))
-    assert(calcSizeSpy.calledWith(tile.structure))
     assert.equal(eventController.event.callCount, 1)
   })
 
@@ -153,8 +150,7 @@ describe('StructureFactory tests', () => {
 
   it('LandCanChangeOwnership returns correct booleans with refineries', () => {
     let newOwnerRefinery = {
-      structureType: { type: 'refinery' },
-      takesOwnershipOf: ['grass']
+      structureType: { type: 'refinery', takesOwnershipOf: ['grass']},
     }
     let wrongTiletype = createTmpTile(null, { name: 'foo' }, null, 0)
     let alreadyHasStructure = createTmpTile('another_structure', { name: 'grass' }, null, 0)
@@ -169,8 +165,7 @@ describe('StructureFactory tests', () => {
 
     it('LandCanChangeOwnership returns correct booleans with producers', () => {
     let newOwnerProducer = {
-      structureType: { type: 'producer_structure' },
-      takesOwnershipOf: ['grass']
+      structureType: { type: 'producer_structure', takesOwnershipOf: ['grass'] }
     }
     let wrongTiletype = createTmpTile(null, { name: 'foo' }, null, 0)
     let alreadyHasStructure = createTmpTile('another_structure', { name: 'grass' }, null, 0)
@@ -201,13 +196,13 @@ describe('StructureFactory tests', () => {
 
   it('setNewTileType is functioning properly', () =>{
     var tileType = { name: 'foo' }
-    var structure = {farmland: 'field'}
+    var structure = {structureType: {farmland: 'field'}}
     var tmpTile = createTmpTile(null, tileType, null, 0)
 
     assert.equal(tmpTile.tileType.name, 'foo')
     sfactory.setNewTileType (tmpTile, structure)
     assert.equal(tmpTile.tileType.name, 'field')
-    structure = {farmland: 'grass'}
+    structure.structureType.farmland = 'grass'
     sfactory.setNewTileType (tmpTile, structure)
     assert.equal(tmpTile.tileType.name, 'grass')
   })
@@ -278,5 +273,30 @@ describe('StructureFactory tests', () => {
     sfactory.decreaseOwnedFarmland(tmpTile)
     assert.equal(tile.structure.size, 66)
     assert.equal(tile.structure.producer.producer.ownedFarmLand.length, 3)
+  })
+
+  it('buildBuildingNamed is functioning properly', () =>{
+    sfactory.buildBuilding = sinon.stub().returns('bla')
+    sfactory.structureTypes = {foo: {}, bar: {}}
+    assert.equal(sfactory.buildBuildingNamed({}, 'huu'), undefined)
+    assert.equal(sfactory.buildBuildingNamed({}, 'foo'), 'bla')
+  })
+
+  it('changeOwnership is functioning properly', () =>{
+    sfactory.removeTileFromPreviousOwner = sinon.spy()
+    sfactory.setNewTileType = sinon.spy()
+    // if is false
+    var structure = {ownedTiles: [], structureType: {takesOwnershipOf: 'foo'}}
+    var tmpTile = {tileType: {name: 'bar'}}
+    sfactory.changeOwnership(structure, tmpTile)
+    assert.equal(sfactory.removeTileFromPreviousOwner.callCount, 1)
+    assert.equal(sfactory.setNewTileType.callCount, 1)
+    assert.equal(structure.ownedTiles.length, 0)
+    // if is true
+    structure.structureType.takesOwnershipOf = 'foobar'
+    sfactory.changeOwnership(structure, tmpTile)
+    assert.equal(sfactory.removeTileFromPreviousOwner.callCount, 2)
+    assert.equal(sfactory.setNewTileType.callCount, 2)
+    assert.equal(structure.ownedTiles.length, 1)
   })
 })

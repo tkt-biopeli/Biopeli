@@ -3,6 +3,8 @@ import ViewTileFactory from './ViewTileFactory'
 
 /**
  * Handles viewing of the game map
+ * Uses ViewTiles to compose the whole view inside RenderTexture
+ * objects before sending to GPU
  */
 export default class MapView {
   /**
@@ -33,10 +35,15 @@ export default class MapView {
     this.viewTileFactory = new ViewTileFactory({ game: game, map: map, config: config })
     this.initialize()
   }
-
+  
+  /**
+   * Called upon starting a new game, initializes the RenderTextures
+   * used to display the ViewTiles
+   * 
+   * @memberof MapView
+   */
   initialize () {
     this.redraw = true
-
     this.layers = new Map()
     let layerNames = ['ground', 'visuals', 'structure']    
     for (var i = 0; i < layerNames.length; i++) {
@@ -49,6 +56,10 @@ export default class MapView {
   }
 
   /**
+   * Draws the map display area of the game screen
+   * Called on every frame update, clears the current RenderTextures
+   * and fills them up again with ViewTiles
+   * 
    * @param {number} cameraX
    * @param {number} cameraY
    */
@@ -69,7 +80,18 @@ export default class MapView {
     this.fillView(viewArea, offset)
   }
 
-  addToTexture(textureName, sprite, x, y,) {
+  /**
+   * Helper to add a sprite to a certain RenderTexture
+   * Coordinates must be previously calculated to match camera location
+   * in the game world
+   * 
+   * @param {any} textureName 
+   * @param {any} sprite 
+   * @param {any} x 
+   * @param {any} y 
+   * @memberof MapView
+   */
+  addToTexture (textureName, sprite, x, y) {
     let layer = this.layers.get(textureName)
     layer.texture.renderXY(sprite, Math.round(x), Math.round(y))
   }
@@ -144,11 +166,13 @@ export default class MapView {
 
     this.viewTileFactory.stop()        
     this.redraw = false
-    
   }
 
   /**
-   * Creates a view for a given tile on the map
+   * Creates a ViewTile for a given tile on the map
+   * Renders the ViewTile components to different RenderTextures
+   * to allow for controlled layering of visual elements.
+   * 
    * @param {ModelTile} tile
    * @param {{x: number, y: number}} pxCoords
    * @param { ??? } viewArea
@@ -159,12 +183,22 @@ export default class MapView {
     // viewTile.tileSprite.width = this.tileWidth
     // viewTile.tileSprite.height = this.tileHeight
     this.addHighlights(viewTile)    
-    this.addToTexture('ground',viewTile.tileSprite, pxCoords.x, pxCoords.y)
-    if (this.showFertility) this.addToTexture('visuals',viewTile.fertilitySprite, pxCoords.x, pxCoords.y)
-    if (this.showMoisture) this.addToTexture('visuals',viewTile.moistureSprite, pxCoords.x, pxCoords.y)
-    if (viewTile.treeSprite) this.addToTexture('visuals', viewTile.treeSprite, pxCoords.x, pxCoords.y)      
-    if (this.showFlowers) this.addToTexture('visuals', viewTile.flowerSprite, pxCoords.x, pxCoords.y)    
-    if (viewTile.structureSprite) this.addToTexture('structure', viewTile.structureSprite, pxCoords.x, pxCoords.y)    
+    this.addToTexture('ground', viewTile.tileSprite, pxCoords.x, pxCoords.y)
+    if (this.showFertility) {
+      this.addToTexture('visuals', viewTile.fertilitySprite, pxCoords.x, pxCoords.y)
+    }
+    if (this.showMoisture) {
+      this.addToTexture('visuals', viewTile.moistureSprite, pxCoords.x, pxCoords.y)
+    }
+    if (viewTile.treeSprite) {
+      this.addToTexture('visuals', viewTile.treeSprite, pxCoords.x, pxCoords.y)
+    }
+    if (this.showFlowers) {
+      this.addToTexture('visuals', viewTile.flowerSprite, pxCoords.x, pxCoords.y)
+    }
+    if (viewTile.structureSprite) {
+      this.addToTexture('structure', viewTile.structureSprite, pxCoords.x, pxCoords.y)
+    }
   }
 
   /**
@@ -180,6 +214,13 @@ export default class MapView {
     this.redraw = true    
   }
 
+  /**
+   * Sets the Fertility, Moisture and Flower layers
+   * on / off. Called by game menu controls upon players
+   * will.
+   * 
+   * @memberof MapView
+   */
   showFertilityLayer () {
     this.showFertility = !this.showFertility
     this.showMoisture = false

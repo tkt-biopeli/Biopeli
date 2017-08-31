@@ -4,7 +4,7 @@ export default class MoneyEffect {
     this.changeAmount = json.change
   }
 
-  happen () {
+  realizeEvent () {
     this.player.cash += this.changeAmount
   }
 }

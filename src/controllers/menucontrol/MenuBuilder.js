@@ -7,7 +7,8 @@ import Controller from './Controller'
  * Generic menu with title, description and buttons
  */
 export default class MenuBuilder {
-  constructor (game, backgroundAsset, startHeight, config) {
+  constructor (game, backgroundAsset, startHeight, config, linePadding) {
+    if(linePadding == null) linePadding = 16
     game.stage.backgroundColor = 0x6B8E23
 
     var menu = new MenuView({
@@ -19,7 +20,7 @@ export default class MenuBuilder {
           width: game.camera.width / 2,
           height: game.camera.height
         },
-        linePadding: 16,
+        linePadding: linePadding,
         sectionPadding: startHeight,
         vertical: true
       }),
@@ -50,8 +51,10 @@ export default class MenuBuilder {
    * Creates final score
    * @param {string} text - score text
    */
-  createScore (text) {
-    this.c.text(text, 'medium')
+  createScore (fields) {
+    for (var i = 0; i < fields.length; i++) {
+      this.c.text(fields[i], 'medium')
+    }
   }
 
   /**
@@ -59,7 +62,10 @@ export default class MenuBuilder {
    * @param {string} text - Description that is displayed in the menu
    */
   createDescription (text) {
-    this.c.text(text, 'small')
+    let rows = text.split('\n')
+    for (var i = 0; i < rows.length; i++) {
+      this.c.text(rows[i], 'small')
+    }
   }
 
   /**
@@ -67,8 +73,8 @@ export default class MenuBuilder {
    * @param {string} text - Button text
    * @param {function} call - Function that is called when pressed
    */
-  createButton (text, call) {
-    this.c.button(text, call, this)
+  createButton (text, call, asset) {
+    this.c.button(text, call, this, asset)
   }
 
   createInputField (parameters) {

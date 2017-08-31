@@ -5,7 +5,7 @@ import Layout from './Layout'
  */
 export default class StackingLayout extends Layout {
   constructor ({ menuRect, linePadding, sectionPadding, vertical }) {
-    super(menuRect, vertical)
+    super(menuRect, vertical) /* istanbul ignore next */
 
     this.linePadding = linePadding
     this.sectionPadding = sectionPadding
@@ -15,15 +15,15 @@ export default class StackingLayout extends Layout {
     this.drawLocation += this.componentParallelSize(component)
   }
 
-  init () {
+  initialize () {
     this.drawLocation = this.parallelStart + this.sectionPadding
   }
 
-  afterLine () {
+  line () {
     this.drawLocation += this.linePadding
   }
 
-  afterSection () {
+  section () {
     this.drawLocation += this.sectionPadding
   }
 

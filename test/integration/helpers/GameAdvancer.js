@@ -9,6 +9,9 @@ import structureTypes from './PseudoStructuretypes'
 
 import Structure from '../../../src/models/structure/Structure'
 import pseudoTexts from './PseudoTexts'
+import pseudoEvents from './PseudoEvents'
+import pseudoStructureHints from './PseudoStructureHints'
+import pseudoBioFacts from './PseudoBioFacts'
 
 const assert = require("assert")
 
@@ -50,8 +53,10 @@ export default class GameAdvancer {
         }
       },
       gameEvents: {
-        events: []
-      }
+        events: pseudoEvents
+      },
+      structureHints: pseudoStructureHints,
+      bioFacts: pseudoBioFacts
     }
 
     this.gameState = new GameState({
@@ -96,6 +101,9 @@ export default class GameAdvancer {
     this.structureTypes = structureTypes
 
     this.structureFactory = this.gameState.structureFactory
+
+    // The events are not shuffled
+    this.gameState.eventRandomizer.shuffleEvents = (array) => {return array}
   }
 
   /**
@@ -307,5 +315,45 @@ export default class GameAdvancer {
     var sf = this.gameState.structureFactory
     sf.minRuin = value
     sf.maxRuin = value
+  }
+
+  activateRandomEvents() {
+    this.gameState.randomEventHandler.timeWindowRandomizer.tryNext = () => {return true}
+  }
+
+  deactivateRandomEvents() {
+    this.gameState.randomEventHandler.timeWindowRandomizer.tryNext = () => {return false}
+  }
+
+  activateBioFacts() {
+    this.gameState.bioFactsGenerator.timer.tryNext = () => {return true}
+  }
+
+  deactivateBioFacts() {
+    this.gameState.bioFactsGenerator.timer.tryNext = () => {return false}
+  }
+
+  setPopulation(value) {
+    this.gameState.city.population = value
+  }
+
+  getStructureProductionInTile(x, y) {
+    this.clickTile(x, y)
+    var productionString = this.findActiveText('Tuotto')
+    // deselect the tile
+    this.clickTile(x, y)
+    // format (from PseudoTexts): "Tuotto (€/vko): ##"
+    return JSON.parse(productionString.slice(16))
+  }
+
+  findActiveText(textLabel) {
+    var activeTexts = this.gameState.menuView.activeTexts
+    for (var i = 0; i < activeTexts.length; i++) {
+      var activeText = activeTexts[i].text.text  
+      if (activeText.includes(textLabel)) {
+        return activeText
+      }
+    }
+    return null
   }
 }

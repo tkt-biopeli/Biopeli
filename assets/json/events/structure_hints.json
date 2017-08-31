@@ -1,107 +1,79 @@
 {
   "wheat_farm": {
     "hints": [
-      "vinkki 1",
-      "vinkki 2",
-      "vinkki 3"
+      "Viljatilan läheisyyteen kannattaa rakentaa mylly."
     ]
   },
   "dairy_farm": {
     "hints": [
-      "vinkki 1",
-      "vinkki 2",
-      "vinkki 3"
+      "Maitotilan läheisyyteen kannattaa rakentaa meijeri."
     ]
   },
   "berry_farm": {
     "hints": [
-      "vinkki 1",
-      "vinkki 2",
-      "vinkki 3"
+      "Marjatila ei ole vaativa maaperän kosteuden suhteen"
     ]
   },
   "mill": {
     "hints": [
-      "vinkki 1",
-      "vinkki 2",
-      "vinkki 3"
+      "Klikkaamalla myllyä näet sen vaikutusalueen."
     ]
   },
   "dairy": {
     "hints": [
-      "vinkki 1",
-      "vinkki 2",
-      "vinkki 3"
+      "Klikkaamalla meijeriä näet sen vaikutusalueen."
     ]
   },
   "herb_farm": {
     "hints": [
-      "vinkki 1",
-      "vinkki 2",
-      "vinkki 3"
+      "Yrttitila saastuttaa ympäristöään varsin vähän.",
+      "Liian kosteaa maaperää voi ojittaa yrttitilalle sopivammaksi.",
+      "Ravinteetonta maaperää voi parantaa lannoitehtaalla yrttitilalle sopivammaksi."
     ]
   },
   "mushroom_farm": {
     "hints": [
-      "vinkki 1",
-      "vinkki 2",
-      "vinkki 3"
+      "Sienitila kannattaa sijoittaa metsän välittömään läheisyyteen."
     ]
   },
   "lumber_yard": {
     "hints": [
-      "vinkki 1",
-      "vinkki 2",
-      "vinkki 3"
+      "Saha kannattaa sijoittaa metsän välitömään läheisyyteen."
     ]
   },
   "fishery": {
     "hints": [
-      "vinkki 1",
-      "vinkki 2",
-      "vinkki 3"
+      "Kalastus varmistaa tuotannon jatkuvuuden kasvitautien iskiessä."
     ]
   },
   "fish_refinery": {
     "hints": [
-      "vinkki 1",
-      "vinkki 2",
-      "vinkki 3"
+      "Klikkaamalla kalajalostamoa näät sen vaikutusalueen."
     ]
   },
   "biofuel_refinery": {
     "hints": [
-      "vinkki 1",
-      "vinkki 2",
-      "vinkki 3"
+      "Biopolttoaineen jalostamo parantaa kaikkien vaikutusalueensa rakennuksien tuottoa."
     ]
   },
   "fertilizer_factory": {
     "hints": [
-      "vinkki 1",
-      "vinkki 2",
-      "vinkki 3"
+      "Rakentamalla lannoitetehtaan voit parantaa maaperän ravinteikuutta."
     ]
   },
   "windmill": {
     "hints": [
-      "vinkki 1",
-      "vinkki 2",
-      "vinkki 3"
+      "Tuulimylly ei välitä maaperän viljavuudesta."
     ]
   },
   "junkyard": {
     "hints": [
-      "vinkki 1",
-      "vinkki 2",
-      "vinkki 3"
+      "Kaatopaikka saastuttaa välitöntä ympäristöään rajusti."
     ]
   },
   "ditch": {
     "hints": [
-      "vinkki 1",
-      "vinkki 2",
-      "vinkki 3"
+      "Ojittamalla voit vaikuttaa maaperän kosteuteen."
     ]
   }
 }

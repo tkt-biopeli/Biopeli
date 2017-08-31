@@ -1,9 +1,9 @@
 import {between} from '../../../../../models/logic/Between'
-import StructureFilter from './StructureFilter'
+import StructureFilter from '../baseclasses/StructureFilter'
 
 export default class FoundingYearStructureFilter extends StructureFilter {
   constructor ({ gameState, json }) {
-    super(gameState)
+    super(gameState) /* istanbul ignore next */
 
     this.min = json.min
     this.max = json.max
