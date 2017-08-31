@@ -46,7 +46,12 @@ describe('Inputhandler tests', () => {
       game: game,
       mapListener: mapListener,
       cameraMover: cameraMover,
-      mapView: {showFlowers: true}
+      mapView: {showFlowers: true},
+      pause: {
+        pause: () => {},
+        unpause: () => {},
+        paused: false
+      }
     })
   })
 
@@ -95,5 +100,34 @@ describe('Inputhandler tests', () => {
     assert.equal(handler.mapView.showFlowers, false)
     handler.flowersOnOff()
     assert.equal(handler.mapView.showFlowers, true)
+  })
+
+  it('Set pause works properly', () => {
+    handler.pause.pause = sinon.spy()
+    handler.setPause()
+    assert.equal(handler.pause.pause.callCount, 1)
+  })
+
+  it('Unpause works properly', () => {
+    handler.pause.unpause = sinon.spy()
+    // paused is false
+    handler.unpause()
+    assert.equal(handler.pause.unpause.callCount, 0)
+    // paused is true
+    handler.pause.paused = true
+    handler.unpause()
+    assert.equal(handler.pause.unpause.callCount, 1)
+  })
+
+  it('Kinetic scrolling works properly', () => {
+    var confSpy = sinon.spy()
+    var startSpy = sinon.spy()
+    game.game.kineticScrolling.beginMove = {}
+    game.game.kineticScrolling.configure = confSpy
+    game.game.kineticScrolling.start = startSpy
+    handler.kineticScrolling()
+    assert.equal(confSpy.callCount, 1)
+    assert.equal(startSpy.callCount, 1)
+    assert(typeof game.game.kineticScrolling.beginMove == 'function') 
   })
 })
