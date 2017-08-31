@@ -10,7 +10,7 @@ export default class HighscoresLoad extends Phaser.State {
   }
 
   create () {
-    this.menu = new MenuBuilder(this, 'start', this.camera.height * 1 / 10, this.gameData.config)
+    this.menu = new MenuBuilder(this, 'gameover', this.camera.height * 1 / 10, this.gameData.config, 8)
     this.menu.createTitle('Ladataan tuloksia...')
     this.menu.finishMenu()
 

@@ -17,18 +17,18 @@ export default class Highscores extends Phaser.State {
   }
 
   create () {
-    this.menu = new MenuBuilder(this, 'start', this.camera.height * 1 / 10, this.gameData.config)
+    this.menu = new MenuBuilder(this, 'gameover', this.camera.height * 1 / 10, this.gameData.config, 4)
     this.menu.createTitle('Tulokset top 10')
 
     this.addScores() 
 
     this.menu.createButton('Uusi peli', () => { 
-      this.state.start('Start', true, false, this.gameData) 
-    })
+      this.state.start('Start', true, false, this.gameData)
+    }, 'smallButton')
 
     this.menu.createButton('Lähimmät', () => {
       this.state.start('HighscoresLocal', true, false, this.gameData, this.scores)
-    })
+    }, 'smallButton')
 
     this.menu.finishMenu()
   }
