@@ -15,15 +15,15 @@ export default class StackingLayout extends Layout {
     this.drawLocation += this.componentParallelSize(component)
   }
 
-  init () {
+  initialize () {
     this.drawLocation = this.parallelStart + this.sectionPadding
   }
 
-  afterLine () {
+  line () {
     this.drawLocation += this.linePadding
   }
 
-  afterSection () {
+  section () {
     this.drawLocation += this.sectionPadding
   }
 

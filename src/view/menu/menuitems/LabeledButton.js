@@ -36,6 +36,7 @@ export default class LabeledButton {
       Math.floor(y + buttonHeight / 2), label, this.style, viewGroup)
     this.text.anchor.set(0.5, 0.5)
 
+    this.label = label
     this.x = x
     this.y = y
     this.asset = asset

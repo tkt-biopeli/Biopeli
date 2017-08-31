@@ -60,12 +60,12 @@ export default class OptionsContent extends Content {
     if (this.game.music.mute) {
       this.button(this.texts.soundOn, this.musicOn, this)
     } else {
-      this.button(this.texts.soundOff, this.musicOff, this)
+      this.button(this.texts.soundOff, this.musicOff, this, 'unusableButton')
     }
     if (!this.telegramStorage.hints) {
       this.button(this.texts.hintsOn, this.hintsOn, this)
     } else {
-      this.button(this.texts.hintsOff, this.hintsOff, this)
+      this.button(this.texts.hintsOff, this.hintsOff, this, 'unusableButton')
     }    
     this.button(this.texts.increaseVolume, this.incVolume, this)
     this.button(this.texts.decreaseVolume, this.decVolume, this)
@@ -74,7 +74,7 @@ export default class OptionsContent extends Content {
     if (!this.game.state.scale.isFullScreen) {
       this.button(this.texts.fullscreenOn, this.fullscreen, this)
     } else {
-      this.button(this.texts.fullscreenOff, this.fullscreen, this)
+      this.button(this.texts.fullscreenOff, this.fullscreen, this, 'unusableButton')
     }
   }
 }
