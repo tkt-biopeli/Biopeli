@@ -24,7 +24,7 @@ export default class Layout {
   }
 
   afterLine () {
-    if(!this.checkCallbackComponent()) this.line()
+    if (!this.checkCallbackComponent()) this.line()
   }
 
   afterSection () {
@@ -40,16 +40,16 @@ export default class Layout {
     this.checkCallbackComponent()
 
     var coordinates = this.coordinates(component)
-    if(component.type !== 'text') {
+    if (component.type !== 'text') {
       this.addComponentPadding(component)
-    }else{
+    } else {
       this.callbackComponent = component
     }
     return coordinates
   }
 
   checkCallbackComponent () {
-    if(this.callbackComponent != null) {
+    if (this.callbackComponent != null) {
       this.addComponentPadding(this.callbackComponent)
       this.callbackComponent = null
       return true

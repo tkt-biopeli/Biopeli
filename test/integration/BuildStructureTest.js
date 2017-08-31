@@ -14,7 +14,7 @@ describe('Integration test: Building structures', () => {
 
   it('Can build a wheat farm on grass', () => {
     gameAdvancer.clickTile(1, 1)
-    gameStateChecker.checkButtonAmountInMenu(3) // 2
+    gameStateChecker.checkButtonAmountInMenu(3)
     gameAdvancer.clickNthButton(1)
     gameStateChecker.checkButtonAmountInMenu(4)
     gameAdvancer.clickNthButton(1)

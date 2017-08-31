@@ -49,7 +49,9 @@ export default class GameStub {
         x: x,
         y: y,
         text: text,
-        destroy: () => { }
+        destroy: () => { },
+        height: 1,
+        width: 1
       }),
 
       renderTexture: renderCreatorFunction,
