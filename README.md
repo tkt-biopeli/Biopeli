@@ -45,8 +45,8 @@ Pelinäkymä rajautuu kartan lisäksi kahteen erilliseen alueeseen:
 
 ### Highscore-serveri
 - on Ruby on Rails -sovellus ja pyörii Herokussa
-- Lähdekoodin repositorio:
-- tietokannan nollaus: https://github.com/emlai/ivan-hall-of-fame
+- Lähdekoodin repositorio: https://github.com/emlai/ivan-hall-of-fame
+- tietokannan nollaus:
   	- asenna Heroku
 	- kloonaa sovellus Herokusta: https://devcenter.heroku.com/articles/git-clone-heroku-app
 	- pyyhi tietokanta: $ heroku pg:reset DATABASE
