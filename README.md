@@ -16,6 +16,8 @@ https://tkt-biopeli.github.io/Biopeli/
 ### Dokumentaatio
 Product Backlog, Definition of Done, Sprinttien burndown-käyrät ja tuntikirjanpito [Google Docsissa](https://docs.google.com/spreadsheets/d/1jGGEMFrbdNQ7DfI0Ranoajh7EyWghUSOJsJR0W0MmUg/edit?usp=sharing).
 
+[Dokumentaatio JSON-tiedostojen käytöstä](https://github.com/tkt-biopeli/Biopeli/tree/master/documentation)
+
 ### Asennusohjeet
 Pelin ajaminen paikallisesti:
 - asenna [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), jos se ei ole jo asennettuna
