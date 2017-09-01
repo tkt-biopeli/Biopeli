@@ -1,12 +1,13 @@
 import Content from './Content'
 
 export default class BuildStructureContent extends Content {
-  constructor ({ structureFactory, purchaseManager, texts, structureTypes }) {
+  constructor ({ structureFactory, purchaseManager, texts, structureTypes, tileTypes }) {
     super() /* istanbul ignore next */
     this.structureFactory = structureFactory
     this.purchaseManager = purchaseManager
     this.texts = texts.buildStructureTexts
     this.structureTypes = structureTypes
+    this.tileTypes = tileTypes
 
     this.emptyFunction = () => {}
   }
@@ -69,14 +70,14 @@ export default class BuildStructureContent extends Content {
     } else {
       var harvests = this.texts.harvest + ': '
       for (let harvest of stype.harvestingWeeks) {
-        harvests += harvest
+        harvests += '\n' + harvest.substr(0, harvest.indexOf('.')) + '. ' + this.texts.month + ', ' + this.texts.week + ' ' + harvest.charAt(harvest.indexOf('.')+1)
       }
       this.text(harvests)
     }
 
     let ownershipText = this.texts.takesOwnership + ': '
     for (let i = 0; i < stype.takesOwnershipOf.length; i++) {
-      ownershipText += stype.takesOwnershipOf[i]
+      ownershipText += this.tileTypes[stype.takesOwnershipOf[i]].nameWithLanguage
       if (i !== stype.takesOwnershipOf.length - 1) ownershipText += ', '
     }
 

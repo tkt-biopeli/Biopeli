@@ -30,6 +30,8 @@
 
     "continuousProduction": "Tuotanto jatkuvaa",
     "harvest": "Sadonkorjuu",
+    "week": "viikko",
+    "month": "kuu",
     "takesOwnership": "Käyttömaa",
     "revenue": "Tuotto",
     "fertility": "Ihanneravinteikkuus",

@@ -300,7 +300,8 @@ export default class GameState {
       purchaseManager: this.purchaseManager,
       structureFactory: this.structureFactory,
       texts: this.texts,
-      structureTypes: this.structureTypes
+      structureTypes: this.structureTypes,
+      tileTypes: this.tileTypes
     })
 
     this.optionsContent = new OptionsContent({
