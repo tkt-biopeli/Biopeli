@@ -47,7 +47,7 @@ Pelinäkymä rajautuu kartan lisäksi kahteen erilliseen alueeseen:
 - on Ruby on Rails -sovellus ja pyörii Herokussa
 - Lähdekoodin repositorio:
 - tietokannan nollaus: https://github.com/emlai/ivan-hall-of-fame
-  - asenna Heroku
+  	- asenna Heroku
 	- kloonaa sovellus Herokusta: https://devcenter.heroku.com/articles/git-clone-heroku-app
 	- pyyhi tietokanta: $ heroku pg:reset DATABASE
 	- muodosta tietokanta uudestaan: $ heroku run rake db:migrate 
