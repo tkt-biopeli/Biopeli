@@ -35,13 +35,14 @@ Pelin upottaminen olemassa olevalle sivulle:
 
 ### Käyttöohjeet
 Kontrollit:
-- liiku kartalla nuolinäppämillä
+- liiku kartalla nuolinäppämillä tai hiirellä raahaamalla
 - valitse ruutuja kartalta hiirellä ja rakenna niihin rakennuksia sivuvalikon valikoimasta
 - tarkastele jo rakentamiesi rakennuksien tietoja valitsemalla ruutu hiirellä
 
 Pelinäkymä rajautuu kartan lisäksi kahteen erilliseen alueeseen:
-- Yläreunan infopalkista näet peliajan etenemisen, keräämäsi pisteet ja rahan sekä turnipsituotannnon riittävyysasteen. Riittävyysaste on rakennuksiesi turnipsituotannon määrän suhde kaupungin kysymään määrään kunakin ajanhetkenä.
+- Yläreunan infopalkista näet peliajan etenemisen, keräämäsi pisteet ja rahan sekä turnipsituotannnon riittävyysasteen. Riittävyysaste on rakennuksiesi turnipsituotannon määrän suhde kaupungin vuosittaiseen turnipsien kysyntään..
 - Sivuvalikosta näet kaupunkisi tiedot, valitun ruudun rakennusmahdollisuudet tai rakennuksesi tiedot.
+- Sivuvalikon alareunasta löytyy toiminnot maaperän kukkasten, kosteuden ja ravinteikkuuden tarkkailuun, sekä lisäksi pääsy pelin asetusvalikkoon.
 
 ### Highscore-serveri
 - on Ruby on Rails -sovellus ja pyörii Herokussa
