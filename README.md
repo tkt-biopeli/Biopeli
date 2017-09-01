@@ -29,7 +29,7 @@ Pelin pitäisi nyt näkyä selaimellasi; mikäli näin ei käy, kirjoita selaime
 Pelin upottaminen olemassa olevalle sivulle:
 - lisää seuraava rivi haluamaasi paikkaan sivullasi
 ```
-<iframe src="https://tkt-biopeli.github.io/Biopeli/" height="700" width="1000">game not available</iframe>
+<iframe src="https://tkt-biopeli.github.io/Biopeli/" height="700" width="1000" allowfullscreen>game not available</iframe>
 ```
 - teksti "game not available" näytetään, mikäli upottaminen epäonnistui
 
@@ -42,6 +42,15 @@ Kontrollit:
 Pelinäkymä rajautuu kartan lisäksi kahteen erilliseen alueeseen:
 - Yläreunan infopalkista näet peliajan etenemisen, keräämäsi pisteet ja rahan sekä turnipsituotannnon riittävyysasteen. Riittävyysaste on rakennuksiesi turnipsituotannon määrän suhde kaupungin kysymään määrään kunakin ajanhetkenä.
 - Sivuvalikosta näet kaupunkisi tiedot, valitun ruudun rakennusmahdollisuudet tai rakennuksesi tiedot.
+
+### Highscore-serveri
+- on Ruby on Rails -sovellus ja pyörii Herokussa
+- Lähdekoodin repositorio:
+- tietokannan nollaus: https://github.com/emlai/ivan-hall-of-fame
+  - asenna Heroku
+	- kloonaa sovellus Herokusta: https://devcenter.heroku.com/articles/git-clone-heroku-app
+	- pyyhi tietokanta: $ heroku pg:reset DATABASE
+	- muodosta tietokanta uudestaan: $ heroku run rake db:migrate 
 
 ### Tekijätiimi
 Hossein Bahmanpour, Ilja Häkkinen, Jarkko Karttunen, Jon-Erik Klint, Ilkka Koskinen, Miia Rämö
