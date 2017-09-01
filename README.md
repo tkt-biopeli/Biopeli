@@ -46,5 +46,9 @@ Pelinäkymä rajautuu kartan lisäksi kahteen erilliseen alueeseen:
 ### Tekijätiimi
 Hossein Bahmanpour, Ilja Häkkinen, Jarkko Karttunen, Jon-Erik Klint, Ilkka Koskinen, Miia Rämö
 
+Grafiikka: Iina Nokelainen
+
+Musiikki: Pauli Ondruska
+
 ### Lisenssi
 [MIT](https://opensource.org/licenses/MIT)
